@@ -92,7 +92,13 @@ class Filter:
 	"""Filter object used to lad filters into memory once, to save on file operations"""		
 
 	file = ""
-	prefixes =  ["/home/smccarty/Operations/tools/lt/lib/","/srv/operations/tools/lt/lib/","/usr/local/lt/lib/","/opt/lt/lib","./"]
+	prefixes =  [ \
+		"/var/lib/chrunchtools/sw/", \
+		"/usr/local/lt/lib/sw/",
+		"/opt/lt/lib", \
+		"/srv/operations/tools/lt/lib/",
+		"/home/smccarty/Operations/tools/lt/lib/" ]
+
 	stopwords = []
 
 	def __init__(self, file):
