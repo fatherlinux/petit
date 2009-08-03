@@ -53,11 +53,7 @@ def signal_handler(signal, frame):
         sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
-class SyslogEntry:
-	"""
-	Helper class which holds data for syslog entries. This allows simple
-	displaying and manipulation of certain fields
-	"""
+class HashLogEntry:
 
 	month = ""
 	day = ""
@@ -67,6 +63,37 @@ class SyslogEntry:
 	host = ""
 	daemon = ""
 	log_entry = ""
+
+	def display(self):
+		print "Month:",self.month,"Day:",self.day,"Time:",self.time,"Host:",self.host,"Payload",self.log_entry
+
+class ApacheLogEntry(HashLogEntry):
+	"""
+	Helper class which holds data for Apache log entries. This allows simple
+	displaying and manipulation and conversion fields
+	"""
+
+	def __init__(self, line):
+
+		# Grab major chunks from the line
+		try:
+			value = line.split()
+			rhost, ident, ruser, time, junk, junk2, uri, protocol, status, bytes, referer, agent = value[:12]
+			self.log_entry = uri
+
+		except (IndexError, ValueError):
+
+			value = line.split()
+			rhost, ident, ruser, time, line, status, bytes, referer, agent = value[:9]
+
+		# Finally Break out the time
+		#self.hour, self.minute, self.second = time.split(":")
+
+class SyslogEntry(HashLogEntry):
+	"""
+	Helper class which holds data for syslog entries. This allows simple
+	displaying and manipulation and conversion fields
+	"""
 
 	def __init__(self, line):
 
@@ -82,11 +109,6 @@ class SyslogEntry:
 
 		# Finally Break out the time
 		self.hour, self.minute, self.second = time.split(":")
-
-
-	def display(self):
-		print "Month:",self.month,"Day:",self.day,"Time:",self.time,"Host:",self.host,"Payload",self.log_entry
-
 
 class Filter:
 	"""Filter object used to lad filters into memory once, to save on file operations"""		
