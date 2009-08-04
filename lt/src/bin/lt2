@@ -368,18 +368,14 @@ class LogHash(EntryHash):
 
 				# Look for something similar to: "11:53:08"
 				if re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",col3):
-					debug ("Determined to be type syslog")
 					return "syslog"
 
 				# Look for something similar to: "03/Aug/2009:11:53:08"
-				if re.search("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9{2}:[0-9]{2}:[0-9]{2}",col4):
-					debug ("Determined to be type apache")
+				elif re.search("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9{2}:[0-9]{2}:[0-9]{2}",col4):
 					return "apache"
 
 				else:
-					debug ("Determined to be type raw")
 					return "raw"
-
 
 			# Maybe only one word per line
 			elif len(line) >= 1:
@@ -396,7 +392,6 @@ class LogHash(EntryHash):
 
 	# Change to static method
 	type = staticmethod(type)
-
 
 class SyslogHash(LogHash):
 	"""Overrides the fill method specifically for LogHashes built from Syslog files"""
@@ -935,12 +930,14 @@ def hash(args):
 	# Get input
 	log = read_file(args)
 
+	# Create the right kind of hashlog
+	# Use array, representing file, and filter
 	if LogHash.type(log) == "syslog":
-		# Create new syslog hash based on log file and filter created
 		x = SyslogHash(log, filter)
 
 	elif LogHash.type(log) == "apache":
 		x = ApacheLogHash(log, filter)
+
 	else:
 		x = RawLogHash(log, filter)
 
