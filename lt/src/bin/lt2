@@ -758,7 +758,6 @@ class SecondsGraph(GraphHash):
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
 		for entry in log:
-			entry.display()
 
 			# Create key rooted in time
 			key = self.month+self.day+self.hour+self.minute+entry.second
@@ -792,15 +791,15 @@ class MinutesGraph(GraphHash):
 
 		# Turn first line into syslog
 		if len(log) > 0:
-			entry = SyslogEntry(log[0])
+			first_entry = log[0]
 		else:
 			sys.exit()
 
 		self.second = "00"
 		self.minute = "00"
-		self.hour = entry.hour
-		self.day = entry.day
-		self.month = entry.month
+		self.hour = first_entry.hour
+		self.day = first_entry.day
+		self.month = first_entry.month
 		self.duration = "60 Minutes"
 
 		# Zero out each entry, this will fill in blanks which
@@ -810,15 +809,13 @@ class MinutesGraph(GraphHash):
 			# Convert to two digits
 			j =   "%.2d" % (i)
 			key = self.month+self.day+self.hour+j
-			self.zero(key, entry)
+			self.zero(key, first_entry)
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
-		for line in log:
-
-			# Turn line into syslog entry, then get just the data
-			entry = SyslogEntry(line)
+		for entry in log:
+			entry.display()
 
 			# Create key rooted in time
 			key = self.month+self.day+self.hour+entry.minute
@@ -848,15 +845,15 @@ class HoursGraph(GraphHash):
 
 		# Turn first line into syslog
 		if len(log) > 0:
-			entry = SyslogEntry(log[0])
+			first_entry = log[0]
 		else:
 			sys.exit()
 
 		self.second = "00"
 		self.minute = "00"
 		self.hour = "00"
-		self.day = entry.day
-		self.month = entry.month
+		self.day = first_entry.day
+		self.month = first_entry.month
 		self.duration = "24 Hours"
 
 		# Zero out each entry, this will fill in blanks which
@@ -866,15 +863,12 @@ class HoursGraph(GraphHash):
 			# Convert to two digits
 			j =   "%.2d" % (i)
 			key = self.month+self.day+j
-			self.zero(key, entry)
+			self.zero(key, first_entry)
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
-		for line in log:
-
-			# Turn line into syslog entry, then get just the data
-			entry = SyslogEntry(line)
+		for entry in log:
 
 			# Create key rooted in time
 			key = self.month+self.day+entry.hour
@@ -1090,9 +1084,6 @@ def host(args):
 
 def sgraph(args):
 
-	# Declarations & Variables
-	#filter = Filter("graph.stopwords")
-
 	# Get input
 	log = Log(args)
 
@@ -1106,11 +1097,8 @@ def sgraph(args):
 
 def mgraph(args):
 
-	# Declarations & Variables
-	filter = Filter("graph.stopwords")
-
 	# Get input
-	log = read_file(args)
+	log = Log(args)
 
 	# Create new syslog hash based on log file and filter created
 	x = MinutesGraph(log)
@@ -1122,11 +1110,8 @@ def mgraph(args):
 
 def hgraph(args):
 
-	# Declarations & Variables
-	filter = Filter("graph.stopwords")
-
 	# Get input
-	log = read_file(args)
+	log = Log(args)
 
 	# Create new syslog hash based on log file and filter created
 	x = HoursGraph(log)
