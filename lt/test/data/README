@@ -1,0 +1,8 @@
+test1 - Small syslog test file with weird lines
+test2 - Small raw test file with all unique lines
+test3 - Small apache test file
+test4 - Small raw test file with some numbers
+test5 - Fingerprint data for Fedora 11
+test6 - Fingerprint data for RHEL4 and Fedora 11
+test7 - Normal sized syslog file
+test8 - Large syslog file

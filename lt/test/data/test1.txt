@@ -1,0 +1,105 @@
+Jul 14 10:57:29 tony.eyemg.com sshd(pam_unix)[4478]: session closed for user root
+Jul 14 10:57:33 calvin.eyemg.com last message repeated 2 times
+Jul 14 10:57:33 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/mysqld status 
+Jul 14 10:57:34 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/httpd status 
+Jul 14 10:57:34 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/nfs status 
+Jul 14 10:57:39 warren.eyemg.com last message repeated 10 times
+Jul 14 10:57:47 henry.eyemg.com last message repeated 2 times
+Jul 14 10:57:48 calvin.eyemg.com last message repeated 9 times
+Jul 14 10:57:48 zebulon.eyemg.com -- MARK --
+Jul 14 10:57:48 dino.eyemg.com sshd[11457]: Accepted publickey for root from 10.0.8.158 port 38308 ssh2
+Jul 14 10:57:48 dino.eyemg.com sshd[11457]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jul 14 10:57:48 dino.eyemg.com sshd[11457]: pam_unix(sshd:session): session closed for user root
+Jul 14 10:57:50 joeybishop.eyemg.com last message repeated 11 times
+Jul 14 10:57:51 maddock.eyemg.com sshd[18114]: Postponed publickey for root from 10.0.8.142 port 36013 ssh2
+Jul 14 10:57:51 maddock.eyemg.com sshd[18113]: Accepted publickey for root from 10.0.8.142 port 36013 ssh2
+Jul 14 10:57:51 maddock.eyemg.com sshd[18113]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jul 14 10:57:51 maddock.eyemg.com sshd[18113]: pam_unix(sshd:session): session closed for user root
+Jul 14 10:57:51 maddock.eyemg.com sshd[18210]: Postponed publickey for root from 10.0.8.145 port 51110 ssh2
+Jul 14 10:57:51 maddock.eyemg.com sshd[18209]: Accepted publickey for root from 10.0.8.145 port 51110 ssh2
+Jul 14 10:57:51 maddock.eyemg.com sshd[18209]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jul 14 10:57:51 maddock.eyemg.com sshd[18209]: pam_unix(sshd:session): session closed for user root
+Jul 14 10:57:52 mathus.eyemg.com last message repeated 3 times
+Jul 14 10:57:52 mathus.eyemg.com last message repeated 3 times
+Jul 14 10:57:53 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/httpd status 
+Jul 14 10:57:54 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/mysqld status 
+Jul 14 10:57:57 peyton.eyemg.com -- MARK --
+Jul 14 10:58:00 warren.eyemg.com last message repeated 4 times
+Jul 14 10:58:01 tpm-secure.eyemg.com crond(pam_unix)[5023]: session opened for user root by (uid=0)
+Jul 14 10:58:01 tpm-secure.eyemg.com crond(pam_unix)[5024]: session opened for user root by (uid=0)
+Jul 14 10:58:01 tpm-secure.eyemg.com crond(pam_unix)[5023]: session closed for user root
+Jul 14 10:58:01 tpm-secure.eyemg.com crond(pam_unix)[5024]: session closed for user root
+Jul 14 10:58:01 tpm-dev.eyemg.com crond(pam_unix)[31692]: session opened for user root by (uid=0)
+Jul 14 10:58:01 tpm-dev.eyemg.com crond(pam_unix)[31691]: session opened for user root by (uid=0)
+Jul 14 10:58:01 louie.eyemg.com last message repeated 8 times
+Jul 14 10:58:02 tpm-dev.eyemg.com crond(pam_unix)[31691]: session closed for user root
+Jul 14 10:58:02 tpm-dev.eyemg.com crond(pam_unix)[31692]: session closed for user root
+Jul 14 10:58:03 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/mysqld status 
+Jul 14 10:58:04 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/httpd status 
+Jul 14 10:58:04 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/nfs status 
+Jul 14 10:58:07 ralph.eyemg.com last message repeated 7 times
+Jul 14 10:58:10 tate.eyemg.com sshd[25731]: Postponed publickey for root from ::ffff:10.100.8.88 port 36135 ssh2
+Jul 14 10:58:10 tate.eyemg.com sshd[25730]: Accepted publickey for root from ::ffff:10.100.8.88 port 36135 ssh2
+Jul 14 10:58:10 tate.eyemg.com sshd(pam_unix)[25730]: session opened for user root by (uid=0)
+Jul 14 10:58:10 tate.eyemg.com sshd(pam_unix)[25730]: session closed for user root
+Jul 14 10:58:10 tate.eyemg.com sshd[25799]: Postponed publickey for root from ::ffff:10.0.8.113 port 40216 ssh2
+Jul 14 10:58:10 tate.eyemg.com sshd[25798]: Accepted publickey for root from ::ffff:10.0.8.113 port 40216 ssh2
+Jul 14 10:58:10 tate.eyemg.com sshd(pam_unix)[25798]: session opened for user root by (uid=0)
+Jul 14 10:58:10 tate.eyemg.com sshd(pam_unix)[25798]: session closed for user root
+Jul 14 10:58:12 warren.eyemg.com last message repeated 10 times
+Jul 14 10:58:18 alberto.eyemg.com last message repeated 8 times
+Jul 14 10:58:19 calvin.eyemg.com last message repeated 2 times
+Jul 14 10:58:21 seth.eyemg.com -- MARK --
+Jul 14 10:58:22 mathus.eyemg.com last message repeated 3 times
+Jul 14 10:58:22 mathus.eyemg.com last message repeated 3 times
+Jul 14 10:58:23 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/httpd status 
+Jul 14 10:58:24 gannon.eyemg.com last message repeated 8 times
+Jul 14 10:58:24 maddock.eyemg.com sshd[18589]: Accepted publickey for root from 10.0.8.124 port 57409 ssh2
+Jul 14 10:58:24 maddock.eyemg.com sshd[18589]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jul 14 10:58:24 maddock.eyemg.com sshd[18589]: pam_unix(sshd:session): session closed for user root
+Jul 14 10:58:24 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/mysqld status 
+Jul 14 10:58:24 mobius.eyemg.com sshd[28451]: Accepted publickey for root from 10.0.8.124 port 57672 ssh2
+Jul 14 10:58:24 mobius.eyemg.com sshd[28451]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jul 14 10:58:25 mobius.eyemg.com sshd[28451]: pam_unix(sshd:session): session closed for user root
+Jul 14 10:58:25 gannon.eyemg.com last message repeated 6 times
+Jul 14 10:58:28 henry.eyemg.com last message repeated 7 times
+Jul 14 10:58:33 warren.eyemg.com last message repeated 4 times
+Jul 14 10:58:33 mobius.eyemg.com sshd[28551]: Accepted publickey for root from 10.0.8.159 port 56047 ssh2
+Jul 14 10:58:33 mobius.eyemg.com sshd[28551]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jul 14 10:58:33 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/mysqld status 
+Jul 14 10:58:33 warren.eyemg.com last message repeated 9 times
+Jul 14 10:58:33 mobius.eyemg.com sshd[28551]: pam_unix(sshd:session): session closed for user root
+Jul 14 10:58:34 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/httpd status 
+Jul 14 10:58:34 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/nfs status 
+Jul 14 10:58:45 warren.eyemg.com last message repeated 10 times
+Jul 14 10:58:46 sable.eyemg.com sshd[5682]: Postponed publickey for root from ::ffff:10.0.8.150 port 47641 ssh2
+Jul 14 10:58:46 sable.eyemg.com sshd[5681]: Accepted publickey for root from ::ffff:10.0.8.150 port 47641 ssh2
+Jul 14 10:58:46 sable.eyemg.com sshd(pam_unix)[5681]: session opened for user root by (uid=0)
+Jul 14 10:58:46 sable.eyemg.com sshd(pam_unix)[5681]: session closed for user root
+Jul 14 10:58:48 tate.eyemg.com sshd[27004]: Postponed publickey for root from ::ffff:10.0.8.163 port 52054 ssh2
+Jul 14 10:58:48 tate.eyemg.com sshd[27003]: Accepted publickey for root from ::ffff:10.0.8.163 port 52054 ssh2
+Jul 14 10:58:48 tate.eyemg.com sshd(pam_unix)[27003]: session opened for user root by (uid=0)
+Jul 14 10:58:48 tate.eyemg.com sshd(pam_unix)[27003]: session closed for user root
+Jul 14 10:58:52 mathus.eyemg.com last message repeated 3 times
+Jul 14 10:58:52 mathus.eyemg.com last message repeated 3 times
+Jul 14 10:58:53 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/httpd status 
+Jul 14 10:58:54 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/mysqld status 
+Jul 14 10:58:56 tpm-secure.eyemg.com sshd[5614]: Accepted publickey for root from ::ffff:127.0.0.1 port 33293 ssh2
+Jul 14 10:58:56 tpm-secure.eyemg.com sshd(pam_unix)[5616]: session opened for user root by (uid=0)
+Jul 14 10:59:01 tpm-secure.eyemg.com crond(pam_unix)[5663]: session opened for user root by (uid=0)
+Jul 14 10:59:01 tpm-secure.eyemg.com crond(pam_unix)[5664]: session opened for user root by (uid=0)
+Jul 14 10:59:01 tpm-dev.eyemg.com crond(pam_unix)[31705]: session opened for user root by (uid=0)
+Jul 14 10:59:01 tpm-dev.eyemg.com crond(pam_unix)[31706]: session opened for user root by (uid=0)
+Jul 14 10:59:01 tpm-secure.eyemg.com crond(pam_unix)[5663]: session closed for user root
+Jul 14 10:59:02 tpm-secure.eyemg.com crond(pam_unix)[5664]: session closed for user root
+Jul 14 10:59:02 tpm-dev.eyemg.com crond(pam_unix)[31705]: session closed for user root
+Jul 14 10:59:02 tpm-dev.eyemg.com crond(pam_unix)[31706]: session closed for user root
+Jul 14 10:59:03 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/mysqld status 
+Jul 14 10:59:04 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/httpd status 
+Jul 14 10:59:04 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/nfs status 
+Jul 14 10:59:06 warren.eyemg.com last message repeated 4 times
+#
+#
+#
+#
+#
