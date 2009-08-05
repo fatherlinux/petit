@@ -717,7 +717,6 @@ class SecondsGraph(GraphHash):
 
 			# Create key rooted in time
 			key = self.month+self.day+self.hour+self.minute+entry.second
-			print "Key:",key, entry.second
 
 			# Check to make sure there are not more than 60
 			# Also, make sure we are on the right
