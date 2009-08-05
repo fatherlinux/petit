@@ -714,7 +714,6 @@ class SecondsGraph(GraphHash):
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
 		for entry in log:
-			entry.display()
 
 			# Create key rooted in time
 			key = self.month+self.day+self.hour+self.minute+entry.second
