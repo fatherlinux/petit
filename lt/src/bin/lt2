@@ -441,46 +441,6 @@ class SuperHash(UserDict):
 
 			debug("Count: "+str(count))
 
-	def type(log):
-
-		# Check at least one line in log
-		if len(log) >= 1:
-
-			# Break up the first line
-			line = log[0].split()
-
-			if len(line) >= 4:
-
-				# Get the first columns
-				col1, col2, col3, col4 = line[:4]
-
-				# Look for something similar to: "11:53:08"
-				if re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",col3):
-					return "syslog"
-
-				# Look for something similar to: "03/Aug/2009:11:53:08"
-				elif re.search("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9{2}:[0-9]{2}:[0-9]{2}",col4):
-					return "apache"
-
-				else:
-					return "raw"
-
-			# Maybe only one word per line
-			elif len(line) >= 1:
-				debug ("Determined to be type raw")
-				return "raw"
-
-			else: 
-				print "Could not determine log type, please check first line in file"
-				sys.exit(16)
-
-		else:
-			print "Could not determine log type, please check first line in file"
-			sys.exit(16)
-
-	# Change to static method
-	type = staticmethod(type)
-
 class SyslogHash(SuperHash):
 	"""Overrides the fill method specifically for LogHashes built from Syslog files"""
 	
@@ -540,10 +500,7 @@ class RawLogHash(SuperHash):
 
 class DaemonHash(SyslogHash):
 
-	def __init__(self, log, filter):
-
-		# Call parent init
-		UserDict.__init__(self)
+	def fill(self, log, filter):
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -562,10 +519,7 @@ class DaemonHash(SyslogHash):
 
 class HostHash(SyslogHash):
 
-	def __init__(self, log, filter):
-
-		# Call parent init
-		UserDict.__init__(self)
+	def fill(self, log, filter):
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -583,20 +537,22 @@ class HostHash(SyslogHash):
 			del self["#"]
 
 class WordHash(SuperHash):
+	"""
+	Subclass which creates a dictionary of words which may hold value in a given log file
+	Date, time, and other common words are excluded from the count.
+	"""
 
-	def __init__(self, log, filter): 
-
-		UserDict.__init__(self)
+	def fill(self, log, filter): 
 
 		# Create a dictionary with an entry for each word. Increment
 		# the value for each time the word is found
-		for line in log:
-
-			for word in line.split():
-#			for word in re.split(r'\W+', line):
+		for entry in log:
+	
+			# Base the wordcount on the log_entry payload
+			for word in entry.log_entry.split():
 
 				# increment the WordHash with the new key
-				self.increment(word)
+				self.increment(word, word)
 
 
 		# Perform bleach at the end because it is more efficient
@@ -815,7 +771,6 @@ class MinutesGraph(GraphHash):
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
 		for entry in log:
-			entry.display()
 
 			# Create key rooted in time
 			key = self.month+self.day+self.hour+entry.minute
@@ -1026,7 +981,7 @@ def wordcount(args):
 	filter = Filter("words.stopwords")
 
 	# Get input
-	log = read_file(args)
+	log = Log(args)
 
 	# Create new word hash based on log file and filter created
 	x = WordHash(log, filter)
