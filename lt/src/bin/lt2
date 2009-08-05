@@ -758,9 +758,11 @@ class SecondsGraph(GraphHash):
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
 		for entry in log:
+			entry.display()
 
 			# Create key rooted in time
 			key = self.month+self.day+self.hour+self.minute+entry.second
+			print "Key:",key, entry.second
 
 			# Check to make sure there are not more than 60
 			# Also, make sure we are on the right
@@ -771,8 +773,6 @@ class SecondsGraph(GraphHash):
 				and entry.hour == self.hour \
 				and entry.minute == self.minute:
 					self.increment(key, entry)
-			else:
-				break
 
 		# find max value of any key
 		for key in self.keys():
@@ -828,8 +828,6 @@ class MinutesGraph(GraphHash):
 				and entry.day == self.day \
 				and entry.hour == self.hour:
 					self.increment(key, entry)
-			else:
-				break
 
 		# find max value of any key
 		for key in self.keys():
@@ -880,8 +878,6 @@ class HoursGraph(GraphHash):
 				and entry.month == self.month \
 				and entry.day == self.day:
 					self.increment(key, entry)
-			else:
-				break
 
 		# find max value of any key
 		for key in self.keys():
