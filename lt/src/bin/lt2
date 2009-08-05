@@ -67,7 +67,7 @@ class LogEntry:
 	log_entry = ""
 
 	def display(self):
-		print "Month:",self.month,"Day:",self.day,"Host:",self.host,"Payload",self.log_entry
+		print "Month:",self.month,"Day:",self.day,"Hour:", self.hour, "Minute:", self.minute, "Second:", self.second, "Host:",self.host,"Payload",self.log_entry
 
 
 class SyslogEntry(LogEntry):
@@ -121,8 +121,20 @@ class ApacheEntry(LogEntry):
 		# Should be normal log entry
 		if len(value) >= 12:
 			# Grab major chunks from the line
-			rhost, ident, ruser, time, junk, junk2, uri, protocol, status, bytes, referer, agent = value[:12]
+			rhost, ident, ruser, apachedate, junk, junk2, uri, protocol, status, bytes, referer, agent = value[:12]
 			self.log_entry = uri
+
+			# Split up something that looks like this: [03/Aug/2009:11:53:08
+			datetime = apachedate.split(':')
+			date = datetime[0]
+			self.hour = datetime[1]
+			self.minute = datetime[2]
+			self.second = datetime[3]
+			dmy = date.split('/')
+			self.day = re.sub("\[", "", dmy[0])
+			self.month = dmy[1]
+			self.host = uri
+			daemon = "webserver"
 
 		# Abnormal log entry
 		elif len(value) >= 1:
@@ -495,10 +507,7 @@ class ApacheLogHash(SuperHash):
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
-		for line in log:
-
-			# Turn line into syslog entry, then get just the data
-			entry = ApacheLogEntry(line)
+		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
 			key = filter.scrub(entry.log_entry)
@@ -517,10 +526,7 @@ class RawLogHash(SuperHash):
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
-		for line in log:
-
-			# Turn line into syslog entry, then get just the data
-			entry = RawLogEntry(line)
+		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
 			key = filter.scrub(entry.log_entry)
@@ -542,10 +548,7 @@ class DaemonHash(SyslogHash):
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
-		for line in log:
-
-			# Turn line into syslog entry, then get just the data
-			entry = SyslogEntry(line)
+		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
 			key = filter.scrub(entry.daemon)
@@ -567,10 +570,7 @@ class HostHash(SyslogHash):
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
-		for line in log:
-
-			# Turn line into syslog entry, then get just the data
-			entry = SyslogEntry(line)
+		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
 			key = filter.scrub(entry.host)
@@ -734,33 +734,31 @@ class SecondsGraph(GraphHash):
 
 		# Turn first line into syslog
 		if len(log) > 0:
-			entry = SyslogEntry(log[0])
+			first_entry = log[0]
 		else:
 			sys.exit()
 
 		self.second = "00"
-		self.minute = entry.minute
-		self.hour = entry.hour
-		self.day = entry.day
-		self.month = entry.month
+		self.minute = first_entry.minute
+		self.hour = first_entry.hour
+		self.day = first_entry.day
+		self.month = first_entry.month
 		self.duration = "60 Seconds"
 
 		# Zero out each entry, this will fill in blanks which
 		# may be in the log, especailly sparse logs. Also,
-		# adds false entry for debugging/printing
+		# adds false sample entry for debugging/printing
 		for i in range(0, 60):
 			# Convert to two digits
 			j =   "%.2d" % (i)
 			key = self.month+self.day+self.hour+self.minute+j
-			self.zero(key, entry)
+			self.zero(key, first_entry)
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
-		for line in log:
-
-			# Turn line into syslog entry, then get just the data
-			entry = SyslogEntry(line)
+		for entry in log:
+			entry.display()
 
 			# Create key rooted in time
 			key = self.month+self.day+self.hour+self.minute+entry.second
@@ -1059,7 +1057,7 @@ def daemon(args):
 	filter = Filter("daemon.stopwords")
 
 	# Get input
-	log = read_file(args)
+	log = Log(args)
 
 	# Create new syslog hash based on log file and filter created
 	x = DaemonHash(log, filter)
@@ -1080,7 +1078,7 @@ def host(args):
 	filter = Filter("host.stopwords")
 
 	# Get input
-	log = read_file(args)
+	log = Log(args)
 
 	# Create new syslog hash based on log file and filter created
 	x = HostHash(log, filter)
@@ -1093,10 +1091,10 @@ def host(args):
 def sgraph(args):
 
 	# Declarations & Variables
-	filter = Filter("graph.stopwords")
+	#filter = Filter("graph.stopwords")
 
 	# Get input
-	log = read_file(args)
+	log = Log(args)
 
 	# Create new syslog hash based on log file and filter created
 	x = SecondsGraph(log)
