@@ -270,7 +270,7 @@ class Filter:
 
 	stopwords = []
 
-	def __init__(self, file):
+	def __init__(self, file="__none__"):
 
 		for prefix in self.prefixes:
 
@@ -278,6 +278,8 @@ class Filter:
 			self.file = prefix+file
 			self.stopwords = []
 
+			if file == "__none__":
+				return
 				
                         if os.path.exists("%s" % self.file):
 				try:
@@ -303,7 +305,7 @@ class Filter:
 			# Replace mathces with hash signs
 			oldstring = string
 			string = re.sub(stopword, "#", string)
-			#debug(" SCRUBBING\t"+oldstring+" OF\t"+stopword+" BECOMES\t"+string)
+			debug(" SCRUBBING\t"+oldstring+" OF\t"+stopword+" BECOMES\t"+string)
 
 		return string
 
@@ -317,17 +319,24 @@ class Filter:
 class SuperHash(UserDict):
 	"""Interface and parent class for all hash/dict based objects. """
 
-	def __init__(self, log=["__none__"], filter=["__none__"]):
+	filter = Filter()
+
+	def __init__(self, log=["__none__"], filter_filename="__none__"):
 
 		# Call parent init
 		UserDict.__init__(self)
 
-		if log[0] == "__none__" and filter[0] == "__none__":
+		if log[0] == "__none__" and filter_filename == "__none__":
 			pass
 		else:
-			self.fill(log, filter)
+			# Setup the filter
+			if options.filter:
+				self.filter = Filter(filter_filename)
 
-	def fill(self, log, filter):
+			# Fill the data structure
+			self.fill(log)
+
+	def fill(self, log):
 		pass
 
 	def increment(self, key, entry):
@@ -444,14 +453,14 @@ class SuperHash(UserDict):
 class SyslogHash(SuperHash):
 	"""Overrides the fill method specifically for LogHashes built from Syslog files"""
 	
-	def fill(self, log, filter):
+	def fill(self, log):
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
 		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
-			key = filter.scrub(entry.daemon+" "+entry.log_entry)
+			key = self.filter.scrub(entry.daemon+" "+entry.log_entry)
 
 			# increment the LogHash with the new key
 			self.increment(key, entry)
@@ -463,14 +472,14 @@ class SyslogHash(SuperHash):
 class ApacheLogHash(SuperHash):
 	"""Overrides the fill method specifically for LogHashes built from Apache logs"""
 	
-	def fill(self, log, filter):
+	def fill(self, log):
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
 		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
-			key = filter.scrub(entry.log_entry)
+			key = self.filter.scrub(entry.log_entry)
 
 			# increment the LogHash with the new key
 			self.increment(key, entry)
@@ -482,14 +491,14 @@ class ApacheLogHash(SuperHash):
 class RawLogHash(SuperHash):
 	"""Overrides the fill method specifically for LogHashes built from text files without date/time"""
 	
-	def fill(self, log, filter):
+	def fill(self, log):
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
 		# Removing numbers and replacing them with a single '#'
 		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
-			key = filter.scrub(entry.log_entry)
+			key = self.filter.scrub(entry.log_entry)
 
 			# increment the LogHash with the new key
 			self.increment(key, entry)
@@ -500,7 +509,7 @@ class RawLogHash(SuperHash):
 
 class DaemonHash(SyslogHash):
 
-	def fill(self, log, filter):
+	def fill(self, log):
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -508,7 +517,7 @@ class DaemonHash(SyslogHash):
 		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
-			key = filter.scrub(entry.daemon)
+			key = self.filter.scrub(entry.daemon)
 
 			# increment the LogHash with the new key
 			self.increment(key, entry)
@@ -519,7 +528,7 @@ class DaemonHash(SyslogHash):
 
 class HostHash(SyslogHash):
 
-	def fill(self, log, filter):
+	def fill(self, log):
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -527,7 +536,7 @@ class HostHash(SyslogHash):
 		for entry in log:
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
-			key = filter.scrub(entry.host)
+			key = self.filter.scrub(entry.host)
 
 			# increment the LogHash with the new key
 			self.increment(key, entry)
@@ -542,7 +551,7 @@ class WordHash(SuperHash):
 	Date, time, and other common words are excluded from the count.
 	"""
 
-	def fill(self, log, filter): 
+	def fill(self, log): 
 
 		# Create a dictionary with an entry for each word. Increment
 		# the value for each time the word is found
@@ -559,7 +568,7 @@ class WordHash(SuperHash):
 		for key in self.keys():
 
 			# First scrub any unwanted words
-			newkey = filter.scrub(key)
+			newkey = self.filter.scrub(key)
 			if newkey in self:
 				self[newkey] = self[newkey] + self[key]
 			else:
@@ -937,26 +946,25 @@ def hash(args):
 	global options
 	if options.sample == None:
 		options.sample = True
+	if options.filter == None:
+		options.filter = True
 
-	# Declarations & Variables
-	filter = Filter("syslog.stopwords")
-
-	# Get input
+	# Get entire log file into ram for speed
 	log = Log(args)
 
-	# Create the right kind of hashlog
-	# Use array, representing file, and filter
+	# Select the correct build method
 	if log.contains(SyslogEntry):
-		x = SyslogHash(log, filter)
-
+		LogHash = SyslogHash
 	elif log.contains(ApacheEntry):
-		x = ApacheLogHash(log, filter)
-
+		LogHash = ApacheLogHash
 	elif log.contains(RawEntry):
-		x = RawLogHash(log, filter)
+		LogHash = RawLogHash
 	else:
-		print "Could not determin what type of objects are contained in generic Log"""
+		print "Could not determine what type of objects are contained in generic Log"""
 		sys.exit(15)
+
+	# Build the Hash
+	x = LogHash(log, "syslog.stopwords")
 
 	if options.fingerprint:
 		x.fingerprint(filter)
@@ -974,15 +982,14 @@ def wordcount(args):
 	global options
 	if options.sample == None:
 		options.sample = False
-
-	# Declarations & Variables
-	filter = Filter("words.stopwords")
+	if options.filter == None:
+		options.filter = True
 
 	# Get input
 	log = Log(args)
 
 	# Create new word hash based on log file and filter created
-	x = WordHash(log, filter)
+	x = WordHash(log, "words.stopwords")
 
 	# Print out the dictionary first sorted by the word with
 	# the most entries with an alphabetical subsort
@@ -995,15 +1002,14 @@ def daemon(args):
 	global options
 	if options.sample == None:
 		options.sample = False
-
-	# Declarations & Variables
-	filter = Filter("daemon.stopwords")
+	if options.filter == None:
+		options.filter = True
 
 	# Get input
 	log = Log(args)
 
 	# Create new syslog hash based on log file and filter created
-	x = DaemonHash(log, filter)
+	x = DaemonHash(log, "daemon.stopwords")
 
 	# Print out the dictionary first sorted by the word with
 	# the most entries with an alphabetical subsort
@@ -1016,15 +1022,14 @@ def host(args):
 	global options
 	if options.sample == None:
 		options.sample = False
-
-	# Declarations & Variables
-	filter = Filter("host.stopwords")
+	if options.filter == None:
+		options.filter = True
 
 	# Get input
 	log = Log(args)
 
 	# Create new syslog hash based on log file and filter created
-	x = HostHash(log, filter)
+	x = HostHash(log, "host.stopwords")
 
 	# Print out the dictionary first sorted by the word with
 	# the most entries with an alphabetical subsort
