@@ -376,7 +376,7 @@ class SuperHash(UserDict):
 			else:
 				print str(self[key][0])+":	"+str(key)
 
-	def fingerprint(self, filter):
+	def fingerprint(self):
 		"""
 		Remove all fingerprints from a given LogHash and replace with a single string"
 		"""
@@ -384,7 +384,6 @@ class SuperHash(UserDict):
 		# Declarations & Variables
 		threshold_coefficient = 0.3
 		fingerprints = []
-		file = []
 		fingerprint_files = ["__none__"]
 
 		# Load & assign fingerprint files
@@ -408,11 +407,15 @@ class SuperHash(UserDict):
 		for fingerprint_file in fingerprint_files:
 			if re.search("fp",fingerprint_file):
 
-				# Create an array to pass to read_file()
-				file = prefix+fingerprint_file
+				# Create a fullpath name
+				filename = prefix+fingerprint_file
 
-				# Build a LogHash array for each fingerprint
-				x = LogHash(read_file(file), filter)
+				# Build a Log for the fingerprint
+				log = Log(filename)
+
+				# Build a SuperHash
+				x = SuperHash.manufacture(log, "syslog.stopwords")
+
 				x.file_name = fingerprint_file
 				fingerprints.append(x)
 
@@ -449,6 +452,25 @@ class SuperHash(UserDict):
 					break
 
 			debug("Count: "+str(count))
+
+	def manufacture(log, filter):
+
+		# Select the correct build method
+		if log.contains(SyslogEntry):
+			LogHash = SyslogHash
+		elif log.contains(ApacheEntry):
+			LogHash = ApacheLogHash
+		elif log.contains(RawEntry):
+			LogHash = RawLogHash
+		else:
+			print "Could not determine what type of objects are contained in generic Log"""
+			sys.exit(15)
+
+		# Build and return the correct subclass instance based on log file type
+		return LogHash(log, "syslog.stopwords")
+
+	manufacture = staticmethod(manufacture)
+
 
 class SyslogHash(SuperHash):
 	"""Overrides the fill method specifically for LogHashes built from Syslog files"""
@@ -952,22 +974,11 @@ def hash(args):
 	# Get entire log file into ram for speed
 	log = Log(args)
 
-	# Select the correct build method
-	if log.contains(SyslogEntry):
-		LogHash = SyslogHash
-	elif log.contains(ApacheEntry):
-		LogHash = ApacheLogHash
-	elif log.contains(RawEntry):
-		LogHash = RawLogHash
-	else:
-		print "Could not determine what type of objects are contained in generic Log"""
-		sys.exit(15)
-
 	# Build the Hash
-	x = LogHash(log, "syslog.stopwords")
+	x = SuperHash.manufacture(log, "syslog.stopwords")
 
 	if options.fingerprint:
-		x.fingerprint(filter)
+		x.fingerprint()
 
 	# Print out the dictionary first sorted by the word with
 	# the most entries with an alphabetical subsort
