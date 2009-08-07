@@ -7,9 +7,9 @@ FORCE:
 
 clean :
 	rm -f petit*.i386.rpm
+	rm -f petit*.src.rpm
 
 rpm : petit*.rpm
 
 petit*.rpm : ../src/bin/petit
 	scripts/rpm.sh
-	mv rpm/RPMS/i386/petit-1-e1.i386.rpm ./

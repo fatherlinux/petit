@@ -15,6 +15,11 @@ echo "%_topdir $HOME" > .rpmmacros
 # Build it
 rpmbuild -ba SPECS/petit.spec
 
-# Restore environment
-export HOME=OLDHOME
+# Move newly created files into current directory
+cd $HOME
+mv ../rpm/RPMS/i386/petit*.i386.rpm ../
+mv ../rpm/SRPMS/petit*.src.rpm ../
 
+# Restore environment
+export HOME=$OLDHOME
+rm .rpmmacros
