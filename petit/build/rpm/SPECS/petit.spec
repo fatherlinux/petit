@@ -43,6 +43,7 @@ install src/lib/fingerprints/rhel5-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fin
 %clean
 rm -fr $RPM_BUILD_ROOT
 rm -rf src
+rm -rf %{SOURCE0}
 
 %files
 /usr/bin/petit
