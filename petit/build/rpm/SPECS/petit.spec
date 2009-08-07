@@ -5,7 +5,7 @@ Release: e1
 License: GPL
 Group: Applications/System
 URL: http://www.eyemg.com/opensource
-Source0: petit.tgz
+Source0: petit.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}       
 BuildArch: i386                                            
 Autoreq: 0                                                 
@@ -21,20 +21,20 @@ echo Building %{name}-%{version}-%{release}
 #%setup -q -n %{name}-%{version}
 
 %build
-tar xvfz .%{SOURCE0}
+tar xvfz %{SOURCE0}
 
 %install
-# Make link for perl, this is required for some of Andy's code
-install bin/petit ${RPM_BUILD_ROOT}/usr/bin/petit
-
-%post
+# Remove old BUILD ROOT
+rm -rf ${RPM_BUILD_ROOT}
+install -d ${RPM_BUILD_ROOT}/usr/bin
+install src/bin/petit ${RPM_BUILD_ROOT}/usr/bin/petit
 
 %clean
-rm -fr $RPM_BUILD_ROOT
+#rm -fr $RPM_BUILD_ROOT
 
 
 %files
-/usr/bin/lt2
+/usr/bin/petit
 
 %defattr(-,root,root,-)
 
