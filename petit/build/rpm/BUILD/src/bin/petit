@@ -262,11 +262,9 @@ class Filter:
 
 	file = ""
 	prefixes =  [ \
-		"/var/lib/chrunchtools/sw/", \
-		"/usr/local/lt/lib/sw/",
-		"/opt/lt/lib", \
-		"/srv/operations/tools/lt/lib/",
-		"/home/smccarty/Operations/tools/lt/src/lib/sw/" ]
+		"/var/lib/petit/filters/", \
+		"/usr/local/petit/var/lib/filters/",
+		"/opt/petit/var/lib/filters/"]
 
 	stopwords = []
 
@@ -388,12 +386,9 @@ class SuperHash(UserDict):
 
 		# Load & assign fingerprint files
 		prefixes =  [ \
-			"/usr/lib/crunch/fp/", \
-			"/usr/local/crunch/lib/fp/", \
-			"/srv/operations/tools/lt/lib/fp/", \
-			"/usr/local/lt/lib/fp/", \
-			"/opt/lt/lib/fp/", \
-			"../lib/fp/" ]
+			"/var/lib/petit/fingerprints/", \
+			"/usr/local/petit/var/lib/fingerprints/" \
+			"/opt/petit/var/lib/fingerprints/"]
 
 		for prefix in prefixes:
 			if os.path.exists(prefix) and len(os.listdir(prefix)) >= 1:

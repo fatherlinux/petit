@@ -1,6 +1,6 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: .8
+Version: 0.8
 Release: e1
 License: GPL
 Group: Applications/System
@@ -30,15 +30,15 @@ install -d ${RPM_BUILD_ROOT}/usr/bin
 install src/bin/petit ${RPM_BUILD_ROOT}/usr/bin/petit
 
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/filters
-install src/lib/filters/daemon.stopwords
-install src/lib/filters/host.stopwords
-install src/lib/filters/syslog.stopwords
-install src/lib/filters/words.stopwords
+install src/lib/filters/daemon.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/daemon.stopwords
+install src/lib/filters/host.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/host.stopwords
+install src/lib/filters/syslog.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/syslog.stopwords
+install src/lib/filters/words.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/words.stopwords
 
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints
-install src/lib/finterprints/fedora11-reboot.fp
-install src/lib/finterprints/rhel4-reboot.fp
-install src/lib/finterprints/rhel5-reboot.fp
+install src/lib/fingerprints/fedora11-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/fedora11-reboot.fp
+install src/lib/fingerprints/rhel4-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/rhel4-reboot.fp
+install src/lib/fingerprints/rhel5-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/rhel5-reboot.fp
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -46,6 +46,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 /usr/bin/petit
+/var/lib/petit
 
 %defattr(-,root,root,-)
 
