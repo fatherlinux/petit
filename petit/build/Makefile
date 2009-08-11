@@ -13,3 +13,8 @@ rpm : petit*.rpm
 
 petit*.rpm : ../src/bin/petit
 	scripts/rpm.sh
+
+deb : petit*.deb
+
+petit*.deb : ../src/bin/petit
+	scripts/deb.sh
