@@ -8,6 +8,7 @@ FORCE:
 clean :
 	rm -f petit*.i386.rpm
 	rm -f petit*.src.rpm
+	rm -f petit*.deb
 
 rpm : petit*.rpm
 
