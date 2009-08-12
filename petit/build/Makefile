@@ -12,10 +12,10 @@ clean :
 
 rpm : petit*.rpm
 
-petit*.rpm : ../src/bin/petit
+petit*.rpm : ../src/bin/* ../src/lib/* ../src/lib/filters/* ../src/lib/fingerprints/* ../src/lib/fingerprint_library/*
 	scripts/rpm.sh
 
 deb : petit*.deb
 
-petit*.deb : ../src/bin/petit
+petit*.deb : ../src/bin/* ../src/lib/* ../src/lib/filters/* ../src/lib/fingerprints/* ../src/lib/fingerprint_library/*
 	scripts/deb.sh
