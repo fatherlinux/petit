@@ -362,7 +362,9 @@ class SuperHash(UserDict):
 
 			# Print all lines as sample
 			if options.allsample:
-				print str(self[key][0])+":	"+choice(self[key][1]).log_entry
+				# Get sample
+				sample_entry = choice(self[key][1])
+				print str(self[key][0])+":	"+sample_entry.daemon+sample_entry.log_entry
 
 			elif options.sample:
 
