@@ -31,7 +31,7 @@ rm -rf ${RPM_BUILD_ROOT}
 install -d ${RPM_BUILD_ROOT}/usr/bin
 install -d ${RPM_BUILD_ROOT}/usr/share/petit
 install src/bin/petit ${RPM_BUILD_ROOT}/usr/bin/petit
-install src/lib/crunchtools.py ${RPM_BUILD_ROOT}/usr/share/petit
+install src/lib/crunchtools.py ${RPM_BUILD_ROOT}/usr/share/petit/crunchtools.py
 
 # Filters
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/filters
@@ -59,7 +59,7 @@ rm -rf %{SOURCE0}
 
 %files
 /usr/bin/petit
-/usr/share/petit/crunchtools.py
+/usr/share/petit
 /var/lib/petit
 /usr/share/doc/petit
 
