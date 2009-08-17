@@ -154,7 +154,7 @@ def hash(args):
 
 	# Build the Hash
 	if options.filter == None or options.filter == True:
-		x = SuperHash.manufacture(log, "syslog.stopwords")
+		x = SuperHash.manufacture(log, "hash.stopwords")
 	else:
 		x = SuperHash.manufacture(log, "__none__")
 	
