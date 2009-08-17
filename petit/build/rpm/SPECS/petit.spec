@@ -27,9 +27,11 @@ tar xvfz %{SOURCE0}
 # Remove ddold BUILD ROOT
 rm -rf ${RPM_BUILD_ROOT}
 
-# Main script/s
+# Main scripts & libraries
 install -d ${RPM_BUILD_ROOT}/usr/bin
+install -d ${RPM_BUILD_ROOT}/usr/share/petit
 install src/bin/petit ${RPM_BUILD_ROOT}/usr/bin/petit
+install src/lib/crunchtools.py ${RPM_BUILD_ROOT}/usr/share/petit
 
 # Filters
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/filters
@@ -57,6 +59,7 @@ rm -rf %{SOURCE0}
 
 %files
 /usr/bin/petit
+/usr/share/petit/crunchtools.py
 /var/lib/petit
 /usr/share/doc/petit
 
