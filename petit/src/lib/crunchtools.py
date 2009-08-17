@@ -6,8 +6,9 @@ manipulating log data.
 ################################################################################
 #
 # Writen By: Scott McCarty
-# Date: 7/2009
+# Date: 8/2009
 # Email: scott.mccarty@gmail.com
+# Version: 0.8.3
 #
 # Copyright (C) 2009 Scott McCarty
 #
@@ -40,15 +41,6 @@ import re
 import sys
 import logging
 global logging
-
-# Process Signals
-## Ignore problems when piping to head
-signal.signal(signal.SIGPIPE, signal.SIG_DFL)
-
-## Exit when control-C is pressed
-def signal_handler(signal, frame):
-        sys.exit(0)
-signal.signal(signal.SIGINT, signal_handler)
 
 class LogEntry:
 	"""Interface class which specifies generic log format for consumption by other classes"""
@@ -214,7 +206,7 @@ class Log(UserList):
 		if filename == "__none__":
 			f = sys.stdin
 		else:
-			logging.info("File: "+filename)
+			logging.info("Opening File: "+filename)
 			f = open(filename)
 
 		# Read entire contents into array for speed
@@ -303,7 +295,7 @@ class Filter:
 			# Replace mathces with hash signs
 			oldstring = string
 			string = re.sub(stopword, "#", string)
-			logging.info(" SCRUBBING\t"+oldstring+" OF\t"+stopword+" BECOMES\t"+string)
+			logging.debug(" SCRUBBING "+oldstring+" OF "+stopword+" BECOMES "+string)
 
 		return string
 
@@ -318,21 +310,25 @@ class SuperHash(UserDict):
 	"""Interface and parent class for all hash/dict based objects. """
 
 	filter = Filter()
+	sample = "none"
 
-	def __init__(self, log=["__none__"], filter_filename="__none__"):
+	def __init__(self, log, filter_filename="__none__"):
 
 		# Call parent init
 		UserDict.__init__(self)
 
-		if log[0] == "__none__" and filter_filename == "__none__":
-			pass
-		else:
-			# Setup the filter
-			if options.filter:
-				self.filter = Filter(filter_filename)
-
-			# Fill the data structure
+		if log[0] != "__none__" and filter_filename != "__none__":
+			# Setup log and filter
+			self.filter = Filter(filter_filename)
 			self.fill(log)
+
+		elif log[0] != "__none__":
+			# Setup log without filter
+			self.fill(log)
+			
+		else:
+			# Create empty filter
+			pass
 
 	def fill(self, log):
 		pass
@@ -350,29 +346,32 @@ class SuperHash(UserDict):
 
 	def display(self):
 
-		# Use the global flags
-		global options
-
 		# Set static sample threshold
 		sample_threshold = 3
+
+		# Debugging
+		logging.info("Sample Type: "+self.sample)
 
 		# Print out the dictionary first sorted by the word with
 		# the most entries with an alphabetical subsort
 		for key in sorted(sorted(self.keys()),cmp=lambda x,y: cmp(self[y][0], self[x][0])):
 
 			# Print all lines as sample
-			if options.allsample:
+			if self.sample == "all":
 				print str(self[key][0])+":	"+choice(self[key][1]).log_entry
 
-			elif options.sample:
+			elif self.sample == "none":
+				print str(self[key][0])+":	"+str(key)
 
+			elif self.sample == "threshold":
 				# Print sample for small values below/equal to threshold
 				if self[key][0] <= sample_threshold:
 					print str(self[key][0])+":	"+self[key][1][0].log_entry
 				else:
 					print str(self[key][0])+":	"+str(key)
 			else:
-				print str(self[key][0])+":	"+str(key)
+				print "That type of sampling is not supported:", self.sample
+				sys.exit(16)
 
 	def fingerprint(self):
 		"""
@@ -418,7 +417,7 @@ class SuperHash(UserDict):
 		# Iterate each fingerprint
 		for fingerprint in fingerprints:
 
-			logging.info("FINGERPRINT:"+fingerprint.file_name)
+			logging.info("Testing Fingerprint:"+fingerprint.file_name)
 
 			# Reset counter for each fingerprint
 			count = 0
@@ -433,7 +432,7 @@ class SuperHash(UserDict):
 				# If Threshold is reached, remove everyline of fingerprint
 				# Saves time on searching every entry
 				if count > threshold:
-					logging.info("FOUND FINGERPRING:"+fingerprint.file_name)
+					logging.info("Found Fingerprint:"+fingerprint.file_name)
 					for key in fingerprint.keys():
 
 						# Key found, plenty to remove
@@ -462,7 +461,7 @@ class SuperHash(UserDict):
 			sys.exit(15)
 
 		# Build and return the correct subclass instance based on log file type
-		return LogHash(log, "syslog.stopwords")
+		return LogHash(log, filter)
 
 	manufacture = staticmethod(manufacture)
 
@@ -610,11 +609,14 @@ class GraphHash(UserDict):
 	day = ""
 	month = ""
 	scale = 0.0
+	tick = "#"
+	width = False
 
 	def __init__(self, log, filter, type):
 
 		# Call parent init
 		UserDict.__init__(self)
+		self.tick = "#"
 
 	def increment(self, key, entry):
 
@@ -640,20 +642,13 @@ class GraphHash(UserDict):
 		graph_height = 6
 		graph_width = len(self)
 		scale = float(float(self.max_value)/float(graph_height))
-		print options.tick
-
-		# Setup tick charachter to use
-		if options.tick:
-			tick = options.tick[:1]
-		else:
-			tick = "#"
 
 		# Use wide scale or small scale
-		if options.wide:
-			char_fill = tick+" "
+		if self.wide:
+			char_fill = self.tick+" "
 			char_blank = "  "
 		else:
-			char_fill = tick
+			char_fill = self.tick
 			char_blank = " "
 		
 
@@ -686,7 +681,7 @@ class GraphHash(UserDict):
 		print
 
 		# Print marker numbers
-		if options.wide:
+		if self.wide:
 			transposed_graph_width = (graph_width*2)
 			graph_mid = 2
 			graph_end = 3
