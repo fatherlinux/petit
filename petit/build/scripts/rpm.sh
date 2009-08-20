@@ -3,6 +3,12 @@
 # Create tar file
 tar cfz rpm/SOURCES/petit.tar.gz --exclude=.svn ../src/ &>/dev/null
 
+# Go create the source distribution, then come back
+# Experimental work to use distutils to create RPM
+#cd ../src
+#python setup.py bdist --dist-dir ../build/rpm/SOURCES/
+#cd ../build
+
 # Build custom environment
 OLDHOME=$HOME
 export HOME=`pwd`/rpm
