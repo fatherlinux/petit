@@ -37,7 +37,7 @@ install src/lib/crunchtools.py ${RPM_BUILD_ROOT}/usr/share/petit/crunchtools.py
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/filters
 install src/lib/filters/daemon.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/daemon.stopwords
 install src/lib/filters/host.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/host.stopwords
-install src/lib/filters/syslog.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/syslog.stopwords
+install src/lib/filters/hash.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/hash.stopwords
 install src/lib/filters/words.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/words.stopwords
 
 # Fingerprints
