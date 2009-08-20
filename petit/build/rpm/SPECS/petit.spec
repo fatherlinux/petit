@@ -46,6 +46,13 @@ install src/lib/fingerprints/fedora11-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/
 install src/lib/fingerprints/rhel4-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/rhel4-reboot.fp
 install src/lib/fingerprints/rhel5-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/rhel5-reboot.fp
 
+# Fingerprint Library
+install -d ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library
+install src/lib/fingerprint_library/rhel4-reboot-dl380.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/rhel4-reboot-dl380.fp
+install src/lib/fingerprint_library/rhel4-reboot-vmware.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/rhel4-reboot-vmware.fp
+install src/lib/fingerprint_library/rhel5-reboot-dl380.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/rhel5-reboot-dl380.fp
+install src/lib/fingerprint_library/rhel5-reboot-vmware.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/rhel5-reboot-vmware.fp
+
 # Licensing & Docs
 install -d ${RPM_BUILD_ROOT}/usr/share/doc/petit
 install src/README ${RPM_BUILD_ROOT}/usr/share/doc/petit/README
