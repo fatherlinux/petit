@@ -6,16 +6,16 @@ default: FORCE
 FORCE:
 
 clean :
-	rm -f chev*.i386.rpm
-	rm -f chev*.src.rpm
-	rm -f chev*.deb
+	rm -f petit*.i386.rpm
+	rm -f petit*.src.rpm
+	rm -f petit*.deb
 
 rpm : petit*.rpm
 
-petit*.rpm : ../src/bin/* ../src/lib/* ../src/etc/*
+petit*.rpm : ../src/bin/* ../src/lib/* ../src/lib/filters/* ../src/lib/fingerprints/* ../src/lib/fingerprint_library/*
 	scripts/rpm.sh
 
 deb : petit*.deb
 
-petit*.deb : ../src/bin/* ../src/lib/* ../src/etc/*
+petit*.deb : ../src/bin/* ../src/lib/* ../src/lib/filters/* ../src/lib/fingerprints/* ../src/lib/fingerprint_library/*
 	scripts/deb.sh
