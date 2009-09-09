@@ -2,13 +2,13 @@
 %{!?pyver: %define pyver %(%{__python} -c "import sys ; print sys.version[:3]")}
 
 Name: petit
-Summary: Log analysis tool for syslog, apache and raw log files
-Version: 0.8.3
+Summary: Check online vulnerabilities rss feeds for important pieces of software
+Version: 0.8.0
 Release: 1
 License: GPL
 Group: Applications/System
 URL: http://opensource.eyemg.com
-Source0: petit.tar.gz
+Source0: chev.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 #BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: i386
@@ -17,13 +17,14 @@ Requires: python
 BuildRequires: python-devel
 
 %description
-Log analysis tool which is useful to systems administrators & systems analysts
-This tool interact with syslog and apache logs to clarify what is happening in logs.
+Simple check which can be used from cron or nagios to check
+critical pieces of software for vulnerabilities using security focus, nist
+and other lists as sources.
 
 %prep
 %setup -q
 %{__chmod} 0644 examples/*
-%{__sed} -i -e '1d' petit.py
+%{__sed} -i -e '1d' chev.py
 
 %build
 %{__python} setup.py build

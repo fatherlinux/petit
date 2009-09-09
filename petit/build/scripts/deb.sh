@@ -1,35 +1,32 @@
 #!/bin/bash
 
-rm -rf deb/petit
+rm -rf deb/chev
 
 # Create directory structure
-mkdir -p deb/petit/DEBIAN
-mkdir -p deb/petit/usr/bin
-mkdir -p deb/petit/usr/share/petit
-mkdir -p deb/petit/usr/share/doc/petit
-mkdir -p deb/petit/var/lib/petit
+mkdir -p deb/chev/DEBIAN
+mkdir -p deb/chev/usr/local/chev/bin
+mkdir -p deb/chev/usr/local/chev/lib
+mkdir -p deb/chev/usr/local/chev/etc
+mkdir -p deb/chev/usr/local/chev/doc
 
 # Copy in control file
-cp deb/control deb/petit/DEBIAN/control
+cp deb/control deb/chev/DEBIAN/control
 
 # Now fill with latest data
 ## Bin
-rsync -av --exclude=.svn ../src/bin/ deb/petit/usr/bin/
+rsync -av --exclude=.svn ../src/bin/ deb/chev/usr/local/chev/bin/
 
 ## Docs
-cp ../src/AUTHORS deb/petit/usr/share/doc/petit/AUTHORS
-cp ../src/COPYING deb/petit/usr/share/doc/petit/COPYING
-cp ../src/README deb/petit/usr/share/doc/petit/README
+cp ../src/AUTHORS deb/chev/usr/local/chev/doc/chev/AUTHORS
+cp ../src/COPYING deb/chev/usr/local/chev/doc/chev/COPYING
+cp ../src/README deb/chev/usr/local/chev//doc/chev/README
 
 ## Lib
-rsync -av --exclude=.svn ../src/lib/fingerprint_library/ deb/petit/var/lib/petit/fingerprint_library/
-rsync -av --exclude=.svn ../src/lib/fingerprints/ deb/petit/var/lib/petit/fingerprints/
-rsync -av --exclude=.svn ../src/lib/filters/ deb/petit/var/lib/petit/filters/
-rsync -av --exclude=.svn ../src/lib/crunchtools.py deb/petit/usr/share/petit/crunchtools.py
+rsync -av --exclude=.svn ../src/lib/crunchtools.py deb/chev/usr/local/chev/lib/crunchtools.py
 
 # Build the package
 version=`cat deb/control | grep Version | awk '{print $2}'`
-dpkg -b deb/petit petit_${version}_i386.deb
+dpkg -b deb/chev chev_${version}_i386.deb
 
 # Clean up
-rm -rf deb/petit
+rm -rf deb/chev
