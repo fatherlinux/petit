@@ -13,20 +13,20 @@ do
 	do
 		# Get the right name for the test
 		test=`basename $test | cut -f1 -d"."`
-		echo "Testing Function: $function with $test.log"
+		echo -n "Testing Function: $function with $test.log: "
 
 		# Run test
 		petit --${function} data/${test}.log > ${test}-${function}.tmp
 
 		if ! diff output/${test}-${function}.output ${test}-${function}.tmp
 		then
-			echo "Fialed $function: Test of: $test"
+			echo " Failed"
+			rm ${test}-${function}.tmp
 			exit 1
 		else
-			echo "Fialed $function: Test of: $test"
+			rm ${test}-${function}.tmp
+			echo " Passed"
 		fi
 
 	done
 done
-
-rm -f ./*.tmp
