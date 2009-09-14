@@ -53,7 +53,6 @@ from crunchtools import SecondsGraph
 from crunchtools import MinutesGraph
 from crunchtools import HoursGraph
 import logging
-global logging
 
 # Process Signals
 ## Ignore problems when piping to head
@@ -73,6 +72,7 @@ def get_options(argv):
 
 	# Use global namespace for flags
 	global options
+	global logging
 
 	# Declarations & Variables
 	usage = "usage: %prog [options] [file]"
