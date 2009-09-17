@@ -9,7 +9,8 @@ clean :
 	rm -f petit*.i386.rpm
 	rm -f petit*.src.rpm
 	rm -f petit*.deb
-	rm -f build/rpm/SOURCES/petit.tar
+	rm -f build/rpm/SOURCES/*
+	rm -f build/rpm/BUILD/*
 
 rpm : petit*.rpm
 

@@ -26,8 +26,8 @@ rpmbuild -ba SPECS/petit.spec
 
 # Move newly created files into current directory
 cd $HOME
-mv ../rpm/RPMS/i386/petit*.i386.rpm ../
-mv ../rpm/SRPMS/petit*.src.rpm ../
+mv ../rpm/RPMS/i386/petit*.i386.rpm ../../
+mv ../rpm/SRPMS/petit*.src.rpm ../../
 
 # Restore environment
 export HOME=$OLDHOME

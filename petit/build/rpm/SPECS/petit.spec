@@ -5,7 +5,7 @@ Release: 1
 License: GPL
 Group: Applications/System
 URL: http://www.eyemg.com/opensource
-Source0: petit.tar.gz
+Source0: petit.tar
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}       
 BuildArch: i386                                            
 Autoreq: 0                                                 
@@ -55,9 +55,9 @@ install src/lib/fingerprint_library/rhel5-reboot-vmware.fp ${RPM_BUILD_ROOT}/var
 
 # Licensing & Docs
 install -d ${RPM_BUILD_ROOT}/usr/share/doc/petit
-install src/README ${RPM_BUILD_ROOT}/usr/share/doc/petit/README
-install src/AUTHORS ${RPM_BUILD_ROOT}/usr/share/doc/petit/AUTHORS
-install src/COPYING ${RPM_BUILD_ROOT}/usr/share/doc/petit/COPYING
+install README ${RPM_BUILD_ROOT}/usr/share/doc/petit/README
+install AUTHORS ${RPM_BUILD_ROOT}/usr/share/doc/petit/AUTHORS
+install COPYING ${RPM_BUILD_ROOT}/usr/share/doc/petit/COPYING
 
 %clean
 rm -fr $RPM_BUILD_ROOT
