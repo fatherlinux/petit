@@ -21,7 +21,7 @@ echo Building %{name}-%{version}-%{release}
 #%setup -q -n %{name}-%{version}
 
 %build
-tar xvfz %{SOURCE0}
+tar xvf %{SOURCE0}
 
 %install
 # Remove ddold BUILD ROOT

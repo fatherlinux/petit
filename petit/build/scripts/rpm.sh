@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # Create tar file
-tar cfz rpm/SOURCES/petit.tar.gz --exclude=.svn ../src/ &>/dev/null
+tar cf build/rpm/SOURCES/petit.tar --exclude=.svn src/ &>/dev/null
+tar rf build/rpm/SOURCES/petit.tar AUTHORS &>/dev/null
+tar rf build/rpm/SOURCES/petit.tar COPYING &>/dev/null
+tar rf build/rpm/SOURCES/petit.tar README &>/dev/null
 
 # Go create the source distribution, then come back
 # Experimental work to use distutils to create RPM
@@ -11,7 +14,7 @@ tar cfz rpm/SOURCES/petit.tar.gz --exclude=.svn ../src/ &>/dev/null
 
 # Build custom environment
 OLDHOME=$HOME
-export HOME=`pwd`/rpm
+export HOME=`pwd`/build/rpm
 echo "Changeing home to $HOME"
 cd ~/
 
