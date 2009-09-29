@@ -40,11 +40,11 @@ import signal
 import re
 import sys
 import logging
-global logging
 
 class LogEntry:
 	"""Interface class which specifies generic log format for consumption by other classes"""
 
+	year = ""
 	month = ""
 	day = ""
 	hour = ""
@@ -55,7 +55,7 @@ class LogEntry:
 	log_entry = ""
 
 	def display(self):
-		print "Month:",self.month,"Day:",self.day,"Hour:", self.hour, "Minute:", self.minute, "Second:", self.second, "Host:",self.host,"Payload",self.log_entry
+		print "Year: ", self.year,"Month:",self.month,"Day:",self.day,"Hour:", self.hour, "Minute:", self.minute, "Second:", self.second, "Host:",self.host,"Payload",self.log_entry
 
 
 class SyslogEntry(LogEntry):
@@ -85,10 +85,13 @@ class SyslogEntry(LogEntry):
 	def is_type(line):
 		"""Standard function from interface class to determine type"""
 
+		global logging
+
 		if len(line) >= 3:
 
 			# Look for something similar to: "11:53:08" in third column
-			if re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]):
+			if re.search("[0-9]{2}",line[1]) and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]):
+				logging.info("Found Syslog Entry")
 				return True
 			else:
 				return False
@@ -137,10 +140,64 @@ class ApacheEntry(LogEntry):
 	def is_type(line):
 		"""Standard function from interface class to determine type"""
 
+		global logging
+
 		if len(line) >= 4:
 
 			# Look for something similar to: "03/Aug/2009:11:53:08" in forth column
 			if re.search("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9{2}:[0-9]{2}:[0-9]{2}",line[3]):
+
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	# Declare Static Methods
+	is_type = staticmethod(is_type)
+
+class SnortEntry(LogEntry):
+	"""Driver for Snort formatted log files. Conforms to LogEntry interface class."""
+
+	def __init__(self, line):
+
+		# Split the line up
+		value = line.split()
+
+		# Should be normal log entry
+		if len(value) >= 2:
+			
+			# Initial break down
+			snortdate = value[:1]
+			self.log_entry = ' '.join(value[1:])
+		
+			# Looks like "09/29-10:18:46.026172"
+			snortdate, junk = snortdate[0].split('.')
+
+			# Looks like "09/29-10:18:46"
+			self.year, snortdate = snortdate.split('/')
+
+			# Looks like "29-10:18:46"
+			self.day, snortdate = snortdate.split('-')
+
+			# Looks like "10:18:46"
+			self.hour, self.minute, self.second = snortdate.split(':')
+
+		# Blank line, will be sorted out by scrub
+		else:
+			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.log_entry = "#"
+
+	def is_type(line):
+		"""Standard function from interface class to determine type"""
+
+		global logging
+
+		if len(line) >= 4:
+
+			# Look for something similar to: "09/29-10:18:46.026172" in first column
+			if re.search("[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}",line[0]):
+				logging.info("Found Snort Entry")
 				return True
 			else:
 				return False
@@ -180,6 +237,7 @@ class RawEntry(LogEntry):
 
 			# Look for any length of text in the line
 			if re.search(".+",line):
+				logging.info("Found Raw Entry")
 				return True
 			else:
 				return False
@@ -196,6 +254,9 @@ class Log(UserList):
 	"""
 
 	def __init__(self, filename=""):
+
+		global logging
+
 		UserList.__init__(self)
 
 		# Create new array to hold log data
@@ -230,8 +291,11 @@ class Log(UserList):
 				Entry = SyslogEntry
 			elif ApacheEntry.is_type(first_entry):
 				Entry = ApacheEntry
+			elif SnortEntry.is_type(first_entry):
+				Entry = SnortEntry
 			else:
 				Entry = RawEntry
+				print Entry.__doc__
 
 		# Finally, build self with the correct subclassed LogEntry constructor type
 		for line in buffer:
@@ -264,6 +328,8 @@ class Filter:
 
 	def __init__(self, file="__none__"):
 
+		global logging
+
 		for prefix in self.prefixes:
 
 			# Set class variable to file & path
@@ -289,6 +355,9 @@ class Filter:
 		logging.info("Filter File: "+str(self.file))
 
 	def scrub(self, string):
+
+		global logging
+
 		# Check each stopword against each key
 		for stopword in self.stopwords:
 
@@ -346,6 +415,8 @@ class SuperHash(UserDict):
 
 	def display(self):
 
+		global logging
+
 		# Set static sample threshold
 		sample_threshold = 3
 
@@ -377,6 +448,8 @@ class SuperHash(UserDict):
 		"""
 		Remove all fingerprints from a given LogHash and replace with a single string"
 		"""
+
+		global logging
 
 		# Declarations & Variables
 		threshold_coefficient = 0.3
@@ -454,6 +527,8 @@ class SuperHash(UserDict):
 			LogHash = SyslogHash
 		elif log.contains(ApacheEntry):
 			LogHash = ApacheLogHash
+		elif log.contains(SnortEntry):
+			LogHash = SnortLogHash
 		elif log.contains(RawEntry):
 			LogHash = RawLogHash
 		else:
@@ -487,6 +562,25 @@ class SyslogHash(SuperHash):
 
 class ApacheLogHash(SuperHash):
 	"""Overrides the fill method specifically for LogHashes built from Apache logs"""
+	
+	def fill(self, log):
+		# Create a dictionary with an entry for each line. Increment
+		# the value for each time the word is found. Merge lines by
+		# Removing numbers and replacing them with a single '#'
+		for entry in log:
+
+			# Scrub sections of SyslogEntry which will be used to key the hash
+			key = self.filter.scrub(entry.log_entry)
+
+			# increment the LogHash with the new key
+			self.increment(key, entry)
+
+		# Finally, remove valueless lines
+		if "#" in self:	
+			del self["#"]
+
+class SnortLogHash(SuperHash):
+	"""Overrides the fill method specifically for LogHashes built from Snort logs"""
 	
 	def fill(self, log):
 		# Create a dictionary with an entry for each line. Increment
