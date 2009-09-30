@@ -179,7 +179,7 @@ class SnortEntry(LogEntry):
 			snortdate, junk = snortdate[0].split('.')
 
 			# Looks like "09/29-10:18:46"
-			self.year, snortdate = snortdate.split('/')
+			self.month, snortdate = snortdate.split('/')
 
 			# Looks like "29-10:18:46"
 			self.day, snortdate = snortdate.split('-')
