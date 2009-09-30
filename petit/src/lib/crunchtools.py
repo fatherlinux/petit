@@ -371,7 +371,7 @@ class Log(UserList):
 			return SyslogEntry
 		elif ApacheEntry.is_type(line):
 			return ApacheEntry
-		elif SnortEntry.is_type(first_entry):
+		elif SnortEntry.is_type(line):
 			return SnortEntry
 		else:
 			return RawEntry
@@ -653,14 +653,16 @@ class Filter:
 
 			if file == "__none__":
 				return
-				
+		
+			# Open the file and get each stopword or regex		
                         if os.path.exists("%s" % self.file):
 				try:
 					f = open(self.file)
 					for line in f.readlines():
 
 						# Read entire contents into array for speed
-						self.stopwords.append(line.rstrip())
+						# Save them as compiled regexes for speed
+						self.stopwords.append(re.compile(line.rstrip()))
 					break
 
 				except IOError:
@@ -678,9 +680,9 @@ class Filter:
 		for stopword in self.stopwords:
 
 			# Replace mathces with hash signs
-			oldstring = string
+			old_string = string
 			string = re.sub(stopword, "#", string)
-			logging.debug(" SCRUBBING "+oldstring+" OF "+stopword+" BECOMES "+string)
+			logging.debug(" SCRUBBING "+old_string+" OF "+stopword.pattern+" BECOMES "+string)
 
 		return string
 
