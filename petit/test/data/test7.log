@@ -1,0 +1,500 @@
+09/29-08:25:54.519035  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 64.32.24.240:53969 -> 208.79.157.85:25
+09/29-08:25:55.075149  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2593 -> 208.79.157.55:110
+09/29-08:26:15.294657  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 71.31.146.159:61835 -> 208.79.157.55:110
+09/29-08:26:21.131445  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.111:1434
+09/29-08:26:37.682755  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3909 -> 208.79.157.55:110
+09/29-08:26:41.225327  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.156.245:1434
+09/29-08:26:53.935233  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2600 -> 208.79.157.55:110
+09/29-08:26:56.965696  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2602 -> 208.79.157.55:110
+09/29-08:27:15.967298  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2609 -> 208.79.157.55:110
+09/29-08:27:18.963934  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2610 -> 208.79.157.55:110
+09/29-08:27:28.153424  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3853 -> 208.79.157.55:110
+09/29-08:28:02.081838  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 210.212.188.177:3920 -> 208.79.156.253:1434
+09/29-08:28:11.373728  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2616 -> 208.79.157.55:110
+09/29-08:28:14.395946  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2618 -> 208.79.157.55:110
+09/29-08:28:56.263715  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.173:1434
+09/29-08:29:13.120165  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2625 -> 208.79.157.55:110
+09/29-08:29:16.170728  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2626 -> 208.79.157.55:110
+09/29-08:29:20.598833  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 174.100.18.16:49598 -> 208.79.157.55:110
+09/29-08:29:28.975799  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.232:1434
+09/29-08:29:44.683233  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2396 -> 208.79.157.55:110
+09/29-08:29:56.578666  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.157.82:1434
+09/29-08:30:15.030937  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 58.57.17.194:1065 -> 208.79.156.170:1434
+09/29-08:30:24.092632  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2635 -> 208.79.157.55:110
+09/29-08:30:27.074774  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2637 -> 208.79.157.55:110
+09/29-08:31:24.483537  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.157.99:1434
+09/29-08:31:25.980011  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2645 -> 208.79.157.55:110
+09/29-08:31:28.983069  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2647 -> 208.79.157.55:110
+09/29-08:31:30.130147  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:57420 -> 208.79.157.55:110
+09/29-08:32:05.133488  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 189.41.236.53:5861 -> 208.79.157.55:25
+09/29-08:32:12.549490  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.141:1434
+09/29-08:32:38.812767  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2654 -> 208.79.157.55:110
+09/29-08:32:41.894802  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2656 -> 208.79.157.55:110
+09/29-08:33:33.512532  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.157.174:1434
+09/29-08:33:38.248394  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.8:1434
+09/29-08:33:54.451276  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2663 -> 208.79.157.55:110
+09/29-08:33:57.434980  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2665 -> 208.79.157.55:110
+09/29-08:34:34.569938  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 174.101.127.223:2730 -> 208.79.156.49:1434
+09/29-08:34:45.872239  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2401 -> 208.79.157.55:110
+09/29-08:34:55.233000  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:38796 -> 208.79.157.55:110
+09/29-08:35:02.420104  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2684 -> 208.79.157.55:110
+09/29-08:35:05.477298  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2686 -> 208.79.157.55:110
+09/29-08:35:19.151291  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2692 -> 208.79.157.55:110
+09/29-08:35:26.123822  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2695 -> 208.79.157.55:110
+09/29-08:35:43.249075  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2698 -> 208.79.157.55:110
+09/29-08:35:49.236576  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2700 -> 208.79.157.55:110
+09/29-08:36:33.476612  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.124:1434
+09/29-08:37:07.966121  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2707 -> 208.79.157.55:110
+09/29-08:37:16.888662  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2710 -> 208.79.157.55:110
+09/29-08:37:31.480255  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.156.180:1434
+09/29-08:37:33.483905  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2715 -> 208.79.157.55:110
+09/29-08:37:36.704360  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2716 -> 208.79.157.55:110
+09/29-08:37:46.686085  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3912 -> 208.79.157.55:110
+09/29-08:38:00.132491  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.224:1434
+09/29-08:38:11.622596  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2721 -> 208.79.157.55:110
+09/29-08:38:14.608168  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2722 -> 208.79.157.55:110
+09/29-08:38:47.850168  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.201:1434
+09/29-08:38:49.705680  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 201.208.192.234:4864 -> 208.79.156.54:1434
+09/29-08:39:14.149669  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 216.240.181.4:60937 -> 208.79.157.85:25
+09/29-08:39:19.702042  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2728 -> 208.79.157.55:110
+09/29-08:39:22.796604  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2730 -> 208.79.157.55:110
+09/29-08:39:23.402135  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3918 -> 208.79.157.55:110
+09/29-08:39:44.662299  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.157.175:1434
+09/29-08:39:47.101105  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2403 -> 208.79.157.55:110
+09/29-08:40:11.405094  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3920 -> 208.79.157.55:110
+09/29-08:40:24.047332  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2737 -> 208.79.157.55:110
+09/29-08:40:27.099125  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2739 -> 208.79.157.55:110
+09/29-08:40:46.329713  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 190.65.69.218:13550 -> 208.79.157.55:25
+09/29-08:41:38.047100  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 189.55.166.111:63181 -> 208.79.157.55:25
+09/29-08:41:39.714917  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2746 -> 208.79.157.55:110
+09/29-08:41:46.110477  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2748 -> 208.79.157.55:110
+09/29-08:42:06.357130  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3924 -> 208.79.157.55:110
+09/29-08:42:09.907023  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.157.55:1434
+09/29-08:42:43.093272  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.110:1434
+09/29-08:42:43.935779  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3928 -> 208.79.157.55:110
+09/29-08:42:57.652044  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2827 -> 208.79.157.55:110
+09/29-08:43:01.555678  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2853 -> 208.79.157.55:110
+09/29-08:43:04.411814  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.90:1434
+09/29-08:44:23.269849  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.121:1434
+09/29-08:44:38.305716  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3243 -> 208.79.157.55:110
+09/29-08:44:48.248987  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2408 -> 208.79.157.55:110
+09/29-08:44:56.538359  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3294 -> 208.79.157.55:110
+09/29-08:45:30.855093  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 200.215.37.170:3711 -> 208.79.156.136:25
+09/29-08:46:33.365198  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3449 -> 208.79.157.55:110
+09/29-08:46:39.514558  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3475 -> 208.79.157.55:110
+09/29-08:47:24.461589  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3521 -> 208.79.157.55:110
+09/29-08:47:28.035688  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3536 -> 208.79.157.55:110
+09/29-08:47:35.162422  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3930 -> 208.79.157.55:110
+09/29-08:47:58.215193  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3932 -> 208.79.157.55:110
+09/29-08:48:05.011654  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.111:1434
+09/29-08:48:06.219956  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.93:1434
+09/29-08:48:06.823974  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.170:1434
+09/29-08:48:21.216767  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.156.115:1434
+09/29-08:48:37.973194  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3836 -> 208.79.157.55:110
+09/29-08:48:41.330194  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3838 -> 208.79.157.55:110
+09/29-08:49:38.172157  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 81.169.167.149:37245 -> 208.79.157.85:25
+09/29-08:49:38.727431  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.81:1434
+09/29-08:49:40.965534  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3926 -> 208.79.157.55:110
+09/29-08:49:44.092678  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:3936 -> 208.79.157.55:110
+09/29-08:49:49.449808  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2414 -> 208.79.157.55:110
+09/29-08:50:17.544553  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:57896 -> 208.79.157.55:110
+09/29-08:50:25.705853  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.157.2:1434
+09/29-08:50:42.700360  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3935 -> 208.79.157.55:110
+09/29-08:51:00.435340  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 114.135.37.57:1525 -> 208.79.157.31:1434
+09/29-08:51:01.015801  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.157.59:1434
+09/29-08:51:21.546342  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4000 -> 208.79.157.55:110
+09/29-08:51:30.925625  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4004 -> 208.79.157.55:110
+09/29-08:51:34.847260  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.131.151.83:1741 -> 208.79.156.38:1434
+09/29-08:51:48.769127  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 187.4.120.205:4649 -> 208.79.156.136:25
+09/29-08:52:07.592910  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 221.130.4.228:4622 -> 208.79.156.86:1434
+09/29-08:53:12.092114  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4130 -> 208.79.157.55:110
+09/29-08:53:15.138660  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4132 -> 208.79.157.55:110
+09/29-08:53:23.258473  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.79:1434
+09/29-08:53:32.884579  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 93.43.134.32:1536 -> 208.79.157.55:25
+09/29-08:54:32.529341  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4211 -> 208.79.157.55:110
+09/29-08:54:44.420113  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4235 -> 208.79.157.55:110
+09/29-08:54:50.623070  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2416 -> 208.79.157.55:110
+09/29-08:55:00.909409  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.234:1434
+09/29-08:55:15.081170  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.63:1434
+09/29-08:55:28.235520  [**] [1:12610:2] WEB-PHP phpBB viewtopic double URL encoding attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 204.202.2.23:2433 -> 208.79.157.169:80
+09/29-08:55:28.235520  [**] [1:2229:5] WEB-PHP viewtopic.php access [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 204.202.2.23:2433 -> 208.79.157.169:80
+09/29-08:55:28.238047  [**] [1:12610:2] WEB-PHP phpBB viewtopic double URL encoding attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 204.202.2.23:2434 -> 208.79.157.169:80
+09/29-08:55:28.238047  [**] [1:2229:5] WEB-PHP viewtopic.php access [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 204.202.2.23:2434 -> 208.79.157.169:80
+09/29-08:55:28.238052  [**] [1:12610:2] WEB-PHP phpBB viewtopic double URL encoding attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 204.202.2.23:2435 -> 208.79.157.169:80
+09/29-08:55:28.238052  [**] [1:2229:5] WEB-PHP viewtopic.php access [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 204.202.2.23:2435 -> 208.79.157.169:80
+09/29-08:56:23.402415  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.75.52.182:41689 -> 208.79.156.144:1434
+09/29-08:57:03.398688  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.156.45:1434
+09/29-08:57:08.777877  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4618 -> 208.79.157.55:110
+09/29-08:57:13.073511  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.145.126.78:1082 -> 208.79.156.202:1434
+09/29-08:57:25.764002  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.139:1434
+09/29-08:57:40.338875  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4637 -> 208.79.157.55:110
+09/29-08:58:37.810897  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.157.172:1434
+09/29-08:59:09.102365  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.156.50:1434
+09/29-08:59:21.847764  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 174.100.18.16:49812 -> 208.79.157.55:110
+09/29-08:59:38.814687  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.62:1434
+09/29-08:59:48.909259  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 76.190.150.202:54004 -> 208.79.157.55:110
+09/29-08:59:51.844221  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2419 -> 208.79.157.55:110
+09/29-09:00:10.717340  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4844 -> 208.79.157.55:110
+09/29-09:00:18.693948  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4847 -> 208.79.157.55:110
+09/29-09:00:58.561020  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.157.115:1434
+09/29-09:01:07.863136  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.157.95:1434
+09/29-09:01:17.876059  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.194:1434
+09/29-09:02:07.361425  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3949 -> 208.79.157.55:110
+09/29-09:02:11.331167  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4964 -> 208.79.157.55:110
+09/29-09:02:20.515099  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:4969 -> 208.79.157.55:110
+09/29-09:02:32.001649  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3951 -> 208.79.157.55:110
+09/29-09:02:52.092271  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3953 -> 208.79.157.55:110
+09/29-09:03:01.577617  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.157.182:1434
+09/29-09:03:04.076460  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3955 -> 208.79.157.55:110
+09/29-09:03:48.842456  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.48:1434
+09/29-09:04:39.702449  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1183 -> 208.79.157.55:110
+09/29-09:04:52.074740  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1189 -> 208.79.157.55:110
+09/29-09:04:53.052729  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2423 -> 208.79.157.55:110
+09/29-09:05:02.437078  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1280 -> 208.79.157.55:110
+09/29-09:05:10.050040  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.157.81:1434
+09/29-09:05:37.791157  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.91:1434
+09/29-09:06:26.375054  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:55360 -> 208.79.157.55:110
+09/29-09:06:28.755512  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1364 -> 208.79.157.55:110
+09/29-09:06:29.775112  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.145.126.78:1082 -> 208.79.156.171:1434
+09/29-09:06:31.344648  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3957 -> 208.79.157.55:110
+09/29-09:06:39.610000  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3967 -> 208.79.157.55:110
+09/29-09:06:41.055719  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1397 -> 208.79.157.55:110
+09/29-09:06:43.317235  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3969 -> 208.79.157.55:110
+09/29-09:06:44.607494  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.108:1434
+09/29-09:07:13.680514  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.49:1434
+09/29-09:07:26.812556  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.36:1434
+09/29-09:07:44.381513  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1618 -> 208.79.157.55:110
+09/29-09:07:50.248295  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1635 -> 208.79.157.55:110
+09/29-09:08:01.994435  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.240.240.50:4031 -> 208.79.157.99:1434
+09/29-09:08:27.738342  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.157.82:1434
+09/29-09:08:44.459857  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1710 -> 208.79.157.55:110
+09/29-09:08:47.471717  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1712 -> 208.79.157.55:110
+09/29-09:09:15.957757  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1318 -> 208.79.157.55:110
+09/29-09:09:34.795310  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:36427 -> 208.79.157.55:110
+09/29-09:09:57.188996  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.156.241:1434
+09/29-09:09:58.664480  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2425 -> 208.79.157.55:110
+09/29-09:10:00.495858  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1719 -> 208.79.157.55:110
+09/29-09:10:03.720733  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1721 -> 208.79.157.55:110
+09/29-09:11:02.056118  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 63.241.211.68:44805 -> 208.79.157.85:25
+09/29-09:11:10.723003  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1727 -> 208.79.157.55:110
+09/29-09:11:12.052902  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.31:1434
+09/29-09:11:16.839536  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3974 -> 208.79.157.55:110
+09/29-09:11:17.105739  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1729 -> 208.79.157.55:110
+09/29-09:11:24.975858  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3976 -> 208.79.157.55:110
+09/29-09:12:20.501397  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1736 -> 208.79.157.55:110
+09/29-09:12:23.625056  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1738 -> 208.79.157.55:110
+09/29-09:12:36.439507  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.157.185:1434
+09/29-09:12:36.618852  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 216.27.63.243:40033 -> 208.79.157.85:25
+09/29-09:12:42.227142  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.157.64:1434
+09/29-09:12:55.499619  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3978 -> 208.79.157.55:110
+09/29-09:13:12.794791  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1335 -> 208.79.157.55:110
+09/29-09:13:23.689583  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1746 -> 208.79.157.55:110
+09/29-09:13:26.695343  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1748 -> 208.79.157.55:110
+09/29-09:13:57.811400  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3980 -> 208.79.157.55:110
+09/29-09:14:33.690480  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1774 -> 208.79.157.55:110
+09/29-09:14:36.723019  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1776 -> 208.79.157.55:110
+09/29-09:14:37.538693  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3982 -> 208.79.157.55:110
+09/29-09:15:00.149461  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2435 -> 208.79.157.55:110
+09/29-09:15:26.228930  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3984 -> 208.79.157.55:110
+09/29-09:15:33.986075  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3986 -> 208.79.157.55:110
+09/29-09:15:38.750645  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1795 -> 208.79.157.55:110
+09/29-09:15:41.770090  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1798 -> 208.79.157.55:110
+09/29-09:15:49.950225  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 58.59.176.70:1092 -> 208.79.156.49:1434
+09/29-09:16:03.680266  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.77:1434
+09/29-09:16:23.129553  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.204:1434
+09/29-09:16:34.149997  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 211.137.84.149:2736 -> 208.79.156.19:1434
+09/29-09:16:37.923054  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3988 -> 208.79.157.55:110
+09/29-09:16:41.502375  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1806 -> 208.79.157.55:110
+09/29-09:16:44.504595  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1808 -> 208.79.157.55:110
+09/29-09:16:48.040926  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.18:1434
+09/29-09:17:15.738327  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.157.110:1434
+09/29-09:17:25.375937  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3990 -> 208.79.157.55:110
+09/29-09:17:38.689019  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3957 -> 208.79.157.55:110
+09/29-09:17:41.601661  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1818 -> 208.79.157.55:110
+09/29-09:17:44.668597  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1820 -> 208.79.157.55:110
+09/29-09:18:02.127286  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.157.51:1434
+09/29-09:18:52.188604  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1828 -> 208.79.157.55:110
+09/29-09:18:52.726983  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3961 -> 208.79.157.55:110
+09/29-09:18:58.410017  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1842 -> 208.79.157.55:110
+09/29-09:19:09.831025  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3992 -> 208.79.157.55:110
+09/29-09:19:18.183323  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3994 -> 208.79.157.55:110
+09/29-09:20:02.734873  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2439 -> 208.79.157.55:110
+09/29-09:20:05.050781  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3996 -> 208.79.157.55:110
+09/29-09:20:07.299443  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1847 -> 208.79.157.55:110
+09/29-09:20:10.343818  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1849 -> 208.79.157.55:110
+09/29-09:20:29.934281  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.9:1434
+09/29-09:20:44.682100  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.156.176:1434
+09/29-09:21:09.815547  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1857 -> 208.79.157.55:110
+09/29-09:21:16.190495  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1860 -> 208.79.157.55:110
+09/29-09:21:42.959193  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 124.173.184.18:4861 -> 208.79.156.227:1434
+09/29-09:22:03.234910  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4007 -> 208.79.157.55:110
+09/29-09:22:17.603262  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1874 -> 208.79.157.55:110
+09/29-09:22:20.720347  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1876 -> 208.79.157.55:110
+09/29-09:22:29.678911  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.157.85:1434
+09/29-09:22:47.475063  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.0:1434
+09/29-09:23:21.915582  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1883 -> 208.79.157.55:110
+09/29-09:23:25.103967  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1885 -> 208.79.157.55:110
+09/29-09:24:06.539410  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.157.152:1434
+09/29-09:24:17.333571  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.75.52.182:41689 -> 208.79.156.51:1434
+09/29-09:24:23.452294  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1892 -> 208.79.157.55:110
+09/29-09:24:26.470799  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1894 -> 208.79.157.55:110
+09/29-09:24:33.744689  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.164:1434
+09/29-09:24:59.642274  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.242:1434
+09/29-09:25:05.187737  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2449 -> 208.79.157.55:110
+09/29-09:25:19.390479  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4012 -> 208.79.157.55:110
+09/29-09:25:20.428303  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4014 -> 208.79.157.55:110
+09/29-09:25:22.733575  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.46:1434
+09/29-09:25:27.866526  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1905 -> 208.79.157.55:110
+09/29-09:25:30.884933  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1906 -> 208.79.157.55:110
+09/29-09:25:33.047959  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:47062 -> 208.79.157.55:110
+09/29-09:26:22.406616  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.243:1434
+09/29-09:26:34.813360  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.157.79:1434
+09/29-09:26:43.423617  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1913 -> 208.79.157.55:110
+09/29-09:26:49.891074  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1914 -> 208.79.157.55:110
+09/29-09:27:09.433828  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.61:1434
+09/29-09:27:38.888485  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3967 -> 208.79.157.55:110
+09/29-09:27:48.210825  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1919 -> 208.79.157.55:110
+09/29-09:27:50.834830  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3969 -> 208.79.157.55:110
+09/29-09:27:54.635635  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1920 -> 208.79.157.55:110
+09/29-09:28:37.844720  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:56098 -> 208.79.157.55:110
+09/29-09:28:40.862466  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.156.128:1434
+09/29-09:29:11.083041  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1926 -> 208.79.157.55:110
+09/29-09:29:11.489959  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4017 -> 208.79.157.55:110
+09/29-09:29:14.141742  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1928 -> 208.79.157.55:110
+09/29-09:30:06.511684  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2451 -> 208.79.157.55:110
+09/29-09:30:14.645164  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1936 -> 208.79.157.55:110
+09/29-09:30:17.675040  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1938 -> 208.79.157.55:110
+09/29-09:31:17.843291  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1946 -> 208.79.157.55:110
+09/29-09:31:20.925361  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1947 -> 208.79.157.55:110
+09/29-09:31:33.328656  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.200.115.195:4272 -> 208.79.156.111:1434
+09/29-09:31:45.182237  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:56869 -> 208.79.157.55:110
+09/29-09:32:20.755247  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1952 -> 208.79.157.55:110
+09/29-09:32:22.151032  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.132.132.162:3034 -> 208.79.156.181:1434
+09/29-09:32:23.933492  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1954 -> 208.79.157.55:110
+09/29-09:32:52.193017  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.238:1434
+09/29-09:33:21.714491  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 64.32.24.240:50518 -> 208.79.157.85:25
+09/29-09:33:22.209267  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1350 -> 208.79.157.55:110
+09/29-09:33:27.895812  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1962 -> 208.79.157.55:110
+09/29-09:33:31.128886  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1964 -> 208.79.157.55:110
+09/29-09:34:21.131180  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.225:1434
+09/29-09:34:41.944172  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.15:1434
+09/29-09:34:44.034092  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1971 -> 208.79.157.55:110
+09/29-09:34:47.035689  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1973 -> 208.79.157.55:110
+09/29-09:34:49.484347  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:37757 -> 208.79.157.55:110
+09/29-09:35:07.674290  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2455 -> 208.79.157.55:110
+09/29-09:35:33.410096  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.211:1434
+09/29-09:35:49.632066  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.157.2:1434
+09/29-09:35:59.856832  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1984 -> 208.79.157.55:110
+09/29-09:36:02.894113  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1986 -> 208.79.157.55:110
+09/29-09:36:10.290928  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.21:1434
+09/29-09:37:07.928042  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1993 -> 208.79.157.55:110
+09/29-09:37:10.943829  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:1995 -> 208.79.157.55:110
+09/29-09:37:17.174780  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3974 -> 208.79.157.55:110
+09/29-09:37:50.807062  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.174:1434
+09/29-09:38:02.155445  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:51865 -> 208.79.157.55:110
+09/29-09:38:17.943869  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2004 -> 208.79.157.55:110
+09/29-09:38:24.238371  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2006 -> 208.79.157.55:110
+09/29-09:38:56.005618  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:3980 -> 208.79.157.55:110
+09/29-09:39:13.543517  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.156.241:1434
+09/29-09:39:17.942832  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2012 -> 208.79.157.55:110
+09/29-09:39:21.006673  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2014 -> 208.79.157.55:110
+09/29-09:39:41.019060  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4063 -> 208.79.157.55:110
+09/29-09:40:06.990849  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4069 -> 208.79.157.55:110
+09/29-09:40:08.819422  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2457 -> 208.79.157.55:110
+09/29-09:40:22.740180  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4039 -> 208.79.157.55:110
+09/29-09:40:28.160051  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4071 -> 208.79.157.55:110
+09/29-09:40:28.743354  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2023 -> 208.79.157.55:110
+09/29-09:40:31.785141  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2025 -> 208.79.157.55:110
+09/29-09:41:00.237176  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4073 -> 208.79.157.55:110
+09/29-09:41:08.641996  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:39386 -> 208.79.157.55:110
+09/29-09:41:25.026721  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1505 -> 208.79.157.55:110
+09/29-09:41:33.422412  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2034 -> 208.79.157.55:110
+09/29-09:41:36.423693  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2036 -> 208.79.157.55:110
+09/29-09:41:39.003562  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1507 -> 208.79.157.55:110
+09/29-09:41:51.815060  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4041 -> 208.79.157.55:110
+09/29-09:42:17.236599  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 72.26.203.156:47604 -> 208.79.157.85:25
+09/29-09:42:37.565953  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2042 -> 208.79.157.55:110
+09/29-09:42:40.568451  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2044 -> 208.79.157.55:110
+09/29-09:43:28.060595  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.22.244.45:1292 -> 208.79.156.144:1434
+09/29-09:43:37.244808  [**] [1:12592:3] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 64.95.75.27:34347 -> 208.79.157.85:25
+09/29-09:43:53.414156  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2053 -> 208.79.157.55:110
+09/29-09:43:54.685780  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.157.55:1434
+09/29-09:43:56.420626  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2055 -> 208.79.157.55:110
+09/29-09:44:00.658125  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4076 -> 208.79.157.55:110
+09/29-09:44:01.062893  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.240:1434
+09/29-09:44:14.865694  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57106 -> 208.79.157.67:80
+09/29-09:44:15.199351  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57111 -> 208.79.157.59:80
+09/29-09:44:15.630991  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57112 -> 208.79.157.59:80
+09/29-09:44:15.640530  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57113 -> 208.79.157.59:80
+09/29-09:44:15.862534  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57114 -> 208.79.157.59:80
+09/29-09:44:16.110617  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57115 -> 208.79.157.59:80
+09/29-09:44:16.313168  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57116 -> 208.79.157.59:80
+09/29-09:44:16.445455  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57117 -> 208.79.157.59:80
+09/29-09:44:17.219120  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57118 -> 208.79.157.59:80
+09/29-09:44:17.229038  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57119 -> 208.79.157.59:80
+09/29-09:44:17.333984  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57125 -> 208.79.157.59:80
+09/29-09:44:17.344347  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57126 -> 208.79.157.59:80
+09/29-09:44:17.502346  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57127 -> 208.79.157.59:80
+09/29-09:44:17.515521  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57128 -> 208.79.157.59:80
+09/29-09:44:17.618316  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57129 -> 208.79.157.59:80
+09/29-09:44:17.631657  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57131 -> 208.79.157.59:80
+09/29-09:44:17.733741  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57133 -> 208.79.157.59:80
+09/29-09:44:17.746336  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57134 -> 208.79.157.59:80
+09/29-09:44:17.861642  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57137 -> 208.79.157.59:80
+09/29-09:44:17.869015  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57138 -> 208.79.157.59:80
+09/29-09:44:17.987656  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57139 -> 208.79.157.59:80
+09/29-09:44:17.993560  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57140 -> 208.79.157.59:80
+09/29-09:44:18.217179  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57143 -> 208.79.157.59:80
+09/29-09:44:18.234422  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57144 -> 208.79.157.59:80
+09/29-09:44:18.456112  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57146 -> 208.79.157.59:80
+09/29-09:44:18.462547  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57147 -> 208.79.157.59:80
+09/29-09:44:18.605463  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57148 -> 208.79.157.59:80
+09/29-09:44:18.611633  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57149 -> 208.79.157.59:80
+09/29-09:44:18.829128  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57150 -> 208.79.157.59:80
+09/29-09:44:37.782299  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.157.176:1434
+09/29-09:44:47.851121  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.22.244.45:1292 -> 208.79.157.177:1434
+09/29-09:45:05.527676  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57203 -> 208.79.157.67:80
+09/29-09:45:05.691574  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57204 -> 208.79.157.59:80
+09/29-09:45:06.684408  [**] [1:13819:2] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 70.151.72.162:57209 -> 208.79.157.59:80
+09/29-09:45:08.711069  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4080 -> 208.79.157.55:110
+09/29-09:45:10.022636  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2459 -> 208.79.157.55:110
+09/29-09:45:14.546527  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2066 -> 208.79.157.55:110
+09/29-09:45:18.192832  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2068 -> 208.79.157.55:110
+09/29-09:45:23.524074  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4082 -> 208.79.157.55:110
+09/29-09:45:32.499028  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.211:1434
+09/29-09:45:34.969550  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.181:1434
+09/29-09:45:54.687398  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.194:1434
+09/29-09:46:01.361314  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.144.217.211:1308 -> 208.79.156.92:1434
+09/29-09:46:02.333235  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4084 -> 208.79.157.55:110
+09/29-09:46:14.022404  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2074 -> 208.79.157.55:110
+09/29-09:46:17.112310  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2075 -> 208.79.157.55:110
+09/29-09:47:16.111873  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2082 -> 208.79.157.55:110
+09/29-09:47:19.142787  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2084 -> 208.79.157.55:110
+09/29-09:47:46.472322  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.134:1434
+09/29-09:47:46.931060  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 4.245.170.27:27205 -> 208.79.157.86:1434
+09/29-09:47:48.445652  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1516 -> 208.79.157.55:110
+09/29-09:48:30.349571  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2092 -> 208.79.157.55:110
+09/29-09:48:33.380117  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2094 -> 208.79.157.55:110
+09/29-09:48:33.830998  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.31:1434
+09/29-09:49:10.628423  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1533 -> 208.79.157.55:110
+09/29-09:49:14.050712  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1535 -> 208.79.157.55:110
+09/29-09:49:38.098486  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2101 -> 208.79.157.55:110
+09/29-09:49:41.154732  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2103 -> 208.79.157.55:110
+09/29-09:49:54.634629  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 99.69.11.192:1053 -> 208.79.157.55:110
+09/29-09:50:11.166270  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2463 -> 208.79.157.55:110
+09/29-09:50:12.365460  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 99.69.11.192:1060 -> 208.79.157.55:110
+09/29-09:50:13.708569  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 99.69.11.192:1063 -> 208.79.157.55:110
+09/29-09:50:39.641407  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2111 -> 208.79.157.55:110
+09/29-09:50:42.716584  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2112 -> 208.79.157.55:110
+09/29-09:51:56.004590  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2118 -> 208.79.157.55:110
+09/29-09:52:01.490669  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2120 -> 208.79.157.55:110
+09/29-09:52:59.989952  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2127 -> 208.79.157.55:110
+09/29-09:53:03.084657  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2129 -> 208.79.157.55:110
+09/29-09:53:18.691551  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4047 -> 208.79.157.55:110
+09/29-09:53:20.173770  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.209:1434
+09/29-09:53:31.867266  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.22.244.45:1292 -> 208.79.156.113:1434
+09/29-09:54:00.090489  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2136 -> 208.79.157.55:110
+09/29-09:54:03.079732  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2138 -> 208.79.157.55:110
+09/29-09:54:38.523972  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.157.168:1434
+09/29-09:55:03.008857  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2153 -> 208.79.157.55:110
+09/29-09:55:06.067703  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2155 -> 208.79.157.55:110
+09/29-09:55:09.338841  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.150:1434
+09/29-09:55:12.410209  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2465 -> 208.79.157.55:110
+09/29-09:55:14.879300  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4049 -> 208.79.157.55:110
+09/29-09:56:06.434165  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4102 -> 208.79.157.55:110
+09/29-09:56:08.133651  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:39637 -> 208.79.157.55:110
+09/29-09:56:18.949303  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2162 -> 208.79.157.55:110
+09/29-09:56:23.333658  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.157.183:1434
+09/29-09:56:24.698917  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2165 -> 208.79.157.55:110
+09/29-09:56:28.067162  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 210.212.188.177:3920 -> 208.79.156.188:1434
+09/29-09:57:09.461402  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.149:1434
+09/29-09:57:26.378921  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2174 -> 208.79.157.55:110
+09/29-09:57:29.717491  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.163:1434
+09/29-09:57:30.116752  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2176 -> 208.79.157.55:110
+09/29-09:58:15.392088  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.184:1434
+09/29-09:58:29.135373  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 12.178.109.43:1543 -> 208.79.157.55:110
+09/29-09:58:32.938224  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.157.182:1434
+09/29-09:58:35.189220  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2184 -> 208.79.157.55:110
+09/29-09:58:38.349618  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2186 -> 208.79.157.55:110
+09/29-09:59:14.504499  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.144:1434
+09/29-09:59:19.010794  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:49217 -> 208.79.157.55:110
+09/29-09:59:24.275609  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.247:1434
+09/29-09:59:36.471522  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 99.69.11.192:1182 -> 208.79.157.55:110
+09/29-09:59:37.222790  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 99.69.11.192:1185 -> 208.79.157.55:110
+09/29-09:59:47.941525  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2195 -> 208.79.157.55:110
+09/29-09:59:50.985498  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2197 -> 208.79.157.55:110
+09/29-10:00:13.584161  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2468 -> 208.79.157.55:110
+09/29-10:00:18.765996  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.156.211:1434
+09/29-10:00:46.348325  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4051 -> 208.79.157.55:110
+09/29-10:00:48.259158  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2205 -> 208.79.157.55:110
+09/29-10:00:51.276055  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2207 -> 208.79.157.55:110
+09/29-10:01:40.863334  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4104 -> 208.79.157.55:110
+09/29-10:01:56.934109  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2215 -> 208.79.157.55:110
+09/29-10:01:58.174912  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4053 -> 208.79.157.55:110
+09/29-10:01:59.910002  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2217 -> 208.79.157.55:110
+09/29-10:02:12.003832  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 99.69.11.192:1188 -> 208.79.157.55:110
+09/29-10:02:28.534403  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:60757 -> 208.79.157.55:110
+09/29-10:02:39.291520  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.178:1434
+09/29-10:02:51.428006  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4106 -> 208.79.157.55:110
+09/29-10:03:00.648203  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4108 -> 208.79.157.55:110
+09/29-10:03:02.586535  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2223 -> 208.79.157.55:110
+09/29-10:03:05.607960  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2225 -> 208.79.157.55:110
+09/29-10:03:51.904570  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.22.244.45:1292 -> 208.79.156.82:1434
+09/29-10:04:07.241460  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2233 -> 208.79.157.55:110
+09/29-10:04:10.241535  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2235 -> 208.79.157.55:110
+09/29-10:04:34.590639  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 58.57.17.194:1065 -> 208.79.156.139:1434
+09/29-10:04:43.702174  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.119:1434
+09/29-10:05:07.170696  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 58.59.176.70:1092 -> 208.79.157.183:1434
+09/29-10:05:14.695937  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2472 -> 208.79.157.55:110
+09/29-10:05:18.131335  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2246 -> 208.79.157.55:110
+09/29-10:05:20.470950  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.22.244.45:1292 -> 208.79.157.115:1434
+09/29-10:05:21.163959  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2248 -> 208.79.157.55:110
+09/29-10:05:57.741749  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.157.152:1434
+09/29-10:06:17.127069  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.157.92:1434
+09/29-10:06:27.784918  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2257 -> 208.79.157.55:110
+09/29-10:06:30.801384  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2259 -> 208.79.157.55:110
+09/29-10:07:48.386551  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.23.37.51:3661 -> 208.79.156.118:1434
+09/29-10:07:57.033122  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2286 -> 208.79.157.55:110
+09/29-10:08:01.200620  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2288 -> 208.79.157.55:110
+09/29-10:09:05.398270  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.156.132:1434
+09/29-10:09:12.429321  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2295 -> 208.79.157.55:110
+09/29-10:09:16.289975  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2297 -> 208.79.157.55:110
+09/29-10:09:49.361800  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.205.231.99:4244 -> 208.79.156.1:1434
+09/29-10:10:15.878245  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2474 -> 208.79.157.55:110
+09/29-10:10:16.207243  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2304 -> 208.79.157.55:110
+09/29-10:10:19.941386  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2305 -> 208.79.157.55:110
+09/29-10:10:35.170550  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.204.137.156:1067 -> 208.79.157.165:1434
+09/29-10:10:41.617494  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 113.16.19.100:4175 -> 208.79.156.139:1434
+09/29-10:10:51.486677  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 61.166.104.67:1039 -> 208.79.156.68:1434
+09/29-10:10:53.649053  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 122.225.100.154:3411 -> 208.79.156.157:1434
+09/29-10:11:02.814422  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.30.22.82:2478 -> 208.79.156.104:1434
+09/29-10:11:15.836760  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2312 -> 208.79.157.55:110
+09/29-10:11:19.062476  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2314 -> 208.79.157.55:110
+09/29-10:11:58.320618  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.156.147:1434
+09/29-10:11:59.374263  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.75.52.182:41689 -> 208.79.157.185:1434
+09/29-10:12:16.961378  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2320 -> 208.79.157.55:110
+09/29-10:12:20.194429  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2322 -> 208.79.157.55:110
+09/29-10:12:37.347863  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4061 -> 208.79.157.55:110
+09/29-10:12:54.364381  [**] [1:11687:8] WEB-MISC Apache SSI error page cross-site scripting [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 12.46.179.121:47692 -> 208.79.157.61:80
+09/29-10:13:10.373950  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 190.210.25.161:1171 -> 208.79.157.180:1434
+09/29-10:13:18.040975  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2329 -> 208.79.157.55:110
+09/29-10:13:18.909235  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4063 -> 208.79.157.55:110
+09/29-10:13:21.115679  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2331 -> 208.79.157.55:110
+09/29-10:14:17.996461  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 202.103.9.51:1100 -> 208.79.156.88:1434
+09/29-10:14:18.134302  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 218.22.244.45:1292 -> 208.79.156.51:1434
+09/29-10:14:29.707103  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2340 -> 208.79.157.55:110
+09/29-10:14:34.281522  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2342 -> 208.79.157.55:110
+09/29-10:14:45.022820  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4135 -> 208.79.157.55:110
+09/29-10:15:17.131887  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:2496 -> 208.79.157.55:110
+09/29-10:15:26.768527  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 173.17.62.229:4030 -> 208.79.156.49:1434
+09/29-10:15:33.138085  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2361 -> 208.79.157.55:110
+09/29-10:15:36.239132  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2363 -> 208.79.157.55:110
+09/29-10:15:59.664153  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4137 -> 208.79.157.55:110
+09/29-10:16:34.286095  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2374 -> 208.79.157.55:110
+09/29-10:16:37.431307  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2376 -> 208.79.157.55:110
+09/29-10:16:45.309728  [**] [1:2050:14] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {UDP} 58.57.17.194:1065 -> 208.79.157.172:1434
+09/29-10:17:39.633537  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4139 -> 208.79.157.55:110
+09/29-10:17:52.133434  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2385 -> 208.79.157.55:110
+09/29-10:17:55.132501  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 196.209.152.247:2387 -> 208.79.157.55:110
+09/29-10:17:55.364128  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 206.183.5.240:4141 -> 208.79.157.55:110
+09/29-10:18:05.467830  [**] [1:2666:2] POP3 PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 67.223.79.34:42537 -> 208.79.157.55:110
