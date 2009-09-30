@@ -8,7 +8,7 @@ manipulating log data.
 # Writen By: Scott McCarty
 # Date: 8/2009
 # Email: scott.mccarty@gmail.com
-# Version: 0.8.3
+# Version: 0.8.7
 #
 # Copyright (C) 2009 Scott McCarty
 #
@@ -39,6 +39,10 @@ import fileinput
 import signal
 import re
 import sys
+import syslog
+import gzip
+import random
+import sha
 import logging
 
 class LogEntry:
@@ -89,7 +93,7 @@ class SyslogEntry(LogEntry):
 
 		if len(line) >= 3:
 
-			# Look for something similar to: "11:53:08" in third column
+			# Look for something similar to: "29 11:53:08" in third column
 			if re.search("[0-9]{2}",line[1]) and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]):
 				logging.info("Found Syslog Entry")
 				return True
@@ -146,7 +150,7 @@ class ApacheEntry(LogEntry):
 
 			# Look for something similar to: "03/Aug/2009:11:53:08" in forth column
 			if re.search("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9{2}:[0-9]{2}:[0-9]{2}",line[3]):
-
+				logging.info("Found Apache Entry")
 				return True
 			else:
 				return False
@@ -207,6 +211,62 @@ class SnortEntry(LogEntry):
 	# Declare Static Methods
 	is_type = staticmethod(is_type)
 
+class ScriptlogEntry(LogEntry):
+	"""
+	Driver for scriptlog entries. Conforms to LogEntry interface class.
+	This allows for a standard syslog entry to have extra fields which 
+	are used with scriptlogs.
+	"""
+
+	# Extra variables
+	label = "__none__"
+	id = "__none__"
+	type = "__none__"
+
+	def __init__(self, line):
+
+		# Split the line up
+		value = line.split()
+
+		# Should be normal log entry
+		if len(value) >= 5:
+			self.month, self.day, time, self.host, self.daemon, self.label, self.id, self.type = value[:8]
+			self.log_entry = ' '.join(value[8:])
+			self.hour, self.minute, self.second = time.split(":") 
+
+		# Abnormal log entry
+		elif len(value) >= 1:
+			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#"]
+			self.log_entry = ' '.join(value)
+
+		# Blank line, will be sorted out by scrub
+		else:
+			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#"]
+			self.log_entry = "#"
+
+	def is_type(line, label="__none__"):
+		"""Standard function from interface class to determine type"""
+
+		# Split the line up
+		value = line.split()
+
+		if len(value) >= 7:
+
+			# Look for warn, crit, or ack in the column 7 to determine scriptlog type
+			if re.search(ScriptLog.labels["warn"], value[7]) and value[5] == label:
+				return True
+			elif re.search(ScriptLog.labels["crit"], value[7]) and value[5] == label:
+				return True
+			elif re.search(ScriptLog.labels["ack"], value[7]) and value[5] == label:
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	# Declare Static Methods
+	is_type = staticmethod(is_type)
+
 class RawEntry(LogEntry):
 	"""
 	Driver for Raw log files. Conforms to LogEntry interface class.
@@ -254,28 +314,10 @@ class Log(UserList):
 	"""
 
 	def __init__(self, filename=""):
-
-		global logging
-
 		UserList.__init__(self)
 
 		# Create new array to hold log data
-		buffer = []
-
-		# Check for logfile or read stdin
-        
-		if filename == "__none__":
-			f = sys.stdin
-		else:
-			logging.info("Opening File: "+filename)
-			f = open(filename)
-
-		# Read entire contents into array for speed
-		for line in f.readlines():
-			buffer.append(line)
-
-		# Close file
-		f.close();
+		buffer = self.open_file(filename)
 
 		# Buffer has bow been created and work with file is done
 		# Now it is time to determine what kind of objects will be
@@ -287,20 +329,52 @@ class Log(UserList):
 			# Get a sample of the first entry
 			first_entry = buffer[0].split()
 
-			if SyslogEntry.is_type(first_entry):
-				Entry = SyslogEntry
-			elif ApacheEntry.is_type(first_entry):
-				Entry = ApacheEntry
-			elif SnortEntry.is_type(first_entry):
-				Entry = SnortEntry
-			else:
-				Entry = RawEntry
-				print Entry.__doc__
+			# Get the correct subclass
+			Entry = self.select(first_entry)
 
 		# Finally, build self with the correct subclassed LogEntry constructor type
 		for line in buffer:
 			self.append(Entry(line))
-			#self[len(self)-1].display()
+
+	def open_file(self, filename):
+		"""Helper function used to open logs"""
+
+		global logging
+
+		# Create new array to hold log data
+		buffer = []
+		trimfiles = []
+
+		# Check for empty, logfile, or read stdin
+		if filename == "":
+			return
+		elif filename == "__none__":
+			f = sys.stdin
+		else:
+			logging.debug("Opening File: "+filename)   
+			f = open(filename)                         
+
+		# Read entire contents into array for speed        
+		for line in f.readlines():                         
+			buffer.append(line)                        
+
+		# Close file                                       
+		f.close();
+
+		return buffer
+
+	def select(self, line):
+		"""Selector which decides what kind of entry to add"""
+
+		# Test and select correct entry type
+		if SyslogEntry.is_type(line):
+			return SyslogEntry
+		elif ApacheEntry.is_type(line):
+			return ApacheEntry
+		elif SnortEntry.is_type(first_entry):
+			return SnortEntry
+		else:
+			return RawEntry
 
 	def contains(self, object):
 		"""Determine what kind of objects are contained in this Log"""
@@ -308,15 +382,256 @@ class Log(UserList):
 			return isinstance(self[len(self)-1], object)
 		else:
 			return False
-		
-    #def subset(self, string):
-    #    """Return a Log object that contains a subset of entries based on a filter"""
-    #   pass
-        
 
+	def display(self):
+		"""Simple display function to show entire log"""
+		for entry in self:
+			entry.display()
+		
+	def subset(self, string):
+		"""Return a Log object that contains a subset of entries based on a filter"""
+
+		newlog = Log()
+		for entry in self:
+			if re.search(string, entry.log_entry):
+				newlog.append(entry)
+
+		return newlog
+
+class ScriptLog(Log):
+	"""Class which allows special use cases for dealing with Report/Acknowledge"""
+
+	# Variables
+	filename = ""
+	label = ""
+	warn = {}
+	crit = {}
+	ack = {}
+
+	# Labels
+	labels = {}
+	labels["warn"] = "__WARN__"
+	labels["crit"] = "__CRIT__"
+	labels["ack"] = "__ACKN__"
+	
+	def __init__(self, filename, label="__ScriptLog__", auto_refresh=False):	
+		import re
+
+
+		# Initialize variables
+		self.filename = filename
+		self.label = label
+		self.auto_refresh = auto_refresh
+
+		self.fill()
+
+	def open_file(self, filename):
+		"""Helper function used to open all logs including previously rotated logs"""
+
+		global logging
+
+		# Create new array to hold log data
+		buffer = []
+		trimfiles = []
+
+		# Check for empty, logfile, or read stdin
+		if filename == "":
+			return
+		elif filename == "__none__":
+			f = sys.stdin
+		else:
+
+			# Search the directory for all files
+			dirname = os.path.dirname(filename)
+			basename = os.path.basename(filename)
+			files = os.listdir(os.path.dirname(filename))
+
+			# Trim files down to ones that make sense
+			for file in files:
+				if re.search(basename, file, re.IGNORECASE):
+					
+					# Open the file
+					logging.debug("Opening File: "+dirname+"/"+file)
+
+					# Check for zip file
+					if re.search("gz", file):
+						f = gzip.open(dirname+"/"+file)
+					else:
+						f = open(dirname+"/"+file)
+
+					# Read entire contents into array for speed
+					for line in f.readlines():
+						buffer.append(line)
+
+					# Close file
+					f.close();
+
+		return buffer
+
+	def fill(self):
+		"""Separate method used to refresh the ScriptLog data structure from file"""
+
+		# Clean up all data structures for each fill
+		UserList.__init__(self)
+		buffer = ()
+		self.warn = {}
+		self.crit = {}
+		self.ack = {}
+
+		# Create new array to hold log data
+		if os.path.exists(self.filename):
+			buffer = self.open_file(self.filename)
+		else:
+			print "File does not exist:", self.filename
+			sys.exit(16)
+
+		# Buffer has bow been created and work with file is done
+		# Now it is time to determine what kind of objects will be
+		# used for construction of self.
+
+		# Finally, build self with the ScriptlogEntries
+		for line in buffer:
+			
+			# Test line to make sure it is a ScriptLog entry, then add
+			if ScriptlogEntry.is_type(line, self.label):
+
+				# Setup main list (self)
+				self.append(ScriptlogEntry(line.expandtabs()))
+
+				# Setup supporting dictionaries
+				# Set Entry
+				entry = self[len(self)-1]
+
+				# Parse warning items
+				if entry.type == ScriptLog.labels["warn"]:
+					self.warn[entry.id] = True
+
+				# Parse critical items
+				if entry.type == ScriptLog.labels["crit"]:
+					self.crit[entry.id] = True
+
+				# If a genuine ack is found, increment
+				if entry.type == ScriptLog.labels["ack"]:
+					self.ack[entry.id] = True
+
+
+	def has_entry(self, line):
+		"""Check the scriptlog object for an entry which matches the line given"""
+
+		# Always check before adding the entry
+		if self.auto_refresh:
+			self.fill()
+
+		for entry in self:
+			
+			# Strip extra spaces out
+			line = re.sub("\s+", " ", line)
+
+			# Complete the search
+			#if re.search(re.escape(line), entry.log_entry, re.IGNORECASE):
+			if line == entry.log_entry:
+				return True
+
+		# Default
+		return False
+
+	def add_warn(self, line):
+		"""Added warning entry to syslog"""
+
+		# Generate new SHA has
+		h = sha.new(str(random.random())+self.label+" "+ScriptLog.labels["warn"]+" "+line)
+
+		# Write out entry
+		syslog.syslog(self.label+" "+h.hexdigest()+" "+ScriptLog.labels["warn"]+" "+line.expandtabs())
+
+		# Refresh the log
+		if self.auto_refresh:
+			self.fill()
+
+	def add_crit(self, line):
+		"""Added critical entry to syslog"""
+
+		# Generate new SHA has
+		h = sha.new(str(random.random())+self.label+" "+ScriptLog.labels["warn"]+" "+line)
+
+		# Write out entry
+		syslog.syslog(self.label+" "+ScriptLog.labels["crit"]+" "+line)
+
+		# Refresh the log
+		if self.auto_refresh:
+			self.fill()
+
+	def add_ack(self, id): 
+		"""Added critical entry to syslog"""
+
+		# Write out entry
+		syslog.syslog(self.label+" "+id+" "+ScriptLog.labels["ack"])
+
+		# Refresh the log
+		if self.auto_refresh:
+			self.fill()
+
+	def show_unacknowledged(self):
+		"""Display function commonly used in derivative works"""
+
+		# Create a list of items
+		unack = {}
+		RETVAL = 0
+
+		# Reload all data
+		self.fill()
+
+		# Build up a list of unacknowledged entries and associated count
+		# Then use that list to display all information from the syslog entries
+
+		# Iterate all warn entries and increment
+		for k in self.warn:
+			if k not in self.ack:
+				unack[k] = True
+				RETVAL = 1
+
+		for k in self.crit:
+			if k not in self.ack:
+				unack[k] = True
+				RETVAL = 2
+
+		if len(unack) > 0:
+			print "Unacknowledged Items:"
+
+			# Iterate full entries so that all information can be printed
+			for entry in self:
+
+				if entry.id in unack:
+					print entry.month \
+					+" "+entry.day \
+					+" "+entry.hour+":"+entry.minute+":"+entry.second \
+					+" "+entry.type \
+					+" \""+entry.log_entry+"\""
+		else:
+			print "OK"
+
+		return RETVAL
+
+	def acknowledge_all(self):
+		"""Acknowledge all entries which have not otherwise been acknowledged"""
+
+		global logging
+
+		for k in self.warn:
+			if k not in self.ack:
+				self.add_ack(k)
+
+		for k in self.crit:
+			if k not in self.ack:
+				self.add_ack(k)
+
+		# Then reload all data
+		self.fill()
 
 class Filter:
 	"""Filter object used to lad filters into memory once, to save on file operations"""		
+
+	global logging
 
 	file = ""
 	prefixes =  [ \
@@ -355,6 +670,7 @@ class Filter:
 		logging.info("Filter File: "+str(self.file))
 
 	def scrub(self, string):
+		"""Used to remove entries and replace them with the scrub character"""
 
 		global logging
 
@@ -369,6 +685,7 @@ class Filter:
 		return string
 
 	def bleach(self, string):
+		"""Determine if a scrub has or should happen"""
 		
 		if self.scrub(string) == "#":
 			return True
@@ -400,9 +717,11 @@ class SuperHash(UserDict):
 			pass
 
 	def fill(self, log):
+		"""Interface method which is flled in by subclasses"""
 		pass
 
 	def increment(self, key, entry):
+		"""Adds a new entry to superhash data structures. Similar to append for a list"""
 
 		# Check to make sure it exists
 		if key not in self:
@@ -414,6 +733,7 @@ class SuperHash(UserDict):
 		self[key][1].append(entry)
 
 	def display(self):
+		"""Displays all entries held in the SuperHash structure"""
 
 		global logging
 
@@ -521,6 +841,7 @@ class SuperHash(UserDict):
 			logging.info("Count: "+str(count))
 
 	def manufacture(log, filter):
+		"""Factory method which creates new SuperHash of correct subtype"""
 
 		# Select the correct build method
 		if log.contains(SyslogEntry):
@@ -618,6 +939,7 @@ class RawLogHash(SuperHash):
 			del self["#"]
 
 class DaemonHash(SyslogHash):
+	"""Overides the fill method specifically for a DaemonHashes built from text files with date/time"""
 
 	def fill(self, log):
 
@@ -637,6 +959,7 @@ class DaemonHash(SyslogHash):
 			del self["#"]
 
 class HostHash(SyslogHash):
+	"""Overides the fill method specifically for a HostHashes built from text files with date/time"""
 
 	def fill(self, log):
 
@@ -692,6 +1015,7 @@ class WordHash(SuperHash):
 			del self["#"]
 
 class GraphHash(UserDict):
+	"""Interface class used to control structure & use of all GraphHash subtypes"""
 
 	begin_time = ""
 	end_time = ""
@@ -713,6 +1037,7 @@ class GraphHash(UserDict):
 		self.tick = "#"
 
 	def increment(self, key, entry):
+		"""Adds new entry. Similar to append method on list"""
 
 		# Check to make sure it exists
 		if key not in self:
@@ -724,6 +1049,7 @@ class GraphHash(UserDict):
 		self[key][1].append(entry)
 
 	def zero(self, key, entry):
+		"""Creates empty entry"""
 
 		# Check to make sure it exists
 		if key not in self:
@@ -731,6 +1057,7 @@ class GraphHash(UserDict):
 			self[key][1].append(entry)
 
 	def display(self):
+		"""Common display function used by all graph subtypes"""
 
 		# Declarations & Variables
 		graph_height = 6
@@ -797,6 +1124,7 @@ class GraphHash(UserDict):
 			
 
 class SecondsGraph(GraphHash):
+	"""60 second graph subtype"""
 
 	def __init__(self, log):
 
@@ -852,6 +1180,7 @@ class SecondsGraph(GraphHash):
 				self.min_value = self[key][0]
 
 class MinutesGraph(GraphHash):
+	"""60 minute graph subtype"""
 
 	def __init__(self, log):
 
@@ -903,6 +1232,7 @@ class MinutesGraph(GraphHash):
 				self.max_value = self[key][0]
 
 class HoursGraph(GraphHash):
+	"""24 hour graph subtype"""
 
 	def __init__(self, log):
 
