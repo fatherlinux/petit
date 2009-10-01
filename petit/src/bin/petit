@@ -64,7 +64,7 @@ def signal_handler(signal, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 def version():
-	print "Version: 0.5"
+	print "Version: 0.8.5"
 	sys.exit(0)
 
 def get_options(argv):

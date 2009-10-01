@@ -8,7 +8,7 @@ manipulating log data.
 # Writen By: Scott McCarty
 # Date: 8/2009
 # Email: scott.mccarty@gmail.com
-# Version: 0.8.7
+# Version: 0.8.8
 #
 # Copyright (C) 2009 Scott McCarty
 #
