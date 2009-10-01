@@ -27,6 +27,12 @@ manipulating log data.
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 #################################################################################
+
+import warnings
+
+## Ignore deprication warning, we have to support a wide range of python versions
+warnings.simplefilter('ignore', DeprecationWarning)
+
 from optparse import OptionParser
 from UserDict import UserDict
 from UserString import UserString
