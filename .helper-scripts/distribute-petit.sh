@@ -4,11 +4,12 @@
 home_location="/srv/operations/tools"
 yum_location="/srv/yum/redhat/RHEL/5/eyemg/"
 remote_location="root@mobius:/usr/web/opensource.eyemg.com/docroot/files/petit/"
+deb_server="root@javier.eyemg.com"
+deb_location="${deb_server}:/root/software/petit"
 
 
 # Get version from admin
-echo -n "What version of petit will you be distributing (X.X.X)? "
-read version
+version=`cat petit/build/rpm/SPECS/petit.spec | grep Version | cut -f2 -d" "`
 
 # Make sure directory is clean for distribution
 cd petit
@@ -25,8 +26,21 @@ cp petit-[0-9].[0-9].[0-9]-[0-9].i386.rpm $yum_location/
 cd $yum_location/
 createrepo .
 
+# Now create deb and distribute
+ssh $deb_server "(cd /root/software/petit; svn update; make clean; make deb)"
+petit_pkg=`ssh $deb_server "ls /root/software/petit | grep \.deb | tail -n1" `
+echo "Petit package: $petit_pkg"
+scp ${deb_location}/${petit_pkg} ${home_location}/petit/${petit_pkg}
+scp ${home_location}/petit/${petit_pkg} $remote_location
+#petit_0.8.5_1_i386.deb
+
 # Cleanup
 cd $home_location
 rm -f petit-${version}.tgz
 cd petit
 make clean
+ssh $deb_server "(cd /root/software/petit; make clean)"
+
+# Update local server
+rpm -e petit
+yum update petit
