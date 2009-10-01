@@ -803,7 +803,7 @@ class SuperHash(UserDict):
 				log = Log(filename)
 
 				# Build a SuperHash
-				x = SuperHash.manufacture(log, "syslog.stopwords")
+				x = SuperHash.manufacture(log, "hash.stopwords")
 
 				x.file_name = fingerprint_file
 				fingerprints.append(x)
