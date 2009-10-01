@@ -13,8 +13,3 @@ test : FORCE
 
 petit : FORCE
 	.helper-scripts/distribute-petit.sh
-
-deb : petit*.deb
-
-petit*.deb : ./src/bin/* ./src/lib/* ./src/lib/filters/* ./src/lib/fingerprints/* ./src/lib/fingerprint_library/*
-	./build/scripts/deb.sh
