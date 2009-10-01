@@ -1,0 +1,376 @@
+6:	last message repeated 3 times
+5:	# #
+4:	clurgmgrd: [29649]: <info> Executing /etc/init.d/httpd status
+4:	clurgmgrd: [29649]: <info> Executing /etc/init.d/nfs status
+4:	clurgmgrd: [31777]: <info> Executing /etc/init.d/mysqld status
+3:	MARK --
+3:	[29649]: <info> Executing /etc/init.d/mysqld status
+3:	[31777]: <info> Executing /etc/init.d/httpd status
+3:	message repeated 10 times
+3:	message repeated 2 times
+3:	message repeated 4 times
+3:	message repeated 8 times
+2:	ACPI: PCI interrupt 0000:00:10.0[A] -> GSI 17 (level, low) -> IRQ 169
+2:	ACPI: PCI interrupt 0000:00:11.0[A] -> GSI 18 (level, low) -> IRQ 177
+2:	parport0: PC-style at 0x378 [PCSPP,TRISTATE]
+2:	message repeated 7 times
+2:	message repeated 9 times
+2:	-e
+2:	kernel.core_uses_pid = 1
+2:	kernel.sysrq = 0
+2:	net.ipv4.conf.default.accept_source_route = 0
+2:	net.ipv4.conf.default.rp_filter = 1
+2:	net.ipv4.ip_forward = 0
+1:	RHEL4 Reboot
+1:	root[2224]: ROOT LOGIN ON tty1
+1:	acpid shutdown succeeded
+1:	acpid startup succeeded
+1:	anacron startup succeeded
+1:	atd shutdown succeeded
+1:	atd startup succeeded
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	crond shutdown succeeded
+1:	crond startup succeeded
+1:	cups-config-daemon -TERM succeeded
+1:	cups-config-daemon startup succeeded
+1:	cupsd shutdown succeeded
+1:	cupsd startup succeeded
+1:	Tue Jul 28 13:29:27 EDT 2009
+1:	on signal 15
+1:	(check in 3 mounts)
+1:	/: clean, 148769/2359296 files, 960781/4717077 blocks
+1:	removed all generated mount points
+1:	added mount point /media/cdrom for /dev/hdc
+1:	added mount point /media/floppy for /dev/fd0
+1:	gpm shutdown succeeded
+1:	gpm startup succeeded
+1:	*** info [mice.c(1766)]:
+1:	*** info [startup.c(95)]:
+1:	Started gpm successfully. Entered daemon mode.
+1:	imps2: Auto-detected intellimouse PS/2
+1:	Timed out waiting for hotplug event 261. Rebasing to 265
+1:	haldaemon -TERM succeeded
+1:	haldaemon startup succeeded
+1:	httpd shutdown succeeded
+1:	httpd startup succeeded
+1:	Entering runlevel: 3
+1:	Switching to runlevel: 6
+1:	succeeded
+1:	irqbalance startup succeeded
+1:	- Added public key E07BC3E85BE30CFD
+1:	- User ID: Red Hat, Inc. (Kernel Module GPG key)
+1:	..TIMER: vector=0x31 pin1=2 pin2=-1
+1:	0MB HIGHMEM available.
+1:	256MB LOWMEM available.
+1:	ACPI wakeup devices:
+1:	ACPI: (supports S0 S1 S5)
+1:	ACPI: AC Adapter [ACAD] (on-line)
+1:	ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 high edge)
+1:	ACPI: IOAPIC (id[0x01] address[0xfec00000] gsi_base[0])
+1:	ACPI: Interpreter enabled
+1:	ACPI: LAPIC (acpi_id[0x00] lapic_id[0x00] enabled)
+1:	ACPI: LAPIC_NMI (acpi_id[0x00] high edge lint[0x1])
+1:	ACPI: PCI Interrupt Link [LNKA] (IRQs 3 4 5 6 7 9 10 11 14 15) *0, disabled.
+1:	ACPI: PCI Interrupt Link [LNKB] (IRQs 3 4 5 6 7 *9 10 11 14 15)
+1:	ACPI: PCI Interrupt Link [LNKC] (IRQs 3 4 5 6 7 9 10 *11 14 15)
+1:	ACPI: PCI Interrupt Link [LNKD] (IRQs 3 4 5 6 7 9 10 11 14 15) *0, disabled.
+1:	ACPI: PCI Root Bridge [PCI0] (00:00)
+1:	ACPI: PM-Timer IO Port: 0x1008
+1:	ACPI: Power Button (FF) [PWRF]
+1:	ACPI: Processor [CPU0] (supports C1, 8 throttling states)
+1:	ACPI: Subsystem revision 20040816
+1:	ACPI: Using IOAPIC for interrupt routing
+1:	Adding 2096472k swap on /dev/sda2. Priority:-1 extents:1
+1:	Attached scsi disk sda at scsi0, channel 0, id 0, lun 0
+1:	BIOS-e820: 0000000000000000 - 000000000009f800 (usable)
+1:	BIOS-e820: 000000000009f800 - 00000000000a0000 (reserved)
+1:	BIOS-e820: 00000000000ca000 - 00000000000cc000 (reserved)
+1:	BIOS-e820: 00000000000dc000 - 0000000000100000 (reserved)
+1:	BIOS-e820: 0000000000100000 - 000000000fef0000 (usable)
+1:	BIOS-e820: 000000000fef0000 - 000000000feff000 (ACPI data)
+1:	BIOS-e820: 000000000feff000 - 000000000ff00000 (ACPI NVS)
+1:	BIOS-e820: 000000000ff00000 - 0000000010000000 (usable)
+1:	BIOS-e820: 00000000fec00000 - 00000000fec10000 (reserved)
+1:	BIOS-e820: 00000000fee00000 - 00000000fee01000 (reserved)
+1:	BIOS-e820: 00000000fffe0000 - 0000000100000000 (reserved)
+1:	BIOS-provided physical RAM map:
+1:	Brought up 1 CPUs
+1:	Built 1 zonelists
+1:	CPU 0 irqstacks, hard=c03d8000 soft=c03b8000
+1:	CPU0: Intel(R) Xeon(TM) CPU 3.40GHz stepping 08
+1:	CPU: L2 cache: 1024K
+1:	CPU: Trace cache: 12K uops, L1 D cache: 16K
+1:	Capability LSM initialized as secondary
+1:	Checking 'hlt' instruction... OK.
+1:	Console: colour VGA+ 80x25
+1:	Copyright (c) 1999-2004 LSI Logic Corporation
+1:	DMI present.
+1:	Dentry cache hash table entries: 65536 (order: 6, 262144 bytes)
+1:	Detected 3399.339 MHz processor.
+1:	Disabled Privacy Extensions on device c0332e60(lo)
+1:	Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+1:	ENABLING IO-APIC IRQs
+1:	EXT3 FS on sda1, internal journal
+1:	EXT3-fs: mounted filesystem with ordered data mode.
+1:	Enabling APIC mode: Flat. Using 1 I/O APICs
+1:	Enabling fast FPU save and restore... done.
+1:	Enabling unmasked SIMD FPU exception support... done.
+1:	FDC 0 is a post-1991 82077
+1:	Floppy drive(s): fd0 is 1.44M
+1:	Freeing initrd memory: 483k freed
+1:	Freeing unused kernel memory: 172k freed
+1:	Fusion MPT SCSI Host driver 3.01.16
+1:	Fusion MPT base driver 3.01.16
+1:	IOAPIC[0]: apic_id 1, version 17, address 0xfec00000, GSI 0-23
+1:	IP: routing cache hash table of 1024 buckets, 16Kbytes
+1:	IPv6 over IPv4 tunneling driver
+1:	Initializing CPU#0
+1:	Initializing Cryptographic API
+1:	Initializing IPsec netlink socket
+1:	Inode-cache hash table entries: 32768 (order: 5, 131072 bytes)
+1:	Intel machine check architecture supported.
+1:	Intel machine check reporting enabled on CPU#0.
+1:	Kernel command line: ro root=LABEL=/ quiet clock=pmtmr
+1:	Kernel log daemon terminating.
+1:	Kernel logging (proc) stopped.
+1:	Limiting direct PCI/PCI transfers.
+1:	Linux Plug and Play Support v0.97 (c) Adam Belay
+1:	Linux agpgart interface v0.100 (c) Dave Jones
+1:	Linux version 2.6.9-5.ELsmp (bhcompile@decompose.build.redhat.com) (gcc version 3.4.3 20041212 (Red Hat 3.4.3-9.EL4)) #1 SMP Wed Jan 5 19:30:39 EST 2005
+1:	Loading keyring
+1:	Memory: 254000k/262144k available (1819k kernel code, 7504k reserved, 740k data, 172k init, 0k highmem)
+1:	Mount-cache hash table entries: 512 (order: 0, 4096 bytes)
+1:	NET: Registered protocol family 1
+1:	NET: Registered protocol family 10
+1:	NET: Registered protocol family 16
+1:	NET: Registered protocol family 17
+1:	NET: Registered protocol family 2
+1:	PCI: Cannot allocate resource region 4 of device 0000:00:07.1
+1:	PCI: PCI BIOS revision 2.10 entry at 0xfd9a0, last bus=1
+1:	PCI: Probing PCI hardware (bus 00)
+1:	PCI: Using ACPI for IRQ routing
+1:	PCI: Using configuration type 1
+1:	PID hash table entries: 2048 (order: 11, 32768 bytes)
+1:	PIIX4: IDE controller at PCI slot 0000:00:07.1
+1:	PIIX4: chipset revision 1
+1:	PIIX4: not 100% native mode: will probe irqs later
+1:	Processor #0 15:4 APIC version 17
+1:	RAMDISK driver initialized: 16 RAM disks of 16384K size 1024 blocksize
+1:	Real Time Clock Driver v1.12
+1:	SCSI device sda: 41943040 512-byte hdwr sectors (21475 MB)
+1:	SCSI subsystem initialized
+1:	SELinux: Disabled at runtime.
+1:	SELinux: Initializing.
+1:	SELinux: Registering netfilter hooks
+1:	SELinux: Starting in permissive mode
+1:	SELinux: Unregistering netfilter hooks
+1:	Security Scaffold v1.0.0 initialized
+1:	Serial: 8250/16550 driver $Revision: 1.90 $ 8 ports, IRQ sharing enabled
+1:	Simple Boot Flag at 0x36 set to 0x80
+1:	TCP: Hash tables configured (established 8192 bind 10922)
+1:	There is already a security framework initialized, register_security failed.
+1:	Total HugeTLB memory allocated, 0
+1:	Total of 1 processors activated (6701.05 BogoMIPS).
+1:	Type: Direct-Access ANSI SCSI revision: 02
+1:	USB
+1:	Uniform CD-ROM driver Revision: 3.20
+1:	Uniform Multi-Platform E-IDE driver Revision: 7.00alpha2
+1:	Using ACPI (MADT) for SMP configuration information
+1:	Using APIC driver default
+1:	Using cfq io scheduler
+1:	Using pmtmr for high-res timesource
+1:	VFS: Disk quotas dquot_6.5.1
+1:	Vendor: VMware, Model: VMware Virtual S Rev: 1.0
+1:	agpgart: AGP aperture is 64M @ 0xec000000
+1:	agpgart: Detected an Intel 440BX Chipset.
+1:	agpgart: Maximum main memory to use for agp memory: 204M
+1:	apm: BIOS version 1.2 Flags 0x03 (Driver version 1.16ac)
+1:	apm: overridden by ACPI.
+1:	audit(1248787745.443:0): initialized
+1:	audit: initializing netlink socket (disabled)
+1:	checking if image is initramfs... it is
+1:	device-mapper: 4.1.0-ioctl (2003-12-10) initialised: dm@uk.sistina.com
+1:	drivers/usb/input/hid-core.c: v2.0:USB HID core driver
+1:	eth0: registered as PCnet/PCI II 79C970A
+1:	found SMP MP-table at 000f6ce0
+1:	hdc: ATAPI 1X CD-ROM drive, 32kB Cache, UDMA(33)
+1:	hdc: VMware Virtual IDE CDROM Drive, ATAPI CD/DVD-ROM drive
+1:	i2c /dev entries driver
+1:	ide-floppy driver 0.99.newide
+1:	ide1 at 0x170-0x177,0x376 on irq 15
+1:	ide1: BM-DMA at 0x1078-0x107f, BIOS settings: hdc:DMA, hdd:pio
+1:	ide: Assuming 33MHz system bus speed for PIO modes; override with idebus=xx
+1:	input: AT Translated Set 2 keyboard on isa0060/serio0
+1:	input: ImPS/2 Generic Wheel Mouse on isa0060/serio1
+1:	inserting floppy driver for 2.6.9-5.ELsmp
+1:	ioc0: 53C1030: Capabilities={Initiator}
+1:	ip_conntrack version 2.1 (2048 buckets, 16384 max) - 340 bytes per conntrack
+1:	ip_tables: (C) 2000-2002 Netfilter core team
+1:	kjournald starting. Commit interval 5 seconds
+1:	klogd 1.4.1, log source = /proc/kmsg started.
+1:	ksign: Installing public key data
+1:	lp0: console ready
+1:	lp0: using parport0 (polling).
+1:	md: ... autorun DONE.
+1:	md: Autodetecting RAID arrays.
+1:	md: autorun ...
+1:	md: md driver 0.90.0 MAX_MD_DEVS=256, MD_SB_DISKS=27
+1:	mice: PS/2 mouse device common for all mice
+1:	mptbase: Initiating ioc0 bringup
+1:	mtrr: v2.0 (20020519)
+1:	pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+1:	pcnet32.c:v1.30i 06.28.2004 tsbogend@alpha.franken.de
+1:	pcnet32: 1 cards_found.
+1:	pcnet32: PCnet/PCI II 79C970A at 0x1400, 00 0c 29 cc 45 9a assigned IRQ 177.
+1:	per-CPU timeslice cutoff: 2925.41 usecs.
+1:	scsi0 : ioc0: LSI53C1030, FwRev=00000000h, Ports=1, MaxQ=128, IRQ=169
+1:	sda: assuming drive cache: write through
+1:	sda: cache data unavailable
+1:	sda: sda1 sda2
+1:	selinux_register_security: Registering secondary module capability
+1:	serio: i8042 AUX port at 0x60,0x64 irq 12
+1:	serio: i8042 KBD port at 0x60,0x64 irq 1
+1:	task migration cache decay timeout: 3 msecs.
+1:	ttyS0 at I/O 0x3f8 (irq = 4) is a 16550A
+1:	ttyS1 at I/O 0x2f8 (irq = 3) is a 16550A
+1:	usbcore: registered new driver hiddev
+1:	usbcore: registered new driver hub
+1:	usbcore: registered new driver usbfs
+1:	usbcore: registered new driver usbhid
+1:	vesafb: probe of vesafb0 failed with error -6
+1:	zapping low mappings.
+1:	succeeded
+1:	message repeated 11 times
+1:	message repeated 6 times
+1:	FINGERPRING_BEGIN
+1:	FINGERPRINT_END
+1:	session closed for user root
+1:	session opened for user root by LOGIN(uid=0)
+1:	
+1:	No volume groups found
+1:	messagebus -TERM succeeded
+1:	messagebus startup succeeded
+1:	Starting MySQL: succeeded
+1:	Stopping MySQL: succeeded
+1:	Mounting other filesystems: succeeded
+1:	Bringing up interface eth0: succeeded
+1:	Bringing up loopback interface: succeeded
+1:	Setting network parameters: succeeded
+1:	lockd shutdown failed
+1:	rpc.statd shutdown succeeded
+1:	rpc.statd startup succeeded
+1:	ntpd shutdown succeeded
+1:	ntpd startup succeeded
+1:	succeeded
+1:	ntpd exiting on signal 15
+1:	Listening on interface eth0, 10.0.8.65#123
+1:	Listening on interface lo, 127.0.0.1#123
+1:	Listening on interface wildcard, 0.0.0.0#123
+1:	Listening on interface wildcard, ::#123
+1:	frequency initialized 137.549 PPM from /var/lib/ntp/drift
+1:	kernel time sync status 0040
+1:	ntpd 4.2.0a@1.1190-r Mon Oct 11 09:10:20 EDT 2004 (1)
+1:	precision = 5.000 usec
+1:	28 Jul 13:30:02
+1:	ntpdate[1953]: the NTP socket is in use, exiting
+1:	step time server 208.79.157.12 offset -2.576906 sec
+1:	portmap shutdown succeeded
+1:	portmap startup succeeded
+1:	Checking filesystems succeeded
+1:	Checking root filesystem succeeded
+1:	Configuring kernel parameters: succeeded
+1:	Enabling local filesystem quotas: succeeded
+1:	Enabling swap space: succeeded
+1:	Loading default keymap succeeded
+1:	Mounting local filesystems: succeeded
+1:	Remounting root filesystem in read-write mode: succeeded
+1:	Setting clock (localtime): Tue Jul 28 13:29:27 EDT 2009 succeeded
+1:	Setting hostname seth.eyemg.com: succeeded
+1:	Setting up Logical Volume Management: succeeded
+1:	Starting lm_sensors: succeeded
+1:	Starting ntpdate: failed
+1:	Starting pcmcia: succeeded
+1:	Caught signal 15, un-registering and exiting.
+1:	Version 1.0.6 Starting
+1:	rpc.idmapd startup succeeded
+1:	disk at /devices/pci0000:00/0000:00:10.0/host0/target0:0:0/0:0:0:0
+1:	sendmail shutdown succeeded
+1:	sendmail startup succeeded
+1:	sm-client shutdown succeeded
+1:	sm-client startup succeeded
+1:	shutting down for system reboot
+1:	snmpd shutdown succeeded
+1:	snmpd startup succeeded
+1:	dlopen failed: /usr/lib/libcmaX.so: cannot open shared object file: No such file or directory
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	sshd -TERM succeeded
+1:	succeeded
+1:	Accepted publickey for root from 10.0.8.158 port 38308 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Accepted publickey for root from 10.0.8.142 port 36013 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Postponed publickey for root from 10.0.8.142 port 36013 ssh2
+1:	Accepted publickey for root from 10.0.8.145 port 51110 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Postponed publickey for root from 10.0.8.145 port 51110 ssh2
+1:	Accepted publickey for root from 10.0.8.124 port 57409 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Accepted publickey for root from ::ffff:10.100.8.88 port 36135 ssh2
+1:	Postponed publickey for root from ::ffff:10.100.8.88 port 36135 ssh2
+1:	Accepted publickey for root from ::ffff:10.0.8.113 port 40216 ssh2
+1:	Postponed publickey for root from ::ffff:10.0.8.113 port 40216 ssh2
+1:	Accepted publickey for root from ::ffff:10.0.8.163 port 52054 ssh2
+1:	Postponed publickey for root from ::ffff:10.0.8.163 port 52054 ssh2
+1:	Accepted publickey for root from 10.0.8.124 port 57672 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Accepted publickey for root from 10.0.8.159 port 56047 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Accepted publickey for root from ::ffff:127.0.0.1 port 33293 ssh2
+1:	Accepted publickey for root from ::ffff:10.0.8.150 port 47641 ssh2
+1:	Postponed publickey for root from ::ffff:10.0.8.150 port 47641 ssh2
+1:	Starting udev: succeeded
+1:	klogd shutdown succeeded
+1:	klogd startup succeeded
+1:	syslogd startup succeeded
+1:	1.4.1: restart.
+1:	starting udevd daemon
+1:	starting udevd daemon
+1:	xfs shutdown succeeded
+1:	xfs startup succeeded
+1:	terminating
+1:	ignoring font path element /usr/X11R6/lib/X11/fonts/Speedo (unreadable)
+1:	xinetd shutdown succeeded
+1:	xinetd startup succeeded
+1:	Exiting...
+1:	Started working: 0 available services
+1:	xinetd Version 2.3.13 started with libwrap loadavg options compiled in.
