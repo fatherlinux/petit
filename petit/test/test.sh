@@ -6,32 +6,32 @@
 
 
 # Routine Tests
-#functions="hash wordcount host daemon sgraph mgraph hgraph"
+functions="hash wordcount host daemon sgraph mgraph hgraph"
 
-#for function in $functions
-#do
+for function in $functions
+do
 
-#	for test in `ls data/*.log`
-#	do
+	for test in `ls data/*.log`
+	do
 		# Get the right name for the test
-#		test=`basename $test | cut -f1 -d"."`
-#		echo -n "Testing: petit --$function $test.log: "
+		test=`basename $test | cut -f1 -d"."`
+		echo -n "Testing: petit --$function $test.log: "
 
 		# Run test
-#		petit --${function} data/${test}.log > ${test}-${function}.tmp
+		petit --${function} data/${test}.log > ${test}-${function}.tmp
 
-#		if ! diff output/${test}-${function}.output ${test}-${function}.tmp
-#		then
-#			echo " Failed"
-#			rm ${test}-${function}.tmp
-#			exit 1
-#		else
-#			rm ${test}-${function}.tmp
-#			echo " Passed"
-#		fi
-#
-#	done
-#done
+		if ! diff output/${test}-${function}.output ${test}-${function}.tmp
+		then
+			echo " Failed"
+			rm ${test}-${function}.tmp
+			exit 1
+		else
+			rm ${test}-${function}.tmp
+			echo " Passed"
+		fi
+
+	done
+done
 
 # Special hashing tests
 
