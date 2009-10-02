@@ -1,6 +1,6 @@
 
 default: FORCE
-	@echo "Specify what to build: rpm, deb, test, install-rpm"
+	@echo "Specify what to build: rpm, deb, test, update-test, install-rpm"
 	@echo "	Usage: make rpm"
 
 FORCE:
@@ -14,6 +14,9 @@ clean : FORCE
 
 test : FORCE
 	(cd test/; time ./test.sh)
+
+update-test : FORCE
+	(cd test/; ./test.sh update)
 
 rpm : petit*.rpm
 

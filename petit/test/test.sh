@@ -17,7 +17,7 @@ do
 		test=`basename $test | cut -f1 -d"."`
 
 		# Update files?
-		if [ $1 == "update" ]
+		if [ "$1" == "update" ]
 		then
 			echo "Updating: petit --$function $test.log: "
 			petit --${function} data/${test}.log > output/${test}-${function}.output
@@ -54,7 +54,7 @@ do
 
 		# Run test
 		# Update files?
-		if [ $1 == "update" ]
+		if [ "$1" == "update" ]
 		then
 			echo "Updating: petit --$function --${option} $test.log: "
 			petit --${function} --${option} data/${test}.log > output/${test}-${function}-${option}.output
