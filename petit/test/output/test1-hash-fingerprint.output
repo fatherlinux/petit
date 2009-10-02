@@ -1,10 +1,10 @@
-24:	last message repeated # times
-8:	crond(pam_unix)[#]: session closed for user root
+28:	last message repeated # times
+10:	crond(pam_unix)[#]: session closed for user root
+8:	clurgmgrd: [#]: <info> Executing /etc/init.d/httpd status
+8:	clurgmgrd: [#]: <info> Executing /etc/init.d/mysqld status
 8:	crond(pam_unix)[#]: session opened for user root by (uid=#)
-7:	clurgmgrd: [#]: <info> Executing /etc/init.d/httpd status
-7:	clurgmgrd: [#]: <info> Executing /etc/init.d/mysqld status
+8:	sshd[#]: pam_unix(sshd:session): session closed for user root
 6:	sshd[#]: Accepted publickey for root from #.#.#.# port # ssh#
-6:	sshd[#]: pam_unix(sshd:session): session closed for user root
 6:	sshd[#]: pam_unix(sshd:session): session opened for user root by (uid=#)
 5:	sshd(pam_unix)[#]: session closed for user root
 5:	sshd(pam_unix)[#]: session opened for user root by (uid=#)

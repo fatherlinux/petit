@@ -1,3 +1,13 @@
+Oct  2 09:45:02 warren.eyemg.com last message repeated 4 times
+Oct  2 09:45:02 maddock.eyemg.com sshd[2574]: pam_unix(sshd:session): session closed for user root
+Oct  2 09:45:02 gannon.eyemg.com sshd[1355]: pam_unix(sshd:session): session closed for user root
+Oct  2 09:45:03 alberto.eyemg.com last message repeated 8 times
+Oct  2 09:45:03 tpm-dev.eyemg.com crond(pam_unix)[22116]: session closed for user root
+Oct  2 09:45:03 calvin.eyemg.com last message repeated 2 times
+Oct  2 09:45:03 tpm-dev.eyemg.com crond(pam_unix)[22117]: session closed for user root
+Oct  2 09:45:05 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/mysqld status
+Oct  2 09:45:05 sable.eyemg.com clurgmgrd: [29649]: <info> Executing /etc/init.d/httpd status
+Oct  2 09:45:06 henry.eyemg.com last message repeated 2 times
 Jul 14 10:57:29 tony.eyemg.com sshd(pam_unix)[4478]: session closed for user root
 Jul 14 10:57:33 calvin.eyemg.com last message repeated 2 times
 Jul 14 10:57:33 tate.eyemg.com clurgmgrd: [31777]: <info> Executing /etc/init.d/mysqld status 

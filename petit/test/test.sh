@@ -15,9 +15,16 @@ do
 	do
 		# Get the right name for the test
 		test=`basename $test | cut -f1 -d"."`
-		echo -n "Testing: petit --$function $test.log: "
+
+		# Update files?
+		if [ $1 == "update" ]
+		then
+			echo "Updating: petit --$function $test.log: "
+			petit --${function} data/${test}.log > output/${test}-${function}.output
+		fi
 
 		# Run test
+		echo -n "Testing: petit --$function $test.log: "
 		petit --${function} data/${test}.log > ${test}-${function}.tmp
 
 		if ! diff output/${test}-${function}.output ${test}-${function}.tmp
@@ -44,10 +51,17 @@ do
 	do
 		# Get the right name for the test
 		test=`basename $test | cut -f1 -d"."`
-		echo -n "Testing: petit --$function --${option} $test.log: "
 
 		# Run test
-		petit --${function} --${option} data/${test}.log > output/${test}-${function}-${option}.output
+		# Update files?
+		if [ $1 == "update" ]
+		then
+			echo "Updating: petit --$function --${option} $test.log: "
+			petit --${function} --${option} data/${test}.log > output/${test}-${function}-${option}.output
+		fi
+
+		# Run Test
+		echo -n "Testing: petit --$function --${option} $test.log: "
 		petit --${function} --${option} data/${test}.log > ${test}-${function}-${option}.tmp
 
 		if ! diff output/${test}-${function}-${option}.output ${test}-${function}-${option}.tmp
