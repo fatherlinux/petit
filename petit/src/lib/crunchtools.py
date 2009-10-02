@@ -100,7 +100,7 @@ class SyslogEntry(LogEntry):
 		if len(line) >= 3:
 
 			# Look for something similar to: "29 11:53:08" in third column
-			if re.search("[0-9]{2}",line[1]) and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]):
+			if re.search("[0-9][0-9]?",line[1]) and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]):
 				logging.info("Found Syslog Entry")
 				return True
 			else:
