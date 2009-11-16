@@ -49,7 +49,37 @@ from a systems administrator
 administrator to determine if it is a normal or abnormal. Then abnormal entries 
 can be acted on, hopefully before there is noticeable impact to your system. 
 
-Building
+
+Installing/Uninstalling
+===============================================================================
+Installation can be done with RPM, DEB or TAR
+
+INSTALL
+========================================
+
+TAR
+ make install
+
+RPM
+ rpm -ivh petit.rpm
+
+DEB
+ dpkg -i petit.deb
+
+UNINSTALL
+========================================
+
+TAR
+ make uninstall
+
+RPM
+ rpm -e petit
+
+DEB
+ dpkg -r petit
+
+
+Building Packages
 ===============================================================================
 Two forms of building are maintained for sanity, deb and rpm. The build scripts
 for these two package managers are distributed with petit for convenience and 
@@ -62,6 +92,7 @@ RPM
 
 DEB
  make deb
+
 
 Routine Operations
 ===============================================================================
