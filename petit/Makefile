@@ -28,6 +28,12 @@ deb : petit*.deb
 petit*.deb : ./src/bin/* ./src/lib/* ./src/lib/filters/* ./src/lib/fingerprints/* ./src/lib/fingerprint_library/*
 	./build/scripts/deb.sh
 
+install : FORCE
+	./build/scripts/tar-install.sh
+
+uninstall : FORCE
+	./build/scripts/tar-uninstall.sh
+
 install-rpm : rpm
 	rpm -e petit
 	rpm -ivh petit*.rpm
