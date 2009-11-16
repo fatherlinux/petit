@@ -49,6 +49,20 @@ from a systems administrator
 administrator to determine if it is a normal or abnormal. Then abnormal entries 
 can be acted on, hopefully before there is noticeable impact to your system. 
 
+Building
+===============================================================================
+Two forms of building are maintained for sanity, deb and rpm. The build scripts
+for these two package managers are distributed with petit for convenience and 
+are used internally by the project  as part of a larger script to help 
+distribute snapshots on our site. Usage is simple, currently no make install is
+supported, but may be part of future distributions.
+
+RPM
+ make rpm
+
+DEB
+ make deb
+
 Routine Operations
 ===============================================================================
 

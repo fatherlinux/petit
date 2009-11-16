@@ -1,10 +1,6 @@
-Background:
- The Makefile in this directory provides automation for building both RPM & DEB packages. This has been tested on both Fedora 11 and Ubuntu 9.04.
+Background
+ This directory is used to house all build related scripting and configuration files for rpm, deb, etc
 
 Test:
  Ubuntu 9.04: rpm & deb
  Fedora 11: rpm only
-
-Usage:
- make rpm
- make deb
