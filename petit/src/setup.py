@@ -5,7 +5,7 @@ import os
 import glob
 
 setup(	name='petit',
-	version='0.8.3',
+	version='0.8.5',
 	description='Log analysis tool for syslog, apache and raw log files',
 	long_description='Log analysis tool which is useful to systems administrators & systems analysts. This tool interacts with syslog and apache logs to clarify what is happening in logs.', 
 	author='Scott McCarty',
