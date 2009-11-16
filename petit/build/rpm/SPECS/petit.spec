@@ -2,7 +2,7 @@ Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
 Version: 0.8.5
 Release: 2
-License: GPL
+License: GPLv3
 Group: Applications/System
 URL: http://www.eyemg.com/opensource
 Source0: petit.tar
