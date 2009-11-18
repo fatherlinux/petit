@@ -43,4 +43,5 @@ ssh $deb_server "(cd /root/software/petit; make clean)"
 
 # Update local server
 rpm -e petit
-yum update petit
+yum clean all
+yum install petit
