@@ -52,6 +52,7 @@ from crunchtools import WordHash
 from crunchtools import SecondsGraph
 from crunchtools import MinutesGraph
 from crunchtools import HoursGraph
+from crunchtools import DaysGraph
 import logging
 
 # Process Signals
@@ -140,6 +141,8 @@ def get_options(argv):
 		mgraph(filename)
 	elif options.mode == "hgraph":
 		hgraph(filename)
+	elif options.mode == "dgraph":
+		dgraph(filename)
 	else:
 		print "No action specified"
 		sys.exit()
@@ -283,7 +286,20 @@ def hgraph(args):
 	sys.exit(0)
 
 def dgraph(args):
-	print "hgraph()"
+
+	# Get input
+	log = Log(args)
+
+	# Create new syslog hash based on log file and filter created
+	x = DaysGraph(log)
+
+	# Set tick & width options
+	x.tick = options.tick
+	x.wide = options.wide
+
+	# Print out the dictionary first sorted by the word with
+	# the most entries with an alphabetical subsort
+	x.display()
 	sys.exit()
 
 

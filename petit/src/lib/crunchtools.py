@@ -1290,3 +1290,53 @@ class HoursGraph(GraphHash):
 			if self[key][0] > self.max_value:
 				self.max_value = self[key][0]
 
+class DaysGraph(GraphHash):
+	"""30 day graph subtype"""
+
+	def __init__(self, log):
+
+		# Call parent init
+		UserDict.__init__(self)
+
+		# Turn first line into syslog
+		if len(log) > 0:
+			first_entry = log[0]
+		else:
+			sys.exit()
+
+		self.second = "00"
+		self.minute = "00"
+		self.hour = "00"
+		self.day = "01"
+		self.month = first_entry.month
+		self.duration = "30 Days"
+
+		# Zero out each entry, this will fill in blanks which
+		# may be in the log, especailly sparse logs. Also,
+		# adds false entry for debugging/printing
+		for i in range(0, 30):
+			# Convert to two digits
+			j =   "%.2d" % (i)
+			key = self.month+self.day+j
+			self.zero(key, first_entry)
+
+		# Create a dictionary with an entry for each line. Increment
+		# the value for each time the word is found. Merge lines by
+		# Removing numbers and replacing them with a single '#'
+		for entry in log:
+
+			# Create key rooted in time
+			key = self.month+self.day+entry.hour
+
+			# Check to make sure there are not more than 60
+			# Also, make sure we are on the right
+			# month, day, hour, and minute
+			if len(self) <= 24 \
+				and entry.month == self.month \
+				and entry.day == self.day:
+					self.increment(key, entry)
+
+		# find max value of any key
+		for key in self.keys():
+			if self[key][0] > self.max_value:
+				self.max_value = self[key][0]
