@@ -50,6 +50,7 @@ import gzip
 import random
 import sha
 import logging
+import datetime
 
 class LogEntry:
 	"""Interface class which specifies generic log format for consumption by other classes"""
@@ -78,18 +79,32 @@ class SyslogEntry(LogEntry):
 
 		# Should be normal log entry
 		if len(value) >= 5:
-			self.month, self.day, time, self.host, self.daemon = value[:5]
+			# Syslog does not store year information so, set to current year
+			self.year = str(datetime.date.today().year)
+			self.month, self.day, clocktime, self.host, self.daemon = value[:5]
 			self.log_entry = ' '.join(value[5:])
-			self.hour, self.minute, self.second = time.split(":") 
+			self.hour, self.minute, self.second = clocktime.split(":") 
+
+			# Convert month to integer
+			self.month = str(time.strptime(self.month,"%b")[1])
+
+			# Normalize integers to standard widths
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
 
 		# Abnormal log entry
 		elif len(value) >= 1:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -134,17 +149,21 @@ class ApacheEntry(LogEntry):
 			dmy = date.split('/')
 			self.day = re.sub("\[", "", dmy[0])
 			self.month = dmy[1]
+			self.year = dmy[2]
 			self.host = uri
 			daemon = "webserver"
 
+			# Convert month to integer
+			self.month = time.strptime(self.month,"%b")[1]
+
 		# Abnormal log entry
 		elif len(value) >= 1:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -176,7 +195,10 @@ class SnortEntry(LogEntry):
 
 		# Should be normal log entry
 		if len(value) >= 2:
-			
+		
+			# Snort does not store year information so, set to current year
+			self.year = datetime.date.today().year
+	
 			# Initial break down
 			snortdate = value[:1]
 			self.log_entry = ' '.join(value[1:])
@@ -195,7 +217,7 @@ class SnortEntry(LogEntry):
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.year,self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -236,18 +258,21 @@ class ScriptlogEntry(LogEntry):
 
 		# Should be normal log entry
 		if len(value) >= 5:
+
+			# Syslog does not store year information so scriptlog does not, set to current year
+			self.year = datetime.date.today().year
 			self.month, self.day, time, self.host, self.daemon, self.label, self.id, self.type = value[:8]
 			self.log_entry = ' '.join(value[8:])
 			self.hour, self.minute, self.second = time.split(":") 
 
 		# Abnormal log entry
 		elif len(value) >= 1:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line, label="__none__"):
@@ -288,12 +313,12 @@ class RawEntry(LogEntry):
 
 		# Fake the time/date values, put the entire line in the key
 		if len(value) >= 1:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -1025,44 +1050,53 @@ class WordHash(SuperHash):
 class GraphHash(UserDict):
 	"""Interface class used to control structure & use of all GraphHash subtypes"""
 
-	begin_time = ""
-	end_time = ""
+	start_date = datetime.date.today()
+	end_date = datetime.date.today()
 	max_value = 0
 	min_value = 0
-	second = ""
-	minute = ""
-	hour = ""
-	day = ""
-	month = ""
+	second = 0
+	minute = 0
+	hour = 0
+	day = 0
+	month = 0
+	year = 0
 	scale = 0.0
 	tick = "#"
 	width = False
+	duration = ""
+	unit = ""
 
-	def __init__(self, log, filter, type):
-
-		# Call parent init
-		UserDict.__init__(self)
-		self.tick = "#"
-
-	def increment(self, key, entry):
+	def increment(self, key):
 		"""Adds new entry. Similar to append method on list"""
 
 		# Check to make sure it exists
 		if key not in self:
-			self[key] = [0, []]
+			self[key] = 0
 
 		# Increment the hashed count
 		# Create an array of un-hashed values for sampling later
-		self[key][0] += 1
-		self[key][1].append(entry)
+		self[key] += 1
 
-	def zero(self, key, entry):
+	def zero(self, key):
 		"""Creates empty entry"""
 
 		# Check to make sure it exists
 		if key not in self:
-			self[key] = [0, []]
-			self[key][1].append(entry)
+			self[key] = 0
+
+	def build_calculations(self): 
+		"""Calculates and saves important graph information"""
+
+		# find max value of any key
+		for key in self.keys():
+			if self[key] > self.max_value:
+				self.max_value = self[key]
+
+		# find the minimum value of any key
+		self.min_value = self.max_value
+		for key in self.keys():
+			if self[key] < self.min_value:
+				self.min_value = self[key]
 
 	def display(self):
 		"""Common display function used by all graph subtypes"""
@@ -1070,7 +1104,9 @@ class GraphHash(UserDict):
 		# Declarations & Variables
 		graph_height = 6
 		graph_width = len(self)
-		scale = float(float(self.max_value)/float(graph_height))
+		scale = float(float(self.max_value-self.min_value)/float(graph_height))
+		graph_position = {}
+		graph_value = {}
 
 		# Use wide scale or small scale
 		if self.wide:
@@ -1079,26 +1115,48 @@ class GraphHash(UserDict):
 		else:
 			char_fill = self.tick
 			char_blank = " "
-		
 
-		# Create a little space at the top of the screen
-		print
-		print "Start Time:",self.month, self.day, self.hour+":"+self.minute+":"+self.second,"\t\tMinimum Value:",self.min_value
-		print "Duration:",self.duration,"\t\t\tMaximum Value:",self.max_value
-		print "Scale:",str(scale)
-		print
+		# Calculate the graph min/max, so that the information is better normalized	
+		graph_min_value = self.min_value
+		graph_max_value = self.max_value
+
+		# Find the real minimum, could very well be zero
+		graph_min_value = self.max_value
+		for key in self.keys():
+			if self[key] < graph_min_value:
+				graph_min_value = self[key]
+
+		# Check if it should be normalized
+		if graph_min_value == 0:
+
+			# Recalculate
+			graph_min_value = self.max_value
+			for key in self.keys():
+				if self[key] < graph_min_value and self[key] != 0:
+					graph_min_value = self[key]/2
+					print graph_min_value
 
 		# Normalize data
 		for key in self.keys():
-			if self[key][0] > 0:
-				self[key][0] = ceil((float(self[key][0])/float(self.max_value))*graph_height)
+			if self[key] > 0:
+
+				# Ensure difference between min/max or don't normalize
+				if graph_max_value > graph_min_value:
+					self[key] = ceil((float(self[key]-graph_min_value)/float(graph_max_value-graph_min_value))*graph_height)
+
+				# Normalize because of difference between min/max
+				else:
+					self[key] = ceil((float(self[key])/float(graph_max_value))*graph_height)
+
+		# Start Graph Printing
+		print
 
 		# Print out the dictionary first sorted by the word with
 		# the most entries with an alphabetical subsort
 		for i in reversed(range(1,graph_height)):
 			for key in sorted(self.keys()):
 					
-				if self[key][0] >= i:
+				if self[key] >= i:
 					sys.stdout.write(char_fill)
 				else:
 					sys.stdout.write(char_blank)
@@ -1109,27 +1167,51 @@ class GraphHash(UserDict):
 			sys.stdout.write(char_fill)
 		print
 
-		# Print marker numbers
+		# Determine numbers for normal and wide graphs
 		if self.wide:
-			transposed_graph_width = (graph_width*2)
-			graph_mid = 2
-			graph_end = 3
+
+			graph_width = graph_width*2
+
+			# Calculate Positions
+			graph_position["begin"] = 1
+			graph_position["middle"] = graph_width/2 - ((graph_width/2) % 2)
+			graph_position["end"]= graph_width-3
+
 		else:
-			transposed_graph_width = graph_width
-			graph_mid = 1
-			graph_end = 2
-			
-	 	for i in range(1,transposed_graph_width):
-			if i == 1:
-				sys.stdout.write("01")
-			elif i == (transposed_graph_width/2-graph_mid):
-				sys.stdout.write(str(graph_width/2))
-			elif i == (transposed_graph_width-graph_end):
-				sys.stdout.write(str(graph_width))
+
+			# Calculate Positions
+			graph_position["begin"] = 1
+			graph_position["middle"] = graph_width/2
+			graph_position["end"] = graph_width-2
+
+		# Calculate Values
+		graph_value["begin"] = eval("self.start_date."+self.unit)
+		graph_value["middle"] = eval("self.middle_date."+self.unit)
+		graph_value["end"] = eval("self.end_date."+self.unit)
+
+		# Draw numbers at bottom of the screen			
+	 	for i in range(1,graph_width):
+
+			# Beginning
+			if i == graph_position["begin"]:
+				sys.stdout.write(str("%.2d" % graph_value["begin"]))
+			# Half
+			elif i == graph_position["middle"]:
+				sys.stdout.write(str("%.2d" % graph_value["middle"]))
+			# Last
+			elif i == graph_position["end"]:
+				sys.stdout.write(str("%.2d" % graph_value["end"]))
 			else:
 				sys.stdout.write(" ")
 		print
-			
+
+		# Create a little space at the top of the screen
+		print
+		print "Start Time:\t",str(self.start_date),"\t\tMinimum Value:",self.min_value
+		print "End Time:\t",str(self.end_date),"\t\tMaximum Value:",self.max_value
+		print "Duration:\t",str(self.duration), self.unit+"s","\t\t\tScale:",str(scale)
+		print
+
 
 class SecondsGraph(GraphHash):
 	"""60 second graph subtype"""
@@ -1145,21 +1227,37 @@ class SecondsGraph(GraphHash):
 		else:
 			sys.exit()
 
-		self.second = "00"
+		# Local Variables
+		counter = 0
+		self.second = first_entry.second
 		self.minute = first_entry.minute
 		self.hour = first_entry.hour
 		self.day = first_entry.day
-		self.month = first_entry.month
-		self.duration = "60 Seconds"
+		self.month = str(first_entry.month)
+		self.year = first_entry.year
+		self.unit = "second"
+		self.duration = 60
+
+		start_date = datetime.datetime(int(self.year),int(self.month),int(self.day),int(self.hour),int(self.minute),int(self.second))
+		start_key = start_date.year+start_date.month+start_date.day+start_date.hour+start_date.minute+start_date.second
 
 		# Zero out each entry, this will fill in blanks which
-		# may be in the log, especailly sparse logs. Also,
-		# adds false sample entry for debugging/printing
-		for i in range(0, 60):
-			# Convert to two digits
-			j =   "%.2d" % (i)
-			key = self.month+self.day+self.hour+self.minute+j
-			self.zero(key, first_entry)
+		# may be in the log, especially sparse logs.
+		for i in range(0, self.duration):
+
+			# Calculate the current date, the last one will be the end date
+			end_date = start_date + datetime.timedelta(seconds=i)
+			end_key = str(end_date.year)+str("%.2d" % (end_date.month))+str("%.2d" % (end_date.day))+str("%.2d" % (end_date.hour))+str("%.2d" % (end_date.minute))+str("%.2d" % (end_date.second))
+			self.zero(end_key)
+
+			# Check for middle date and save
+			if i == (self.duration/2):
+				middle_date = end_date
+
+		# Save final values
+		self.start_date = start_date
+		self.middle_date = middle_date
+		self.end_date = end_date
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -1167,25 +1265,13 @@ class SecondsGraph(GraphHash):
 		for entry in log:
 
 			# Create key rooted in time
-			key = self.month+self.day+self.hour+self.minute+entry.second
+			key = entry.year+entry.month+entry.day+entry.hour+entry.minute+entry.second
 
-			# Check to make sure there are not more than 60
-			# Also, make sure we are on the right
-			# month, day, hour, and minute
-			if len(self) <= 60 \
-				and entry.month == self.month \
-				and entry.day == self.day \
-				and entry.hour == self.hour \
-				and entry.minute == self.minute:
-					self.increment(key, entry)
+			# Check to make sure key is found in the list built above
+			if key in self.keys():
+				self.increment(key)
 
-		# find max value of any key
-		for key in self.keys():
-			if self[key][0] > self.max_value:
-				self.max_value = self[key][0]
-		for key in self.keys():
-			if self[key][0] < self.max_value:
-				self.min_value = self[key][0]
+		self.build_calculations()
 
 class MinutesGraph(GraphHash):
 	"""60 minute graph subtype"""
@@ -1201,21 +1287,37 @@ class MinutesGraph(GraphHash):
 		else:
 			sys.exit()
 
-		self.second = "00"
-		self.minute = "00"
+		# Local Variables
+		counter = 0
+		self.second = 0
+		self.minute = first_entry.minute
 		self.hour = first_entry.hour
 		self.day = first_entry.day
-		self.month = first_entry.month
-		self.duration = "60 Minutes"
+		self.month = str(first_entry.month)
+		self.year = first_entry.year
+		self.unit = "minute"
+		self.duration = 60
+
+		start_date = datetime.datetime(int(self.year),int(self.month),int(self.day),int(self.hour),int(self.minute),int(self.second))
+		start_key = start_date.year+start_date.month+start_date.day+start_date.hour+start_date.minute
 
 		# Zero out each entry, this will fill in blanks which
-		# may be in the log, especailly sparse logs. Also,
-		# adds false entry for debugging/printing
-		for i in range(0, 60):
-			# Convert to two digits
-			j =   "%.2d" % (i)
-			key = self.month+self.day+self.hour+j
-			self.zero(key, first_entry)
+		# may be in the log, especially sparse logs.
+		for i in range(0, self.duration):
+
+			# Calculate the current date, the last one will be the end date
+			end_date = start_date + datetime.timedelta(minutes=i)
+			end_key = str(end_date.year)+str("%.2d" % (end_date.month))+str("%.2d" % (end_date.day))+str("%.2d" % (end_date.hour))+str("%.2d" % (end_date.minute))
+			self.zero(end_key)
+
+			# Check for middle date and save
+			if i == (self.duration/2):
+				middle_date = end_date
+
+		# Save final values
+		self.start_date = start_date
+		self.middle_date = middle_date
+		self.end_date = end_date
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -1223,21 +1325,13 @@ class MinutesGraph(GraphHash):
 		for entry in log:
 
 			# Create key rooted in time
-			key = self.month+self.day+self.hour+entry.minute
+			key = entry.year+entry.month+entry.day+entry.hour+entry.minute
 
-			# Check to make sure there are not more than 60
-			# Also, make sure we are on the right
-			# month, day, hour, and minute
-			if len(self) <= 60 \
-				and entry.month == self.month \
-				and entry.day == self.day \
-				and entry.hour == self.hour:
-					self.increment(key, entry)
+			# Check to make sure key is found in the list built above
+			if key in self.keys():
+				self.increment(key)
 
-		# find max value of any key
-		for key in self.keys():
-			if self[key][0] > self.max_value:
-				self.max_value = self[key][0]
+		self.build_calculations()
 
 class HoursGraph(GraphHash):
 	"""24 hour graph subtype"""
@@ -1253,21 +1347,37 @@ class HoursGraph(GraphHash):
 		else:
 			sys.exit()
 
-		self.second = "00"
-		self.minute = "00"
-		self.hour = "00"
+		# Local Variables
+		counter = 0
+		self.second = 0
+		self.minute = 0
+		self.hour = first_entry.hour
 		self.day = first_entry.day
-		self.month = first_entry.month
-		self.duration = "24 Hours"
+		self.month = str(first_entry.month)
+		self.year = first_entry.year
+		self.unit = "hour"
+		self.duration = 24
+
+		start_date = datetime.datetime(int(self.year),int(self.month),int(self.day),int(self.hour),int(self.minute),int(self.second))
+		start_key = start_date.year+start_date.month+start_date.day+start_date.hour
 
 		# Zero out each entry, this will fill in blanks which
-		# may be in the log, especailly sparse logs. Also,
-		# adds false entry for debugging/printing
-		for i in range(0, 24):
-			# Convert to two digits
-			j =   "%.2d" % (i)
-			key = self.month+self.day+j
-			self.zero(key, first_entry)
+		# may be in the log, especially sparse logs.
+		for i in range(0, self.duration):
+
+			# Calculate the current date, the last one will be the end date
+			end_date = start_date + datetime.timedelta(hours=i)
+			end_key = str(end_date.year)+str("%.2d" % (end_date.month))+str("%.2d" % (end_date.day))+str("%.2d" % (end_date.hour))
+			self.zero(end_key)
+
+			# Check for middle date and save
+			if i == (self.duration/2):
+				middle_date = end_date
+
+		# Save final values
+		self.start_date = start_date
+		self.middle_date = middle_date
+		self.end_date = end_date
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -1275,20 +1385,13 @@ class HoursGraph(GraphHash):
 		for entry in log:
 
 			# Create key rooted in time
-			key = self.month+self.day+entry.hour
+			key = entry.year+entry.month+entry.day+entry.hour
 
-			# Check to make sure there are not more than 60
-			# Also, make sure we are on the right
-			# month, day, hour, and minute
-			if len(self) <= 24 \
-				and entry.month == self.month \
-				and entry.day == self.day:
-					self.increment(key, entry)
+			# Check to make sure key is found in the list built above
+			if key in self.keys():
+				self.increment(key)
 
-		# find max value of any key
-		for key in self.keys():
-			if self[key][0] > self.max_value:
-				self.max_value = self[key][0]
+		self.build_calculations()
 
 class DaysGraph(GraphHash):
 	"""30 day graph subtype"""
@@ -1304,21 +1407,37 @@ class DaysGraph(GraphHash):
 		else:
 			sys.exit()
 
-		self.second = "00"
-		self.minute = "00"
-		self.hour = "00"
-		self.day = "01"
-		self.month = first_entry.month
-		self.duration = "30 Days"
+		# Local Variables
+		counter = 0
+		self.second = 0
+		self.minute = 0
+		self.hour = 0
+		self.day = first_entry.day
+		self.month = str(first_entry.month)
+		self.year = first_entry.year
+		self.unit = "day"
+		self.duration = 31
+
+		start_date = datetime.datetime(int(self.year),int(self.month),int(self.day),int(self.hour),int(self.minute),int(self.second))
+		start_key = start_date.year+start_date.month+start_date.day
 
 		# Zero out each entry, this will fill in blanks which
-		# may be in the log, especailly sparse logs. Also,
-		# adds false entry for debugging/printing
-		for i in range(0, 30):
-			# Convert to two digits
-			j =   "%.2d" % (i)
-			key = self.month+self.day+j
-			self.zero(key, first_entry)
+		# may be in the log, especially sparse logs.
+		for i in range(0, self.duration):
+
+			# Calculate the current date, the last one will be the end date
+			end_date = start_date + datetime.timedelta(days=i)
+			end_key = str(end_date.year)+str("%.2d" % (end_date.month))+str("%.2d" % (end_date.day))
+			self.zero(end_key)
+
+			# Check for middle date and save
+			if i == (self.duration/2):
+				middle_date = end_date
+
+		# Save final values
+		self.start_date = start_date
+		self.middle_date = middle_date
+		self.end_date = end_date
 
 		# Create a dictionary with an entry for each line. Increment
 		# the value for each time the word is found. Merge lines by
@@ -1326,17 +1445,10 @@ class DaysGraph(GraphHash):
 		for entry in log:
 
 			# Create key rooted in time
-			key = self.month+self.day+entry.hour
+			key = entry.year+entry.month+entry.day
 
-			# Check to make sure there are not more than 60
-			# Also, make sure we are on the right
-			# month, day, hour, and minute
-			if len(self) <= 24 \
-				and entry.month == self.month \
-				and entry.day == self.day:
-					self.increment(key, entry)
+			# Check to make sure key is found in the list built above
+			if key in self.keys():
+				self.increment(key)
 
-		# find max value of any key
-		for key in self.keys():
-			if self[key][0] > self.max_value:
-				self.max_value = self[key][0]
+		self.build_calculations()
