@@ -300,8 +300,7 @@ def dgraph(args):
 	# Print out the dictionary first sorted by the word with
 	# the most entries with an alphabetical subsort
 	x.display()
-	sys.exit()
-
+	sys.exit(0)
 
 if __name__ == "__main__":
 	get_options(sys.argv[1:])
