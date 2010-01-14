@@ -1194,13 +1194,13 @@ class GraphHash(UserDict):
 
 			# Beginning
 			if i == graph_position["begin"]:
-				sys.stdout.write(str("%.2d" % graph_value["begin"]))
+				sys.stdout.write(str("%.2d" % (graph_value["begin"] % 2000)))
 			# Half
 			elif i == graph_position["middle"]:
-				sys.stdout.write(str("%.2d" % graph_value["middle"]))
+				sys.stdout.write(str("%.2d" % (graph_value["middle"] % 2000)))
 			# Last
 			elif i == graph_position["end"]:
-				sys.stdout.write(str("%.2d" % graph_value["end"]))
+				sys.stdout.write(str("%.2d" % (graph_value["end"] % 2000)))
 			else:
 				sys.stdout.write(" ")
 		print
@@ -1446,6 +1446,126 @@ class DaysGraph(GraphHash):
 
 			# Create key rooted in time
 			key = entry.year+entry.month+entry.day
+
+			# Check to make sure key is found in the list built above
+			if key in self.keys():
+				self.increment(key)
+
+		self.build_calculations()
+
+class MonthsGraph(GraphHash):
+	"""12 month graph subtype"""
+
+	def __init__(self, log):
+
+		# Call parent init
+		UserDict.__init__(self)
+
+		# Turn first line into syslog
+		if len(log) > 0:
+			first_entry = log[0]
+		else:
+			sys.exit()
+
+		# Local Variables
+		counter = 0
+		self.second = 0
+		self.minute = 0
+		self.hour = 0
+		self.day = 1
+		self.month = str(first_entry.month)
+		self.year = first_entry.year
+		self.unit = "month"
+		self.duration = 12
+
+		start_date = datetime.datetime(int(self.year),int(self.month),int(self.day),int(self.hour),int(self.minute),int(self.second))
+		start_key = start_date.year+start_date.month
+
+		# Zero out each entry, this will fill in blanks which
+		# may be in the log, especially sparse logs.
+		for i in range(0, self.duration):
+
+			# Calculate the current date, the last one will be the end date
+			end_date = start_date + datetime.timedelta(days=i*365/12)
+			end_key = str(end_date.year)+str("%.2d" % (end_date.month))
+			self.zero(end_key)
+
+			# Check for middle date and save
+			if i == (self.duration/2):
+				middle_date = end_date
+
+		# Save final values
+		self.start_date = start_date
+		self.middle_date = middle_date
+		self.end_date = end_date
+
+		# Create a dictionary with an entry for each line. Increment
+		# the value for each time the word is found. Merge lines by
+		# Removing numbers and replacing them with a single '#'
+		for entry in log:
+
+			# Create key rooted in time
+			key = entry.year+entry.month
+
+			# Check to make sure key is found in the list built above
+			if key in self.keys():
+				self.increment(key)
+
+		self.build_calculations()
+
+class YearsGraph(GraphHash):
+	"""10 year graph subtype"""
+
+	def __init__(self, log):
+
+		# Call parent init
+		UserDict.__init__(self)
+
+		# Turn first line into syslog
+		if len(log) > 0:
+			first_entry = log[0]
+		else:
+			sys.exit()
+
+		# Local Variables
+		counter = 0
+		self.second = 0
+		self.minute = 0
+		self.hour = 0
+		self.day = 1
+		self.month = 1
+		self.year = first_entry.year
+		self.unit = "year"
+		self.duration = 10
+
+		start_date = datetime.datetime(int(self.year),int(self.month),int(self.day),int(self.hour),int(self.minute),int(self.second))
+		start_key = start_date.year
+
+		# Zero out each entry, this will fill in blanks which
+		# may be in the log, especially sparse logs.
+		for i in range(0, self.duration):
+
+			# Calculate the current date, the last one will be the end date
+			end_date = start_date + datetime.timedelta(days=i*365)
+			end_key = str(end_date.year)
+			self.zero(end_key)
+
+			# Check for middle date and save
+			if i == (self.duration/2):
+				middle_date = end_date
+
+		# Save final values
+		self.start_date = start_date
+		self.middle_date = middle_date
+		self.end_date = end_date
+
+		# Create a dictionary with an entry for each line. Increment
+		# the value for each time the word is found. Merge lines by
+		# Removing numbers and replacing them with a single '#'
+		for entry in log:
+
+			# Create key rooted in time
+			key = entry.year
 
 			# Check to make sure key is found in the list built above
 			if key in self.keys():

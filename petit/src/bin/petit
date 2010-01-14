@@ -53,6 +53,8 @@ from crunchtools import SecondsGraph
 from crunchtools import MinutesGraph
 from crunchtools import HoursGraph
 from crunchtools import DaysGraph
+from crunchtools import MonthsGraph
+from crunchtools import YearsGraph
 import logging
 
 # Process Signals
@@ -96,10 +98,12 @@ def get_options(argv):
 	parser.add_option("--wordcount", dest="mode", action="store_const", const="wordcount", help="Show word count for given word")
 	parser.add_option("--daemon", dest="mode", action="store_const", const="daemon", help="show a report of entries from each daemon")
 	parser.add_option("--host", dest="mode", action="store_const", const="host", help="show a report of entries from each host")
-	parser.add_option("--sgraph", dest="mode", action="store_const", const="sgraph", help="show graph of first 60 seconds, by second")
-	parser.add_option("--mgraph", dest="mode", action="store_const", const="mgraph", help="show graph of first 60 seconds, by second")
-	parser.add_option("--hgraph", dest="mode", action="store_const", const="hgraph", help="show graph of first 60 seconds, by second")
-	parser.add_option("--dgraph", dest="mode", action="store_const", const="dgraph", help="show graph of first 60 seconds, by second")
+	parser.add_option("--sgraph", dest="mode", action="store_const", const="sgraph", help="show graph of first 60 seconds")
+	parser.add_option("--mgraph", dest="mode", action="store_const", const="mgraph", help="show graph of first 60 minutes")
+	parser.add_option("--hgraph", dest="mode", action="store_const", const="hgraph", help="show graph of first 24 hours")
+	parser.add_option("--dgraph", dest="mode", action="store_const", const="dgraph", help="show graph of first 31 days")
+	parser.add_option("--mograph", dest="mode", action="store_const", const="mograph", help="show graph of first 12 months")
+	parser.add_option("--ygraph", dest="mode", action="store_const", const="ygraph", help="show graph of first 10 years")
 
 	# parse options/args
 	(options, args) = parser.parse_args()
@@ -143,6 +147,10 @@ def get_options(argv):
 		hgraph(filename)
 	elif options.mode == "dgraph":
 		dgraph(filename)
+	elif options.mode == "mograph":
+		mograph(filename)
+	elif options.mode == "ygraph":
+		ygraph(filename)
 	else:
 		print "No action specified"
 		sys.exit()
@@ -292,6 +300,40 @@ def dgraph(args):
 
 	# Create new syslog hash based on log file and filter created
 	x = DaysGraph(log)
+
+	# Set tick & width options
+	x.tick = options.tick
+	x.wide = options.wide
+
+	# Print out the dictionary first sorted by the word with
+	# the most entries with an alphabetical subsort
+	x.display()
+	sys.exit(0)
+
+def mograph(args):
+
+	# Get input
+	log = Log(args)
+
+	# Create new syslog hash based on log file and filter created
+	x = MonthsGraph(log)
+
+	# Set tick & width options
+	x.tick = options.tick
+	x.wide = options.wide
+
+	# Print out the dictionary first sorted by the word with
+	# the most entries with an alphabetical subsort
+	x.display()
+	sys.exit(0)
+
+def ygraph(args):
+
+	# Get input
+	log = Log(args)
+
+	# Create new syslog hash based on log file and filter created
+	x = YearsGraph(log)
 
 	# Set tick & width options
 	x.tick = options.tick
