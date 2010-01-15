@@ -73,5 +73,20 @@ rm -rf %{SOURCE0}
 %defattr(-,root,root,-)
 
 %changelog
+* Fri Jan 15 2010 Scott McCarty <smccarty@eyemg.com>
+- Removed first sample, replaced by random
+- Added Linux secure log processing capabilities
+- Changed to random sampling for log type determiniation
+- Fixed documentation/help menu text
+- Added month graph, caveat: syslog does not store year data, so don't reach wrong conclusions
+- Added year graph for completeness, same warning as month                                    
+- Added year support in code
+- Fixed bug in value calculations of each bar of graph, values were erroring low
+- Added Days graph                                                              
+- Completely revamped date delta code using datetime built in functionality to calculate date/time ranges
+- Re-architected graphing logic                                                                          
+- Redesigned graphing output to better mach cacti/RRD                                                    
+- Added normalization code, better differentiation of close values, handles most edge cases              
+- Made design decision to stay with simplicity (Separate Classes) for each type of graph. Imaging the graphing code more as report writing than object oriented programming and you will find my zen
 * Tue Jul 31 2009 Scott McCarty <smccarty@eyemg.com>
 - First working version
