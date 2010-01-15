@@ -298,6 +298,67 @@ class ScriptlogEntry(LogEntry):
 	# Declare Static Methods
 	is_type = staticmethod(is_type)
 
+
+class SecureLogEntry(LogEntry):
+	"""Driver for Syslog formatted files. Conforms to LogEntry interface class."""
+
+	def __init__(self, line):
+
+		# Split the line up
+		value = line.split()
+
+		# Should be normal log entry
+		if len(value) >= 5:
+			# Syslog does not store year information so, set to current year
+			self.year = str(datetime.date.today().year)
+			self.month, self.day, clocktime, self.host, self.daemon = value[:5]
+			self.log_entry = ' '.join(value[5:])
+			self.hour, self.minute, self.second = clocktime.split(":") 
+
+			# Convert month to integer
+			self.month = str(time.strptime(self.month,"%b")[1])
+
+			# Normalize integers to standard widths
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
+
+		# Abnormal log entry
+		elif len(value) >= 1:
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.log_entry = ' '.join(value)
+
+		# Blank line, will be sorted out by scrub
+		else:
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.log_entry = "#"
+
+	def is_type(line):
+		"""Standard function from interface class to determine type"""
+
+		global logging
+
+		if len(line) >= 3:
+
+			# Look for something similar to: "29 11:53:08" in third column
+			if re.search("[0-9][0-9]?",line[1]) \
+			and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]) \
+			and (re.search("^pam_",line[5]) \
+			or re.search("^sshd\[",line[4])):
+				logging.info("Found Secure Log Entry")
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	# Declare Static Methods
+	is_type = staticmethod(is_type)
+
 class RawEntry(LogEntry):
 	"""
 	Driver for Raw log files. Conforms to LogEntry interface class.
@@ -359,9 +420,10 @@ class Log(UserList):
 
 			# Get a sample of the first entry
 			first_entry = buffer[0].split()
+			random_entry = choice(buffer).split()
 
 			# Get the correct subclass
-			Entry = self.select(first_entry)
+			Entry = self.select(random_entry)
 
 		# Finally, build self with the correct subclassed LogEntry constructor type
 		for line in buffer:
@@ -398,6 +460,8 @@ class Log(UserList):
 		"""Selector which decides what kind of entry to add"""
 
 		# Test and select correct entry type
+		if SecureLogEntry.is_type(line):
+			return SecureLogEntry
 		if SyslogEntry.is_type(line):
 			return SyslogEntry
 		elif ApacheEntry.is_type(line):
@@ -885,6 +949,8 @@ class SuperHash(UserDict):
 			LogHash = SnortLogHash
 		elif log.contains(RawEntry):
 			LogHash = RawLogHash
+		if log.contains(SecureLogEntry):
+			LogHash = SecureLogHash
 		else:
 			print "Could not determine what type of objects are contained in generic Log"""
 			sys.exit(15)
@@ -944,6 +1010,49 @@ class SnortLogHash(SuperHash):
 
 			# Scrub sections of SyslogEntry which will be used to key the hash
 			key = self.filter.scrub(entry.log_entry)
+
+			# increment the LogHash with the new key
+			self.increment(key, entry)
+
+		# Finally, remove valueless lines
+		if "#" in self:	
+			del self["#"]
+
+class SecureLogHash(SuperHash):
+	"""Overrides the fill method specifically for LogHashes built from Syslog files"""
+	
+	def fill(self, log):
+		# Create a dictionary with an entry for each line. Increment
+		# the value for each time the word is found. Merge lines by
+		# Removing numbers and replacing them with a single '#'
+		for entry in log:
+
+			# Clean up the log entry better since it is a secure log hash
+
+			## Session Entries
+			entry.log_entry = re.sub("session closed for.*", "session closed for #", entry.log_entry)
+			entry.log_entry = re.sub("session opened for.*", "session opened for #", entry.log_entry)
+
+			## Auth Entries
+			entry.log_entry = re.sub("Accepted publickey for.*", "Accepted publickey for #", entry.log_entry)
+			entry.log_entry = re.sub("Accepted password for.*", "Accepted password for #", entry.log_entry)
+			entry.log_entry = re.sub("Postponed publickey for.*", "Postponed publickey for #", entry.log_entry)
+			entry.log_entry = re.sub("input_userauth_request: invalid user.*", "input_userauth_request: invalid user #", entry.log_entry)
+			entry.log_entry = re.sub("Invalid user.*", "Invalid user #", entry.log_entry)
+			entry.log_entry = re.sub("reverse mapping checking getaddrinfo for.*", "reverse mapping checking getaddrinfo for #", entry.log_entry)
+			entry.log_entry = re.sub("Connection closed by.*", "Connection closed by #", entry.log_entry)
+			entry.log_entry = re.sub("Failed password for invalid user.*", "Failed password for invalid user #", entry.log_entry)
+			entry.log_entry = re.sub("Failed password for.*from.*", "Failed password for # from #", entry.log_entry)
+			entry.log_entry = re.sub("error retrieving information about user.*", "error retrieving information about user #", entry.log_entry)
+			entry.log_entry = re.sub("authentication failure.*", "authentication failure #", entry.log_entry)
+
+			## Misc
+			entry.log_entry = re.sub("Received disconnect from.*", "Received disconnect from #", entry.log_entry)
+			entry.log_entry = re.sub("Could not reverse map address.*", "Could not reverse map address #", entry.log_entry)
+			#entry.log_entry = re.sub("", "", entry.log_entry)
+
+			# Scrub sections of SyslogEntry which will be used to key the hash
+			key = self.filter.scrub(entry.daemon+" "+entry.log_entry)
 
 			# increment the LogHash with the new key
 			self.increment(key, entry)
