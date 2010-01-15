@@ -419,7 +419,6 @@ class Log(UserList):
 		if len(buffer) >= 1:
 
 			# Get a sample of the first entry
-			first_entry = buffer[0].split()
 			random_entry = choice(buffer).split()
 
 			# Get the correct subclass
