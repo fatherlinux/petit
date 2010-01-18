@@ -1,12 +1,15 @@
+14
+3
 
-Start Time: Aug 03 11:53:00 		Minimum Value: 0
-Duration: 60 Seconds 			Maximum Value: 30
-Scale: 5.0
-
-      ###                                                   
-      ###                                                   
-      ###                                                   
-     ####                                                   
-     ####                                                   
+ ###                                                        
+ ###                                                        
+ ###                                                        
+ ###                                                        
+####                                                        
 ############################################################
-01                           30                            60 
+05                            35                           04 
+
+Start Time:	2009-08-03 11:53:05 		Minimum Value: 0
+End Time:	2009-08-03 11:54:04 		Maximum Value: 30
+Duration:	60 seconds 			Scale: 5.0
+

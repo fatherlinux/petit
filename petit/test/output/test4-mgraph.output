@@ -1,12 +1,13 @@
 
-Start Time: # # #:00:00 		Minimum Value: 0
-Duration: 60 Minutes 			Maximum Value: 1
-Scale: 0.166666666667
+#                                                           
+#                                                           
+#                                                           
+#                                                           
+#                                                           
+############################################################
+01                            31                           00 
 
-#                                                            
-#                                                            
-#                                                            
-#                                                            
-#                                                            
-#############################################################
-01                           30                             61 
+Start Time:	1900-01-01 01:01:00 		Minimum Value: 0
+End Time:	1900-01-01 02:00:00 		Maximum Value: 6
+Duration:	60 minutes 			Scale: 1.0
+

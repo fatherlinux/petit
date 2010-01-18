@@ -1,12 +1,14 @@
+1
 
-Start Time: Oct 2 09:45:00 		Minimum Value: 0
-Duration: 60 Seconds 			Maximum Value: 4
-Scale: 0.666666666667
-
-  ##                                                        
-  ##                                                        
-  ## #                                                      
-  ## ##                                                     
-  ## ##                                                     
+ #                                                          
+##                                                          
+##                                                          
+## #                                                        
+## #                                                        
 ############################################################
-01                           30                            60 
+02                            32                           01 
+
+Start Time:	2010-10-02 09:45:02 		Minimum Value: 0
+End Time:	2010-10-02 09:46:01 		Maximum Value: 4
+Duration:	60 seconds 			Scale: 0.666666666667
+
