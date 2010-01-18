@@ -3,7 +3,9 @@
 # Variables
 home_location="/srv/operations/tools"
 yum_location="/srv/yum/redhat/RHEL/5/eyemg/"
-remote_location="root@mobius:/usr/web/opensource.eyemg.com/docroot/files/petit/"
+remote_server="root@mobius"
+remote_directory="/usr/web/opensource.eyemg.com/docroot/files/petit/"
+remote_location="$remote_server:$remote_directory"
 deb_server="root@javier.eyemg.com"
 deb_location="${deb_server}:/root/software/petit"
 
@@ -17,11 +19,17 @@ make clean
 cd ..
 tar cvvfz petit-${version}.tgz petit/
 scp petit-${version}.tgz $remote_location
+ssh $remote_server "rm $remote_directory/petit-current.tgz"
+latest=`ssh $remote_server "ls -trh $remote_directory| grep tgz | tail -n1"`
+ssh $remote_server "ln -s $latest $remote_directory/petit-current.tgz"
 
 # Now create RPM and distribute
 cd petit
 make rpm
 scp petit-[0-9].[0-9].[0-9]-[0-9].i386.rpm $remote_location
+ssh $remote_server "rm $remote_directory/petit-current.rpm"
+latest=`ssh $remote_server "ls -trh $remote_directory| grep rpm | tail -n1"`
+ssh $remote_server "ln -s $latest $remote_directory/petit-current.rpm"
 cp petit-[0-9].[0-9].[0-9]-[0-9].i386.rpm $yum_location/
 cd $yum_location/
 createrepo .
@@ -32,7 +40,9 @@ petit_pkg=`ssh $deb_server "ls /root/software/petit | grep \.deb | tail -n1" `
 echo "Petit package: $petit_pkg"
 scp ${deb_location}/${petit_pkg} ${home_location}/petit/${petit_pkg}
 scp ${home_location}/petit/${petit_pkg} $remote_location
-#petit_0.8.5_1_i386.deb
+ssh $remote_server "rm $remote_directory/petit-current.deb"
+latest=`ssh $remote_server "ls -trh $remote_directory| grep deb | tail -n1"`
+ssh $remote_server "ln -s $latest $remote_directory/petit-current.deb"
 
 # Cleanup
 cd $home_location
