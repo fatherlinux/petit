@@ -6,7 +6,7 @@
 
 
 # Routine Tests
-functions="hash wordcount host daemon sgraph mgraph hgraph"
+functions="hash wordcount host daemon sgraph mgraph hgraph dgraph mograph ygraph"
 
 for function in $functions
 do
