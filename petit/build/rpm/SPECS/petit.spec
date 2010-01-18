@@ -1,6 +1,6 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: 0.8.6
+Version: 0.8.7
 Release: 1
 License: GPLv3
 Group: Applications/System
@@ -73,6 +73,12 @@ rm -rf %{SOURCE0}
 %defattr(-,root,root,-)
 
 %changelog
+* Mon Jan 18 2010 Scott McCarty <smccarty@eyemg.com>
+- Changed defaults for entries to 1900 so that time delta calculations do not fail
+- Changed log determination logic to use multiple samples                         
+- Fixed bug in SecureLog processing where sample line was not being checked for long enough line
+- Added string conversion to all known log types to resolve type bugs cating strings and numbers
+
 * Fri Jan 15 2010 Scott McCarty <smccarty@eyemg.com>
 - Removed first sample, replaced by random
 - Added Linux secure log processing capabilities
