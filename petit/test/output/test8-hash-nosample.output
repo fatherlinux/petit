@@ -1,0 +1,8 @@
+537:	sshd[#]: Accepted publickey for #
+347:	sshd[#]: Postponed publickey for #
+273:	sshd[#]: pam_unix(sshd:session): session opened for #
+270:	sshd[#]: pam_unix(sshd:session): session closed for #
+33:	sshd[#]: reverse mapping checking getaddrinfo for #
+32:	sshd[#]: Connection closed by #
+6:	sshd[#]: Accepted password for #
+2:	sshd[#]: subsystem request for sftp
