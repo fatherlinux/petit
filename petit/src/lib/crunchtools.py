@@ -88,7 +88,7 @@ class SyslogEntry(LogEntry):
 			# Convert month to integer
 			self.month = str(time.strptime(self.month,"%b")[1])
 
-			# Normalize integers to standard widths
+			# Normalize integers to standard widths and convert to strings
 			self.year = str("%.4d" % (int(self.year)))
 			self.month = str("%.2d" % (int(self.month)))
 			self.day = str("%.2d" % (int(self.day)))
@@ -96,15 +96,14 @@ class SyslogEntry(LogEntry):
 			self.minute = str("%.2d" % (int(self.minute)))
 			self.second = str("%.2d" % (int(self.second)))
 
-
 		# Abnormal log entry
 		elif len(value) >= 1:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -116,7 +115,6 @@ class SyslogEntry(LogEntry):
 
 			# Look for something similar to: "29 11:53:08" in third column
 			if re.search("[0-9][0-9]?",line[1]) and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]):
-				logging.info("Found Syslog Entry")
 				return True
 			else:
 				return False
@@ -156,14 +154,22 @@ class ApacheEntry(LogEntry):
 			# Convert month to integer
 			self.month = time.strptime(self.month,"%b")[1]
 
+			# Normalize integers to standard widths and convert to strings
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
 		# Abnormal log entry
 		elif len(value) >= 1:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -175,7 +181,6 @@ class ApacheEntry(LogEntry):
 
 			# Look for something similar to: "03/Aug/2009:11:53:08" in forth column
 			if re.search("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9{2}:[0-9]{2}:[0-9]{2}",line[3]):
-				logging.info("Found Apache Entry")
 				return True
 			else:
 				return False
@@ -215,9 +220,18 @@ class SnortEntry(LogEntry):
 			# Looks like "10:18:46"
 			self.hour, self.minute, self.second = snortdate.split(':')
 
+			# Normalize integers to standard widths and convert to strings
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
+
 		# Blank line, will be sorted out by scrub
 		else:
-			self.year,self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year,self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -229,7 +243,6 @@ class SnortEntry(LogEntry):
 
 			# Look for something similar to: "09/29-10:18:46.026172" in first column
 			if re.search("[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}",line[0]):
-				logging.info("Found Snort Entry")
 				return True
 			else:
 				return False
@@ -265,14 +278,22 @@ class ScriptlogEntry(LogEntry):
 			self.log_entry = ' '.join(value[8:])
 			self.hour, self.minute, self.second = time.split(":") 
 
+			# Normalize integers to standard widths and convert to strings
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
 		# Abnormal log entry
 		elif len(value) >= 1:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["#","#","#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon, self.label, self.type = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line, label="__none__"):
@@ -329,12 +350,12 @@ class SecureLogEntry(LogEntry):
 
 		# Abnormal log entry
 		elif len(value) >= 1:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -342,14 +363,13 @@ class SecureLogEntry(LogEntry):
 
 		global logging
 
-		if len(line) >= 3:
+		if len(line) >= 6:
 
 			# Look for something similar to: "29 11:53:08" in third column
 			if re.search("[0-9][0-9]?",line[1]) \
 			and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]) \
 			and (re.search("^pam_",line[5]) \
 			or re.search("^sshd\[",line[4])):
-				logging.info("Found Secure Log Entry")
 				return True
 			else:
 				return False
@@ -374,12 +394,12 @@ class RawEntry(LogEntry):
 
 		# Fake the time/date values, put the entire line in the key
 		if len(value) >= 1:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = ' '.join(value)
 
 		# Blank line, will be sorted out by scrub
 		else:
-			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["#","#","#","#","#","#","#","#"]
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
 			self.log_entry = "#"
 
 	def is_type(line):
@@ -389,7 +409,6 @@ class RawEntry(LogEntry):
 
 			# Look for any length of text in the line
 			if re.search(".+",line):
-				logging.info("Found Raw Entry")
 				return True
 			else:
 				return False
@@ -405,8 +424,13 @@ class Log(UserList):
 	Log, which is an array of type LogEntry,  is relied upon and consumed to build a SuperHash or GraphHash.
 	"""
 
+	# Setup constant variables
+	max_sample_lines = 10
+	sample_lines = []
+
 	def __init__(self, filename=""):
 		UserList.__init__(self)
+
 
 		# Create new array to hold log data
 		buffer = self.open_file(filename)
@@ -417,12 +441,13 @@ class Log(UserList):
 
 		# Check to make sure buffer has data
 		if len(buffer) >= 1:
-
-			# Get a sample of the first entry
-			random_entry = choice(buffer).split()
+			
+			# Get samples
+			for i in range(0,self.max_sample_lines):
+				self.sample_lines.append(choice(buffer).split())
 
 			# Get the correct subclass
-			Entry = self.select(random_entry)
+			Entry = self.select(self.sample_lines)
 
 		# Finally, build self with the correct subclassed LogEntry constructor type
 		for line in buffer:
@@ -455,20 +480,45 @@ class Log(UserList):
 
 		return buffer
 
-	def select(self, line):
+	def select(self, lines):
 		"""Selector which decides what kind of entry to add"""
 
-		# Test and select correct entry type
-		if SecureLogEntry.is_type(line):
+		tally = {'SecureLogEntry': 0, 'SyslogEntry': 0, 'ApacheEntry': 0, 'SnortEntry': 0, 'RawEntry': 0}
+		tally_threshold = self.max_sample_lines/4
+
+		# Build tallies for each type
+		for line in lines:
+			# Test and select correct entry type
+			if SecureLogEntry.is_type(line):
+				tally['SecureLogEntry'] += 1
+			elif SyslogEntry.is_type(line):
+				tally['SyslogEntry'] += 1
+			elif ApacheEntry.is_type(line):
+				tally['ApacheEntry'] += 1
+			elif SnortEntry.is_type(line):
+				tally['SnortEntry'] += 1
+			else:
+				tally['RawEntry'] += 1
+
+		# Determined which type to return
+		if tally['SecureLogEntry'] == self.max_sample_lines:
+			logging.info("Determined Secure Log: "+str(tally['SecureLogEntry']))
 			return SecureLogEntry
-		if SyslogEntry.is_type(line):
+		elif tally['SyslogEntry'] > tally_threshold:
+			logging.info("Determined Syslog Log: "+str(tally['SyslogEntry']))
 			return SyslogEntry
-		elif ApacheEntry.is_type(line):
+		elif tally['ApacheEntry'] > tally_threshold:
+			logging.info("Determined Apache Log: "+str(tally['ApacheEntry']))
 			return ApacheEntry
-		elif SnortEntry.is_type(line):
+		elif tally['SnortEntry'] > tally_threshold:
+			logging.info("Determined Snort Log: "+str(tally['SnortEntry']))
 			return SnortEntry
-		else:
+		elif tally['RawEntry'] > tally_threshold:
+			logging.info("Determined Raw Log: "+str(tally['RawEntry']))
 			return RawEntry
+		else:
+			print "Could not determine what kind of entried contained in given log"
+			sys.exit(1)
 
 	def contains(self, object):
 		"""Determine what kind of objects are contained in this Log"""
@@ -948,7 +998,7 @@ class SuperHash(UserDict):
 			LogHash = SnortLogHash
 		elif log.contains(RawEntry):
 			LogHash = RawLogHash
-		if log.contains(SecureLogEntry):
+		elif log.contains(SecureLogEntry):
 			LogHash = SecureLogHash
 		else:
 			print "Could not determine what type of objects are contained in generic Log"""
