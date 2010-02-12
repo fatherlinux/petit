@@ -1,6 +1,6 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: 0.8.7
+Version: 0.8.8
 Release: 1
 License: GPLv3
 Group: Applications/System
@@ -73,6 +73,10 @@ rm -rf %{SOURCE0}
 %defattr(-,root,root,-)
 
 %changelog
+* Fri Feb 12 2010 Scott McCarty <smccarty@eyemg.com>
+- Moved a bunch of code into the select function of the Log object so that it can now randomly sample ten entries over and over until it determines what kind of file has been opened
+- Now passes all regression tests, all the time :-)
+
 * Mon Jan 18 2010 Scott McCarty <smccarty@eyemg.com>
 - Changed defaults for entries to 1900 so that time delta calculations do not fail
 - Changed log determination logic to use multiple samples                         
@@ -94,5 +98,6 @@ rm -rf %{SOURCE0}
 - Redesigned graphing output to better mach cacti/RRD                                                    
 - Added normalization code, better differentiation of close values, handles most edge cases              
 - Made design decision to stay with simplicity (Separate Classes) for each type of graph. Imaging the graphing code more as report writing than object oriented programming and you will find my zen
+
 * Tue Jul 31 2009 Scott McCarty <smccarty@eyemg.com>
 - First working version
