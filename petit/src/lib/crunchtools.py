@@ -424,10 +424,6 @@ class Log(UserList):
 	Log, which is an array of type LogEntry,  is relied upon and consumed to build a SuperHash or GraphHash.
 	"""
 
-	# Setup constant variables
-	max_sample_lines = 10
-	sample_lines = []
-
 	def __init__(self, filename=""):
 		UserList.__init__(self)
 
@@ -439,15 +435,8 @@ class Log(UserList):
 		# Now it is time to determine what kind of objects will be
 		# used for construction of self.
 
-		# Check to make sure buffer has data
-		if len(buffer) >= 1:
-			
-			# Get samples
-			for i in range(0,self.max_sample_lines):
-				self.sample_lines.append(choice(buffer).split())
-
-			# Get the correct subclass
-			Entry = self.select(self.sample_lines)
+		# Get the correct subclass
+		Entry = self.select(buffer)
 
 		# Finally, build self with the correct subclassed LogEntry constructor type
 		for line in buffer:
@@ -480,45 +469,55 @@ class Log(UserList):
 
 		return buffer
 
-	def select(self, lines):
+	def select(self, buffer):
 		"""Selector which decides what kind of entry to add"""
 
+		# Setup variables
+		max_sample_lines = 10
+		sample_lines = []
 		tally = {'SecureLogEntry': 0, 'SyslogEntry': 0, 'ApacheEntry': 0, 'SnortEntry': 0, 'RawEntry': 0}
-		tally_threshold = self.max_sample_lines/4
+		tally_threshold = max_sample_lines/4
 
-		# Build tallies for each type
-		for line in lines:
-			# Test and select correct entry type
-			if SecureLogEntry.is_type(line):
-				tally['SecureLogEntry'] += 1
-			elif SyslogEntry.is_type(line):
-				tally['SyslogEntry'] += 1
-			elif ApacheEntry.is_type(line):
-				tally['ApacheEntry'] += 1
-			elif SnortEntry.is_type(line):
-				tally['SnortEntry'] += 1
-			else:
-				tally['RawEntry'] += 1
+		# Check to make sure buffer has data
+		if len(buffer) >= 1:
 
-		# Determined which type to return
-		if tally['SecureLogEntry'] == self.max_sample_lines:
-			logging.info("Determined Secure Log: "+str(tally['SecureLogEntry']))
-			return SecureLogEntry
-		elif tally['SyslogEntry'] > tally_threshold:
-			logging.info("Determined Syslog Log: "+str(tally['SyslogEntry']))
-			return SyslogEntry
-		elif tally['ApacheEntry'] > tally_threshold:
-			logging.info("Determined Apache Log: "+str(tally['ApacheEntry']))
-			return ApacheEntry
-		elif tally['SnortEntry'] > tally_threshold:
-			logging.info("Determined Snort Log: "+str(tally['SnortEntry']))
-			return SnortEntry
-		elif tally['RawEntry'] > tally_threshold:
-			logging.info("Determined Raw Log: "+str(tally['RawEntry']))
-			return RawEntry
-		else:
-			print "Could not determine what kind of entried contained in given log"
-			sys.exit(1)
+			# Keep building samples until we get a good set
+			while (1):
+			
+				# Get X number of samples
+				for i in range(0,max_sample_lines):
+					sample_lines.append(choice(buffer).split())
+
+				# Build tallies for the collected samples
+				for line in sample_lines:
+					# Test and select correct entry type
+					if SecureLogEntry.is_type(line):
+						tally['SecureLogEntry'] += 1
+					elif SyslogEntry.is_type(line):
+						tally['SyslogEntry'] += 1
+					elif ApacheEntry.is_type(line):
+						tally['ApacheEntry'] += 1
+					elif SnortEntry.is_type(line):
+						tally['SnortEntry'] += 1
+					else:
+						tally['RawEntry'] += 1
+
+				# Determined which type to return
+				if tally['SecureLogEntry'] == max_sample_lines:
+					logging.info("Determined Secure Log: "+str(tally['SecureLogEntry']))
+					return SecureLogEntry
+				elif tally['SyslogEntry'] > tally_threshold:
+					logging.info("Determined Syslog Log: "+str(tally['SyslogEntry']))
+					return SyslogEntry
+				elif tally['ApacheEntry'] > tally_threshold:
+					logging.info("Determined Apache Log: "+str(tally['ApacheEntry']))
+					return ApacheEntry
+				elif tally['SnortEntry'] > tally_threshold:
+					logging.info("Determined Snort Log: "+str(tally['SnortEntry']))
+					return SnortEntry
+				elif tally['RawEntry'] > tally_threshold:
+					logging.info("Determined Raw Log: "+str(tally['RawEntry']))
+					return RawEntry
 
 	def contains(self, object):
 		"""Determine what kind of objects are contained in this Log"""
