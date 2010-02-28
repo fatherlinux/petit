@@ -74,6 +74,7 @@ rm -rf %{SOURCE0}
 /usr/share/petit
 /var/lib/petit
 /usr/share/doc/petit
+/usr/share/man/man1/petit.1.gz
 
 %defattr(-,root,root,-)
 
@@ -81,6 +82,8 @@ rm -rf %{SOURCE0}
 * Sat Feb 27 2010 Scott McCarty <smccarty@eyemg.com>
 - Added apache error log support
 - Added apache error log tests
+- Added man page
+- Added fingerprints for Ubuntu 9.04
 * Fri Feb 12 2010 Scott McCarty <smccarty@eyemg.com>
 - Moved a bunch of code into the select function of the Log object so that it can now randomly sample ten entries over and over until it determines what kind of file has been opened
 - Now passes all regression tests, all the time :-)
