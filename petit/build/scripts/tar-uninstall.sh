@@ -12,6 +12,7 @@
 # Main scripts & libraries
 rm -vf /usr/bin/petit
 rm -rvf /usr/share/petit
+rm -f /usr/share/man/man1/petit.1.gz
 
 # Filters, Fingerprints, and Fingerprint Libraries
 rm -rvf  /var/lib/petit/
