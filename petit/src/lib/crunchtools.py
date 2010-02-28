@@ -79,6 +79,7 @@ class SyslogEntry(LogEntry):
 
 		# Should be normal log entry
 		if len(value) >= 5:
+
 			# Syslog does not store year information so, set to current year
 			self.year = str(datetime.date.today().year)
 			self.month, self.day, clocktime, self.host, self.daemon = value[:5]
@@ -124,8 +125,8 @@ class SyslogEntry(LogEntry):
 	# Declare Static Methods
 	is_type = staticmethod(is_type)
 
-class ApacheEntry(LogEntry):
-	"""Driver for Apache formatted log files. Conforms to LogEntry interface class."""
+class ApacheAccessEntry(LogEntry):
+	"""Driver for Apache Access formatted log files. Conforms to LogEntry interface class."""
 
 	def __init__(self, line):
 
@@ -181,6 +182,125 @@ class ApacheEntry(LogEntry):
 
 			# Look for something similar to: "03/Aug/2009:11:53:08" in forth column
 			if re.search("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9{2}:[0-9]{2}:[0-9]{2}",line[3]):
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	# Declare Static Methods
+	is_type = staticmethod(is_type)
+
+class ApacheErrorEntry(LogEntry):
+	"""Driver for Apache Error formatted log files. Conforms to LogEntry interface class."""
+
+	def __init__(self, line):
+
+		# Split the line up
+		value = line.split()
+
+		# Should be normal log entry
+		if len(value) >= 5:
+			# Grab major chunks from the line. Split up something that looks like this: [Sat Feb 27 12:16:10 2010]
+			junk, self.month, self.day, clocktime, self.year = value[:5]
+			self.log_entry = ' '.join(value[5:])
+			self.hour, self.minute, self.second = clocktime.split(":") 
+
+			# Convert month to integer
+			self.month = time.strptime(self.month,"%b")[1]
+
+			# Clean up the year field
+			self.year = re.sub("\]", "", self.year)
+
+			# Normalize integers to standard widths and convert to strings
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
+		# Abnormal log entry
+		elif len(value) >= 1:
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
+			self.log_entry = ' '.join(value)
+
+		# Blank line, will be sorted out by scrub
+		else:
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
+			self.log_entry = "#"
+
+	def is_type(line):
+		"""Standard function from interface class to determine type"""
+
+		global logging
+
+		if len(line) >= 5:
+
+			# Look for something that looks like this: [Sat Feb 27 12:16:10 2010]
+			if re.search("[[a-zA-Z]{3}",line[0]) and re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}",line[3]) and re.search("[0-9]{4}",line[4]):
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	# Declare Static Methods
+	is_type = staticmethod(is_type)
+
+class SnortEntry(LogEntry):
+	"""Driver for Snort formatted log files. Conforms to LogEntry interface class."""
+
+	def __init__(self, line):
+
+		# Split the line up
+		value = line.split()
+
+		# Should be normal log entry
+		if len(value) >= 2:
+		
+			# Snort does not store year information so, set to current year
+			self.year = datetime.date.today().year
+	
+			# Initial break down
+			snortdate = value[:1]
+			self.log_entry = ' '.join(value[1:])
+		
+			# Looks like "09/29-10:18:46.026172"
+			snortdate, junk = snortdate[0].split('.')
+
+			# Looks like "09/29-10:18:46"
+			self.month, snortdate = snortdate.split('/')
+
+			# Looks like "29-10:18:46"
+			self.day, snortdate = snortdate.split('-')
+
+			# Looks like "10:18:46"
+			self.hour, self.minute, self.second = snortdate.split(':')
+
+			# Normalize integers to standard widths and convert to strings
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
+
+		# Blank line, will be sorted out by scrub
+		else:
+			self.year,self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
+			self.log_entry = "#"
+
+	def is_type(line):
+		"""Standard function from interface class to determine type"""
+
+		global logging
+
+		if len(line) >= 4:
+
+			# Look for something similar to: "09/29-10:18:46.026172" in first column
+			if re.search("[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}",line[0]):
 				return True
 			else:
 				return False
@@ -475,7 +595,7 @@ class Log(UserList):
 		# Setup variables
 		max_sample_lines = 10
 		sample_lines = []
-		tally = {'SecureLogEntry': 0, 'SyslogEntry': 0, 'ApacheEntry': 0, 'SnortEntry': 0, 'RawEntry': 0}
+		tally = {'SecureLogEntry': 0, 'SyslogEntry': 0, 'ApacheAccessEntry': 0, 'ApacheErrorEntry': 0, 'SnortEntry': 0, 'RawEntry': 0}
 		tally_threshold = max_sample_lines/4
 
 		# Check to make sure buffer has data
@@ -495,8 +615,10 @@ class Log(UserList):
 						tally['SecureLogEntry'] += 1
 					elif SyslogEntry.is_type(line):
 						tally['SyslogEntry'] += 1
-					elif ApacheEntry.is_type(line):
-						tally['ApacheEntry'] += 1
+					elif ApacheAccessEntry.is_type(line):
+						tally['ApacheAccessEntry'] += 1
+					elif ApacheErrorEntry.is_type(line):
+						tally['ApacheErrorEntry'] += 1
 					elif SnortEntry.is_type(line):
 						tally['SnortEntry'] += 1
 					else:
@@ -509,9 +631,12 @@ class Log(UserList):
 				elif tally['SyslogEntry'] > tally_threshold:
 					logging.info("Determined Syslog Log: "+str(tally['SyslogEntry']))
 					return SyslogEntry
-				elif tally['ApacheEntry'] > tally_threshold:
-					logging.info("Determined Apache Log: "+str(tally['ApacheEntry']))
-					return ApacheEntry
+				elif tally['ApacheAccessEntry'] > tally_threshold:
+					logging.info("Determined Apache Access Log: "+str(tally['ApacheAccessEntry']))
+					return ApacheAccessEntry
+				elif tally['ApacheErrorEntry'] > tally_threshold:
+					logging.info("Determined Apache Error Log: "+str(tally['ApacheErrorEntry']))
+					return ApacheErrorEntry
 				elif tally['SnortEntry'] > tally_threshold:
 					logging.info("Determined Snort Log: "+str(tally['SnortEntry']))
 					return SnortEntry
@@ -991,7 +1116,9 @@ class SuperHash(UserDict):
 		# Select the correct build method
 		if log.contains(SyslogEntry):
 			LogHash = SyslogHash
-		elif log.contains(ApacheEntry):
+		elif log.contains(ApacheAccessEntry):
+			LogHash = ApacheLogHash
+		elif log.contains(ApacheErrorEntry):
 			LogHash = ApacheLogHash
 		elif log.contains(SnortEntry):
 			LogHash = SnortLogHash
