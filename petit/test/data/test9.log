@@ -1,0 +1,197 @@
+[Sun Feb 21 04:03:01 2010] [notice] Digest: generating secret for digest authentication ...
+[Sun Feb 21 04:03:02 2010] [notice] Digest: done
+[Sun Feb 21 04:03:06 2010] [notice] Apache/2.2.3 (CentOS) configured -- resuming normal operations
+[Sun Feb 21 04:23:47 2010] [error] [client 69.58.178.27] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 04:23:58 2010] [error] [client 69.58.178.27] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Sun Feb 21 04:23:59 2010] [error] [client 69.58.178.27] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Sun Feb 21 04:34:33 2010] [error] [client 67.175.136.56] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 04:53:00 2010] [error] [client 66.249.67.210] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 06:00:54 2010] [error] [client 94.199.241.41] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 06:01:45 2010] [error] [client 94.199.241.41] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 09:14:10 2010] [error] [client 67.195.112.245] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 09:35:58 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 09:36:21 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 10:38:34 2010] [error] [client 65.55.106.112] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 10:39:50 2010] [error] [client 207.46.204.237] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 11:56:06 2010] [error] [client 75.48.11.114] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 14:27:50 2010] [error] [client 66.249.67.79] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Sun Feb 21 14:59:43 2010] [error] [client 207.46.204.238] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 16:10:51 2010] [error] [client 65.55.106.235] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 17:19:31 2010] [error] [client 66.249.67.248] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 17:42:59 2010] [error] [client 65.55.207.102] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 18:12:08 2010] [error] [client 64.22.121.11] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 18:13:38 2010] [error] [client 64.22.121.11] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 19:11:02 2010] [error] [client 98.207.80.126] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 19:21:51 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 19:22:43 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Feb 21 23:20:18 2010] [error] [client 65.55.106.207] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Feb 21 23:22:51 2010] [error] [client 65.55.106.108] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Mon Feb 22 00:21:03 2010] [error] [client 66.249.68.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 00:36:39 2010] [error] [client 207.46.204.193] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 01:59:39 2010] [error] [client 203.172.242.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Mon Feb 22 02:00:54 2010] [error] [client 203.172.242.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Mon Feb 22 02:58:57 2010] [error] [client 124.115.6.13] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 03:03:47 2010] [error] [client 66.249.68.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Mon Feb 22 03:11:43 2010] [error] [client 66.249.68.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Mon Feb 22 03:15:41 2010] [error] [client 66.249.68.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/w
+[Mon Feb 22 04:56:46 2010] [error] [client 65.55.106.182] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 05:31:48 2010] [error] [client 67.218.116.162] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 06:07:49 2010] [error] [client 207.46.204.190] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 07:20:32 2010] [error] [client 66.249.67.79] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Mon Feb 22 09:09:42 2010] [error] [client 216.129.119.14] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Mon Feb 22 09:53:30 2010] [error] [client 211.155.228.169] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Mon Feb 22 09:54:42 2010] [error] [client 211.155.228.169] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Mon Feb 22 10:05:14 2010] [error] [client 65.55.106.209] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 10:05:53 2010] [error] [client 65.55.106.209] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Mon Feb 22 10:22:53 2010] [error] [client 65.55.106.114] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 10:23:54 2010] [error] [client 65.55.106.114] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Mon Feb 22 10:34:44 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Mon Feb 22 10:35:13 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Mon Feb 22 12:58:25 2010] [error] [client 208.109.239.123] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Mon Feb 22 14:52:40 2010] [error] [client 66.249.68.51] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 16:19:39 2010] [error] [client 65.55.106.162] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 16:36:22 2010] [error] [client 207.46.199.44] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 17:08:27 2010] [notice] caught SIGTERM, shutting down
+[Mon Feb 22 17:08:31 2010] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Mon Feb 22 17:08:32 2010] [notice] Digest: generating secret for digest authentication ...
+[Mon Feb 22 17:08:32 2010] [notice] Digest: done
+[Mon Feb 22 17:08:33 2010] [notice] Apache/2.2.3 (CentOS) configured -- resuming normal operations
+[Mon Feb 22 18:40:05 2010] [error] [client 66.249.67.24] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Feb 22 18:58:04 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:06 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:18 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:25 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:30 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html, referer: http://wiki.educatedconfusion.com/html/album.html
+[Mon Feb 22 18:58:30 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:32 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:33 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:37 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:51 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:52 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 18:58:53 2010] [error] [client 76.189.155.174] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Mon Feb 22 21:10:59 2010] [error] [client 190.144.99.11] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/user
+[Mon Feb 22 23:21:29 2010] [error] [client 66.249.71.44] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Tue Feb 23 00:15:36 2010] [error] [client 65.55.106.163] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 03:00:10 2010] [error] [client 207.46.199.50] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 04:06:06 2010] [error] [client 74.63.224.136] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Tue Feb 23 04:25:28 2010] [error] [client 124.115.6.13] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 05:55:45 2010] [error] [client 67.218.116.162] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 06:21:26 2010] [error] [client 207.46.199.48] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 06:30:44 2010] [error] [client 66.249.71.88] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 09:39:24 2010] [error] [client 65.55.207.52] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 11:05:15 2010] [error] [client 65.55.106.235] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 11:39:04 2010] [error] [client 207.241.227.83] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 12:25:44 2010] [error] [client 66.249.65.152] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Tue Feb 23 12:37:24 2010] [error] [client 207.46.199.234] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 14:48:14 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Tue Feb 23 14:48:41 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Tue Feb 23 15:04:01 2010] [error] [client 65.55.107.179] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 16:17:49 2010] [error] [client 207.46.204.244] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 16:28:49 2010] [error] [client 65.55.215.75] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 17:21:45 2010] [error] [client 66.249.65.166] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 21:44:44 2010] [error] [client 65.55.106.182] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Feb 23 22:08:52 2010] [error] [client 65.55.207.99] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Tue Feb 23 23:14:43 2010] [error] [client 66.249.71.35] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Wed Feb 24 04:54:18 2010] [error] [client 207.46.195.234] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 05:11:30 2010] [error] [client 65.55.106.211] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 05:49:24 2010] [error] [client 207.46.204.197] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 06:07:47 2010] [error] [client 124.115.6.13] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 06:16:14 2010] [error] [client 67.218.116.162] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 09:02:53 2010] [error] [client 216.129.119.14] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Wed Feb 24 10:54:39 2010] [error] [client 65.55.207.29] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 10:55:52 2010] [error] [client 65.55.207.29] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Wed Feb 24 13:35:08 2010] [error] [client 66.249.71.35] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Wed Feb 24 14:58:07 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Wed Feb 24 14:58:30 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Wed Feb 24 16:54:01 2010] [error] [client 207.46.204.230] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 17:13:22 2010] [error] [client 65.55.207.126] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 18:04:51 2010] [error] [client 66.249.71.36] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Feb 24 19:04:18 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:04:24 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:04:31 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:04:37 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:04:43 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:04:51 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:04:57 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:05:02 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:05:15 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:06:08 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:06:26 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:06:58 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:07:04 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:07:11 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:07:14 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:07:16 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:15:20 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:15:40 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:16:16 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Wed Feb 24 19:16:28 2010] [error] [client 64.245.169.106] File does not exist: /var/www/html/learn.fatherlinux.com/favicon.ico
+[Thu Feb 25 00:46:03 2010] [error] [client 207.46.199.55] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 01:54:54 2010] [error] [client 66.249.71.168] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 02:24:54 2010] [error] [client 66.249.71.41] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Thu Feb 25 03:24:20 2010] [error] [client 38.100.8.50] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 03:24:23 2010] [error] [client 38.100.8.50] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Thu Feb 25 03:24:24 2010] [error] [client 38.100.8.50] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Thu Feb 25 03:24:30 2010] [error] [client 38.100.8.50] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Thu Feb 25 03:24:32 2010] [error] [client 38.100.8.50] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Thu Feb 25 06:30:03 2010] [error] [client 207.46.204.243] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 07:38:09 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 07:38:36 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 07:54:42 2010] [error] [client 124.115.6.13] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 09:18:31 2010] [error] [client 67.218.116.162] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 11:32:44 2010] [error] [client 207.46.199.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 13:14:00 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 13:14:23 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 14:49:06 2010] [error] [client 66.249.71.41] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Thu Feb 25 14:52:47 2010] [error] [client 216.129.119.14] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Thu Feb 25 15:32:35 2010] [error] [client 207.46.204.188] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 16:25:59 2010] [error] [client 207.46.199.37] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 16:58:29 2010] [error] [client 207.46.204.178] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 17:31:01 2010] [error] [client 88.80.216.124] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 17:31:52 2010] [error] [client 88.80.216.124] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 19:32:26 2010] [error] [client 64.22.121.11] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 19:35:12 2010] [error] [client 64.22.121.11] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Feb 25 22:00:39 2010] [error] [client 76.190.162.2] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Thu Feb 25 22:32:33 2010] [error] [client 207.46.204.184] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Feb 25 23:59:12 2010] [error] [client 207.46.199.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 00:00:14 2010] [error] [client 207.46.199.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Fri Feb 26 05:27:44 2010] [error] [client 207.46.204.187] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 05:45:47 2010] [error] [client 66.249.71.85] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Fri Feb 26 08:37:52 2010] [error] [client 67.218.116.162] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 09:36:10 2010] [error] [client 124.115.6.13] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 09:48:32 2010] [error] [client 221.192.199.35] script '/var/www/html/carmenletgo.fatherlinux.com/prx2.php' not found or unable to stat
+[Fri Feb 26 11:14:52 2010] [error] [client 207.46.199.52] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 11:15:45 2010] [error] [client 207.46.199.52] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Fri Feb 26 11:24:17 2010] [error] [client 207.46.204.242] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 13:37:43 2010] [error] [client 87.118.100.43] script '/var/www/html/carmenletgo.fatherlinux.com/wp-login.php' not found or unable to stat, referer: http://floureggsandwater.com/wp-login.php
+[Fri Feb 26 14:05:10 2010] [error] [client 61.183.15.9] script '/var/www/html/carmenletgo.fatherlinux.com/prx2.php' not found or unable to stat
+[Fri Feb 26 17:24:09 2010] [error] [client 207.46.199.50] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 18:29:55 2010] [error] [client 207.46.195.225] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Feb 26 21:52:57 2010] [error] [client 66.249.71.85] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Fri Feb 26 22:07:47 2010] [error] [client 75.118.196.87] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Fri Feb 26 22:07:50 2010] [error] [client 75.118.196.87] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Sat Feb 27 01:25:07 2010] [error] [client 207.46.204.231] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sat Feb 27 02:54:17 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sat Feb 27 02:54:41 2010] [error] [client 173.204.11.227] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sat Feb 27 03:57:33 2010] [error] [client 67.195.111.40] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sat Feb 27 07:07:03 2010] [error] [client 64.246.165.10] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sat Feb 27 11:33:08 2010] [error] [client 124.115.6.13] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sat Feb 27 11:50:56 2010] [error] [client 216.129.119.14] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Sat Feb 27 12:15:48 2010] [error] [client 207.46.199.37] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sat Feb 27 14:22:28 2010] [error] [client 66.249.71.85] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Sat Feb 27 15:19:04 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sat Feb 27 15:19:30 2010] [error] [client 67.228.100.146] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sat Feb 27 16:08:34 2010] [error] [client 207.46.195.224] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sat Feb 27 17:39:52 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:39:57 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:40:29 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:40:41 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:41:46 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:41:51 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:41:58 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:42:01 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:44:02 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:44:06 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:44:15 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:44:21 2010] [error] [client 64.134.168.217] File does not exist: /var/www/html/www.floureggsandwater.com/favicon.ico
+[Sat Feb 27 17:50:56 2010] [error] [client 207.46.204.237] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
