@@ -7,6 +7,7 @@ mkdir -p build/deb/petit/DEBIAN
 mkdir -p build/deb/petit/usr/bin
 mkdir -p build/deb/petit/usr/share/petit
 mkdir -p build/deb/petit/usr/share/doc/petit
+mkdir -p build/deb/petit/usr/share/man/man1
 mkdir -p build/deb/petit/var/lib/petit
 
 # Copy in control file
