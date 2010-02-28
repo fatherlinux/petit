@@ -27,6 +27,10 @@ rsync -av --exclude=.svn src/lib/fingerprints/ build/deb/petit/var/lib/petit/fin
 rsync -av --exclude=.svn src/lib/filters/ build/deb/petit/var/lib/petit/filters/
 rsync -av --exclude=.svn src/lib/crunchtools.py build/deb/petit/usr/share/petit/crunchtools.py
 
+## Man
+rsync -av --exclude=.svn src/man/petit.1.gz build/deb/petit/usr/share/man/man1/petit.1.gz
+
+
 # Build the package
 version=`cat build/deb/control | grep Version | awk '{print $2}'`
 dpkg -b build/deb/petit petit_${version}_i386.deb
