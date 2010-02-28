@@ -1,6 +1,6 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: 0.8.8
+Version: 0.9.1
 Release: 1
 License: GPLv3
 Group: Applications/System
@@ -73,6 +73,9 @@ rm -rf %{SOURCE0}
 %defattr(-,root,root,-)
 
 %changelog
+* Sat Feb 27 2010 Scott McCarty <smccarty@eyemg.com>
+- Added apache error log support
+- Added apache error log tests
 * Fri Feb 12 2010 Scott McCarty <smccarty@eyemg.com>
 - Moved a bunch of code into the select function of the Log object so that it can now randomly sample ten entries over and over until it determines what kind of file has been opened
 - Now passes all regression tests, all the time :-)

@@ -1,0 +1,126 @@
+.TH PETIT "1" "February 2010" "Petit" "User Commands" .SH NAME
+petit \- log analysis tool for systems administrators
+.SH SYNOPSIS
+\fBpetit\fR [\fIOPTION\fR] [\fIFILE\fR] 
+.SH DESCRIPTION
+\fBpetit\fR was developed to quickly analyze syslog and Apache
+log files in large environments. It can also be used for word
+discovery within log data. It is a general purpose tool that can
+do hashing, word counts, and command line graphing of Apache and
+syslog files. It is designed to be a standard Unix tool that can
+be employed with pipes or by opening files. Petit works by sifting
+data with standard patterns and allows for custom filters and
+fingerprints. This leaves the analyst with data that is both 
+varied and interesting.
+
+\fIFILE\fR can be Syslog, Apache Access, Apache Error, Snort or 
+Raw log files. Petit can also be used to analyze any type of file
+as a Raw log file, but since time/date is not understood, they
+cannot be graphed.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Displays simple usage message
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Adds verbose output to any function
+.TP
+\fB\-\-sample\fR
+Sample any line for which there are 3 or less entries found
+.TP
+\fB\-\-allsample\fR
+Show samples for all lines found
+.TP
+\fB\-\-filter\fR
+Force filter files to be used during processing because some functions do not
+filter by default.
+.TP
+\fB\-\-nofilter\fR
+Force filter files to be skipped during processing. This will work for any
+function.
+.TP
+\fB\-\-wide\fR
+Make graphing wider for bigger screens
+.TP
+\fB\-\-tick\fR="%"
+Change tick character from default of "#". This can be any single character.
+.TP
+\fB\-\-finterprint\fR
+Use fingerprinting to remove certain patterns from analysis. By default this is
+off for most or all functions. This is a safety feature to prevent an analyst
+from removing data without using an explicit switch.
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Display the version of petit and exit
+.TP
+\fB\-\-hash\fR
+This is one of the most basic functions of petit. This function tallies lines
+found. Each output line displays the number of similar lines found in the log
+and what the group generally looked like. If filtering is used in conjunction
+with hashing then numbers and patterns which are commonly found and not
+profoundly necessary are removed from the input stream. This leaves the analyst
+with approximate log entries as opposed to actual log entries. This is useful for
+analyzing large log sets commonly found in clusters/pools of servers.
+.TP
+\fB\-\-wordcount\fR
+Word counting is essentially like hashing except that data is grouped by word
+instead of line. A custom stopwords list is used to filter out common words
+found in the english language. A common use case for this function would be
+word discovery. When used in connection with grep or swatch, word counting 
+can be used to enumarate all of the words found in a log file which have similar
+meanings, such as "error, can't, fail, reject", etc.
+
+This is extremely useful for giving confidence when building white lists and
+black lists. These lists can then be used for daily reporting or graphing for
+anamoly detection.
+.TP
+\fB\-\-daemon\fR
+Gives a simple report of lines produced, keyed by the daemon that produced them
+.TP
+\fB\-\-host\fR
+Gives a simple report of lines produced, keyed by the host that produced them.
+This can be useful for analyzing machines in a cluster dedicated to the same
+task. If one machine is producing too much or too little log output there
+is generally a problem.
+.SH GRAPHS
+Graphs are displayed with the following information to help analyze
+the log file
+.TP
+\fB\-\-sgraph\fR
+Show a graph of first 60 seconds of the log file
+.TP
+\fB\-\-mgraph\fR
+Show a graph of first 60 minutes of the log file
+.TP
+\fB\-\-hgraph\fR
+Show a graph of first 24 hours of the log file
+.TP
+\fB\-\-dgraph\fR
+Show a graph of first 31 days of the log file
+.TP
+\fB\-\-mograph\fR
+Show a graph of first 12 months of the log file
+.TP
+\fB\-\-ygraph\fR
+Show a graph of first 10 years. 10 years was chosen arbitrarily and 
+could be changed in the code if more time is needed.
+.SH FILES
+.TP
+\fB/var/lib/petit/fingerprint_library\fR
+Fingerprint library which can be used to construct custom fingerprint
+files. They are in the same format as petit's output so it is easy
+to construct new fingerprints.
+.TP
+\fB/var/lib/petit/fingerprints\fR
+Aggregate fingerprint files which can be used to filter out reboots
+and other events which the administrator does not care to see
+.TP
+\fB/var/lib/petit/filters/\fR
+Each function has a separate list of words and patterns which are
+removed. Each list is stored in a designated file and specified with
+standard regular expression format.
+.SH AUTHOR
+Written by Scott McCarty, see the AUTHORS file
+.SH COPYRIGHT
+This program is licensed under the GNU General Public License, see the
+file COPYING included in the distribution archive.
