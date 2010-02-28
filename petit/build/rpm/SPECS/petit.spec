@@ -30,8 +30,10 @@ rm -rf ${RPM_BUILD_ROOT}
 # Main scripts & libraries
 install -d ${RPM_BUILD_ROOT}/usr/bin
 install -d ${RPM_BUILD_ROOT}/usr/share/petit
+install -d ${RPM_BUILD_ROOT}/usr/share/man/man1
 install src/bin/petit ${RPM_BUILD_ROOT}/usr/bin/petit
 install src/lib/crunchtools.py ${RPM_BUILD_ROOT}/usr/share/petit/crunchtools.py
+install src/man/petit.1.gz ${RPM_BUILD_ROOT}/usr/share/man/man1/petit.1.gz
 
 # Filters
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/filters
@@ -43,11 +45,14 @@ install src/lib/filters/words.stopwords ${RPM_BUILD_ROOT}/var/lib/petit/filters/
 # Fingerprints
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints
 install src/lib/fingerprints/fedora11-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/fedora11-reboot.fp
+install src/lib/fingerprints/ubuntu9.04-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/ubuntu9.04-reboot.fp
 install src/lib/fingerprints/rhel4-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/rhel4-reboot.fp
 install src/lib/fingerprints/rhel5-reboot.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprints/rhel5-reboot.fp
 
 # Fingerprint Library
 install -d ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library
+install src/lib/fingerprint_library/fedora11-reboot-dell.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/fedora11-reboot-dell.fp
+install src/lib/fingerprint_library/ubuntu9.04-reboot-vmware.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/ubuntu9.04-reboot-vmware.fp
 install src/lib/fingerprint_library/rhel4-reboot-dl380.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/rhel4-reboot-dl380.fp
 install src/lib/fingerprint_library/rhel4-reboot-vmware.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/rhel4-reboot-vmware.fp
 install src/lib/fingerprint_library/rhel5-reboot-dl380.fp ${RPM_BUILD_ROOT}/var/lib/petit/fingerprint_library/rhel5-reboot-dl380.fp
