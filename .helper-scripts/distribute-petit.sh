@@ -17,7 +17,7 @@ version=`cat petit/build/rpm/SPECS/petit.spec | grep Version | cut -f2 -d" "`
 cd petit
 make clean
 cd ..
-tar cvvfz petit-${version}.tgz petit/
+tar cvvfz petit-${version}.tgz petit/ --exclude .svn
 scp petit-${version}.tgz $remote_location
 ssh $remote_server "rm $remote_directory/petit-current.tgz"
 latest=`ssh $remote_server "ls -trh $remote_directory| grep tgz | tail -n1"`
@@ -43,6 +43,9 @@ scp ${home_location}/petit/${petit_pkg} $remote_location
 ssh $remote_server "rm $remote_directory/petit-current.deb"
 latest=`ssh $remote_server "ls -trh $remote_directory| grep deb | tail -n1"`
 ssh $remote_server "ln -s $latest $remote_directory/petit-current.deb"
+
+# Distrbute change log
+scp ${home_location}/petit/CHANGELOG $remote_location/CHANGELOG
 
 # Cleanup
 cd $home_location
