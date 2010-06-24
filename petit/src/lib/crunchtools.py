@@ -125,6 +125,64 @@ class SyslogEntry(LogEntry):
 	# Declare Static Methods
 	is_type = staticmethod(is_type)
 
+class RSyslogEntry(LogEntry):
+	"""Driver for RSyslog formatted files. Conforms to LogEntry interface class."""
+
+	def __init__(self, line):
+
+		# Split the line up
+		value = line.split()
+
+		# Should be normal log entry
+		if len(value) >= 5:
+
+			# Complete major splits
+			date, rtime = value[0].split("T")
+			time, offset = rtime.split("-")
+		
+			# Complete secondary splits
+			self.year, self.month, self.day = date.split("-")
+			self.hour, self.minute, self.second = time.split(":") 
+			self.host = value[1]
+			self.daemon = value[2]
+			self.log_entry = ' '.join(value[3:])
+
+			# Normalize integers to standard widths and convert to strings
+			self.year = str("%.4d" % (int(self.year)))
+			self.month = str("%.2d" % (int(self.month)))
+			self.day = str("%.2d" % (int(self.day)))
+			self.hour = str("%.2d" % (int(self.hour)))
+			self.minute = str("%.2d" % (int(self.minute)))
+			self.second = str("%.2d" % (int(self.second)))
+
+		# Abnormal log entry
+		elif len(value) >= 1:
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
+			self.log_entry = ' '.join(value)
+
+		# Blank line, will be sorted out by scrub
+		else:
+			self.year, self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
+			self.log_entry = "#"
+
+	def is_type(line):
+		"""Standard function from interface class to determine type"""
+
+		global logging
+
+		if len(line) >= 3:
+
+			# Look for something similar to: "29 11:53:08" in third column
+			if re.search("[0-9]{4}-[0-9]{2}-[0-9]{2}T",line[0]):
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	# Declare Static Methods
+	is_type = staticmethod(is_type)
+
 class ApacheAccessEntry(LogEntry):
 	"""Driver for Apache Access formatted log files. Conforms to LogEntry interface class."""
 
@@ -595,7 +653,7 @@ class Log(UserList):
 		# Setup variables
 		max_sample_lines = 10
 		sample_lines = []
-		tally = {'SecureLogEntry': 0, 'SyslogEntry': 0, 'ApacheAccessEntry': 0, 'ApacheErrorEntry': 0, 'SnortEntry': 0, 'RawEntry': 0}
+		tally = {'SecureLogEntry': 0, 'SyslogEntry': 0, 'RSyslogEntry': 0, 'ApacheAccessEntry': 0, 'ApacheErrorEntry': 0, 'SnortEntry': 0, 'RawEntry': 0}
 		tally_threshold = max_sample_lines/4
 
 		# Check to make sure buffer has data
@@ -615,6 +673,8 @@ class Log(UserList):
 						tally['SecureLogEntry'] += 1
 					elif SyslogEntry.is_type(line):
 						tally['SyslogEntry'] += 1
+					elif RSyslogEntry.is_type(line):
+						tally['RSyslogEntry'] += 1
 					elif ApacheAccessEntry.is_type(line):
 						tally['ApacheAccessEntry'] += 1
 					elif ApacheErrorEntry.is_type(line):
@@ -631,6 +691,9 @@ class Log(UserList):
 				elif tally['SyslogEntry'] > tally_threshold:
 					logging.info("Determined Syslog Log: "+str(tally['SyslogEntry']))
 					return SyslogEntry
+				elif tally['RSyslogEntry'] > tally_threshold:
+					logging.info("Determined RSyslog Log: "+str(tally['RSyslogEntry']))
+					return RSyslogEntry
 				elif tally['ApacheAccessEntry'] > tally_threshold:
 					logging.info("Determined Apache Access Log: "+str(tally['ApacheAccessEntry']))
 					return ApacheAccessEntry
@@ -1115,6 +1178,8 @@ class SuperHash(UserDict):
 
 		# Select the correct build method
 		if log.contains(SyslogEntry):
+			LogHash = SyslogHash
+		elif log.contains(RSyslogEntry):
 			LogHash = SyslogHash
 		elif log.contains(ApacheAccessEntry):
 			LogHash = ApacheLogHash
