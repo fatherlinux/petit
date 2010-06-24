@@ -26,3 +26,4 @@ test6 - Fingerprint data for RHEL4 and Fedora 11
 test7 - Small snort file for testing
 test8 - Small secure log test file
 test9 - Medium sized Apache Error log file
+test10 - RSyslog test file with precision time turned on

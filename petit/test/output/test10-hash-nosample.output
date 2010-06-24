@@ -1,0 +1,472 @@
+32:	dhclient: DHCPREQUEST of #.#.#.# on eth# to #.#.#.# port #
+31:	dhclient: DHCPACK of #.#.#.# from #.#.#.#
+31:	dhclient: bound to #.#.#.# -- renewal in # seconds.
+15:	kernel: [ #.#] ACPI: LAPIC (acpi_id[#x#] lapic_id[#x#] disabled)
+7:	kernel: [ #.#] # disabled
+6:	NetworkManager: <info> (eth#): device state change: # -> # (reason #)
+5:	kernel: [ #.#] NET: Registered protocol family #
+5:	kernel: [ #.#] modified: # - # (reserved)
+5:	kernel: [ #.#] pci #:#:#.#: reg # io port: [#x#-#x#]
+4:	NetworkManager: <info> nameserver '#.#.#.#'
+4:	kernel: [ #.#] ACPI: INT_SRC_OVR (bus # bus_irq # global_irq # high level)
+4:	kernel: [ #.#] ACPI: IRQ# used by override.
+4:	kernel: [ #.#] BIOS-#: # - # (reserved)
+4:	kernel: [ #.#] PM: Registered nosave memory: # - #
+3:	kernel: [ #.#] #: #x# -> #x#
+3:	kernel: [ #.#] modified: # - # (usable)
+2:	NetworkManager: <info> Activation (eth#) Stage # of # (IP# Configure Get) complete.
+2:	NetworkManager: <info> Activation (eth#) Stage # of # (IP# Configure Get) scheduled...
+2:	NetworkManager: <info> Activation (eth#) Stage # of # (IP# Configure Get) started...
+2:	NetworkManager: <info> address #.#.#.#
+2:	NetworkManager: <info> domain name 'eyemg.com'
+2:	NetworkManager: <info> domain name 'eyemg.net'
+2:	NetworkManager: <info> gateway #.#.#.#
+2:	NetworkManager: <info> prefix # (#.#.#.#)
+2:	acpid: # client rule loaded
+2:	acpid: client connected from #[#:#]
+2:	kernel: [ #.#] # - # page #k
+2:	kernel: [ #.#] ACPI: Local APIC address #x#
+2:	kernel: [ #.#] BIOS-#: # - # (usable)
+2:	kernel: [ #.#] at#: PATA max MWDMA# cmd #x# ctl #x# bmdma #x# irq #
+2:	kernel: [ #.#] scsi# : ata_piix
+2:	kernel: [ #.#] udev: starting version #
+2:	kernel: imklog #.#.#, log source = /proc/kmsg started.
+2:	rsyslogd-#: Could no open output file '/dev/xconsole' [try http://www.rsyslog.com/e/# ]
+2:	rsyslogd: [origin software="rsyslogd" swVersion="#.#.#" x-pid="#" x-info="http://www.rsyslog.com"] (re)start
+2:	rsyslogd: rsyslogd's groupid changed to #
+2:	rsyslogd: rsyslogd's userid changed to #
+1:	#-#-#T#:#:#.#-#:# bryan dhclient:
+1:	#-#-#T#:#:#.#-#:# bryan rtkit-daemon[#]: Running.
+1:	CRON[#]: (root) CMD ( cd / && run-parts --report /etc/cron.hourly)
+1:	NetworkManager: <WARN> default_adapter_cb(): bluez error getting default adapter: The name org.bluez was not provided by any .service files
+1:	NetworkManager: <info> (eth#): bringing up device.
+1:	NetworkManager: <info> (eth#): carrier is OFF
+1:	NetworkManager: <info> (eth#): carrier now ON (device state #)
+1:	NetworkManager: <info> (eth#): deactivating device (reason: #).
+1:	NetworkManager: <info> (eth#): exported as /org/freedesktop/NetworkManager/Devices/#
+1:	NetworkManager: <info> (eth#): new Ethernet device (driver: 'virtio_net')
+1:	NetworkManager: <info> (eth#): now managed
+1:	NetworkManager: <info> (eth#): preparing device.
+1:	NetworkManager: <info> Activation (eth#) Beginning DHCP transaction (timeout in # seconds)
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (Device Configure) complete.
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (Device Configure) scheduled...
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (Device Configure) starting...
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (Device Configure) successful.
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (Device Prepare) complete.
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (Device Prepare) scheduled...
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (Device Prepare) started...
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (IP Configure Commit) complete.
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (IP Configure Commit) scheduled...
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (IP Configure Commit) started...
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (IP Configure Start) complete.
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (IP Configure Start) scheduled.
+1:	NetworkManager: <info> Activation (eth#) Stage # of # (IP Configure Start) started...
+1:	NetworkManager: <info> Activation (eth#) starting connection 'Auto eth#'
+1:	NetworkManager: <info> Activation (eth#) successful, device activated.
+1:	NetworkManager: <info> DHCP: device eth# state changed (null) -> preinit
+1:	NetworkManager: <info> DHCP: device eth# state changed bound -> renew
+1:	NetworkManager: <info> DHCP: device eth# state changed preinit -> bound
+1:	NetworkManager: <info> Policy set 'Auto eth#' (eth#) as default for routing and DNS.
+1:	NetworkManager: <info> Trying to start the modem-manager...
+1:	NetworkManager: <info> Trying to start the supplicant...
+1:	NetworkManager: <info> WWAN enabled by radio killswitch; enabled by state file
+1:	NetworkManager: <info> WiFi enabled by radio killswitch; enabled by state file
+1:	NetworkManager: <info> dhclient started with pid #
+1:	NetworkManager: <info> modem-manager is now available
+1:	NetworkManager: <info> starting...
+1:	NetworkManager: Added default wired connection 'Auto eth#' for /sys/devices/virtio-pci/virtio#/net/eth#
+1:	NetworkManager: Ifupdown: get unmanaged devices count: #
+1:	NetworkManager: Loaded plugin ifupdown: (C) # Canonical Ltd. To report bugs please use the NetworkManager mailing list.
+1:	NetworkManager: Loaded plugin keyfile: (c) # - # Red Hat, Inc. To report bugs please use the NetworkManager mailing list.
+1:	NetworkManager: SCPlugin-Ifupdown: (#) ... get_connections (managed=false): return empty list.
+1:	NetworkManager: SCPlugin-Ifupdown: (#) ... get_connections.
+1:	NetworkManager: SCPlugin-Ifupdown: device added (path: /sys/devices/virtio-pci/virtio#/net/eth#, iface: eth#): no ifupdown configuration found.
+1:	NetworkManager: SCPlugin-Ifupdown: device added (path: /sys/devices/virtual/net/lo, iface: lo): no ifupdown configuration found.
+1:	NetworkManager: SCPlugin-Ifupdown: devices added (path: /sys/devices/virtio-pci/virtio#/net/eth#, iface: eth#)
+1:	NetworkManager: SCPlugin-Ifupdown: devices added (path: /sys/devices/virtual/net/lo, iface: lo)
+1:	NetworkManager: SCPlugin-Ifupdown: end _init.
+1:	NetworkManager: SCPlugin-Ifupdown: init!
+1:	NetworkManager: SCPlugin-Ifupdown: update_system_hostname
+1:	NetworkManager: SCPluginIfupdown: management mode: unmanaged
+1:	acpid: # rules loaded
+1:	acpid: starting up with proc fs
+1:	acpid: waiting for events: event logging is off
+1:	anacron[#]: Anacron #.# started on #-#-#
+1:	anacron[#]: Job `cron.monthly' started
+1:	anacron[#]: Job `cron.monthly' terminated
+1:	anacron[#]: Job `cron.weekly' started
+1:	anacron[#]: Job `cron.weekly' terminated
+1:	anacron[#]: Jobs will be executed sequentially
+1:	anacron[#]: Normal exit (# jobs run)
+1:	anacron[#]: Updated timestamp for job `cron.monthly' to #-#-#
+1:	anacron[#]: Updated timestamp for job `cron.weekly' to #-#-#
+1:	anacron[#]: Will run job `cron.monthly' in # min.
+1:	anacron[#]: Will run job `cron.weekly' in # min.
+1:	avahi-daemon[#]: Found user 'avahi' (UID #) and group 'avahi' (GID #).
+1:	avahi-daemon[#]: Joining mDNS multicast group on interface eth#.IPv# with address #.#.#.#.
+1:	avahi-daemon[#]: Network interface enumeration completed.
+1:	avahi-daemon[#]: New relevant interface eth#.IPv# for mDNS.
+1:	avahi-daemon[#]: No service file found in /etc/avahi/services.
+1:	avahi-daemon[#]: Registering HINFO record with values 'I#'/'LINUX'.
+1:	avahi-daemon[#]: Registering new address record for #.#.#.# on eth#.IPv#.
+1:	avahi-daemon[#]: Registering new address record for #::#:ff:#:# on eth#.*.
+1:	avahi-daemon[#]: Server startup complete. Host name is bryan.local. Local service cookie is #.
+1:	avahi-daemon[#]: Successfully called chroot().
+1:	avahi-daemon[#]: Successfully dropped remaining capabilities.
+1:	avahi-daemon[#]: Successfully dropped root privileges.
+1:	avahi-daemon[#]: avahi-daemon #.#.# starting up.
+1:	cron[#]: (CRON) INFO (Running @reboot jobs)
+1:	cron[#]: (CRON) INFO (pidfile fd = #)
+1:	cron[#]: (CRON) STARTUP (fork ok)
+1:	dhclient: All rights reserved.
+1:	dhclient: Copyright #-# Internet Systems Consortium.
+1:	dhclient: DHCPDISCOVER on eth# to #.#.#.# port # interval #
+1:	dhclient: DHCPOFFER of #.#.#.# from #.#.#.#
+1:	dhclient: For info, please visit https://www.isc.org/software/dhcp/
+1:	dhclient: Internet Systems Consortium DHCP Client V#.#.#
+1:	dhclient: Listening on LPF/eth#/#
+1:	dhclient: Sending on LPF/eth#/#
+1:	dhclient: Sending on Socket/fallback
+1:	gdm-binary[#]: WARNING: Unable to find users: no seat-id found
+1:	gdm-binary[#]: WARNING: Unable to load file '/etc/gdm/custom.conf': No such file or directory
+1:	gdm-session-worker[#]: WARNING: Unable to load file '/etc/gdm/custom.conf': No such file or directory
+1:	gdm-simple-greeter[#]: Gtk-WARNING: /build/buildd/gtk+#.#-#.#.#/gtk/gtkwidget.c:#: widget not within a GtkWindow
+1:	gdm-simple-slave[#]: WARNING: Unable to load file '/etc/gdm/custom.conf': No such file or directory
+1:	init: apport post-stop process (#) terminated with status #
+1:	init: apport pre-start process (#) terminated with status #
+1:	kernel: Kernel logging (proc) stopped.
+1:	kernel: [ #.#] # - # page #M
+1:	kernel: [ #.#] # Processors exceeds NR_CPUS limit of #
+1:	kernel: [ #.#] # [# - #] BIOS data page ==> [# - #]
+1:	kernel: [ #.#] # [# - #] BIOS reserved ==> [# - #]
+1:	kernel: [ #.#] # [# - #] BOOTMAP ==> [# - #]
+1:	kernel: [ #.#] # [# - #] BRK ==> [# - #]
+1:	kernel: [ #.#] # [# - #] EX TRAMPOLINE ==> [# - #]
+1:	kernel: [ #.#] # [# - #] PGTABLE ==> [# - #]
+1:	kernel: [ #.#] # [# - #] RAMDISK ==> [# - #]
+1:	kernel: [ #.#] # [# - #] TEXT DATA BSS ==> [# - #]
+1:	kernel: [ #.#] # [# - #] TRAMPOLINE ==> [# - #]
+1:	kernel: [ #.#] # base #C# mask FFFFFFFFE# uncachable
+1:	kernel: [ #.#] # update range: # - # (usable) ==> (reserved)
+1:	kernel: [ #.#] #-#FFFF write-back
+1:	kernel: [ #.#] #: VGA# VGA frame buffer device
+1:	kernel: [ #.#] #:#: ttyS# at I/O #x# (irq = #) is a #A
+1:	kernel: [ #.#] #MB HIGHMEM available.
+1:	kernel: [ #.#] #MB LOWMEM available.
+1:	kernel: [ #.#] (# early reservations) ==> bootmem [# - #]
+1:	kernel: [ #.#] , L# D cache: #K
+1:	kernel: [ #.#] ... bit width: #
+1:	kernel: [ #.#] ... event mask: #
+1:	kernel: [ #.#] ... fixed-purpose events: #
+1:	kernel: [ #.#] ... generic registers: #
+1:	kernel: [ #.#] ... max period: #
+1:	kernel: [ #.#] ... value mask: #
+1:	kernel: [ #.#] ... version: #
+1:	kernel: [ #.#] ..TIMER: vector=#x# api#=# pin#=# api#=-# pin#=-#
+1:	kernel: [ #.#] .data : #x# - #x# (# kB)
+1:	kernel: [ #.#] .init : #x# - #x# ( # kB)
+1:	kernel: [ #.#] .text : #x# - #x# (# kB)
+1:	kernel: [ #.#] A#-FFFFF uncachable
+1:	kernel: [ #.#] ACPI: (supports S# S# S# S#)
+1:	kernel: [ #.#] ACPI: ACPI bus type pnp unregistered
+1:	kernel: [ #.#] ACPI: APIC #E# (v# QEMU QEMUAPIC # QEMU #)
+1:	kernel: [ #.#] ACPI: Core revision #
+1:	kernel: [ #.#] ACPI: DSDT # (v# BXPC BXDSDT # INTL #)
+1:	kernel: [ #.#] ACPI: EC: Look up EC in DSDT
+1:	kernel: [ #.#] ACPI: FACP # (v# QEMU QEMUFACP # QEMU #)
+1:	kernel: [ #.#] ACPI: FACS #
+1:	kernel: [ #.#] ACPI: IOAPIC (id[#x#] address[#x#] gsi_base[#])
+1:	kernel: [ #.#] ACPI: Interpreter enabled
+1:	kernel: [ #.#] ACPI: LAPIC (acpi_id[#x#] lapic_id[#x#] enabled)
+1:	kernel: [ #.#] ACPI: No dock devices found.
+1:	kernel: [ #.#] ACPI: PCI Interrupt Link [LNKA] (IRQs # *#)
+1:	kernel: [ #.#] ACPI: PCI Interrupt Link [LNKA] enabled at IRQ #
+1:	kernel: [ #.#] ACPI: PCI Interrupt Link [LNKB] (IRQs # *#)
+1:	kernel: [ #.#] ACPI: PCI Interrupt Link [LNKC] (IRQs # *#)
+1:	kernel: [ #.#] ACPI: PCI Interrupt Link [LNKC] enabled at IRQ #
+1:	kernel: [ #.#] ACPI: PCI Interrupt Link [LNKD] (IRQs # *#)
+1:	kernel: [ #.#] ACPI: PCI Interrupt Link [LNKD] enabled at IRQ #
+1:	kernel: [ #.#] ACPI: PCI Interrupt Routing Table [\_SB_.PCI#._PRT]
+1:	kernel: [ #.#] ACPI: PCI Root Bridge [PCI#] (#:#)
+1:	kernel: [ #.#] ACPI: PM-Timer IO Port: #x#
+1:	kernel: [ #.#] ACPI: Power Button [PWRF]
+1:	kernel: [ #.#] ACPI: RSDP # (v# QEMU )
+1:	kernel: [ #.#] ACPI: RSDT #C (v# QEMU QEMURSDT # QEMU #)
+1:	kernel: [ #.#] ACPI: Using IOAPIC for interrupt routing
+1:	kernel: [ #.#] ACPI: WMI: Mapper loaded
+1:	kernel: [ #.#] ACPI: bus type pci registered
+1:	kernel: [ #.#] ACPI: bus type pnp registered
+1:	kernel: [ #.#] AMD AuthenticAMD
+1:	kernel: [ #.#] Adding #k swap on /dev/v#. Priority:-# extents:# across:#k
+1:	kernel: [ #.#] Allocating PCI resources starting at # (gap: #:#)
+1:	kernel: [ #.#] AppArmor: AppArmor Filesystem Enabled
+1:	kernel: [ #.#] AppArmor: AppArmor initialized
+1:	kernel: [ #.#] BIOS EDD facility v#.#-Jun-#, # devices found
+1:	kernel: [ #.#] BIOS-#: # - # (ACPI data)
+1:	kernel: [ #.#] BIOS-provided physical RAM map:
+1:	kernel: [ #.#] Block layer SCSI generic (bsg) driver version #.# loaded (major #)
+1:	kernel: [ #.#] Booting paravirtualized kernel on KVM
+1:	kernel: [ #.#] Brought up # CPUs
+1:	kernel: [ #.#] Built # zonelists in Zone order, mobility grouping on. Total pages: #
+1:	kernel: [ #.#] CPU# attaching NULL sched-domain.
+1:	kernel: [ #.#] CPU#: Intel QEMU Virtual CPU version #.#.# stepping #
+1:	kernel: [ #.#] Calibrating delay loop (skipped) preset value.. #.# BogoMIPS (lpj=#)
+1:	kernel: [ #.#] Centaur CentaurHauls
+1:	kernel: [ #.#] Checking if this processor honours the WP bit even in supervisor mode...Ok.
+1:	kernel: [ #.#] Console: colour VGA+ #x#
+1:	kernel: [ #.#] Console: switching to colour frame buffer device #x#
+1:	kernel: [ #.#] Cyrix CyrixInstead
+1:	kernel: [ #.#] DMA #x# -> #x#
+1:	kernel: [ #.#] DMA zone: # pages reserved
+1:	kernel: [ #.#] DMA zone: # pages used for memmap
+1:	kernel: [ #.#] DMA zone: # pages, LIFO batch:#
+1:	kernel: [ #.#] DMI #.# present.
+1:	kernel: [ #.#] Dentry cache hash table entries: # (order: #, # bytes)
+1:	kernel: [ #.#] Detected #.# MHz processor.
+1:	kernel: [ #.#] Dquot-cache hash table entries: # (order #, # bytes)
+1:	kernel: [ #.#] EDD information not available.
+1:	kernel: [ #.#] EISA bus registered
+1:	kernel: [ #.#] EISA: Detected # cards.
+1:	kernel: [ #.#] EISA: Probing bus # at eisa.#
+1:	kernel: [ #.#] EXT#-fs (v#): mounted filesystem with ordered data mode
+1:	kernel: [ #.#] Enabling APIC mode: Flat. Using # I/O APICs
+1:	kernel: [ #.#] Enabling fast FPU save and restore... done.
+1:	kernel: [ #.#] Enabling unmasked SIMD FPU exception support... done.
+1:	kernel: [ #.#] FDC # is a S#B
+1:	kernel: [ #.#] Fixed MDIO Bus: probed
+1:	kernel: [ #.#] Freeing initrd memory: #k freed
+1:	kernel: [ #.#] Freeing unused kernel memory: #k freed
+1:	kernel: [ #.#] Hierarchical RCU implementation.
+1:	kernel: [ #.#] HighMem #x# -> #x#
+1:	kernel: [ #.#] HugeTLB registered # MB page size, pre-allocated # pages
+1:	kernel: [ #.#] IOAPIC[#]: apic_id #, version #, address #x#, GSI #-#
+1:	kernel: [ #.#] IP route cache hash table entries: # (order: #, # bytes)
+1:	kernel: [ #.#] Initializing CPU#
+1:	kernel: [ #.#] Initializing HighMem for node # (#:#)
+1:	kernel: [ #.#] Initializing cgroup subsys cpu
+1:	kernel: [ #.#] Initializing cgroup subsys cpuacct
+1:	kernel: [ #.#] Initializing cgroup subsys cpuset
+1:	kernel: [ #.#] Initializing cgroup subsys devices
+1:	kernel: [ #.#] Initializing cgroup subsys freezer
+1:	kernel: [ #.#] Initializing cgroup subsys memory
+1:	kernel: [ #.#] Initializing cgroup subsys net_cls
+1:	kernel: [ #.#] Initializing cgroup subsys ns
+1:	kernel: [ #.#] Inode-cache hash table entries: # (order: #, # bytes)
+1:	kernel: [ #.#] Intel GenuineIntel
+1:	kernel: [ #.#] JBD: barrier-based sync failed on v#-# - disabling barriers
+1:	kernel: [ #.#] KERNEL supported cpus:
+1:	kernel: [ #.#] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-#.#.#-#-generic root=UUID=#-#-#-#-# ro quiet splash
+1:	kernel: [ #.#] Linux version #.#.#-#-generic (buildd@rothera) (gcc version #.#.# (Ubuntu #.#.#-#ubuntu#) ) #-Ubuntu SMP Fri Apr #:#:# UTC # (Ubuntu #.#.#-#.#-generic #.#.#.#+drm#.#)
+1:	kernel: [ #.#] MTRR default type: write-back
+1:	kernel: [ #.#] MTRR fixed ranges enabled:
+1:	kernel: [ #.#] MTRR variable ranges enabled:
+1:	kernel: [ #.#] Magic number: #:#:#
+1:	kernel: [ #.#] Memory: #k/#k available (#k kernel code, #k reserved, #k data, #k init, #k highmem)
+1:	kernel: [ #.#] Mount-cache hash table entries: #
+1:	kernel: [ #.#] Movable zone start PFN for each node
+1:	kernel: [ #.#] NR_CPUS:# nr_cpumask_bits:# nr_cpu_ids:# nr_node_ids:#
+1:	kernel: [ #.#] NR_IRQS:# nr_irqs:#
+1:	kernel: [ #.#] NSC Geode by NSC
+1:	kernel: [ #.#] NetLabel: Initializing
+1:	kernel: [ #.#] NetLabel: domain hash size = #
+1:	kernel: [ #.#] NetLabel: protocols = UNLABELED CIPSOv#
+1:	kernel: [ #.#] NetLabel: unlabeled traffic allowed by default
+1:	kernel: [ #.#] Normal #x# -> #x#
+1:	kernel: [ #.#] Normal zone: # pages used for memmap
+1:	kernel: [ #.#] Normal zone: # pages, LIFO batch:#
+1:	kernel: [ #.#] On node # totalpages: #
+1:	kernel: [ #.#] PAT not supported by CPU.
+1:	kernel: [ #.#] PCI: PCI BIOS revision #.# entry at #x#, last bus=#
+1:	kernel: [ #.#] PCI: Using ACPI for IRQ routing
+1:	kernel: [ #.#] PCI: Using configuration type # for base access
+1:	kernel: [ #.#] PERCPU: Embedded # pages/cpu @# s# r# u#
+1:	kernel: [ #.#] PID hash table entries: # (order: #, # bytes)
+1:	kernel: [ #.#] PM: Resume from disk failed.
+1:	kernel: [ #.#] PNP: PS/# Controller [PNP#:KBD,PNP#:MOU] at #x#,#x# irq #,#
+1:	kernel: [ #.#] PPP generic driver version #.#.#
+1:	kernel: [ #.#] Performance Events: p# PMU driver.
+1:	kernel: [ #.#] PnPBIOS: Disabled
+1:	kernel: [ #.#] RAMDISK: # - #
+1:	kernel: [ #.#] SCSI subsystem initialized
+1:	kernel: [ #.#] SLUB: Genslabs=#, HWalign=#, Order=#-#, MinObjects=#, CPUs=#, Nodes=#
+1:	kernel: [ #.#] SMP alternatives: switching to UP code
+1:	kernel: [ #.#] SMP: Allowing # CPUs, # hotplug CPUs
+1:	kernel: [ #.#] Scanning # areas for low memory corruption
+1:	kernel: [ #.#] Scanning for low memory corruption every # seconds
+1:	kernel: [ #.#] Security Framework initialized
+1:	kernel: [ #.#] Serial: #/# driver, # ports, IRQ sharing enabled
+1:	kernel: [ #.#] Switching to clocksource kvm-clock
+1:	kernel: [ #.#] TCP bind hash table entries: # (order: #, # bytes)
+1:	kernel: [ #.#] TCP cubic registered
+1:	kernel: [ #.#] TCP established hash table entries: # (order: #, # bytes)
+1:	kernel: [ #.#] TCP reno registered
+1:	kernel: [ #.#] TCP: Hash tables configured (established # bind #)
+1:	kernel: [ #.#] Time: #:#:# Date: #/#/#
+1:	kernel: [ #.#] Total of # processors activated (#.# BogoMIPS).
+1:	kernel: [ #.#] Transmeta GenuineTMx#
+1:	kernel: [ #.#] Transmeta TransmetaCPU
+1:	kernel: [ #.#] Trying to unpack rootfs image as initramfs...
+1:	kernel: [ #.#] UMC UMC UMC UMC
+1:	kernel: [ #.#] Uniform CD-ROM driver Revision: #.#
+1:	kernel: [ #.#] Using ACPI (MADT) for SMP configuration information
+1:	kernel: [ #.#] Using APIC driver default
+1:	kernel: [ #.#] Using IPI No-Shortcut mode
+1:	kernel: [ #.#] Using x# segment limits to approximate NX protection
+1:	kernel: [ #.#] VFS: Disk quotas dquot_#.#.#
+1:	kernel: [ #.#] Write protecting the kernel read-only data: #k
+1:	kernel: [ #.#] Write protecting the kernel text: #k
+1:	kernel: [ #.#] Zone PFN ranges:
+1:	kernel: [ #.#] alg: No test for stdrng (krng)
+1:	kernel: [ #.#] allocated # bytes of page_cgroup
+1:	kernel: [ #.#] at#.#: ATAPI: QEMU DVD-ROM, #.#.#, max UDMA/#
+1:	kernel: [ #.#] at#.#: NODEV after polling detection
+1:	kernel: [ #.#] at#.#: configured for MWDMA#
+1:	kernel: [ #.#] ata_piix #:#:#.#: version #.#
+1:	kernel: [ #.#] audit: initializing netlink socket (disabled)
+1:	kernel: [ #.#] bio: create slab <bio-#> at #
+1:	kernel: [ #.#] brd: module loaded
+1:	kernel: [ #.#] console [tty#] enabled
+1:	kernel: [ #.#] cpufreq-nfor#: No nFor# chipset.
+1:	kernel: [ #.#] cpuidle: using governor ladder
+1:	kernel: [ #.#] cpuidle: using governor menu
+1:	kernel: [ #.#] device-mapper: ioctl: #.#.#-ioctl (#-#-#) initialised: dm-devel@redhat.com
+1:	kernel: [ #.#] device-mapper: multipath round-robin: version #.#.# loaded
+1:	kernel: [ #.#] device-mapper: multipath: version #.#.# loaded
+1:	kernel: [ #.#] device-mapper: uevent: version #.#.#
+1:	kernel: [ #.#] devtmpfs: initialized
+1:	kernel: [ #.#] early_node_map[#] active PFN ranges
+1:	kernel: [ #.#] ehci_hcd: USB #.# 'Enhanced' Host Controller (EHCI) Driver
+1:	kernel: [ #.#] eth#: no IPv# routers present
+1:	kernel: [ #.#] fixmap : #x# - #x# ( # kB)
+1:	kernel: [ #.#] found SMP MP-table at [#] #
+1:	kernel: [ #.#] free_area_init_node: node #, pgdat #, node_mem_map #
+1:	kernel: [ #.#] ftrace: allocating # entries in # pages
+1:	kernel: [ #.#] ftrace: converting mcount calls to #
+1:	kernel: [ #.#] fuse init (API version #.#)
+1:	kernel: [ #.#] hub #-#:#.#: # ports detected
+1:	kernel: [ #.#] hub #-#:#.#: USB hub found
+1:	kernel: [ #.#] init_memory_mapping: #-#
+1:	kernel: [ #.#] initial memory mapped : # - #
+1:	kernel: [ #.#] input: AT Translated Set # keyboard as /devices/platform/i#/serio#/input/input#
+1:	kernel: [ #.#] input: ImExPS/# Generic Explorer Mouse as /devices/platform/i#/serio#/input/input#
+1:	kernel: [ #.#] input: Macintosh mouse button emulation as /devices/virtual/input/input#
+1:	kernel: [ #.#] input: Power Button as /devices/LNXSYSTM:#/LNXPWRBN:#/input/input#
+1:	kernel: [ #.#] io scheduler anticipatory registered
+1:	kernel: [ #.#] io scheduler cfq registered (default)
+1:	kernel: [ #.#] io scheduler deadline registered
+1:	kernel: [ #.#] io scheduler noop registered
+1:	kernel: [ #.#] isapnp: No Plug & Play device found
+1:	kernel: [ #.#] isapnp: Scanning for PnP cards...
+1:	kernel: [ #.#] kernel direct mapping tables up to # @ #-#
+1:	kernel: [ #.#] kvm-clock: cpu #, msr #:#, boot clock
+1:	kernel: [ #.#] kvm-clock: cpu #, msr #:#, primary cpu clock
+1:	kernel: [ #.#] last_pfn = #x# max_arch_pfn = #x#
+1:	kernel: [ #.#] libata version #.# loaded.
+1:	kernel: [ #.#] lo: Disabled Privacy Extensions
+1:	kernel: [ #.#] loop: module loaded
+1:	kernel: [ #.#] low ram: # - #
+1:	kernel: [ #.#] lowmem : #x# - #x# ( # MB)
+1:	kernel: [ #.#] lp: driver loaded but no devices found
+1:	kernel: [ #.#] mapped low ram: # - #
+1:	kernel: [ #.#] mce: CPU supports # MCE banks
+1:	kernel: [ #.#] mice: PS/# mouse device common for all mice
+1:	kernel: [ #.#] modified physical RAM map:
+1:	kernel: [ #.#] modified: # - # (ACPI data)
+1:	kernel: [ #.#] msgmni has been set to #
+1:	kernel: [ #.#] node # bootmap # - #
+1:	kernel: [ #.#] node # low ram: # - #
+1:	kernel: [ #.#] nr_irqs_gsi: #
+1:	kernel: [ #.#] ohci_hcd: USB #.# 'Open' Host Controller (OHCI) Driver
+1:	kernel: [ #.#] pci #:#:#.#: Activating ISA DMA hang workarounds
+1:	kernel: [ #.#] pci #:#:#.#: Boot video device
+1:	kernel: [ #.#] pci #:#:#.#: Limiting direct PCI/PCI transfers
+1:	kernel: [ #.#] pci #:#:#.#: quirk: region #-# claimed by PIIX# ACPI
+1:	kernel: [ #.#] pci #:#:#.#: quirk: region #-# claimed by PIIX# SMB
+1:	kernel: [ #.#] pci #:#:#.#: reg #it mmio pref: [#x#-#x#]
+1:	kernel: [ #.#] pci #:#:#.#: reg #it mmio: [#x#-#x#]
+1:	kernel: [ #.#] pci_bus #:#: on NUMA node #
+1:	kernel: [ #.#] pci_bus #:#: resource # io: [#x#-#xffff]
+1:	kernel: [ #.#] pci_bus #:#: resource # mem: [#x#-#x#]
+1:	kernel: [ #.#] pci_hotplug: PCI Hot Plug PCI Core version: #.#
+1:	kernel: [ #.#] pciehp: PCI Express Hot Plug Controller Driver version: #.#
+1:	kernel: [ #.#] pcpu-alloc: [#] #
+1:	kernel: [ #.#] pcpu-alloc: s# r# u# alloc=#*#
+1:	kernel: [ #.#] piix#_smbus #:#:#.#: SMBus Host Controller at #x#, revision #
+1:	kernel: [ #.#] pkmap : #x# - #x# (# kB)
+1:	kernel: [ #.#] please try 'cgroup_disable=memory' option if you don't want memory cgroups
+1:	kernel: [ #.#] pnp: PnP ACPI init
+1:	kernel: [ #.#] pnp: PnP ACPI: found # devices
+1:	kernel: [ #.#] ppdev: user-space parallel port driver
+1:	kernel: [ #.#] processor LNXCPU:#: registered as cooling_devi#
+1:	kernel: [ #.#] psmouse serio#: ID: #
+1:	kernel: [ #.#] registered taskstats version #
+1:	kernel: [ #.#] regulator: core version #.#
+1:	kernel: [ #.#] rt#: alarms up to one day, # bytes nvram
+1:	kernel: [ #.#] rtc_cmos #:#: rtc core: registered rtc_cmos as rt#
+1:	kernel: [ #.#] rtc_cmos #:#: setting system clock to #-#-#:#:# UTC (#)
+1:	kernel: [ #.#] scsi #:#:#:#: CD-ROM QEMU QEMU DVD-ROM #.#. PQ: # ANSI: #
+1:	kernel: [ #.#] serial#: ttyS# at I/O #x# (irq = #) is a #A
+1:	kernel: [ #.#] serio: i# AUX port at #x#,#x# irq #
+1:	kernel: [ #.#] serio: i# KBD port at #x#,#x# irq #
+1:	kernel: [ #.#] sr #:#:#:#: Attached scsi CD-ROM sr#
+1:	kernel: [ #.#] sr #:#:#:#: Attached scsi generic sg# type #
+1:	kernel: [ #.#] sr#: scsi#-mmc drive: #x/#x xa/form# tray
+1:	kernel: [ #.#] tun: (C) #-# Max Krasnyansky <maxk@qualcomm.com>
+1:	kernel: [ #.#] tun: Universal TUN/TAP device driver, #.#
+1:	kernel: [ #.#] type=# audit(#.#:#): initialized
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/sbin/dhclient#"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/bin/evince"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/bin/evince-previewer"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/bin/evince-thumbnailer"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/lib/NetworkManager/nm-dhcp-client.action"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/lib/connman/scripts/dhclient-script"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/lib/cups/backend/cups-pdf"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/sbin/cupsd"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/sbin/tcpdump"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_load" pid=# name="/usr/share/gdm/guest-session/Xsession"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_replace" pid=# name="/sbin/dhclient#"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_replace" pid=# name="/usr/lib/NetworkManager/nm-dhcp-client.action"
+1:	kernel: [ #.#] type=# audit(#.#:#): operation="profile_replace" pid=# name="/usr/lib/connman/scripts/dhclient-script"
+1:	kernel: [ #.#] uhci_hcd #:#:#.#: PCI INT D -> Link[LNKD] -> GSI # (level, high) -> IRQ #
+1:	kernel: [ #.#] uhci_hcd #:#:#.#: UHCI Host Controller
+1:	kernel: [ #.#] uhci_hcd #:#:#.#: irq #, io base #x#
+1:	kernel: [ #.#] uhci_hcd #:#:#.#: new USB bus registered, assigned bus number #
+1:	kernel: [ #.#] uhci_hcd: USB Universal Host Controller Interface driver
+1:	kernel: [ #.#] usb us#: configuration # chosen from # choice
+1:	kernel: [ #.#] usbcore: registered new device driver usb
+1:	kernel: [ #.#] usbcore: registered new interface driver hub
+1:	kernel: [ #.#] usbcore: registered new interface driver usbfs
+1:	kernel: [ #.#] v# >
+1:	kernel: [ #.#] vda: v# v# <
+1:	kernel: [ #.#] vg#: initializing
+1:	kernel: [ #.#] vg#: mapped to #x#
+1:	kernel: [ #.#] vgaarb: device added: PCI:#:#:#.#,decodes=io+mem,owns=io+mem,locks=none
+1:	kernel: [ #.#] vgaarb: loaded
+1:	kernel: [ #.#] virtio-pci #:#:#.#: PCI INT A -> Link[LNKA] -> GSI # (level, high) -> IRQ #
+1:	kernel: [ #.#] virtio-pci #:#:#.#: PCI INT A -> Link[LNKC] -> GSI # (level, high) -> IRQ #
+1:	kernel: [ #.#] virtio-pci #:#:#.#: PCI INT A -> Link[LNKD] -> GSI # (level, high) -> IRQ #
+1:	kernel: [ #.#] virtual kernel memory layout:
+1:	kernel: [ #.#] vmalloc : #x# - #x# ( # MB)
+1:	modem-manager: Loaded plugin AnyData
+1:	modem-manager: Loaded plugin Ericsson MBM
+1:	modem-manager: Loaded plugin Generic
+1:	modem-manager: Loaded plugin Gobi
+1:	modem-manager: Loaded plugin Huawei
+1:	modem-manager: Loaded plugin Longcheer
+1:	modem-manager: Loaded plugin MotoC
+1:	modem-manager: Loaded plugin Nokia
+1:	modem-manager: Loaded plugin Novatel
+1:	modem-manager: Loaded plugin Option
+1:	modem-manager: Loaded plugin Option High-Speed
+1:	modem-manager: Loaded plugin Sierra
+1:	modem-manager: Loaded plugin ZTE
+1:	ntpdate[#]: no server suitable for synchronization found
+1:	polkitd[#]: started daemon version #.# using authority implementation `local' version `#.#'
+1:	rsyslogd: [origin software="rsyslogd" swVersion="#.#.#" x-pid="#" x-info="http://www.rsyslog.com"] exiting on signal #.
+1:	rtkit-daemon[#]: Canary thread running.
+1:	rtkit-daemon[#]: Sucessfully called chroot.
+1:	rtkit-daemon[#]: Sucessfully dropped privileges.
+1:	rtkit-daemon[#]: Sucessfully limited resources.
+1:	rtkit-daemon[#]: Sucessfully made thread # of process # (n/a) owned by '#' high priority at nice level -#.
+1:	rtkit-daemon[#]: Supervising # threads of # processes of # users.
+1:	rtkit-daemon[#]: Watchdog thread running.
