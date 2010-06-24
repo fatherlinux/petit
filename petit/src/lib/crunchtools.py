@@ -137,8 +137,9 @@ class RSyslogEntry(LogEntry):
 		if len(value) >= 5:
 
 			# Complete major splits
-			date, rtime = value[0].split("T")
-			time, offset = rtime.split("-")
+			date, rtime = value[0].split("T") # Raw time
+			hptime, offset = rtime.split("-") # High precision time
+			time, mseconds = hptime.split(".") # Miliseconds
 		
 			# Complete secondary splits
 			self.year, self.month, self.day = date.split("-")
