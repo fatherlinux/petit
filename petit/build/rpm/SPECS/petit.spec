@@ -1,6 +1,6 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: 1.0.1
+Version: 1.0.2
 Release: 1
 License: GPLv3
 Group: Applications/System
@@ -79,6 +79,11 @@ rm -rf %{SOURCE0}
 %defattr(-,root,root,-)
 
 %changelog
+* Thu Jun 24 2010 Scott McCarty <smccarty@eyemg.com>
+- Added support rsyslogd precision time format
+- Added fingerprints for Ubuntu 10.04
+- Added NAME section to man page
+
 * Sat Feb 27 2010 Scott McCarty <smccarty@eyemg.com>
 - Added apache error log support
 - Added apache error log tests

@@ -3,8 +3,8 @@
 # Variables
 home_location="/srv/operations/tools"
 yum_location="/srv/yum/redhat/RHEL/5/eyemg/"
-remote_server="root@mobius"
-remote_directory="/usr/web/opensource.eyemg.com/docroot/files/petit/"
+remote_server="scott@lance.educatedconfusion.com"
+remote_directory="/var/www/html/crunchtools.com/wp-content/files/petit"
 remote_location="$remote_server:$remote_directory"
 deb_server="root@javier.eyemg.com"
 deb_location="${deb_server}:/root/software/petit"
