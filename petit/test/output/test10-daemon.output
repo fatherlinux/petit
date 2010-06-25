@@ -1,0 +1,13 @@
+385:	kernel:
+51:	NetworkManager:
+13:	modem-manager:
+10:	avahi-daemon[#]:
+7:	dhclient:
+7:	rsyslogd:
+4:	anacron[#]:
+3:	acpid:
+3:	cron[#]:
+2:	gdm-binary[#]:
+2:	init:
+2:	rsyslogd-#:
+1:	gdm-simple-slave[#]:

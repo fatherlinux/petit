@@ -1,0 +1,14 @@
+8:	crond(pam_unix)[#]: session closed for user root
+8:	crond(pam_unix)[#]: session opened for user root by (uid=#)
+7:	clurgmgrd: [#]: <info> Executing /etc/init.d/httpd status
+7:	clurgmgrd: [#]: <info> Executing /etc/init.d/mysqld status
+6:	sshd[#]: Accepted publickey for root from #.#.#.# port # ssh#
+6:	sshd[#]: pam_unix(sshd:session): session closed for user root
+6:	sshd[#]: pam_unix(sshd:session): session opened for user root by (uid=#)
+5:	sshd[#]: Accepted publickey for root from ::ffff:#.#.#.# port # ssh#
+4:	clurgmgrd: [#]: <info> Executing /etc/init.d/nfs status
+4:	sshd[#]: Postponed publickey for root from ::ffff:#.#.#.# port # ssh#
+2:	Postponed publickey for root from 10.0.8.142 port 36013 ssh2
+1:	RHEL4 Reboot
+1:	FINGERPRINT_END
+1:	rhel4-reboot.fp

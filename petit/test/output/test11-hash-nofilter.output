@@ -1,0 +1,14 @@
+10:	dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+10:	dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+8:	puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+1:	bound to 10.0.8.50 -- renewal in 119 seconds.
+1:	bound to 10.0.8.50 -- renewal in 121 seconds.
+1:	bound to 10.0.8.50 -- renewal in 130 seconds.
+1:	bound to 10.0.8.50 -- renewal in 137 seconds.
+1:	bound to 10.0.8.50 -- renewal in 141 seconds.
+1:	bound to 10.0.8.50 -- renewal in 143 seconds.
+1:	bound to 10.0.8.50 -- renewal in 145 seconds.
+1:	bound to 10.0.8.50 -- renewal in 147 seconds.
+1:	bound to 10.0.8.50 -- renewal in 148 seconds.
+1:	bound to 10.0.8.50 -- renewal in 149 seconds.
+1:	bound to 10.0.8.50 -- renewal in 150 seconds.

@@ -1,0 +1,75 @@
+6:	last message repeated 3 times
+5:	# #
+5:	clurgmgrd: [29649]: <info> Executing /etc/init.d/httpd status
+5:	last message repeated 2 times
+4:	clurgmgrd: [29649]: <info> Executing /etc/init.d/mysqld status
+4:	clurgmgrd: [29649]: <info> Executing /etc/init.d/nfs status
+4:	clurgmgrd: [31777]: <info> Executing /etc/init.d/mysqld status
+4:	last message repeated 4 times
+4:	last message repeated 8 times
+3:	MARK --
+3:	[31777]: <info> Executing /etc/init.d/httpd status
+3:	message repeated 10 times
+2:	message repeated 7 times
+2:	message repeated 9 times
+1:	session closed for user root
+1:	session closed for user root
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	message repeated 11 times
+1:	message repeated 6 times
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	session closed for user root
+1:	session opened for user root by (uid=0)
+1:	Accepted publickey for root from 10.0.8.158 port 38308 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	pam_unix(sshd:session): session closed for user root
+1:	Accepted publickey for root from 10.0.8.142 port 36013 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Postponed publickey for root from 10.0.8.142 port 36013 ssh2
+1:	Accepted publickey for root from 10.0.8.145 port 51110 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Postponed publickey for root from 10.0.8.145 port 51110 ssh2
+1:	Accepted publickey for root from 10.0.8.124 port 57409 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Accepted publickey for root from ::ffff:10.100.8.88 port 36135 ssh2
+1:	Postponed publickey for root from ::ffff:10.100.8.88 port 36135 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	Accepted publickey for root from ::ffff:10.0.8.113 port 40216 ssh2
+1:	Postponed publickey for root from ::ffff:10.0.8.113 port 40216 ssh2
+1:	Accepted publickey for root from ::ffff:10.0.8.163 port 52054 ssh2
+1:	Postponed publickey for root from ::ffff:10.0.8.163 port 52054 ssh2
+1:	Accepted publickey for root from 10.0.8.124 port 57672 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Accepted publickey for root from 10.0.8.159 port 56047 ssh2
+1:	pam_unix(sshd:session): session closed for user root
+1:	pam_unix(sshd:session): session opened for user root by (uid=0)
+1:	Accepted publickey for root from ::ffff:127.0.0.1 port 33293 ssh2
+1:	Accepted publickey for root from ::ffff:10.0.8.150 port 47641 ssh2
+1:	Postponed publickey for root from ::ffff:10.0.8.150 port 47641 ssh2
