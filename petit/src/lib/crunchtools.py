@@ -136,10 +136,19 @@ class RSyslogEntry(LogEntry):
 		# Should be normal log entry
 		if len(value) >= 5:
 
-			# Complete major splits
+			# Complete major splits: 2010-06-24T17:56:32.197716-04:00
 			date, rtime = value[0].split("T") # Raw time
-			hptime, offset = rtime.split("-") # High precision time
-			time, mseconds = hptime.split(".") # Miliseconds
+
+			# High precision time with timezone info: 17:56:32.197716-04:00
+			hptime, offset = rtime.split("-")
+
+			# Patch for mixed enviornments, milliseconds do not get logged
+			# if older Ubuntu 8.04 boxes log to a newer 10.04 server with
+			# Rsyslog precision time on.
+			if re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}", hptime):
+				time, mseconds = hptime.split(".") # Miliseconds
+			else:
+				time = hptime
 		
 			# Complete secondary splits
 			self.year, self.month, self.day = date.split("-")

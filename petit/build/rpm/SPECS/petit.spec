@@ -1,6 +1,6 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: 1.0.2
+Version: 1.0.3
 Release: 1
 License: GPLv3
 Group: Applications/System
@@ -79,6 +79,9 @@ rm -rf %{SOURCE0}
 %defattr(-,root,root,-)
 
 %changelog
+* Thu Jun 25 2010 Scott McCarty <smccarty@eyemg.com>
+- Patched to allow mixed precision when Ubuntu 8.04 logs to an Ubuntuo 10.04 server with high precision
+
 * Thu Jun 24 2010 Scott McCarty <smccarty@eyemg.com>
 - Added support rsyslogd precision time format
 - Added fingerprints for Ubuntu 10.04
