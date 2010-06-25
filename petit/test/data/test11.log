@@ -1,3 +1,11 @@
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
 2010-06-24T17:24:57.156790-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 148 seconds.
 2010-06-24T17:27:25.003284-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
 2010-06-24T17:27:25.199882-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
@@ -29,11 +37,3 @@
 2010-06-24T17:48:17.003043-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
 2010-06-24T17:48:17.075725-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
 2010-06-24T17:48:17.085171-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 130 seconds.
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
-2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
