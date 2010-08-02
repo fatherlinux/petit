@@ -3,12 +3,12 @@
 
 
 Logtool provides trimming and analysis of ascii based log files
-such as syslog.  Different options allow different types of analyis such as 
+such as syslog.  Different options allow different types of analyis such as
 line hashing, hash counting, and word usage counting. These options can be used
 to determine WHAT is normal and WHAT to look for, which programs such
 as logwatch or swatch cannot do.
 """
-################################################################################
+###############################################################################
 #
 # Writen By: Scott McCarty
 # Date: 8/2009
@@ -28,9 +28,10 @@ as logwatch or swatch cannot do.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+# Foundation, Inc.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
-################################################################################
+###############################################################################
 from optparse import OptionParser
 from UserDict import UserDict
 from UserString import UserString
@@ -42,6 +43,7 @@ import time
 import signal
 import re
 import sys
+import logging
 sys.path.append("/usr/share/petit")
 from crunchtools import Log
 from crunchtools import SuperHash
@@ -54,23 +56,152 @@ from crunchtools import HoursGraph
 from crunchtools import DaysGraph
 from crunchtools import MonthsGraph
 from crunchtools import YearsGraph
-import logging
 
 # Process Signals
+
+
+def sigint_handler(signal, frame):
+    sys.exit(0)
+
+
+## Exit when control-C is pressed
+signal.signal(signal.SIGINT, sigint_handler)
+
 ## Ignore problems when piping to head
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
-## Exit when control-C is pressed
-def signal_handler(signal, frame):
-        sys.exit(0)
-signal.signal(signal.SIGINT, signal_handler)
 
 def version():
     print "Version: 1.0.3"
     sys.exit(0)
 
+
+def parser_setup(parser):
+
+    # Handle flags
+    parser.add_option("-v", "--verbose",
+                    dest="verbose",
+                    action="count",
+                    help="Show verbose output")
+
+    parser.add_option("--sample", dest="sample",
+                    action="store_const",
+                    const="threshold",
+                    default="threshold",
+                    help="Show sample output for small numbered entries")
+
+    parser.add_option("--nosample",
+                    dest="sample",
+                    action="store_const",
+                    const="none",
+                    help="Do not sample output for low count entries")
+
+    parser.add_option("--allsample", dest="sample",
+                    action="store_const",
+                    const="all",
+                    help="Show samples instead of munged text for all entries")
+
+    parser.add_option("--filter",
+                    dest="filter",
+                    action="store_true",
+                    default=None, help="Use filter files during processing")
+
+    parser.add_option("--nofilter",
+                    dest="filter",
+                    action="store_false",
+                    help="Do not use filter files during processing")
+
+    parser.add_option("--wide",
+                    dest="wide",
+                    action="store_true",
+                    default=False,
+                    help="Use wider graph characters")
+
+    parser.add_option("--tick=",
+                    dest="tick",
+                    action="store",
+                    type="string",
+                    default="#",
+                    help="Change tick character from default")
+
+    parser.add_option("--fingerprint",
+                    dest="fingerprint",
+                    action="store_true",
+                    default=False,
+                    help="Use fingerprinting to remove certain patterns")
+
+    # Handle modes
+    parser.add_option("-V", "--version",
+                    dest="mode",
+                    action="store_const",
+                    const="version",
+                    help="Show verbose output")
+
+    parser.add_option("--hash",
+                    dest="mode",
+                    action="store_const",
+                    const="hash",
+                    help="Show hashes of log files with numbers removed")
+
+    parser.add_option("--wordcount",
+                    dest="mode",
+                    action="store_const",
+                    const="wordcount",
+                    help="Show word count for given word")
+
+    parser.add_option("--daemon",
+                    dest="mode",
+                    action="store_const",
+                    const="daemon",
+                    help="show a report of entries from each daemon")
+
+    parser.add_option("--host",
+                    dest="mode",
+                    action="store_const",
+                    const="host",
+                    help="show a report of entries from each host")
+
+    parser.add_option("--sgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="sgraph",
+                    help="show graph of first 60 seconds")
+
+    parser.add_option("--mgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="mgraph",
+                    help="show graph of first 60 minutes")
+
+    parser.add_option("--hgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="hgraph",
+                    help="show graph of first 24 hours")
+
+    parser.add_option("--dgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="dgraph",
+                    help="show graph of first 31 days")
+
+    parser.add_option("--mograph",
+                    dest="mode",
+                    action="store_const",
+                    const="mograph",
+                    help="show graph of first 12 months")
+
+    parser.add_option("--ygraph",
+                    dest="mode",
+                    action="store_const",
+                    const="ygraph",
+                    help="show graph of first 10 years")
+
+    return parser
+
+
 def get_options(argv):
-    """ Used to capturoe all of the command line args and perform initializations"""
+    """Captures command line args and perform initializations"""
 
     # Use global namespace for flags
     global options
@@ -79,30 +210,7 @@ def get_options(argv):
     # Declarations & Variables
     usage = "usage: %prog [options] [file]"
     parser = OptionParser(usage)
-
-    # Handle flags
-    parser.add_option("-v", "--verbose", dest="verbose", action="count", help="Show verbose output")
-    parser.add_option("--sample", dest="sample", action="store_const", const="threshold", default="threshold", help="Show sample output for small numbered entries")
-    parser.add_option("--nosample", dest="sample", action="store_const",  const="none", help="Do not show sample output for small numbered entries")
-    parser.add_option("--allsample", dest="sample", action="store_const", const="all", help="Show samples instead of munged text for all entries")
-    parser.add_option("--filter", dest="filter", action="store_true", default=None, help="Use filter files during processing")
-    parser.add_option("--nofilter", dest="filter", action="store_false", help="Do not use filter files during processing")
-    parser.add_option("--wide", dest="wide", action="store_true", default=False, help="Use wider graph characters")
-    parser.add_option("--tick=", dest="tick", action="store", type="string", default="#", help="Change tick character from default")
-    parser.add_option("--fingerprint", dest="fingerprint", action="store_true", default=False, help="Use fingerprinting to remove certain paterns from analysis")
-
-    # Handle mode
-    parser.add_option("-V", "--version", dest="mode", action="store_const", const="version", help="Show verbose output")
-    parser.add_option("--hash", dest="mode", action="store_const", const="hash", help="Show hashes of log files with numbers removed")
-    parser.add_option("--wordcount", dest="mode", action="store_const", const="wordcount", help="Show word count for given word")
-    parser.add_option("--daemon", dest="mode", action="store_const", const="daemon", help="show a report of entries from each daemon")
-    parser.add_option("--host", dest="mode", action="store_const", const="host", help="show a report of entries from each host")
-    parser.add_option("--sgraph", dest="mode", action="store_const", const="sgraph", help="show graph of first 60 seconds")
-    parser.add_option("--mgraph", dest="mode", action="store_const", const="mgraph", help="show graph of first 60 minutes")
-    parser.add_option("--hgraph", dest="mode", action="store_const", const="hgraph", help="show graph of first 24 hours")
-    parser.add_option("--dgraph", dest="mode", action="store_const", const="dgraph", help="show graph of first 31 days")
-    parser.add_option("--mograph", dest="mode", action="store_const", const="mograph", help="show graph of first 12 months")
-    parser.add_option("--ygraph", dest="mode", action="store_const", const="ygraph", help="show graph of first 10 years")
+    parser = parser_setup(parser)
 
     # parse options/args
     (options, args) = parser.parse_args()
@@ -122,7 +230,7 @@ def get_options(argv):
     elif options.verbose >= 2:
         log_level = logging.DEBUG
 
-    # Set up basic configuration, out to stderr with a reasonable default format.
+    # Set up basic configuration
     logging.basicConfig(level=log_level)
 
 
@@ -154,6 +262,7 @@ def get_options(argv):
         print "No action specified"
         sys.exit()
 
+
 def hash(args):
 
     # Use global namespace for flags
@@ -167,7 +276,7 @@ def hash(args):
         x = SuperHash.manufacture(log, "hash.stopwords")
     else:
         x = SuperHash.manufacture(log, "__none__")
-    
+
     if options.fingerprint:
         x.fingerprint()
 
@@ -180,6 +289,7 @@ def hash(args):
 
 
     sys.exit(0)
+
 
 def wordcount(args):
 
@@ -201,6 +311,7 @@ def wordcount(args):
     x.display()
     sys.exit(0)
 
+
 def daemon(args):
 
     # Setup default behavior
@@ -220,6 +331,7 @@ def daemon(args):
     # the most entries with an alphabetical subsort
     x.display()
     sys.exit(0)
+
 
 def host(args):
 
@@ -241,6 +353,7 @@ def host(args):
     x.display()
     sys.exit(0)
 
+
 def sgraph(args):
 
     # Get input
@@ -257,6 +370,7 @@ def sgraph(args):
     # the most entries with an alphabetical subsort
     x.display()
     sys.exit(0)
+
 
 def mgraph(args):
 
@@ -275,6 +389,7 @@ def mgraph(args):
     x.display()
     sys.exit(0)
 
+
 def hgraph(args):
 
     # Get input
@@ -291,6 +406,7 @@ def hgraph(args):
     # the most entries with an alphabetical subsort
     x.display()
     sys.exit(0)
+
 
 def dgraph(args):
 
@@ -309,6 +425,7 @@ def dgraph(args):
     x.display()
     sys.exit(0)
 
+
 def mograph(args):
 
     # Get input
@@ -326,6 +443,7 @@ def mograph(args):
     x.display()
     sys.exit(0)
 
+
 def ygraph(args):
 
     # Get input
@@ -342,6 +460,7 @@ def ygraph(args):
     # the most entries with an alphabetical subsort
     x.display()
     sys.exit(0)
+
 
 if __name__ == "__main__":
     get_options(sys.argv[1:])
