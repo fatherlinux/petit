@@ -28,9 +28,9 @@ as logwatch or swatch cannot do.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 #
-#################################################################################
+################################################################################
 from optparse import OptionParser
 from UserDict import UserDict
 from UserString import UserString
@@ -39,7 +39,6 @@ from random import choice
 from math import ceil
 import os
 import time
-import fileinput
 import signal
 import re
 import sys
@@ -67,283 +66,283 @@ def signal_handler(signal, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 def version():
-	print "Version: 1.0.3"
-	sys.exit(0)
+    print "Version: 1.0.3"
+    sys.exit(0)
 
 def get_options(argv):
-	""" Used to capturoe all of the command line args and perform initializations"""
+    """ Used to capturoe all of the command line args and perform initializations"""
 
-	# Use global namespace for flags
-	global options
-	global logging
+    # Use global namespace for flags
+    global options
+    global logging
 
-	# Declarations & Variables
-	usage = "usage: %prog [options] [file]"
-	parser = OptionParser(usage)
+    # Declarations & Variables
+    usage = "usage: %prog [options] [file]"
+    parser = OptionParser(usage)
 
-	# Handle flags
-	parser.add_option("-v", "--verbose", dest="verbose", action="count", help="Show verbose output")
-	parser.add_option("--sample", dest="sample", action="store_const", const="threshold", default="threshold", help="Show sample output for small numbered entries")
-	parser.add_option("--nosample", dest="sample", action="store_const",  const="none", help="Do not show sample output for small numbered entries")
-	parser.add_option("--allsample", dest="sample", action="store_const", const="all", help="Show samples instead of munged text for all entries")
-	parser.add_option("--filter", dest="filter", action="store_true", default=None, help="Use filter files during processing")
-	parser.add_option("--nofilter", dest="filter", action="store_false", help="Do not use filter files during processing")
-	parser.add_option("--wide", dest="wide", action="store_true", default=False, help="Use wider graph characters")
-	parser.add_option("--tick=", dest="tick", action="store", type="string", default="#", help="Change tick character from default")
-	parser.add_option("--fingerprint", dest="fingerprint", action="store_true", default=False, help="Use fingerprinting to remove certain paterns from analysis")
+    # Handle flags
+    parser.add_option("-v", "--verbose", dest="verbose", action="count", help="Show verbose output")
+    parser.add_option("--sample", dest="sample", action="store_const", const="threshold", default="threshold", help="Show sample output for small numbered entries")
+    parser.add_option("--nosample", dest="sample", action="store_const",  const="none", help="Do not show sample output for small numbered entries")
+    parser.add_option("--allsample", dest="sample", action="store_const", const="all", help="Show samples instead of munged text for all entries")
+    parser.add_option("--filter", dest="filter", action="store_true", default=None, help="Use filter files during processing")
+    parser.add_option("--nofilter", dest="filter", action="store_false", help="Do not use filter files during processing")
+    parser.add_option("--wide", dest="wide", action="store_true", default=False, help="Use wider graph characters")
+    parser.add_option("--tick=", dest="tick", action="store", type="string", default="#", help="Change tick character from default")
+    parser.add_option("--fingerprint", dest="fingerprint", action="store_true", default=False, help="Use fingerprinting to remove certain paterns from analysis")
 
-	# Handle mode
-	parser.add_option("-V", "--version", dest="mode", action="store_const", const="version", help="Show verbose output")
-	parser.add_option("--hash", dest="mode", action="store_const", const="hash", help="Show hashes of log files with numbers removed")
-	parser.add_option("--wordcount", dest="mode", action="store_const", const="wordcount", help="Show word count for given word")
-	parser.add_option("--daemon", dest="mode", action="store_const", const="daemon", help="show a report of entries from each daemon")
-	parser.add_option("--host", dest="mode", action="store_const", const="host", help="show a report of entries from each host")
-	parser.add_option("--sgraph", dest="mode", action="store_const", const="sgraph", help="show graph of first 60 seconds")
-	parser.add_option("--mgraph", dest="mode", action="store_const", const="mgraph", help="show graph of first 60 minutes")
-	parser.add_option("--hgraph", dest="mode", action="store_const", const="hgraph", help="show graph of first 24 hours")
-	parser.add_option("--dgraph", dest="mode", action="store_const", const="dgraph", help="show graph of first 31 days")
-	parser.add_option("--mograph", dest="mode", action="store_const", const="mograph", help="show graph of first 12 months")
-	parser.add_option("--ygraph", dest="mode", action="store_const", const="ygraph", help="show graph of first 10 years")
+    # Handle mode
+    parser.add_option("-V", "--version", dest="mode", action="store_const", const="version", help="Show verbose output")
+    parser.add_option("--hash", dest="mode", action="store_const", const="hash", help="Show hashes of log files with numbers removed")
+    parser.add_option("--wordcount", dest="mode", action="store_const", const="wordcount", help="Show word count for given word")
+    parser.add_option("--daemon", dest="mode", action="store_const", const="daemon", help="show a report of entries from each daemon")
+    parser.add_option("--host", dest="mode", action="store_const", const="host", help="show a report of entries from each host")
+    parser.add_option("--sgraph", dest="mode", action="store_const", const="sgraph", help="show graph of first 60 seconds")
+    parser.add_option("--mgraph", dest="mode", action="store_const", const="mgraph", help="show graph of first 60 minutes")
+    parser.add_option("--hgraph", dest="mode", action="store_const", const="hgraph", help="show graph of first 24 hours")
+    parser.add_option("--dgraph", dest="mode", action="store_const", const="dgraph", help="show graph of first 31 days")
+    parser.add_option("--mograph", dest="mode", action="store_const", const="mograph", help="show graph of first 12 months")
+    parser.add_option("--ygraph", dest="mode", action="store_const", const="ygraph", help="show graph of first 10 years")
 
-	# parse options/args
-	(options, args) = parser.parse_args()
+    # parse options/args
+    (options, args) = parser.parse_args()
 
-	# Pull off file name
-	if len(args) > 1:
-		parser.error("Specify only one file")
-	elif len(args) == 1:
-		filename = args[0]
-	else:
-		filename = "__none__"
+    # Pull off file name
+    if len(args) > 1:
+        parser.error("Specify only one file")
+    elif len(args) == 1:
+        filename = args[0]
+    else:
+        filename = "__none__"
 
-	# Set Verbosity
-	log_level = logging.WARNING
-	if options.verbose == 1:
-		log_level = logging.INFO
-	elif options.verbose >= 2:
-		log_level = logging.DEBUG
+    # Set Verbosity
+    log_level = logging.WARNING
+    if options.verbose == 1:
+        log_level = logging.INFO
+    elif options.verbose >= 2:
+        log_level = logging.DEBUG
 
-	# Set up basic configuration, out to stderr with a reasonable default format.
-	logging.basicConfig(level=log_level)
+    # Set up basic configuration, out to stderr with a reasonable default format.
+    logging.basicConfig(level=log_level)
 
 
-	# Determine mode
-	if options.mode == "version":
-		version()
-		sys.exit()
-	elif options.mode == "hash":
-		hash(filename)
-	elif options.mode == "wordcount":
-		wordcount(filename)
-	elif options.mode == "daemon":
-		daemon(filename)
-	elif options.mode == "host":
-		host(filename)
-	elif options.mode == "sgraph":
-		sgraph(filename)
-	elif options.mode == "mgraph":
-		mgraph(filename)
-	elif options.mode == "hgraph":
-		hgraph(filename)
-	elif options.mode == "dgraph":
-		dgraph(filename)
-	elif options.mode == "mograph":
-		mograph(filename)
-	elif options.mode == "ygraph":
-		ygraph(filename)
-	else:
-		print "No action specified"
-		sys.exit()
+    # Determine mode
+    if options.mode == "version":
+        version()
+        sys.exit()
+    elif options.mode == "hash":
+        hash(filename)
+    elif options.mode == "wordcount":
+        wordcount(filename)
+    elif options.mode == "daemon":
+        daemon(filename)
+    elif options.mode == "host":
+        host(filename)
+    elif options.mode == "sgraph":
+        sgraph(filename)
+    elif options.mode == "mgraph":
+        mgraph(filename)
+    elif options.mode == "hgraph":
+        hgraph(filename)
+    elif options.mode == "dgraph":
+        dgraph(filename)
+    elif options.mode == "mograph":
+        mograph(filename)
+    elif options.mode == "ygraph":
+        ygraph(filename)
+    else:
+        print "No action specified"
+        sys.exit()
 
 def hash(args):
 
-	# Use global namespace for flags
-	global options
+    # Use global namespace for flags
+    global options
 
-	# Get entire log file into ram for speed
-	log = Log(args)
+    # Get entire log file into ram for speed
+    log = Log(args)
 
-	# Build the Hash
-	if options.filter == None or options.filter == True:
-		x = SuperHash.manufacture(log, "hash.stopwords")
-	else:
-		x = SuperHash.manufacture(log, "__none__")
-	
-	if options.fingerprint:
-		x.fingerprint()
+    # Build the Hash
+    if options.filter == None or options.filter == True:
+        x = SuperHash.manufacture(log, "hash.stopwords")
+    else:
+        x = SuperHash.manufacture(log, "__none__")
+    
+    if options.fingerprint:
+        x.fingerprint()
 
-	# Set sampling type
-	x.sample = options.sample
+    # Set sampling type
+    x.sample = options.sample
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
 
 
-	sys.exit(0)
+    sys.exit(0)
 
 def wordcount(args):
 
-	# Setup default behavior
-	global options
-	if options.sample == None:
-		options.sample = False
-	if options.filter == None:
-		options.filter = True
+    # Setup default behavior
+    global options
+    if options.sample == None:
+        options.sample = False
+    if options.filter == None:
+        options.filter = True
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new word hash based on log file and filter created
-	x = WordHash(log, "words.stopwords")
+    # Create new word hash based on log file and filter created
+    x = WordHash(log, "words.stopwords")
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def daemon(args):
 
-	# Setup default behavior
-	global options
-	if options.sample == None:
-		options.sample = False
-	if options.filter == None:
-		options.filter = True
+    # Setup default behavior
+    global options
+    if options.sample == None:
+        options.sample = False
+    if options.filter == None:
+        options.filter = True
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = DaemonHash(log, "daemon.stopwords")
+    # Create new syslog hash based on log file and filter created
+    x = DaemonHash(log, "daemon.stopwords")
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def host(args):
 
-	# Setup default behavior
-	global options
-	if options.sample == None:
-		options.sample = False
-	if options.filter == None:
-		options.filter = True
+    # Setup default behavior
+    global options
+    if options.sample == None:
+        options.sample = False
+    if options.filter == None:
+        options.filter = True
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = HostHash(log, "host.stopwords")
+    # Create new syslog hash based on log file and filter created
+    x = HostHash(log, "host.stopwords")
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def sgraph(args):
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = SecondsGraph(log)
+    # Create new syslog hash based on log file and filter created
+    x = SecondsGraph(log)
 
-	# Set tick & width options
-	x.tick = options.tick
-	x.wide = options.wide
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def mgraph(args):
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = MinutesGraph(log)
+    # Create new syslog hash based on log file and filter created
+    x = MinutesGraph(log)
 
-	# Set tick & width options
-	x.tick = options.tick
-	x.wide = options.wide
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def hgraph(args):
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = HoursGraph(log)
+    # Create new syslog hash based on log file and filter created
+    x = HoursGraph(log)
 
-	# Set tick & width options
-	x.tick = options.tick
-	x.wide = options.wide
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def dgraph(args):
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = DaysGraph(log)
+    # Create new syslog hash based on log file and filter created
+    x = DaysGraph(log)
 
-	# Set tick & width options
-	x.tick = options.tick
-	x.wide = options.wide
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def mograph(args):
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = MonthsGraph(log)
+    # Create new syslog hash based on log file and filter created
+    x = MonthsGraph(log)
 
-	# Set tick & width options
-	x.tick = options.tick
-	x.wide = options.wide
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 def ygraph(args):
 
-	# Get input
-	log = Log(args)
+    # Get input
+    log = Log(args)
 
-	# Create new syslog hash based on log file and filter created
-	x = YearsGraph(log)
+    # Create new syslog hash based on log file and filter created
+    x = YearsGraph(log)
 
-	# Set tick & width options
-	x.tick = options.tick
-	x.wide = options.wide
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
 
-	# Print out the dictionary first sorted by the word with
-	# the most entries with an alphabetical subsort
-	x.display()
-	sys.exit(0)
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
 
 if __name__ == "__main__":
-	get_options(sys.argv[1:])
-	#print get_options.__doc__
+    get_options(sys.argv[1:])
+    #print get_options.__doc__
