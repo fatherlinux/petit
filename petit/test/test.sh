@@ -30,7 +30,7 @@ do
 		if ! diff output/${test}-${function}.output ${test}-${function}.tmp
 		then
 			echo " Failed"
-			rm ${test}-${function}.tmp
+			#rm ${test}-${function}.tmp
 			exit 1
 		else
 			rm ${test}-${function}.tmp
@@ -67,7 +67,7 @@ do
 		if ! diff output/${test}-${function}-${option}.output ${test}-${function}-${option}.tmp
 		then
 			echo " Failed"
-			rm ${test}-${function}-${option}.tmp
+			#rm ${test}-${function}-${option}.tmp
 			exit 1
 		else
 			rm ${test}-${function}-${option}.tmp
