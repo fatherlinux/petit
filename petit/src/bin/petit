@@ -71,11 +71,6 @@ signal.signal(signal.SIGINT, sigint_handler)
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
-def version():
-    print "Version: 1.0.3"
-    sys.exit(0)
-
-
 def parser_setup(parser):
 
     # Handle flags
@@ -134,67 +129,67 @@ def parser_setup(parser):
     parser.add_option("-V", "--version",
                     dest="mode",
                     action="store_const",
-                    const="version",
+                    const="mode_version",
                     help="Show verbose output")
 
     parser.add_option("--hash",
                     dest="mode",
                     action="store_const",
-                    const="hash",
+                    const="mode_hash",
                     help="Show hashes of log files with numbers removed")
 
     parser.add_option("--wordcount",
                     dest="mode",
                     action="store_const",
-                    const="wordcount",
+                    const="mode_wordcount",
                     help="Show word count for given word")
 
     parser.add_option("--daemon",
                     dest="mode",
                     action="store_const",
-                    const="daemon",
+                    const="mode_daemon",
                     help="show a report of entries from each daemon")
 
     parser.add_option("--host",
                     dest="mode",
                     action="store_const",
-                    const="host",
+                    const="mode_host",
                     help="show a report of entries from each host")
 
     parser.add_option("--sgraph",
                     dest="mode",
                     action="store_const",
-                    const="sgraph",
+                    const="mode_sgraph",
                     help="show graph of first 60 seconds")
 
     parser.add_option("--mgraph",
                     dest="mode",
                     action="store_const",
-                    const="mgraph",
+                    const="mode_mgraph",
                     help="show graph of first 60 minutes")
 
     parser.add_option("--hgraph",
                     dest="mode",
                     action="store_const",
-                    const="hgraph",
+                    const="mode_hgraph",
                     help="show graph of first 24 hours")
 
     parser.add_option("--dgraph",
                     dest="mode",
                     action="store_const",
-                    const="dgraph",
+                    const="mode_dgraph",
                     help="show graph of first 31 days")
 
     parser.add_option("--mograph",
                     dest="mode",
                     action="store_const",
-                    const="mograph",
+                    const="mode_mograph",
                     help="show graph of first 12 months")
 
     parser.add_option("--ygraph",
                     dest="mode",
                     action="store_const",
-                    const="ygraph",
+                    const="mode_ygraph",
                     help="show graph of first 10 years")
 
     return parser
@@ -206,6 +201,7 @@ def get_options(argv):
     # Use global namespace for flags
     global options
     global logging
+    global filename
 
     # Declarations & Variables
     usage = "usage: %prog [options] [file]"
@@ -235,41 +231,21 @@ def get_options(argv):
 
 
     # Determine mode
-    if options.mode == "version":
-        version()
-        sys.exit()
-    elif options.mode == "hash":
-        hash(filename)
-    elif options.mode == "wordcount":
-        wordcount(filename)
-    elif options.mode == "daemon":
-        daemon(filename)
-    elif options.mode == "host":
-        host(filename)
-    elif options.mode == "sgraph":
-        sgraph(filename)
-    elif options.mode == "mgraph":
-        mgraph(filename)
-    elif options.mode == "hgraph":
-        hgraph(filename)
-    elif options.mode == "dgraph":
-        dgraph(filename)
-    elif options.mode == "mograph":
-        mograph(filename)
-    elif options.mode == "ygraph":
-        ygraph(filename)
-    else:
-        print "No action specified"
-        sys.exit()
+    eval(options.mode+"()")
+
+def mode_version():
+    print "Version: 1.0.3"
+    sys.exit(0)
 
 
-def hash(args):
+def mode_hash():
 
     # Use global namespace for flags
     global options
+    global filename
 
     # Get entire log file into ram for speed
-    log = Log(args)
+    log = Log(filename)
 
     # Build the Hash
     if options.filter == None or options.filter == True:
@@ -291,17 +267,19 @@ def hash(args):
     sys.exit(0)
 
 
-def wordcount(args):
+def mode_wordcount():
+
+    global options
+    global filename
 
     # Setup default behavior
-    global options
     if options.sample == None:
         options.sample = False
     if options.filter == None:
         options.filter = True
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new word hash based on log file and filter created
     x = WordHash(log, "words.stopwords")
@@ -312,17 +290,19 @@ def wordcount(args):
     sys.exit(0)
 
 
-def daemon(args):
+def mode_daemon():
+
+    global options
+    global filename
 
     # Setup default behavior
-    global options
     if options.sample == None:
         options.sample = False
     if options.filter == None:
         options.filter = True
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = DaemonHash(log, "daemon.stopwords")
@@ -333,17 +313,19 @@ def daemon(args):
     sys.exit(0)
 
 
-def host(args):
+def mode_host():
+
+    global options
+    global filename
 
     # Setup default behavior
-    global options
     if options.sample == None:
         options.sample = False
     if options.filter == None:
         options.filter = True
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = HostHash(log, "host.stopwords")
@@ -354,10 +336,12 @@ def host(args):
     sys.exit(0)
 
 
-def sgraph(args):
+def mode_sgraph():
+
+    global filename
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = SecondsGraph(log)
@@ -372,10 +356,12 @@ def sgraph(args):
     sys.exit(0)
 
 
-def mgraph(args):
+def mode_mgraph():
+
+    global filename
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = MinutesGraph(log)
@@ -390,10 +376,12 @@ def mgraph(args):
     sys.exit(0)
 
 
-def hgraph(args):
+def mode_hgraph():
+
+    global filename
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = HoursGraph(log)
@@ -408,10 +396,12 @@ def hgraph(args):
     sys.exit(0)
 
 
-def dgraph(args):
+def mode_dgraph():
+
+    global filename
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = DaysGraph(log)
@@ -426,10 +416,12 @@ def dgraph(args):
     sys.exit(0)
 
 
-def mograph(args):
+def mode_mograph():
+
+    global filename
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = MonthsGraph(log)
@@ -444,10 +436,12 @@ def mograph(args):
     sys.exit(0)
 
 
-def ygraph(args):
+def mode_ygraph():
+
+    global filename
 
     # Get input
-    log = Log(args)
+    log = Log(filename)
 
     # Create new syslog hash based on log file and filter created
     x = YearsGraph(log)
