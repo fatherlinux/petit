@@ -33,15 +33,7 @@ as logwatch or swatch cannot do.
 #
 ###############################################################################
 from optparse import OptionParser
-from UserDict import UserDict
-from UserString import UserString
-from UserList import UserList
-from random import choice
-from math import ceil
-import os
-import time
 import signal
-import re
 import sys
 import logging
 sys.path.append("/usr/share/petit")
@@ -71,7 +63,13 @@ signal.signal(signal.SIGINT, sigint_handler)
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
-def parser_setup(parser):
+# Use global namespace for flags and filename
+options = object()
+filename = object()
+
+
+def add_options(parser):
+    """Adds all options in one concise function"""
 
     # Handle flags
     parser.add_option("-v", "--verbose",
@@ -195,18 +193,17 @@ def parser_setup(parser):
     return parser
 
 
-def get_options(argv):
+def get_options():
     """Captures command line args and perform initializations"""
 
     # Use global namespace for flags
     global options
-    global logging
     global filename
 
     # Declarations & Variables
     usage = "usage: %prog [options] [file]"
     parser = OptionParser(usage)
-    parser = parser_setup(parser)
+    parser = add_options(parser)
 
     # parse options/args
     (options, args) = parser.parse_args()
@@ -231,18 +228,17 @@ def get_options(argv):
 
 
     # Determine mode
-    eval(options.mode+"()")
+    eval(options.mode + "()")
+
 
 def mode_version():
+    """Version information"""
     print "Version: 1.0.3"
     sys.exit(0)
 
 
 def mode_hash():
-
-    # Use global namespace for flags
-    global options
-    global filename
+    """Runs in hashing mode"""
 
     # Get entire log file into ram for speed
     log = Log(filename)
@@ -268,9 +264,7 @@ def mode_hash():
 
 
 def mode_wordcount():
-
-    global options
-    global filename
+    """Runs wordcount mode"""
 
     # Setup default behavior
     if options.sample == None:
@@ -291,9 +285,7 @@ def mode_wordcount():
 
 
 def mode_daemon():
-
-    global options
-    global filename
+    """Runs daemon report mode"""
 
     # Setup default behavior
     if options.sample == None:
@@ -314,9 +306,7 @@ def mode_daemon():
 
 
 def mode_host():
-
-    global options
-    global filename
+    """Runs host report mode"""
 
     # Setup default behavior
     if options.sample == None:
@@ -337,8 +327,7 @@ def mode_host():
 
 
 def mode_sgraph():
-
-    global filename
+    """Runs seconds graph mode"""
 
     # Get input
     log = Log(filename)
@@ -357,8 +346,7 @@ def mode_sgraph():
 
 
 def mode_mgraph():
-
-    global filename
+    """Runs minutes graph mode"""
 
     # Get input
     log = Log(filename)
@@ -377,8 +365,7 @@ def mode_mgraph():
 
 
 def mode_hgraph():
-
-    global filename
+    """Runs hours graph mode"""
 
     # Get input
     log = Log(filename)
@@ -397,8 +384,7 @@ def mode_hgraph():
 
 
 def mode_dgraph():
-
-    global filename
+    """Runs days graph mode"""
 
     # Get input
     log = Log(filename)
@@ -417,8 +403,7 @@ def mode_dgraph():
 
 
 def mode_mograph():
-
-    global filename
+    """Runs months graph mode"""
 
     # Get input
     log = Log(filename)
@@ -437,8 +422,7 @@ def mode_mograph():
 
 
 def mode_ygraph():
-
-    global filename
+    """Runs years graph mode"""
 
     # Get input
     log = Log(filename)
@@ -457,5 +441,4 @@ def mode_ygraph():
 
 
 if __name__ == "__main__":
-    get_options(sys.argv[1:])
-    #print get_options.__doc__
+    get_options()
