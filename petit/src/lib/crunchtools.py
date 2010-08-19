@@ -3,7 +3,7 @@
 Library of utility code useful for systems administrators, analyzing and
 manipulating log data.
 """
-################################################################################
+###############################################################################
 #
 # Writen By: Scott McCarty
 # Date: 8/2009
@@ -24,13 +24,13 @@ manipulating log data.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
 #
-#################################################################################
+###############################################################################
 
 import warnings
 
-## Ignore deprication warning, we have to support a wide range of python versions
+## Ignore deprication warnings to support a wide range of python versions
 warnings.simplefilter('ignore', DeprecationWarning)
 
 from optparse import OptionParser
@@ -52,8 +52,10 @@ import sha
 import logging
 import datetime
 
+
 class LogEntry:
-    """Interface class which specifies generic log format for consumption by other classes"""
+    """Interface class which specifies generic log format for consumption 
+    by other classes"""
 
     year = ""
     month = ""
@@ -64,6 +66,7 @@ class LogEntry:
     host = ""
     daemon = ""
     log_entry = ""
+
 
     def display(self):
         print "Year: ", self.year,"Month:",self.month,"Day:",self.day,"Hour:", self.hour, "Minute:", self.minute, "Second:", self.second, "Host:",self.host,"Payload",self.log_entry
@@ -124,6 +127,7 @@ class SyslogEntry(LogEntry):
 
     # Declare Static Methods
     is_type = staticmethod(is_type)
+
 
 class RSyslogEntry(LogEntry):
     """Driver for RSyslog formatted files. Conforms to LogEntry interface class."""
@@ -192,6 +196,7 @@ class RSyslogEntry(LogEntry):
 
     # Declare Static Methods
     is_type = staticmethod(is_type)
+
 
 class ApacheAccessEntry(LogEntry):
     """Driver for Apache Access formatted log files. Conforms to LogEntry interface class."""
@@ -316,67 +321,6 @@ class ApacheErrorEntry(LogEntry):
     # Declare Static Methods
     is_type = staticmethod(is_type)
 
-class SnortEntry(LogEntry):
-    """Driver for Snort formatted log files. Conforms to LogEntry interface class."""
-
-    def __init__(self, line):
-
-        # Split the line up
-        value = line.split()
-
-        # Should be normal log entry
-        if len(value) >= 2:
-        
-            # Snort does not store year information so, set to current year
-            self.year = datetime.date.today().year
-    
-            # Initial break down
-            snortdate = value[:1]
-            self.log_entry = ' '.join(value[1:])
-        
-            # Looks like "09/29-10:18:46.026172"
-            snortdate, junk = snortdate[0].split('.')
-
-            # Looks like "09/29-10:18:46"
-            self.month, snortdate = snortdate.split('/')
-
-            # Looks like "29-10:18:46"
-            self.day, snortdate = snortdate.split('-')
-
-            # Looks like "10:18:46"
-            self.hour, self.minute, self.second = snortdate.split(':')
-
-            # Normalize integers to standard widths and convert to strings
-            self.year = str("%.4d" % (int(self.year)))
-            self.month = str("%.2d" % (int(self.month)))
-            self.day = str("%.2d" % (int(self.day)))
-            self.hour = str("%.2d" % (int(self.hour)))
-            self.minute = str("%.2d" % (int(self.minute)))
-            self.second = str("%.2d" % (int(self.second)))
-
-
-        # Blank line, will be sorted out by scrub
-        else:
-            self.year,self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
-            self.log_entry = "#"
-
-    def is_type(line):
-        """Standard function from interface class to determine type"""
-
-        global logging
-
-        if len(line) >= 4:
-
-            # Look for something similar to: "09/29-10:18:46.026172" in first column
-            if re.search("[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}",line[0]):
-                return True
-            else:
-                return False
-        else:
-            return False
-
-    # Declare Static Methods
-    is_type = staticmethod(is_type)
 
 class SnortEntry(LogEntry):
     """Driver for Snort formatted log files. Conforms to LogEntry interface class."""
@@ -439,6 +383,70 @@ class SnortEntry(LogEntry):
 
     # Declare Static Methods
     is_type = staticmethod(is_type)
+
+
+class SnortEntry(LogEntry):
+    """Driver for Snort formatted log files. Conforms to LogEntry interface class."""
+
+    def __init__(self, line):
+
+        # Split the line up
+        value = line.split()
+
+        # Should be normal log entry
+        if len(value) >= 2:
+        
+            # Snort does not store year information so, set to current year
+            self.year = datetime.date.today().year
+    
+            # Initial break down
+            snortdate = value[:1]
+            self.log_entry = ' '.join(value[1:])
+        
+            # Looks like "09/29-10:18:46.026172"
+            snortdate, junk = snortdate[0].split('.')
+
+            # Looks like "09/29-10:18:46"
+            self.month, snortdate = snortdate.split('/')
+
+            # Looks like "29-10:18:46"
+            self.day, snortdate = snortdate.split('-')
+
+            # Looks like "10:18:46"
+            self.hour, self.minute, self.second = snortdate.split(':')
+
+            # Normalize integers to standard widths and convert to strings
+            self.year = str("%.4d" % (int(self.year)))
+            self.month = str("%.2d" % (int(self.month)))
+            self.day = str("%.2d" % (int(self.day)))
+            self.hour = str("%.2d" % (int(self.hour)))
+            self.minute = str("%.2d" % (int(self.minute)))
+            self.second = str("%.2d" % (int(self.second)))
+
+
+        # Blank line, will be sorted out by scrub
+        else:
+            self.year,self.month, self.day, self.hour, self.minute, self.second, self.host, self.daemon = ["1900","01","01","01","01","01","#","#"]
+            self.log_entry = "#"
+
+    def is_type(line):
+        """Standard function from interface class to determine type"""
+
+        global logging
+
+        if len(line) >= 4:
+
+            # Look for something similar to: "09/29-10:18:46.026172" in first column
+            if re.search("[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}",line[0]):
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    # Declare Static Methods
+    is_type = staticmethod(is_type)
+
 
 class ScriptlogEntry(LogEntry):
     """
@@ -567,6 +575,7 @@ class SecureLogEntry(LogEntry):
     # Declare Static Methods
     is_type = staticmethod(is_type)
 
+
 class RawEntry(LogEntry):
     """
     Driver for Raw log files. Conforms to LogEntry interface class.
@@ -605,6 +614,7 @@ class RawEntry(LogEntry):
 
     # Declare Static Methods
     is_type = staticmethod(is_type)
+
 
 class Log(UserList):
     """
@@ -738,6 +748,7 @@ class Log(UserList):
                 newlog.append(entry)
 
         return newlog
+
 
 class ScriptLog(Log):
     """Class which allows special use cases for dealing with Report/Acknowledge"""
@@ -969,6 +980,7 @@ class ScriptLog(Log):
         # Then reload all data
         self.fill()
 
+
 class Filter:
     """Filter object used to lad filters into memory once, to save on file operations"""        
 
@@ -1034,6 +1046,7 @@ class Filter:
             return True
         else:
             return False
+
 
 class SuperHash(UserDict):
     """Interface and parent class for all hash/dict based objects. """
@@ -1249,6 +1262,7 @@ class ApacheLogHash(SuperHash):
         if "#" in self:    
             del self["#"]
 
+
 class SnortLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Snort logs"""
     
@@ -1311,6 +1325,7 @@ class SecureLogHash(SuperHash):
         if "#" in self:    
             del self["#"]
 
+
 class RawLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from text files without date/time"""
     
@@ -1329,6 +1344,7 @@ class RawLogHash(SuperHash):
         # Finally, remove valueless lines
         if "#" in self:    
             del self["#"]
+
 
 class DaemonHash(SyslogHash):
     """Overides the fill method specifically for a DaemonHashes built from text files with date/time"""
@@ -1350,6 +1366,7 @@ class DaemonHash(SyslogHash):
         if "#" in self:    
             del self["#"]
 
+
 class HostHash(SyslogHash):
     """Overides the fill method specifically for a HostHashes built from text files with date/time"""
 
@@ -1369,6 +1386,7 @@ class HostHash(SyslogHash):
         # Finally, remove valueless lines
         if "#" in self:    
             del self["#"]
+
 
 class WordHash(SuperHash):
     """
@@ -1405,6 +1423,7 @@ class WordHash(SuperHash):
         # Finally, remove valueless lines
         if "#" in self:    
             del self["#"]
+
 
 class GraphHash(UserDict):
     """Interface class used to control structure & use of all GraphHash subtypes"""
@@ -1632,6 +1651,7 @@ class SecondsGraph(GraphHash):
 
         self.build_calculations()
 
+
 class MinutesGraph(GraphHash):
     """60 minute graph subtype"""
 
@@ -1691,6 +1711,7 @@ class MinutesGraph(GraphHash):
                 self.increment(key)
 
         self.build_calculations()
+
 
 class HoursGraph(GraphHash):
     """24 hour graph subtype"""
@@ -1752,6 +1773,7 @@ class HoursGraph(GraphHash):
 
         self.build_calculations()
 
+
 class DaysGraph(GraphHash):
     """30 day graph subtype"""
 
@@ -1812,6 +1834,7 @@ class DaysGraph(GraphHash):
 
         self.build_calculations()
 
+
 class MonthsGraph(GraphHash):
     """12 month graph subtype"""
 
@@ -1871,6 +1894,7 @@ class MonthsGraph(GraphHash):
                 self.increment(key)
 
         self.build_calculations()
+
 
 class YearsGraph(GraphHash):
     """10 year graph subtype"""
