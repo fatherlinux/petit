@@ -33,6 +33,7 @@ as logwatch or swatch cannot do.
 #
 ###############################################################################
 from optparse import OptionParser
+from optparse import Values
 import signal
 import sys
 import logging
@@ -64,8 +65,8 @@ signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
 # Use global namespace for flags and filename
-options = object()
-filename = object()
+options = Values
+filename = ""
 
 
 def add_options(parser):
