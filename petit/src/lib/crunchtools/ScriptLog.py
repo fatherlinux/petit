@@ -1,8 +1,7 @@
 """Defines ScriptLog class"""
 
-from Log import Log
 from UserList import UserList
-from ScriptlogEntry import ScriptlogEntry
+from CrunchLog import ScriptlogEntry
 import re
 import sys
 import os
@@ -13,7 +12,7 @@ import random
 import syslog
 
 
-class ScriptLog(Log):
+class ScriptLog(UserList):
     """Class which allows special use cases for dealing with Report/Acknowledge"""
 
     # Variables

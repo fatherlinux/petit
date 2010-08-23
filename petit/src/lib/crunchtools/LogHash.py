@@ -2,18 +2,18 @@
 
 from UserDict import UserDict
 from Filter import Filter
-from Log import Log
+from CrunchLog import Log
 
-from LogEntry import SyslogEntry
-from LogEntry import RSyslogEntry
-from LogEntry import ApacheAccessEntry
-from LogEntry import ApacheErrorEntry
-from LogEntry import SnortEntry
-from LogEntry import RawEntry
-from LogEntry import SecureLogEntry
+from CrunchLog import SyslogEntry
+from CrunchLog import RSyslogEntry
+from CrunchLog import ApacheAccessEntry
+from CrunchLog import ApacheErrorEntry
+from CrunchLog import SnortEntry
+from CrunchLog import RawEntry
+from CrunchLog import SecureLogEntry
 
 import logging
-import choice
+from random import choice
 import re
 import os
 import sys

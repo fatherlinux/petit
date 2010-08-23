@@ -1,6 +1,6 @@
 from UserDict import UserDict
+from math import ceil
 import datetime
-import ceil
 import sys
 
 class GraphHash(UserDict):
@@ -167,10 +167,7 @@ class GraphHash(UserDict):
         print "End Time:\t",str(self.end_date),"\t\tMaximum Value:",self.max_value
         print "Duration:\t",str(self.duration), self.unit+"s","\t\t\tScale:",str(scale)
         print
-from GraphHash import GraphHash
-from UserDict import UserDict
-import sys
-import datetime
+
 
 class SecondsGraph(GraphHash):
     """60 second graph subtype"""
@@ -231,10 +228,7 @@ class SecondsGraph(GraphHash):
                 self.increment(key)
 
         self.build_calculations()
-from GraphHash import GraphHash
-from UserDict import UserDict
-import sys
-import datetime
+
 
 class MinutesGraph(GraphHash):
     """60 minute graph subtype"""
@@ -295,10 +289,7 @@ class MinutesGraph(GraphHash):
                 self.increment(key)
 
         self.build_calculations()
-from GraphHash import GraphHash
-from UserDict import UserDict
-import sys
-import datetime
+
 
 class HoursGraph(GraphHash):
     """24 hour graph subtype"""
@@ -359,10 +350,7 @@ class HoursGraph(GraphHash):
                 self.increment(key)
 
         self.build_calculations()
-from GraphHash import GraphHash
-from UserDict import UserDict
-import sys
-import datetime
+
 
 class DaysGraph(GraphHash):
     """30 day graph subtype"""
@@ -423,7 +411,7 @@ class DaysGraph(GraphHash):
                 self.increment(key)
 
         self.build_calculations()
-from GraphHash import GraphHash
+
 
 class MonthsGraph(GraphHash):
     """12 month graph subtype"""
@@ -484,7 +472,7 @@ class MonthsGraph(GraphHash):
                 self.increment(key)
 
         self.build_calculations()
-from GraphHash import GraphHash
+
 
 class YearsGraph(GraphHash):
     """10 year graph subtype"""

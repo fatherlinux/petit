@@ -38,17 +38,17 @@ import signal
 import sys
 import logging
 sys.path.append("/usr/share/petit")
-from crunchtools import Log
-from crunchtools import SuperHash
-from crunchtools import DaemonHash
-from crunchtools import HostHash
-from crunchtools import WordHash
-from crunchtools import SecondsGraph
-from crunchtools import MinutesGraph
-from crunchtools import HoursGraph
-from crunchtools import DaysGraph
-from crunchtools import MonthsGraph
-from crunchtools import YearsGraph
+from crunchtools.CrunchLog import Log
+from crunchtools.LogHash import SuperHash
+from crunchtools.LogHash import DaemonHash
+from crunchtools.LogHash import HostHash
+from crunchtools.LogHash import WordHash
+from crunchtools.LogGraph import SecondsGraph
+from crunchtools.LogGraph import MinutesGraph
+from crunchtools.LogGraph import HoursGraph
+from crunchtools.LogGraph import DaysGraph
+from crunchtools.LogGraph import MonthsGraph
+from crunchtools.LogGraph import YearsGraph
 
 # Process Signals
 
