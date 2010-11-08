@@ -77,19 +77,19 @@ class SuperHash(UserDict):
 
             # Print all lines as sample
             if self.sample == "all":
-                print str(self[key][0]) + ":    " + \
+                print str(self[key][0]) + ":	" + \
                 choice(self[key][1]).log_entry
 
             elif self.sample == "none":
-                print str(self[key][0]) + ":    "+str(key)
+                print str(self[key][0]) + ":	"+str(key)
 
             elif self.sample == "threshold":
                 # Print sample for small values below/equal to threshold
                 if self[key][0] <= sample_threshold:
-                    print str(self[key][0]) + ":    " + \
+                    print str(self[key][0]) + ":	" + \
                     self[key][1][0].log_entry
                 else:
-                    print str(self[key][0]) + ":    " + str(key)
+                    print str(self[key][0]) + ":	" + str(key)
             else:
                 print "That type of sampling is not supported:", self.sample
                 sys.exit(16)
