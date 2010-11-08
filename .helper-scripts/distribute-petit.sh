@@ -7,7 +7,7 @@ remote_server="scott@lance.educatedconfusion.com"
 remote_directory="/var/www/html/crunchtools.com/wp-content/files/petit"
 remote_location="$remote_server:$remote_directory"
 deb_server="root@javier.eyemg.com"
-deb_location="${deb_server}:/root/software/petit"
+deb_location="/root/software/petit/petit"
 
 
 # Get version from admin
@@ -35,10 +35,10 @@ cd $yum_location/
 createrepo .
 
 # Now create deb and distribute
-ssh $deb_server "(cd /root/software/petit; svn update; make clean; make deb)"
-petit_pkg=`ssh $deb_server "ls /root/software/petit | grep \.deb | tail -n1" `
+ssh $deb_server "(cd ${deb_location}; hg pull; hg update; make clean; make deb)"
+petit_pkg=`ssh $deb_server "ls ${deb_location} | grep \.deb | tail -n1" `
 echo "Petit package: $petit_pkg"
-scp ${deb_location}/${petit_pkg} ${home_location}/petit/${petit_pkg}
+scp $deb_server:${deb_location}/${petit_pkg} ${home_location}/petit/${petit_pkg}
 scp ${home_location}/petit/${petit_pkg} $remote_location
 ssh $remote_server "rm $remote_directory/petit-current.deb"
 latest=`ssh $remote_server "ls -trh $remote_directory| grep deb | tail -n1"`
@@ -57,4 +57,4 @@ ssh $deb_server "(cd /root/software/petit; make clean)"
 # Update local server
 rpm -e petit
 yum clean all
-yum install petit
+yum -y install petit
