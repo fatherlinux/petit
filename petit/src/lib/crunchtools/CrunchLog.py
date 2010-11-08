@@ -103,7 +103,7 @@ class Log(UserList):
                         tally['RawEntry'] += 1
 
                 # Determined which type to return
-                if tally['SecureLogEntry'] == max_sample_lines:
+                if tally['SecureLogEntry'] >= max_sample_lines:
                     logging.info("Determined Secure Log: " + \
                     str(tally['SecureLogEntry']))
                     return SecureLogEntry
