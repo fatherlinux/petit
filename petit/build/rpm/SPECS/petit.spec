@@ -30,9 +30,10 @@ rm -rf ${RPM_BUILD_ROOT}
 # Main scripts & libraries
 install -d ${RPM_BUILD_ROOT}/usr/bin
 install -d ${RPM_BUILD_ROOT}/usr/share/petit
+install -d ${RPM_BUILD_ROOT}/usr/share/petit/crunchtools
 install -d ${RPM_BUILD_ROOT}/usr/share/man/man1
 install src/bin/petit ${RPM_BUILD_ROOT}/usr/bin/petit
-install src/lib/crunchtools.py ${RPM_BUILD_ROOT}/usr/share/petit/crunchtools.py
+install src/lib/crunchtools/* ${RPM_BUILD_ROOT}/usr/share/petit/crunchtools
 install src/man/petit.1.gz ${RPM_BUILD_ROOT}/usr/share/man/man1/petit.1.gz
 
 # Filters
