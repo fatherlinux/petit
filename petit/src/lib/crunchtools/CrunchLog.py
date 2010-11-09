@@ -80,9 +80,8 @@ class Log(UserList):
             while (1):
 
                 # Get X number of samples
-                while max_sample_lines >= 0:
+                for i in range(0,max_sample_lines):
                     sample_lines.append(choice(buf).split())
-                    max_sample_lines -= 1
 
                 # Build tallies for the collected samples
                 for line in sample_lines:
