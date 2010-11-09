@@ -4,6 +4,14 @@
 # Date: 9/2009
 # Description: Simple integration test to make sure things work rudamentarily well
 
+# First test with no input, should print version
+if ! petit
+then
+	echo " Failed: Default with no input"
+	exit 1
+else
+	echo " Passed: Default with no input"
+fi
 
 # Routine Tests
 functions="hash wordcount host daemon sgraph mgraph hgraph dgraph mograph ygraph"
