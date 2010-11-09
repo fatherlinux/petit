@@ -103,7 +103,7 @@ class SuperHash(UserDict):
         global logging
 
         # Declarations & Variables
-        threshold_coefficient = 0.3
+        threshold_coefficient = 0.31
         fingerprints = []
         fingerprint_files = ["__none__"]
 
@@ -115,7 +115,13 @@ class SuperHash(UserDict):
 
         for prefix in prefixes:
             if os.path.exists(prefix) and len(os.listdir(prefix)) >= 1:
+
+                # Process in order from largest to smallest which prevents 
+                # double labeling with similar fingerprints
                 fingerprint_files = os.listdir(prefix)
+		fingerprint_files = [os.path.join(prefix, f) for f in fingerprint_files]
+		fingerprint_files.sort(key=lambda x: os.path.getsize(x))
+		fingerprint_files.reverse()
                 break
 
         if fingerprint_files[0] == "__none__":
@@ -125,16 +131,14 @@ class SuperHash(UserDict):
         for fingerprint_file in fingerprint_files:
             if re.search("fp",fingerprint_file):
 
-                # Create a fullpath name
-                filename = prefix+fingerprint_file
-
                 # Build a Log for the fingerprint
-                log = Log(filename)
+                log = Log(fingerprint_file)
 
                 # Build a SuperHash
                 x = SuperHash.manufacture(log, "hash.stopwords")
 
-                x.file_name = fingerprint_file
+		# Remove the prefix & set name
+                x.file_name = re.sub(prefix, "", fingerprint_file)
                 fingerprints.append(x)
 
 
