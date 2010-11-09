@@ -129,6 +129,7 @@ def add_options(parser):
                     dest="mode",
                     action="store_const",
                     const="mode_version",
+                    default="mode_version",
                     help="Show verbose output")
 
     parser.add_option("--hash",
