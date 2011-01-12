@@ -1,6 +1,8 @@
 """
-Generic log class which contains a payload of objects which conform to the LogEntry specification.
-Log, which is an array of type LogEntry,  is relied upon and consumed to build a SuperHash or GraphHash.
+Generic log class which contains a payload of objects which conform to the 
+LogEntry specification.  Log, which is a List (array) of type LogEntry,  is
+relied upon and consumed to build any of the XHash object such as SuperHash
+or GraphHash.
 """
 
 from UserList import UserList
