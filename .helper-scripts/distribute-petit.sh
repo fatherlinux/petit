@@ -2,7 +2,7 @@
 
 # Variables
 home_location="/srv/operations/tools"
-yum_location="/srv/yum/redhat/RHEL/5/eyemg/"
+yum_location="/srv/yum/data/eyemg/eyemg-5-i386"
 remote_server="scott@lance.educatedconfusion.com"
 remote_directory="/var/www/html/crunchtools.com/wp-content/files/petit"
 remote_location="$remote_server:$remote_directory"

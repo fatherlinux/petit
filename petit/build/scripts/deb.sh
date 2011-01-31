@@ -26,7 +26,7 @@ cp README build/deb/petit/usr/share/doc/petit/README
 rsync -av --exclude=.svn src/lib/fingerprint_library/ build/deb/petit/var/lib/petit/fingerprint_library/
 rsync -av --exclude=.svn src/lib/fingerprints/ build/deb/petit/var/lib/petit/fingerprints/
 rsync -av --exclude=.svn src/lib/filters/ build/deb/petit/var/lib/petit/filters/
-rsync -av --exclude=.svn src/lib/crunchtools.py build/deb/petit/usr/share/petit/crunchtools.py
+rsync -av --exclude=.svn src/lib/crunchtools/ build/deb/petit/usr/share/petit/crunchtools/
 
 ## Man
 rsync -av --exclude=.svn src/man/petit.1.gz build/deb/petit/usr/share/man/man1/petit.1.gz

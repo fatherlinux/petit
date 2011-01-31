@@ -13,7 +13,7 @@
 mkdir -p /usr/bin
 mkdir -p /usr/share/petit
 cp -vf ./src/bin/petit /usr/bin/petit
-cp -vf ./src/lib/crunchtools.py /usr/share/petit/crunchtools.py
+cp -vf ./src/lib/crunchtools/* /usr/share/petit/crunchtools/
 cp -vf ./src/man/petit.1.gz /usr/share/man/man1/petit.1.gz
 
 # Filters
