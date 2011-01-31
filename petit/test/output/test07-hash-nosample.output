@@ -1,0 +1,7 @@
+309:	[**] [#:#:#] POP# PASS format string attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: #] {TCP} #.#.#.#:# -> #.#.#.#:#
+138:	[**] [#:#:#] SQL version overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: #] {UDP} #.#.#.#:# -> #.#.#.#:#
+32:	[**] [#:#:#] WEB-MISC IBM Lotus Domino Web Server Accept-Language header buffer overflow attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: #] {TCP} #.#.#.#:# -> #.#.#.#:#
+14:	[**] [#:#:#] SMTP ClamAV recipient command injection attempt [**] [Classification: Attempted Administrator Privilege Gain] [Priority: #] {TCP} #.#.#.#:# -> #.#.#.#:#
+3:	[**] [#:#:#] WEB-PHP phpBB viewtopic double URL encoding attempt [**] [Classification: Web Application Attack] [Priority: #] {TCP} #.#.#.#:# -> #.#.#.#:#
+3:	[**] [#:#:#] WEB-PHP viewtopic.php access [**] [Classification: Web Application Attack] [Priority: #] {TCP} #.#.#.#:# -> #.#.#.#:#
+1:	[**] [#:#:#] WEB-MISC Apache SSI error page cross-site scripting [**] [Classification: Web Application Attack] [Priority: #] {TCP} #.#.#.#:# -> #.#.#.#:#

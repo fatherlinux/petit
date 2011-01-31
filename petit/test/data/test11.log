@@ -1,0 +1,39 @@
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-21T16:06:29-04:00 machinename puppetd[8088]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{md5}a456c75bf562f74323f8bc590dc56edd' to '{md5}8d85534f3e02b3f582772e40dd9e1e18'
+2010-06-24T17:24:57.156790-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 148 seconds.
+2010-06-24T17:27:25.003284-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:27:25.199882-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:27:25.209155-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 143 seconds.
+2010-06-24T17:29:48.100603-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:29:48.142014-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:29:48.153557-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 150 seconds.
+2010-06-24T17:32:18.100844-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:32:18.161737-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:32:18.170774-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 137 seconds.
+2010-06-24T17:34:35.003168-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:34:35.057041-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:34:35.067162-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 147 seconds.
+2010-06-24T17:37:02.101378-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:37:02.190500-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:37:02.200321-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 119 seconds.
+2010-06-24T17:39:01.003562-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:39:01.081622-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:39:01.090801-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 149 seconds.
+2010-06-24T17:41:30.100942-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:41:30.501281-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:41:30.510369-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 145 seconds.
+2010-06-24T17:43:55.004246-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:43:55.089751-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:43:55.099636-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 141 seconds.
+2010-06-24T17:46:16.100460-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:46:16.176001-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:46:16.187789-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 121 seconds.
+2010-06-24T17:48:17.003043-04:00 bryan dhclient: DHCPREQUEST of 10.0.8.50 on eth0 to 10.0.8.52 port 67
+2010-06-24T17:48:17.075725-04:00 bryan dhclient: DHCPACK of 10.0.8.50 from 10.0.8.52
+2010-06-24T17:48:17.085171-04:00 bryan dhclient: bound to 10.0.8.50 -- renewal in 130 seconds.

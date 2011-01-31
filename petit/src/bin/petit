@@ -1,0 +1,446 @@
+#!/usr/bin/python
+"""Log & text analysis tool for systems administrators
+
+
+Logtool provides trimming and analysis of ascii based log files
+such as syslog.  Different options allow different types of analyis such as
+line hashing, hash counting, and word usage counting. These options can be used
+to determine WHAT is normal and WHAT to look for, which programs such
+as logwatch or swatch cannot do.
+"""
+###############################################################################
+#
+# Writen By: Scott McCarty
+# Date: 8/2009
+# Email: scott.mccarty@gmail.com
+#
+# Copyright (C) 2009 Scott McCarty
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 3
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+###############################################################################
+from optparse import OptionParser
+from optparse import Values
+import signal
+import sys
+import logging
+sys.path.append("/usr/share/petit")
+from crunchtools.CrunchLog import Log
+from crunchtools.LogHash import SuperHash
+from crunchtools.LogHash import DaemonHash
+from crunchtools.LogHash import HostHash
+from crunchtools.LogHash import WordHash
+from crunchtools.LogGraph import SecondsGraph
+from crunchtools.LogGraph import MinutesGraph
+from crunchtools.LogGraph import HoursGraph
+from crunchtools.LogGraph import DaysGraph
+from crunchtools.LogGraph import MonthsGraph
+from crunchtools.LogGraph import YearsGraph
+
+# Process Signals
+
+
+def sigint_handler(signal, frame):
+    sys.exit(0)
+
+
+## Exit when control-C is pressed
+signal.signal(signal.SIGINT, sigint_handler)
+
+## Ignore problems when piping to head
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+
+
+# Use global namespace for flags and filename
+options = Values
+filename = ""
+
+
+def add_options(parser):
+    """Adds all options in one concise function"""
+
+    # Handle flags
+    parser.add_option("-v", "--verbose",
+                    dest="verbose",
+                    action="count",
+                    help="Show verbose output")
+
+    parser.add_option("--sample", dest="sample",
+                    action="store_const",
+                    const="threshold",
+                    default="threshold",
+                    help="Show sample output for small numbered entries")
+
+    parser.add_option("--nosample",
+                    dest="sample",
+                    action="store_const",
+                    const="none",
+                    help="Do not sample output for low count entries")
+
+    parser.add_option("--allsample", dest="sample",
+                    action="store_const",
+                    const="all",
+                    help="Show samples instead of munged text for all entries")
+
+    parser.add_option("--filter",
+                    dest="filter",
+                    action="store_true",
+                    default=None, help="Use filter files during processing")
+
+    parser.add_option("--nofilter",
+                    dest="filter",
+                    action="store_false",
+                    help="Do not use filter files during processing")
+
+    parser.add_option("--wide",
+                    dest="wide",
+                    action="store_true",
+                    default=False,
+                    help="Use wider graph characters")
+
+    parser.add_option("--tick=",
+                    dest="tick",
+                    action="store",
+                    type="string",
+                    default="#",
+                    help="Change tick character from default")
+
+    parser.add_option("--fingerprint",
+                    dest="fingerprint",
+                    action="store_true",
+                    default=False,
+                    help="Use fingerprinting to remove certain patterns")
+
+    # Handle modes
+    parser.add_option("-V", "--version",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_version",
+                    default="mode_version",
+                    help="Show verbose output")
+
+    parser.add_option("--hash",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_hash",
+                    help="Show hashes of log files with numbers removed")
+
+    parser.add_option("--wordcount",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_wordcount",
+                    help="Show word count for given word")
+
+    parser.add_option("--daemon",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_daemon",
+                    help="show a report of entries from each daemon")
+
+    parser.add_option("--host",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_host",
+                    help="show a report of entries from each host")
+
+    parser.add_option("--sgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_sgraph",
+                    help="show graph of first 60 seconds")
+
+    parser.add_option("--mgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_mgraph",
+                    help="show graph of first 60 minutes")
+
+    parser.add_option("--hgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_hgraph",
+                    help="show graph of first 24 hours")
+
+    parser.add_option("--dgraph",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_dgraph",
+                    help="show graph of first 31 days")
+
+    parser.add_option("--mograph",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_mograph",
+                    help="show graph of first 12 months")
+
+    parser.add_option("--ygraph",
+                    dest="mode",
+                    action="store_const",
+                    const="mode_ygraph",
+                    help="show graph of first 10 years")
+
+    return parser
+
+
+def get_options():
+    """Captures command line args and perform initializations"""
+
+    # Use global namespace for flags
+    global options
+    global filename
+
+    # Declarations & Variables
+    usage = "usage: %prog [options] [file]"
+    parser = OptionParser(usage)
+    parser = add_options(parser)
+
+    # parse options/args
+    (options, args) = parser.parse_args()
+
+    # Pull off file name
+    if len(args) > 1:
+        parser.error("Specify only one file")
+    elif len(args) == 1:
+        filename = args[0]
+    else:
+        filename = "__none__"
+
+    # Set Verbosity
+    log_level = logging.WARNING
+    if options.verbose == 1:
+        log_level = logging.INFO
+    elif options.verbose >= 2:
+        log_level = logging.DEBUG
+
+    # Set up basic configuration
+    logging.basicConfig(level=log_level)
+
+
+    # Determine mode
+    eval(options.mode + "()")
+
+
+def mode_version():
+    """Version information"""
+    print "Version: 1.1.0"
+    sys.exit(0)
+
+
+def mode_hash():
+    """Runs in hashing mode"""
+
+    # Get entire log file into ram for speed
+    log = Log(filename)
+
+    # Build the Hash
+    if options.filter == None or options.filter == True:
+        x = SuperHash.manufacture(log, "hash.stopwords")
+    else:
+        x = SuperHash.manufacture(log, "__none__")
+
+    if options.fingerprint:
+        x.fingerprint()
+
+    # Set sampling type
+    x.sample = options.sample
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+
+
+    sys.exit(0)
+
+
+def mode_wordcount():
+    """Runs wordcount mode"""
+
+    # Setup default behavior
+    if options.sample == None:
+        options.sample = False
+    if options.filter == None:
+        options.filter = True
+
+    # Get input
+    log = Log(filename)
+
+    # Create new word hash based on log file and filter created
+    x = WordHash(log, "words.stopwords")
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_daemon():
+    """Runs daemon report mode"""
+
+    # Setup default behavior
+    if options.sample == None:
+        options.sample = False
+    if options.filter == None:
+        options.filter = True
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = DaemonHash(log, "daemon.stopwords")
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_host():
+    """Runs host report mode"""
+
+    # Setup default behavior
+    if options.sample == None:
+        options.sample = False
+    if options.filter == None:
+        options.filter = True
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = HostHash(log, "host.stopwords")
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_sgraph():
+    """Runs seconds graph mode"""
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = SecondsGraph(log)
+
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_mgraph():
+    """Runs minutes graph mode"""
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = MinutesGraph(log)
+
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_hgraph():
+    """Runs hours graph mode"""
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = HoursGraph(log)
+
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_dgraph():
+    """Runs days graph mode"""
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = DaysGraph(log)
+
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_mograph():
+    """Runs months graph mode"""
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = MonthsGraph(log)
+
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+def mode_ygraph():
+    """Runs years graph mode"""
+
+    # Get input
+    log = Log(filename)
+
+    # Create new syslog hash based on log file and filter created
+    x = YearsGraph(log)
+
+    # Set tick & width options
+    x.tick = options.tick
+    x.wide = options.wide
+
+    # Print out the dictionary first sorted by the word with
+    # the most entries with an alphabetical subsort
+    x.display()
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    get_options()

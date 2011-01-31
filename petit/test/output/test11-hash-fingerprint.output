@@ -1,0 +1,4 @@
+11:	dhclient: bound to #.#.#.# -- renewal in # seconds.
+10:	dhclient: DHCPACK of #.#.#.# from #.#.#.#
+10:	dhclient: DHCPREQUEST of #.#.#.# on eth# to #.#.#.# port #
+8:	puppetd[#]: (//collectd/File[/etc/collectd/collectd.conf]/content) content changed '{m#}#' to '{m#}#'

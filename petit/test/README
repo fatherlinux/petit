@@ -1,0 +1,30 @@
+
+How
+===============================================================================
+The test script test.sh iterates each major functiona and each data file
+comparing the output to a known output which is saved in a data file. If the 
+output is different from the last known good output, then the test fails.
+
+These tests do not prove that the petit is flawless but rather that it can
+survive all of the stresses that I have encountered. The idea is to add more
+tests over time to improve the quality.
+
+It is often necessary to update the test files, files can be updated by calling
+test with the update option like so
+
+	test.sh update
+
+
+File Descriptions
+===============================================================================
+test01 - Small syslog test file with weird lines
+test02 - Small raw test file with all unique lines
+test03 - Small apache test file
+test04 - Small raw test file with some numbers
+test05 - Fingerprint data for Fedora 11
+test06 - Fingerprint data for RHEL4 and Fedora 11
+test07 - Small snort file for testing
+test08 - Small secure log test file
+test09 - Medium sized Apache Error log file
+test10 - RSyslog test file with precision time turned on
+test11 - RSyslog test file with precision mixed with/without milliseconds

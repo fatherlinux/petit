@@ -1,0 +1,1500 @@
+Jan 15 14:01:04 gannon.eyemg.com sshd[6977]: Accepted publickey for root from 10.0.8.128 port 56526 ssh2
+Jan 15 14:01:04 gannon.eyemg.com sshd[6977]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:01:04 gannon.eyemg.com sshd[6977]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:01:16 tony.eyemg.com sshd[29022]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:01:16 tony.eyemg.com sshd[29023]: Postponed publickey for root from ::ffff:10.0.8.174 port 59232 ssh2
+Jan 15 14:01:16 tony.eyemg.com sshd[29022]: Accepted publickey for root from ::ffff:10.0.8.174 port 59232 ssh2
+Jan 15 14:01:22 tpm-secure.eyemg.com sshd[10549]: Accepted publickey for root from ::ffff:127.0.0.1 port 56529 ssh2
+Jan 15 14:01:58 maddock.eyemg.com sshd[30808]: Accepted publickey for root from 10.0.8.124 port 39255 ssh2
+Jan 15 14:01:58 maddock.eyemg.com sshd[30808]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:01:58 maddock.eyemg.com sshd[30808]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:01:58 mobius.eyemg.com sshd[13876]: Accepted publickey for root from 10.0.8.124 port 45057 ssh2
+Jan 15 14:01:58 mobius.eyemg.com sshd[13876]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:01:58 mobius.eyemg.com sshd[13876]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:02:00 maddock.eyemg.com sshd[30924]: Postponed publickey for root from 10.0.8.142 port 48425 ssh2
+Jan 15 14:02:00 maddock.eyemg.com sshd[30923]: Accepted publickey for root from 10.0.8.142 port 48425 ssh2
+Jan 15 14:02:00 maddock.eyemg.com sshd[30923]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:02:00 maddock.eyemg.com sshd[30923]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:02:00 maddock.eyemg.com sshd[31020]: Postponed publickey for root from 10.0.8.145 port 40520 ssh2
+Jan 15 14:02:00 maddock.eyemg.com sshd[31019]: Accepted publickey for root from 10.0.8.145 port 40520 ssh2
+Jan 15 14:02:00 maddock.eyemg.com sshd[31019]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:02:01 maddock.eyemg.com sshd[31019]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:02:13 maddock.eyemg.com sshd[31169]: Accepted password for root from 10.2.1.224 port 38317 ssh2
+Jan 15 14:02:13 maddock.eyemg.com sshd[31169]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:02:15 tate.eyemg.com sshd[6595]: Postponed publickey for root from ::ffff:10.0.8.163 port 48811 ssh2
+Jan 15 14:02:15 tate.eyemg.com sshd[6594]: Accepted publickey for root from ::ffff:10.0.8.163 port 48811 ssh2
+Jan 15 14:02:15 tate.eyemg.com sshd[6663]: Postponed publickey for root from ::ffff:10.0.8.113 port 51731 ssh2
+Jan 15 14:02:15 tate.eyemg.com sshd[6662]: Accepted publickey for root from ::ffff:10.0.8.113 port 51731 ssh2
+Jan 15 14:02:19 dino.eyemg.com sshd[31332]: Accepted publickey for root from 10.0.8.158 port 41330 ssh2
+Jan 15 14:02:19 dino.eyemg.com sshd[31332]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:02:19 dino.eyemg.com sshd[31332]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:02:25 tate.eyemg.com sshd[7208]: Postponed publickey for root from ::ffff:10.100.8.88 port 41711 ssh2
+Jan 15 14:02:25 tate.eyemg.com sshd[7207]: Accepted publickey for root from ::ffff:10.100.8.88 port 41711 ssh2
+Jan 15 14:02:26 tate.eyemg.com sshd[7276]: Postponed publickey for root from ::ffff:10.100.8.88 port 41712 ssh2
+Jan 15 14:02:27 tate.eyemg.com sshd[7275]: Accepted publickey for root from ::ffff:10.100.8.88 port 41712 ssh2
+Jan 15 14:02:33 sable.eyemg.com sshd[30466]: Postponed publickey for root from ::ffff:10.0.8.150 port 50630 ssh2
+Jan 15 14:02:33 sable.eyemg.com sshd[30467]: Postponed publickey for root from ::ffff:10.0.8.97 port 44835 ssh2
+Jan 15 14:02:33 sable.eyemg.com sshd[30464]: Accepted publickey for root from ::ffff:10.0.8.150 port 50630 ssh2
+Jan 15 14:02:33 sable.eyemg.com sshd[30465]: Accepted publickey for root from ::ffff:10.0.8.97 port 44835 ssh2
+Jan 15 14:02:35 juno.eyemg.com sshd[18533]: Connection closed by UNKNOWN
+Jan 15 14:02:47 mobius.eyemg.com sshd[14320]: Accepted publickey for root from 10.0.8.159 port 51400 ssh2
+Jan 15 14:02:47 mobius.eyemg.com sshd[14320]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:02:47 mobius.eyemg.com sshd[14320]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:03:16 tony.eyemg.com sshd[30112]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:03:16 tony.eyemg.com sshd[30113]: Postponed publickey for root from ::ffff:10.0.8.174 port 59243 ssh2
+Jan 15 14:03:16 tony.eyemg.com sshd[30112]: Accepted publickey for root from ::ffff:10.0.8.174 port 59243 ssh2
+Jan 15 14:03:22 tpm-secure.eyemg.com sshd[11739]: Accepted publickey for root from ::ffff:127.0.0.1 port 56532 ssh2
+Jan 15 14:03:58 maddock.eyemg.com sshd[32427]: Accepted publickey for root from 10.0.8.124 port 39257 ssh2
+Jan 15 14:03:58 maddock.eyemg.com sshd[32427]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:03:58 maddock.eyemg.com sshd[32427]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:03:59 mobius.eyemg.com sshd[15258]: Accepted publickey for root from 10.0.8.124 port 45059 ssh2
+Jan 15 14:03:59 mobius.eyemg.com sshd[15258]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:03:59 mobius.eyemg.com sshd[15258]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:03:59 maddock.eyemg.com sshd[32521]: Accepted publickey for root from 10.0.8.124 port 39259 ssh2
+Jan 15 14:03:59 maddock.eyemg.com sshd[32521]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:03:59 maddock.eyemg.com sshd[32521]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:03:59 mobius.eyemg.com sshd[15339]: Accepted publickey for root from 10.0.8.124 port 45061 ssh2
+Jan 15 14:03:59 mobius.eyemg.com sshd[15339]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:03:59 mobius.eyemg.com sshd[15339]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:04:00 maddock.eyemg.com sshd[32635]: Postponed publickey for root from 10.0.8.142 port 59353 ssh2
+Jan 15 14:04:00 maddock.eyemg.com sshd[32634]: Accepted publickey for root from 10.0.8.142 port 59353 ssh2
+Jan 15 14:04:00 maddock.eyemg.com sshd[32634]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:04:00 maddock.eyemg.com sshd[32634]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:04:00 maddock.eyemg.com sshd[32731]: Postponed publickey for root from 10.0.8.145 port 54232 ssh2
+Jan 15 14:04:00 maddock.eyemg.com sshd[32730]: Accepted publickey for root from 10.0.8.145 port 54232 ssh2
+Jan 15 14:04:00 maddock.eyemg.com sshd[32730]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:04:00 maddock.eyemg.com sshd[32730]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:04:15 tate.eyemg.com sshd[9725]: Postponed publickey for root from ::ffff:10.0.8.163 port 48869 ssh2
+Jan 15 14:04:15 tate.eyemg.com sshd[9724]: Accepted publickey for root from ::ffff:10.0.8.163 port 48869 ssh2
+Jan 15 14:04:15 tate.eyemg.com sshd[9812]: Postponed publickey for root from ::ffff:10.0.8.113 port 51736 ssh2
+Jan 15 14:04:15 tate.eyemg.com sshd[9807]: Accepted publickey for root from ::ffff:10.0.8.113 port 51736 ssh2
+Jan 15 14:04:19 dino.eyemg.com sshd[31451]: Accepted publickey for root from 10.0.8.158 port 41331 ssh2
+Jan 15 14:04:19 dino.eyemg.com sshd[31451]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:04:19 dino.eyemg.com sshd[31451]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:04:25 tate.eyemg.com sshd[10319]: Postponed publickey for root from ::ffff:10.100.8.88 port 41714 ssh2
+Jan 15 14:04:26 tate.eyemg.com sshd[10318]: Accepted publickey for root from ::ffff:10.100.8.88 port 41714 ssh2
+Jan 15 14:04:26 tate.eyemg.com sshd[10387]: Postponed publickey for root from ::ffff:10.100.8.88 port 41715 ssh2
+Jan 15 14:04:27 tate.eyemg.com sshd[10386]: Accepted publickey for root from ::ffff:10.100.8.88 port 41715 ssh2
+Jan 15 14:04:33 sable.eyemg.com sshd[2265]: Postponed publickey for root from ::ffff:10.0.8.150 port 50655 ssh2
+Jan 15 14:04:33 sable.eyemg.com sshd[2264]: Accepted publickey for root from ::ffff:10.0.8.150 port 50655 ssh2
+Jan 15 14:04:33 sable.eyemg.com sshd[2333]: Postponed publickey for root from ::ffff:10.0.8.97 port 44844 ssh2
+Jan 15 14:04:33 sable.eyemg.com sshd[2332]: Accepted publickey for root from ::ffff:10.0.8.97 port 44844 ssh2
+Jan 15 14:04:35 juno.eyemg.com sshd[20287]: Connection closed by UNKNOWN
+Jan 15 14:04:47 mobius.eyemg.com sshd[15772]: Accepted publickey for root from 10.0.8.159 port 38350 ssh2
+Jan 15 14:04:47 mobius.eyemg.com sshd[15772]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:04:47 mobius.eyemg.com sshd[15772]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:05:16 tony.eyemg.com sshd[31507]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:05:16 tony.eyemg.com sshd[31508]: Postponed publickey for root from ::ffff:10.0.8.174 port 59248 ssh2
+Jan 15 14:05:16 tony.eyemg.com sshd[31507]: Accepted publickey for root from ::ffff:10.0.8.174 port 59248 ssh2
+Jan 15 14:05:22 tpm-secure.eyemg.com sshd[12992]: Accepted publickey for root from ::ffff:127.0.0.1 port 56533 ssh2
+Jan 15 14:05:58 maddock.eyemg.com sshd[1632]: Accepted publickey for root from 10.0.8.124 port 39261 ssh2
+Jan 15 14:05:58 maddock.eyemg.com sshd[1632]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:05:58 maddock.eyemg.com sshd[1632]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:05:58 mobius.eyemg.com sshd[16765]: Accepted publickey for root from 10.0.8.124 port 45063 ssh2
+Jan 15 14:05:58 mobius.eyemg.com sshd[16765]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:05:58 mobius.eyemg.com sshd[16765]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:06:00 maddock.eyemg.com sshd[1746]: Postponed publickey for root from 10.0.8.142 port 59426 ssh2
+Jan 15 14:06:00 maddock.eyemg.com sshd[1745]: Accepted publickey for root from 10.0.8.142 port 59426 ssh2
+Jan 15 14:06:00 maddock.eyemg.com sshd[1745]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:06:00 maddock.eyemg.com sshd[1745]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:06:00 maddock.eyemg.com sshd[1842]: Postponed publickey for root from 10.0.8.145 port 54303 ssh2
+Jan 15 14:06:00 maddock.eyemg.com sshd[1841]: Accepted publickey for root from 10.0.8.145 port 54303 ssh2
+Jan 15 14:06:00 maddock.eyemg.com sshd[1841]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:06:00 maddock.eyemg.com sshd[1841]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:06:15 tate.eyemg.com sshd[12963]: Postponed publickey for root from ::ffff:10.0.8.163 port 48911 ssh2
+Jan 15 14:06:15 tate.eyemg.com sshd[12962]: Accepted publickey for root from ::ffff:10.0.8.163 port 48911 ssh2
+Jan 15 14:06:15 tate.eyemg.com sshd[13041]: Postponed publickey for root from ::ffff:10.0.8.113 port 51741 ssh2
+Jan 15 14:06:15 tate.eyemg.com sshd[13037]: Accepted publickey for root from ::ffff:10.0.8.113 port 51741 ssh2
+Jan 15 14:06:19 dino.eyemg.com sshd[31609]: Accepted publickey for root from 10.0.8.158 port 41332 ssh2
+Jan 15 14:06:19 dino.eyemg.com sshd[31609]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:06:20 dino.eyemg.com sshd[31609]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:06:25 tate.eyemg.com sshd[13557]: Postponed publickey for root from ::ffff:10.100.8.88 port 41716 ssh2
+Jan 15 14:06:25 tate.eyemg.com sshd[13556]: Accepted publickey for root from ::ffff:10.100.8.88 port 41716 ssh2
+Jan 15 14:06:26 tate.eyemg.com sshd[13625]: Postponed publickey for root from ::ffff:10.100.8.88 port 41717 ssh2
+Jan 15 14:06:26 tate.eyemg.com sshd[13624]: Accepted publickey for root from ::ffff:10.100.8.88 port 41717 ssh2
+Jan 15 14:06:33 sable.eyemg.com sshd[6603]: Postponed publickey for root from ::ffff:10.0.8.150 port 50699 ssh2
+Jan 15 14:06:33 sable.eyemg.com sshd[6602]: Accepted publickey for root from ::ffff:10.0.8.150 port 50699 ssh2
+Jan 15 14:06:33 sable.eyemg.com sshd[6671]: Postponed publickey for root from ::ffff:10.0.8.97 port 44849 ssh2
+Jan 15 14:06:33 sable.eyemg.com sshd[6670]: Accepted publickey for root from ::ffff:10.0.8.97 port 44849 ssh2
+Jan 15 14:06:35 juno.eyemg.com sshd[23009]: Connection closed by UNKNOWN
+Jan 15 14:06:47 mobius.eyemg.com sshd[17215]: Accepted publickey for root from 10.0.8.159 port 38371 ssh2
+Jan 15 14:06:47 mobius.eyemg.com sshd[17215]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:06:47 mobius.eyemg.com sshd[17215]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:07:01 maddock.eyemg.com sshd[2596]: Postponed publickey for root from 10.0.8.145 port 54327 ssh2
+Jan 15 14:07:01 maddock.eyemg.com sshd[2595]: Accepted publickey for root from 10.0.8.145 port 54327 ssh2
+Jan 15 14:07:01 maddock.eyemg.com sshd[2595]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:07:01 maddock.eyemg.com sshd[2595]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:07:16 tony.eyemg.com sshd[385]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:07:16 tony.eyemg.com sshd[386]: Postponed publickey for root from ::ffff:10.0.8.174 port 59255 ssh2
+Jan 15 14:07:16 tony.eyemg.com sshd[385]: Accepted publickey for root from ::ffff:10.0.8.174 port 59255 ssh2
+Jan 15 14:07:22 tpm-secure.eyemg.com sshd[13899]: Accepted publickey for root from ::ffff:127.0.0.1 port 56543 ssh2
+Jan 15 14:07:58 maddock.eyemg.com sshd[3277]: Accepted publickey for root from 10.0.8.124 port 47962 ssh2
+Jan 15 14:07:58 maddock.eyemg.com sshd[3277]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:07:58 maddock.eyemg.com sshd[3277]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:07:58 mobius.eyemg.com sshd[18145]: Accepted publickey for root from 10.0.8.124 port 49676 ssh2
+Jan 15 14:07:58 mobius.eyemg.com sshd[18145]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:07:59 mobius.eyemg.com sshd[18145]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:08:00 maddock.eyemg.com sshd[3407]: Postponed publickey for root from 10.0.8.142 port 47799 ssh2
+Jan 15 14:08:00 maddock.eyemg.com sshd[3406]: Accepted publickey for root from 10.0.8.142 port 47799 ssh2
+Jan 15 14:08:00 maddock.eyemg.com sshd[3406]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:08:00 maddock.eyemg.com sshd[3406]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:08:00 maddock.eyemg.com sshd[3515]: Postponed publickey for root from 10.0.8.145 port 32886 ssh2
+Jan 15 14:08:00 maddock.eyemg.com sshd[3514]: Accepted publickey for root from 10.0.8.145 port 32886 ssh2
+Jan 15 14:08:00 maddock.eyemg.com sshd[3514]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:08:00 maddock.eyemg.com sshd[3514]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:08:15 tate.eyemg.com sshd[16052]: Postponed publickey for root from ::ffff:10.0.8.163 port 48957 ssh2
+Jan 15 14:08:15 tate.eyemg.com sshd[16051]: Accepted publickey for root from ::ffff:10.0.8.163 port 48957 ssh2
+Jan 15 14:08:15 tate.eyemg.com sshd[16128]: Postponed publickey for root from ::ffff:10.0.8.113 port 51746 ssh2
+Jan 15 14:08:15 tate.eyemg.com sshd[16124]: Accepted publickey for root from ::ffff:10.0.8.113 port 51746 ssh2
+Jan 15 14:08:19 dino.eyemg.com sshd[31717]: Accepted publickey for root from 10.0.8.158 port 59129 ssh2
+Jan 15 14:08:19 dino.eyemg.com sshd[31717]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:08:19 dino.eyemg.com sshd[31717]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:08:25 tate.eyemg.com sshd[16665]: Postponed publickey for root from ::ffff:10.100.8.88 port 41719 ssh2
+Jan 15 14:08:26 tate.eyemg.com sshd[16664]: Accepted publickey for root from ::ffff:10.100.8.88 port 41719 ssh2
+Jan 15 14:08:27 tate.eyemg.com sshd[16733]: Postponed publickey for root from ::ffff:10.100.8.88 port 41720 ssh2
+Jan 15 14:08:27 tate.eyemg.com sshd[16732]: Accepted publickey for root from ::ffff:10.100.8.88 port 41720 ssh2
+Jan 15 14:08:33 sable.eyemg.com sshd[10613]: Postponed publickey for root from ::ffff:10.0.8.150 port 50746 ssh2
+Jan 15 14:08:33 sable.eyemg.com sshd[10612]: Accepted publickey for root from ::ffff:10.0.8.150 port 50746 ssh2
+Jan 15 14:08:33 sable.eyemg.com sshd[10682]: Postponed publickey for root from ::ffff:10.0.8.97 port 44854 ssh2
+Jan 15 14:08:33 sable.eyemg.com sshd[10681]: Accepted publickey for root from ::ffff:10.0.8.97 port 44854 ssh2
+Jan 15 14:08:35 juno.eyemg.com sshd[24750]: Connection closed by UNKNOWN
+Jan 15 14:08:47 mobius.eyemg.com sshd[18601]: Accepted publickey for root from 10.0.8.159 port 38388 ssh2
+Jan 15 14:08:47 mobius.eyemg.com sshd[18601]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:08:47 mobius.eyemg.com sshd[18601]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:09:16 tony.eyemg.com sshd[1738]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:09:16 tony.eyemg.com sshd[1739]: Postponed publickey for root from ::ffff:10.0.8.174 port 59264 ssh2
+Jan 15 14:09:16 tony.eyemg.com sshd[1738]: Accepted publickey for root from ::ffff:10.0.8.174 port 59264 ssh2
+Jan 15 14:09:22 tpm-secure.eyemg.com sshd[15073]: Accepted publickey for root from ::ffff:127.0.0.1 port 56545 ssh2
+Jan 15 14:09:51 maddock.eyemg.com sshd[31169]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:09:58 maddock.eyemg.com sshd[4869]: Accepted publickey for root from 10.0.8.124 port 47964 ssh2
+Jan 15 14:09:58 maddock.eyemg.com sshd[4869]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:09:58 maddock.eyemg.com sshd[4869]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:09:58 mobius.eyemg.com sshd[19276]: Accepted publickey for root from 10.0.8.124 port 49678 ssh2
+Jan 15 14:09:58 mobius.eyemg.com sshd[19276]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:09:59 mobius.eyemg.com sshd[19276]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:10:00 maddock.eyemg.com sshd[4985]: Postponed publickey for root from 10.0.8.142 port 47859 ssh2
+Jan 15 14:10:00 maddock.eyemg.com sshd[4984]: Accepted publickey for root from 10.0.8.142 port 47859 ssh2
+Jan 15 14:10:00 maddock.eyemg.com sshd[4984]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:10:00 maddock.eyemg.com sshd[4984]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:10:00 maddock.eyemg.com sshd[5086]: Postponed publickey for root from 10.0.8.145 port 32946 ssh2
+Jan 15 14:10:00 maddock.eyemg.com sshd[5085]: Accepted publickey for root from 10.0.8.145 port 32946 ssh2
+Jan 15 14:10:00 maddock.eyemg.com sshd[5085]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:10:01 maddock.eyemg.com sshd[5085]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:10:06 tony.eyemg.com sshd[2469]: Accepted password for root from ::ffff:10.2.1.224 port 40512 ssh2
+Jan 15 14:10:15 tate.eyemg.com sshd[19208]: Postponed publickey for root from ::ffff:10.0.8.163 port 48999 ssh2
+Jan 15 14:10:15 tate.eyemg.com sshd[19207]: Accepted publickey for root from ::ffff:10.0.8.163 port 48999 ssh2
+Jan 15 14:10:15 tate.eyemg.com sshd[19289]: Postponed publickey for root from ::ffff:10.0.8.113 port 51751 ssh2
+Jan 15 14:10:15 tate.eyemg.com sshd[19286]: Accepted publickey for root from ::ffff:10.0.8.113 port 51751 ssh2
+Jan 15 14:10:19 dino.eyemg.com sshd[31877]: Accepted publickey for root from 10.0.8.158 port 59130 ssh2
+Jan 15 14:10:19 dino.eyemg.com sshd[31877]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:10:19 dino.eyemg.com sshd[31877]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:10:26 tate.eyemg.com sshd[19825]: Postponed publickey for root from ::ffff:10.100.8.88 port 41721 ssh2
+Jan 15 14:10:26 tate.eyemg.com sshd[19824]: Accepted publickey for root from ::ffff:10.100.8.88 port 41721 ssh2
+Jan 15 14:10:27 tate.eyemg.com sshd[19905]: Postponed publickey for root from ::ffff:10.100.8.88 port 41722 ssh2
+Jan 15 14:10:27 tate.eyemg.com sshd[19904]: Accepted publickey for root from ::ffff:10.100.8.88 port 41722 ssh2
+Jan 15 14:10:30 tony.eyemg.com sshd[2964]: Accepted password for root from ::ffff:10.2.1.224 port 40513 ssh2
+Jan 15 14:10:33 sable.eyemg.com sshd[14936]: Postponed publickey for root from ::ffff:10.0.8.150 port 50793 ssh2
+Jan 15 14:10:33 sable.eyemg.com sshd[14935]: Accepted publickey for root from ::ffff:10.0.8.150 port 50793 ssh2
+Jan 15 14:10:33 sable.eyemg.com sshd[15004]: Postponed publickey for root from ::ffff:10.0.8.97 port 44859 ssh2
+Jan 15 14:10:33 sable.eyemg.com sshd[15003]: Accepted publickey for root from ::ffff:10.0.8.97 port 44859 ssh2
+Jan 15 14:10:35 juno.eyemg.com sshd[27478]: Connection closed by UNKNOWN
+Jan 15 14:10:47 mobius.eyemg.com sshd[20023]: Accepted publickey for root from 10.0.8.159 port 56199 ssh2
+Jan 15 14:10:47 mobius.eyemg.com sshd[20023]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:10:47 mobius.eyemg.com sshd[20023]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:11:16 tony.eyemg.com sshd[3392]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:11:16 tony.eyemg.com sshd[3393]: Postponed publickey for root from ::ffff:10.0.8.174 port 59267 ssh2
+Jan 15 14:11:16 tony.eyemg.com sshd[3392]: Accepted publickey for root from ::ffff:10.0.8.174 port 59267 ssh2
+Jan 15 14:11:22 tpm-secure.eyemg.com sshd[16265]: Accepted publickey for root from ::ffff:127.0.0.1 port 56553 ssh2
+Jan 15 14:11:58 maddock.eyemg.com sshd[6476]: Accepted publickey for root from 10.0.8.124 port 60979 ssh2
+Jan 15 14:11:58 maddock.eyemg.com sshd[6476]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:11:58 maddock.eyemg.com sshd[6476]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:11:58 mobius.eyemg.com sshd[20720]: Accepted publickey for root from 10.0.8.124 port 47323 ssh2
+Jan 15 14:11:58 mobius.eyemg.com sshd[20720]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:11:59 mobius.eyemg.com sshd[20720]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:12:00 maddock.eyemg.com sshd[6591]: Postponed publickey for root from 10.0.8.142 port 47928 ssh2
+Jan 15 14:12:00 maddock.eyemg.com sshd[6590]: Accepted publickey for root from 10.0.8.142 port 47928 ssh2
+Jan 15 14:12:00 maddock.eyemg.com sshd[6590]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:12:00 maddock.eyemg.com sshd[6590]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:12:00 maddock.eyemg.com sshd[6687]: Postponed publickey for root from 10.0.8.145 port 33015 ssh2
+Jan 15 14:12:00 maddock.eyemg.com sshd[6686]: Accepted publickey for root from 10.0.8.145 port 33015 ssh2
+Jan 15 14:12:00 maddock.eyemg.com sshd[6686]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:12:00 maddock.eyemg.com sshd[6686]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:12:15 tate.eyemg.com sshd[22353]: Postponed publickey for root from ::ffff:10.0.8.163 port 49036 ssh2
+Jan 15 14:12:15 tate.eyemg.com sshd[22352]: Accepted publickey for root from ::ffff:10.0.8.163 port 49036 ssh2
+Jan 15 14:12:15 tate.eyemg.com sshd[22470]: Postponed publickey for root from ::ffff:10.0.8.113 port 51756 ssh2
+Jan 15 14:12:15 tate.eyemg.com sshd[22469]: Accepted publickey for root from ::ffff:10.0.8.113 port 51756 ssh2
+Jan 15 14:12:19 dino.eyemg.com sshd[31985]: Accepted publickey for root from 10.0.8.158 port 51403 ssh2
+Jan 15 14:12:19 dino.eyemg.com sshd[31985]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:12:19 dino.eyemg.com sshd[31985]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:12:26 tate.eyemg.com sshd[22954]: Postponed publickey for root from ::ffff:10.100.8.88 port 41724 ssh2
+Jan 15 14:12:26 tate.eyemg.com sshd[22953]: Accepted publickey for root from ::ffff:10.100.8.88 port 41724 ssh2
+Jan 15 14:12:27 tate.eyemg.com sshd[23022]: Postponed publickey for root from ::ffff:10.100.8.88 port 41725 ssh2
+Jan 15 14:12:27 tate.eyemg.com sshd[23021]: Accepted publickey for root from ::ffff:10.100.8.88 port 41725 ssh2
+Jan 15 14:12:33 sable.eyemg.com sshd[19177]: Postponed publickey for root from ::ffff:10.0.8.150 port 50827 ssh2
+Jan 15 14:12:33 sable.eyemg.com sshd[19176]: Accepted publickey for root from ::ffff:10.0.8.150 port 50827 ssh2
+Jan 15 14:12:33 sable.eyemg.com sshd[19245]: Postponed publickey for root from ::ffff:10.0.8.97 port 44864 ssh2
+Jan 15 14:12:33 sable.eyemg.com sshd[19244]: Accepted publickey for root from ::ffff:10.0.8.97 port 44864 ssh2
+Jan 15 14:12:35 juno.eyemg.com sshd[29235]: Connection closed by UNKNOWN
+Jan 15 14:12:40 tpm-secure.eyemg.com sshd[17116]: Accepted password for root from ::ffff:10.2.1.224 port 37996 ssh2
+Jan 15 14:12:47 mobius.eyemg.com sshd[21423]: Accepted publickey for root from 10.0.8.159 port 56231 ssh2
+Jan 15 14:12:47 mobius.eyemg.com sshd[21423]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:12:47 mobius.eyemg.com sshd[21423]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:02 dino.eyemg.com sshd[32053]: Accepted publickey for root from 10.0.8.52 port 52778 ssh2
+Jan 15 14:13:02 dino.eyemg.com sshd[32053]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:02 dino.eyemg.com sshd[32137]: Accepted publickey for root from 10.0.8.158 port 51404 ssh2
+Jan 15 14:13:02 dino.eyemg.com sshd[32137]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:02 dino.eyemg.com sshd[32137]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:02 dino.eyemg.com sshd[32053]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:03 samir.eyemg.com sshd[21656]: Accepted publickey for root from 10.0.8.52 port 41579 ssh2
+Jan 15 14:13:03 samir.eyemg.com sshd[21656]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:08 samir.eyemg.com sshd[21656]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:08 dino.eyemg.com sshd[32205]: Accepted publickey for root from 10.0.8.52 port 52781 ssh2
+Jan 15 14:13:08 dino.eyemg.com sshd[32205]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:09 samir.eyemg.com sshd[21780]: Accepted publickey for root from 10.0.8.64 port 34939 ssh2
+Jan 15 14:13:09 samir.eyemg.com sshd[21780]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:16 tony.eyemg.com sshd[4737]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:13:16 tony.eyemg.com sshd[4738]: Postponed publickey for root from ::ffff:10.0.8.174 port 59268 ssh2
+Jan 15 14:13:16 tony.eyemg.com sshd[4737]: Accepted publickey for root from ::ffff:10.0.8.174 port 59268 ssh2
+Jan 15 14:13:19 dino.eyemg.com sshd[32205]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:19 samir.eyemg.com sshd[21780]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:19 dino.eyemg.com sshd[32273]: Accepted publickey for root from 10.0.8.52 port 52800 ssh2
+Jan 15 14:13:19 dino.eyemg.com sshd[32273]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:20 samir.eyemg.com sshd[21861]: Accepted publickey for root from 10.0.8.64 port 34940 ssh2
+Jan 15 14:13:20 samir.eyemg.com sshd[21861]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:21 samir.eyemg.com sshd[21861]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:21 dino.eyemg.com sshd[32273]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:22 tpm-secure.eyemg.com sshd[17482]: Accepted publickey for root from ::ffff:127.0.0.1 port 56556 ssh2
+Jan 15 14:13:22 samir.eyemg.com sshd[21942]: Accepted publickey for root from 10.0.8.52 port 41621 ssh2
+Jan 15 14:13:22 samir.eyemg.com sshd[21942]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:25 samir.eyemg.com sshd[21942]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:26 samir.eyemg.com sshd[22022]: Accepted publickey for root from 10.0.8.52 port 41629 ssh2
+Jan 15 14:13:26 samir.eyemg.com sshd[22022]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:28 samir.eyemg.com sshd[22022]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:28 tony.eyemg.com sshd[5200]: Accepted publickey for root from ::ffff:10.0.8.52 port 40549 ssh2
+Jan 15 14:13:28 tony.eyemg.com sshd[5359]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:13:28 tony.eyemg.com sshd[5360]: Postponed publickey for root from ::ffff:10.0.8.174 port 59269 ssh2
+Jan 15 14:13:28 tony.eyemg.com sshd[5359]: Accepted publickey for root from ::ffff:10.0.8.174 port 59269 ssh2
+Jan 15 14:13:29 junior.eyemg.com sshd[27791]: Accepted publickey for root from ::ffff:10.0.8.52 port 36749 ssh2
+Jan 15 14:13:33 tony.eyemg.com sshd[5503]: Accepted publickey for root from ::ffff:10.0.8.52 port 40559 ssh2
+Jan 15 14:13:33 junior.eyemg.com sshd[27945]: Postponed publickey for root from ::ffff:10.0.8.82 port 59270 ssh2
+Jan 15 14:13:33 junior.eyemg.com sshd[27944]: Accepted publickey for root from ::ffff:10.0.8.82 port 59270 ssh2
+Jan 15 14:13:37 tony.eyemg.com sshd[5664]: Accepted publickey for root from ::ffff:10.0.8.52 port 40581 ssh2
+Jan 15 14:13:38 junior.eyemg.com sshd[28079]: Postponed publickey for root from ::ffff:10.0.8.82 port 59271 ssh2
+Jan 15 14:13:38 junior.eyemg.com sshd[28076]: Accepted publickey for root from ::ffff:10.0.8.82 port 59271 ssh2
+Jan 15 14:13:39 tony.eyemg.com sshd[5792]: Accepted publickey for root from ::ffff:10.0.8.52 port 40582 ssh2
+Jan 15 14:13:39 junior.eyemg.com sshd[28207]: Postponed publickey for root from ::ffff:10.0.8.82 port 59272 ssh2
+Jan 15 14:13:40 junior.eyemg.com sshd[28206]: Accepted publickey for root from ::ffff:10.0.8.82 port 59272 ssh2
+Jan 15 14:13:58 maddock.eyemg.com sshd[8082]: Accepted publickey for root from 10.0.8.124 port 60981 ssh2
+Jan 15 14:13:58 maddock.eyemg.com sshd[8082]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:58 maddock.eyemg.com sshd[8082]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:13:58 mobius.eyemg.com sshd[22112]: Accepted publickey for root from 10.0.8.124 port 47325 ssh2
+Jan 15 14:13:58 mobius.eyemg.com sshd[22112]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:13:58 mobius.eyemg.com sshd[22112]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:14:00 maddock.eyemg.com sshd[8197]: Postponed publickey for root from 10.0.8.142 port 48132 ssh2
+Jan 15 14:14:00 maddock.eyemg.com sshd[8196]: Accepted publickey for root from 10.0.8.142 port 48132 ssh2
+Jan 15 14:14:00 maddock.eyemg.com sshd[8196]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:14:00 maddock.eyemg.com sshd[8196]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:14:00 maddock.eyemg.com sshd[8296]: Postponed publickey for root from 10.0.8.145 port 34899 ssh2
+Jan 15 14:14:00 maddock.eyemg.com sshd[8295]: Accepted publickey for root from 10.0.8.145 port 34899 ssh2
+Jan 15 14:14:00 maddock.eyemg.com sshd[8295]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:14:01 maddock.eyemg.com sshd[8295]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:14:02 maddock.eyemg.com sshd[8406]: Postponed publickey for root from 10.0.8.145 port 34904 ssh2
+Jan 15 14:14:02 maddock.eyemg.com sshd[8405]: Accepted publickey for root from 10.0.8.145 port 34904 ssh2
+Jan 15 14:14:02 maddock.eyemg.com sshd[8405]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:14:02 maddock.eyemg.com sshd[8405]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:14:15 tate.eyemg.com sshd[25542]: Postponed publickey for root from ::ffff:10.0.8.163 port 49076 ssh2
+Jan 15 14:14:15 tate.eyemg.com sshd[25541]: Accepted publickey for root from ::ffff:10.0.8.163 port 49076 ssh2
+Jan 15 14:14:15 tate.eyemg.com sshd[25637]: Postponed publickey for root from ::ffff:10.0.8.113 port 51761 ssh2
+Jan 15 14:14:15 tate.eyemg.com sshd[25632]: Accepted publickey for root from ::ffff:10.0.8.113 port 51761 ssh2
+Jan 15 14:14:19 dino.eyemg.com sshd[32381]: Accepted publickey for root from 10.0.8.158 port 51407 ssh2
+Jan 15 14:14:19 dino.eyemg.com sshd[32381]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:14:19 dino.eyemg.com sshd[32381]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:14:25 tate.eyemg.com sshd[26172]: Postponed publickey for root from ::ffff:10.100.8.88 port 41726 ssh2
+Jan 15 14:14:25 tate.eyemg.com sshd[26171]: Accepted publickey for root from ::ffff:10.100.8.88 port 41726 ssh2
+Jan 15 14:14:26 tate.eyemg.com sshd[26252]: Postponed publickey for root from ::ffff:10.100.8.88 port 41727 ssh2
+Jan 15 14:14:27 tate.eyemg.com sshd[26251]: Accepted publickey for root from ::ffff:10.100.8.88 port 41727 ssh2
+Jan 15 14:14:33 sable.eyemg.com sshd[23431]: Postponed publickey for root from ::ffff:10.0.8.150 port 50865 ssh2
+Jan 15 14:14:33 sable.eyemg.com sshd[23432]: Postponed publickey for root from ::ffff:10.0.8.97 port 44865 ssh2
+Jan 15 14:14:33 sable.eyemg.com sshd[23429]: Accepted publickey for root from ::ffff:10.0.8.150 port 50865 ssh2
+Jan 15 14:14:33 sable.eyemg.com sshd[23430]: Accepted publickey for root from ::ffff:10.0.8.97 port 44865 ssh2
+Jan 15 14:14:35 juno.eyemg.com sshd[30999]: Connection closed by UNKNOWN
+Jan 15 14:14:47 mobius.eyemg.com sshd[22816]: Accepted publickey for root from 10.0.8.159 port 36215 ssh2
+Jan 15 14:14:47 mobius.eyemg.com sshd[22816]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:14:47 mobius.eyemg.com sshd[22816]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:01 maddock.eyemg.com sshd[9243]: Postponed publickey for root from 10.0.8.145 port 34967 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9228]: Postponed publickey for root from 10.0.8.145 port 34964 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9239]: Postponed publickey for root from 10.0.8.145 port 34965 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9220]: Accepted publickey for root from 10.0.8.145 port 34964 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9220]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:01 maddock.eyemg.com sshd[9242]: Accepted publickey for root from 10.0.8.145 port 34967 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9230]: Accepted publickey for root from 10.0.8.145 port 34965 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9230]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:01 maddock.eyemg.com sshd[9242]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:01 maddock.eyemg.com sshd[9245]: Postponed publickey for root from 10.0.8.145 port 34968 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9241]: Postponed publickey for root from 10.0.8.145 port 34966 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9244]: Accepted publickey for root from 10.0.8.145 port 34968 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9240]: Accepted publickey for root from 10.0.8.145 port 34966 ssh2
+Jan 15 14:15:01 maddock.eyemg.com sshd[9240]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:01 maddock.eyemg.com sshd[9244]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:02 maddock.eyemg.com sshd[9240]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:02 maddock.eyemg.com sshd[9230]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:02 maddock.eyemg.com sshd[9242]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:02 maddock.eyemg.com sshd[9220]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:02 maddock.eyemg.com sshd[9244]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:02 mobius.eyemg.com sshd[22921]: Accepted publickey for root from 10.0.8.159 port 36216 ssh2
+Jan 15 14:15:02 mobius.eyemg.com sshd[22921]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:02 mobius.eyemg.com sshd[22921]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:02 gannon.eyemg.com sshd[7122]: Accepted publickey for root from 10.0.8.155 port 59434 ssh2
+Jan 15 14:15:02 gannon.eyemg.com sshd[7122]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:03 gannon.eyemg.com sshd[7122]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:16 tony.eyemg.com sshd[6880]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:15:16 tony.eyemg.com sshd[6881]: Postponed publickey for root from ::ffff:10.0.8.174 port 59281 ssh2
+Jan 15 14:15:16 tony.eyemg.com sshd[6880]: Accepted publickey for root from ::ffff:10.0.8.174 port 59281 ssh2
+Jan 15 14:15:22 tpm-secure.eyemg.com sshd[18689]: Accepted publickey for root from ::ffff:127.0.0.1 port 56558 ssh2
+Jan 15 14:15:58 maddock.eyemg.com sshd[10423]: Accepted publickey for root from 10.0.8.124 port 60983 ssh2
+Jan 15 14:15:58 maddock.eyemg.com sshd[10423]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:58 maddock.eyemg.com sshd[10423]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:15:58 mobius.eyemg.com sshd[23639]: Accepted publickey for root from 10.0.8.124 port 47327 ssh2
+Jan 15 14:15:58 mobius.eyemg.com sshd[23639]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:15:59 mobius.eyemg.com sshd[23639]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:16:00 maddock.eyemg.com sshd[10541]: Postponed publickey for root from 10.0.8.142 port 48335 ssh2
+Jan 15 14:16:00 maddock.eyemg.com sshd[10540]: Accepted publickey for root from 10.0.8.142 port 48335 ssh2
+Jan 15 14:16:00 maddock.eyemg.com sshd[10540]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:16:00 maddock.eyemg.com sshd[10540]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:16:00 maddock.eyemg.com sshd[10637]: Postponed publickey for root from 10.0.8.145 port 35101 ssh2
+Jan 15 14:16:00 maddock.eyemg.com sshd[10636]: Accepted publickey for root from 10.0.8.145 port 35101 ssh2
+Jan 15 14:16:00 maddock.eyemg.com sshd[10636]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:16:00 maddock.eyemg.com sshd[10636]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:16:15 tate.eyemg.com sshd[28753]: Postponed publickey for root from ::ffff:10.0.8.163 port 49135 ssh2
+Jan 15 14:16:15 tate.eyemg.com sshd[28752]: Accepted publickey for root from ::ffff:10.0.8.163 port 49135 ssh2
+Jan 15 14:16:15 tate.eyemg.com sshd[28826]: Postponed publickey for root from ::ffff:10.0.8.113 port 51766 ssh2
+Jan 15 14:16:15 tate.eyemg.com sshd[28824]: Accepted publickey for root from ::ffff:10.0.8.113 port 51766 ssh2
+Jan 15 14:16:19 dino.eyemg.com sshd[32539]: Accepted publickey for root from 10.0.8.158 port 51408 ssh2
+Jan 15 14:16:19 dino.eyemg.com sshd[32539]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:16:19 dino.eyemg.com sshd[32539]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:16:25 tate.eyemg.com sshd[29096]: Postponed publickey for root from ::ffff:10.100.8.88 port 41729 ssh2
+Jan 15 14:16:25 tate.eyemg.com sshd[29095]: Accepted publickey for root from ::ffff:10.100.8.88 port 41729 ssh2
+Jan 15 14:16:26 tate.eyemg.com sshd[29436]: Postponed publickey for root from ::ffff:10.100.8.88 port 41730 ssh2
+Jan 15 14:16:27 tate.eyemg.com sshd[29435]: Accepted publickey for root from ::ffff:10.100.8.88 port 41730 ssh2
+Jan 15 14:16:33 sable.eyemg.com sshd[27795]: Postponed publickey for root from ::ffff:10.0.8.97 port 44870 ssh2
+Jan 15 14:16:33 sable.eyemg.com sshd[27794]: Accepted publickey for root from ::ffff:10.0.8.97 port 44870 ssh2
+Jan 15 14:16:33 sable.eyemg.com sshd[27810]: Postponed publickey for root from ::ffff:10.0.8.150 port 50907 ssh2
+Jan 15 14:16:33 sable.eyemg.com sshd[27809]: Accepted publickey for root from ::ffff:10.0.8.150 port 50907 ssh2
+Jan 15 14:16:35 juno.eyemg.com sshd[1278]: Connection closed by UNKNOWN
+Jan 15 14:16:47 mobius.eyemg.com sshd[24339]: Accepted publickey for root from 10.0.8.159 port 36240 ssh2
+Jan 15 14:16:47 mobius.eyemg.com sshd[24339]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:16:47 mobius.eyemg.com sshd[24339]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:17:16 tony.eyemg.com sshd[8255]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:17:16 tony.eyemg.com sshd[8256]: Postponed publickey for root from ::ffff:10.0.8.174 port 59282 ssh2
+Jan 15 14:17:16 tony.eyemg.com sshd[8255]: Accepted publickey for root from ::ffff:10.0.8.174 port 59282 ssh2
+Jan 15 14:17:22 tpm-secure.eyemg.com sshd[19860]: Accepted publickey for root from ::ffff:127.0.0.1 port 56562 ssh2
+Jan 15 14:17:58 maddock.eyemg.com sshd[11859]: Accepted publickey for root from 10.0.8.124 port 55584 ssh2
+Jan 15 14:17:58 maddock.eyemg.com sshd[11859]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:17:58 maddock.eyemg.com sshd[11859]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:17:58 mobius.eyemg.com sshd[25033]: Accepted publickey for root from 10.0.8.124 port 40570 ssh2
+Jan 15 14:17:58 mobius.eyemg.com sshd[25033]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:17:59 mobius.eyemg.com sshd[25033]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:18:00 maddock.eyemg.com sshd[12229]: Postponed publickey for root from 10.0.8.142 port 48899 ssh2
+Jan 15 14:18:00 maddock.eyemg.com sshd[12228]: Accepted publickey for root from 10.0.8.142 port 48899 ssh2
+Jan 15 14:18:00 maddock.eyemg.com sshd[12228]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:18:00 maddock.eyemg.com sshd[12228]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:18:00 maddock.eyemg.com sshd[12326]: Postponed publickey for root from 10.0.8.145 port 51443 ssh2
+Jan 15 14:18:00 maddock.eyemg.com sshd[12325]: Accepted publickey for root from 10.0.8.145 port 51443 ssh2
+Jan 15 14:18:00 maddock.eyemg.com sshd[12325]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:18:01 maddock.eyemg.com sshd[12325]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:18:15 tate.eyemg.com sshd[31887]: Postponed publickey for root from ::ffff:10.0.8.163 port 49166 ssh2
+Jan 15 14:18:15 tate.eyemg.com sshd[31886]: Accepted publickey for root from ::ffff:10.0.8.163 port 49166 ssh2
+Jan 15 14:18:15 tate.eyemg.com sshd[31963]: Postponed publickey for root from ::ffff:10.0.8.113 port 51771 ssh2
+Jan 15 14:18:15 tate.eyemg.com sshd[31962]: Accepted publickey for root from ::ffff:10.0.8.113 port 51771 ssh2
+Jan 15 14:18:19 dino.eyemg.com sshd[32647]: Accepted publickey for root from 10.0.8.158 port 41843 ssh2
+Jan 15 14:18:19 dino.eyemg.com sshd[32647]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:18:19 dino.eyemg.com sshd[32647]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:18:25 tate.eyemg.com sshd[32222]: Postponed publickey for root from ::ffff:10.100.8.88 port 41731 ssh2
+Jan 15 14:18:25 tate.eyemg.com sshd[32212]: Accepted publickey for root from ::ffff:10.100.8.88 port 41731 ssh2
+Jan 15 14:18:26 tate.eyemg.com sshd[32294]: Postponed publickey for root from ::ffff:10.100.8.88 port 41732 ssh2
+Jan 15 14:18:27 tate.eyemg.com sshd[32293]: Accepted publickey for root from ::ffff:10.100.8.88 port 41732 ssh2
+Jan 15 14:18:33 sable.eyemg.com sshd[32089]: Postponed publickey for root from ::ffff:10.0.8.150 port 50952 ssh2
+Jan 15 14:18:33 sable.eyemg.com sshd[32090]: Postponed publickey for root from ::ffff:10.0.8.97 port 44875 ssh2
+Jan 15 14:18:33 sable.eyemg.com sshd[32087]: Accepted publickey for root from ::ffff:10.0.8.150 port 50952 ssh2
+Jan 15 14:18:33 sable.eyemg.com sshd[32088]: Accepted publickey for root from ::ffff:10.0.8.97 port 44875 ssh2
+Jan 15 14:18:35 juno.eyemg.com sshd[3026]: Connection closed by UNKNOWN
+Jan 15 14:18:47 mobius.eyemg.com sshd[25730]: Accepted publickey for root from 10.0.8.159 port 36264 ssh2
+Jan 15 14:18:47 mobius.eyemg.com sshd[25730]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:18:47 mobius.eyemg.com sshd[25730]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:19:16 tony.eyemg.com sshd[9586]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:19:16 tony.eyemg.com sshd[9587]: Postponed publickey for root from ::ffff:10.0.8.174 port 59284 ssh2
+Jan 15 14:19:16 tony.eyemg.com sshd[9586]: Accepted publickey for root from ::ffff:10.0.8.174 port 59284 ssh2
+Jan 15 14:19:22 tpm-secure.eyemg.com sshd[21017]: Accepted publickey for root from ::ffff:127.0.0.1 port 56563 ssh2
+Jan 15 14:19:58 maddock.eyemg.com sshd[13351]: Accepted publickey for root from 10.0.8.124 port 55586 ssh2
+Jan 15 14:19:58 maddock.eyemg.com sshd[13351]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:19:58 maddock.eyemg.com sshd[13351]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:19:58 mobius.eyemg.com sshd[26404]: Accepted publickey for root from 10.0.8.124 port 40572 ssh2
+Jan 15 14:19:58 mobius.eyemg.com sshd[26404]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:19:59 mobius.eyemg.com sshd[26404]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:20:00 maddock.eyemg.com sshd[13473]: Postponed publickey for root from 10.0.8.142 port 48953 ssh2
+Jan 15 14:20:00 maddock.eyemg.com sshd[13472]: Accepted publickey for root from 10.0.8.142 port 48953 ssh2
+Jan 15 14:20:00 maddock.eyemg.com sshd[13472]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:20:00 maddock.eyemg.com sshd[13472]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:20:00 maddock.eyemg.com sshd[13569]: Postponed publickey for root from 10.0.8.145 port 51497 ssh2
+Jan 15 14:20:00 maddock.eyemg.com sshd[13568]: Accepted publickey for root from 10.0.8.145 port 51497 ssh2
+Jan 15 14:20:00 maddock.eyemg.com sshd[13568]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:20:01 maddock.eyemg.com sshd[13568]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:20:15 tate.eyemg.com sshd[2588]: Postponed publickey for root from ::ffff:10.0.8.163 port 49227 ssh2
+Jan 15 14:20:15 tate.eyemg.com sshd[2587]: Accepted publickey for root from ::ffff:10.0.8.163 port 49227 ssh2
+Jan 15 14:20:15 tate.eyemg.com sshd[2660]: Postponed publickey for root from ::ffff:10.0.8.113 port 51776 ssh2
+Jan 15 14:20:15 tate.eyemg.com sshd[2659]: Accepted publickey for root from ::ffff:10.0.8.113 port 51776 ssh2
+Jan 15 14:20:19 dino.eyemg.com sshd[341]: Accepted publickey for root from 10.0.8.158 port 41844 ssh2
+Jan 15 14:20:19 dino.eyemg.com sshd[341]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:20:19 dino.eyemg.com sshd[341]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:20:25 tate.eyemg.com sshd[2910]: Postponed publickey for root from ::ffff:10.100.8.88 port 41734 ssh2
+Jan 15 14:20:25 tate.eyemg.com sshd[2909]: Accepted publickey for root from ::ffff:10.100.8.88 port 41734 ssh2
+Jan 15 14:20:27 tate.eyemg.com sshd[2978]: Postponed publickey for root from ::ffff:10.100.8.88 port 41735 ssh2
+Jan 15 14:20:27 tate.eyemg.com sshd[2977]: Accepted publickey for root from ::ffff:10.100.8.88 port 41735 ssh2
+Jan 15 14:20:33 sable.eyemg.com sshd[3937]: Postponed publickey for root from ::ffff:10.0.8.150 port 50991 ssh2
+Jan 15 14:20:33 sable.eyemg.com sshd[3936]: Accepted publickey for root from ::ffff:10.0.8.150 port 50991 ssh2
+Jan 15 14:20:33 sable.eyemg.com sshd[4007]: Postponed publickey for root from ::ffff:10.0.8.97 port 44884 ssh2
+Jan 15 14:20:33 sable.eyemg.com sshd[4006]: Accepted publickey for root from ::ffff:10.0.8.97 port 44884 ssh2
+Jan 15 14:20:35 juno.eyemg.com sshd[5803]: Connection closed by UNKNOWN
+Jan 15 14:20:47 mobius.eyemg.com sshd[27158]: Accepted publickey for root from 10.0.8.159 port 33008 ssh2
+Jan 15 14:20:47 mobius.eyemg.com sshd[27158]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:20:47 mobius.eyemg.com sshd[27158]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:21:01 maddock.eyemg.com sshd[14367]: Postponed publickey for root from 10.0.8.145 port 51557 ssh2
+Jan 15 14:21:01 maddock.eyemg.com sshd[14366]: Accepted publickey for root from 10.0.8.145 port 51557 ssh2
+Jan 15 14:21:01 maddock.eyemg.com sshd[14366]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:21:02 maddock.eyemg.com sshd[14366]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:21:16 tony.eyemg.com sshd[10992]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:21:16 tony.eyemg.com sshd[10993]: Postponed publickey for root from ::ffff:10.0.8.174 port 59289 ssh2
+Jan 15 14:21:16 tony.eyemg.com sshd[10992]: Accepted publickey for root from ::ffff:10.0.8.174 port 59289 ssh2
+Jan 15 14:21:22 tpm-secure.eyemg.com sshd[22234]: Accepted publickey for root from ::ffff:127.0.0.1 port 56565 ssh2
+Jan 15 14:21:58 maddock.eyemg.com sshd[15043]: Accepted publickey for root from 10.0.8.124 port 36447 ssh2
+Jan 15 14:21:58 maddock.eyemg.com sshd[15043]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:21:58 maddock.eyemg.com sshd[15043]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:21:58 mobius.eyemg.com sshd[27839]: Accepted publickey for root from 10.0.8.124 port 49744 ssh2
+Jan 15 14:21:59 mobius.eyemg.com sshd[27839]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:21:59 mobius.eyemg.com sshd[27839]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:22:00 maddock.eyemg.com sshd[15165]: Postponed publickey for root from 10.0.8.142 port 49059 ssh2
+Jan 15 14:22:00 maddock.eyemg.com sshd[15164]: Accepted publickey for root from 10.0.8.142 port 49059 ssh2
+Jan 15 14:22:00 maddock.eyemg.com sshd[15164]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:22:00 maddock.eyemg.com sshd[15164]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:22:00 maddock.eyemg.com sshd[15269]: Postponed publickey for root from 10.0.8.145 port 51603 ssh2
+Jan 15 14:22:00 maddock.eyemg.com sshd[15268]: Accepted publickey for root from 10.0.8.145 port 51603 ssh2
+Jan 15 14:22:00 maddock.eyemg.com sshd[15268]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:22:00 maddock.eyemg.com sshd[15268]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:22:15 tate.eyemg.com sshd[5738]: Postponed publickey for root from ::ffff:10.0.8.163 port 49273 ssh2
+Jan 15 14:22:15 tate.eyemg.com sshd[5737]: Postponed publickey for root from ::ffff:10.0.8.113 port 51781 ssh2
+Jan 15 14:22:15 tate.eyemg.com sshd[5736]: Accepted publickey for root from ::ffff:10.0.8.163 port 49273 ssh2
+Jan 15 14:22:15 tate.eyemg.com sshd[5735]: Accepted publickey for root from ::ffff:10.0.8.113 port 51781 ssh2
+Jan 15 14:22:19 dino.eyemg.com sshd[451]: Accepted publickey for root from 10.0.8.158 port 59829 ssh2
+Jan 15 14:22:19 dino.eyemg.com sshd[451]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:22:19 dino.eyemg.com sshd[451]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:22:25 tate.eyemg.com sshd[6009]: Postponed publickey for root from ::ffff:10.100.8.88 port 41736 ssh2
+Jan 15 14:22:26 tate.eyemg.com sshd[6008]: Accepted publickey for root from ::ffff:10.100.8.88 port 41736 ssh2
+Jan 15 14:22:27 tate.eyemg.com sshd[6077]: Postponed publickey for root from ::ffff:10.100.8.88 port 41737 ssh2
+Jan 15 14:22:27 tate.eyemg.com sshd[6076]: Accepted publickey for root from ::ffff:10.100.8.88 port 41737 ssh2
+Jan 15 14:22:33 sable.eyemg.com sshd[8246]: Postponed publickey for root from ::ffff:10.0.8.150 port 51041 ssh2
+Jan 15 14:22:33 sable.eyemg.com sshd[8245]: Accepted publickey for root from ::ffff:10.0.8.150 port 51041 ssh2
+Jan 15 14:22:33 sable.eyemg.com sshd[8314]: Postponed publickey for root from ::ffff:10.0.8.97 port 44889 ssh2
+Jan 15 14:22:33 sable.eyemg.com sshd[8313]: Accepted publickey for root from ::ffff:10.0.8.97 port 44889 ssh2
+Jan 15 14:22:35 juno.eyemg.com sshd[7519]: Connection closed by UNKNOWN
+Jan 15 14:22:47 mobius.eyemg.com sshd[28544]: Accepted publickey for root from 10.0.8.159 port 33035 ssh2
+Jan 15 14:22:47 mobius.eyemg.com sshd[28544]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:22:47 mobius.eyemg.com sshd[28544]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:23:16 tony.eyemg.com sshd[12344]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:23:16 tony.eyemg.com sshd[12345]: Postponed publickey for root from ::ffff:10.0.8.174 port 59294 ssh2
+Jan 15 14:23:16 tony.eyemg.com sshd[12344]: Accepted publickey for root from ::ffff:10.0.8.174 port 59294 ssh2
+Jan 15 14:23:22 tpm-secure.eyemg.com sshd[23393]: Accepted publickey for root from ::ffff:127.0.0.1 port 56570 ssh2
+Jan 15 14:23:58 maddock.eyemg.com sshd[16529]: Accepted publickey for root from 10.0.8.124 port 36449 ssh2
+Jan 15 14:23:58 maddock.eyemg.com sshd[16529]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:23:58 maddock.eyemg.com sshd[16529]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:23:58 mobius.eyemg.com sshd[29224]: Accepted publickey for root from 10.0.8.124 port 49746 ssh2
+Jan 15 14:23:58 mobius.eyemg.com sshd[29224]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:23:58 mobius.eyemg.com sshd[29224]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:24:00 maddock.eyemg.com sshd[16643]: Postponed publickey for root from 10.0.8.142 port 39181 ssh2
+Jan 15 14:24:00 maddock.eyemg.com sshd[16642]: Accepted publickey for root from 10.0.8.142 port 39181 ssh2
+Jan 15 14:24:00 maddock.eyemg.com sshd[16642]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:24:00 maddock.eyemg.com sshd[16642]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:24:00 maddock.eyemg.com sshd[16739]: Postponed publickey for root from 10.0.8.145 port 50262 ssh2
+Jan 15 14:24:00 maddock.eyemg.com sshd[16738]: Accepted publickey for root from 10.0.8.145 port 50262 ssh2
+Jan 15 14:24:00 maddock.eyemg.com sshd[16738]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:24:00 maddock.eyemg.com sshd[16738]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:24:15 tate.eyemg.com sshd[8828]: Postponed publickey for root from ::ffff:10.0.8.163 port 49304 ssh2
+Jan 15 14:24:15 tate.eyemg.com sshd[8827]: Accepted publickey for root from ::ffff:10.0.8.163 port 49304 ssh2
+Jan 15 14:24:15 tate.eyemg.com sshd[8830]: Postponed publickey for root from ::ffff:10.0.8.113 port 51786 ssh2
+Jan 15 14:24:15 tate.eyemg.com sshd[8829]: Accepted publickey for root from ::ffff:10.0.8.113 port 51786 ssh2
+Jan 15 14:24:19 dino.eyemg.com sshd[559]: Accepted publickey for root from 10.0.8.158 port 59830 ssh2
+Jan 15 14:24:19 dino.eyemg.com sshd[559]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:24:19 dino.eyemg.com sshd[559]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:24:26 tate.eyemg.com sshd[9122]: Postponed publickey for root from ::ffff:10.100.8.88 port 41739 ssh2
+Jan 15 14:24:26 tate.eyemg.com sshd[9121]: Accepted publickey for root from ::ffff:10.100.8.88 port 41739 ssh2
+Jan 15 14:24:26 tate.eyemg.com sshd[9195]: Postponed publickey for root from ::ffff:10.100.8.88 port 41740 ssh2
+Jan 15 14:24:27 tate.eyemg.com sshd[9194]: Accepted publickey for root from ::ffff:10.100.8.88 port 41740 ssh2
+Jan 15 14:24:33 sable.eyemg.com sshd[12559]: Postponed publickey for root from ::ffff:10.0.8.150 port 51111 ssh2
+Jan 15 14:24:33 sable.eyemg.com sshd[12558]: Accepted publickey for root from ::ffff:10.0.8.150 port 51111 ssh2
+Jan 15 14:24:33 sable.eyemg.com sshd[12561]: Postponed publickey for root from ::ffff:10.0.8.97 port 44890 ssh2
+Jan 15 14:24:33 sable.eyemg.com sshd[12560]: Accepted publickey for root from ::ffff:10.0.8.97 port 44890 ssh2
+Jan 15 14:24:35 juno.eyemg.com sshd[9261]: Connection closed by UNKNOWN
+Jan 15 14:24:47 mobius.eyemg.com sshd[29657]: Accepted publickey for root from 10.0.8.159 port 41642 ssh2
+Jan 15 14:24:47 mobius.eyemg.com sshd[29657]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:24:47 mobius.eyemg.com sshd[29657]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:25:16 tony.eyemg.com sshd[13735]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:25:16 tony.eyemg.com sshd[13736]: Postponed publickey for root from ::ffff:10.0.8.174 port 59295 ssh2
+Jan 15 14:25:16 tony.eyemg.com sshd[13735]: Accepted publickey for root from ::ffff:10.0.8.174 port 59295 ssh2
+Jan 15 14:25:22 tpm-secure.eyemg.com sshd[24607]: Accepted publickey for root from ::ffff:127.0.0.1 port 56579 ssh2
+Jan 15 14:25:58 maddock.eyemg.com sshd[18069]: Accepted publickey for root from 10.0.8.124 port 36451 ssh2
+Jan 15 14:25:58 maddock.eyemg.com sshd[18069]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:25:58 maddock.eyemg.com sshd[18069]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:25:58 mobius.eyemg.com sshd[30635]: Accepted publickey for root from 10.0.8.124 port 49748 ssh2
+Jan 15 14:25:58 mobius.eyemg.com sshd[30635]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:25:58 mobius.eyemg.com sshd[30635]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:26:00 maddock.eyemg.com sshd[18183]: Postponed publickey for root from 10.0.8.142 port 39262 ssh2
+Jan 15 14:26:00 maddock.eyemg.com sshd[18182]: Accepted publickey for root from 10.0.8.142 port 39262 ssh2
+Jan 15 14:26:00 maddock.eyemg.com sshd[18182]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:26:00 maddock.eyemg.com sshd[18182]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:26:00 maddock.eyemg.com sshd[18279]: Postponed publickey for root from 10.0.8.145 port 50342 ssh2
+Jan 15 14:26:00 maddock.eyemg.com sshd[18278]: Accepted publickey for root from 10.0.8.145 port 50342 ssh2
+Jan 15 14:26:00 maddock.eyemg.com sshd[18278]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:26:01 maddock.eyemg.com sshd[18278]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:26:15 tate.eyemg.com sshd[11964]: Postponed publickey for root from ::ffff:10.0.8.113 port 51787 ssh2
+Jan 15 14:26:15 tate.eyemg.com sshd[11962]: Accepted publickey for root from ::ffff:10.0.8.113 port 51787 ssh2
+Jan 15 14:26:15 tate.eyemg.com sshd[12087]: Postponed publickey for root from ::ffff:10.0.8.163 port 49339 ssh2
+Jan 15 14:26:15 tate.eyemg.com sshd[12086]: Accepted publickey for root from ::ffff:10.0.8.163 port 49339 ssh2
+Jan 15 14:26:19 dino.eyemg.com sshd[719]: Accepted publickey for root from 10.0.8.158 port 59831 ssh2
+Jan 15 14:26:19 dino.eyemg.com sshd[719]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:26:19 dino.eyemg.com sshd[719]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:26:25 tate.eyemg.com sshd[12321]: Postponed publickey for root from ::ffff:10.100.8.88 port 41741 ssh2
+Jan 15 14:26:25 tate.eyemg.com sshd[12320]: Accepted publickey for root from ::ffff:10.100.8.88 port 41741 ssh2
+Jan 15 14:26:27 tate.eyemg.com sshd[12401]: Postponed publickey for root from ::ffff:10.100.8.88 port 41742 ssh2
+Jan 15 14:26:27 tate.eyemg.com sshd[12400]: Accepted publickey for root from ::ffff:10.100.8.88 port 41742 ssh2
+Jan 15 14:26:33 sable.eyemg.com sshd[16845]: Postponed publickey for root from ::ffff:10.0.8.150 port 51171 ssh2
+Jan 15 14:26:33 sable.eyemg.com sshd[16846]: Postponed publickey for root from ::ffff:10.0.8.97 port 44895 ssh2
+Jan 15 14:26:33 sable.eyemg.com sshd[16843]: Accepted publickey for root from ::ffff:10.0.8.150 port 51171 ssh2
+Jan 15 14:26:33 sable.eyemg.com sshd[16844]: Accepted publickey for root from ::ffff:10.0.8.97 port 44895 ssh2
+Jan 15 14:26:35 juno.eyemg.com sshd[11985]: Connection closed by UNKNOWN
+Jan 15 14:26:47 mobius.eyemg.com sshd[31085]: Accepted publickey for root from 10.0.8.159 port 41654 ssh2
+Jan 15 14:26:47 mobius.eyemg.com sshd[31085]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:26:47 mobius.eyemg.com sshd[31085]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:27:16 tony.eyemg.com sshd[15079]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:27:16 tony.eyemg.com sshd[15080]: Postponed publickey for root from ::ffff:10.0.8.174 port 59304 ssh2
+Jan 15 14:27:16 tony.eyemg.com sshd[15079]: Accepted publickey for root from ::ffff:10.0.8.174 port 59304 ssh2
+Jan 15 14:27:22 tpm-secure.eyemg.com sshd[25751]: Accepted publickey for root from ::ffff:127.0.0.1 port 56580 ssh2
+Jan 15 14:27:58 maddock.eyemg.com sshd[19560]: Accepted publickey for root from 10.0.8.124 port 48354 ssh2
+Jan 15 14:27:58 maddock.eyemg.com sshd[19560]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:27:58 maddock.eyemg.com sshd[19560]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:27:58 mobius.eyemg.com sshd[32014]: Accepted publickey for root from 10.0.8.124 port 38491 ssh2
+Jan 15 14:27:58 mobius.eyemg.com sshd[32014]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:27:58 mobius.eyemg.com sshd[32014]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:28:00 maddock.eyemg.com sshd[19674]: Postponed publickey for root from 10.0.8.142 port 38590 ssh2
+Jan 15 14:28:00 maddock.eyemg.com sshd[19673]: Accepted publickey for root from 10.0.8.142 port 38590 ssh2
+Jan 15 14:28:00 maddock.eyemg.com sshd[19673]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:28:00 maddock.eyemg.com sshd[19673]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:28:00 maddock.eyemg.com sshd[19770]: Postponed publickey for root from 10.0.8.145 port 44571 ssh2
+Jan 15 14:28:00 maddock.eyemg.com sshd[19769]: Accepted publickey for root from 10.0.8.145 port 44571 ssh2
+Jan 15 14:28:00 maddock.eyemg.com sshd[19769]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:28:00 maddock.eyemg.com sshd[19769]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:28:01 maddock.eyemg.com sshd[19878]: Postponed publickey for root from 10.0.8.145 port 44572 ssh2
+Jan 15 14:28:01 maddock.eyemg.com sshd[19877]: Accepted publickey for root from 10.0.8.145 port 44572 ssh2
+Jan 15 14:28:01 maddock.eyemg.com sshd[19877]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:28:01 maddock.eyemg.com sshd[19877]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:28:15 tate.eyemg.com sshd[15135]: Postponed publickey for root from ::ffff:10.0.8.113 port 51792 ssh2
+Jan 15 14:28:15 tate.eyemg.com sshd[15133]: Accepted publickey for root from ::ffff:10.0.8.113 port 51792 ssh2
+Jan 15 14:28:15 tate.eyemg.com sshd[15256]: Postponed publickey for root from ::ffff:10.0.8.163 port 49387 ssh2
+Jan 15 14:28:15 tate.eyemg.com sshd[15255]: Accepted publickey for root from ::ffff:10.0.8.163 port 49387 ssh2
+Jan 15 14:28:19 dino.eyemg.com sshd[827]: Accepted publickey for root from 10.0.8.158 port 37866 ssh2
+Jan 15 14:28:19 dino.eyemg.com sshd[827]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:28:19 dino.eyemg.com sshd[827]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:28:25 tate.eyemg.com sshd[15463]: Postponed publickey for root from ::ffff:10.100.8.88 port 41744 ssh2
+Jan 15 14:28:25 tate.eyemg.com sshd[15462]: Accepted publickey for root from ::ffff:10.100.8.88 port 41744 ssh2
+Jan 15 14:28:26 tate.eyemg.com sshd[15531]: Postponed publickey for root from ::ffff:10.100.8.88 port 41745 ssh2
+Jan 15 14:28:26 tate.eyemg.com sshd[15530]: Accepted publickey for root from ::ffff:10.100.8.88 port 41745 ssh2
+Jan 15 14:28:33 sable.eyemg.com sshd[21099]: Postponed publickey for root from ::ffff:10.0.8.150 port 51199 ssh2
+Jan 15 14:28:33 sable.eyemg.com sshd[21100]: Postponed publickey for root from ::ffff:10.0.8.97 port 44900 ssh2
+Jan 15 14:28:33 sable.eyemg.com sshd[21097]: Accepted publickey for root from ::ffff:10.0.8.150 port 51199 ssh2
+Jan 15 14:28:33 sable.eyemg.com sshd[21098]: Accepted publickey for root from ::ffff:10.0.8.97 port 44900 ssh2
+Jan 15 14:28:35 juno.eyemg.com sshd[13737]: Connection closed by UNKNOWN
+Jan 15 14:28:47 mobius.eyemg.com sshd[32463]: Accepted publickey for root from 10.0.8.159 port 41669 ssh2
+Jan 15 14:28:47 mobius.eyemg.com sshd[32463]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:28:47 mobius.eyemg.com sshd[32463]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:29:02 mobius.eyemg.com sshd[355]: Accepted publickey for root from 10.0.8.159 port 50006 ssh2
+Jan 15 14:29:02 mobius.eyemg.com sshd[355]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:29:02 mobius.eyemg.com sshd[355]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:29:03 gannon.eyemg.com sshd[7267]: Accepted publickey for root from 10.0.8.155 port 55308 ssh2
+Jan 15 14:29:03 gannon.eyemg.com sshd[7267]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:29:04 gannon.eyemg.com sshd[7267]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:29:16 tony.eyemg.com sshd[16425]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:29:16 tony.eyemg.com sshd[16426]: Postponed publickey for root from ::ffff:10.0.8.174 port 59305 ssh2
+Jan 15 14:29:16 tony.eyemg.com sshd[16425]: Accepted publickey for root from ::ffff:10.0.8.174 port 59305 ssh2
+Jan 15 14:29:19 zoltan.eyemg.com sshd[4525]: Accepted password for aholland from 10.0.4.208 port 49392 ssh2
+Jan 15 14:29:19 zoltan.eyemg.com sshd[4525]: pam_unix(sshd:session): session opened for user aholland by (uid=0)
+Jan 15 14:29:19 zoltan.eyemg.com sshd[4792]: subsystem request for sftp
+Jan 15 14:29:22 tpm-secure.eyemg.com sshd[26902]: Accepted publickey for root from ::ffff:127.0.0.1 port 56583 ssh2
+Jan 15 14:29:33 zoltan.eyemg.com sshd[4525]: pam_unix(sshd:session): session closed for user aholland
+Jan 15 14:29:58 maddock.eyemg.com sshd[21157]: Accepted publickey for root from 10.0.8.124 port 48356 ssh2
+Jan 15 14:29:58 maddock.eyemg.com sshd[21157]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:29:58 maddock.eyemg.com sshd[21157]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:29:58 mobius.eyemg.com sshd[1043]: Accepted publickey for root from 10.0.8.124 port 38493 ssh2
+Jan 15 14:29:58 mobius.eyemg.com sshd[1043]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:29:59 mobius.eyemg.com sshd[1043]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:00 maddock.eyemg.com sshd[21271]: Postponed publickey for root from 10.0.8.142 port 38650 ssh2
+Jan 15 14:30:00 maddock.eyemg.com sshd[21270]: Accepted publickey for root from 10.0.8.142 port 38650 ssh2
+Jan 15 14:30:00 maddock.eyemg.com sshd[21270]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:00 maddock.eyemg.com sshd[21270]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:00 maddock.eyemg.com sshd[21367]: Postponed publickey for root from 10.0.8.145 port 44631 ssh2
+Jan 15 14:30:00 maddock.eyemg.com sshd[21366]: Accepted publickey for root from 10.0.8.145 port 44631 ssh2
+Jan 15 14:30:00 maddock.eyemg.com sshd[21366]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:00 maddock.eyemg.com sshd[21366]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:01 maddock.eyemg.com sshd[21620]: Postponed publickey for root from 10.0.8.145 port 44635 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21623]: Postponed publickey for root from 10.0.8.145 port 44636 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21616]: Accepted publickey for root from 10.0.8.145 port 44635 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21628]: Postponed publickey for root from 10.0.8.145 port 44638 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21616]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21629]: Postponed publickey for root from 10.0.8.145 port 44639 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21619]: Accepted publickey for root from 10.0.8.145 port 44636 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21619]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21625]: Accepted publickey for root from 10.0.8.145 port 44639 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21625]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21624]: Accepted publickey for root from 10.0.8.145 port 44638 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21624]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21615]: Postponed publickey for root from 10.0.8.145 port 44634 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21617]: Postponed publickey for root from 10.0.8.145 port 44633 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21632]: Postponed publickey for root from 10.0.8.145 port 44640 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21601]: Accepted publickey for root from 10.0.8.145 port 44634 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21601]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21600]: Accepted publickey for root from 10.0.8.145 port 44633 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21600]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21631]: Accepted publickey for root from 10.0.8.145 port 44640 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21662]: Postponed publickey for root from 10.0.8.145 port 44643 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21630]: Postponed publickey for root from 10.0.8.145 port 44637 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21657]: Postponed publickey for root from 10.0.8.145 port 44642 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21642]: Accepted publickey for root from 10.0.8.145 port 44643 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21642]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21631]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:01 maddock.eyemg.com sshd[21621]: Accepted publickey for root from 10.0.8.145 port 44637 ssh2
+Jan 15 14:30:01 maddock.eyemg.com sshd[21621]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:02 maddock.eyemg.com sshd[21640]: Accepted publickey for root from 10.0.8.145 port 44642 ssh2
+Jan 15 14:30:02 maddock.eyemg.com sshd[21640]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:02 maddock.eyemg.com sshd[21667]: Postponed publickey for root from 10.0.8.145 port 44641 ssh2
+Jan 15 14:30:02 maddock.eyemg.com sshd[21633]: Accepted publickey for root from 10.0.8.145 port 44641 ssh2
+Jan 15 14:30:02 maddock.eyemg.com sshd[21633]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:02 gannon.eyemg.com sshd[7316]: Accepted password for aholland from 10.0.4.208 port 49393 ssh2
+Jan 15 14:30:02 mobius.eyemg.com sshd[1148]: Accepted publickey for root from 10.0.8.159 port 50013 ssh2
+Jan 15 14:30:02 mobius.eyemg.com sshd[1148]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:02 gannon.eyemg.com sshd[7316]: pam_unix(sshd:session): session opened for user aholland by (uid=0)
+Jan 15 14:30:02 mobius.eyemg.com sshd[1148]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 gannon.eyemg.com sshd[7330]: subsystem request for sftp
+Jan 15 14:30:02 maddock.eyemg.com sshd[21616]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 maddock.eyemg.com sshd[21601]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 maddock.eyemg.com sshd[21619]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 maddock.eyemg.com sshd[21600]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 maddock.eyemg.com sshd[21642]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 gannon.eyemg.com sshd[7338]: Accepted publickey for root from 10.0.8.155 port 55316 ssh2
+Jan 15 14:30:02 gannon.eyemg.com sshd[7338]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:02 maddock.eyemg.com sshd[21625]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 maddock.eyemg.com sshd[21621]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:02 maddock.eyemg.com sshd[21640]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:03 maddock.eyemg.com sshd[21631]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:03 gannon.eyemg.com sshd[7338]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:03 maddock.eyemg.com sshd[21633]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:03 maddock.eyemg.com sshd[21624]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:15 tate.eyemg.com sshd[18286]: Postponed publickey for root from ::ffff:10.0.8.113 port 51797 ssh2
+Jan 15 14:30:15 tate.eyemg.com sshd[18283]: Accepted publickey for root from ::ffff:10.0.8.113 port 51797 ssh2
+Jan 15 14:30:15 tate.eyemg.com sshd[18410]: Postponed publickey for root from ::ffff:10.0.8.163 port 49426 ssh2
+Jan 15 14:30:15 tate.eyemg.com sshd[18409]: Accepted publickey for root from ::ffff:10.0.8.163 port 49426 ssh2
+Jan 15 14:30:19 dino.eyemg.com sshd[988]: Accepted publickey for root from 10.0.8.158 port 37867 ssh2
+Jan 15 14:30:19 dino.eyemg.com sshd[988]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:20 dino.eyemg.com sshd[988]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:30:26 tate.eyemg.com sshd[18617]: Postponed publickey for root from ::ffff:10.100.8.88 port 41746 ssh2
+Jan 15 14:30:26 tate.eyemg.com sshd[18616]: Accepted publickey for root from ::ffff:10.100.8.88 port 41746 ssh2
+Jan 15 14:30:27 tate.eyemg.com sshd[18685]: Postponed publickey for root from ::ffff:10.100.8.88 port 41747 ssh2
+Jan 15 14:30:27 tate.eyemg.com sshd[18684]: Accepted publickey for root from ::ffff:10.100.8.88 port 41747 ssh2
+Jan 15 14:30:28 patrick.eyemg.com sshd[24186]: Accepted publickey for root from 10.0.4.231 port 46691 ssh2
+Jan 15 14:30:28 patrick.eyemg.com sshd[24186]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:33 sable.eyemg.com sshd[25446]: Postponed publickey for root from ::ffff:10.0.8.150 port 51236 ssh2
+Jan 15 14:30:33 sable.eyemg.com sshd[25445]: Accepted publickey for root from ::ffff:10.0.8.150 port 51236 ssh2
+Jan 15 14:30:33 sable.eyemg.com sshd[25514]: Postponed publickey for root from ::ffff:10.0.8.97 port 44909 ssh2
+Jan 15 14:30:33 sable.eyemg.com sshd[25513]: Accepted publickey for root from ::ffff:10.0.8.97 port 44909 ssh2
+Jan 15 14:30:35 juno.eyemg.com sshd[16387]: Connection closed by UNKNOWN
+Jan 15 14:30:48 mobius.eyemg.com sshd[1634]: Accepted publickey for root from 10.0.8.159 port 50019 ssh2
+Jan 15 14:30:48 mobius.eyemg.com sshd[1634]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:30:48 mobius.eyemg.com sshd[1634]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:31:16 tony.eyemg.com sshd[17829]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:31:16 tony.eyemg.com sshd[17830]: Postponed publickey for root from ::ffff:10.0.8.174 port 59312 ssh2
+Jan 15 14:31:16 tony.eyemg.com sshd[17829]: Accepted publickey for root from ::ffff:10.0.8.174 port 59312 ssh2
+Jan 15 14:31:22 tpm-secure.eyemg.com sshd[28103]: Accepted publickey for root from ::ffff:127.0.0.1 port 56587 ssh2
+Jan 15 14:31:58 maddock.eyemg.com sshd[24039]: Accepted publickey for root from 10.0.8.124 port 48075 ssh2
+Jan 15 14:31:58 maddock.eyemg.com sshd[24039]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:31:58 maddock.eyemg.com sshd[24039]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:31:58 mobius.eyemg.com sshd[2350]: Accepted publickey for root from 10.0.8.124 port 41044 ssh2
+Jan 15 14:31:59 mobius.eyemg.com sshd[2350]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:31:59 mobius.eyemg.com sshd[2350]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:32:00 maddock.eyemg.com sshd[24153]: Postponed publickey for root from 10.0.8.142 port 38813 ssh2
+Jan 15 14:32:00 maddock.eyemg.com sshd[24152]: Accepted publickey for root from 10.0.8.142 port 38813 ssh2
+Jan 15 14:32:00 maddock.eyemg.com sshd[24152]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:32:00 maddock.eyemg.com sshd[24152]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:32:00 maddock.eyemg.com sshd[24249]: Postponed publickey for root from 10.0.8.145 port 44794 ssh2
+Jan 15 14:32:00 maddock.eyemg.com sshd[24248]: Accepted publickey for root from 10.0.8.145 port 44794 ssh2
+Jan 15 14:32:00 maddock.eyemg.com sshd[24248]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:32:00 maddock.eyemg.com sshd[24248]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:32:15 tate.eyemg.com sshd[21392]: Postponed publickey for root from ::ffff:10.0.8.113 port 51802 ssh2
+Jan 15 14:32:15 tate.eyemg.com sshd[21390]: Accepted publickey for root from ::ffff:10.0.8.113 port 51802 ssh2
+Jan 15 14:32:15 tate.eyemg.com sshd[21541]: Postponed publickey for root from ::ffff:10.0.8.163 port 49462 ssh2
+Jan 15 14:32:15 tate.eyemg.com sshd[21540]: Accepted publickey for root from ::ffff:10.0.8.163 port 49462 ssh2
+Jan 15 14:32:19 dino.eyemg.com sshd[1097]: Accepted publickey for root from 10.0.8.158 port 38475 ssh2
+Jan 15 14:32:19 dino.eyemg.com sshd[1097]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:32:19 dino.eyemg.com sshd[1097]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:32:26 tate.eyemg.com sshd[21752]: Postponed publickey for root from ::ffff:10.100.8.88 port 41749 ssh2
+Jan 15 14:32:26 tate.eyemg.com sshd[21751]: Accepted publickey for root from ::ffff:10.100.8.88 port 41749 ssh2
+Jan 15 14:32:27 tate.eyemg.com sshd[21821]: Postponed publickey for root from ::ffff:10.100.8.88 port 41750 ssh2
+Jan 15 14:32:27 tate.eyemg.com sshd[21820]: Accepted publickey for root from ::ffff:10.100.8.88 port 41750 ssh2
+Jan 15 14:32:33 sable.eyemg.com sshd[29708]: Postponed publickey for root from ::ffff:10.0.8.150 port 51265 ssh2
+Jan 15 14:32:33 sable.eyemg.com sshd[29707]: Accepted publickey for root from ::ffff:10.0.8.150 port 51265 ssh2
+Jan 15 14:32:33 sable.eyemg.com sshd[29788]: Postponed publickey for root from ::ffff:10.0.8.97 port 44914 ssh2
+Jan 15 14:32:33 sable.eyemg.com sshd[29787]: Accepted publickey for root from ::ffff:10.0.8.97 port 44914 ssh2
+Jan 15 14:32:35 juno.eyemg.com sshd[18145]: Connection closed by UNKNOWN
+Jan 15 14:32:48 mobius.eyemg.com sshd[3085]: Accepted publickey for root from 10.0.8.159 port 50047 ssh2
+Jan 15 14:32:48 mobius.eyemg.com sshd[3085]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:32:48 mobius.eyemg.com sshd[3085]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:33:16 tony.eyemg.com sshd[19169]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:33:16 tony.eyemg.com sshd[19170]: Postponed publickey for root from ::ffff:10.0.8.174 port 59313 ssh2
+Jan 15 14:33:16 tony.eyemg.com sshd[19169]: Accepted publickey for root from ::ffff:10.0.8.174 port 59313 ssh2
+Jan 15 14:33:22 tpm-secure.eyemg.com sshd[29267]: Accepted publickey for root from ::ffff:127.0.0.1 port 56590 ssh2
+Jan 15 14:33:58 maddock.eyemg.com sshd[25570]: Accepted publickey for root from 10.0.8.124 port 48077 ssh2
+Jan 15 14:33:58 maddock.eyemg.com sshd[25570]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:33:58 maddock.eyemg.com sshd[25570]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:33:58 mobius.eyemg.com sshd[3788]: Accepted publickey for root from 10.0.8.124 port 41046 ssh2
+Jan 15 14:33:58 mobius.eyemg.com sshd[3788]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:33:58 mobius.eyemg.com sshd[3788]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:34:00 maddock.eyemg.com sshd[25684]: Postponed publickey for root from 10.0.8.142 port 41170 ssh2
+Jan 15 14:34:00 maddock.eyemg.com sshd[25683]: Accepted publickey for root from 10.0.8.142 port 41170 ssh2
+Jan 15 14:34:00 maddock.eyemg.com sshd[25683]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:34:00 maddock.eyemg.com sshd[25683]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:34:00 maddock.eyemg.com sshd[25780]: Postponed publickey for root from 10.0.8.145 port 54857 ssh2
+Jan 15 14:34:00 maddock.eyemg.com sshd[25779]: Accepted publickey for root from 10.0.8.145 port 54857 ssh2
+Jan 15 14:34:00 maddock.eyemg.com sshd[25779]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:34:00 maddock.eyemg.com sshd[25779]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:34:15 tate.eyemg.com sshd[24587]: Postponed publickey for root from ::ffff:10.0.8.113 port 51807 ssh2
+Jan 15 14:34:15 tate.eyemg.com sshd[24581]: Accepted publickey for root from ::ffff:10.0.8.113 port 51807 ssh2
+Jan 15 14:34:15 tate.eyemg.com sshd[24714]: Postponed publickey for root from ::ffff:10.0.8.163 port 49510 ssh2
+Jan 15 14:34:15 tate.eyemg.com sshd[24713]: Accepted publickey for root from ::ffff:10.0.8.163 port 49510 ssh2
+Jan 15 14:34:19 dino.eyemg.com sshd[1208]: Accepted publickey for root from 10.0.8.158 port 38476 ssh2
+Jan 15 14:34:19 dino.eyemg.com sshd[1208]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:34:19 dino.eyemg.com sshd[1208]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:34:25 tate.eyemg.com sshd[24940]: Postponed publickey for root from ::ffff:10.100.8.88 port 41751 ssh2
+Jan 15 14:34:26 tate.eyemg.com sshd[24939]: Accepted publickey for root from ::ffff:10.100.8.88 port 41751 ssh2
+Jan 15 14:34:27 tate.eyemg.com sshd[25013]: Postponed publickey for root from ::ffff:10.100.8.88 port 41752 ssh2
+Jan 15 14:34:27 tate.eyemg.com sshd[25012]: Accepted publickey for root from ::ffff:10.100.8.88 port 41752 ssh2
+Jan 15 14:34:33 sable.eyemg.com sshd[1546]: Postponed publickey for root from ::ffff:10.0.8.150 port 51293 ssh2
+Jan 15 14:34:33 sable.eyemg.com sshd[1545]: Accepted publickey for root from ::ffff:10.0.8.150 port 51293 ssh2
+Jan 15 14:34:33 sable.eyemg.com sshd[1614]: Postponed publickey for root from ::ffff:10.0.8.97 port 44919 ssh2
+Jan 15 14:34:33 sable.eyemg.com sshd[1613]: Accepted publickey for root from ::ffff:10.0.8.97 port 44919 ssh2
+Jan 15 14:34:35 juno.eyemg.com sshd[19880]: Connection closed by UNKNOWN
+Jan 15 14:34:48 mobius.eyemg.com sshd[4503]: Accepted publickey for root from 10.0.8.159 port 51653 ssh2
+Jan 15 14:34:48 mobius.eyemg.com sshd[4503]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:34:48 mobius.eyemg.com sshd[4503]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:35:02 maddock.eyemg.com sshd[26517]: Postponed publickey for root from 10.0.8.145 port 54895 ssh2
+Jan 15 14:35:02 maddock.eyemg.com sshd[26516]: Accepted publickey for root from 10.0.8.145 port 54895 ssh2
+Jan 15 14:35:02 maddock.eyemg.com sshd[26516]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:35:02 maddock.eyemg.com sshd[26516]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:35:16 tony.eyemg.com sshd[20562]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:35:16 tony.eyemg.com sshd[20563]: Postponed publickey for root from ::ffff:10.0.8.174 port 59319 ssh2
+Jan 15 14:35:16 tony.eyemg.com sshd[20562]: Accepted publickey for root from ::ffff:10.0.8.174 port 59319 ssh2
+Jan 15 14:35:22 tpm-secure.eyemg.com sshd[30518]: Accepted publickey for root from ::ffff:127.0.0.1 port 56591 ssh2
+Jan 15 14:35:58 maddock.eyemg.com sshd[27241]: Accepted publickey for root from 10.0.8.124 port 48079 ssh2
+Jan 15 14:35:58 maddock.eyemg.com sshd[27241]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:35:58 maddock.eyemg.com sshd[27241]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:35:58 mobius.eyemg.com sshd[5241]: Accepted publickey for root from 10.0.8.124 port 41048 ssh2
+Jan 15 14:35:58 mobius.eyemg.com sshd[5241]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:35:59 mobius.eyemg.com sshd[5241]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:36:00 maddock.eyemg.com sshd[27355]: Postponed publickey for root from 10.0.8.142 port 41256 ssh2
+Jan 15 14:36:00 maddock.eyemg.com sshd[27354]: Accepted publickey for root from 10.0.8.142 port 41256 ssh2
+Jan 15 14:36:00 maddock.eyemg.com sshd[27354]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:36:00 maddock.eyemg.com sshd[27354]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:36:00 maddock.eyemg.com sshd[27451]: Postponed publickey for root from 10.0.8.145 port 54943 ssh2
+Jan 15 14:36:00 maddock.eyemg.com sshd[27450]: Accepted publickey for root from 10.0.8.145 port 54943 ssh2
+Jan 15 14:36:00 maddock.eyemg.com sshd[27450]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:36:01 maddock.eyemg.com sshd[27450]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:36:15 tate.eyemg.com sshd[27818]: Postponed publickey for root from ::ffff:10.0.8.113 port 51812 ssh2
+Jan 15 14:36:15 tate.eyemg.com sshd[27815]: Accepted publickey for root from ::ffff:10.0.8.113 port 51812 ssh2
+Jan 15 14:36:15 tate.eyemg.com sshd[27940]: Postponed publickey for root from ::ffff:10.0.8.163 port 49539 ssh2
+Jan 15 14:36:15 tate.eyemg.com sshd[27939]: Accepted publickey for root from ::ffff:10.0.8.163 port 49539 ssh2
+Jan 15 14:36:19 dino.eyemg.com sshd[1367]: Accepted publickey for root from 10.0.8.158 port 38477 ssh2
+Jan 15 14:36:19 dino.eyemg.com sshd[1367]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:36:19 dino.eyemg.com sshd[1367]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:36:26 tate.eyemg.com sshd[28148]: Postponed publickey for root from ::ffff:10.100.8.88 port 41754 ssh2
+Jan 15 14:36:26 tate.eyemg.com sshd[28147]: Accepted publickey for root from ::ffff:10.100.8.88 port 41754 ssh2
+Jan 15 14:36:27 tate.eyemg.com sshd[28217]: Postponed publickey for root from ::ffff:10.100.8.88 port 41755 ssh2
+Jan 15 14:36:27 tate.eyemg.com sshd[28216]: Accepted publickey for root from ::ffff:10.100.8.88 port 41755 ssh2
+Jan 15 14:36:33 sable.eyemg.com sshd[5869]: Postponed publickey for root from ::ffff:10.0.8.150 port 51326 ssh2
+Jan 15 14:36:33 sable.eyemg.com sshd[5868]: Accepted publickey for root from ::ffff:10.0.8.150 port 51326 ssh2
+Jan 15 14:36:33 sable.eyemg.com sshd[5937]: Postponed publickey for root from ::ffff:10.0.8.97 port 44924 ssh2
+Jan 15 14:36:33 sable.eyemg.com sshd[5936]: Accepted publickey for root from ::ffff:10.0.8.97 port 44924 ssh2
+Jan 15 14:36:35 juno.eyemg.com sshd[22611]: Connection closed by UNKNOWN
+Jan 15 14:36:48 mobius.eyemg.com sshd[5958]: Accepted publickey for root from 10.0.8.159 port 51679 ssh2
+Jan 15 14:36:48 mobius.eyemg.com sshd[5958]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:36:48 mobius.eyemg.com sshd[5958]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:37:16 tony.eyemg.com sshd[21913]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:37:16 tony.eyemg.com sshd[21914]: Postponed publickey for root from ::ffff:10.0.8.174 port 59322 ssh2
+Jan 15 14:37:16 tony.eyemg.com sshd[21913]: Accepted publickey for root from ::ffff:10.0.8.174 port 59322 ssh2
+Jan 15 14:37:22 tpm-secure.eyemg.com sshd[31687]: Accepted publickey for root from ::ffff:127.0.0.1 port 56595 ssh2
+Jan 15 14:37:58 maddock.eyemg.com sshd[28767]: Accepted publickey for root from 10.0.8.124 port 55550 ssh2
+Jan 15 14:37:58 maddock.eyemg.com sshd[28767]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:37:58 maddock.eyemg.com sshd[28767]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:37:58 mobius.eyemg.com sshd[6636]: Accepted publickey for root from 10.0.8.124 port 35077 ssh2
+Jan 15 14:37:58 mobius.eyemg.com sshd[6636]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:37:59 mobius.eyemg.com sshd[6636]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:38:00 maddock.eyemg.com sshd[28881]: Postponed publickey for root from 10.0.8.142 port 46474 ssh2
+Jan 15 14:38:00 maddock.eyemg.com sshd[28880]: Accepted publickey for root from 10.0.8.142 port 46474 ssh2
+Jan 15 14:38:00 maddock.eyemg.com sshd[28880]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:38:00 maddock.eyemg.com sshd[28880]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:38:00 maddock.eyemg.com sshd[28978]: Postponed publickey for root from 10.0.8.145 port 53234 ssh2
+Jan 15 14:38:00 maddock.eyemg.com sshd[28977]: Accepted publickey for root from 10.0.8.145 port 53234 ssh2
+Jan 15 14:38:00 maddock.eyemg.com sshd[28977]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:38:00 maddock.eyemg.com sshd[28977]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:38:15 tate.eyemg.com sshd[30957]: Postponed publickey for root from ::ffff:10.0.8.113 port 51817 ssh2
+Jan 15 14:38:15 tate.eyemg.com sshd[30954]: Accepted publickey for root from ::ffff:10.0.8.113 port 51817 ssh2
+Jan 15 14:38:15 tate.eyemg.com sshd[31079]: Postponed publickey for root from ::ffff:10.0.8.163 port 49580 ssh2
+Jan 15 14:38:15 tate.eyemg.com sshd[31078]: Accepted publickey for root from ::ffff:10.0.8.163 port 49580 ssh2
+Jan 15 14:38:19 dino.eyemg.com sshd[1476]: Accepted publickey for root from 10.0.8.158 port 44429 ssh2
+Jan 15 14:38:19 dino.eyemg.com sshd[1476]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:38:19 dino.eyemg.com sshd[1476]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:38:26 tate.eyemg.com sshd[31285]: Postponed publickey for root from ::ffff:10.100.8.88 port 41756 ssh2
+Jan 15 14:38:26 tate.eyemg.com sshd[31284]: Accepted publickey for root from ::ffff:10.100.8.88 port 41756 ssh2
+Jan 15 14:38:27 tate.eyemg.com sshd[31355]: Postponed publickey for root from ::ffff:10.100.8.88 port 41757 ssh2
+Jan 15 14:38:27 tate.eyemg.com sshd[31354]: Accepted publickey for root from ::ffff:10.100.8.88 port 41757 ssh2
+Jan 15 14:38:33 sable.eyemg.com sshd[10153]: Postponed publickey for root from ::ffff:10.0.8.150 port 51375 ssh2
+Jan 15 14:38:33 sable.eyemg.com sshd[10152]: Accepted publickey for root from ::ffff:10.0.8.150 port 51375 ssh2
+Jan 15 14:38:33 sable.eyemg.com sshd[10225]: Postponed publickey for root from ::ffff:10.0.8.97 port 44929 ssh2
+Jan 15 14:38:33 sable.eyemg.com sshd[10224]: Accepted publickey for root from ::ffff:10.0.8.97 port 44929 ssh2
+Jan 15 14:38:35 juno.eyemg.com sshd[24358]: Connection closed by UNKNOWN
+Jan 15 14:38:48 mobius.eyemg.com sshd[7322]: Accepted publickey for root from 10.0.8.159 port 51701 ssh2
+Jan 15 14:38:48 mobius.eyemg.com sshd[7322]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:38:48 mobius.eyemg.com sshd[7322]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:39:16 tony.eyemg.com sshd[23000]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:39:16 tony.eyemg.com sshd[23003]: Postponed publickey for root from ::ffff:10.0.8.174 port 59331 ssh2
+Jan 15 14:39:16 tony.eyemg.com sshd[23000]: Accepted publickey for root from ::ffff:10.0.8.174 port 59331 ssh2
+Jan 15 14:39:22 tpm-secure.eyemg.com sshd[372]: Accepted publickey for root from ::ffff:127.0.0.1 port 56599 ssh2
+Jan 15 14:39:58 maddock.eyemg.com sshd[30315]: Accepted publickey for root from 10.0.8.124 port 55552 ssh2
+Jan 15 14:39:58 maddock.eyemg.com sshd[30315]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:39:58 maddock.eyemg.com sshd[30315]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:39:58 mobius.eyemg.com sshd[7997]: Accepted publickey for root from 10.0.8.124 port 35079 ssh2
+Jan 15 14:39:58 mobius.eyemg.com sshd[7997]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:39:59 mobius.eyemg.com sshd[7997]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:40:00 maddock.eyemg.com sshd[30429]: Postponed publickey for root from 10.0.8.142 port 46583 ssh2
+Jan 15 14:40:00 maddock.eyemg.com sshd[30428]: Accepted publickey for root from 10.0.8.142 port 46583 ssh2
+Jan 15 14:40:00 maddock.eyemg.com sshd[30428]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:40:00 maddock.eyemg.com sshd[30428]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:40:00 maddock.eyemg.com sshd[30525]: Postponed publickey for root from 10.0.8.145 port 53343 ssh2
+Jan 15 14:40:00 maddock.eyemg.com sshd[30524]: Accepted publickey for root from 10.0.8.145 port 53343 ssh2
+Jan 15 14:40:00 maddock.eyemg.com sshd[30524]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:40:00 maddock.eyemg.com sshd[30524]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:40:15 tate.eyemg.com sshd[1636]: Postponed publickey for root from ::ffff:10.0.8.113 port 51822 ssh2
+Jan 15 14:40:15 tate.eyemg.com sshd[1633]: Accepted publickey for root from ::ffff:10.0.8.113 port 51822 ssh2
+Jan 15 14:40:15 tate.eyemg.com sshd[1758]: Postponed publickey for root from ::ffff:10.0.8.163 port 49620 ssh2
+Jan 15 14:40:15 tate.eyemg.com sshd[1757]: Accepted publickey for root from ::ffff:10.0.8.163 port 49620 ssh2
+Jan 15 14:40:19 dino.eyemg.com sshd[1637]: Accepted publickey for root from 10.0.8.158 port 44430 ssh2
+Jan 15 14:40:19 dino.eyemg.com sshd[1637]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:40:20 dino.eyemg.com sshd[1637]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:40:25 tate.eyemg.com sshd[1979]: Postponed publickey for root from ::ffff:10.100.8.88 port 41759 ssh2
+Jan 15 14:40:25 tate.eyemg.com sshd[1978]: Accepted publickey for root from ::ffff:10.100.8.88 port 41759 ssh2
+Jan 15 14:40:26 tate.eyemg.com sshd[2047]: Postponed publickey for root from ::ffff:10.100.8.88 port 41760 ssh2
+Jan 15 14:40:27 tate.eyemg.com sshd[2046]: Accepted publickey for root from ::ffff:10.100.8.88 port 41760 ssh2
+Jan 15 14:40:33 sable.eyemg.com sshd[14446]: Postponed publickey for root from ::ffff:10.0.8.150 port 51404 ssh2
+Jan 15 14:40:33 sable.eyemg.com sshd[14445]: Accepted publickey for root from ::ffff:10.0.8.150 port 51404 ssh2
+Jan 15 14:40:33 sable.eyemg.com sshd[14514]: Postponed publickey for root from ::ffff:10.0.8.97 port 44934 ssh2
+Jan 15 14:40:33 sable.eyemg.com sshd[14513]: Accepted publickey for root from ::ffff:10.0.8.97 port 44934 ssh2
+Jan 15 14:40:35 juno.eyemg.com sshd[27048]: Connection closed by UNKNOWN
+Jan 15 14:40:48 mobius.eyemg.com sshd[8752]: Accepted publickey for root from 10.0.8.159 port 56396 ssh2
+Jan 15 14:40:48 mobius.eyemg.com sshd[8752]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:40:48 mobius.eyemg.com sshd[8752]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:41:16 tony.eyemg.com sshd[24397]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:41:16 tony.eyemg.com sshd[24398]: Postponed publickey for root from ::ffff:10.0.8.174 port 59338 ssh2
+Jan 15 14:41:16 tony.eyemg.com sshd[24397]: Accepted publickey for root from ::ffff:10.0.8.174 port 59338 ssh2
+Jan 15 14:41:22 tpm-secure.eyemg.com sshd[1558]: Accepted publickey for root from ::ffff:127.0.0.1 port 56604 ssh2
+Jan 15 14:41:58 maddock.eyemg.com sshd[31881]: Accepted publickey for root from 10.0.8.124 port 51886 ssh2
+Jan 15 14:41:58 maddock.eyemg.com sshd[31881]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:41:58 maddock.eyemg.com sshd[31881]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:41:58 mobius.eyemg.com sshd[9432]: Accepted publickey for root from 10.0.8.124 port 40385 ssh2
+Jan 15 14:41:58 mobius.eyemg.com sshd[9432]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:41:59 mobius.eyemg.com sshd[9432]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:42:00 maddock.eyemg.com sshd[31996]: Postponed publickey for root from 10.0.8.142 port 46636 ssh2
+Jan 15 14:42:00 maddock.eyemg.com sshd[31995]: Accepted publickey for root from 10.0.8.142 port 46636 ssh2
+Jan 15 14:42:00 maddock.eyemg.com sshd[31995]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:42:00 maddock.eyemg.com sshd[31995]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:42:00 maddock.eyemg.com sshd[32092]: Postponed publickey for root from 10.0.8.145 port 53396 ssh2
+Jan 15 14:42:00 maddock.eyemg.com sshd[32091]: Accepted publickey for root from 10.0.8.145 port 53396 ssh2
+Jan 15 14:42:00 maddock.eyemg.com sshd[32091]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:42:00 maddock.eyemg.com sshd[32091]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:42:01 maddock.eyemg.com sshd[32200]: Postponed publickey for root from 10.0.8.145 port 53398 ssh2
+Jan 15 14:42:01 maddock.eyemg.com sshd[32199]: Accepted publickey for root from 10.0.8.145 port 53398 ssh2
+Jan 15 14:42:01 maddock.eyemg.com sshd[32199]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:42:02 maddock.eyemg.com sshd[32199]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:42:15 tate.eyemg.com sshd[4738]: Postponed publickey for root from ::ffff:10.0.8.113 port 51827 ssh2
+Jan 15 14:42:15 tate.eyemg.com sshd[4735]: Accepted publickey for root from ::ffff:10.0.8.113 port 51827 ssh2
+Jan 15 14:42:15 tate.eyemg.com sshd[4860]: Postponed publickey for root from ::ffff:10.0.8.163 port 49650 ssh2
+Jan 15 14:42:15 tate.eyemg.com sshd[4859]: Accepted publickey for root from ::ffff:10.0.8.163 port 49650 ssh2
+Jan 15 14:42:19 dino.eyemg.com sshd[1724]: Accepted publickey for root from 10.0.8.158 port 58582 ssh2
+Jan 15 14:42:19 dino.eyemg.com sshd[1724]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:42:19 dino.eyemg.com sshd[1724]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:42:26 tate.eyemg.com sshd[5065]: Postponed publickey for root from ::ffff:10.100.8.88 port 41761 ssh2
+Jan 15 14:42:26 tate.eyemg.com sshd[5064]: Accepted publickey for root from ::ffff:10.100.8.88 port 41761 ssh2
+Jan 15 14:42:27 tate.eyemg.com sshd[5133]: Postponed publickey for root from ::ffff:10.100.8.88 port 41762 ssh2
+Jan 15 14:42:27 tate.eyemg.com sshd[5132]: Accepted publickey for root from ::ffff:10.100.8.88 port 41762 ssh2
+Jan 15 14:42:33 sable.eyemg.com sshd[18704]: Postponed publickey for root from ::ffff:10.0.8.150 port 51444 ssh2
+Jan 15 14:42:33 sable.eyemg.com sshd[18703]: Accepted publickey for root from ::ffff:10.0.8.150 port 51444 ssh2
+Jan 15 14:42:33 sable.eyemg.com sshd[18706]: Postponed publickey for root from ::ffff:10.0.8.97 port 44935 ssh2
+Jan 15 14:42:33 sable.eyemg.com sshd[18705]: Accepted publickey for root from ::ffff:10.0.8.97 port 44935 ssh2
+Jan 15 14:42:35 juno.eyemg.com sshd[28808]: Connection closed by UNKNOWN
+Jan 15 14:42:48 mobius.eyemg.com sshd[10132]: Accepted publickey for root from 10.0.8.159 port 56409 ssh2
+Jan 15 14:42:48 mobius.eyemg.com sshd[10132]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:42:48 mobius.eyemg.com sshd[10132]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:43:16 tony.eyemg.com sshd[25739]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:43:16 tony.eyemg.com sshd[25740]: Postponed publickey for root from ::ffff:10.0.8.174 port 59339 ssh2
+Jan 15 14:43:16 tony.eyemg.com sshd[25739]: Accepted publickey for root from ::ffff:10.0.8.174 port 59339 ssh2
+Jan 15 14:43:22 tpm-secure.eyemg.com sshd[2475]: Accepted publickey for root from ::ffff:127.0.0.1 port 56605 ssh2
+Jan 15 14:43:58 maddock.eyemg.com sshd[1121]: Accepted publickey for root from 10.0.8.124 port 51888 ssh2
+Jan 15 14:43:58 maddock.eyemg.com sshd[1121]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:43:58 maddock.eyemg.com sshd[1121]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:43:58 mobius.eyemg.com sshd[10820]: Accepted publickey for root from 10.0.8.124 port 40387 ssh2
+Jan 15 14:43:58 mobius.eyemg.com sshd[10820]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:43:59 mobius.eyemg.com sshd[10820]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:44:00 maddock.eyemg.com sshd[1236]: Postponed publickey for root from 10.0.8.142 port 36326 ssh2
+Jan 15 14:44:00 maddock.eyemg.com sshd[1235]: Accepted publickey for root from 10.0.8.142 port 36326 ssh2
+Jan 15 14:44:00 maddock.eyemg.com sshd[1235]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:44:00 maddock.eyemg.com sshd[1235]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:44:00 maddock.eyemg.com sshd[1333]: Postponed publickey for root from 10.0.8.145 port 48124 ssh2
+Jan 15 14:44:00 maddock.eyemg.com sshd[1332]: Accepted publickey for root from 10.0.8.145 port 48124 ssh2
+Jan 15 14:44:00 maddock.eyemg.com sshd[1332]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:44:01 maddock.eyemg.com sshd[1332]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:44:15 tate.eyemg.com sshd[7843]: Postponed publickey for root from ::ffff:10.0.8.113 port 51832 ssh2
+Jan 15 14:44:15 tate.eyemg.com sshd[7840]: Accepted publickey for root from ::ffff:10.0.8.113 port 51832 ssh2
+Jan 15 14:44:15 tate.eyemg.com sshd[7965]: Postponed publickey for root from ::ffff:10.0.8.163 port 49685 ssh2
+Jan 15 14:44:15 tate.eyemg.com sshd[7964]: Accepted publickey for root from ::ffff:10.0.8.163 port 49685 ssh2
+Jan 15 14:44:19 dino.eyemg.com sshd[1857]: Accepted publickey for root from 10.0.8.158 port 58583 ssh2
+Jan 15 14:44:19 dino.eyemg.com sshd[1857]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:44:19 dino.eyemg.com sshd[1857]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:44:25 tate.eyemg.com sshd[8170]: Postponed publickey for root from ::ffff:10.100.8.88 port 41764 ssh2
+Jan 15 14:44:26 tate.eyemg.com sshd[8169]: Accepted publickey for root from ::ffff:10.100.8.88 port 41764 ssh2
+Jan 15 14:44:27 tate.eyemg.com sshd[8238]: Postponed publickey for root from ::ffff:10.100.8.88 port 41765 ssh2
+Jan 15 14:44:27 tate.eyemg.com sshd[8237]: Accepted publickey for root from ::ffff:10.100.8.88 port 41765 ssh2
+Jan 15 14:44:33 sable.eyemg.com sshd[22952]: Postponed publickey for root from ::ffff:10.0.8.150 port 51485 ssh2
+Jan 15 14:44:33 sable.eyemg.com sshd[22951]: Accepted publickey for root from ::ffff:10.0.8.150 port 51485 ssh2
+Jan 15 14:44:33 sable.eyemg.com sshd[22954]: Postponed publickey for root from ::ffff:10.0.8.97 port 44940 ssh2
+Jan 15 14:44:33 sable.eyemg.com sshd[22953]: Accepted publickey for root from ::ffff:10.0.8.97 port 44940 ssh2
+Jan 15 14:44:35 juno.eyemg.com sshd[30548]: Connection closed by UNKNOWN
+Jan 15 14:44:48 mobius.eyemg.com sshd[11512]: Accepted publickey for root from 10.0.8.159 port 56609 ssh2
+Jan 15 14:44:48 mobius.eyemg.com sshd[11512]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:44:48 mobius.eyemg.com sshd[11512]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:01 maddock.eyemg.com sshd[2188]: Postponed publickey for root from 10.0.8.145 port 48172 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2182]: Accepted publickey for root from 10.0.8.145 port 48172 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2182]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:01 maddock.eyemg.com sshd[2187]: Postponed publickey for root from 10.0.8.145 port 48175 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2189]: Postponed publickey for root from 10.0.8.145 port 48173 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2183]: Accepted publickey for root from 10.0.8.145 port 48175 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2183]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:01 maddock.eyemg.com sshd[2181]: Accepted publickey for root from 10.0.8.145 port 48173 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2181]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:01 maddock.eyemg.com sshd[2190]: Postponed publickey for root from 10.0.8.145 port 48177 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2191]: Postponed publickey for root from 10.0.8.145 port 48176 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2192]: Postponed publickey for root from 10.0.8.145 port 48178 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2185]: Accepted publickey for root from 10.0.8.145 port 48177 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2184]: Accepted publickey for root from 10.0.8.145 port 48176 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2185]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:01 maddock.eyemg.com sshd[2186]: Accepted publickey for root from 10.0.8.145 port 48178 ssh2
+Jan 15 14:45:01 maddock.eyemg.com sshd[2184]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:01 maddock.eyemg.com sshd[2186]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:01 maddock.eyemg.com sshd[2182]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:01 maddock.eyemg.com sshd[2183]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:02 maddock.eyemg.com sshd[2181]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:02 maddock.eyemg.com sshd[2186]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:02 maddock.eyemg.com sshd[2184]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:02 maddock.eyemg.com sshd[2185]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:02 mobius.eyemg.com sshd[11637]: Accepted publickey for root from 10.0.8.159 port 56613 ssh2
+Jan 15 14:45:02 mobius.eyemg.com sshd[11637]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:03 mobius.eyemg.com sshd[11637]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:03 gannon.eyemg.com sshd[7499]: Accepted publickey for root from 10.0.8.155 port 37379 ssh2
+Jan 15 14:45:03 gannon.eyemg.com sshd[7499]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:03 gannon.eyemg.com sshd[7499]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:16 tony.eyemg.com sshd[27138]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:45:16 tony.eyemg.com sshd[27139]: Postponed publickey for root from ::ffff:10.0.8.174 port 59344 ssh2
+Jan 15 14:45:16 tony.eyemg.com sshd[27138]: Accepted publickey for root from ::ffff:10.0.8.174 port 59344 ssh2
+Jan 15 14:45:22 tpm-secure.eyemg.com sshd[3672]: Accepted publickey for root from ::ffff:127.0.0.1 port 56606 ssh2
+Jan 15 14:45:58 maddock.eyemg.com sshd[3536]: Accepted publickey for root from 10.0.8.124 port 51890 ssh2
+Jan 15 14:45:58 maddock.eyemg.com sshd[3536]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:58 maddock.eyemg.com sshd[3536]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:45:58 mobius.eyemg.com sshd[12356]: Accepted publickey for root from 10.0.8.124 port 40389 ssh2
+Jan 15 14:45:58 mobius.eyemg.com sshd[12356]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:45:58 mobius.eyemg.com sshd[12356]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:46:00 maddock.eyemg.com sshd[3661]: Postponed publickey for root from 10.0.8.142 port 36504 ssh2
+Jan 15 14:46:00 maddock.eyemg.com sshd[3660]: Accepted publickey for root from 10.0.8.142 port 36504 ssh2
+Jan 15 14:46:00 maddock.eyemg.com sshd[3660]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:46:00 maddock.eyemg.com sshd[3660]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:46:00 maddock.eyemg.com sshd[3763]: Postponed publickey for root from 10.0.8.145 port 48305 ssh2
+Jan 15 14:46:00 maddock.eyemg.com sshd[3762]: Accepted publickey for root from 10.0.8.145 port 48305 ssh2
+Jan 15 14:46:00 maddock.eyemg.com sshd[3762]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:46:01 maddock.eyemg.com sshd[3762]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:46:15 tate.eyemg.com sshd[10775]: Postponed publickey for root from ::ffff:10.0.8.113 port 51841 ssh2
+Jan 15 14:46:15 tate.eyemg.com sshd[10764]: Accepted publickey for root from ::ffff:10.0.8.113 port 51841 ssh2
+Jan 15 14:46:15 tate.eyemg.com sshd[10779]: Postponed publickey for root from ::ffff:10.0.8.163 port 49714 ssh2
+Jan 15 14:46:15 tate.eyemg.com sshd[10778]: Accepted publickey for root from ::ffff:10.0.8.163 port 49714 ssh2
+Jan 15 14:46:19 dino.eyemg.com sshd[2020]: Accepted publickey for root from 10.0.8.158 port 58584 ssh2
+Jan 15 14:46:19 dino.eyemg.com sshd[2020]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:46:19 dino.eyemg.com sshd[2020]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:46:25 tate.eyemg.com sshd[11344]: Postponed publickey for root from ::ffff:10.100.8.88 port 41766 ssh2
+Jan 15 14:46:25 tate.eyemg.com sshd[11343]: Accepted publickey for root from ::ffff:10.100.8.88 port 41766 ssh2
+Jan 15 14:46:26 tate.eyemg.com sshd[11413]: Postponed publickey for root from ::ffff:10.100.8.88 port 41767 ssh2
+Jan 15 14:46:26 tate.eyemg.com sshd[11412]: Accepted publickey for root from ::ffff:10.100.8.88 port 41767 ssh2
+Jan 15 14:46:33 sable.eyemg.com sshd[27308]: Postponed publickey for root from ::ffff:10.0.8.150 port 51518 ssh2
+Jan 15 14:46:33 sable.eyemg.com sshd[27307]: Accepted publickey for root from ::ffff:10.0.8.150 port 51518 ssh2
+Jan 15 14:46:33 sable.eyemg.com sshd[27376]: Postponed publickey for root from ::ffff:10.0.8.97 port 44949 ssh2
+Jan 15 14:46:33 sable.eyemg.com sshd[27375]: Accepted publickey for root from ::ffff:10.0.8.97 port 44949 ssh2
+Jan 15 14:46:35 juno.eyemg.com sshd[800]: Connection closed by UNKNOWN
+Jan 15 14:46:48 mobius.eyemg.com sshd[12788]: Accepted publickey for root from 10.0.8.159 port 56623 ssh2
+Jan 15 14:46:48 mobius.eyemg.com sshd[12788]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:46:48 mobius.eyemg.com sshd[12788]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:47:16 tony.eyemg.com sshd[28465]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:47:16 tony.eyemg.com sshd[28466]: Postponed publickey for root from ::ffff:10.0.8.174 port 59346 ssh2
+Jan 15 14:47:16 tony.eyemg.com sshd[28465]: Accepted publickey for root from ::ffff:10.0.8.174 port 59346 ssh2
+Jan 15 14:47:22 tpm-secure.eyemg.com sshd[4818]: Accepted publickey for root from ::ffff:127.0.0.1 port 56608 ssh2
+Jan 15 14:47:58 mobius.eyemg.com sshd[13721]: Accepted publickey for root from 10.0.8.124 port 42173 ssh2
+Jan 15 14:47:58 mobius.eyemg.com sshd[13721]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:47:58 maddock.eyemg.com sshd[4984]: Accepted publickey for root from 10.0.8.124 port 38798 ssh2
+Jan 15 14:47:58 maddock.eyemg.com sshd[4984]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:47:58 maddock.eyemg.com sshd[4984]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:47:59 mobius.eyemg.com sshd[13721]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:48:00 maddock.eyemg.com sshd[5364]: Postponed publickey for root from 10.0.8.142 port 43098 ssh2
+Jan 15 14:48:00 maddock.eyemg.com sshd[5363]: Accepted publickey for root from 10.0.8.142 port 43098 ssh2
+Jan 15 14:48:00 maddock.eyemg.com sshd[5363]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:48:00 maddock.eyemg.com sshd[5363]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:48:00 maddock.eyemg.com sshd[5460]: Postponed publickey for root from 10.0.8.145 port 36290 ssh2
+Jan 15 14:48:00 maddock.eyemg.com sshd[5459]: Accepted publickey for root from 10.0.8.145 port 36290 ssh2
+Jan 15 14:48:00 maddock.eyemg.com sshd[5459]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:48:01 maddock.eyemg.com sshd[5459]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:48:15 tate.eyemg.com sshd[13971]: Postponed publickey for root from ::ffff:10.0.8.163 port 49747 ssh2
+Jan 15 14:48:15 tate.eyemg.com sshd[13970]: Accepted publickey for root from ::ffff:10.0.8.163 port 49747 ssh2
+Jan 15 14:48:15 tate.eyemg.com sshd[13973]: Postponed publickey for root from ::ffff:10.0.8.113 port 51846 ssh2
+Jan 15 14:48:15 tate.eyemg.com sshd[13972]: Accepted publickey for root from ::ffff:10.0.8.113 port 51846 ssh2
+Jan 15 14:48:19 dino.eyemg.com sshd[2138]: Accepted publickey for root from 10.0.8.158 port 44772 ssh2
+Jan 15 14:48:19 dino.eyemg.com sshd[2138]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:48:19 dino.eyemg.com sshd[2138]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:48:26 tate.eyemg.com sshd[14517]: Postponed publickey for root from ::ffff:10.100.8.88 port 41769 ssh2
+Jan 15 14:48:26 tate.eyemg.com sshd[14516]: Accepted publickey for root from ::ffff:10.100.8.88 port 41769 ssh2
+Jan 15 14:48:27 tate.eyemg.com sshd[14586]: Postponed publickey for root from ::ffff:10.100.8.88 port 41770 ssh2
+Jan 15 14:48:27 tate.eyemg.com sshd[14585]: Accepted publickey for root from ::ffff:10.100.8.88 port 41770 ssh2
+Jan 15 14:48:33 sable.eyemg.com sshd[31601]: Postponed publickey for root from ::ffff:10.0.8.150 port 51580 ssh2
+Jan 15 14:48:33 sable.eyemg.com sshd[31600]: Accepted publickey for root from ::ffff:10.0.8.150 port 51580 ssh2
+Jan 15 14:48:33 sable.eyemg.com sshd[31670]: Postponed publickey for root from ::ffff:10.0.8.97 port 44954 ssh2
+Jan 15 14:48:33 sable.eyemg.com sshd[31669]: Accepted publickey for root from ::ffff:10.0.8.97 port 44954 ssh2
+Jan 15 14:48:35 juno.eyemg.com sshd[2547]: Connection closed by UNKNOWN
+Jan 15 14:48:48 mobius.eyemg.com sshd[14168]: Accepted publickey for root from 10.0.8.159 port 56637 ssh2
+Jan 15 14:48:48 mobius.eyemg.com sshd[14168]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:48:48 mobius.eyemg.com sshd[14168]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:49:01 maddock.eyemg.com sshd[6216]: Postponed publickey for root from 10.0.8.145 port 36324 ssh2
+Jan 15 14:49:01 maddock.eyemg.com sshd[6215]: Accepted publickey for root from 10.0.8.145 port 36324 ssh2
+Jan 15 14:49:01 maddock.eyemg.com sshd[6215]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:49:02 maddock.eyemg.com sshd[6215]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:49:16 tony.eyemg.com sshd[29822]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:49:16 tony.eyemg.com sshd[29823]: Postponed publickey for root from ::ffff:10.0.8.174 port 59351 ssh2
+Jan 15 14:49:16 tony.eyemg.com sshd[29822]: Accepted publickey for root from ::ffff:10.0.8.174 port 59351 ssh2
+Jan 15 14:49:22 tpm-secure.eyemg.com sshd[5956]: Accepted publickey for root from ::ffff:127.0.0.1 port 56609 ssh2
+Jan 15 14:49:58 maddock.eyemg.com sshd[6646]: Accepted publickey for root from 10.0.8.124 port 38800 ssh2
+Jan 15 14:49:59 maddock.eyemg.com sshd[6646]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:49:59 maddock.eyemg.com sshd[6646]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:49:59 mobius.eyemg.com sshd[15102]: Accepted publickey for root from 10.0.8.124 port 42175 ssh2
+Jan 15 14:49:59 mobius.eyemg.com sshd[15102]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:49:59 mobius.eyemg.com sshd[15102]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:49:59 maddock.eyemg.com sshd[6740]: Accepted publickey for root from 10.0.8.124 port 38802 ssh2
+Jan 15 14:49:59 maddock.eyemg.com sshd[6740]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:49:59 maddock.eyemg.com sshd[6740]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:49:59 mobius.eyemg.com sshd[15183]: Accepted publickey for root from 10.0.8.124 port 42177 ssh2
+Jan 15 14:49:59 mobius.eyemg.com sshd[15183]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:50:00 mobius.eyemg.com sshd[15183]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:50:00 maddock.eyemg.com sshd[6854]: Postponed publickey for root from 10.0.8.142 port 43224 ssh2
+Jan 15 14:50:00 maddock.eyemg.com sshd[6853]: Accepted publickey for root from 10.0.8.142 port 43224 ssh2
+Jan 15 14:50:00 maddock.eyemg.com sshd[6853]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:50:00 maddock.eyemg.com sshd[6853]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:50:00 maddock.eyemg.com sshd[6950]: Postponed publickey for root from 10.0.8.145 port 36416 ssh2
+Jan 15 14:50:01 maddock.eyemg.com sshd[6949]: Accepted publickey for root from 10.0.8.145 port 36416 ssh2
+Jan 15 14:50:01 maddock.eyemg.com sshd[6949]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:50:01 maddock.eyemg.com sshd[6949]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:50:15 tate.eyemg.com sshd[17123]: Postponed publickey for root from ::ffff:10.0.8.163 port 49785 ssh2
+Jan 15 14:50:15 tate.eyemg.com sshd[17122]: Accepted publickey for root from ::ffff:10.0.8.163 port 49785 ssh2
+Jan 15 14:50:15 tate.eyemg.com sshd[17125]: Postponed publickey for root from ::ffff:10.0.8.113 port 51851 ssh2
+Jan 15 14:50:15 tate.eyemg.com sshd[17124]: Accepted publickey for root from ::ffff:10.0.8.113 port 51851 ssh2
+Jan 15 14:50:19 dino.eyemg.com sshd[2316]: Accepted publickey for root from 10.0.8.158 port 44773 ssh2
+Jan 15 14:50:19 dino.eyemg.com sshd[2316]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:50:19 dino.eyemg.com sshd[2316]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:50:26 tate.eyemg.com sshd[17671]: Postponed publickey for root from ::ffff:10.100.8.88 port 41771 ssh2
+Jan 15 14:50:26 tate.eyemg.com sshd[17670]: Accepted publickey for root from ::ffff:10.100.8.88 port 41771 ssh2
+Jan 15 14:50:27 tate.eyemg.com sshd[17739]: Postponed publickey for root from ::ffff:10.100.8.88 port 41772 ssh2
+Jan 15 14:50:27 tate.eyemg.com sshd[17738]: Accepted publickey for root from ::ffff:10.100.8.88 port 41772 ssh2
+Jan 15 14:50:33 sable.eyemg.com sshd[3460]: Postponed publickey for root from ::ffff:10.0.8.150 port 51613 ssh2
+Jan 15 14:50:33 sable.eyemg.com sshd[3458]: Accepted publickey for root from ::ffff:10.0.8.150 port 51613 ssh2
+Jan 15 14:50:33 sable.eyemg.com sshd[3461]: Postponed publickey for root from ::ffff:10.0.8.97 port 44955 ssh2
+Jan 15 14:50:33 sable.eyemg.com sshd[3459]: Accepted publickey for root from ::ffff:10.0.8.97 port 44955 ssh2
+Jan 15 14:50:35 juno.eyemg.com sshd[5330]: Connection closed by UNKNOWN
+Jan 15 14:50:48 mobius.eyemg.com sshd[15681]: Accepted publickey for root from 10.0.8.159 port 50405 ssh2
+Jan 15 14:50:48 mobius.eyemg.com sshd[15681]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:50:49 mobius.eyemg.com sshd[15681]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:51:16 tony.eyemg.com sshd[31217]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:51:16 tony.eyemg.com sshd[31218]: Postponed publickey for root from ::ffff:10.0.8.174 port 59352 ssh2
+Jan 15 14:51:16 tony.eyemg.com sshd[31217]: Accepted publickey for root from ::ffff:10.0.8.174 port 59352 ssh2
+Jan 15 14:51:22 tpm-secure.eyemg.com sshd[7152]: Accepted publickey for root from ::ffff:127.0.0.1 port 56611 ssh2
+Jan 15 14:51:58 maddock.eyemg.com sshd[8320]: Accepted publickey for root from 10.0.8.124 port 49262 ssh2
+Jan 15 14:51:58 maddock.eyemg.com sshd[8320]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:51:58 maddock.eyemg.com sshd[8320]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:51:58 mobius.eyemg.com sshd[16619]: Accepted publickey for root from 10.0.8.124 port 40184 ssh2
+Jan 15 14:51:58 mobius.eyemg.com sshd[16619]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:51:59 mobius.eyemg.com sshd[16619]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:52:00 maddock.eyemg.com sshd[8434]: Postponed publickey for root from 10.0.8.142 port 43310 ssh2
+Jan 15 14:52:00 maddock.eyemg.com sshd[8433]: Accepted publickey for root from 10.0.8.142 port 43310 ssh2
+Jan 15 14:52:00 maddock.eyemg.com sshd[8433]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:52:00 maddock.eyemg.com sshd[8433]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:52:00 maddock.eyemg.com sshd[8530]: Postponed publickey for root from 10.0.8.145 port 36502 ssh2
+Jan 15 14:52:00 maddock.eyemg.com sshd[8529]: Accepted publickey for root from 10.0.8.145 port 36502 ssh2
+Jan 15 14:52:00 maddock.eyemg.com sshd[8529]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:52:00 maddock.eyemg.com sshd[8529]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:52:15 tate.eyemg.com sshd[20247]: Postponed publickey for root from ::ffff:10.0.8.163 port 49822 ssh2
+Jan 15 14:52:15 tate.eyemg.com sshd[20248]: Postponed publickey for root from ::ffff:10.0.8.113 port 51856 ssh2
+Jan 15 14:52:15 tate.eyemg.com sshd[20245]: Accepted publickey for root from ::ffff:10.0.8.163 port 49822 ssh2
+Jan 15 14:52:15 tate.eyemg.com sshd[20246]: Accepted publickey for root from ::ffff:10.0.8.113 port 51856 ssh2
+Jan 15 14:52:19 dino.eyemg.com sshd[2431]: Accepted publickey for root from 10.0.8.158 port 47741 ssh2
+Jan 15 14:52:19 dino.eyemg.com sshd[2431]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:52:19 dino.eyemg.com sshd[2431]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:52:25 tate.eyemg.com sshd[20790]: Postponed publickey for root from ::ffff:10.100.8.88 port 41774 ssh2
+Jan 15 14:52:25 tate.eyemg.com sshd[20789]: Accepted publickey for root from ::ffff:10.100.8.88 port 41774 ssh2
+Jan 15 14:52:27 tate.eyemg.com sshd[20860]: Postponed publickey for root from ::ffff:10.100.8.88 port 41775 ssh2
+Jan 15 14:52:27 tate.eyemg.com sshd[20859]: Accepted publickey for root from ::ffff:10.100.8.88 port 41775 ssh2
+Jan 15 14:52:33 sable.eyemg.com sshd[7778]: Postponed publickey for root from ::ffff:10.0.8.150 port 51675 ssh2
+Jan 15 14:52:33 sable.eyemg.com sshd[7777]: Accepted publickey for root from ::ffff:10.0.8.150 port 51675 ssh2
+Jan 15 14:52:33 sable.eyemg.com sshd[7849]: Postponed publickey for root from ::ffff:10.0.8.97 port 44964 ssh2
+Jan 15 14:52:33 sable.eyemg.com sshd[7848]: Accepted publickey for root from ::ffff:10.0.8.97 port 44964 ssh2
+Jan 15 14:52:35 juno.eyemg.com sshd[7059]: Connection closed by UNKNOWN
+Jan 15 14:52:48 mobius.eyemg.com sshd[17053]: Accepted publickey for root from 10.0.8.159 port 50440 ssh2
+Jan 15 14:52:48 mobius.eyemg.com sshd[17053]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:52:48 mobius.eyemg.com sshd[17053]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:53:16 tony.eyemg.com sshd[32544]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:53:16 tony.eyemg.com sshd[32545]: Postponed publickey for root from ::ffff:10.0.8.174 port 59357 ssh2
+Jan 15 14:53:16 tony.eyemg.com sshd[32544]: Accepted publickey for root from ::ffff:10.0.8.174 port 59357 ssh2
+Jan 15 14:53:22 tpm-secure.eyemg.com sshd[8319]: Accepted publickey for root from ::ffff:127.0.0.1 port 56613 ssh2
+Jan 15 14:53:58 maddock.eyemg.com sshd[9813]: Accepted publickey for root from 10.0.8.124 port 49264 ssh2
+Jan 15 14:53:58 maddock.eyemg.com sshd[9813]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:53:58 maddock.eyemg.com sshd[9813]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:53:58 mobius.eyemg.com sshd[17729]: Accepted publickey for root from 10.0.8.124 port 40186 ssh2
+Jan 15 14:53:58 mobius.eyemg.com sshd[17729]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:53:59 mobius.eyemg.com sshd[17729]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:54:00 maddock.eyemg.com sshd[9927]: Postponed publickey for root from 10.0.8.142 port 33905 ssh2
+Jan 15 14:54:00 maddock.eyemg.com sshd[9926]: Accepted publickey for root from 10.0.8.142 port 33905 ssh2
+Jan 15 14:54:00 maddock.eyemg.com sshd[9926]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:54:00 maddock.eyemg.com sshd[9926]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:54:00 maddock.eyemg.com sshd[10023]: Postponed publickey for root from 10.0.8.145 port 59964 ssh2
+Jan 15 14:54:00 maddock.eyemg.com sshd[10022]: Accepted publickey for root from 10.0.8.145 port 59964 ssh2
+Jan 15 14:54:00 maddock.eyemg.com sshd[10022]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:54:00 maddock.eyemg.com sshd[10022]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:54:15 tate.eyemg.com sshd[23372]: Postponed publickey for root from ::ffff:10.0.8.113 port 51861 ssh2
+Jan 15 14:54:15 tate.eyemg.com sshd[23373]: Postponed publickey for root from ::ffff:10.0.8.163 port 49840 ssh2
+Jan 15 14:54:15 tate.eyemg.com sshd[23370]: Accepted publickey for root from ::ffff:10.0.8.113 port 51861 ssh2
+Jan 15 14:54:15 tate.eyemg.com sshd[23371]: Accepted publickey for root from ::ffff:10.0.8.163 port 49840 ssh2
+Jan 15 14:54:19 dino.eyemg.com sshd[2549]: Accepted publickey for root from 10.0.8.158 port 47742 ssh2
+Jan 15 14:54:19 dino.eyemg.com sshd[2549]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:54:19 dino.eyemg.com sshd[2549]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:54:26 tate.eyemg.com sshd[23951]: Postponed publickey for root from ::ffff:10.100.8.88 port 41776 ssh2
+Jan 15 14:54:26 tate.eyemg.com sshd[23950]: Accepted publickey for root from ::ffff:10.100.8.88 port 41776 ssh2
+Jan 15 14:54:27 tate.eyemg.com sshd[24020]: Postponed publickey for root from ::ffff:10.100.8.88 port 41777 ssh2
+Jan 15 14:54:27 tate.eyemg.com sshd[24019]: Accepted publickey for root from ::ffff:10.100.8.88 port 41777 ssh2
+Jan 15 14:54:33 sable.eyemg.com sshd[12056]: Postponed publickey for root from ::ffff:10.0.8.150 port 51727 ssh2
+Jan 15 14:54:33 sable.eyemg.com sshd[12057]: Postponed publickey for root from ::ffff:10.0.8.97 port 44965 ssh2
+Jan 15 14:54:33 sable.eyemg.com sshd[12054]: Accepted publickey for root from ::ffff:10.0.8.150 port 51727 ssh2
+Jan 15 14:54:33 sable.eyemg.com sshd[12055]: Accepted publickey for root from ::ffff:10.0.8.97 port 44965 ssh2
+Jan 15 14:54:35 juno.eyemg.com sshd[8805]: Connection closed by UNKNOWN
+Jan 15 14:54:48 mobius.eyemg.com sshd[18430]: Accepted publickey for root from 10.0.8.159 port 35058 ssh2
+Jan 15 14:54:48 mobius.eyemg.com sshd[18430]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:54:48 mobius.eyemg.com sshd[18430]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:55:16 tony.eyemg.com sshd[1479]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:55:16 tony.eyemg.com sshd[1480]: Postponed publickey for root from ::ffff:10.0.8.174 port 59358 ssh2
+Jan 15 14:55:16 tony.eyemg.com sshd[1479]: Accepted publickey for root from ::ffff:10.0.8.174 port 59358 ssh2
+Jan 15 14:55:22 tpm-secure.eyemg.com sshd[9513]: Accepted publickey for root from ::ffff:127.0.0.1 port 56614 ssh2
+Jan 15 14:55:58 maddock.eyemg.com sshd[11348]: Accepted publickey for root from 10.0.8.124 port 49266 ssh2
+Jan 15 14:55:58 maddock.eyemg.com sshd[11348]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:55:58 maddock.eyemg.com sshd[11348]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:55:58 mobius.eyemg.com sshd[19156]: Accepted publickey for root from 10.0.8.124 port 40188 ssh2
+Jan 15 14:55:58 mobius.eyemg.com sshd[19156]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:55:58 mobius.eyemg.com sshd[19156]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:56:00 maddock.eyemg.com sshd[11462]: Postponed publickey for root from 10.0.8.142 port 33960 ssh2
+Jan 15 14:56:00 maddock.eyemg.com sshd[11461]: Accepted publickey for root from 10.0.8.142 port 33960 ssh2
+Jan 15 14:56:00 maddock.eyemg.com sshd[11461]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:56:00 maddock.eyemg.com sshd[11461]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:56:00 maddock.eyemg.com sshd[11558]: Postponed publickey for root from 10.0.8.145 port 60019 ssh2
+Jan 15 14:56:00 maddock.eyemg.com sshd[11557]: Accepted publickey for root from 10.0.8.145 port 60019 ssh2
+Jan 15 14:56:00 maddock.eyemg.com sshd[11557]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:56:00 maddock.eyemg.com sshd[11557]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:56:01 maddock.eyemg.com sshd[11666]: Postponed publickey for root from 10.0.8.145 port 60021 ssh2
+Jan 15 14:56:01 maddock.eyemg.com sshd[11665]: Accepted publickey for root from 10.0.8.145 port 60021 ssh2
+Jan 15 14:56:01 maddock.eyemg.com sshd[11665]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:56:02 maddock.eyemg.com sshd[11665]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:56:15 tate.eyemg.com sshd[26642]: Postponed publickey for root from ::ffff:10.0.8.113 port 51866 ssh2
+Jan 15 14:56:15 tate.eyemg.com sshd[26641]: Postponed publickey for root from ::ffff:10.0.8.163 port 49852 ssh2
+Jan 15 14:56:15 tate.eyemg.com sshd[26640]: Accepted publickey for root from ::ffff:10.0.8.163 port 49852 ssh2
+Jan 15 14:56:15 tate.eyemg.com sshd[26639]: Accepted publickey for root from ::ffff:10.0.8.113 port 51866 ssh2
+Jan 15 14:56:19 dino.eyemg.com sshd[2709]: Accepted publickey for root from 10.0.8.158 port 47743 ssh2
+Jan 15 14:56:19 dino.eyemg.com sshd[2709]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:56:20 dino.eyemg.com sshd[2709]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:56:25 tate.eyemg.com sshd[27201]: Postponed publickey for root from ::ffff:10.100.8.88 port 41779 ssh2
+Jan 15 14:56:25 tate.eyemg.com sshd[27200]: Accepted publickey for root from ::ffff:10.100.8.88 port 41779 ssh2
+Jan 15 14:56:26 tate.eyemg.com sshd[27270]: Postponed publickey for root from ::ffff:10.100.8.88 port 41780 ssh2
+Jan 15 14:56:26 tate.eyemg.com sshd[27269]: Accepted publickey for root from ::ffff:10.100.8.88 port 41780 ssh2
+Jan 15 14:56:33 sable.eyemg.com sshd[16108]: Postponed publickey for root from ::ffff:10.0.8.150 port 51755 ssh2
+Jan 15 14:56:33 sable.eyemg.com sshd[16107]: Accepted publickey for root from ::ffff:10.0.8.150 port 51755 ssh2
+Jan 15 14:56:33 sable.eyemg.com sshd[16110]: Postponed publickey for root from ::ffff:10.0.8.97 port 44970 ssh2
+Jan 15 14:56:33 sable.eyemg.com sshd[16109]: Accepted publickey for root from ::ffff:10.0.8.97 port 44970 ssh2
+Jan 15 14:56:35 juno.eyemg.com sshd[11527]: Connection closed by UNKNOWN
+Jan 15 14:56:48 mobius.eyemg.com sshd[19856]: Accepted publickey for root from 10.0.8.159 port 35067 ssh2
+Jan 15 14:56:48 mobius.eyemg.com sshd[19856]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:56:48 mobius.eyemg.com sshd[19856]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:57:16 tony.eyemg.com sshd[2828]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:57:16 tony.eyemg.com sshd[2829]: Postponed publickey for root from ::ffff:10.0.8.174 port 59363 ssh2
+Jan 15 14:57:16 tony.eyemg.com sshd[2828]: Accepted publickey for root from ::ffff:10.0.8.174 port 59363 ssh2
+Jan 15 14:57:22 tpm-secure.eyemg.com sshd[10680]: Accepted publickey for root from ::ffff:127.0.0.1 port 56615 ssh2
+Jan 15 14:57:58 maddock.eyemg.com sshd[12933]: Accepted publickey for root from 10.0.8.124 port 56349 ssh2
+Jan 15 14:57:58 maddock.eyemg.com sshd[12933]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:57:58 maddock.eyemg.com sshd[12933]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:57:58 mobius.eyemg.com sshd[20540]: Accepted publickey for root from 10.0.8.124 port 52716 ssh2
+Jan 15 14:57:58 mobius.eyemg.com sshd[20540]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:57:58 mobius.eyemg.com sshd[20540]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:58:00 maddock.eyemg.com sshd[13047]: Postponed publickey for root from 10.0.8.142 port 58479 ssh2
+Jan 15 14:58:00 maddock.eyemg.com sshd[13046]: Accepted publickey for root from 10.0.8.142 port 58479 ssh2
+Jan 15 14:58:00 maddock.eyemg.com sshd[13046]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:58:00 maddock.eyemg.com sshd[13046]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:58:00 maddock.eyemg.com sshd[13143]: Postponed publickey for root from 10.0.8.145 port 35134 ssh2
+Jan 15 14:58:00 maddock.eyemg.com sshd[13142]: Accepted publickey for root from 10.0.8.145 port 35134 ssh2
+Jan 15 14:58:00 maddock.eyemg.com sshd[13142]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:58:01 maddock.eyemg.com sshd[13142]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:58:15 tate.eyemg.com sshd[29799]: Postponed publickey for root from ::ffff:10.0.8.163 port 49884 ssh2
+Jan 15 14:58:15 tate.eyemg.com sshd[29798]: Accepted publickey for root from ::ffff:10.0.8.163 port 49884 ssh2
+Jan 15 14:58:15 tate.eyemg.com sshd[29801]: Postponed publickey for root from ::ffff:10.0.8.113 port 51871 ssh2
+Jan 15 14:58:15 tate.eyemg.com sshd[29800]: Accepted publickey for root from ::ffff:10.0.8.113 port 51871 ssh2
+Jan 15 14:58:19 dino.eyemg.com sshd[2817]: Accepted publickey for root from 10.0.8.158 port 45855 ssh2
+Jan 15 14:58:19 dino.eyemg.com sshd[2817]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:58:19 dino.eyemg.com sshd[2817]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:58:26 tate.eyemg.com sshd[30347]: Postponed publickey for root from ::ffff:10.100.8.88 port 41781 ssh2
+Jan 15 14:58:26 tate.eyemg.com sshd[30346]: Accepted publickey for root from ::ffff:10.100.8.88 port 41781 ssh2
+Jan 15 14:58:27 tate.eyemg.com sshd[30416]: Postponed publickey for root from ::ffff:10.100.8.88 port 41782 ssh2
+Jan 15 14:58:27 tate.eyemg.com sshd[30415]: Accepted publickey for root from ::ffff:10.100.8.88 port 41782 ssh2
+Jan 15 14:58:33 sable.eyemg.com sshd[20392]: Postponed publickey for root from ::ffff:10.0.8.97 port 44975 ssh2
+Jan 15 14:58:33 sable.eyemg.com sshd[20390]: Accepted publickey for root from ::ffff:10.0.8.97 port 44975 ssh2
+Jan 15 14:58:33 sable.eyemg.com sshd[20391]: Postponed publickey for root from ::ffff:10.0.8.150 port 51775 ssh2
+Jan 15 14:58:33 sable.eyemg.com sshd[20389]: Accepted publickey for root from ::ffff:10.0.8.150 port 51775 ssh2
+Jan 15 14:58:35 juno.eyemg.com sshd[13287]: Connection closed by UNKNOWN
+Jan 15 14:58:48 mobius.eyemg.com sshd[21229]: Accepted publickey for root from 10.0.8.159 port 35092 ssh2
+Jan 15 14:58:48 mobius.eyemg.com sshd[21229]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:58:48 mobius.eyemg.com sshd[21229]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:59:16 tony.eyemg.com sshd[4177]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 14:59:16 tony.eyemg.com sshd[4178]: Postponed publickey for root from ::ffff:10.0.8.174 port 59364 ssh2
+Jan 15 14:59:16 tony.eyemg.com sshd[4177]: Accepted publickey for root from ::ffff:10.0.8.174 port 59364 ssh2
+Jan 15 14:59:22 tpm-secure.eyemg.com sshd[11822]: Accepted publickey for root from ::ffff:127.0.0.1 port 56616 ssh2
+Jan 15 14:59:58 maddock.eyemg.com sshd[14437]: Accepted publickey for root from 10.0.8.124 port 56351 ssh2
+Jan 15 14:59:58 maddock.eyemg.com sshd[14437]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:59:58 maddock.eyemg.com sshd[14437]: pam_unix(sshd:session): session closed for user root
+Jan 15 14:59:58 mobius.eyemg.com sshd[21923]: Accepted publickey for root from 10.0.8.124 port 52718 ssh2
+Jan 15 14:59:58 mobius.eyemg.com sshd[21923]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 14:59:59 mobius.eyemg.com sshd[21923]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:00 maddock.eyemg.com sshd[14551]: Postponed publickey for root from 10.0.8.142 port 58579 ssh2
+Jan 15 15:00:00 maddock.eyemg.com sshd[14550]: Accepted publickey for root from 10.0.8.142 port 58579 ssh2
+Jan 15 15:00:00 maddock.eyemg.com sshd[14550]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:00 maddock.eyemg.com sshd[14550]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:00 maddock.eyemg.com sshd[14647]: Postponed publickey for root from 10.0.8.145 port 35234 ssh2
+Jan 15 15:00:00 maddock.eyemg.com sshd[14646]: Accepted publickey for root from 10.0.8.145 port 35234 ssh2
+Jan 15 15:00:00 maddock.eyemg.com sshd[14646]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:00 maddock.eyemg.com sshd[14646]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:01 sable.eyemg.com sshd[23715]: Postponed publickey for root from ::ffff:10.0.8.82 port 59367 ssh2
+Jan 15 15:00:01 sable.eyemg.com sshd[23716]: Postponed publickey for root from ::ffff:10.0.8.82 port 59366 ssh2
+Jan 15 15:00:01 sable.eyemg.com sshd[23714]: Postponed publickey for root from ::ffff:10.0.8.82 port 59365 ssh2
+Jan 15 15:00:01 sable.eyemg.com sshd[23713]: Accepted publickey for root from ::ffff:10.0.8.82 port 59367 ssh2
+Jan 15 15:00:01 sable.eyemg.com sshd[23711]: Accepted publickey for root from ::ffff:10.0.8.82 port 59365 ssh2
+Jan 15 15:00:01 sable.eyemg.com sshd[23712]: Accepted publickey for root from ::ffff:10.0.8.82 port 59366 ssh2
+Jan 15 15:00:01 maddock.eyemg.com sshd[14903]: Postponed publickey for root from 10.0.8.145 port 35239 ssh2
+Jan 15 15:00:01 maddock.eyemg.com sshd[14901]: Accepted publickey for root from 10.0.8.145 port 35239 ssh2
+Jan 15 15:00:01 maddock.eyemg.com sshd[14901]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:01 maddock.eyemg.com sshd[14892]: Postponed publickey for root from 10.0.8.145 port 35237 ssh2
+Jan 15 15:00:01 maddock.eyemg.com sshd[14920]: Postponed publickey for root from 10.0.8.145 port 35241 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14916]: Accepted publickey for root from 10.0.8.145 port 35241 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14916]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14884]: Accepted publickey for root from 10.0.8.145 port 35237 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14884]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14925]: Postponed publickey for root from 10.0.8.145 port 35240 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14924]: Postponed publickey for root from 10.0.8.145 port 35242 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14929]: Postponed publickey for root from 10.0.8.145 port 35243 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14915]: Accepted publickey for root from 10.0.8.145 port 35240 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14915]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14902]: Postponed publickey for root from 10.0.8.145 port 35238 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14926]: Accepted publickey for root from 10.0.8.145 port 35243 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14900]: Accepted publickey for root from 10.0.8.145 port 35238 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14921]: Accepted publickey for root from 10.0.8.145 port 35242 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14926]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14900]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14921]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14939]: Postponed publickey for root from 10.0.8.145 port 35244 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14979]: Postponed publickey for root from 10.0.8.145 port 35249 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14954]: Postponed publickey for root from 10.0.8.145 port 35247 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14943]: Postponed publickey for root from 10.0.8.145 port 35246 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14946]: Postponed publickey for root from 10.0.8.145 port 35245 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14966]: Accepted publickey for root from 10.0.8.145 port 35249 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14941]: Accepted publickey for root from 10.0.8.145 port 35245 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14937]: Accepted publickey for root from 10.0.8.145 port 35244 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14942]: Accepted publickey for root from 10.0.8.145 port 35246 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14966]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14941]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14952]: Accepted publickey for root from 10.0.8.145 port 35247 ssh2
+Jan 15 15:00:02 maddock.eyemg.com sshd[14942]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14952]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14937]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14901]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:02 mobius.eyemg.com sshd[22030]: Accepted publickey for root from 10.0.8.159 port 37128 ssh2
+Jan 15 15:00:02 mobius.eyemg.com sshd[22030]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:02 maddock.eyemg.com sshd[14915]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:02 maddock.eyemg.com sshd[14916]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:02 maddock.eyemg.com sshd[14926]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:02 maddock.eyemg.com sshd[14921]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:03 mobius.eyemg.com sshd[22030]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:03 maddock.eyemg.com sshd[14884]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:03 gannon.eyemg.com sshd[7662]: Accepted publickey for root from 10.0.8.155 port 34780 ssh2
+Jan 15 15:00:03 gannon.eyemg.com sshd[7662]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:03 gannon.eyemg.com sshd[7665]: Postponed publickey for root from 10.0.8.131 port 38224 ssh2
+Jan 15 15:00:03 gannon.eyemg.com sshd[7664]: Accepted publickey for root from 10.0.8.131 port 38224 ssh2
+Jan 15 15:00:03 gannon.eyemg.com sshd[7664]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:03 maddock.eyemg.com sshd[14942]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:03 maddock.eyemg.com sshd[14952]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:04 maddock.eyemg.com sshd[14966]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:04 maddock.eyemg.com sshd[14941]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:04 maddock.eyemg.com sshd[14937]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:04 maddock.eyemg.com sshd[14900]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:04 gannon.eyemg.com sshd[7664]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:04 gannon.eyemg.com sshd[7662]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:04 gannon.eyemg.com sshd[7757]: Postponed publickey for root from 10.0.8.131 port 38225 ssh2
+Jan 15 15:00:04 gannon.eyemg.com sshd[7756]: Accepted publickey for root from 10.0.8.131 port 38225 ssh2
+Jan 15 15:00:04 gannon.eyemg.com sshd[7756]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:05 gannon.eyemg.com sshd[7756]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:05 gannon.eyemg.com sshd[7804]: Postponed publickey for root from 10.0.8.131 port 38226 ssh2
+Jan 15 15:00:05 gannon.eyemg.com sshd[7803]: Accepted publickey for root from 10.0.8.131 port 38226 ssh2
+Jan 15 15:00:05 gannon.eyemg.com sshd[7803]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:05 gannon.eyemg.com sshd[7803]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:05 gannon.eyemg.com sshd[7851]: Postponed publickey for root from 10.0.8.131 port 38227 ssh2
+Jan 15 15:00:06 gannon.eyemg.com sshd[7850]: Accepted publickey for root from 10.0.8.131 port 38227 ssh2
+Jan 15 15:00:06 gannon.eyemg.com sshd[7850]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:06 gannon.eyemg.com sshd[7850]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:07 gannon.eyemg.com sshd[7898]: Postponed publickey for root from 10.0.8.131 port 38228 ssh2
+Jan 15 15:00:07 gannon.eyemg.com sshd[7897]: Accepted publickey for root from 10.0.8.131 port 38228 ssh2
+Jan 15 15:00:07 gannon.eyemg.com sshd[7897]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:07 gannon.eyemg.com sshd[7944]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:07 gannon.eyemg.com sshd[7944]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:07 gannon.eyemg.com sshd[7992]: Postponed publickey for root from 10.0.8.131 port 38230 ssh2
+Jan 15 15:00:07 gannon.eyemg.com sshd[7991]: Accepted publickey for root from 10.0.8.131 port 38230 ssh2
+Jan 15 15:00:07 gannon.eyemg.com sshd[7991]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:08 gannon.eyemg.com sshd[7991]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:08 gannon.eyemg.com sshd[8039]: Postponed publickey for root from 10.0.8.131 port 38231 ssh2
+Jan 15 15:00:08 gannon.eyemg.com sshd[8038]: Accepted publickey for root from 10.0.8.131 port 38231 ssh2
+Jan 15 15:00:08 gannon.eyemg.com sshd[8038]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:08 gannon.eyemg.com sshd[8038]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:08 gannon.eyemg.com sshd[8086]: Postponed publickey for root from 10.0.8.131 port 38232 ssh2
+Jan 15 15:00:08 gannon.eyemg.com sshd[8085]: Accepted publickey for root from 10.0.8.131 port 38232 ssh2
+Jan 15 15:00:08 gannon.eyemg.com sshd[8085]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:09 gannon.eyemg.com sshd[8085]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:09 gannon.eyemg.com sshd[8133]: Postponed publickey for root from 10.0.8.131 port 38233 ssh2
+Jan 15 15:00:09 gannon.eyemg.com sshd[8132]: Accepted publickey for root from 10.0.8.131 port 38233 ssh2
+Jan 15 15:00:09 gannon.eyemg.com sshd[8132]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:09 gannon.eyemg.com sshd[8132]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:09 gannon.eyemg.com sshd[8180]: Postponed publickey for root from 10.0.8.131 port 38234 ssh2
+Jan 15 15:00:09 gannon.eyemg.com sshd[8179]: Accepted publickey for root from 10.0.8.131 port 38234 ssh2
+Jan 15 15:00:09 gannon.eyemg.com sshd[8179]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:10 gannon.eyemg.com sshd[8179]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:15 tate.eyemg.com sshd[488]: Postponed publickey for root from ::ffff:10.0.8.163 port 49903 ssh2
+Jan 15 15:00:15 tate.eyemg.com sshd[486]: Accepted publickey for root from ::ffff:10.0.8.163 port 49903 ssh2
+Jan 15 15:00:15 tate.eyemg.com sshd[489]: Postponed publickey for root from ::ffff:10.0.8.113 port 51876 ssh2
+Jan 15 15:00:15 tate.eyemg.com sshd[487]: Accepted publickey for root from ::ffff:10.0.8.113 port 51876 ssh2
+Jan 15 15:00:19 dino.eyemg.com sshd[2956]: Accepted publickey for root from 10.0.8.158 port 45856 ssh2
+Jan 15 15:00:19 dino.eyemg.com sshd[2956]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:20 dino.eyemg.com sshd[2956]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:00:26 tate.eyemg.com sshd[778]: Postponed publickey for root from ::ffff:10.100.8.88 port 41784 ssh2
+Jan 15 15:00:26 tate.eyemg.com sshd[775]: Accepted publickey for root from ::ffff:10.100.8.88 port 41784 ssh2
+Jan 15 15:00:27 tate.eyemg.com sshd[1120]: Postponed publickey for root from ::ffff:10.100.8.88 port 41785 ssh2
+Jan 15 15:00:27 tate.eyemg.com sshd[1119]: Accepted publickey for root from ::ffff:10.100.8.88 port 41785 ssh2
+Jan 15 15:00:33 sable.eyemg.com sshd[24958]: Postponed publickey for root from ::ffff:10.0.8.150 port 51839 ssh2
+Jan 15 15:00:33 sable.eyemg.com sshd[24957]: Accepted publickey for root from ::ffff:10.0.8.150 port 51839 ssh2
+Jan 15 15:00:33 sable.eyemg.com sshd[24960]: Postponed publickey for root from ::ffff:10.0.8.97 port 44980 ssh2
+Jan 15 15:00:33 sable.eyemg.com sshd[24959]: Accepted publickey for root from ::ffff:10.0.8.97 port 44980 ssh2
+Jan 15 15:00:35 juno.eyemg.com sshd[15951]: Connection closed by UNKNOWN
+Jan 15 15:00:48 mobius.eyemg.com sshd[22758]: Accepted publickey for root from 10.0.8.159 port 37131 ssh2
+Jan 15 15:00:48 mobius.eyemg.com sshd[22758]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:00:48 mobius.eyemg.com sshd[22758]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:01:16 tony.eyemg.com sshd[5627]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 15:01:16 tony.eyemg.com sshd[5628]: Postponed publickey for root from ::ffff:10.0.8.174 port 59368 ssh2
+Jan 15 15:01:16 tony.eyemg.com sshd[5627]: Accepted publickey for root from ::ffff:10.0.8.174 port 59368 ssh2
+Jan 15 15:01:22 tpm-secure.eyemg.com sshd[13014]: Accepted publickey for root from ::ffff:127.0.0.1 port 56617 ssh2
+Jan 15 15:01:58 maddock.eyemg.com sshd[17499]: Accepted publickey for root from 10.0.8.124 port 40993 ssh2
+Jan 15 15:01:58 maddock.eyemg.com sshd[17499]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:01:58 maddock.eyemg.com sshd[17499]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:01:58 mobius.eyemg.com sshd[23440]: Accepted publickey for root from 10.0.8.124 port 40046 ssh2
+Jan 15 15:01:58 mobius.eyemg.com sshd[23440]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:01:58 mobius.eyemg.com sshd[23440]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:02:00 maddock.eyemg.com sshd[17615]: Postponed publickey for root from 10.0.8.142 port 58758 ssh2
+Jan 15 15:02:00 maddock.eyemg.com sshd[17614]: Accepted publickey for root from 10.0.8.142 port 58758 ssh2
+Jan 15 15:02:00 maddock.eyemg.com sshd[17614]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:02:00 maddock.eyemg.com sshd[17614]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:02:00 maddock.eyemg.com sshd[17711]: Postponed publickey for root from 10.0.8.145 port 35413 ssh2
+Jan 15 15:02:00 maddock.eyemg.com sshd[17710]: Accepted publickey for root from 10.0.8.145 port 35413 ssh2
+Jan 15 15:02:00 maddock.eyemg.com sshd[17710]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:02:00 maddock.eyemg.com sshd[17710]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:02:15 tate.eyemg.com sshd[3592]: Postponed publickey for root from ::ffff:10.0.8.163 port 49935 ssh2
+Jan 15 15:02:15 tate.eyemg.com sshd[3591]: Accepted publickey for root from ::ffff:10.0.8.163 port 49935 ssh2
+Jan 15 15:02:15 tate.eyemg.com sshd[3594]: Postponed publickey for root from ::ffff:10.0.8.113 port 51881 ssh2
+Jan 15 15:02:15 tate.eyemg.com sshd[3593]: Accepted publickey for root from ::ffff:10.0.8.113 port 51881 ssh2
+Jan 15 15:02:19 dino.eyemg.com sshd[3087]: Accepted publickey for root from 10.0.8.158 port 38881 ssh2
+Jan 15 15:02:19 dino.eyemg.com sshd[3087]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:02:20 dino.eyemg.com sshd[3087]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:02:26 tate.eyemg.com sshd[3880]: Postponed publickey for root from ::ffff:10.100.8.88 port 41786 ssh2
+Jan 15 15:02:26 tate.eyemg.com sshd[3879]: Accepted publickey for root from ::ffff:10.100.8.88 port 41786 ssh2
+Jan 15 15:02:27 tate.eyemg.com sshd[3949]: Postponed publickey for root from ::ffff:10.100.8.88 port 41787 ssh2
+Jan 15 15:02:27 tate.eyemg.com sshd[3948]: Accepted publickey for root from ::ffff:10.100.8.88 port 41787 ssh2
+Jan 15 15:02:33 sable.eyemg.com sshd[29267]: Postponed publickey for root from ::ffff:10.0.8.150 port 51866 ssh2
+Jan 15 15:02:33 sable.eyemg.com sshd[29268]: Postponed publickey for root from ::ffff:10.0.8.97 port 44985 ssh2
+Jan 15 15:02:33 sable.eyemg.com sshd[29265]: Accepted publickey for root from ::ffff:10.0.8.150 port 51866 ssh2
+Jan 15 15:02:33 sable.eyemg.com sshd[29266]: Accepted publickey for root from ::ffff:10.0.8.97 port 44985 ssh2
+Jan 15 15:02:35 juno.eyemg.com sshd[17684]: Connection closed by UNKNOWN
+Jan 15 15:02:48 mobius.eyemg.com sshd[24139]: Accepted publickey for root from 10.0.8.159 port 37143 ssh2
+Jan 15 15:02:48 mobius.eyemg.com sshd[24139]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:02:48 mobius.eyemg.com sshd[24139]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:03:16 tony.eyemg.com sshd[6994]: reverse mapping checking getaddrinfo for opt-out.yrcw.eyemg.com failed - POSSIBLE BREAKIN ATTEMPT!
+Jan 15 15:03:16 tony.eyemg.com sshd[6995]: Postponed publickey for root from ::ffff:10.0.8.174 port 59369 ssh2
+Jan 15 15:03:16 tony.eyemg.com sshd[6994]: Accepted publickey for root from ::ffff:10.0.8.174 port 59369 ssh2
+Jan 15 15:03:22 tpm-secure.eyemg.com sshd[14145]: Accepted publickey for root from ::ffff:127.0.0.1 port 56618 ssh2
+Jan 15 15:03:58 maddock.eyemg.com sshd[19034]: Accepted publickey for root from 10.0.8.124 port 40995 ssh2
+Jan 15 15:03:58 maddock.eyemg.com sshd[19034]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:03:58 maddock.eyemg.com sshd[19034]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:03:58 mobius.eyemg.com sshd[24817]: Accepted publickey for root from 10.0.8.124 port 40048 ssh2
+Jan 15 15:03:58 mobius.eyemg.com sshd[24817]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:03:58 mobius.eyemg.com sshd[24817]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:04:00 maddock.eyemg.com sshd[19148]: Postponed publickey for root from 10.0.8.142 port 39947 ssh2
+Jan 15 15:04:00 maddock.eyemg.com sshd[19147]: Accepted publickey for root from 10.0.8.142 port 39947 ssh2
+Jan 15 15:04:00 maddock.eyemg.com sshd[19147]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:04:00 maddock.eyemg.com sshd[19147]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:04:00 maddock.eyemg.com sshd[19244]: Postponed publickey for root from 10.0.8.145 port 56261 ssh2
+Jan 15 15:04:00 maddock.eyemg.com sshd[19243]: Accepted publickey for root from 10.0.8.145 port 56261 ssh2
+Jan 15 15:04:00 maddock.eyemg.com sshd[19243]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:04:00 maddock.eyemg.com sshd[19243]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:04:15 tate.eyemg.com sshd[6699]: Postponed publickey for root from ::ffff:10.0.8.163 port 49967 ssh2
+Jan 15 15:04:15 tate.eyemg.com sshd[6698]: Accepted publickey for root from ::ffff:10.0.8.163 port 49967 ssh2
+Jan 15 15:04:15 tate.eyemg.com sshd[6701]: Postponed publickey for root from ::ffff:10.0.8.113 port 51886 ssh2
+Jan 15 15:04:15 tate.eyemg.com sshd[6700]: Accepted publickey for root from ::ffff:10.0.8.113 port 51886 ssh2
+Jan 15 15:04:19 dino.eyemg.com sshd[3175]: Accepted publickey for root from 10.0.8.158 port 38882 ssh2
+Jan 15 15:04:19 dino.eyemg.com sshd[3175]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:04:19 dino.eyemg.com sshd[3175]: pam_unix(sshd:session): session closed for user root
+Jan 15 15:04:26 tate.eyemg.com sshd[6972]: Postponed publickey for root from ::ffff:10.100.8.88 port 41789 ssh2
+Jan 15 15:04:26 tate.eyemg.com sshd[6971]: Accepted publickey for root from ::ffff:10.100.8.88 port 41789 ssh2
+Jan 15 15:04:27 tate.eyemg.com sshd[7041]: Postponed publickey for root from ::ffff:10.100.8.88 port 41790 ssh2
+Jan 15 15:04:27 tate.eyemg.com sshd[7040]: Accepted publickey for root from ::ffff:10.100.8.88 port 41790 ssh2
+Jan 15 15:04:33 sable.eyemg.com sshd[1160]: Postponed publickey for root from ::ffff:10.0.8.97 port 44990 ssh2
+Jan 15 15:04:33 sable.eyemg.com sshd[1161]: Postponed publickey for root from ::ffff:10.0.8.150 port 51918 ssh2
+Jan 15 15:04:33 sable.eyemg.com sshd[1157]: Accepted publickey for root from ::ffff:10.0.8.97 port 44990 ssh2
+Jan 15 15:04:33 sable.eyemg.com sshd[1159]: Accepted publickey for root from ::ffff:10.0.8.150 port 51918 ssh2
+Jan 15 15:04:35 juno.eyemg.com sshd[19453]: Connection closed by UNKNOWN
+Jan 15 15:04:48 mobius.eyemg.com sshd[25500]: Accepted publickey for root from 10.0.8.159 port 42126 ssh2
+Jan 15 15:04:48 mobius.eyemg.com sshd[25500]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 15 15:04:48 mobius.eyemg.com sshd[25500]: pam_unix(sshd:session): session closed for user root

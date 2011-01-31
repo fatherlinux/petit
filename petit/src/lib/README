@@ -1,0 +1,4 @@
+Directory	Description
+sw		Contains all stopworkds
+fp		Fingerprint files used in analysis
+fplib		Fingerprint libraries used to build files in fp
