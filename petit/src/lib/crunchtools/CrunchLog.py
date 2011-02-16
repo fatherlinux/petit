@@ -14,16 +14,7 @@ from random import choice
 import datetime
 import time
 import types
-
-# Automatically load a list of drivers for each file type this will be used
-# to determine what kind of log it is. Do NOT add the parent LogEntry class
-ma = sys.modules[__name__].__dict__ # module attributes
-entry_types = list()
-
-for i in ma.keys():
-    if isinstance(ma[i], types.ClassType):
-        if issubclass(ma[i], ma['LogEntry']) and ma[i].__name__ != "LogEntry":
-            entry_types.append(ma[i].__name__)
+#import rpdb2; rpdb2.start_embedded_debugger("password")
 
 class CrunchLog(UserList):
     """
@@ -93,9 +84,7 @@ class CrunchLog(UserList):
                     for entry_type in entry_types:
                         if eval(entry_type).is_type(line):
                             tally[entry_type] += 1
-                        else:
-                            tally['RawEntry'] += 1
-
+                            break
 
                 # Tally logic is determined by driver
                 for entry_type in entry_types:
@@ -242,9 +231,13 @@ class SyslogEntry(LogEntry):
 
         if len(line) >= 3:
 
-            # Look for something similar to: "29 11:53:08" in third column
-            if re.search("[0-9][0-9]?",line[1]) and \
-               re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]):
+            # Look for something similar to: "Feb 29 11:53:08" in first
+            # three columns
+            if re.search("[A-Z][a-z]{2}",line[0]) and \
+               re.search("[0-9][0-9]?",line[1]) and \
+               re.search("[0-9{2}:[0-9]{2}:[0-9]{2}",line[2]) and not \
+               (re.search("^pam_",line[5]) or \
+               re.search("^sshd\[",line[4])):
                 return True
             else:
                 return False
@@ -631,14 +624,21 @@ class RawEntry(LogEntry):
 
     def is_type(line):
         """
-        Always return False so that raw entry is not selected by mistake
+        Do minimum checking to ensure there is some data
         """
 
-        return False
+        if len(line) >= 1:
+
+            # Look for any length of text in the line
+            if re.search(".+",str(line)):
+                return True
+            else:
+                return False
+        else:
+            return False
 
     # Declare Static Methods
     is_type = staticmethod(is_type)
-
 
 class SnortEntry(LogEntry):
     """
@@ -704,3 +704,20 @@ class SnortEntry(LogEntry):
 
     # Declare Static Methods
     is_type = staticmethod(is_type)
+
+
+# Automatically load a list of drivers for each file type this will be used
+# to determine what kind of log it is. Do NOT append the parent LogEntry and
+# append RawEntry to the end to preserve last resort logic
+ma = sys.modules[__name__].__dict__ # module attributes
+entry_types = list()
+
+for i in ma.keys():
+    if isinstance(ma[i], types.ClassType):
+        if issubclass(ma[i], ma['LogEntry']) and \
+                      ma[i].__name__ != "LogEntry" and \
+                      ma[i].__name__ != "RawEntry":
+            entry_types.append(ma[i].__name__)
+
+entry_types.append("RawEntry")
+
