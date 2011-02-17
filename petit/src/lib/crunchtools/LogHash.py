@@ -2,7 +2,7 @@
 
 from UserDict import UserDict
 from Filter import Filter
-from CrunchLog import Log
+from CrunchLog import CrunchLog
 
 from CrunchLog import SyslogEntry
 from CrunchLog import RSyslogEntry
@@ -132,7 +132,7 @@ class SuperHash(UserDict):
             if re.search("fp",fingerprint_file):
 
                 # Build a Log for the fingerprint
-                log = Log(fingerprint_file)
+                log = CrunchLog(fingerprint_file)
 
                 # Build a SuperHash
                 x = SuperHash.manufacture(log, "hash.stopwords")

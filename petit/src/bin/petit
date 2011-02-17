@@ -38,7 +38,7 @@ import signal
 import sys
 import logging
 sys.path.append("/usr/share/petit")
-from crunchtools.CrunchLog import Log
+from crunchtools.CrunchLog import CrunchLog
 from crunchtools.LogHash import SuperHash
 from crunchtools.LogHash import DaemonHash
 from crunchtools.LogHash import HostHash
@@ -243,7 +243,7 @@ def mode_hash():
     """Runs in hashing mode"""
 
     # Get entire log file into ram for speed
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Build the Hash
     if options.filter == None or options.filter == True:
@@ -275,7 +275,7 @@ def mode_wordcount():
         options.filter = True
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new word hash based on log file and filter created
     x = WordHash(log, "words.stopwords")
@@ -296,7 +296,7 @@ def mode_daemon():
         options.filter = True
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = DaemonHash(log, "daemon.stopwords")
@@ -317,7 +317,7 @@ def mode_host():
         options.filter = True
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = HostHash(log, "host.stopwords")
@@ -332,7 +332,7 @@ def mode_sgraph():
     """Runs seconds graph mode"""
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = SecondsGraph(log)
@@ -351,7 +351,7 @@ def mode_mgraph():
     """Runs minutes graph mode"""
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = MinutesGraph(log)
@@ -370,7 +370,7 @@ def mode_hgraph():
     """Runs hours graph mode"""
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = HoursGraph(log)
@@ -389,7 +389,7 @@ def mode_dgraph():
     """Runs days graph mode"""
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = DaysGraph(log)
@@ -408,7 +408,7 @@ def mode_mograph():
     """Runs months graph mode"""
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = MonthsGraph(log)
@@ -427,7 +427,7 @@ def mode_ygraph():
     """Runs years graph mode"""
 
     # Get input
-    log = Log(filename)
+    log = CrunchLog(filename)
 
     # Create new syslog hash based on log file and filter created
     x = YearsGraph(log)
