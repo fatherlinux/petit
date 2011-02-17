@@ -15,7 +15,7 @@ cp build/deb/control build/deb/petit/DEBIAN/control
 
 # Now fill with latest data
 ## Bin
-rsync -av --exclude=.svn src/bin/ build/deb/petit/usr/bin/
+rsync -aq --exclude=.svn src/bin/ build/deb/petit/usr/bin/
 
 ## Docs
 cp AUTHORS build/deb/petit/usr/share/doc/petit/AUTHORS
@@ -23,13 +23,13 @@ cp COPYING build/deb/petit/usr/share/doc/petit/COPYING
 cp README build/deb/petit/usr/share/doc/petit/README
 
 ## Lib
-rsync -av --exclude=.svn src/lib/fingerprint_library/ build/deb/petit/var/lib/petit/fingerprint_library/
-rsync -av --exclude=.svn src/lib/fingerprints/ build/deb/petit/var/lib/petit/fingerprints/
-rsync -av --exclude=.svn src/lib/filters/ build/deb/petit/var/lib/petit/filters/
-rsync -av --exclude=.svn src/lib/crunchtools/ build/deb/petit/usr/share/petit/crunchtools/
+rsync -aq --exclude=.svn src/lib/fingerprint_library/ build/deb/petit/var/lib/petit/fingerprint_library/
+rsync -aq --exclude=.svn src/lib/fingerprints/ build/deb/petit/var/lib/petit/fingerprints/
+rsync -aq --exclude=.svn src/lib/filters/ build/deb/petit/var/lib/petit/filters/
+rsync -aq --exclude=.svn src/lib/crunchtools/ build/deb/petit/usr/share/petit/crunchtools/
 
 ## Man
-rsync -av --exclude=.svn src/man/petit.1.gz build/deb/petit/usr/share/man/man1/petit.1.gz
+rsync -aq --exclude=.svn src/man/petit.1.gz build/deb/petit/usr/share/man/man1/petit.1.gz
 
 
 # Build the package
