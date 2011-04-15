@@ -10,13 +10,19 @@ deb_location="~/petit/petit"
 
 
 # Get version from admin
-version=`cat petit/build/rpm/SPECS/petit.spec | grep Version | cut -f2 -d" "`
+version=`hg tags | head -n 2 | tail -n 1 | cut -f1 -d" "`
 
 clean() {
 	# Clean build
 	cd $home_location/petit
 	make clean
 	cd $home_location
+}
+
+increment_version() {
+    sed -i -e "s/Version: [0-9]\.[0-9]\.[0-9]/Version: $version/" petit/src/bin/petit
+    sed -i -e "s/^Version:.*/Version: $version/" petit/build/rpm/SPECS/petit.spec
+    sed -i -e "s/^Version:.*/Version: ${version}_1/" build/deb/DEBIAN/control
 }
 
 make_tar() {
@@ -60,6 +66,7 @@ clean() {
 	ls -ltrh /var/www/html/crunchtools.com/wp-content/files/petit/ | tail
 }
 
+increment_version
 make_tar
 make_rpm
 make_deb

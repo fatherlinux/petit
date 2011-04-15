@@ -13,11 +13,6 @@ mkdir -p build/deb/petit/var/lib/petit
 # Copy in control file
 cp build/deb/control build/deb/petit/DEBIAN/control
 
-# Increment version
-version=`hg tags | head -n 2 | tail -n 1 | cut -f1 -d" "`
-sed -i -e "s/^Version:.*/Version: ${version}_1/" build/deb/DEBIAN/control
-sed -i -e "s/Version: [0-9]\.[0-9]\.[0-9]/Version: $version/" src/bin/petit
-
 # Now fill with latest data
 ## Bin
 rsync -aq --exclude=.svn src/bin/ build/deb/petit/usr/bin/
