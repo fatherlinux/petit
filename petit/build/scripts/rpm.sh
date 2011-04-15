@@ -12,6 +12,11 @@ tar rf build/rpm/SOURCES/petit.tar README &>/dev/null
 #python setup.py bdist --dist-dir ../build/rpm/SOURCES/
 #cd ../build
 
+# Increment version
+version=`hg tags | head -n 2 | tail -n 1 | cut -f1 -d" "`
+sed -i -e "s/^Version:.*/Version: $version/" build/rpm/SPECS/petit.spec
+sed -i -e "s/Version: [0-9]\.[0-9]\.[0-9]/Version: $version/" src/bin/petit
+
 # Build custom environment
 OLDHOME=$HOME
 export HOME=`pwd`/build/rpm
