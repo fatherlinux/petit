@@ -1,3 +1,18 @@
+* Fri Apr 15 2011 Scott McCarty <scott.mccarty@gmail.com>
+- Added re.escape to variable based regex
+- Added debugging output for graph
+- Added patch for bug with determining month
+- Updated outputs for new patch and year change
+- Added empty log data test
+- Added new test output for broken apache error log
+- Updated description of tests
+- Added new test files
+- Added description of new test files
+- Added path for logs with no data
+- Added try/catch for interspersed wrong data problem
+- Fixed index bug in syslog entry and rsyslog
+- Added better documentation rsyslog
+
 * Tue Nov 09 2010 Scott McCarty <smccarty@eyemg.com>
 - Finished conversion of crunchtoools to module
 - Passes all tests again :-)

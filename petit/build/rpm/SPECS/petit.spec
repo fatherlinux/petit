@@ -1,6 +1,6 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: 1.1.0
+Version: 1.1.1
 Release: 1
 License: GPLv3
 Group: Applications/System
