@@ -28,3 +28,5 @@ test08 - Small secure log test file
 test09 - Medium sized Apache Error log file
 test10 - RSyslog test file with precision time turned on
 test11 - RSyslog test file with precision mixed with/without milliseconds
+test12 - Apache error log with non-standard entries
+test13 - Empty log test
