@@ -37,6 +37,10 @@ class CrunchLog(UserList):
         for line in self.f.xreadlines():
             buf.append(line)
 
+        if len(buf) < 1:
+            print "No data found"
+            sys.exit()
+
         # Automatically select entry type
         self.Entry = self.select(buf)
 
@@ -46,8 +50,14 @@ class CrunchLog(UserList):
         self.build_date = datetime.datetime.now()
 
         # Build from entry type
+        counter = 0
         for line in buf:                         
-            self.append(self.Entry(line))
+            try:
+                self.append(self.Entry(line))
+                counter += 1 
+            except (ValueError, TypeError):
+                print "Cannot parse values on line: " + str(counter)
+                sys.exit()
 
         del buf
 
@@ -229,7 +239,7 @@ class SyslogEntry(LogEntry):
 
         global logging
 
-        if len(line) >= 3:
+        if len(line) >= 6:
 
             # Look for something similar to: "Feb 29 11:53:08" in first
             # three columns
@@ -317,9 +327,9 @@ class RSyslogEntry(LogEntry):
 
         global logging
 
-        if len(line) >= 3:
+        if len(line) >= 1:
 
-            # Look for something similar to: "29 11:53:08" in third column
+            # Look for something similar to: "2011-04-04T"
             if re.search("[0-9]{4}-[0-9]{2}-[0-9]{2}T",line[0]):
                 return True
             else:
