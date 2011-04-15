@@ -1,0 +1,85 @@
+[Sun Apr 10 04:04:00 2011] [notice] Digest: generating secret for digest authentication ...
+[Sun Apr 10 04:04:00 2011] [notice] Digest: done
+[Sun Apr 10 04:04:06 2011] [notice] Apache/2.2.3 (CentOS) configured -- resuming normal operations
+[Sun Apr 10 09:44:20 2011] [error] [client 72.29.84.183] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/webdav
+[Sun Apr 10 10:34:25 2011] [error] [client 207.46.199.179] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Apr 10 11:53:07 2011] [error] [client 207.46.199.47] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Sun Apr 10 13:05:59 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Apr 10 13:06:51 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Sun Apr 10 13:24:16 2011] [notice] caught SIGTERM, shutting down
+[Sun Apr 10 13:24:30 2011] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Sun Apr 10 13:24:32 2011] [notice] Digest: generating secret for digest authentication ...
+[Sun Apr 10 13:24:32 2011] [notice] Digest: done
+[Sun Apr 10 13:24:33 2011] [notice] Apache/2.2.3 (CentOS) configured -- resuming normal operations
+[Sun Apr 10 14:26:03 2011] [error] server reached MaxClients setting, consider raising the MaxClients setting
+[Sun Apr 10 15:14:32 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Sun Apr 10 20:47:23 2011] [error] [client 222.187.221.224] script '/var/www/html/carmenletgo.fatherlinux.com/judge.php' not found or unable to stat
+[Mon Apr 11 01:03:17 2011] [error] [client 123.125.71.109] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Apr 11 06:25:34 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Mon Apr 11 03:38:36 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Mon Apr 11 09:13:02 2011] [error] [client 207.46.199.195] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Mon Apr 11 10:28:32 2011] [error] [client 222.187.221.224] script '/var/www/html/carmenletgo.fatherlinux.com/judge.php' not found or unable to stat
+[Mon Apr 11 13:51:54 2011] [error] [client 67.195.115.53] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Mon Apr 11 16:29:04 2011] [error] [client 77.221.159.100] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/user
+[Mon Apr 11 16:45:05 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Mon Apr 11 17:13:41 2011] [error] [client 218.111.161.132] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/webdav
+[Mon Apr 11 20:01:08 2011] [error] [client 123.125.71.107] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Apr 12 05:08:22 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Tue Apr 12 10:05:57 2011] [error] [client 173.203.64.88] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.test0:)
+[Tue Apr 12 12:40:54 2011] [error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/w00tw00t.at.blackhats.romanian.anti-sec:)
+[Tue Apr 12 12:40:54 2011] [error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpMyAdmin
+[Tue Apr 12 12:40:54 2011] [error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpmyadmin
+[Tue Apr 12 12:40:54 2011] [error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/pma
+[Tue Apr 12 12:40:54 2011] [error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/myadmin
+[Tue Apr 12 12:40:55 2011] [error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/MyAdmin
+[Tue Apr 12 14:51:38 2011] [error] [client 208.79.157.2] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/cacti
+[Tue Apr 12 14:51:38 2011] [error] [client 208.79.157.2] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+[Tue Apr 12 15:57:06 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Tue Apr 12 15:57:57 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Tue Apr 12 17:12:28 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Tue Apr 12 19:06:35 2011] [error] [client 207.46.13.92] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Tue Apr 12 20:10:40 2011] [error] [client 208.176.53.58] Invalid URI in request GET HTTP/1.1 HTTP/1.1
+[Tue Apr 12 20:10:40 2011] [error] [client 208.176.53.58] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpmyadmin
+[Tue Apr 12 20:10:40 2011] [error] [client 208.176.53.58] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpMyAdmin
+[Wed Apr 13 01:41:15 2011] [error] [client 69.58.178.56] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Apr 13 01:41:24 2011] [error] [client 69.58.178.56] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+[Wed Apr 13 01:41:25 2011] [error] [client 69.58.178.56] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+[Wed Apr 13 02:13:09 2011] [error] [client 123.125.71.94] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Apr 13 02:38:55 2011] [error] [client 207.46.199.183] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Apr 13 07:02:34 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Wed Apr 13 04:06:23 2011] [error] [client 64.246.161.30] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Apr 13 05:08:55 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Wed Apr 13 10:38:33 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Wed Apr 13 07:20:29 2011] [error] [client 64.246.161.190] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Wed Apr 13 09:52:40 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Wed Apr 13 09:53:32 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Wed Apr 13 18:19:46 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Wed Apr 13 18:55:36 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Wed Apr 13 17:39:25 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Wed Apr 13 18:27:45 2011] [error] [client 207.46.195.230] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Apr 13 22:41:42 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Wed Apr 13 23:12:45 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Thu Apr 14 00:23:48 2011] [crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+[Wed Apr 13 20:43:25 2011] [error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Wed Apr 13 22:06:22 2011] [error] [client 123.125.71.114] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Wed Apr 13 22:28:37 2011] [error] [client 72.223.73.46] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/pagead, referer: http://www.texascooking.com/features/oct2000plm.htm
+[Wed Apr 13 22:28:43 2011] [error] [client 72.223.73.46] Invalid URI in request HTTP/1.1 200 OK
+[Thu Apr 14 01:30:37 2011] [error] [client 65.52.110.31] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Apr 14 08:38:28 2011] [error] [client 95.108.150.235] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Apr 14 08:38:28 2011] [error] [client 95.108.150.235] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Apr 14 08:47:19 2011] [error] [client 66.249.71.251] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Thu Apr 14 09:18:40 2011] [error] [client 66.249.71.89] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Apr 14 13:42:37 2011] [error] [client 116.9.191.207] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/wp-content, referer: http://crunchtools.com/software/petit/
+[Thu Apr 14 14:54:41 2011] [error] [client 66.249.71.53] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Apr 14 15:43:24 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Apr 14 15:44:16 2011] [error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+[Thu Apr 14 17:02:15 2011] [error] [client 207.46.195.225] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Thu Apr 14 17:02:57 2011] [error] [client 207.46.195.225] File does not exist: /var/www/html/www.floureggsandwater.com/html
+[Thu Apr 14 18:14:59 2011] [error] [client 207.46.199.185] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Thu Apr 14 19:17:59 2011] [error] [client 92.240.68.153] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/images/baby-elephant.jpg, referer: http://random.yahoo.com/fast/ryl
+[Thu Apr 14 20:51:01 2011] [error] [client 66.249.71.50] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+[Thu Apr 14 21:38:48 2011] [error] [client 116.9.191.207] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/wp-content, referer: http://crunchtools.com/software/petit/
+[Fri Apr 15 01:34:32 2011] [error] [client 123.125.71.99] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Apr 15 02:16:22 2011] [error] [client 93.158.148.31] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+[Fri Apr 15 02:49:08 2011] [error] [client 66.249.71.177] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+PHP Warning:  PHP Startup: dbase: Unable to initialize module\nModule compiled with module API=20050922\nPHP    compiled with module API=20090626\nThese options need to match\n in Unknown on line 0
