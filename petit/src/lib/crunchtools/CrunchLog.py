@@ -600,7 +600,7 @@ class ScriptlogEntry(LogEntry):
         if len(value) >= 8:
 
             # Look for special label to determine scriptlog type
-            if re.search(value[5], label):
+            if re.search(re.escape(value[5]), re.escape(label)):
                 return True
             else:
                 return False
