@@ -11,5 +11,5 @@ clean : FORCE
 test : FORCE
 	(cd petit/test/; time ./test.sh)
 
-petit : FORCE
+distribute : FORCE
 	.helper-scripts/distribute-petit.sh
