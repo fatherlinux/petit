@@ -28,6 +28,7 @@
 32:	header
 14:	ClamAV
 14:	SMTP
+14:	[#]
 14:	comm#
 14:	injection
 14:	recipient
@@ -35,7 +36,6 @@
 7:	Attack]
 6:	WEB-PHP
 3:	URL
-3:	[#]
 3:	access
 3:	double
 3:	encoding

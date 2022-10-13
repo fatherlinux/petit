@@ -1,1 +1,30 @@
-Cannot parse values on line: 84
+21:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+13:	[error] [client #.#.#.#] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+8:	[crit]: Apach#::RequestIO::rflush: (#) Software caused connection abort at /usr/lib/perl#/vendor_perl/#.#.#/HTML/Mason/ApacheHandler.pm line # (/usr/sbin/webmux.pl:#)
+8:	[error] [client #.#.#.#] client sent HTTP/#.# request without hostname (see RFC# section #.#): /w#tw#t.at.ISC.SANS.DFind:)
+2:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpMyAdmin
+2:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpmyadmin
+2:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/webdav
+2:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/wp-content, referer: http://crunchtools.com/software/petit/
+2:	[error] [client #.#.#.#] script '/var/www/html/carmenletgo.fatherlinux.com/judge.php' not found or unable to stat
+2:	[notice] Apache/#.#.# (CentOS) configured -- resuming normal operations
+2:	[notice] Digest: done
+2:	[notice] Digest: generating secret for digest authentication ...
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/MyAdmin
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/cacti
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/images/baby-elephant.jpg, referer: http://random.yahoo.com/fast/ryl
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/myadmin
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/pagead, referer: http://www.texascooking.com/features/oct#plm.htm
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/pma
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/user
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/w#tw#t.at.blackhats.romanian.anti-sec:)
+1:	[error] [client #.#.#.#] File does not exist: /var/www/html/www.floureggsandwater.com/html
+1:	[error] [client #.#.#.#] Invalid URI in request GET HTTP/#.# HTTP/#.#
+1:	[error] [client #.#.#.#] Invalid URI in request HTTP/#.# OK
+1:	[error] [client #.#.#.#] client sent HTTP/#.# request without hostname (see RFC# section #.#): /w#tw#t.at.ISC.SANS.test#:)
+1:	[error] server reached MaxClients setting, consider raising the MaxClients setting
+1:	[notice] caught SIGTERM, shutting down
+1:	[notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)

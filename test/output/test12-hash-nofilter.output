@@ -1,1 +1,57 @@
-Cannot parse values on line: 84
+8:	[crit]: Apache2::RequestIO::rflush: (103) Software caused connection abort at /usr/lib/perl5/vendor_perl/5.8.8/HTML/Mason/ApacheHandler.pm line 1020 (/usr/sbin/webmux.pl:127)
+8:	[error] [client 216.205.76.228] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.DFind:)
+8:	[error] [client 66.249.71.6] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+2:	[error] [client 116.9.191.207] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/wp-content, referer: http://crunchtools.com/software/petit/
+2:	[error] [client 222.187.221.224] script '/var/www/html/carmenletgo.fatherlinux.com/judge.php' not found or unable to stat
+2:	[error] [client 95.108.150.235] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+2:	[notice] Apache/2.2.3 (CentOS) configured -- resuming normal operations
+2:	[notice] Digest: done
+2:	[notice] Digest: generating secret for digest authentication ...
+1:	[error] [client 123.125.71.107] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 123.125.71.109] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 123.125.71.114] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 123.125.71.94] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 123.125.71.99] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 173.203.64.88] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /w00tw00t.at.ISC.SANS.test0:)
+1:	[error] [client 207.46.13.92] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 207.46.195.225] File does not exist: /var/www/html/www.floureggsandwater.com/html
+1:	[error] [client 207.46.195.225] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+1:	[error] [client 207.46.195.230] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 207.46.199.179] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 207.46.199.183] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 207.46.199.185] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 207.46.199.195] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 207.46.199.47] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 208.176.53.58] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpMyAdmin
+1:	[error] [client 208.176.53.58] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpmyadmin
+1:	[error] [client 208.176.53.58] Invalid URI in request GET HTTP/1.1 HTTP/1.1
+1:	[error] [client 208.79.157.2] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/cacti
+1:	[error] [client 208.79.157.2] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/favicon.ico
+1:	[error] [client 218.111.161.132] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/webdav
+1:	[error] [client 64.246.161.190] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+1:	[error] [client 64.246.161.30] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 65.52.110.31] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 66.249.71.177] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 66.249.71.251] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+1:	[error] [client 66.249.71.50] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+1:	[error] [client 66.249.71.53] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 66.249.71.89] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 67.195.115.53] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+1:	[error] [client 69.58.178.56] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/linktous.html
+1:	[error] [client 69.58.178.56] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/html/message.html
+1:	[error] [client 69.58.178.56] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 72.223.73.46] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/pagead, referer: http://www.texascooking.com/features/oct2000plm.htm
+1:	[error] [client 72.223.73.46] Invalid URI in request HTTP/1.1 200 OK
+1:	[error] [client 72.29.84.183] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/webdav
+1:	[error] [client 77.221.159.100] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/user
+1:	[error] [client 92.240.68.153] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/images/baby-elephant.jpg, referer: http://random.yahoo.com/fast/ryl
+1:	[error] [client 93.158.148.31] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+1:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/MyAdmin
+1:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/myadmin
+1:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpMyAdmin
+1:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpmyadmin
+1:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/pma
+1:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/w00tw00t.at.blackhats.romanian.anti-sec:)
+1:	[error] server reached MaxClients setting, consider raising the MaxClients setting
+1:	[notice] caught SIGTERM, shutting down
+1:	[notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)

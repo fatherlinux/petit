@@ -72,8 +72,9 @@ class SuperHash(UserDict):
 
         # Print out the dictionary first sorted by the word with
         # the most entries with an alphabetical subsort
-        for key in sorted(sorted(self.keys()), \
-            cmp=lambda x,y: cmp(self[y][0], self[x][0])):
+        for key in sorted(sorted(self.keys()),
+                key=lambda k : self[k][0],
+                reverse=True):
 
             # Print all lines as sample
             if self.sample == "all":

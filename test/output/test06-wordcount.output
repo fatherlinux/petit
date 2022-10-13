@@ -80,7 +80,6 @@
 12:	pam_unix(sshd:session):
 12:	usbcore:
 12:	window:
-11:	(r#
 11:	(reserved)
 11:	:
 11:	Accepted
@@ -90,7 +89,6 @@
 11:	family
 11:	kernel
 11:	protocol
-10:	(#
 10:	(eth#):
 10:	(order:
 10:	==>
@@ -135,13 +133,13 @@
 8:	mode
 8:	strings:
 8:	subsys
-7:	#,
 7:	#c.#
 7:	/#/init.d/httpd
 7:	/#/init.d/mysqld
 7:	A
 7:	APIC
 7:	Button
+7:	Product=#,
 7:	SELinux:
 7:	SMP
 7:	Write
@@ -181,6 +179,7 @@
 6:	usb#
 5:	#-byte
 5:	#e.#
+5:	#f.#
 5:	#x#,#x#
 5:	(supports
 5:	(usable)
@@ -189,12 +188,14 @@
 5:	Attached
 5:	Checking
 5:	D
-5:	EXT#-fs:
 5:	Found
 5:	ID:
+5:	L#
+5:	Mfr=#,
 5:	PmRef
 5:	Power
 5:	SSDT
+5:	SerialNumber=#
 5:	TERM
 5:	TSC
 5:	a
@@ -218,8 +219,8 @@
 5:	sda:
 5:	use
 4:	#.
+4:	#a#
 4:	#c:
-4:	#f.#
 4:	(ACPI
 4:	(CM)
 4:	(bus
@@ -299,7 +300,9 @@
 4:	timer
 4:	version:
 4:	x#
+3:	#,
 3:	#b.#
+3:	#e#
 3:	(
 3:	(C)
 3:	(FF)
@@ -317,9 +320,10 @@
 3:	Direct-Access
 3:	EC:
 3:	EHCI
+3:	EXT#
+3:	EXT#-fs:
 3:	INT_SRC_OVR
 3:	Intel(R)
-3:	L#
 3:	LAPIC
 3:	LPC
 3:	Loading
@@ -334,11 +338,12 @@
 3:	PnP
 3:	RAMDISK
 3:	Registering
-3:	SerialNumber=#
 3:	Successfully
 3:	Tue
+3:	UDMA/#
 3:	Version
 3:	Zone
+3:	[#
 3:	[drm]
 3:	agpgart-intel
 3:	agpgart:
@@ -393,22 +398,21 @@
 3:	throttling
 3:	write
 3:	xinetd
-2:	#)
-2:	#).
 2:	#-#
 2:	#-#ELsmp
+2:	#/#
 2:	#A
+2:	#C
 2:	#C#A
-2:	#K
 2:	#K,
 2:	#[A]
 2:	#]
-2:	#a#
 2:	#a#]
 2:	#a#be#]
 2:	#a:
 2:	#ac)
 2:	#d#a]
+2:	#f#
 2:	#f#a#
 2:	#f#ae#
 2:	#f#f#
@@ -422,7 +426,6 @@
 2:	#n't
 2:	#ocated
 2:	#t
-2:	#x#f#a#
 2:	#x#fe
 2:	#xc#baaa
 2:	#xfec#,
@@ -473,6 +476,7 @@
 2:	C#[C#])
 2:	C#ing
 2:	CD-ROM
+2:	CPU#
 2:	CRDA
 2:	Calibrating
 2:	DMI
@@ -537,6 +541,7 @@
 2:	Red
 2:	Revision:
 2:	Root
+2:	S#
 2:	S#)
 2:	SIMD
 2:	SSID
@@ -561,7 +566,6 @@
 2:	Video
 2:	Virtual
 2:	You
-2:	[#
 2:	[#a#
 2:	[#a#c#
 2:	[#fc#
@@ -645,7 +649,6 @@
 2:	instruction...
 2:	inteldrmfb
 2:	interface:
-2:	ioc#
 2:	ip_tables:
 2:	irqs
 2:	isapnp:
@@ -721,6 +724,8 @@
 2:	runtime.
 2:	s#ce
 2:	save
+2:	scsi#
+2:	sda#
 2:	sec
 2:	sendmail
 2:	server
@@ -760,6 +765,7 @@
 2:	vm#oc
 2:	waiting
 2:	wildcard,
+2:	wlan#
 2:	wlan#IPv#
 2:	xfs
 2:	zonelists
@@ -767,6 +773,8 @@
 1:	"rpcbind
 1:	##
 1:	#%
+1:	#)
+1:	#).
 1:	#,#
 1:	#-#)
 1:	#-#EL#))
@@ -776,12 +784,10 @@
 1:	#-bit
 1:	#-cpu
 1:	#-ioctl
-1:	#/#
 1:	#/#)
 1:	#/#/#
 1:	#:#k
 1:	#BX
-1:	#C
 1:	#C#
 1:	#CC
 1:	#D#CE
@@ -799,6 +805,7 @@
 1:	#G
 1:	#GHz
 1:	#GME
+1:	#K
 1:	#Kbytes
 1:	#M
 1:	#MB
@@ -819,9 +826,7 @@
 1:	#d#
 1:	#d#a
 1:	#dc#
-1:	#e#
 1:	#f
-1:	#f#
 1:	#f#ce#
 1:	#f#f#)
 1:	#fe#]
@@ -866,6 +871,7 @@
 1:	#x#f
 1:	#x#f#
 1:	#x#f#-#x#f#ffffff
+1:	#x#f#a#
 1:	#xc#
 1:	#xc#-#xcffff
 1:	#xc#e#a#
@@ -910,6 +916,7 @@
 1:	'sd'
 1:	'sr'
 1:	'synchronous',
+1:	(#
 1:	(#)
 1:	(#-#-#)
 1:	(#f#b#)
@@ -941,6 +948,7 @@
 1:	(noway#=#)
 1:	(polling).
 1:	(proc)
+1:	(r#
 1:	(re)start
 1:	(s#_capa
 1:	(skipped),
@@ -1028,7 +1036,6 @@
 1:	CDROM
 1:	CIPSOv#
 1:	CONFIG_NF_CT_ACCT
-1:	CPU#
 1:	CPU#]:
 1:	CPUs,
 1:	CPUs=#,
@@ -1069,7 +1076,6 @@
 1:	EST
 1:	ETPS/#
 1:	EX
-1:	EXT#
 1:	EXT#-fs
 1:	Eee
 1:	EeePC
@@ -1160,7 +1166,6 @@
 1:	Marking
 1:	MaxQ=#,
 1:	Maximum
-1:	Mfr=#,
 1:	MinObjects=#,
 1:	Missing
 1:	Model:
@@ -1204,7 +1209,6 @@
 1:	Please
 1:	Ports=#,
 1:	Probing
-1:	Product=#,
 1:	RAID
 1:	RAM,
 1:	RAM:
@@ -1225,7 +1229,6 @@
 1:	Rev:#
 1:	Rev:d#
 1:	S
-1:	S#
 1:	S#ning
 1:	SATA
 1:	SIGTERM,
@@ -1263,7 +1266,6 @@
 1:	TransmetaCPU
 1:	Type:
 1:	UDMA(#)
-1:	UDMA/#
 1:	UNLABELED
 1:	UVC
 1:	Universal
@@ -1517,6 +1519,7 @@
 1:	inst#ing
 1:	intel_rng:
 1:	intellimouse
+1:	ioc#
 1:	ioctl:
 1:	ip
 1:	ip#_tables:
@@ -1693,10 +1696,8 @@
 1:	running
 1:	s#s
 1:	safe.
-1:	scsi#
 1:	scsi#,
 1:	sda
-1:	sda#
 1:	sda#,
 1:	sdb#
 1:	sdb:
@@ -1807,7 +1808,6 @@
 1:	wakeup
 1:	want
 1:	warning:
-1:	wlan#
 1:	wmaster#
 1:	working
 1:	working:

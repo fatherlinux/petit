@@ -5,9 +5,9 @@
 #                              
 #                              
 ###############################
-01             16             31 
+01                           31 
 
-Start Time:	1900-01-01 00:00:00 		Minimum Value: 0
-End Time:	1900-01-31 00:00:00 		Maximum Value: 6
-Duration:	31 days 			Scale: 1.0
+Start Time:	 1900-01-01 00:00:00 		Minimum Value: 0
+End Time:	 1900-01-31 00:00:00 		Maximum Value: 6
+Duration:	 31 days 			Scale: 1.0
 

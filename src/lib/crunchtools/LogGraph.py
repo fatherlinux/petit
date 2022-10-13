@@ -395,7 +395,7 @@ class DaysGraph(GraphHash):
             self.zero(end_key)
 
             # Check for middle date and save
-            if i == (self.duration/2):
+            if i == (int(self.duration/2)):
                 middle_date = end_date
 
         # Save final values

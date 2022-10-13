@@ -82,4 +82,3 @@
 [Fri Apr 15 01:34:32 2011] [error] [client 123.125.71.99] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
 [Fri Apr 15 02:16:22 2011] [error] [client 93.158.148.31] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
 [Fri Apr 15 02:49:08 2011] [error] [client 66.249.71.177] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
-PHP Warning:  PHP Startup: dbase: Unable to initialize module\nModule compiled with module API=20050922\nPHP    compiled with module API=20090626\nThese options need to match\n in Unknown on line 0

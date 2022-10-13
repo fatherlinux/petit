@@ -1,4 +1,5 @@
 382:	[
+168:	#]
 58:	-
 55:	ACPI:
 36:	<info>
@@ -62,7 +63,6 @@
 7:	kernel
 7:	node
 7:	reg
-6:	#]
 6:	(order:
 6:	(usable)
 6:	Configure
@@ -101,6 +101,7 @@
 5:	zone:
 4:	#a#
 4:	#e#
+4:	#fff#
 4:	#ride.
 4:	(
 4:	(IRQs
@@ -133,6 +134,7 @@
 4:	rsyslogd's
 4:	scheduler
 4:	uhci_hcd
+3:	#)
 3:	#x#,#x#
 3:	(CRON)
 3:	(IP
@@ -158,6 +160,7 @@
 3:	Trying
 3:	Unable
 3:	WARNING:
+3:	[#
 3:	[origin
 3:	a
 3:	ata_piix
@@ -187,10 +190,12 @@
 3:	version:
 3:	virtio-pci
 3:	x-info="http://www.rsyslog.com"]
+2:	#,
 2:	#-#-#
 2:	#.
 2:	#A
 2:	#bit
+2:	#c#
 2:	#c#]
 2:	#d#e#]
 2:	#dd#d]
@@ -201,12 +206,12 @@
 2:	#put
 2:	#t
 2:	#ts:
+2:	#x#f#
 2:	#xfee#
 2:	'/#/gdm/custom.conf':
 2:	'/dev/xconsole'
 2:	'Auto
 2:	'avahi'
-2:	(#)
 2:	(ACPI
 2:	(C)
 2:	(Ubuntu
@@ -269,7 +274,6 @@
 2:	Will
 2:	Write
 2:	Zone
-2:	[#
 2:	[#c#
 2:	[#da#
 2:	[#fc#
@@ -386,10 +390,9 @@
 2:	vga#fb:
 2:	vgaarb:
 2:	write-back
-1:	#)
+2:	x-pid="#"
 1:	#).
 1:	#+drm#)
-1:	#,
 1:	#,#
 1:	#-#
 1:	#-#-#T#-#
@@ -414,11 +417,9 @@
 1:	#_connections.
 1:	#a#)
 1:	#as
-1:	#c#
 1:	#e
 1:	#f
 1:	#fbed#
-1:	#fff#
 1:	#fff#]
 1:	#fff#c
 1:	#fff#c#
@@ -436,7 +437,6 @@
 1:	#x#
 1:	#x#c#
 1:	#x#f
-1:	#x#f#
 1:	#x#fff#
 1:	#x/#x
 1:	#xb#
@@ -461,6 +461,7 @@
 1:	'cgroup_disable=memory'
 1:	'virtio_net')
 1:	(#
+1:	(#)
 1:	(#-#-#)
 1:	(#k
 1:	(API
@@ -1150,7 +1151,6 @@
 1:	wired
 1:	work#s
 1:	x#
-1:	x-pid="#"
 1:	xa/#m#
 1:	you
 1:	zone
