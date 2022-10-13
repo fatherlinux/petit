@@ -1,16 +1,16 @@
 """Contains SuperHash and all closely related children"""
 
-from UserDict import UserDict
-from Filter import Filter
-from CrunchLog import CrunchLog
+from collections import UserDict
+from .Filter import Filter
+from .CrunchLog import CrunchLog
 
-from CrunchLog import SyslogEntry
-from CrunchLog import RSyslogEntry
-from CrunchLog import ApacheAccessEntry
-from CrunchLog import ApacheErrorEntry
-from CrunchLog import SnortEntry
-from CrunchLog import RawEntry
-from CrunchLog import SecureLogEntry
+from .CrunchLog import SyslogEntry
+from .CrunchLog import RSyslogEntry
+from .CrunchLog import ApacheAccessEntry
+from .CrunchLog import ApacheErrorEntry
+from .CrunchLog import SnortEntry
+from .CrunchLog import RawEntry
+from .CrunchLog import SecureLogEntry
 
 import logging
 from random import choice
@@ -77,21 +77,21 @@ class SuperHash(UserDict):
 
             # Print all lines as sample
             if self.sample == "all":
-                print str(self[key][0]) + ":	" + \
-                choice(self[key][1]).log_entry
+                print((str(self[key][0]) + ":	" + \
+                choice(self[key][1]).log_entry))
 
             elif self.sample == "none":
-                print str(self[key][0]) + ":	"+str(key)
+                print((str(self[key][0]) + ":	"+str(key)))
 
             elif self.sample == "threshold":
                 # Print sample for small values below/equal to threshold
                 if self[key][0] <= sample_threshold:
-                    print str(self[key][0]) + ":	" + \
-                    self[key][1][0].log_entry
+                    print((str(self[key][0]) + ":	" + \
+                    self[key][1][0].log_entry))
                 else:
-                    print str(self[key][0]) + ":	" + str(key)
+                    print((str(self[key][0]) + ":	" + str(key)))
             else:
-                print "That type of sampling is not supported:", self.sample
+                print(("That type of sampling is not supported:", self.sample))
                 sys.exit(16)
 
     def fingerprint(self):
@@ -119,13 +119,13 @@ class SuperHash(UserDict):
                 # Process in order from largest to smallest which prevents 
                 # double labeling with similar fingerprints
                 fingerprint_files = os.listdir(prefix)
-		fingerprint_files = [os.path.join(prefix, f) for f in fingerprint_files]
-		fingerprint_files.sort(key=lambda x: os.path.getsize(x))
-		fingerprint_files.reverse()
+                fingerprint_files = [os.path.join(prefix, f) for f in fingerprint_files]
+                fingerprint_files.sort(key=lambda x: os.path.getsize(x))
+                fingerprint_files.reverse()
                 break
 
         if fingerprint_files[0] == "__none__":
-            print "Could not locate fingerprint files: ", prefix
+            print(("Could not locate fingerprint files: ", prefix))
             sys.exit()
 
         for fingerprint_file in fingerprint_files:
@@ -153,7 +153,7 @@ class SuperHash(UserDict):
             logging.info("Threshold:"+str(threshold))
 
             # Look for fingerpring
-            for key in fingerprint.keys():
+            for key in list(fingerprint.keys()):
                 if key in self:
                     count = count+1
 
@@ -161,7 +161,7 @@ class SuperHash(UserDict):
                 # Saves time on searching every entry
                 if count > threshold:
                     logging.info("Found Fingerprint:"+fingerprint.file_name)
-                    for key in fingerprint.keys():
+                    for key in list(fingerprint.keys()):
 
                         # Key found, plenty to remove
                         if key in self:
@@ -194,7 +194,7 @@ class SuperHash(UserDict):
         elif log.contains(SecureLogEntry):
             LogHash = SecureLogHash
         else:
-            print "Could not determine what type of objects are contained in generic Log"""
+            print("Could not determine what type of objects are contained in generic Log""")
             sys.exit(15)
 
         # Build and return the correct subclass instance based on log file type
@@ -387,7 +387,7 @@ class WordHash(SuperHash):
 
 
         # Perform bleach at the end because it is more efficient
-        for key in self.keys():
+        for key in list(self.keys()):
 
             # First scrub any unwanted words
             newkey = self.filter.scrub(key)

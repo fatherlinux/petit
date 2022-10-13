@@ -1,7 +1,7 @@
 """Defines ScriptLog class"""
 
-from UserList import UserList
-from CrunchLog import ScriptlogEntry
+from collections import UserList
+from .CrunchLog import ScriptlogEntry
 import re
 import sys
 import os
@@ -94,7 +94,7 @@ class ScriptLog(UserList):
         if os.path.exists(self.filename):
             buffer = self.open_file(self.filename)
         else:
-            print "File does not exist:", self.filename
+            print("File does not exist:", self.filename)
             sys.exit(16)
 
         # Buffer has bow been created and work with file is done
@@ -208,19 +208,19 @@ class ScriptLog(UserList):
                 RETVAL = 2
 
         if len(unack) > 0:
-            print "Unacknowledged Items:"
+            print("Unacknowledged Items:")
 
             # Iterate full entries so that all information can be printed
             for entry in self:
 
                 if entry.id in unack:
-                    print entry.month \
+                    print(entry.month \
                     +" "+entry.day \
                     +" "+entry.hour+":"+entry.minute+":"+entry.second \
                     +" "+entry.type \
-                    +" \""+entry.log_entry+"\""
+                    +" \""+entry.log_entry+"\"")
         else:
-            print "OK"
+            print("OK")
 
         return RETVAL
 

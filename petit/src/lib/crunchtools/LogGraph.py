@@ -1,4 +1,4 @@
-from UserDict import UserDict
+from collections import UserDict
 from math import ceil
 import datetime
 import sys
@@ -45,13 +45,13 @@ class GraphHash(UserDict):
         """Calculates and saves important graph information"""
 
         # find max value of any key
-        for key in self.keys():
+        for key in list(self.keys()):
             if self[key] > self.max_value:
                 self.max_value = self[key]
 
         # find the minimum value of any key
         self.min_value = self.max_value
-        for key in self.keys():
+        for key in list(self.keys()):
             if self[key] < self.min_value:
                 self.min_value = self[key]
 
@@ -83,7 +83,7 @@ class GraphHash(UserDict):
 
         # Find the real minimum, could very well be zero
         graph_min_value = self.max_value
-        for key in self.keys():
+        for key in list(self.keys()):
             if self[key] < graph_min_value:
                 graph_min_value = self[key]
 
@@ -92,13 +92,13 @@ class GraphHash(UserDict):
 
             # Recalculate
             graph_min_value = self.max_value
-            for key in self.keys():
+            for key in list(self.keys()):
                 if self[key] < graph_min_value and self[key] != 0:
                     graph_min_value = self[key]/2
-                    print graph_min_value
+                    print(graph_min_value)
 
         # Normalize data
-        for key in self.keys():
+        for key in list(self.keys()):
             if self[key] > 0:
 
                 # Ensure difference between min/max or don't normalize
@@ -110,23 +110,23 @@ class GraphHash(UserDict):
                     self[key] = ceil((float(self[key])/float(graph_max_value))*graph_height)
 
         # Start Graph Printing
-        print
+        print()
 
         # Print out the dictionary first sorted by the word with
         # the most entries with an alphabetical subsort
-        for i in reversed(range(1,graph_height)):
+        for i in reversed(list(range(1,graph_height))):
             for key in sorted(self.keys()):
                     
                 if self[key] >= i:
                     sys.stdout.write(char_fill)
                 else:
                     sys.stdout.write(char_blank)
-            print
+            print()
 
         # Print line of '#' charachters at bottom of screen
-        for key in self.keys():
+        for key in list(self.keys()):
             sys.stdout.write(char_fill)
-        print
+        print()
 
         # Determine numbers for normal and wide graphs
         if self.wide:
@@ -164,14 +164,14 @@ class GraphHash(UserDict):
                 sys.stdout.write(str("%.2d" % (graph_value["end"] % 2000)))
             else:
                 sys.stdout.write(" ")
-        print
+        print()
 
         # Create a little space at the top of the screen
-        print
-        print "Start Time:\t",str(self.start_date),"\t\tMinimum Value:",self.min_value
-        print "End Time:\t",str(self.end_date),"\t\tMaximum Value:",self.max_value
-        print "Duration:\t",str(self.duration), self.unit+"s","\t\t\tScale:",str(scale)
-        print
+        print()
+        print("Start Time:\t",str(self.start_date),"\t\tMinimum Value:",self.min_value)
+        print("End Time:\t",str(self.end_date),"\t\tMaximum Value:",self.max_value)
+        print("Duration:\t",str(self.duration), self.unit+"s","\t\t\tScale:",str(scale))
+        print()
 
 
 class SecondsGraph(GraphHash):
@@ -229,7 +229,7 @@ class SecondsGraph(GraphHash):
             key = entry.year+entry.month+entry.day+entry.hour+entry.minute+entry.second
 
             # Check to make sure key is found in the list built above
-            if key in self.keys():
+            if key in list(self.keys()):
                 self.increment(key)
 
         self.build_calculations()
@@ -290,7 +290,7 @@ class MinutesGraph(GraphHash):
             key = entry.year+entry.month+entry.day+entry.hour+entry.minute
 
             # Check to make sure key is found in the list built above
-            if key in self.keys():
+            if key in list(self.keys()):
                 self.increment(key)
 
         self.build_calculations()
@@ -351,7 +351,7 @@ class HoursGraph(GraphHash):
             key = entry.year+entry.month+entry.day+entry.hour
 
             # Check to make sure key is found in the list built above
-            if key in self.keys():
+            if key in list(self.keys()):
                 self.increment(key)
 
         self.build_calculations()
@@ -412,7 +412,7 @@ class DaysGraph(GraphHash):
             key = entry.year+entry.month+entry.day
 
             # Check to make sure key is found in the list built above
-            if key in self.keys():
+            if key in list(self.keys()):
                 self.increment(key)
 
         self.build_calculations()
@@ -475,7 +475,7 @@ class MonthsGraph(GraphHash):
             key = entry.year+entry.month
 
             # Check to make sure key is found in the list built above
-            if key in self.keys():
+            if key in list(self.keys()):
                 self.increment(key)
 
         self.build_calculations()
@@ -536,7 +536,7 @@ class YearsGraph(GraphHash):
             key = entry.year
 
             # Check to make sure key is found in the list built above
-            if key in self.keys():
+            if key in list(self.keys()):
                 self.increment(key)
 
         self.build_calculations()

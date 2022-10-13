@@ -5,7 +5,7 @@ relied upon and consumed to build any of the XHash objects such as SuperHash
 or GraphHash.
 """
 
-from UserList import UserList
+from collections import UserList
 
 import re
 import sys
@@ -67,11 +67,11 @@ class CrunchLog(UserList):
             logging.debug("Opening File: " + filename)
             self.f = open(filename)
 
-        for line in self.f.xreadlines():
+        for line in self.f:
             buf.append(line)
 
         if len(buf) < 1:
-            print "No data found"
+            print("No data found")
             sys.exit()
 
         # Automatically select entry type
@@ -89,7 +89,7 @@ class CrunchLog(UserList):
                 self.append(self.Entry(line))
                 counter += 1
             except (ValueError, TypeError):
-                print "Cannot parse values on line: " + str(counter)
+                print("Cannot parse values on line: " + str(counter))
                 sys.exit()
 
         del buf
@@ -169,14 +169,14 @@ class LogEntry:
     log_entry = ""
 
     def display(self):
-        print "Year: ", self.year, \
+        print("Year: ", self.year, \
               "Month:", self.month, \
               "Day:", self.day, \
               "Hour:", self.hour, \
               "Minute:", self.minute, \
               "Second:", self.second, \
               "Host:", self.host, \
-              "Payload", self.log_entry
+              "Payload", self.log_entry)
 
     def tally_logic(tally, tally_threshold, max_sample_lines):
         if tally > tally_threshold:
@@ -758,8 +758,8 @@ class SnortEntry(LogEntry):
 ma = sys.modules[__name__].__dict__  # module attributes
 entry_types = list()
 
-for i in ma.keys():
-    if isinstance(ma[i], types.ClassType):
+for i in list(ma.keys()):
+    if isinstance(ma[i], type):
         if issubclass(ma[i], ma['LogEntry']) and \
                       ma[i].__name__ != "LogEntry" and \
                       ma[i].__name__ != "RawEntry":

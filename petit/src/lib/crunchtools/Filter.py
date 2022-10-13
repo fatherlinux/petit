@@ -42,7 +42,7 @@ class Filter:
                     break
 
                 except IOError:
-                    print "Could not open Filter file",self.file
+                    print("Could not open Filter file",self.file)
                     sys.exit(16)
 
         logging.info("Filter File: "+str(self.file))
