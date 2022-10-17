@@ -1,8 +1,8 @@
-.TH PETIT "1" "February 2010" "Petit" "User Commands" 
+.TH PETIT "1" "February 2010" "Petit" "User Commands"
 .SH NAME
 petit \- log analysis tool for systems administrators
 .SH SYNOPSIS
-\fBpetit\fR [\fIOPTION\fR] [\fIFILE\fR] 
+\fBpetit\fR [\fIOPTION\fR] [\fIFILE\fR]
 .SH DESCRIPTION
 \fBpetit\fR was developed to quickly analyze syslog and Apache
 log files in large environments. It can also be used for word
@@ -11,10 +11,10 @@ do hashing, word counts, and command line graphing of Apache and
 syslog files. It is designed to be a standard Unix tool that can
 be employed with pipes or by opening files. Petit works by sifting
 data with standard patterns and allows for custom filters and
-fingerprints. This leaves the analyst with data that is both 
+fingerprints. This leaves the analyst with data that is both
 varied and interesting.
 
-\fIFILE\fR can be Syslog, Apache Access, Apache Error, Snort or 
+\fIFILE\fR can be Syslog, Apache Access, Apache Error, Snort or
 Raw log files. Petit can also be used to analyze any type of file
 as a Raw log file, but since time/date is not understood, they
 cannot be graphed.
@@ -67,7 +67,7 @@ analyzing large log sets commonly found in clusters/pools of servers.
 Word counting is essentially like hashing except that data is grouped by word
 instead of line. A custom stopwords list is used to filter out common words
 found in the english language. A common use case for this function would be
-word discovery. When used in connection with grep or swatch, word counting 
+word discovery. When used in connection with grep or swatch, word counting
 can be used to enumarate all of the words found in a log file which have similar
 meanings, such as "error, can't, fail, reject", etc.
 
@@ -103,7 +103,7 @@ Show a graph of first 31 days of the log file
 Show a graph of first 12 months of the log file
 .TP
 \fB\-\-ygraph\fR
-Show a graph of first 10 years. 10 years was chosen arbitrarily and 
+Show a graph of first 10 years. 10 years was chosen arbitrarily and
 could be changed in the code if more time is needed.
 .SH FILES
 .TP

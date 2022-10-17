@@ -1,14 +1,14 @@
 Name: petit
 Summary: Log analysis tool for syslog, apache and raw log files
-Version: 
+Version:
 Release: 1
 License: GPLv3
 Group: Applications/System
 URL: http://www.eyemg.com/opensource
 Source0: petit.tar
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}       
-BuildArch: i386                                            
-Autoreq: 0                                                 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildArch: i386
+Autoreq: 0
 Requires: python
 
 %description
@@ -99,7 +99,7 @@ rm -rf %{SOURCE0}
 
 * Mon Jan 18 2010 Scott McCarty <smccarty@eyemg.com>
 - Changed defaults for entries to 1900 so that time delta calculations do not fail
-- Changed log determination logic to use multiple samples                         
+- Changed log determination logic to use multiple samples
 - Fixed bug in SecureLog processing where sample line was not being checked for long enough line
 - Added string conversion to all known log types to resolve type bugs cating strings and numbers
 
@@ -109,14 +109,14 @@ rm -rf %{SOURCE0}
 - Changed to random sampling for log type determiniation
 - Fixed documentation/help menu text
 - Added month graph, caveat: syslog does not store year data, so don't reach wrong conclusions
-- Added year graph for completeness, same warning as month                                    
+- Added year graph for completeness, same warning as month
 - Added year support in code
 - Fixed bug in value calculations of each bar of graph, values were erroring low
-- Added Days graph                                                              
+- Added Days graph
 - Completely revamped date delta code using datetime built in functionality to calculate date/time ranges
-- Re-architected graphing logic                                                                          
-- Redesigned graphing output to better mach cacti/RRD                                                    
-- Added normalization code, better differentiation of close values, handles most edge cases              
+- Re-architected graphing logic
+- Redesigned graphing output to better mach cacti/RRD
+- Added normalization code, better differentiation of close values, handles most edge cases
 - Made design decision to stay with simplicity (Separate Classes) for each type of graph. Imaging the graphing code more as report writing than object oriented programming and you will find my zen
 
 * Tue Jul 31 2009 Scott McCarty <smccarty@eyemg.com>

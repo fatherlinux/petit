@@ -6,7 +6,7 @@
 # spec file. This allows petit to be installed on other unix-like operating
 # systems such as OSX, Solaris, etc. It has not been test on every platform,
 # but it is fairly simple and should work on most.
-# 
+#
 # You must be root to run this script
 
 # Main scripts & libraries
