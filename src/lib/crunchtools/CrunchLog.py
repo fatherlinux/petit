@@ -7,6 +7,7 @@ or GraphHash.
 
 from collections import UserList
 
+import os
 import re
 import sys
 import logging
@@ -65,7 +66,12 @@ class CrunchLog(UserList):
             self.f = sys.stdin
         else:
             logging.debug("Opening File: " + filename)
-            self.f = open(filename)
+            
+            if os.access(filename,os.R_OK):
+                self.f = open(filename)
+            else:
+                logging.error("Failure to open file: %s" % filename)
+                sys.exit(-1)
 
         for line in self.f:
             buf.append(line)
