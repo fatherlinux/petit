@@ -5,19 +5,19 @@ relied upon and consumed to build any of the XHash objects such as SuperHash
 or GraphHash.
 """
 
-from collections import UserList
-
+import datetime
+import logging
 import re
 import sys
-import logging
-from random import choice
-import datetime
 import time
 import types
-#import rpdb2; rpdb2.start_embedded_debugger("password")
+from collections import UserList
+from random import choice
+
+# import rpdb2; rpdb2.start_embedded_debugger("password")
 
 
-class Tally():
+class Tally:
 
     matrix = {}
     tally_threshold = 0
@@ -111,7 +111,7 @@ class CrunchLog(UserList):
         if len(buf) >= 1:
 
             # Keep building samples until we get a good set
-            while (1):
+            while 1:
 
                 # Get X number of samples
                 for i in range(0, max_sample_lines):
@@ -127,8 +127,12 @@ class CrunchLog(UserList):
                 # Tally logic is determined by driver
                 for entry_type in entry_types:
                     if t.is_type(entry_type):
-                        logging.info("Determined " + \
-                        str(entry_type) + ": " + str(t.matrix[entry_type]))
+                        logging.info(
+                            "Determined "
+                            + str(entry_type)
+                            + ": "
+                            + str(t.matrix[entry_type])
+                        )
 
                         return eval(entry_type)
 
@@ -158,6 +162,7 @@ class CrunchLog(UserList):
 class LogEntry:
     """Interface class which specifies generic log format for consumption
     by other classes"""
+
     year = ""
     month = ""
     day = ""
@@ -169,14 +174,24 @@ class LogEntry:
     log_entry = ""
 
     def display(self):
-        print("Year: ", self.year, \
-              "Month:", self.month, \
-              "Day:", self.day, \
-              "Hour:", self.hour, \
-              "Minute:", self.minute, \
-              "Second:", self.second, \
-              "Host:", self.host, \
-              "Payload", self.log_entry)
+        print(
+            "Year: ",
+            self.year,
+            "Month:",
+            self.month,
+            "Day:",
+            self.day,
+            "Hour:",
+            self.hour,
+            "Minute:",
+            self.minute,
+            "Second:",
+            self.second,
+            "Host:",
+            self.host,
+            "Payload",
+            self.log_entry,
+        )
 
     def tally_logic(tally, tally_threshold, max_sample_lines):
         if tally > tally_threshold:
@@ -188,25 +203,29 @@ class LogEntry:
     tally_logic = staticmethod(tally_logic)
 
     def set_abnormal(self, value):
-        self.year, \
-        self.month, \
-        self.day, \
-        self.hour, \
-        self.minute, \
-        self.second, \
-        self.host, \
-        self.daemon = ["1900", "01", "01", "01", "01", "01", "#", "#"]
-        self.log_entry = ' '.join(value)
+        (
+            self.year,
+            self.month,
+            self.day,
+            self.hour,
+            self.minute,
+            self.second,
+            self.host,
+            self.daemon,
+        ) = ["1900", "01", "01", "01", "01", "01", "#", "#"]
+        self.log_entry = " ".join(value)
 
     def set_blank(self):
-        self.year, \
-        self.month, \
-        self.day, \
-        self.hour, \
-        self.minute, \
-        self.second, \
-        self.host, \
-        self.daemon = ["1900", "01", "01", "01", "01", "01", "#", "#"]
+        (
+            self.year,
+            self.month,
+            self.day,
+            self.hour,
+            self.minute,
+            self.second,
+            self.host,
+            self.daemon,
+        ) = ["1900", "01", "01", "01", "01", "01", "#", "#"]
         self.log_entry = "#"
 
 
@@ -224,7 +243,7 @@ class SyslogEntry(LogEntry):
             # Syslog does not store year information so, set to current year
             self.year = str(datetime.date.today().year)
             self.month, self.day, clocktime, self.host, self.daemon = value[:5]
-            self.log_entry = ' '.join(value[5:])
+            self.log_entry = " ".join(value[5:])
             self.hour, self.minute, self.second = clocktime.split(":")
 
             # Convert month to integer
@@ -240,26 +259,30 @@ class SyslogEntry(LogEntry):
 
         # Abnormal log entry
         elif len(value) >= 1:
-            self.year, \
-            self.month, \
-            self.day, \
-            self.hour, \
-            self.minute, \
-            self.second, \
-            self.host, \
-            self.daemon = ["1900", "01", "01", "01", "01", "01", "#", "#"]
-            self.log_entry = ' '.join(value)
+            (
+                self.year,
+                self.month,
+                self.day,
+                self.hour,
+                self.minute,
+                self.second,
+                self.host,
+                self.daemon,
+            ) = ["1900", "01", "01", "01", "01", "01", "#", "#"]
+            self.log_entry = " ".join(value)
 
         # Blank line, will be sorted out by scrub
         else:
-            self.year, \
-            self.month, \
-            self.day, \
-            self.hour, \
-            self.minute, \
-            self.second, \
-            self.host, \
-            self.daemon = ["1900", "01", "01", "01", "01", "01", "#", "#"]
+            (
+                self.year,
+                self.month,
+                self.day,
+                self.hour,
+                self.minute,
+                self.second,
+                self.host,
+                self.daemon,
+            ) = ["1900", "01", "01", "01", "01", "01", "#", "#"]
             self.log_entry = "#"
 
     def is_type(line):
@@ -271,11 +294,12 @@ class SyslogEntry(LogEntry):
 
             # Look for something similar to: "Feb 29 11:53:08" in first
             # three columns
-            if re.search("[A-Z][a-z]{2}", line[0]) and \
-               re.search("[0-9][0-9]?", line[1]) and \
-               re.search("[0-9{2}:[0-9]{2}:[0-9]{2}", line[2]) and not \
-               (re.search("^pam_", line[5]) or \
-               re.search("^sshd\[", line[4])):
+            if (
+                re.search(r"[A-Z][a-z]{2}", line[0])
+                and re.search(r"[0-9][0-9]?", line[1])
+                and re.search(r"[0-9{2}:[0-9]{2}:[0-9]{2}", line[2])
+                and not (re.search("^pam_", line[5]) or re.search(r"^sshd\[", line[4]))
+            ):
                 return True
             else:
                 return False
@@ -306,7 +330,7 @@ class RSyslogEntry(LogEntry):
             # Patch for mixed enviornments, milliseconds do not get logged
             # if older Ubuntu 8.04 boxes log to a newer 10.04 server with
             # Rsyslog precision time on.
-            if re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}", hptime):
+            if re.search(r"[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}", hptime):
                 time, mseconds = hptime.split(".")  # Miliseconds
             else:
                 time = hptime
@@ -316,7 +340,7 @@ class RSyslogEntry(LogEntry):
             self.hour, self.minute, self.second = time.split(":")
             self.host = value[1]
             self.daemon = value[2]
-            self.log_entry = ' '.join(value[3:])
+            self.log_entry = " ".join(value[3:])
 
             # Normalize integers to standard widths and convert to strings
             self.year = str("%.4d" % (int(self.year)))
@@ -328,26 +352,30 @@ class RSyslogEntry(LogEntry):
 
         # Abnormal log entry
         elif len(value) >= 1:
-            self.year, \
-            self.month, \
-            self.day, \
-            self.hour, \
-            self.minute, \
-            self.second, \
-            self.host, \
-            self.daemon = ["1900", "01", "01", "01", "01", "01", "#", "#"]
-            self.log_entry = ' '.join(value)
+            (
+                self.year,
+                self.month,
+                self.day,
+                self.hour,
+                self.minute,
+                self.second,
+                self.host,
+                self.daemon,
+            ) = ["1900", "01", "01", "01", "01", "01", "#", "#"]
+            self.log_entry = " ".join(value)
 
         # Blank line, will be sorted out by scrub
         else:
-            self.year, \
-            self.month, \
-            self.day, \
-            self.hour, \
-            self.minute, \
-            self.second, \
-            self.host, \
-            self.daemon = ["1900", "01", "01", "01", "01", "01", "#", "#"]
+            (
+                self.year,
+                self.month,
+                self.day,
+                self.hour,
+                self.minute,
+                self.second,
+                self.host,
+                self.daemon,
+            ) = ["1900", "01", "01", "01", "01", "01", "#", "#"]
             self.log_entry = "#"
 
     def is_type(line):
@@ -380,28 +408,30 @@ class ApacheAccessEntry(LogEntry):
         # Should be normal log entry
         if len(value) >= 12:
             # Grab major chunks from the line
-            rhost, \
-            ident, \
-            ruser, \
-            apachedate, \
-            junk, \
-            junk2, \
-            uri, \
-            protocol, \
-            status, \
-            bytes, \
-            referer, \
-            agent = value[:12]
+            (
+                rhost,
+                ident,
+                ruser,
+                apachedate,
+                junk,
+                junk2,
+                uri,
+                protocol,
+                status,
+                bytes,
+                referer,
+                agent,
+            ) = value[:12]
             self.log_entry = uri
 
             # Split up something that looks like this: [03/Aug/2009:11:53:08
-            datetime = apachedate.split(':')
+            datetime = apachedate.split(":")
             date = datetime[0]
             self.hour = datetime[1]
             self.minute = datetime[2]
             self.second = datetime[3]
-            dmy = date.split('/')
-            self.day = re.sub("\[", "", dmy[0])
+            dmy = date.split("/")
+            self.day = re.sub(r"\[", "", dmy[0])
             self.month = dmy[1]
             self.year = dmy[2]
             self.host = uri
@@ -460,14 +490,14 @@ class ApacheErrorEntry(LogEntry):
             # Split up something that looks like this:
             # [Sat Feb 27 12:16:10 2010]
             junk, self.month, self.day, clocktime, self.year = value[:5]
-            self.log_entry = ' '.join(value[5:])
+            self.log_entry = " ".join(value[5:])
             self.hour, self.minute, self.second = clocktime.split(":")
 
             # Convert month to integer
             self.month = time.strptime(self.month, "%b")[1]
 
             # Clean up the year field
-            self.year = re.sub("\]", "", self.year)
+            self.year = re.sub(r"\]", "", self.year)
 
             # Normalize integers to standard widths and convert to strings
             self.year = str("%.4d" % (int(self.year)))
@@ -493,9 +523,11 @@ class ApacheErrorEntry(LogEntry):
         if len(line) >= 5:
 
             # Look for : [Sat Feb 27 12:16:10 2010]
-            if re.search("[[a-zA-Z]{3}", line[0]) and \
-               re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}", line[3]) and \
-               re.search("[0-9]{4}", line[4]):
+            if (
+                re.search("[[a-zA-Z]{3}", line[0])
+                and re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}", line[3])
+                and re.search("[0-9]{4}", line[4])
+            ):
                 return True
             else:
                 return False
@@ -519,7 +551,7 @@ class SecureLogEntry(LogEntry):
             # Syslog does not store year information so, set to current year
             self.year = str(datetime.date.today().year)
             self.month, self.day, clocktime, self.host, self.daemon = value[:5]
-            self.log_entry = ' '.join(value[5:])
+            self.log_entry = " ".join(value[5:])
             self.hour, self.minute, self.second = clocktime.split(":")
 
             # Convert month to integer
@@ -549,10 +581,11 @@ class SecureLogEntry(LogEntry):
         if len(line) >= 6:
 
             # Look for something similar to: "29 11:53:08" in third column
-            if re.search("[0-9][0-9]?", line[1]) \
-            and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}", line[2]) \
-            and (re.search("^pam_", line[5]) \
-            or re.search("^sshd\[", line[4])):
+            if (
+                re.search("[0-9][0-9]?", line[1])
+                and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}", line[2])
+                and (re.search("^pam_", line[5]) or re.search(r"^sshd\[", line[4]))
+            ):
                 return True
             else:
                 return False
@@ -597,16 +630,18 @@ class ScriptlogEntry(LogEntry):
             # Syslog does not store year information so scriptlog does not
             # So set to current year, set the other fields normally
             self.year = datetime.date.today().year
-            self.month, \
-            self.day, \
-            time, \
-            self.host, \
-            self.daemon, \
-            self.label, \
-            self.id, \
-            self.type = value[:8]
+            (
+                self.month,
+                self.day,
+                time,
+                self.host,
+                self.daemon,
+                self.label,
+                self.id,
+                self.type,
+            ) = value[:8]
 
-            self.log_entry = ' '.join(value[8:])
+            self.log_entry = " ".join(value[8:])
             self.hour, self.minute, self.second = time.split(":")
 
             # Normalize integers to standard widths and convert to strings
@@ -703,19 +738,19 @@ class SnortEntry(LogEntry):
 
             # Initial break down
             snortdate = value[:1]
-            self.log_entry = ' '.join(value[1:])
+            self.log_entry = " ".join(value[1:])
 
             # Looks like "09/29-10:18:46.026172"
-            snortdate, junk = snortdate[0].split('.')
+            snortdate, junk = snortdate[0].split(".")
 
             # Looks like "09/29-10:18:46"
-            self.month, snortdate = snortdate.split('/')
+            self.month, snortdate = snortdate.split("/")
 
             # Looks like "29-10:18:46"
-            self.day, snortdate = snortdate.split('-')
+            self.day, snortdate = snortdate.split("-")
 
             # Looks like "10:18:46"
-            self.hour, self.minute, self.second = snortdate.split(':')
+            self.hour, self.minute, self.second = snortdate.split(":")
 
             # Normalize integers to standard widths and convert to strings
             self.year = str("%.4d" % (int(self.year)))
@@ -740,7 +775,7 @@ class SnortEntry(LogEntry):
         if len(line) >= 4:
 
             # Look for : "09/29-10:18:46.026172" in first column
-            r = "[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}"
+            r = r"[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}"
             if re.search(r, line[0]):
                 return True
             else:
@@ -760,9 +795,11 @@ entry_types = list()
 
 for i in list(ma.keys()):
     if isinstance(ma[i], type):
-        if issubclass(ma[i], ma['LogEntry']) and \
-                      ma[i].__name__ != "LogEntry" and \
-                      ma[i].__name__ != "RawEntry":
+        if (
+            issubclass(ma[i], ma["LogEntry"])
+            and ma[i].__name__ != "LogEntry"
+            and ma[i].__name__ != "RawEntry"
+        ):
             entry_types.append(ma[i].__name__)
 
 entry_types.append("RawEntry")

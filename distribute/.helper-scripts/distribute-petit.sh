@@ -1,4 +1,4 @@
-#/bin/bash -x
+#!/bin/bash -x
 
 # Variables
 home_location="/root/foss/petit"

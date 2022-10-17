@@ -1,15 +1,17 @@
 """Defines ScriptLog class"""
 
-from collections import UserList
-from .CrunchLog import ScriptlogEntry
+import gzip
+import logging
+import os
+import random
 import re
 import sys
-import os
-import logging
-import gzip
-import sha
-import random
 import syslog
+from collections import UserList
+
+import sha
+
+from .CrunchLog import ScriptlogEntry
 
 
 class ScriptLog(UserList):
@@ -27,8 +29,8 @@ class ScriptLog(UserList):
     labels["warn"] = "__WARN__"
     labels["crit"] = "__CRIT__"
     labels["ack"] = "__ACKN__"
-    
-    def __init__(self, filename, label="__ScriptLog__", auto_refresh=False):    
+
+    def __init__(self, filename, label="__ScriptLog__", auto_refresh=False):
 
         # Initialize variables
         self.filename = filename
@@ -61,22 +63,22 @@ class ScriptLog(UserList):
             # Trim files down to ones that make sense
             for file in files:
                 if re.search(basename, file, re.IGNORECASE):
-                    
+
                     # Open the file
-                    logging.debug("Opening File: "+dirname+"/"+file)
+                    logging.debug("Opening File: " + dirname + "/" + file)
 
                     # Check for zip file
                     if re.search("gz", file):
-                        f = gzip.open(dirname+"/"+file)
+                        f = gzip.open(dirname + "/" + file)
                     else:
-                        f = open(dirname+"/"+file)
+                        f = open(dirname + "/" + file)
 
                     # Read entire contents into array for speed
                     for line in f.readlines():
                         buffer.append(line)
 
                     # Close file
-                    f.close();
+                    f.close()
 
         return buffer
 
@@ -103,7 +105,7 @@ class ScriptLog(UserList):
 
         # Finally, build self with the ScriptlogEntries
         for line in buffer:
-            
+
             # Test line to make sure it is a ScriptLog entry, then add
             if ScriptlogEntry.is_type(line, self.label):
 
@@ -112,7 +114,7 @@ class ScriptLog(UserList):
 
                 # Setup supporting dictionaries
                 # Set Entry
-                entry = self[len(self)-1]
+                entry = self[len(self) - 1]
 
                 # Parse warning items
                 if entry.type == ScriptLog.labels["warn"]:
@@ -126,7 +128,6 @@ class ScriptLog(UserList):
                 if entry.type == ScriptLog.labels["ack"]:
                     self.ack[entry.id] = True
 
-
     def has_entry(self, line):
         """Check the scriptlog object for an entry which matches the line given"""
 
@@ -135,12 +136,12 @@ class ScriptLog(UserList):
             self.fill()
 
         for entry in self:
-            
+
             # Strip extra spaces out
-            line = re.sub("\s+", " ", line)
+            line = re.sub(r"\s+", " ", line)
 
             # Complete the search
-            #if re.search(re.escape(line), entry.log_entry, re.IGNORECASE):
+            # if re.search(re.escape(line), entry.log_entry, re.IGNORECASE):
             if line == entry.log_entry:
                 return True
 
@@ -151,10 +152,25 @@ class ScriptLog(UserList):
         """Added warning entry to syslog"""
 
         # Generate new SHA has
-        h = sha.new(str(random.random())+self.label+" "+ScriptLog.labels["warn"]+" "+line)
+        h = sha.new(
+            str(random.random())
+            + self.label
+            + " "
+            + ScriptLog.labels["warn"]
+            + " "
+            + line
+        )
 
         # Write out entry
-        syslog.syslog(self.label+" "+h.hexdigest()+" "+ScriptLog.labels["warn"]+" "+line.expandtabs())
+        syslog.syslog(
+            self.label
+            + " "
+            + h.hexdigest()
+            + " "
+            + ScriptLog.labels["warn"]
+            + " "
+            + line.expandtabs()
+        )
 
         # Refresh the log
         if self.auto_refresh:
@@ -164,20 +180,27 @@ class ScriptLog(UserList):
         """Added critical entry to syslog"""
 
         # Generate new SHA has
-        h = sha.new(str(random.random())+self.label+" "+ScriptLog.labels["warn"]+" "+line)
+        h = sha.new(
+            str(random.random())
+            + self.label
+            + " "
+            + ScriptLog.labels["warn"]
+            + " "
+            + line
+        )
 
         # Write out entry
-        syslog.syslog(self.label+" "+ScriptLog.labels["crit"]+" "+line)
+        syslog.syslog(self.label + " " + ScriptLog.labels["crit"] + " " + line)
 
         # Refresh the log
         if self.auto_refresh:
             self.fill()
 
-    def add_ack(self, id): 
+    def add_ack(self, id):
         """Added critical entry to syslog"""
 
         # Write out entry
-        syslog.syslog(self.label+" "+id+" "+ScriptLog.labels["ack"])
+        syslog.syslog(self.label + " " + id + " " + ScriptLog.labels["ack"])
 
         # Refresh the log
         if self.auto_refresh:
@@ -214,11 +237,22 @@ class ScriptLog(UserList):
             for entry in self:
 
                 if entry.id in unack:
-                    print(entry.month \
-                    +" "+entry.day \
-                    +" "+entry.hour+":"+entry.minute+":"+entry.second \
-                    +" "+entry.type \
-                    +" \""+entry.log_entry+"\"")
+                    print(
+                        entry.month
+                        + " "
+                        + entry.day
+                        + " "
+                        + entry.hour
+                        + ":"
+                        + entry.minute
+                        + ":"
+                        + entry.second
+                        + " "
+                        + entry.type
+                        + ' "'
+                        + entry.log_entry
+                        + '"'
+                    )
         else:
             print("OK")
 

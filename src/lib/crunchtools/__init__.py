@@ -27,10 +27,10 @@ manipulating log data.
 #
 ###############################################################################
 
-import warnings
 import sys
+import warnings
+
 sys.path.append("../")
 
 ## Ignore deprication warnings to support a wide range of python versions
-warnings.simplefilter('ignore', DeprecationWarning)
-
+warnings.simplefilter("ignore", DeprecationWarning)
