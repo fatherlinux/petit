@@ -13,7 +13,8 @@ class Filter:
     file = ""
     prefixes =  [ "/var/lib/petit/filters/", \
                   "/usr/local/petit/var/lib/filters/", \
-                  "/opt/petit/var/lib/filters/" ]
+                  "/opt/petit/var/lib/filters/" , os.path.join(os.path.dirname( __file__),'../filters/')]
+                  
 
     stopwords = []
 
