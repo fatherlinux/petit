@@ -112,7 +112,7 @@ class SuperHash(UserDict):
         prefixes =  [ \
             "/var/lib/petit/fingerprints/", \
             "/usr/local/petit/var/lib/fingerprints/" \
-            "/opt/petit/var/lib/fingerprints/"]
+            "/opt/petit/var/lib/fingerprints/", os.path.join(os.path.dirname( __file__),'../fingerprints/')]
 
         for prefix in prefixes:
             if os.path.exists(prefix) and len(os.listdir(prefix)) >= 1:
