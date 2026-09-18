@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crunchtools"
+version = "2.1.0"
+description = "Log analysis for systems administrators — detects the log format, then collapses the repetitive into counts so the unusual is what you read"
+readme = { file = "README", content-type = "text/plain" }
+requires-python = ">=3.9"
+license = "GPL-3.0-or-later"
+license-files = ["COPYING"]
+authors = [{ name = "Scott McCarty", email = "scott.mccarty@gmail.com" }]
+keywords = ["log", "analysis", "syslog", "apache", "sysadmin", "deduplication"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Logging",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/fatherlinux/petit"
+Source = "https://github.com/fatherlinux/petit"
+Changelog = "https://github.com/fatherlinux/petit/blob/master/CHANGELOG"
+
+[project.scripts]
+petit = "crunchtools.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/crunchtools"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/crunchtools", "README", "COPYING", "CHANGELOG", "AUTHORS", "test"]
+
+[tool.pytest.ini_options]
+testpaths = ["test"]

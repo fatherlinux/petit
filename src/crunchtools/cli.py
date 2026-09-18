@@ -37,7 +37,7 @@ from optparse import Values
 import signal
 import sys
 import logging
-sys.path.append("/usr/share/petit")
+from crunchtools.errors import PetitError
 from crunchtools.CrunchLog import CrunchLog
 from crunchtools.LogHash import SuperHash
 from crunchtools.LogHash import DaemonHash
@@ -442,5 +442,22 @@ def mode_ygraph():
     sys.exit(0)
 
 
+def main():
+    """Console-script entry point.
+
+    This is the boundary where a PetitError becomes an exit status. The
+    library itself never exits — see crunchtools.errors.
+    """
+    try:
+        get_options()
+    except PetitError as exc:
+        print("petit: " + str(exc), file=sys.stderr)
+        return 1
+    except BrokenPipeError:
+        # `petit ... | head` is normal usage, not an error.
+        return 0
+    return 0
+
+
 if __name__ == "__main__":
-    get_options()
+    sys.exit(main())

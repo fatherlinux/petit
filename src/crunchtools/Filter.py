@@ -2,6 +2,8 @@
 
 import os
 import re
+from .errors import DataFileError
+from .resources import search_prefixes
 import sys
 import logging
 
@@ -11,9 +13,8 @@ class Filter:
     global logging
 
     file = ""
-    prefixes =  [ "/var/lib/petit/filters/", \
-                  "/usr/local/petit/var/lib/filters/", \
-                  "/opt/petit/var/lib/filters/" ]
+    # Packaged data first, legacy system paths after — see resources.py
+    prefixes = search_prefixes("filters")
 
     stopwords = []
 
@@ -41,9 +42,10 @@ class Filter:
                         self.stopwords.append(re.compile(line.rstrip()))
                     break
 
-                except IOError:
-                    print("Could not open Filter file",self.file)
-                    sys.exit(16)
+                except OSError as exc:
+                    raise DataFileError(
+                        "could not open filter file " + str(self.file)
+                    ) from exc
 
         logging.info("Filter File: "+str(self.file))
 

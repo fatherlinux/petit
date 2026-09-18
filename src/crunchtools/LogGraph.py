@@ -3,6 +3,7 @@ from math import ceil
 import datetime
 import sys
 import logging
+from .errors import EmptyLogError
 
 class GraphHash(UserDict):
     """Interface class used to control structure & use of all GraphHash subtypes"""
@@ -186,7 +187,7 @@ class SecondsGraph(GraphHash):
         if len(log) > 0:
             first_entry = log[0]
         else:
-            sys.exit()
+            raise EmptyLogError("no entries to graph")
 
         # Local Variables
         counter = 0
@@ -247,7 +248,7 @@ class MinutesGraph(GraphHash):
         if len(log) > 0:
             first_entry = log[0]
         else:
-            sys.exit()
+            raise EmptyLogError("no entries to graph")
 
         # Local Variables
         counter = 0
@@ -308,7 +309,7 @@ class HoursGraph(GraphHash):
         if len(log) > 0:
             first_entry = log[0]
         else:
-            sys.exit()
+            raise EmptyLogError("no entries to graph")
 
         # Local Variables
         counter = 0
@@ -369,7 +370,7 @@ class DaysGraph(GraphHash):
         if len(log) > 0:
             first_entry = log[0]
         else:
-            sys.exit()
+            raise EmptyLogError("no entries to graph")
 
         # Local Variables
         counter = 0
@@ -430,7 +431,7 @@ class MonthsGraph(GraphHash):
         if len(log) > 0:
             first_entry = log[0]
         else:
-            sys.exit()
+            raise EmptyLogError("no entries to graph")
 
         # Local Variables
         counter = 0
@@ -493,7 +494,7 @@ class YearsGraph(GraphHash):
         if len(log) > 0:
             first_entry = log[0]
         else:
-            sys.exit()
+            raise EmptyLogError("no entries to graph")
 
         # Local Variables
         counter = 0

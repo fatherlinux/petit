@@ -13,6 +13,8 @@ from .CrunchLog import RawEntry
 from .CrunchLog import SecureLogEntry
 
 import logging
+from .errors import DataFileError, PetitError
+from .resources import search_prefixes
 from random import choice
 import re
 import os
@@ -92,8 +94,9 @@ class SuperHash(UserDict):
                 else:
                     print((str(self[key][0]) + ":	" + str(key)))
             else:
-                print(("That type of sampling is not supported:", self.sample))
-                sys.exit(16)
+                raise PetitError(
+                    "unsupported sampling mode: " + str(self.sample)
+                )
 
     def fingerprint(self):
         """
@@ -109,10 +112,7 @@ class SuperHash(UserDict):
         fingerprint_files = ["__none__"]
 
         # Load & assign fingerprint files
-        prefixes =  [ \
-            "/var/lib/petit/fingerprints/", \
-            "/usr/local/petit/var/lib/fingerprints/" \
-            "/opt/petit/var/lib/fingerprints/"]
+        prefixes = search_prefixes("fingerprints")
 
         for prefix in prefixes:
             if os.path.exists(prefix) and len(os.listdir(prefix)) >= 1:
@@ -126,8 +126,10 @@ class SuperHash(UserDict):
                 break
 
         if fingerprint_files[0] == "__none__":
-            print(("Could not locate fingerprint files: ", prefix))
-            sys.exit()
+            raise DataFileError(
+                "could not locate fingerprint files in any of: "
+                + ", ".join(prefixes)
+            )
 
         for fingerprint_file in fingerprint_files:
             if re.search("fp",fingerprint_file):
@@ -195,8 +197,9 @@ class SuperHash(UserDict):
         elif log.contains(SecureLogEntry):
             LogHash = SecureLogHash
         else:
-            print("Could not determine what type of objects are contained in generic Log""")
-            sys.exit(15)
+            raise PetitError(
+                "could not determine what type of objects the log contains"
+            )
 
         # Build and return the correct subclass instance based on log file type
         return LogHash(log, filter)
