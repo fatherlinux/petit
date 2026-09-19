@@ -2,7 +2,7 @@
 
 import pytest
 
-from crunchtools import (
+from petit import (
     EmptyLogError,
     ParseError,
     PetitError,
@@ -10,7 +10,7 @@ from crunchtools import (
     detect_format,
     hash_text,
 )
-from crunchtools import resources
+from petit import resources
 
 
 def secure_log(lines=200, pids=(1234, 5678)):
@@ -111,8 +111,8 @@ class TestFileErrors:
     def test_unreadable_file_raises_cleanly(self, tmp_path):
         import os
 
-        from crunchtools.CrunchLog import CrunchLog
-        from crunchtools import DataFileError
+        from petit.CrunchLog import CrunchLog
+        from petit import DataFileError
 
         target = tmp_path / "noperm.log"
         target.write_text("Aug 18 10:00:00 host sshd[1]: test\n")
@@ -126,8 +126,8 @@ class TestFileErrors:
             os.chmod(target, 0o644)
 
     def test_missing_file_raises_cleanly(self, tmp_path):
-        from crunchtools.CrunchLog import CrunchLog
-        from crunchtools import DataFileError
+        from petit.CrunchLog import CrunchLog
+        from petit import DataFileError
 
         with pytest.raises(DataFileError):
             CrunchLog(str(tmp_path / "does-not-exist.log"))
@@ -254,8 +254,8 @@ class TestSecureLogIsNotConsumed:
     def test_hashing_does_not_mutate_the_log(self):
         """fill() used to assign its generalised form back onto the entry,
         so hashing a log destroyed it for every later reader."""
-        from crunchtools.CrunchLog import CrunchLog
-        from crunchtools.LogHash import SuperHash
+        from petit.CrunchLog import CrunchLog
+        from petit.LogHash import SuperHash
 
         log = CrunchLog.from_text(secure_log())
         before = [entry.log_entry for entry in log]

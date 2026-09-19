@@ -1,4 +1,4 @@
-"""Exceptions for the crunchtools library.
+"""Exceptions for the petit library.
 
 The library used to call sys.exit() on bad input, which is defensible in a
 command-line tool and fatal anywhere else: a caller embedding petit — a

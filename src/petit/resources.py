@@ -31,7 +31,7 @@ LEGACY_PREFIXES = {
 def data_dir(kind: str) -> str | None:
     """Absolute path to the packaged data directory for `kind`, if present."""
     try:
-        path = resources.files("crunchtools") / "data" / kind
+        path = resources.files("petit") / "data" / kind
         if path.is_dir():
             return str(path)
     except (ModuleNotFoundError, AttributeError, TypeError):

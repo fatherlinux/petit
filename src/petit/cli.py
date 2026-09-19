@@ -37,18 +37,18 @@ from optparse import Values
 import signal
 import sys
 import logging
-from crunchtools.errors import PetitError
-from crunchtools.CrunchLog import CrunchLog
-from crunchtools.LogHash import SuperHash
-from crunchtools.LogHash import DaemonHash
-from crunchtools.LogHash import HostHash
-from crunchtools.LogHash import WordHash
-from crunchtools.LogGraph import SecondsGraph
-from crunchtools.LogGraph import MinutesGraph
-from crunchtools.LogGraph import HoursGraph
-from crunchtools.LogGraph import DaysGraph
-from crunchtools.LogGraph import MonthsGraph
-from crunchtools.LogGraph import YearsGraph
+from petit.errors import PetitError
+from petit.CrunchLog import CrunchLog
+from petit.LogHash import SuperHash
+from petit.LogHash import DaemonHash
+from petit.LogHash import HostHash
+from petit.LogHash import WordHash
+from petit.LogGraph import SecondsGraph
+from petit.LogGraph import MinutesGraph
+from petit.LogGraph import HoursGraph
+from petit.LogGraph import DaysGraph
+from petit.LogGraph import MonthsGraph
+from petit.LogGraph import YearsGraph
 
 # Process Signals
 
@@ -446,7 +446,7 @@ def main():
     """Console-script entry point.
 
     This is the boundary where a PetitError becomes an exit status. The
-    library itself never exits — see crunchtools.errors.
+    library itself never exits — see petit.errors.
     """
     try:
         get_options()
