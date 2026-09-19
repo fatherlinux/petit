@@ -5,7 +5,7 @@ failure. No file paths, no stdout, no sys.exit. The CLI is one caller of this
 module; a service embedding petit is another, and neither should have to
 route a payload through a temporary file or lose its process to a bad line.
 
-    from crunchtools.api import hash_text
+    from petit.api import hash_text
 
     for group in hash_text(open("/var/log/messages").read()):
         print(group.count, group.pattern)

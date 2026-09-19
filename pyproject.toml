@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "crunchtools"
-version = "2.2.0"
+name = "petit-log"
+version = "3.0.0"
 description = "Log analysis for systems administrators — detects the log format, then collapses the repetitive into counts so the unusual is what you read"
 readme = { file = "README", content-type = "text/plain" }
 requires-python = ">=3.9"
@@ -24,21 +24,21 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/fatherlinux/petit"
-Source = "https://github.com/fatherlinux/petit"
-Changelog = "https://github.com/fatherlinux/petit/blob/master/CHANGELOG"
+Homepage = "https://github.com/crunchtools/petit"
+Source = "https://github.com/crunchtools/petit"
+Changelog = "https://github.com/crunchtools/petit/blob/master/CHANGELOG"
 
 [project.scripts]
-petit = "crunchtools.cli:main"
+petit = "petit.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/crunchtools"]
+packages = ["src/petit"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/crunchtools", "README", "COPYING", "CHANGELOG", "AUTHORS", "test"]
+include = ["src/petit", "README", "COPYING", "CHANGELOG", "AUTHORS", "test"]
 
 [tool.pytest.ini_options]
 testpaths = ["test"]

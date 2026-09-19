@@ -1,3 +1,19 @@
+* Sat Sep 19 2026 Scott McCarty <scott.mccarty@gmail.com> - 3.0.0
+- BREAKING: the import package is now `petit`, not `crunchtools`. Update
+  `from crunchtools import hash_text` to `from petit import hash_text`
+- BREAKING: the PyPI distribution is now `petit-log`, not `crunchtools`.
+  `crunchtools` was this project's brand, not this tool's name — spending it
+  on one log analyser left nothing for anything else that ships under it, and
+  meant the repo, the distribution, the import and the command were four
+  different words for one program. `petit` alone was unavailable on PyPI
+  (a protein engineering toolkit holds it), hence `petit-log`
+- The repository moved to github.com/crunchtools/petit
+- The `petit` command and every flag are unchanged, as is the library API
+  beyond the import path: hash_text, analyze_text, detect_format, Group,
+  Analysis, and the PetitError hierarchy all behave exactly as in 2.2.0
+- crunchtools 2.1.0 remains on PyPI and is not superseded by an upload; the
+  name is being kept for a future package under that brand
+
 * Fri Sep 19 2026 Scott McCarty <scott.mccarty@gmail.com> - 2.2.0
 - Made driver selection deterministic. select() drew its sample lines with
   random.choice(), so the driver — and therefore the entire result — was a
