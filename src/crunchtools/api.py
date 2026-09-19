@@ -22,6 +22,7 @@ from dataclasses import dataclass, field
 from . import CrunchLog as _drivers
 from .CrunchLog import CrunchLog
 from .errors import PetitError
+from .Filter import Filter
 from .LogHash import SuperHash
 
 
@@ -106,6 +107,7 @@ def analyze_text(
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
+    stopwords: list[str] | None = None,
 ) -> Analysis:
     """Group `text` by line fingerprint and report how it was done.
 
@@ -114,7 +116,14 @@ def analyze_text(
     Args:
         text: The log or payload to analyse.
         filter_name: Stopword file to apply, resolved from packaged data.
-            Pass "__none__" for no filtering at all.
+            Pass "__none__" for no filtering at all. Ignored when
+            `stopwords` is given.
+        stopwords: Regexes to normalise with, supplied by the caller and
+            used instead of any packaged file. The packaged hash.stopwords
+            is tuned for system logs and is deliberately aggressive —
+            `[a-f]+#` collapses letters adjacent to a scrubbed number, so
+            "bob0" and "boa0" group together. A caller that needs two
+            distinct values to stay distinct supplies its own list.
         max_samples: Real lines to retain per group.
         source_name: Label used in errors and logging.
         driver: Pin an entry class by name (e.g. "RawEntry") instead of
@@ -137,7 +146,10 @@ def analyze_text(
         driver=_resolve_driver(driver),
         strict=strict,
     )
-    hashed = SuperHash.manufacture(log, filter_name)
+    hashed = SuperHash.manufacture(
+        log,
+        Filter.from_patterns(stopwords) if stopwords is not None else filter_name,
+    )
 
     groups = [
         Group(
@@ -169,6 +181,7 @@ def hash_text(
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
+    stopwords: list[str] | None = None,
 ) -> list[Group]:
     """Group `text` by line fingerprint, most frequent first.
 
@@ -186,6 +199,7 @@ def hash_text(
         source_name=source_name,
         driver=driver,
         strict=strict,
+        stopwords=stopwords,
     ).groups
 
 

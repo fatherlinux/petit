@@ -25,6 +25,12 @@
 - Added a driver= argument to pin an entry class instead of detecting one. A
   caller that must not have per-format vocabulary applied to its payloads pins
   RawEntry and gets purely structural grouping. Unknown names raise PetitError
+- Added a stopwords= argument taking regexes from the caller, used instead of
+  any packaged filter file. Normalisation policy belongs to whoever reads the
+  output: hash.stopwords is tuned for system logs and deliberately aggressive,
+  and its `[a-f]+#` rule collapses letters next to a scrubbed number, so "bob0"
+  and "boa0" group together. Right for spotting a flapping daemon, wrong for a
+  caller that needs two distinct values to stay distinct
 - Added Group.sample_lines, the 0-based position of each sample in the input.
   Grouping throws the original order away, so a caller that wants to show
   samples in written order rather than in group order had no way back

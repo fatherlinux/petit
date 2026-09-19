@@ -286,3 +286,51 @@ class TestSampleLineNumbers:
         for group in result.groups:
             for number, sample in zip(group.sample_lines, group.samples):
                 assert lines[number] == sample
+
+
+class TestCallerSuppliedStopwords:
+    """Normalisation policy belongs to whoever reads the output. The
+    packaged hash.stopwords is right for system logs and wrong for a caller
+    that needs two distinct values to stay distinct."""
+
+    NAMES = "\n".join(
+        ["user bob%d logged in" % i for i in range(15)]
+        + ["user boa%d logged in" % i for i in range(15)]
+    )
+
+    def test_packaged_filter_collapses_adjacent_letters(self):
+        """Documents the behaviour that motivates the option: `[a-f]+#`
+        eats the letter next to a scrubbed number, so two different names
+        share a fingerprint."""
+        groups = hash_text(self.NAMES, driver="RawEntry")
+        assert len(groups) == 1
+        assert groups[0].pattern == "user bo# logged in"
+
+    def test_caller_patterns_keep_distinct_words_distinct(self):
+        groups = hash_text(self.NAMES, driver="RawEntry", stopwords=[r"[0-9]+"])
+        patterns = {g.pattern for g in groups}
+        assert patterns == {"user bob# logged in", "user boa# logged in"}
+
+    def test_caller_patterns_still_normalise_what_they_are_given(self):
+        groups = hash_text(self.NAMES, driver="RawEntry", stopwords=[r"[0-9]+"])
+        assert sum(g.count for g in groups) == 30
+        assert all(g.count == 15 for g in groups)
+
+    def test_empty_pattern_list_means_no_normalisation(self):
+        groups = hash_text(self.NAMES, driver="RawEntry", stopwords=[])
+        assert len(groups) == 30
+
+    def test_stopwords_override_filter_name(self):
+        groups = hash_text(
+            self.NAMES,
+            driver="RawEntry",
+            filter_name="hash.stopwords",
+            stopwords=[r"[0-9]+"],
+        )
+        assert len(groups) == 2
+
+    def test_samples_are_still_verbatim_with_caller_patterns(self):
+        lines = self.NAMES.splitlines()
+        for group in hash_text(self.NAMES, driver="RawEntry", stopwords=[r"[0-9]+"]):
+            for number, sample in zip(group.sample_lines, group.samples):
+                assert lines[number] == sample

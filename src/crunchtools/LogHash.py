@@ -31,18 +31,18 @@ class SuperHash(UserDict):
         # Call parent init
         UserDict.__init__(self)
 
-        if log[0] != "__none__" and filter_filename != "__none__":
-            # Setup log and filter
-            self.filter = Filter(filter_filename)
-            self.fill(log)
-
-        elif log[0] != "__none__":
-            # Setup log without filter
-            self.fill(log)
-            
-        else:
+        if log[0] == "__none__":
             # Create empty filter
-            pass
+            return
+
+        # A caller that supplies its own normalisation policy passes a built
+        # Filter instead of the name of one to go and find.
+        if isinstance(filter_filename, Filter):
+            self.filter = filter_filename
+        elif filter_filename != "__none__":
+            self.filter = Filter(filter_filename)
+
+        self.fill(log)
 
     def fill(self, log):
         """Interface method which is flled in by subclasses"""
