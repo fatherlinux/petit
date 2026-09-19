@@ -45,6 +45,11 @@ class Group:
     pattern: str
     count: int
     samples: list[str] = field(default_factory=list)
+    # Where each sample sat in the input, 0-based and parallel to `samples`.
+    # Grouping throws the original order away, so a caller that wants to
+    # show samples in the order they were written — rather than in the
+    # order their groups happened to sort — needs these to put them back.
+    sample_lines: list[int] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -139,6 +144,9 @@ def analyze_text(
             pattern=str(key),
             count=value[0],
             samples=[_render(entry) for entry in value[1][:max_samples]],
+            sample_lines=[
+                getattr(entry, "line_number", -1) for entry in value[1][:max_samples]
+            ],
         )
         for key, value in hashed.items()
     ]

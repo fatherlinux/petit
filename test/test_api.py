@@ -261,3 +261,28 @@ class TestSecureLogIsNotConsumed:
         before = [entry.log_entry for entry in log]
         SuperHash.manufacture(log, "hash.stopwords")
         assert [entry.log_entry for entry in log] == before
+
+
+class TestSampleLineNumbers:
+    """Grouping reorders by definition. A caller that wants to present
+    samples in written order needs to know where they came from."""
+
+    def test_sample_lines_are_parallel_to_samples(self):
+        for group in hash_text(secure_log()):
+            assert len(group.sample_lines) == len(group.samples)
+
+    def test_sample_lines_point_at_the_right_lines(self):
+        text = secure_log()
+        lines = text.splitlines()
+        for group in hash_text(text):
+            for number, sample in zip(group.sample_lines, group.samples):
+                assert lines[number] == sample
+
+    def test_sample_lines_survive_the_degraded_path(self):
+        text = secure_log() + "\nan ordinary prose sentence in the stream"
+        lines = text.splitlines()
+        result = analyze_text(text)
+        assert result.degraded is True
+        for group in result.groups:
+            for number, sample in zip(group.sample_lines, group.samples):
+                assert lines[number] == sample

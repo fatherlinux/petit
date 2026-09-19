@@ -25,6 +25,9 @@
 - Added a driver= argument to pin an entry class instead of detecting one. A
   caller that must not have per-format vocabulary applied to its payloads pins
   RawEntry and gets purely structural grouping. Unknown names raise PetitError
+- Added Group.sample_lines, the 0-based position of each sample in the input.
+  Grouping throws the original order away, so a caller that wants to show
+  samples in written order rather than in group order had no way back
 - hash_text() and detect_format() are unchanged for existing callers, and the
   petit command line produces byte-identical output on the full test corpus
 

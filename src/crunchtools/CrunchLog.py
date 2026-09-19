@@ -146,6 +146,7 @@ class CrunchLog(UserList):
             # fields cannot reconstruct the original. A caller that wants to
             # show a human what was actually in the log needs the bytes.
             entry.raw = line.rstrip("\n")
+            entry.line_number = counter
             entries.append(entry)
         return entries, None
 
@@ -283,6 +284,10 @@ class LogEntry:
     # The line exactly as it arrived, set by CrunchLog._parse. Parsing is
     # lossy in every driver, so this is the only faithful copy.
     raw = ""
+    # 0-based position in the source buffer, set by CrunchLog._parse.
+    # Grouping reorders by definition; this is how a caller gets back to
+    # where a line actually was.
+    line_number = -1
 
     def display(self):
         print("Year: ", self.year, \
