@@ -10,11 +10,17 @@ from collections import UserList
 import re
 import sys
 import logging
+from .errors import DataFileError, EmptyLogError, ParseError
 from random import choice
 import datetime
 import time
 import types
 #import rpdb2; rpdb2.start_embedded_debugger("password")
+
+
+# Bound on how many times select() will resample before giving up and
+# using RawEntry. Without a bound, input that no driver claims spins forever.
+MAX_SELECT_ROUNDS = 5
 
 
 class Tally():
@@ -37,7 +43,7 @@ class Tally():
     def is_type(self, entry_type):
 
         # Setup the correct tally logic method
-        tally_logic = eval(entry_type).tally_logic
+        tally_logic = entry_type.tally_logic
 
         m = self.matrix[entry_type]
         th = self.tally_threshold
@@ -57,29 +63,49 @@ class CrunchLog(UserList):
     def __init__(self, filename=""):
         UserList.__init__(self)
 
-        buf = list()
-
         if filename == "":
             return
-        elif filename == "__none__":
-            self.f = sys.stdin
+
+        if filename == "__none__":
+            buf = sys.stdin.readlines()
         else:
-            logging.debug("Opening File: " + filename)
-            self.f = open(filename)
+            logging.debug("Opening File: %s", filename)
+            # A missing or unreadable file is an ordinary operator mistake, not
+            # a bug, and it should read like one. Left bare it escapes as a
+            # PermissionError traceback (reported as issue #16).
+            try:
+                with open(filename) as handle:
+                    buf = handle.readlines()
+            except OSError as exc:
+                raise DataFileError(
+                    "cannot read %s: %s" % (filename, exc.strerror or exc)
+                ) from exc
 
-        for line in self.f:
-            buf.append(line)
+        self._build(buf, filename)
 
+    @classmethod
+    def from_text(cls, text, source_name="<text>"):
+        """Build a log from a string already in memory.
+
+        The reason this exists: every caller that is not a shell has its
+        payload in memory already, and the file-only constructor forced it
+        through a temporary file to use this library at all.
+        """
+        log = cls()
+        log._build(text.splitlines(keepends=True), source_name)
+        return log
+
+    def _build(self, buf, source_name):
+        """Select a driver for the buffer and parse every line with it."""
         if len(buf) < 1:
-            print("No data found")
-            sys.exit()
+            raise EmptyLogError("no data found in " + (source_name or "input"))
 
         # Automatically select entry type
         self.Entry = self.select(buf)
 
         # Save for introspective purpose
         self.payload_type = self.Entry.__name__
-        self.file_name = filename
+        self.file_name = source_name
         self.build_date = datetime.datetime.now()
 
         # Build from entry type
@@ -88,14 +114,8 @@ class CrunchLog(UserList):
             try:
                 self.append(self.Entry(line))
                 counter += 1
-            except (ValueError, TypeError):
-                print("Cannot parse values on line: " + str(counter))
-                sys.exit()
-
-        del buf
-
-    def __del__(self):
-        self.f.close()
+            except (ValueError, TypeError) as exc:
+                raise ParseError(counter, line) from exc
 
     def select(self, buf):
         """
@@ -108,29 +128,42 @@ class CrunchLog(UserList):
         max_sample_lines = 10
         t = Tally(entry_types, max_sample_lines)
 
-        if len(buf) >= 1:
+        if len(buf) < 1:
+            return RawEntry
 
-            # Keep building samples until we get a good set
-            while (1):
+        # This loop used to be `while (1)`, which never terminated when no
+        # driver reached quorum — and sample_lines grew on every pass, so it
+        # burned memory while it span. A buffer of blank lines does exactly
+        # that: `choice(buf).split()` yields [], and every is_type() rejects
+        # an empty list, RawEntry's included, so nothing ever votes.
+        #
+        # Resampling more than a few times means the buffer is not giving a
+        # clear answer, and more rounds will not change that. Cap it and fall
+        # back to RawEntry, which is what the registry already appoints as the
+        # last resort.
+        for _ in range(MAX_SELECT_ROUNDS):
 
-                # Get X number of samples
-                for i in range(0, max_sample_lines):
-                    sample_lines.append(choice(buf).split())
+            # Get X number of samples
+            for i in range(0, max_sample_lines):
+                sample_lines.append(choice(buf).split())
 
-                # Build tallies for the collected samples
-                for line in sample_lines:
-                    for entry_type in entry_types:
-                        if eval(entry_type).is_type(line):
-                            t.append(entry_type)
-                            break
-
-                # Tally logic is determined by driver
+            # Build tallies for the collected samples
+            for line in sample_lines:
                 for entry_type in entry_types:
-                    if t.is_type(entry_type):
-                        logging.info("Determined " + \
-                        str(entry_type) + ": " + str(t.matrix[entry_type]))
+                    if entry_type.is_type(line):
+                        t.append(entry_type)
+                        break
 
-                        return eval(entry_type)
+            # Tally logic is determined by driver
+            for entry_type in entry_types:
+                if t.is_type(entry_type):
+                    logging.info("Determined %s: %s", entry_type.__name__, t.matrix[entry_type])
+
+                    return entry_type
+
+        logging.info("No driver reached quorum after %d rounds; using RawEntry",
+                     MAX_SELECT_ROUNDS)
+        return RawEntry
 
     def contains(self, obj):
         """Determine what kind of objects are contained in this Log"""
@@ -275,7 +308,7 @@ class SyslogEntry(LogEntry):
                re.search("[0-9][0-9]?", line[1]) and \
                re.search("[0-9{2}:[0-9]{2}:[0-9]{2}", line[2]) and not \
                (re.search("^pam_", line[5]) or \
-               re.search("^sshd\[", line[4])):
+               re.search(r"^sshd\[", line[4])):
                 return True
             else:
                 return False
@@ -306,7 +339,7 @@ class RSyslogEntry(LogEntry):
             # Patch for mixed enviornments, milliseconds do not get logged
             # if older Ubuntu 8.04 boxes log to a newer 10.04 server with
             # Rsyslog precision time on.
-            if re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}", hptime):
+            if re.search(r"[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}", hptime):
                 time, mseconds = hptime.split(".")  # Miliseconds
             else:
                 time = hptime
@@ -401,7 +434,7 @@ class ApacheAccessEntry(LogEntry):
             self.minute = datetime[2]
             self.second = datetime[3]
             dmy = date.split('/')
-            self.day = re.sub("\[", "", dmy[0])
+            self.day = re.sub(r"\[", "", dmy[0])
             self.month = dmy[1]
             self.year = dmy[2]
             self.host = uri
@@ -467,7 +500,7 @@ class ApacheErrorEntry(LogEntry):
             self.month = time.strptime(self.month, "%b")[1]
 
             # Clean up the year field
-            self.year = re.sub("\]", "", self.year)
+            self.year = re.sub(r"\]", "", self.year)
 
             # Normalize integers to standard widths and convert to strings
             self.year = str("%.4d" % (int(self.year)))
@@ -493,7 +526,7 @@ class ApacheErrorEntry(LogEntry):
         if len(line) >= 5:
 
             # Look for : [Sat Feb 27 12:16:10 2010]
-            if re.search("[[a-zA-Z]{3}", line[0]) and \
+            if re.search(r"[\[a-zA-Z]{3}", line[0]) and \
                re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}", line[3]) and \
                re.search("[0-9]{4}", line[4]):
                 return True
@@ -552,7 +585,7 @@ class SecureLogEntry(LogEntry):
             if re.search("[0-9][0-9]?", line[1]) \
             and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}", line[2]) \
             and (re.search("^pam_", line[5]) \
-            or re.search("^sshd\[", line[4])):
+            or re.search(r"^sshd\[", line[4])):
                 return True
             else:
                 return False
@@ -740,7 +773,7 @@ class SnortEntry(LogEntry):
         if len(line) >= 4:
 
             # Look for : "09/29-10:18:46.026172" in first column
-            r = "[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}"
+            r = r"[0-9]{2}\/[0-9]{2}\-[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{6}"
             if re.search(r, line[0]):
                 return True
             else:
@@ -763,6 +796,6 @@ for i in list(ma.keys()):
         if issubclass(ma[i], ma['LogEntry']) and \
                       ma[i].__name__ != "LogEntry" and \
                       ma[i].__name__ != "RawEntry":
-            entry_types.append(ma[i].__name__)
+            entry_types.append(ma[i])
 
-entry_types.append("RawEntry")
+entry_types.append(RawEntry)

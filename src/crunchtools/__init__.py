@@ -27,10 +27,25 @@ manipulating log data.
 #
 ###############################################################################
 
-import warnings
-import sys
-sys.path.append("../")
+# NOTE: this module deliberately does no sys.path manipulation and installs no
+# warning filters. It used to do both; a library that mutates global state on
+# import makes its host's behaviour depend on import order.
 
-## Ignore deprication warnings to support a wide range of python versions
-warnings.simplefilter('ignore', DeprecationWarning)
+from .api import Group, detect_format, hash_text
+from .errors import (
+    DataFileError,
+    EmptyLogError,
+    ParseError,
+    PetitError,
+)
+
+__all__ = [
+    "DataFileError",
+    "EmptyLogError",
+    "Group",
+    "ParseError",
+    "PetitError",
+    "detect_format",
+    "hash_text",
+]
 

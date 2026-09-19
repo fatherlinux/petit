@@ -1,4 +1,0 @@
-Directory	                Description
-filter		                Contains all stopword lists and regexes
-finterprints                Fingerprint files used in analysis
-fingerprint_library		    Fingerprint libraries used to build files in fp

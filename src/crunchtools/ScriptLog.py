@@ -6,6 +6,7 @@ import re
 import sys
 import os
 import logging
+from .errors import DataFileError
 import gzip
 import sha
 import random
@@ -94,8 +95,7 @@ class ScriptLog(UserList):
         if os.path.exists(self.filename):
             buffer = self.open_file(self.filename)
         else:
-            print("File does not exist:", self.filename)
-            sys.exit(16)
+            raise DataFileError("file does not exist: " + str(self.filename))
 
         # Buffer has bow been created and work with file is done
         # Now it is time to determine what kind of objects will be
@@ -137,7 +137,7 @@ class ScriptLog(UserList):
         for entry in self:
             
             # Strip extra spaces out
-            line = re.sub("\s+", " ", line)
+            line = re.sub(r"\s+", " ", line)
 
             # Complete the search
             #if re.search(re.escape(line), entry.log_entry, re.IGNORECASE):
