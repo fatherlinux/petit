@@ -11,7 +11,6 @@ import re
 import sys
 import logging
 from .errors import DataFileError, EmptyLogError, ParseError
-from random import choice
 import datetime
 import time
 import types
@@ -21,6 +20,31 @@ import types
 # Bound on how many times select() will resample before giving up and
 # using RawEntry. Without a bound, input that no driver claims spins forever.
 MAX_SELECT_ROUNDS = 5
+
+# Lines drawn per selection round. Each further round widens the sample.
+SAMPLE_LINES_PER_ROUND = 10
+
+
+def sample_indices(total, count):
+    """Evenly spaced line numbers across a buffer of `total` lines.
+
+    Deterministic by construction. Selection used to draw with
+    random.choice(), which made the driver — and therefore the entire
+    output — a function of the RNG as well as the input: the same bytes
+    could come back parsed two different ways, or parse cleanly on one call
+    and fail on the next. Anything that caches on petit's output, diffs two
+    runs, or simply expects a log tool to be reproducible could not rely on
+    it.
+
+    Spreading the sample evenly is also better evidence than drawing at
+    random, because it is guaranteed to look at the head and the tail. A
+    buffer whose format changes half way through is a real shape, and random
+    draws can miss it entirely.
+    """
+    if count >= total:
+        return list(range(total))
+    step = total / count
+    return [int(i * step) for i in range(count)]
 
 
 class Tally():
@@ -60,6 +84,10 @@ class CrunchLog(UserList):
     Class which extends UserList to provide robust in memory log object
     """
 
+    # True when the detected driver could not parse the whole buffer and
+    # RawEntry was used instead, so grouping is structural only.
+    degraded = False
+
     def __init__(self, filename=""):
         UserList.__init__(self)
 
@@ -84,38 +112,82 @@ class CrunchLog(UserList):
         self._build(buf, filename)
 
     @classmethod
-    def from_text(cls, text, source_name="<text>"):
+    def from_text(cls, text, source_name="<text>", driver=None, strict=False):
         """Build a log from a string already in memory.
 
         The reason this exists: every caller that is not a shell has its
         payload in memory already, and the file-only constructor forced it
         through a temporary file to use this library at all.
+
+        `driver` pins the entry class instead of detecting one. `strict`
+        restores the old behaviour of raising when the driver meets a line
+        it cannot parse, rather than falling back to RawEntry.
         """
         log = cls()
-        log._build(text.splitlines(keepends=True), source_name)
+        log._build(text.splitlines(keepends=True), source_name,
+                   driver=driver, strict=strict)
         return log
 
-    def _build(self, buf, source_name):
+    def _parse(self, buf, entry_type):
+        """Parse every line with `entry_type`.
+
+        Returns (entries, None) on success, or (None, (line_number, line))
+        for the first line the driver could not handle.
+        """
+        entries = []
+        for counter, line in enumerate(buf):
+            try:
+                entry = entry_type(line)
+            except (ValueError, TypeError, IndexError):
+                return None, (counter, line)
+            # Keep the line exactly as it arrived. Every driver normalises
+            # while parsing — collapsing runs of whitespace, substituting
+            # placeholder dates for formats that carry none — so the parsed
+            # fields cannot reconstruct the original. A caller that wants to
+            # show a human what was actually in the log needs the bytes.
+            entry.raw = line.rstrip("\n")
+            entry.line_number = counter
+            entries.append(entry)
+        return entries, None
+
+    def _build(self, buf, source_name, driver=None, strict=False):
         """Select a driver for the buffer and parse every line with it."""
         if len(buf) < 1:
             raise EmptyLogError("no data found in " + (source_name or "input"))
 
         # Automatically select entry type
-        self.Entry = self.select(buf)
+        self.Entry = driver if driver is not None else self.select(buf)
+        self.degraded = False
+
+        entries, failure = self._parse(buf, self.Entry)
+
+        if entries is None:
+            # The driver was chosen from a sample and then applied to every
+            # line, so one line in a different shape used to abort the whole
+            # run. That is not an exotic input: application logs interleave
+            # stack traces, and tool output mixes JSON with prose. Dying on
+            # line 400 of 401 serves nobody.
+            #
+            # Fall back to RawEntry, which parses anything, and record that
+            # the grouping is structural rather than format-aware so the
+            # caller can say so. `strict` keeps the old behaviour for callers
+            # that would rather hear about it.
+            if strict or self.Entry is RawEntry:
+                raise ParseError(*failure)
+            logging.info("%s could not parse line %d; falling back to RawEntry",
+                         self.Entry.__name__, failure[0])
+            self.Entry = RawEntry
+            self.degraded = True
+            entries, failure = self._parse(buf, self.Entry)
+            if entries is None:  # pragma: no cover - RawEntry accepts anything
+                raise ParseError(*failure)
+
+        self.data = entries
 
         # Save for introspective purpose
         self.payload_type = self.Entry.__name__
         self.file_name = source_name
         self.build_date = datetime.datetime.now()
-
-        # Build from entry type
-        counter = 0
-        for line in buf:
-            try:
-                self.append(self.Entry(line))
-                counter += 1
-            except (ValueError, TypeError) as exc:
-                raise ParseError(counter, line) from exc
 
     def select(self, buf):
         """
@@ -124,28 +196,33 @@ class CrunchLog(UserList):
         log type
         """
 
-        sample_lines = []
-        max_sample_lines = 10
-        t = Tally(entry_types, max_sample_lines)
-
         if len(buf) < 1:
             return RawEntry
 
         # This loop used to be `while (1)`, which never terminated when no
         # driver reached quorum — and sample_lines grew on every pass, so it
         # burned memory while it span. A buffer of blank lines does exactly
-        # that: `choice(buf).split()` yields [], and every is_type() rejects
-        # an empty list, RawEntry's included, so nothing ever votes.
+        # that: an empty split() yields [], and every is_type() rejects an
+        # empty list, RawEntry's included, so nothing ever votes.
         #
         # Resampling more than a few times means the buffer is not giving a
         # clear answer, and more rounds will not change that. Cap it and fall
         # back to RawEntry, which is what the registry already appoints as the
         # last resort.
-        for _ in range(MAX_SELECT_ROUNDS):
+        for round_number in range(1, MAX_SELECT_ROUNDS + 1):
 
-            # Get X number of samples
-            for i in range(0, max_sample_lines):
-                sample_lines.append(choice(buf).split())
+            # Widen the sample each round rather than accumulating votes on
+            # top of the previous round's. The old code reused one Tally and
+            # re-counted every line it had ever sampled, so round three
+            # weighed the first ten lines three times over.
+            wanted = SAMPLE_LINES_PER_ROUND * round_number
+            indices = sample_indices(len(buf), wanted)
+            sample_lines = [buf[i].split() for i in indices]
+
+            # Quorum is judged against the lines actually drawn, not the
+            # number requested, so a log shorter than the sample size can
+            # still satisfy a driver that demands unanimity.
+            t = Tally(entry_types, len(sample_lines))
 
             # Build tallies for the collected samples
             for line in sample_lines:
@@ -160,6 +237,10 @@ class CrunchLog(UserList):
                     logging.info("Determined %s: %s", entry_type.__name__, t.matrix[entry_type])
 
                     return entry_type
+
+            # Already looked at every line; another round sees the same data.
+            if len(indices) >= len(buf):
+                break
 
         logging.info("No driver reached quorum after %d rounds; using RawEntry",
                      MAX_SELECT_ROUNDS)
@@ -200,6 +281,13 @@ class LogEntry:
     host = ""
     daemon = ""
     log_entry = ""
+    # The line exactly as it arrived, set by CrunchLog._parse. Parsing is
+    # lossy in every driver, so this is the only faithful copy.
+    raw = ""
+    # 0-based position in the source buffer, set by CrunchLog._parse.
+    # Grouping reorders by definition; this is how a caller gets back to
+    # where a line actually was.
+    line_number = -1
 
     def display(self):
         print("Year: ", self.year, \

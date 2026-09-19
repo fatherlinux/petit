@@ -267,39 +267,59 @@ class SnortLogHash(SuperHash):
 
 class SecureLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Syslog files"""
-    
+
+    # Each rule collapses everything after a phrase sshd is known to emit,
+    # which is what makes a secure log group at all: the variable half is
+    # the user, host or port, and that is precisely what differs line to
+    # line. Applied to the key only — see fill().
+    GENERALIZATIONS = [
+        # Session entries
+        (re.compile("session closed for.*"), "session closed for #"),
+        (re.compile("session opened for.*"), "session opened for #"),
+        # Auth entries
+        (re.compile("Accepted publickey for.*"), "Accepted publickey for #"),
+        (re.compile("Accepted password for.*"), "Accepted password for #"),
+        (re.compile("Postponed publickey for.*"), "Postponed publickey for #"),
+        (re.compile("input_userauth_request: invalid user.*"),
+         "input_userauth_request: invalid user #"),
+        (re.compile("Invalid user.*"), "Invalid user #"),
+        (re.compile("reverse mapping checking getaddrinfo for.*"),
+         "reverse mapping checking getaddrinfo for #"),
+        (re.compile("Connection closed by.*"), "Connection closed by #"),
+        (re.compile("Failed password for invalid user.*"),
+         "Failed password for invalid user #"),
+        (re.compile("Failed password for.*from.*"), "Failed password for # from #"),
+        (re.compile("error retrieving information about user.*"),
+         "error retrieving information about user #"),
+        (re.compile("authentication failure.*"), "authentication failure #"),
+        # Misc
+        (re.compile("Received disconnect from.*"), "Received disconnect from #"),
+        (re.compile("Could not reverse map address.*"), "Could not reverse map address #"),
+    ]
+
+    def generalize(self, payload):
+        """Return `payload` with sshd's variable tails collapsed."""
+        for pattern, replacement in self.GENERALIZATIONS:
+            payload = pattern.sub(replacement, payload)
+        return payload
+
     def fill(self, log):
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
         # Removing numbers and replacing them with a single '#'
         for entry in log:
 
-            # Clean up the log entry better since it is a secure log hash
-
-            ## Session Entries
-            entry.log_entry = re.sub("session closed for.*", "session closed for #", entry.log_entry)
-            entry.log_entry = re.sub("session opened for.*", "session opened for #", entry.log_entry)
-
-            ## Auth Entries
-            entry.log_entry = re.sub("Accepted publickey for.*", "Accepted publickey for #", entry.log_entry)
-            entry.log_entry = re.sub("Accepted password for.*", "Accepted password for #", entry.log_entry)
-            entry.log_entry = re.sub("Postponed publickey for.*", "Postponed publickey for #", entry.log_entry)
-            entry.log_entry = re.sub("input_userauth_request: invalid user.*", "input_userauth_request: invalid user #", entry.log_entry)
-            entry.log_entry = re.sub("Invalid user.*", "Invalid user #", entry.log_entry)
-            entry.log_entry = re.sub("reverse mapping checking getaddrinfo for.*", "reverse mapping checking getaddrinfo for #", entry.log_entry)
-            entry.log_entry = re.sub("Connection closed by.*", "Connection closed by #", entry.log_entry)
-            entry.log_entry = re.sub("Failed password for invalid user.*", "Failed password for invalid user #", entry.log_entry)
-            entry.log_entry = re.sub("Failed password for.*from.*", "Failed password for # from #", entry.log_entry)
-            entry.log_entry = re.sub("error retrieving information about user.*", "error retrieving information about user #", entry.log_entry)
-            entry.log_entry = re.sub("authentication failure.*", "authentication failure #", entry.log_entry)
-
-            ## Misc
-            entry.log_entry = re.sub("Received disconnect from.*", "Received disconnect from #", entry.log_entry)
-            entry.log_entry = re.sub("Could not reverse map address.*", "Could not reverse map address #", entry.log_entry)
-            #entry.log_entry = re.sub("", "", entry.log_entry)
+            # Generalise sshd's vocabulary to build the key. This used to
+            # assign back to entry.log_entry, which mutated the log itself:
+            # after hashing, every sample the caller could reach had been
+            # overwritten with the generalised form, and the actual user
+            # name, source address or failure reason was gone for good.
+            # Fingerprinting is supposed to describe the entry, not consume
+            # it — so generalise into a local and leave the entry alone.
+            payload = self.generalize(entry.log_entry)
 
             # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.daemon+" "+entry.log_entry)
+            key = self.filter.scrub(entry.daemon+" "+payload)
 
             # increment the LogHash with the new key
             self.increment(key, entry)

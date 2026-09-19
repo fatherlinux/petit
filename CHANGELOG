@@ -1,3 +1,36 @@
+* Fri Sep 19 2026 Scott McCarty <scott.mccarty@gmail.com> - 2.2.0
+- Made driver selection deterministic. select() drew its sample lines with
+  random.choice(), so the driver — and therefore the entire result — was a
+  function of the RNG as well as the input. The same bytes could parse two
+  different ways, or succeed on one call and raise on the next. It now samples
+  evenly spaced lines, which is reproducible and, because it always looks at
+  the head and the tail, better evidence than a random draw
+- Fixed select() re-counting votes across rounds. One Tally was reused while
+  the sample list grew, so round three weighed the first ten lines three times
+- A line the selected driver cannot parse no longer aborts the run. The driver
+  is chosen from a sample and then applied to every line, so one stack trace in
+  an application log, or one prose line in mixed tool output, used to raise
+  ParseError and lose the other four hundred lines. It now falls back to
+  RawEntry and reports Analysis.degraded. Pass strict=True for the old behaviour
+- Samples are now the original lines, byte for byte. They were rebuilt from
+  parsed fields, which invented data: formats carrying no timestamp were
+  rendered with a placeholder "01 01 01:01:01 # #" envelope they never had
+- SecureLogHash no longer mutates the log it is fingerprinting. fill() assigned
+  its generalised form back onto each entry, so hashing a secure log destroyed
+  it for every later reader — the user name and source address, the only reason
+  to read a sample, were gone. The rules now build the key from a local copy
+- Added analyze_text(), which returns the groups plus the driver used, whether
+  it degraded, and lines in versus lines grouped, so a caller can account for
+  every line rather than wonder where they went
+- Added a driver= argument to pin an entry class instead of detecting one. A
+  caller that must not have per-format vocabulary applied to its payloads pins
+  RawEntry and gets purely structural grouping. Unknown names raise PetitError
+- Added Group.sample_lines, the 0-based position of each sample in the input.
+  Grouping throws the original order away, so a caller that wants to show
+  samples in written order rather than in group order had no way back
+- hash_text() and detect_format() are unchanged for existing callers, and the
+  petit command line produces byte-identical output on the full test corpus
+
 * Fri Sep 18 2026 Scott McCarty <scott.mccarty@gmail.com> - 2.1.0
 - Added a library API: crunchtools.hash_text() and crunchtools.detect_format()
 - Added CrunchLog.from_text() so callers can analyse a string without a file
