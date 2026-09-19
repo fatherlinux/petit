@@ -26,12 +26,26 @@
 
 * Thu Oct 13 2022 Scott McCarty <scott.mccarty@gmail.com> - 2.0.0
 - Ported to Python 3
+- Cleaned up to PEP 8 and added the Tally class to simplify driver-selection
+  logic (committed 2011-04-16, the day after the 1.1.1 tag, so it waited here)
 - Reorganised the directory structure
 - Fixed Test 12; the suite passes again
 - (recorded retroactively in 2026 — this release shipped without a changelog
   entry at the time)
 
-* Fri Apr 15 2011 Scott McCarty <scott.mccarty@gmail.com>
+- Proposed during this period but NOT merged, so none of it is in the code.
+  Recorded because the history is otherwise invisible; all four were opened by
+  Pablo Iranzo Gomez (iranzo) in Oct 2022 and closed unmerged in Nov 2024:
+-   #12 packaging for PyPI. Published independently as "petitlog" 2.0.0.post3
+-       on 2022-10-17 — https://pypi.org/project/petitlog/ — which is why that
+-       name is taken. It is this project, credited to Scott McCarty, and is
+-       unrelated to the "crunchtools" distribution published in 2026
+-   #14 GitHub Actions to help with release tagging
+-   #15 pre-commit configuration, applied across the code
+-   #17 permission check in CrunchLog.py to avoid a traceback on unreadable
+-       files (closes #16)
+
+* Fri Apr 15 2011 Scott McCarty <scott.mccarty@gmail.com> - 1.1.1
 - Added re.escape to variable based regex
 - Added debugging output for graph
 - Added patch for bug with determining month
@@ -46,14 +60,14 @@
 - Fixed index bug in syslog entry and rsyslog
 - Added better documentation rsyslog
 
-* Tue Nov 09 2010 Scott McCarty <smccarty@eyemg.com>
+* Tue Nov 09 2010 Scott McCarty <smccarty@eyemg.com> - 1.1.0
 - Finished conversion of crunchtoools to module
 - Passes all tests again :-)
 
-* Mon Nov 08 2010 Scott McCarty <smccarty@eyemg.com>
+* Mon Nov 08 2010 Scott McCarty <smccarty@eyemg.com> - 1.0.4
 - Updated version because of problem with rpdb2
 
-* Thu Jun 25 2010 Scott McCarty <smccarty@eyemg.com>
+* Thu Jun 25 2010 Scott McCarty <smccarty@eyemg.com> - 1.0.3
 - Patched to allow mixed precision when Ubuntu 8.04 logs to an Ubuntuo 10.04 server with high precision
 
 * Thu Jun 24 2010 Scott McCarty <smccarty@eyemg.com>
