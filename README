@@ -2,6 +2,45 @@ Download and Information
 ===============================================================================
 http://crunchtools.com/software/petit/
 
+Installation
+===============================================================================
+    pip install crunchtools
+
+Installs the petit command and the crunchtools library. The distribution is
+named crunchtools because the name "petit" on PyPI belongs to an unrelated
+project.
+
+
+Using petit as a library
+===============================================================================
+    from crunchtools import hash_text, detect_format
+
+    for group in hash_text(open("/var/log/messages").read()):
+        print(group.count, group.pattern)
+
+hash_text() groups lines by fingerprint, most frequent first. detect_format()
+reports which driver claims the text; "RawEntry" means no driver recognised it.
+
+Text goes in, data comes out. Nothing here reads a file, writes to stdout, or
+exits the process — failures raise PetitError subclasses (EmptyLogError,
+ParseError, DataFileError) for the caller to handle.
+
+
+Public API and versioning
+===============================================================================
+Petit follows Semantic Versioning. Two things are public and covered by it:
+
+  * the petit command line, its options and its output
+  * the names exported from the crunchtools package: hash_text,
+    detect_format, Group, and the PetitError hierarchy
+
+Everything else is internal. The driver classes in crunchtools.CrunchLog and
+the hash classes in crunchtools.LogHash may change in any release; they are
+where new log formats get added, and pinning them would freeze that. If you
+need something from them, ask for it to be exported rather than importing it
+directly.
+
+
 Why
 ===============================================================================
 Log analysis is something that all systems administrators know they need to do. 

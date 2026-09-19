@@ -1,3 +1,36 @@
+* Fri Sep 18 2026 Scott McCarty <scott.mccarty@gmail.com> - 2.1.0
+- Added a library API: crunchtools.hash_text() and crunchtools.detect_format()
+- Added CrunchLog.from_text() so callers can analyse a string without a file
+- Fixed an infinite loop in select(): a buffer no driver claimed (blank lines,
+  for instance) span forever and grew its sample list on every pass. Bounded to
+  MAX_SELECT_ROUNDS with a fall back to RawEntry
+- Removed all 13 sys.exit() calls from library code; they raise PetitError
+  subclasses now, and only the CLI turns those into an exit status
+- Removed eval() from the driver-detection path; entry_types holds the classes
+  rather than their names. Auto-registration of new drivers is unchanged
+- Fingerprints and stopwords now ship inside the package and resolve through
+  importlib.resources, so a pip install has its data. They were only ever
+  installed to /var/lib/petit by the distro packaging, which meant filtering
+  silently did nothing anywhere else
+- Fixed a missing comma in the fingerprint prefix list that joined two paths
+  into one, so /opt was never actually searched
+- Made 7 regex literals raw (SyntaxWarning today, SyntaxError on a future
+  Python) and escaped a literal [ in a character class
+- Dropped the sys.path and warnings.simplefilter side effects from package
+  import; a library should not mutate global state when it is imported
+- Packaged with pyproject.toml as the "crunchtools" distribution on PyPI, with
+  petit as a console script. The name "petit" on PyPI belongs to an unrelated
+  project
+- The petit command line is unchanged: --hash, --daemon, --host and
+  --wordcount all behave exactly as before
+
+* Thu Oct 13 2022 Scott McCarty <scott.mccarty@gmail.com> - 2.0.0
+- Ported to Python 3
+- Reorganised the directory structure
+- Fixed Test 12; the suite passes again
+- (recorded retroactively in 2026 — this release shipped without a changelog
+  entry at the time)
+
 * Fri Apr 15 2011 Scott McCarty <scott.mccarty@gmail.com>
 - Added re.escape to variable based regex
 - Added debugging output for graph
