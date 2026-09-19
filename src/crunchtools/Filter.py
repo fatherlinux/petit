@@ -18,6 +18,25 @@ class Filter:
 
     stopwords = []
 
+    @classmethod
+    def from_patterns(cls, patterns):
+        """Build a filter from regexes supplied by the caller.
+
+        Normalisation policy belongs to whoever is reading the output. The
+        packaged hash.stopwords is tuned for system logs and is deliberately
+        aggressive — `[a-f]+#` collapses the letters next to a scrubbed
+        number, so "bob0" and "boa0" land in the same group. That is the
+        right trade for spotting a flapping daemon and the wrong one for a
+        caller who needs two distinct names to stay distinct.
+
+        Rather than have such a caller ship a file into a package data
+        directory to be found by name, let it hand over the patterns.
+        """
+        instance = cls.__new__(cls)
+        instance.file = "<patterns>"
+        instance.stopwords = [re.compile(p) for p in patterns]
+        return instance
+
     def __init__(self, file="__none__"):
 
         global logging
