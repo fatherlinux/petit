@@ -19,7 +19,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from . import CrunchLog as _drivers
 from .CrunchLog import CrunchLog
+from .errors import PetitError
 from .LogHash import SuperHash
 
 
@@ -30,12 +32,14 @@ class Group:
     `pattern` is the fingerprint the driver produced — the line with its
     volatile tokens normalised.
 
-    `samples` are members of the group, rendered from the fields the driver
-    parsed. They are NOT guaranteed verbatim: some hash drivers (SecureLogHash
-    is one) rewrite `log_entry` in place while fingerprinting, so a sample can
-    come back already generalised. What a sample reliably preserves is the
-    envelope — timestamp, host, daemon — which is usually the part you wanted
-    a sample for.
+    `samples` are members of the group **exactly as they appeared in the
+    input**, newline stripped. They used to be rebuilt from the parsed
+    fields, which made them neither verbatim nor honest: SecureLogHash
+    overwrote the payload while fingerprinting, so the user name or source
+    address was already gone, and formats that carry no timestamp had one
+    invented for them — raw text came back wearing a fabricated
+    `01 01 01:01:01 # #` envelope it never had. A sample exists to show
+    what was really in the log, so it is now the original line.
     """
 
     pattern: str
@@ -43,60 +47,91 @@ class Group:
     samples: list[str] = field(default_factory=list)
 
 
-def _render(entry) -> str:
-    """Rebuild a readable line from a parsed entry.
+@dataclass(frozen=True)
+class Analysis:
+    """Groups plus what petit had to do to produce them.
 
-    LogEntry has no __str__, so the alternative is an object repr, which is
-    useless to a caller and worse than useless in a log.
+    `driver` names the entry class that parsed the text. `degraded` is True
+    when detection picked a driver that then met a line it could not parse
+    and RawEntry was used for the whole buffer instead — the grouping is
+    still valid, but it is structural rather than format-aware.
+
+    `lines_in` counts input lines; `lines_grouped` counts those that ended
+    up in a group. They differ when entries scrub away to nothing (blank
+    lines, `-- MARK --`), which petit drops. The two numbers are here so a
+    caller can account for every line rather than wonder where they went.
     """
-    parts = []
-    for attr in ("month", "day"):
-        value = getattr(entry, attr, None)
-        if value:
-            parts.append(str(value))
-    clock = ":".join(
-        str(getattr(entry, a))
-        for a in ("hour", "minute", "second")
-        if getattr(entry, a, None)
-    )
-    if clock:
-        parts.append(clock)
-    for attr in ("host", "daemon"):
-        value = getattr(entry, attr, None)
-        if value and not isinstance(value, list):
-            parts.append(str(value))
+
+    groups: list[Group]
+    driver: str
+    degraded: bool
+    lines_in: int
+    lines_grouped: int
+
+
+def _render(entry) -> str:
+    """The entry's original line.
+
+    Falls back to the parsed payload only for entries built by something
+    other than CrunchLog._parse, which is the one place `raw` is set.
+    """
+    raw = getattr(entry, "raw", "")
+    if raw:
+        return raw
     payload = getattr(entry, "log_entry", None)
-    if payload:
-        parts.append(str(payload))
-    return " ".join(parts) if parts else repr(entry)
+    return str(payload) if payload else repr(entry)
 
 
-def hash_text(
+def _resolve_driver(name):
+    """Map a driver name to its entry class, for callers that pin one."""
+    if name is None:
+        return None
+    driver = getattr(_drivers, name, None)
+    if driver is None or not isinstance(driver, type) \
+            or not issubclass(driver, _drivers.LogEntry):
+        raise PetitError("unknown driver: " + str(name))
+    return driver
+
+
+def analyze_text(
     text: str,
     *,
     filter_name: str = "hash.stopwords",
     max_samples: int = 3,
     source_name: str = "<text>",
-) -> list[Group]:
-    """Group `text` by line fingerprint, most frequent first.
+    driver: str | None = None,
+    strict: bool = False,
+) -> Analysis:
+    """Group `text` by line fingerprint and report how it was done.
+
+    Deterministic: the same text yields the same analysis every time.
 
     Args:
         text: The log or payload to analyse.
         filter_name: Stopword file to apply, resolved from packaged data.
-            Pass "__none__" for no filtering.
+            Pass "__none__" for no filtering at all.
         max_samples: Real lines to retain per group.
         source_name: Label used in errors and logging.
-
-    Returns:
-        Groups sorted by descending count. An empty list only when `text`
-        held nothing usable.
+        driver: Pin an entry class by name (e.g. "RawEntry") instead of
+            detecting one. A caller that needs grouping to be purely
+            structural — no per-format vocabulary applied to its payloads —
+            pins RawEntry and gets exactly that.
+        strict: Raise ParseError when the driver meets a line it cannot
+            parse, instead of falling back to RawEntry.
 
     Raises:
         EmptyLogError: `text` contained no data.
-        ParseError: the selected driver could not parse a line.
+        ParseError: only when `strict`, or when `driver` was pinned and
+            could not parse the text.
         DataFileError: `filter_name` was given but could not be read.
+        PetitError: `driver` is not a known entry class.
     """
-    log = CrunchLog.from_text(text, source_name=source_name)
+    log = CrunchLog.from_text(
+        text,
+        source_name=source_name,
+        driver=_resolve_driver(driver),
+        strict=strict,
+    )
     hashed = SuperHash.manufacture(log, filter_name)
 
     groups = [
@@ -108,7 +143,42 @@ def hash_text(
         for key, value in hashed.items()
     ]
     groups.sort(key=lambda g: (-g.count, g.pattern))
-    return groups
+
+    return Analysis(
+        groups=groups,
+        driver=log.payload_type,
+        degraded=log.degraded,
+        lines_in=len(log),
+        lines_grouped=sum(g.count for g in groups),
+    )
+
+
+def hash_text(
+    text: str,
+    *,
+    filter_name: str = "hash.stopwords",
+    max_samples: int = 3,
+    source_name: str = "<text>",
+    driver: str | None = None,
+    strict: bool = False,
+) -> list[Group]:
+    """Group `text` by line fingerprint, most frequent first.
+
+    The groups half of `analyze_text`, for callers that do not need to know
+    which driver was used or whether it degraded. Arguments are identical.
+
+    Returns:
+        Groups sorted by descending count. An empty list only when `text`
+        held nothing that survived scrubbing.
+    """
+    return analyze_text(
+        text,
+        filter_name=filter_name,
+        max_samples=max_samples,
+        source_name=source_name,
+        driver=driver,
+        strict=strict,
+    ).groups
 
 
 def detect_format(text: str, source_name: str = "<text>") -> str:
