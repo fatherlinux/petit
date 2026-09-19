@@ -21,6 +21,10 @@
 - Packaged with pyproject.toml as the "crunchtools" distribution on PyPI, with
   petit as a console script. The name "petit" on PyPI belongs to an unrelated
   project
+- Fixed #16: an unreadable or missing file escaped as a PermissionError
+  traceback. It now raises DataFileError, which the CLI reports as
+  "petit: cannot read <path>: Permission denied" and exits 1. Reported by
+  Pablo Iranzo Gomez in 2022
 - The petit command line is unchanged: --hash, --daemon, --host and
   --wordcount all behave exactly as before
 

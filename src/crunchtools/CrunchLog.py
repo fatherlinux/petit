@@ -10,7 +10,7 @@ from collections import UserList
 import re
 import sys
 import logging
-from .errors import EmptyLogError, ParseError
+from .errors import DataFileError, EmptyLogError, ParseError
 from random import choice
 import datetime
 import time
@@ -70,8 +70,16 @@ class CrunchLog(UserList):
             buf = sys.stdin.readlines()
         else:
             logging.debug("Opening File: %s", filename)
-            with open(filename) as handle:
-                buf = handle.readlines()
+            # A missing or unreadable file is an ordinary operator mistake, not
+            # a bug, and it should read like one. Left bare it escapes as a
+            # PermissionError traceback (reported as issue #16).
+            try:
+                with open(filename) as handle:
+                    buf = handle.readlines()
+            except OSError as exc:
+                raise DataFileError(
+                    "cannot read %s: %s" % (filename, exc.strerror or exc)
+                ) from exc
 
         self._build(buf, filename)
 

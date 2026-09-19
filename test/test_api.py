@@ -95,3 +95,33 @@ class TestPackagedData:
         concatenated into one and /opt was never actually searched."""
         prefixes = resources.search_prefixes("fingerprints")
         assert "/opt/petit/var/lib/fingerprints/" in prefixes
+
+
+class TestFileErrors:
+    """Issue #16: an unreadable or missing file used to escape as a raw
+    traceback. Reported by Pablo Iranzo Gomez in 2022; PR #17 proposed an
+    os.access() check and was closed unmerged, so it stayed broken."""
+
+    def test_unreadable_file_raises_cleanly(self, tmp_path):
+        import os
+
+        from crunchtools.CrunchLog import CrunchLog
+        from crunchtools import DataFileError
+
+        target = tmp_path / "noperm.log"
+        target.write_text("Aug 18 10:00:00 host sshd[1]: test\n")
+        os.chmod(target, 0o000)
+        try:
+            if os.access(target, os.R_OK):  # running as root; nothing to test
+                pytest.skip("cannot make a file unreadable as this user")
+            with pytest.raises(DataFileError):
+                CrunchLog(str(target))
+        finally:
+            os.chmod(target, 0o644)
+
+    def test_missing_file_raises_cleanly(self, tmp_path):
+        from crunchtools.CrunchLog import CrunchLog
+        from crunchtools import DataFileError
+
+        with pytest.raises(DataFileError):
+            CrunchLog(str(tmp_path / "does-not-exist.log"))
