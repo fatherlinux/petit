@@ -31,6 +31,10 @@
   and its `[a-f]+#` rule collapses letters next to a scrubbed number, so "bob0"
   and "boa0" group together. Right for spotting a flapping daemon, wrong for a
   caller that needs two distinct values to stay distinct
+- stopwords= entries may be (regex, replacement) pairs as well as bare regexes,
+  so a fingerprint can say what it normalised away: "<TS> host sshd[<N>]: login
+  from <IP>" rather than "# host sshd[#]: login from #". Patterns loaded from a
+  file keep the "#" scrub character petit has always used
 - Added Group.sample_lines, the 0-based position of each sample in the input.
   Grouping throws the original order away, so a caller that wants to show
   samples in written order rather than in group order had no way back

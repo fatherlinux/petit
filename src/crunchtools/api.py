@@ -107,7 +107,7 @@ def analyze_text(
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
-    stopwords: list[str] | None = None,
+    stopwords: list | None = None,
 ) -> Analysis:
     """Group `text` by line fingerprint and report how it was done.
 
@@ -124,6 +124,9 @@ def analyze_text(
             `[a-f]+#` collapses letters adjacent to a scrubbed number, so
             "bob0" and "boa0" group together. A caller that needs two
             distinct values to stay distinct supplies its own list.
+            Each entry is a regex, replaced with "#", or a
+            (regex, replacement) pair when the fingerprint should say what
+            was normalised away — "<TS>" and "<IP>" rather than "#".
         max_samples: Real lines to retain per group.
         source_name: Label used in errors and logging.
         driver: Pin an entry class by name (e.g. "RawEntry") instead of
@@ -181,7 +184,7 @@ def hash_text(
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
-    stopwords: list[str] | None = None,
+    stopwords: list | None = None,
 ) -> list[Group]:
     """Group `text` by line fingerprint, most frequent first.
 

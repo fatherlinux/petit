@@ -31,10 +31,20 @@ class Filter:
 
         Rather than have such a caller ship a file into a package data
         directory to be found by name, let it hand over the patterns.
+
+        Each entry is either a regex, which is replaced with "#" as a file
+        would be, or a (regex, replacement) pair. Distinct replacements keep
+        a fingerprint legible: "<TS> host sshd[<N>]: login from <IP>" says
+        what was normalised away, where "# host sshd[#]: login from #" only
+        says that something was.
         """
         instance = cls.__new__(cls)
         instance.file = "<patterns>"
-        instance.stopwords = [re.compile(p) for p in patterns]
+        instance.stopwords = [
+            (re.compile(p), "#") if isinstance(p, str)
+            else (re.compile(p[0]), p[1])
+            for p in patterns
+        ]
         return instance
 
     def __init__(self, file="__none__"):
@@ -58,7 +68,10 @@ class Filter:
 
                         # Read entire contents into array for speed
                         # Save them as compiled regexes for speed
-                        self.stopwords.append(re.compile(line.rstrip()))
+                        # Patterns from a file have no replacement of
+                        # their own; "#" is the scrub character petit has
+                        # always used.
+                        self.stopwords.append((re.compile(line.rstrip()), "#"))
                     break
 
                 except OSError as exc:
@@ -74,11 +87,11 @@ class Filter:
         global logging
 
         # Check each stopword against each key
-        for stopword in self.stopwords:
+        for stopword, replacement in self.stopwords:
 
-            # Replace mathces with hash signs
+            # Replace matches with this pattern's replacement
             old_string = string
-            string = re.sub(stopword, "#", string)
+            string = stopword.sub(replacement, string)
             logging.debug(" SCRUBBING "+old_string+" OF "+stopword.pattern+" BECOMES "+string)
 
         return string

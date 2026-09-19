@@ -334,3 +334,40 @@ class TestCallerSuppliedStopwords:
         for group in hash_text(self.NAMES, driver="RawEntry", stopwords=[r"[0-9]+"]):
             for number, sample in zip(group.sample_lines, group.samples):
                 assert lines[number] == sample
+
+
+class TestPatternReplacements:
+    """A fingerprint that says what it normalised away is worth more than
+    one that only says something was there."""
+
+    TEXT = "\n".join(
+        "2026-09-19T04:00:%02d host sshd[%d]: login from 10.0.0.%d" % (i, i, i)
+        for i in range(30)
+    )
+    RULES = [
+        (r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}", "<TS>"),
+        (r"\b(?:\d{1,3}\.){3}\d{1,3}\b", "<IP>"),
+        (r"\d+", "<N>"),
+    ]
+
+    def test_replacements_appear_in_the_pattern(self):
+        groups = hash_text(self.TEXT, driver="RawEntry", stopwords=self.RULES)
+        assert len(groups) == 1
+        assert groups[0].pattern == "<TS> host sshd[<N>]: login from <IP>"
+
+    def test_bare_regexes_still_scrub_to_hash(self):
+        groups = hash_text(self.TEXT, driver="RawEntry", stopwords=[r"\d+"])
+        assert groups[0].pattern == "#-#-#T#:#:# host sshd[#]: login from #.#.#.#"
+
+    def test_bare_and_paired_rules_can_be_mixed(self):
+        groups = hash_text(
+            self.TEXT, driver="RawEntry",
+            stopwords=[(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", "<IP>"), r"\d+"],
+        )
+        assert groups[0].pattern == "#-#-#T#:#:# host sshd[#]: login from <IP>"
+
+    def test_rule_order_is_preserved(self):
+        """Specific before generic, or an ISO timestamp becomes six <N>s."""
+        reversed_rules = list(reversed(self.RULES))
+        groups = hash_text(self.TEXT, driver="RawEntry", stopwords=reversed_rules)
+        assert "<TS>" not in groups[0].pattern
