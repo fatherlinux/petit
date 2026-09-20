@@ -16,44 +16,50 @@ as logwatch or swatch cannot do.
 #
 # Copyright (C) 2009 Scott McCarty
 #
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 3
-# of the License, or (at your option) any later version.
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at
+# your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero
+# General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc.
-# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 ###############################################################################
-from optparse import OptionParser
-from optparse import Values
+
+from __future__ import annotations
+
+import argparse
+import logging
 import signal
 import sys
-import logging
-from petit.errors import PetitError
+from collections.abc import Callable
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as pkg_version
+from types import FrameType
+
 from petit.CrunchLog import CrunchLog
-from petit.LogHash import SuperHash
-from petit.LogHash import DaemonHash
-from petit.LogHash import HostHash
-from petit.LogHash import WordHash
-from petit.LogGraph import SecondsGraph
-from petit.LogGraph import MinutesGraph
-from petit.LogGraph import HoursGraph
-from petit.LogGraph import DaysGraph
-from petit.LogGraph import MonthsGraph
-from petit.LogGraph import YearsGraph
+from petit.errors import PetitError
+from petit.LogGraph import (
+    DaysGraph,
+    HoursGraph,
+    MinutesGraph,
+    MonthsGraph,
+    SecondsGraph,
+    YearsGraph,
+)
+from petit.LogHash import DaemonHash, HostHash, SuperHash, WordHash
+
+AnyGraph = SecondsGraph | MinutesGraph | HoursGraph | DaysGraph | MonthsGraph | YearsGraph
 
 # Process Signals
 
 
-def sigint_handler(signal, frame):
+def sigint_handler(_signum: int, _frame: FrameType | None) -> None:
     sys.exit(0)
 
 
@@ -64,392 +70,252 @@ signal.signal(signal.SIGINT, sigint_handler)
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
-# Use global namespace for flags and filename
-options = Values
-filename = ""
-
-
-def add_options(parser):
+def build_parser() -> argparse.ArgumentParser:
     """Adds all options in one concise function"""
 
+    parser = argparse.ArgumentParser(usage="%(prog)s [options] [file]")
+
     # Handle flags
-    parser.add_option("-v", "--verbose",
-                    dest="verbose",
-                    action="count",
-                    help="Show verbose output")
+    parser.add_argument("-v", "--verbose",
+                         dest="verbose",
+                         action="count",
+                         help="Show verbose output")
 
-    parser.add_option("--sample", dest="sample",
-                    action="store_const",
-                    const="threshold",
-                    default="threshold",
-                    help="Show sample output for small numbered entries")
+    parser.add_argument("--sample", dest="sample",
+                         action="store_const",
+                         const="threshold",
+                         default="threshold",
+                         help="Show sample output for small numbered entries")
 
-    parser.add_option("--nosample",
-                    dest="sample",
-                    action="store_const",
-                    const="none",
-                    help="Do not sample output for low count entries")
+    parser.add_argument("--nosample",
+                         dest="sample",
+                         action="store_const",
+                         const="none",
+                         help="Do not sample output for low count entries")
 
-    parser.add_option("--allsample", dest="sample",
-                    action="store_const",
-                    const="all",
-                    help="Show samples instead of munged text for all entries")
+    parser.add_argument("--allsample", dest="sample",
+                         action="store_const",
+                         const="all",
+                         help="Show samples instead of munged text for all entries")
 
-    parser.add_option("--filter",
-                    dest="filter",
-                    action="store_true",
-                    default=None, help="Use filter files during processing")
+    parser.add_argument("--filter",
+                         dest="filter",
+                         action="store_true",
+                         default=None, help="Use filter files during processing")
 
-    parser.add_option("--nofilter",
-                    dest="filter",
-                    action="store_false",
-                    help="Do not use filter files during processing")
+    parser.add_argument("--nofilter",
+                         dest="filter",
+                         action="store_false",
+                         help="Do not use filter files during processing")
 
-    parser.add_option("--wide",
-                    dest="wide",
-                    action="store_true",
-                    default=False,
-                    help="Use wider graph characters")
+    parser.add_argument("--wide",
+                         dest="wide",
+                         action="store_true",
+                         default=False,
+                         help="Use wider graph characters")
 
-    parser.add_option("--tick=",
-                    dest="tick",
-                    action="store",
-                    type="string",
-                    default="#",
-                    help="Change tick character from default")
+    parser.add_argument("--tick",
+                         dest="tick",
+                         default="#",
+                         help="Change tick character from default")
 
-    parser.add_option("--fingerprint",
-                    dest="fingerprint",
-                    action="store_true",
-                    default=False,
-                    help="Use fingerprinting to remove certain patterns")
+    parser.add_argument("--fingerprint",
+                         dest="fingerprint",
+                         action="store_true",
+                         default=False,
+                         help="Use fingerprinting to remove certain patterns")
 
     # Handle modes
-    parser.add_option("-V", "--version",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_version",
-                    default="mode_version",
-                    help="Show verbose output")
+    parser.add_argument("-V", "--version",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_version",
+                         help="Show verbose output")
 
-    parser.add_option("--hash",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_hash",
-                    help="Show hashes of log files with numbers removed")
+    parser.add_argument("--hash",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_hash",
+                         help="Show hashes of log files with numbers removed")
 
-    parser.add_option("--wordcount",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_wordcount",
-                    help="Show word count for given word")
+    parser.add_argument("--wordcount",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_wordcount",
+                         help="Show word count for given word")
 
-    parser.add_option("--daemon",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_daemon",
-                    help="show a report of entries from each daemon")
+    parser.add_argument("--daemon",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_daemon",
+                         help="show a report of entries from each daemon")
 
-    parser.add_option("--host",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_host",
-                    help="show a report of entries from each host")
+    parser.add_argument("--host",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_host",
+                         help="show a report of entries from each host")
 
-    parser.add_option("--sgraph",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_sgraph",
-                    help="show graph of first 60 seconds")
+    parser.add_argument("--sgraph",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_sgraph",
+                         help="show graph of first 60 seconds")
 
-    parser.add_option("--mgraph",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_mgraph",
-                    help="show graph of first 60 minutes")
+    parser.add_argument("--mgraph",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_mgraph",
+                         help="show graph of first 60 minutes")
 
-    parser.add_option("--hgraph",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_hgraph",
-                    help="show graph of first 24 hours")
+    parser.add_argument("--hgraph",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_hgraph",
+                         help="show graph of first 24 hours")
 
-    parser.add_option("--dgraph",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_dgraph",
-                    help="show graph of first 31 days")
+    parser.add_argument("--dgraph",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_dgraph",
+                         help="show graph of first 31 days")
 
-    parser.add_option("--mograph",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_mograph",
-                    help="show graph of first 12 months")
+    parser.add_argument("--mograph",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_mograph",
+                         help="show graph of first 12 months")
 
-    parser.add_option("--ygraph",
-                    dest="mode",
-                    action="store_const",
-                    const="mode_ygraph",
-                    help="show graph of first 10 years")
+    parser.add_argument("--ygraph",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_ygraph",
+                         help="show graph of first 10 years")
+
+    # -V/--version is the default when no mode flag is given at all, exactly
+    # as running plain `petit` always has.
+    parser.set_defaults(mode="mode_version")
+
+    parser.add_argument("file", nargs="?", default=None)
 
     return parser
 
 
-def get_options():
-    """Captures command line args and perform initializations"""
-
-    # Use global namespace for flags
-    global options
-    global filename
-
-    # Declarations & Variables
-    usage = "usage: %prog [options] [file]"
-    parser = OptionParser(usage)
-    parser = add_options(parser)
-
-    # parse options/args
-    (options, args) = parser.parse_args()
-
-    # Pull off file name
-    if len(args) > 1:
-        parser.error("Specify only one file")
-    elif len(args) == 1:
-        filename = args[0]
-    else:
-        filename = "__none__"
-
-    # Set Verbosity
-    log_level = logging.WARNING
-    if options.verbose == 1:
-        log_level = logging.INFO
-    elif options.verbose == 2:
-        log_level = logging.DEBUG
-
-    # Set up basic configuration
-    logging.basicConfig(level=log_level)
-
-
-    # Determine mode
-    eval(options.mode + "()")
-
-
-def mode_version():
+def mode_version(_args: argparse.Namespace, _filename: str) -> None:
     """Version information"""
-    print("Version: 2.0.0")
-    sys.exit(0)
+    try:
+        current_version = pkg_version("petit-log")
+    except PackageNotFoundError:
+        current_version = "unknown"
+    print("Version: " + current_version)
 
 
-def mode_hash():
+def mode_hash(args: argparse.Namespace, filename: str) -> None:
     """Runs in hashing mode"""
 
     # Get entire log file into ram for speed
     log = CrunchLog(filename)
 
     # Build the Hash
-    if options.filter == None or options.filter == True:
+    if args.filter is None or args.filter is True:
         x = SuperHash.manufacture(log, "hash.stopwords")
     else:
         x = SuperHash.manufacture(log, "__none__")
 
-    if options.fingerprint:
+    if args.fingerprint:
         x.fingerprint()
 
     # Set sampling type
-    x.sample = options.sample
+    x.sample = args.sample
 
     # Print out the dictionary first sorted by the word with
     # the most entries with an alphabetical subsort
     x.display()
 
 
-    sys.exit(0)
+def _run_report_mode(
+    hash_cls: type[WordHash | DaemonHash | HostHash], stopwords: str, filename: str,
+) -> None:
+    """Build one of the fixed-stopword-file reports and display it.
+
+    --wordcount, --daemon and --host differ only in which SuperHash subclass
+    and packaged stopword file they use.
+    """
+    log = CrunchLog(filename)
+    x = hash_cls(log, stopwords)
+    x.display()
 
 
-def mode_wordcount():
+def mode_wordcount(_args: argparse.Namespace, filename: str) -> None:
     """Runs wordcount mode"""
-
-    # Setup default behavior
-    if options.sample == None:
-        options.sample = False
-    if options.filter == None:
-        options.filter = True
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new word hash based on log file and filter created
-    x = WordHash(log, "words.stopwords")
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
+    _run_report_mode(WordHash, "words.stopwords", filename)
 
 
-def mode_daemon():
+def mode_daemon(_args: argparse.Namespace, filename: str) -> None:
     """Runs daemon report mode"""
-
-    # Setup default behavior
-    if options.sample == None:
-        options.sample = False
-    if options.filter == None:
-        options.filter = True
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = DaemonHash(log, "daemon.stopwords")
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
+    _run_report_mode(DaemonHash, "daemon.stopwords", filename)
 
 
-def mode_host():
+def mode_host(_args: argparse.Namespace, filename: str) -> None:
     """Runs host report mode"""
+    _run_report_mode(HostHash, "host.stopwords", filename)
 
-    # Setup default behavior
-    if options.sample == None:
-        options.sample = False
-    if options.filter == None:
-        options.filter = True
 
-    # Get input
+def _run_graph_mode(
+    graph_cls: type[AnyGraph],
+    args: argparse.Namespace,
+    filename: str,
+) -> None:
+    """Build, configure and display one of the time-window graphs.
+
+    Every --?graph mode differs only in which GraphHash subclass it builds;
+    tick/wide/display are identical, so they share this one implementation.
+    """
     log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = HostHash(log, "host.stopwords")
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
+    x = graph_cls(log)
+    x.tick = args.tick
+    x.wide = args.wide
     x.display()
-    sys.exit(0)
 
 
-def mode_sgraph():
-    """Runs seconds graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = SecondsGraph(log)
-
-    # Set tick & width options
-    x.tick = options.tick
-    x.wide = options.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
+MODE_HANDLERS: dict[str, Callable[[argparse.Namespace, str], None]] = {
+    "mode_version": mode_version,
+    "mode_hash": mode_hash,
+    "mode_wordcount": mode_wordcount,
+    "mode_daemon": mode_daemon,
+    "mode_host": mode_host,
+    "mode_sgraph": lambda args, filename: _run_graph_mode(SecondsGraph, args, filename),
+    "mode_mgraph": lambda args, filename: _run_graph_mode(MinutesGraph, args, filename),
+    "mode_hgraph": lambda args, filename: _run_graph_mode(HoursGraph, args, filename),
+    "mode_dgraph": lambda args, filename: _run_graph_mode(DaysGraph, args, filename),
+    "mode_mograph": lambda args, filename: _run_graph_mode(MonthsGraph, args, filename),
+    "mode_ygraph": lambda args, filename: _run_graph_mode(YearsGraph, args, filename),
+}
 
 
-def mode_mgraph():
-    """Runs minutes graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = MinutesGraph(log)
-
-    # Set tick & width options
-    x.tick = options.tick
-    x.wide = options.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
-
-
-def mode_hgraph():
-    """Runs hours graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = HoursGraph(log)
-
-    # Set tick & width options
-    x.tick = options.tick
-    x.wide = options.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
-
-
-def mode_dgraph():
-    """Runs days graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = DaysGraph(log)
-
-    # Set tick & width options
-    x.tick = options.tick
-    x.wide = options.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
-
-
-def mode_mograph():
-    """Runs months graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = MonthsGraph(log)
-
-    # Set tick & width options
-    x.tick = options.tick
-    x.wide = options.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
-
-
-def mode_ygraph():
-    """Runs years graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = YearsGraph(log)
-
-    # Set tick & width options
-    x.tick = options.tick
-    x.wide = options.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-    sys.exit(0)
-
-
-def main():
+def main() -> int:
     """Console-script entry point.
 
     This is the boundary where a PetitError becomes an exit status. The
     library itself never exits — see petit.errors.
     """
+    parser = build_parser()
+    args = parser.parse_args()
+
+    filename = args.file if args.file is not None else "__none__"
+
+    # Set Verbosity
+    log_level = logging.WARNING
+    if args.verbose == 1:
+        log_level = logging.INFO
+    elif args.verbose == 2:
+        log_level = logging.DEBUG
+
+    # Set up basic configuration
+    logging.basicConfig(level=log_level)
+
     try:
-        get_options()
+        MODE_HANDLERS[args.mode](args, filename)
     except PetitError as exc:
         print("petit: " + str(exc), file=sys.stderr)
         return 1

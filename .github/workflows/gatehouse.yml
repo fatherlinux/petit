@@ -1,0 +1,65 @@
+# Fork-safe code review + workflow protection, in ONE file, per
+# crunchtools/constitution Section XII.
+#
+# Nothing is ever checked out from the PR. The fork's change is only ever
+# read as a diff (data); the reviewer logic lives in the pinned gatehouse
+# container; the rules (the repo's styleguide/constitution) are fetched from
+# the base branch, not the PR. The one thing not trusted -- the proposed
+# change -- is only ever read.
+#
+# Two jobs with DIFFERENT authority:
+#   * guard  -- a real blocking gate. Marked a REQUIRED status check so a PR
+#               that tampers with workflow files is rejected.
+#   * review -- ADVISORY. It posts findings as PR comments and always
+#               passes; it is NOT marked required. An LLM reviewer is
+#               non-deterministic, so it must never hold merge authority.
+
+name: Gatehouse
+
+on:
+  pull_request_target:
+    branches: [master]
+    types: [opened, synchronize, reopened]
+
+permissions: {}   # default-deny; each job grants only what it needs
+
+jobs:
+  # 1) Reject PRs from outside contributors that modify workflow files.
+  guard:
+    name: Protect workflows
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Reject workflow changes from untrusted PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          set -euo pipefail
+          # Gate on where the branch lives, not on the author's role -- a
+          # branch pushed into this repo already required write access.
+          if [ "$HEAD_REPO" = "$GITHUB_REPOSITORY" ]; then
+            echo "Head branch is in $GITHUB_REPOSITORY; allowing."; exit 0
+          fi
+          changed="$(gh pr diff "$PR" --repo "$GITHUB_REPOSITORY" --name-only)"
+          if echo "$changed" | grep -qE '^\.github/workflows/'; then
+            echo "::error::PR modifies .github/workflows/ — not accepted from external contributors."
+            gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body \
+              $'🚫 **Workflow changes are not accepted via pull request.** Please open an issue and a maintainer will make the change.'
+            exit 1
+          fi
+          echo "No workflow files changed."
+
+  # 2) Review the PR diff (no checkout, BYO key) via the reusable workflow.
+  #    Advisory by construction: this job MUST NOT be a required status check.
+  review:
+    name: Gatehouse review
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: crunchtools/gatehouse/.github/workflows/review.yml@v0.2.0
+    secrets:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

@@ -1,0 +1,146 @@
+# Documented exceptions to Gourmand findings, with justification.
+# See constitution.md Section XII / profiles/cli-tool.md Section VI.
+
+[[exceptions]]
+check = "EV002-manifest_lint_suppression"
+path = "pyproject.toml"
+classification = "by_design"
+justification = "Every entry in ruff's ignore and per-file-ignores carries an inline comment naming why (breaking-change scope for N999/module renames, naive-local-time domain for DTZ001/005/011, complexity of an already fixture-tested rendering routine for LogGraph.py, etc). These are deliberate, documented configuration, not suppressions parked to be cleaned up later."
+
+[[exceptions]]
+check = "CH001-absolute_paths"
+path = "src/petit/resources.py"
+classification = "by_design"
+justification = "LEGACY_PREFIXES are intentional backward-compatibility search paths for existing system installs that predate packaged data (see the module's own docstring: old prefixes are still searched, last, so an install with locally added fingerprints keeps working). They are not hardcoded deployment paths this code depends on -- they are a documented fallback."
+
+[[exceptions]]
+check = "CH001-absolute_paths"
+path = "src/petit/api.py"
+classification = "by_design"
+justification = "The syslog path appears once, in a module docstring usage example, illustrating the conventional log location -- not a path the code reads."
+
+[[exceptions]]
+check = "EV004-redundant_error_handling"
+path = "src/petit/resources.py"
+classification = "by_design"
+justification = "data_dir()'s except is not empty in effect: it lets execution fall through to `return None`, which is the recovery for 'this package has no data directory' (running from source, a zipapp, or some other layout without importlib.resources support). ModuleNotFoundError/AttributeError/TypeError are the specific exceptions that mean the resource genuinely isn't there, not a caught-and-ignored bug."
+
+[[exceptions]]
+check = "EV004-redundant_error_handling"
+path = "test/test_api.py"
+classification = "by_design"
+justification = "test_hostile_input_does_not_escape_as_systemexit's `except Exception: pass` is the test's whole point: hostile input is allowed to raise any ordinary exception, and the test only fails if it raises SystemExit instead (caught separately, one line above, and turned into pytest.fail). This is a regression guard against the library taking the caller's process down, not sloppy error handling."
+
+[[exceptions]]
+check = "CQ003-deferred_work"
+path = "src/petit/CrunchLog.py"
+classification = "by_design"
+justification = "'substituting placeholder dates for formats that carry none' in _parse's docstring describes what SyslogEntry/SnortEntry/etc actually do at runtime (stamp 1900-01-01 when a format has no date) -- domain vocabulary describing existing, finished behavior, not a promise of unfinished work."
+
+[[exceptions]]
+check = "CH007-print_alongside_logger"
+path = "src/petit/CrunchLog.py"
+classification = "by_design"
+justification = "print() is petit's designed stdout output channel (the tool's actual result -- LogEntry.display() and the CLI's report/graph output); logging is the separate, opt-in diagnostic channel enabled by -v/-vv, per the CLI Tool profile's Output Conventions (default output is human-readable terminal text; verbose mode shows diagnostic info). The two are intentionally different channels, not a debug print left behind."
+
+[[exceptions]]
+check = "CH007-print_alongside_logger"
+path = "src/petit/LogGraph.py"
+classification = "by_design"
+justification = "Same as CrunchLog.py: GraphHash.display() prints the graph itself -- petit's actual output -- while logging.debug() carries opt-in diagnostics."
+
+[[exceptions]]
+check = "CH007-print_alongside_logger"
+path = "src/petit/LogHash.py"
+classification = "by_design"
+justification = "Same as CrunchLog.py: SuperHash.display() prints the hash report itself -- petit's actual output -- while logging.info() carries opt-in diagnostics from fingerprint()."
+
+[[exceptions]]
+check = "CH007-print_alongside_logger"
+path = "src/petit/cli.py"
+classification = "by_design"
+justification = "mode_version()'s print() is the --version output itself, and main()'s error path writes to stderr on a PetitError -- both are the CLI's designed output, not debug prints alongside the (separate, opt-in) logging channel."
+
+[[exceptions]]
+check = "CH013-prefer_match"
+path = "src/petit/LogHash.py"
+classification = "by_design"
+justification = "SuperHash.manufacture()'s branches dispatch on log.contains(SomeEntry) method calls, not on structural patterns of one subject. Python match has no equivalent to a chain of independent boolean-returning calls without a guard clause per case, which would be less readable than the current elif chain (same reasoning as crunchtools/gatehouse's own CH013 exception for diffview.py)."
+
+[[exceptions]]
+check = "SE001-security_practices"
+path = "src/petit/LogGraph.py"
+classification = "by_design"
+justification = "GraphHash.display()'s getattr(self.start_date, self.unit) reads self.unit, which is set once per GraphHash subclass's own __init__ to a fixed literal ('second'/'minute'/'hour'/'day'/'month'/'year') -- never derived from a file, argument, or any other external input. There is no attacker-controlled path to this attribute name."
+
+[[exceptions]]
+check = "DC008-vestigial_code"
+path = "src/petit/CrunchLog.py"
+classification = "by_design"
+justification = "LogEntry.__init__ and LogEntry.is_type are deliberate interface stubs: LogEntry's own docstring calls it an 'Interface class which specifies generic log format for consumption by other classes', and every concrete driver (SyslogEntry, RSyslogEntry, ApacheAccessEntry, etc.) overrides both. The stubs exist so mypy --strict can type-check `entry_type(line)` and `entry_type.is_type(line)` where entry_type: type[LogEntry] is resolved dynamically."
+
+[[exceptions]]
+check = "CQ002-dead_code_markers"
+path = "src/petit/CrunchLog.py"
+classification = "by_design"
+justification = "LogEntry.tally_logic and SecureLogEntry.tally_logic are both called uniformly as tally_logic(m, th, msl) from Tally.is_type, but each implementation only needs 2 of the 3 shared positional parameters (the base ignores max_sample_lines; SecureLogEntry's override ignores tally_threshold). This is a shared 3-parameter interface where different implementations use different subsets, not a parameter that became dead through refactoring."
+
+[[exceptions]]
+check = "CQ002-dead_code_markers"
+path = "src/petit/cli.py"
+classification = "by_design"
+justification = "sigint_handler's (_signum, _frame) match signal.signal()'s required callback signature. mode_version/mode_wordcount/mode_daemon/mode_host's _args matches the (args, filename) -> None signature every entry in MODE_HANDLERS must share, even though not every mode reads both parameters -- the same shared-callable-signature pattern as CrunchLog.py's tally_logic."
+
+[[exceptions]]
+check = "DC004-dead_structs"
+path = "src/petit/CrunchLog.py"
+classification = "by_design"
+justification = "LogEntry and its seven drivers (SyslogEntry, RSyslogEntry, ApacheAccessEntry, ApacheErrorEntry, SecureLogEntry, RawEntry, SnortEntry) are constructed dynamically: `entry = entry_type(line)` in CrunchLog._parse, where entry_type is a type[LogEntry] resolved at runtime from the entry_types registry (built by reflection at module load, see the comment above entry_types) or passed in as the driver= override. There is no static `SyslogEntry(line)` call site for gourmand's analyzer to find, but every one of these classes is exercised by test/test_cli.py's fixture regression suite against real log files of each format, and by test/test_api.py's TestDriverOverride tests."
+
+[[exceptions]]
+check = "DC004-dead_structs"
+path = "src/petit/LogGraph.py"
+classification = "by_design"
+justification = "SecondsGraph/MinutesGraph/HoursGraph/DaysGraph/MonthsGraph/YearsGraph are constructed dynamically: cli.py's MODE_HANDLERS passes each class itself (not a call) to _run_graph_mode(graph_cls, args, filename), which does `graph_cls(log)`. Gourmand's analyzer sees the class name only as an argument at the mode_?graph call sites in cli.py, not as a direct `SecondsGraph(...)` construction, but every one of these classes is exercised by test/test_cli.py's fixture regression suite (one case per --?graph mode)."
+
+[[exceptions]]
+check = "DC004-dead_structs"
+path = "src/petit/LogHash.py"
+classification = "by_design"
+justification = "DaemonHash and HostHash are constructed the same way as the LogGraph.py classes above: cli.py's MODE_HANDLERS passes the class itself to _run_report_mode(hash_cls, stopwords, filename), which does `hash_cls(log, stopwords)`. Both are exercised by test/test_cli.py's fixture regression suite (--daemon and --host)."
+
+[[exceptions]]
+check = "CH012-copy_paste_detection"
+path = "src/petit/cli.py"
+classification = "by_design"
+justification = "_run_graph_mode and _run_report_mode look similar (build a CrunchLog, construct a class, call display()) but build different, unrelated class hierarchies with different constructor signatures: GraphHash subclasses take only a log and are configured afterward via tick/wide attributes, SuperHash subclasses take a log and a stopwords file name with no post-construction configuration. A single merged helper would need to special-case one branch for tick/wide and another for the stopwords argument, which is more indirection than the two four-line functions it would replace."
+
+[[exceptions]]
+check = "CH012-copy_paste_detection"
+path = "src/petit/CrunchLog.py"
+classification = "by_design"
+justification = "The is_type() near-duplicates (ApacheAccessEntry/SnortEntry, RSyslogEntry/RawEntry, ApacheErrorEntry/SecureLogEntry) share the 'if len(line) < N: return False; return bool(re.search(...))' shape because that shape IS the LogEntry driver interface every format detector implements -- the regex pattern and column index differ per format, which is the actual content, not boilerplate to extract."
+
+[[exceptions]]
+check = "CH012-copy_paste_detection"
+path = "src/petit/Filter.py"
+classification = "by_design"
+justification = "Filter.scrub and SecureLogHash.generalize both loop over (pattern, replacement) pairs calling .sub() -- a 3-line shape -- but serve different roles: scrub() applies caller-supplied or packaged stopwords for general normalisation, generalize() applies SecureLogHash's own fixed sshd-message rules. Extracting a shared helper for two 3-line loops with different semantic roles and different data sources would be over-abstraction, not de-duplication."
+
+[[exceptions]]
+check = "CQ005-verbose_comments"
+path = "src/petit/CrunchLog.py"
+classification = "by_design"
+justification = "_build's and select's long comment blocks explain non-obvious algorithmic decisions (the RawEntry fallback instead of aborting on one unparseable line, and the round-based resampling quorum bound) that a future reader cannot infer from the code alone -- exactly the 'why' documentation the crunchtools constitution's Documentation section asks projects to keep. The line 716-718 comment ('to determine what kind of log it is') is a false-positive phrase match on a genuine why-comment explaining the reflection-based driver registry and the RawEntry-must-be-last invariant."
+
+[[exceptions]]
+check = "CQ005-verbose_comments"
+path = "src/petit/__init__.py"
+classification = "by_design"
+justification = "The header comment documents that this module deliberately does no sys.path manipulation or warning-filter mutation on import (a past bug being explained so it is not reintroduced), plus the mandatory AGPL-3.0-or-later license notice. Neither is prose padding."
+
+[[exceptions]]
+check = "CQ005-verbose_comments"
+path = "src/petit/cli.py"
+classification = "by_design"
+justification = "The header block is the mandatory AGPL-3.0-or-later license notice, not narrative comment -- there is no shorter form that satisfies the license."

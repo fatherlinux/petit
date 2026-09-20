@@ -1,0 +1,129 @@
+"""CLI integration tests: the exit code contract and output regression.
+
+Runs the real `petit` entry point as a subprocess (not by importing cli.py
+directly) so these tests exercise argument parsing exactly as a user would,
+and diffs the output against the fixtures in test/data + test/output that
+have been part of this repo since 2009 — the safety net for the
+optparse-to-argparse migration.
+"""
+
+from __future__ import annotations
+
+import os
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+
+# Syslog/secure-log/snort entries carry no year, so CrunchLog stamps them
+# with the current year (see CrunchLog.py's SyslogEntry/SecureLogEntry/
+# SnortEntry). The graph fixtures built from those formats bake in whatever
+# year they were captured in (e.g. "2022-10-02") and would otherwise fail
+# every year going forward — not a regression, just the wall clock moving.
+# Normalize 4-digit year-like tokens out of both sides before comparing so
+# the fixtures stay useful indefinitely.
+_YEAR_RE = re.compile(r"(?<!\d)(19|20)\d{2}(?!\d)")
+
+# --ygraph additionally prints each axis label as the year mod 2000
+# (GraphHash.display(): `graph_value["begin"] % 2000`), so for those same
+# year-less formats it also carries a 2-digit, wall-clock-derived token that
+# _YEAR_RE alone won't catch. ygraph has no other 2-digit content on those
+# label lines, so blanking every standalone 2-digit number is safe there —
+# it would not be safe for the second/minute/hour/day/month graphs, whose
+# 2-digit axis labels are real content (an actual hour or day-of-month) that
+# a regression should still be able to break.
+_TWO_DIGIT_RE = re.compile(r"(?<!\d)\d{2}(?!\d)")
+
+
+def _normalize_years(text: str, *, aggressive: bool = False) -> str:
+    text = _YEAR_RE.sub("YYYY", text)
+    if aggressive:
+        text = _TWO_DIGIT_RE.sub("YY", text)
+    return text
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = Path(__file__).resolve().parent / "data"
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+
+MODES = [
+    "hash", "wordcount", "host", "daemon",
+    "sgraph", "mgraph", "hgraph", "dgraph", "mograph", "ygraph",
+]
+HASH_OPTIONS = ["fingerprint", "nosample", "nofilter"]
+
+# test13.log is the empty-log fixture. It has no output fixtures: an empty
+# log raises EmptyLogError, which the CLI reports on stderr and turns into
+# exit code 1, so there is nothing to capture on stdout. It is exercised
+# separately, in test_empty_log_exits_1_with_no_stdout below.
+EMPTY_LOG_TEST_ID = "test13"
+
+
+def run_petit(*args: str) -> subprocess.CompletedProcess[str]:
+    env = dict(os.environ, PYTHONPATH=str(ROOT / "src"))
+    return subprocess.run(
+        [sys.executable, "-m", "petit.cli", *args],
+        capture_output=True,
+        text=True,
+        env=env,
+        check=False,
+    )
+
+
+def _fixture_cases() -> list[tuple[str, list[str], Path]]:
+    """One case per test/output/<testNN>-<mode[-option]>.output fixture."""
+    cases = []
+    for output_file in sorted(OUTPUT_DIR.glob("*.output")):
+        test_id, _, rest = output_file.stem.partition("-")
+        if rest in MODES:
+            cases.append((test_id, [f"--{rest}"], output_file))
+            continue
+        mode, _, option = rest.partition("-")
+        if mode == "hash" and option in HASH_OPTIONS:
+            cases.append((test_id, [f"--{mode}", f"--{option}"], output_file))
+    return cases
+
+
+@pytest.mark.parametrize(
+    ("test_id", "flags", "output_file"),
+    _fixture_cases(),
+    ids=[f"{t}-{'-'.join(f.lstrip('-') for f in flags)}" for t, flags, _ in _fixture_cases()],
+)
+def test_output_matches_fixture(test_id: str, flags: list[str], output_file: Path) -> None:
+    data_file = DATA_DIR / f"{test_id}.log"
+    result = run_petit(*flags, str(data_file))
+    assert result.returncode == 0, result.stderr
+    aggressive = "--ygraph" in flags
+    assert _normalize_years(result.stdout, aggressive=aggressive) == \
+        _normalize_years(output_file.read_text(), aggressive=aggressive)
+
+
+def test_help_exits_0() -> None:
+    result = run_petit("--help")
+    assert result.returncode == 0
+    assert "usage" in result.stdout.lower()
+
+
+def test_unknown_flag_exits_2() -> None:
+    result = run_petit("--not-a-real-flag")
+    assert result.returncode == 2
+
+
+def test_too_many_positional_args_exits_2() -> None:
+    result = run_petit("--hash", "one.log", "two.log")
+    assert result.returncode == 2
+
+
+def test_missing_file_exits_1() -> None:
+    result = run_petit("--hash", str(DATA_DIR / "does-not-exist.log"))
+    assert result.returncode == 1
+    assert "petit:" in result.stderr
+
+
+def test_empty_log_exits_1_with_no_stdout() -> None:
+    data_file = DATA_DIR / f"{EMPTY_LOG_TEST_ID}.log"
+    result = run_petit("--hash", str(data_file))
+    assert result.returncode == 1
+    assert result.stdout == ""
+    assert "no data found" in result.stderr
