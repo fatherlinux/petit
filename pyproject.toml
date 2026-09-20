@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "petit-log"
-version = "3.0.0"
+version = "3.1.0"
 description = "Log analysis for systems administrators — detects the log format, then collapses the repetitive into counts so the unusual is what you read"
 readme = { file = "README", content-type = "text/plain" }
-requires-python = ">=3.9"
-license = "GPL-3.0-or-later"
+requires-python = ">=3.11"
+license = "AGPL-3.0-or-later"
 license-files = ["COPYING"]
 authors = [{ name = "Scott McCarty", email = "scott.mccarty@gmail.com" }]
 keywords = ["log", "analysis", "syslog", "apache", "sysadmin", "deduplication"]
@@ -26,19 +26,61 @@ dependencies = []
 [project.urls]
 Homepage = "https://github.com/crunchtools/petit"
 Source = "https://github.com/crunchtools/petit"
-Changelog = "https://github.com/crunchtools/petit/blob/master/CHANGELOG"
+Changelog = "https://github.com/crunchtools/petit/blob/master/CHANGELOG.md"
 
 [project.scripts]
 petit = "petit.cli:main"
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "ruff>=0.8", "mypy>=1.13"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/petit"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/petit", "README", "COPYING", "CHANGELOG", "AUTHORS", "test"]
+include = ["src/petit", "README", "COPYING", "CHANGELOG.md", "AUTHORS", "test"]
 
 [tool.pytest.ini_options]
 testpaths = ["test"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "C901", "DTZ", "T10", "ISC", "PIE", "PT", "RET", "SIM", "TID", "ARG", "PLC", "PLE", "PLR", "PLW", "RUF"]
+ignore = [
+    "PLR2004",  # magic numbers ok — sample sizes, field counts, etc. are self-explanatory in context
+    "PLR0913",  # many arguments ok for driver/graph constructors
+    "N999",     # CrunchLog.py/LogGraph.py/LogHash.py/Filter.py are the public import surface
+                # (`from petit.CrunchLog import CrunchLog`); renaming to lowercase is a breaking
+                # change out of scope for this pass
+    "DTZ001",   # petit's whole domain is naive local-time log timestamps — syslog carries no
+    "DTZ005",   # timezone, so there is nothing to attach. Timezone-aware datetimes would
+    "DTZ011",   # misrepresent data that was never tz-qualified to begin with.
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12
+
+[tool.ruff.lint.pylint]
+max-branches = 15
+max-statements = 60
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" = ["PLR2004"]
+"src/petit/api.py" = [
+    "N813",  # `from . import CrunchLog as _drivers` avoids shadowing the CrunchLog class also
+             # imported in this file; the module genuinely is named CrunchLog
+]
+"src/petit/LogGraph.py" = [
+    "C901",     # GraphHash.display() renders one graph in one pass — normalize, draw bars, label
+    "PLR0912",  # the axis — covered end-to-end by test_cli.py's fixture regression tests; splitting
+                # it up would scatter one coherent, already-verified rendering routine
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true

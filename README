@@ -4,16 +4,22 @@ http://crunchtools.com/software/petit/
 
 Installation
 ===============================================================================
-    pip install crunchtools
+    pip install petit-log
+    # or: uv tool install petit-log
+    # or: pipx install petit-log
 
-Installs the petit command and the crunchtools library. The distribution is
-named crunchtools because the name "petit" on PyPI belongs to an unrelated
-project.
+Installs the petit command and the petit library. The PyPI distribution is
+named petit-log, not petit, because "petit" on PyPI belongs to an unrelated
+project — see CHANGELOG.md's 3.0.0 entry.
+
+A container image is also published, for CI or isolated execution:
+
+    podman run --rm -v $(pwd):/data:ro,Z quay.io/crunchtools/petit --hash /data/some.log
 
 
 Using petit as a library
 ===============================================================================
-    from crunchtools import hash_text, detect_format
+    from petit import hash_text, detect_format
 
     for group in hash_text(open("/var/log/messages").read()):
         print(group.count, group.pattern)
@@ -31,11 +37,11 @@ Public API and versioning
 Petit follows Semantic Versioning. Two things are public and covered by it:
 
   * the petit command line, its options and its output
-  * the names exported from the crunchtools package: hash_text,
+  * the names exported from the petit package: hash_text,
     detect_format, Group, and the PetitError hierarchy
 
-Everything else is internal. The driver classes in crunchtools.CrunchLog and
-the hash classes in crunchtools.LogHash may change in any release; they are
+Everything else is internal. The driver classes in petit.CrunchLog and
+the hash classes in petit.LogHash may change in any release; they are
 where new log formats get added, and pinning them would freeze that. If you
 need something from them, ask for it to be exported rather than importing it
 directly.
@@ -89,50 +95,6 @@ administrator to determine if it is a normal or abnormal. Then abnormal entries
 can be acted on, hopefully before there is noticeable impact to your system. 
 
 
-Installing/Uninstalling
-===============================================================================
-Installation can be done with RPM, DEB or TAR
-
-INSTALL
-========================================
-
-TAR
- make install
-
-RPM
- rpm -ivh petit.rpm
-
-DEB
- dpkg -i petit.deb
-
-UNINSTALL
-========================================
-
-TAR
- make uninstall
-
-RPM
- rpm -e petit
-
-DEB
- dpkg -r petit
-
-
-Building Packages
-===============================================================================
-Two forms of building are maintained for sanity, deb and rpm. The build scripts
-for these two package managers are distributed with petit for convenience and 
-are used internally by the project  as part of a larger script to help 
-distribute snapshots on our site. Usage is simple, currently no make install is
-supported, but may be part of future distributions.
-
-RPM
- make rpm
-
-DEB
- make deb
-
-
 Routine Operations
 ===============================================================================
 
@@ -160,7 +122,7 @@ help determine what should be monitored in swatch.
 
 Graph first 60 seconds in a syslog
 
-	petit -sgraph /var/log/messages
+	petit --sgraph /var/log/messages
 
 Track a special work you are interested in by minute
 
@@ -177,5 +139,5 @@ Create an on the fly driver for a nonstandard file format, then pipe it to Petit
 Petit can hash files of non-standard types ok, but graphing requires the time 
 values to be in the correct columns.
 
-	cat /var/log/httpd/error_log | awk '{$1="";$5="";print}' | lt --sgraph
+	cat /var/log/httpd/error_log | awk '{$1="";$5="";print}' | petit --sgraph
 

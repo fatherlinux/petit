@@ -1,0 +1,7 @@
+# Documented exceptions to Gourmand findings, with justification.
+# See constitution.md Section XII / profiles/cli-tool.md Section VI.
+#
+# Empty for now: this is petit's first Gourmand run in CI. Add entries here
+# only as real findings surface, each with a `classification` and a
+# justification tied to the specific check and file -- never a blanket
+# "the code is special" exemption.

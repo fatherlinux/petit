@@ -1,25 +1,29 @@
 """Defines filter class for use with SuperHash"""
 
+from __future__ import annotations
+
+import logging
 import os
 import re
+
 from .errors import DataFileError
 from .resources import search_prefixes
-import sys
-import logging
+
 
 class Filter:
     """Filter object used to load filters into memory once, to save on file operations"""
-
-    global logging
 
     file = ""
     # Packaged data first, legacy system paths after — see resources.py
     prefixes = search_prefixes("filters")
 
-    stopwords = []
+    # Not a ClassVar: every instance gets its own list, reassigned in
+    # __init__/from_patterns before use. This is only the pre-assignment
+    # type declaration.
+    stopwords: list[tuple[re.Pattern[str], str]]
 
     @classmethod
-    def from_patterns(cls, patterns):
+    def from_patterns(cls, patterns: list[str | tuple[str, str]]) -> Filter:
         """Build a filter from regexes supplied by the caller.
 
         Normalisation policy belongs to whoever is reading the output. The
@@ -47,31 +51,28 @@ class Filter:
         ]
         return instance
 
-    def __init__(self, file="__none__"):
-
-        global logging
-
+    def __init__(self, file: str = "__none__") -> None:
         for prefix in self.prefixes:
 
             # Set class variable to file & path
-            self.file = prefix+file
+            self.file = prefix + file
             self.stopwords = []
 
             if file == "__none__":
                 return
-        
-            # Open the file and get each stopword or regex        
-            if os.path.exists("%s" % self.file):
-                try:
-                    f = open(self.file)
-                    for line in f.readlines():
 
-                        # Read entire contents into array for speed
-                        # Save them as compiled regexes for speed
-                        # Patterns from a file have no replacement of
-                        # their own; "#" is the scrub character petit has
-                        # always used.
-                        self.stopwords.append((re.compile(line.rstrip()), "#"))
+            # Open the file and get each stopword or regex
+            if os.path.exists(self.file):
+                try:
+                    with open(self.file) as f:
+                        for line in f.readlines():
+
+                            # Read entire contents into array for speed
+                            # Save them as compiled regexes for speed
+                            # Patterns from a file have no replacement of
+                            # their own; "#" is the scrub character petit has
+                            # always used.
+                            self.stopwords.append((re.compile(line.rstrip()), "#"))
                     break
 
                 except OSError as exc:
@@ -79,12 +80,10 @@ class Filter:
                         "could not open filter file " + str(self.file)
                     ) from exc
 
-        logging.info("Filter File: "+str(self.file))
+        logging.info("Filter File: " + str(self.file))
 
-    def scrub(self, string):
+    def scrub(self, string: str) -> str:
         """Used to remove entries and replace them with the scrub character"""
-
-        global logging
 
         # Check each stopword against each key
         for stopword, replacement in self.stopwords:
@@ -92,14 +91,13 @@ class Filter:
             # Replace matches with this pattern's replacement
             old_string = string
             string = stopword.sub(replacement, string)
-            logging.debug(" SCRUBBING "+old_string+" OF "+stopword.pattern+" BECOMES "+string)
+            logging.debug(
+                " SCRUBBING %s OF %s BECOMES %s", old_string, stopword.pattern, string
+            )
 
         return string
 
-    def bleach(self, string):
+    def bleach(self, string: str) -> bool:
         """Determine if a scrub has or should happen"""
-        
-        if self.scrub(string) == "#":
-            return True
-        else:
-            return False
+
+        return self.scrub(string) == "#"

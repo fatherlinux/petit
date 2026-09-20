@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Run linter
+        run: uv run ruff check src test
+
+      - name: Run type checker
+        run: uv run mypy src
+
+      - name: Run tests
+        run: uv run pytest -v
+
+  # Gatehouse code review runs in its own workflow (gatehouse.yml) on
+  # pull_request_target, so it covers fork PRs too. See that file.
+
+  # Call the reusable workflow rather than inlining the job body. Gatehouse
+  # hosts gourmand.yml for the whole fleet; a private copy here is the
+  # copy-paste drift that broke the fleet before (RT #1468).
+  gourmand:
+    name: Code Quality (Gourmand)
+    uses: crunchtools/gatehouse/.github/workflows/gourmand.yml@v0.7.0
+
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build container image
+        run: docker build -f Containerfile -t petit:test .
+
+  validate-constitution:
+    name: Constitution Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: crunchtools/constitution
+          path: .constitution
+
+      - name: Validate constitution
+        run: python3 .constitution/validate-constitution.py .specify/memory/constitution.md --verbose

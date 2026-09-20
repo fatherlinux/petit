@@ -1,0 +1,20 @@
+[global]
+excluded_paths = [
+    ".git/**",
+    ".venv/**",
+    ".mypy_cache/**",
+    ".ruff_cache/**",
+    ".pytest_cache/**",
+    ".github/**",
+    "*.egg-info/**",
+    "dist/**",
+    "build/**",
+    "uv.lock",
+    "test/data/**",
+    "test/output/**",
+    "architecture/**",
+]
+
+[output]
+format = "text"
+color = true

@@ -1,37 +1,42 @@
 """Contains SuperHash and all closely related children"""
 
-from collections import UserDict
-from .Filter import Filter
-from .CrunchLog import CrunchLog
-
-from .CrunchLog import SyslogEntry
-from .CrunchLog import RSyslogEntry
-from .CrunchLog import ApacheAccessEntry
-from .CrunchLog import ApacheErrorEntry
-from .CrunchLog import SnortEntry
-from .CrunchLog import RawEntry
-from .CrunchLog import SecureLogEntry
+from __future__ import annotations
 
 import logging
-from .errors import DataFileError, PetitError
-from .resources import search_prefixes
-from random import choice
-import re
 import os
-import sys
+import re
+from collections import UserDict
+from random import choice
+from typing import Any, ClassVar
 
-class SuperHash(UserDict):
+from .CrunchLog import (
+    ApacheAccessEntry,
+    ApacheErrorEntry,
+    CrunchLog,
+    RawEntry,
+    RSyslogEntry,
+    SecureLogEntry,
+    SnortEntry,
+    SyslogEntry,
+)
+from .errors import DataFileError, PetitError
+from .Filter import Filter
+from .resources import search_prefixes
+
+
+class SuperHash(UserDict[str, list[Any]]):
     """Interface and parent class for all hash/dict based objects. """
 
     filter = Filter()
     sample = "none"
+    file_name = ""
 
-    def __init__(self, log, filter_filename="__none__"):
+    def __init__(self, log: CrunchLog, filter_filename: str | Filter = "__none__") -> None:
 
         # Call parent init
         UserDict.__init__(self)
 
-        if log[0] == "__none__":
+        if log[0] == "__none__":  # type: ignore[comparison-overlap]
             # Create empty filter
             return
 
@@ -44,11 +49,10 @@ class SuperHash(UserDict):
 
         self.fill(log)
 
-    def fill(self, log):
+    def fill(self, log: CrunchLog) -> None:
         """Interface method which is flled in by subclasses"""
-        pass
 
-    def increment(self, key, entry):
+    def increment(self, key: str, entry: object) -> None:
         """Adds a new entry to superhash data structures.
         Similar to append for a list"""
 
@@ -61,50 +65,46 @@ class SuperHash(UserDict):
         self[key][0] += 1
         self[key][1].append(entry)
 
-    def display(self):
+    def display(self) -> None:
         """Displays all entries held in the SuperHash structure"""
-
-        global logging
 
         # Set static sample threshold
         sample_threshold = 3
 
         # Debugging
-        logging.info("Sample Type: "+self.sample)
+        logging.info("Sample Type: " + self.sample)
 
         # Print out the dictionary first sorted by the word with
         # the most entries with an alphabetical subsort
         for key in sorted(sorted(self.keys()),
-                key=lambda k : self[k][0],
+                key=lambda k: self[k][0],
                 reverse=True):
 
             # Print all lines as sample
             if self.sample == "all":
-                print((str(self[key][0]) + ":	" + \
-                choice(self[key][1]).log_entry))
+                print(str(self[key][0]) + ":\t" +
+                choice(self[key][1]).log_entry)
 
             elif self.sample == "none":
-                print((str(self[key][0]) + ":	"+str(key)))
+                print(str(self[key][0]) + ":\t" + str(key))
 
             elif self.sample == "threshold":
                 # Print sample for small values below/equal to threshold
                 if self[key][0] <= sample_threshold:
-                    print((str(self[key][0]) + ":	" + \
-                    self[key][1][0].log_entry))
+                    print(str(self[key][0]) + ":\t" +
+                    self[key][1][0].log_entry)
                 else:
-                    print((str(self[key][0]) + ":	" + str(key)))
+                    print(str(self[key][0]) + ":\t" + str(key))
             else:
                 raise PetitError(
                     "unsupported sampling mode: " + str(self.sample)
                 )
 
-    def fingerprint(self):
+    def fingerprint(self) -> None:
         """
-        Remove all fingerprints from a given LogHash and replace with a 
+        Remove all fingerprints from a given LogHash and replace with a
         single string"
         """
-
-        global logging
 
         # Declarations & Variables
         threshold_coefficient = 0.31
@@ -117,11 +117,11 @@ class SuperHash(UserDict):
         for prefix in prefixes:
             if os.path.exists(prefix) and len(os.listdir(prefix)) >= 1:
 
-                # Process in order from largest to smallest which prevents 
+                # Process in order from largest to smallest which prevents
                 # double labeling with similar fingerprints
                 fingerprint_files = os.listdir(prefix)
                 fingerprint_files = [os.path.join(prefix, f) for f in fingerprint_files]
-                fingerprint_files.sort(key=lambda x: os.path.getsize(x))
+                fingerprint_files.sort(key=os.path.getsize)
                 fingerprint_files.reverse()
                 break
 
@@ -132,7 +132,7 @@ class SuperHash(UserDict):
             )
 
         for fingerprint_file in fingerprint_files:
-            if re.search("fp",fingerprint_file):
+            if re.search("fp", fingerprint_file):
 
                 # Build a Log for the fingerprint
                 log = CrunchLog(fingerprint_file)
@@ -140,31 +140,34 @@ class SuperHash(UserDict):
                 # Build a SuperHash
                 x = SuperHash.manufacture(log, "hash.stopwords")
 
-		# Remove the prefix & set name
+                # Remove the prefix & set name
                 x.file_name = re.sub(prefix, "", fingerprint_file)
                 fingerprints.append(x)
-
 
         # Iterate each fingerprint
         for fingerprint in fingerprints:
 
-            logging.info("Testing Fingerprint:"+fingerprint.file_name)
+            logging.info("Testing Fingerprint:" + fingerprint.file_name)
 
             # Reset counter for each fingerprint
             count = 0
             threshold = (len(fingerprint) * threshold_coefficient)
-            logging.info("Threshold:"+str(threshold))
+            logging.info("Threshold:" + str(threshold))
 
             # Look for fingerpring
             for key in list(fingerprint.keys()):
                 if key in self:
-                    count = count+1
+                    count = count + 1
 
                 # If Threshold is reached, remove everyline of fingerprint
                 # Saves time on searching every entry
                 if count > threshold:
-                    logging.info("Found Fingerprint:"+fingerprint.file_name)
-                    for key in list(fingerprint.keys()):
+                    logging.info("Found Fingerprint:" + fingerprint.file_name)
+                    # `key` deliberately left shadowed by the inner loop below:
+                    # the outer loop's `key` is never read again after this
+                    # point, only whatever this loop leaves `key` set to
+                    # (existing behavior, not touched here).
+                    for key in list(fingerprint.keys()):  # noqa: PLW2901
 
                         # Key found, plenty to remove
                         if key in self:
@@ -173,63 +176,60 @@ class SuperHash(UserDict):
                     # Force the sample entry to be the same as the key
                     # and based off of the filename of the fingerprint
                     fingerprint[key][1][0].log_entry = fingerprint.file_name
-                    self.increment(fingerprint.file_name, fingerprint[key][1][0]) 
+                    self.increment(fingerprint.file_name, fingerprint[key][1][0])
                     break
 
-            logging.info("Count: "+str(count))
+            logging.info("Count: " + str(count))
 
-    def manufacture(log, filter):
+    @staticmethod
+    def manufacture(log: CrunchLog, filter: str | Filter) -> SuperHash:
         """Factory method which creates new SuperHash of correct subtype"""
 
         # Select the correct build method
-        if log.contains(SyslogEntry):
-            LogHash = SyslogHash
-        elif log.contains(RSyslogEntry):
-            LogHash = SyslogHash
-        elif log.contains(ApacheAccessEntry):
-            LogHash = ApacheLogHash
-        elif log.contains(ApacheErrorEntry):
-            LogHash = ApacheLogHash
+        log_hash_class: type[SuperHash]
+        if log.contains(SyslogEntry) or log.contains(RSyslogEntry):
+            log_hash_class = SyslogHash
+        elif log.contains(ApacheAccessEntry) or log.contains(ApacheErrorEntry):
+            log_hash_class = ApacheLogHash
         elif log.contains(SnortEntry):
-            LogHash = SnortLogHash
+            log_hash_class = SnortLogHash
         elif log.contains(RawEntry):
-            LogHash = RawLogHash
+            log_hash_class = RawLogHash
         elif log.contains(SecureLogEntry):
-            LogHash = SecureLogHash
+            log_hash_class = SecureLogHash
         else:
             raise PetitError(
                 "could not determine what type of objects the log contains"
             )
 
         # Build and return the correct subclass instance based on log file type
-        return LogHash(log, filter)
-
-    manufacture = staticmethod(manufacture)
+        return log_hash_class(log, filter)
 
 
 class SyslogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Syslog files"""
-    
-    def fill(self, log):
+
+    def fill(self, log: CrunchLog) -> None:
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
         # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.daemon+" "+entry.log_entry)
+            key = self.filter.scrub(entry.daemon + " " + entry.log_entry)
 
             # increment the LogHash with the new key
             self.increment(key, entry)
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]
+
 
 class ApacheLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Apache logs"""
-    
-    def fill(self, log):
+
+    def fill(self, log: CrunchLog) -> None:
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
         # Removing numbers and replacing them with a single '#'
@@ -242,14 +242,14 @@ class ApacheLogHash(SuperHash):
             self.increment(key, entry)
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]
 
 
 class SnortLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Snort logs"""
-    
-    def fill(self, log):
+
+    def fill(self, log: CrunchLog) -> None:
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
         # Removing numbers and replacing them with a single '#'
@@ -262,8 +262,9 @@ class SnortLogHash(SuperHash):
             self.increment(key, entry)
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]
+
 
 class SecureLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Syslog files"""
@@ -272,7 +273,7 @@ class SecureLogHash(SuperHash):
     # which is what makes a secure log group at all: the variable half is
     # the user, host or port, and that is precisely what differs line to
     # line. Applied to the key only — see fill().
-    GENERALIZATIONS = [
+    GENERALIZATIONS: ClassVar[list[tuple[re.Pattern[str], str]]] = [
         # Session entries
         (re.compile("session closed for.*"), "session closed for #"),
         (re.compile("session opened for.*"), "session opened for #"),
@@ -297,13 +298,13 @@ class SecureLogHash(SuperHash):
         (re.compile("Could not reverse map address.*"), "Could not reverse map address #"),
     ]
 
-    def generalize(self, payload):
+    def generalize(self, payload: str) -> str:
         """Return `payload` with sshd's variable tails collapsed."""
         for pattern, replacement in self.GENERALIZATIONS:
             payload = pattern.sub(replacement, payload)
         return payload
 
-    def fill(self, log):
+    def fill(self, log: CrunchLog) -> None:
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
         # Removing numbers and replacing them with a single '#'
@@ -319,20 +320,20 @@ class SecureLogHash(SuperHash):
             payload = self.generalize(entry.log_entry)
 
             # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.daemon+" "+payload)
+            key = self.filter.scrub(entry.daemon + " " + payload)
 
             # increment the LogHash with the new key
             self.increment(key, entry)
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]
 
 
 class RawLogHash(SuperHash):
-    """Overrides the fill method specifically for LogHashes built from text files without date/time"""
-    
-    def fill(self, log):
+    """Overrides the fill method for LogHashes built from text files without date/time"""
+
+    def fill(self, log: CrunchLog) -> None:
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
         # Removing numbers and replacing them with a single '#'
@@ -345,14 +346,14 @@ class RawLogHash(SuperHash):
             self.increment(key, entry)
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]
 
 
 class DaemonHash(SyslogHash):
-    """Overides the fill method specifically for a DaemonHashes built from text files with date/time"""
+    """Overrides the fill method for DaemonHashes built from text files with date/time"""
 
-    def fill(self, log):
+    def fill(self, log: CrunchLog) -> None:
 
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
@@ -366,14 +367,14 @@ class DaemonHash(SyslogHash):
             self.increment(key, entry)
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]
 
 
 class HostHash(SyslogHash):
-    """Overides the fill method specifically for a HostHashes built from text files with date/time"""
+    """Overrides the fill method for HostHashes built from text files with date/time"""
 
-    def fill(self, log):
+    def fill(self, log: CrunchLog) -> None:
 
         # Create a dictionary with an entry for each line. Increment
         # the value for each time the word is found. Merge lines by
@@ -387,7 +388,7 @@ class HostHash(SyslogHash):
             self.increment(key, entry)
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]
 
 
@@ -397,18 +398,17 @@ class WordHash(SuperHash):
     Date, time, and other common words are excluded from the count.
     """
 
-    def fill(self, log): 
+    def fill(self, log: CrunchLog) -> None:
 
         # Create a dictionary with an entry for each word. Increment
         # the value for each time the word is found
         for entry in log:
-    
+
             # Base the wordcount on the log_entry payload
             for word in entry.log_entry.split():
 
                 # increment the WordHash with the new key
                 self.increment(word, word)
-
 
         # Perform bleach at the end because it is more efficient
         for key in list(self.keys()):
@@ -424,5 +424,5 @@ class WordHash(SuperHash):
                 del self[key]
 
         # Finally, remove valueless lines
-        if "#" in self:    
+        if "#" in self:
             del self["#"]

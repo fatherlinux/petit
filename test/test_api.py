@@ -1,16 +1,22 @@
 """Library API: text in, data out, exceptions on failure."""
 
+import os
+from typing import ClassVar
+
 import pytest
 
 from petit import (
+    DataFileError,
     EmptyLogError,
     ParseError,
     PetitError,
     analyze_text,
     detect_format,
     hash_text,
+    resources,
 )
-from petit import resources
+from petit.CrunchLog import CrunchLog
+from petit.LogHash import SuperHash
 
 
 def secure_log(lines=200, pids=(1234, 5678)):
@@ -21,9 +27,8 @@ def secure_log(lines=200, pids=(1234, 5678)):
     would make this suite pass for the wrong reason.
     """
     return "\n".join(
-        "Aug 18 10:%02d:%02d lotor sshd[%d]: "
-        "Accepted publickey for scott from 10.0.0.%d port %d"
-        % (i % 60, i % 60, pids[i % len(pids)], i % 250, 3000 + i)
+        f"Aug 18 10:{i % 60:02d}:{i % 60:02d} lotor sshd[{pids[i % len(pids)]}]: "
+        f"Accepted publickey for scott from 10.0.0.{i % 250} port {3000 + i}"
         for i in range(lines)
     )
 
@@ -109,11 +114,6 @@ class TestFileErrors:
     os.access() check and was closed unmerged, so it stayed broken."""
 
     def test_unreadable_file_raises_cleanly(self, tmp_path):
-        import os
-
-        from petit.CrunchLog import CrunchLog
-        from petit import DataFileError
-
         target = tmp_path / "noperm.log"
         target.write_text("Aug 18 10:00:00 host sshd[1]: test\n")
         os.chmod(target, 0o000)
@@ -126,9 +126,6 @@ class TestFileErrors:
             os.chmod(target, 0o644)
 
     def test_missing_file_raises_cleanly(self, tmp_path):
-        from petit.CrunchLog import CrunchLog
-        from petit import DataFileError
-
         with pytest.raises(DataFileError):
             CrunchLog(str(tmp_path / "does-not-exist.log"))
 
@@ -138,8 +135,8 @@ def mixed_log(syslog_fraction=0.7, lines=40):
     application logs and for tool output that interleaves JSON with prose."""
     k = int(lines * syslog_fraction)
     return "\n".join(
-        ["Sep 19 04:00:%02d lotor sshd[%d]: Accepted publickey for scott "
-         "from 10.0.0.%d port 22" % (i, i, i) for i in range(k)]
+        [f"Sep 19 04:00:{i:02d} lotor sshd[{i}]: Accepted publickey for scott "
+         f"from 10.0.0.{i} port 22" for i in range(k)]
         + ["an ordinary prose sentence slipped into the stream here"
            for _ in range(lines - k)]
     )
@@ -216,8 +213,8 @@ class TestDriverOverride:
         """SecureLogHash collapses everything after "Invalid user", which is
         exactly the part a caller may need to keep distinct."""
         boilerplate = "\n".join(
-            "Sep 19 04:00:%02d lotor sshd[%d]: Invalid user bob%d from 10.0.0.%d"
-            % (i, i, i, i) for i in range(50)
+            f"Sep 19 04:00:{i:02d} lotor sshd[{i}]: Invalid user bob{i} from 10.0.0.{i}"
+            for i in range(50)
         )
         text = boilerplate + (
             "\nSep 19 04:59:59 lotor sshd[99]: Invalid user DISTINCTIVE from 10.0.0.99"
@@ -243,7 +240,7 @@ class TestNoFabricatedFields:
         """Raw text has no timestamp, host or daemon. Rendering from parsed
         fields supplied placeholders for all three, so a JSON line came back
         as "01 01 01:01:01 # # ..." — data the input never contained."""
-        text = "\n".join('  "key": "PROJ-%d",' % i for i in range(30))
+        text = "\n".join(f'  "key": "PROJ-{i}",' for i in range(30))
         for group in hash_text(text):
             for sample in group.samples:
                 assert "01 01 01:01:01" not in sample
@@ -254,9 +251,6 @@ class TestSecureLogIsNotConsumed:
     def test_hashing_does_not_mutate_the_log(self):
         """fill() used to assign its generalised form back onto the entry,
         so hashing a log destroyed it for every later reader."""
-        from petit.CrunchLog import CrunchLog
-        from petit.LogHash import SuperHash
-
         log = CrunchLog.from_text(secure_log())
         before = [entry.log_entry for entry in log]
         SuperHash.manufacture(log, "hash.stopwords")
@@ -275,7 +269,7 @@ class TestSampleLineNumbers:
         text = secure_log()
         lines = text.splitlines()
         for group in hash_text(text):
-            for number, sample in zip(group.sample_lines, group.samples):
+            for number, sample in zip(group.sample_lines, group.samples, strict=True):
                 assert lines[number] == sample
 
     def test_sample_lines_survive_the_degraded_path(self):
@@ -284,7 +278,7 @@ class TestSampleLineNumbers:
         result = analyze_text(text)
         assert result.degraded is True
         for group in result.groups:
-            for number, sample in zip(group.sample_lines, group.samples):
+            for number, sample in zip(group.sample_lines, group.samples, strict=True):
                 assert lines[number] == sample
 
 
@@ -294,8 +288,8 @@ class TestCallerSuppliedStopwords:
     that needs two distinct values to stay distinct."""
 
     NAMES = "\n".join(
-        ["user bob%d logged in" % i for i in range(15)]
-        + ["user boa%d logged in" % i for i in range(15)]
+        [f"user bob{i} logged in" for i in range(15)]
+        + [f"user boa{i} logged in" for i in range(15)]
     )
 
     def test_packaged_filter_collapses_adjacent_letters(self):
@@ -332,7 +326,7 @@ class TestCallerSuppliedStopwords:
     def test_samples_are_still_verbatim_with_caller_patterns(self):
         lines = self.NAMES.splitlines()
         for group in hash_text(self.NAMES, driver="RawEntry", stopwords=[r"[0-9]+"]):
-            for number, sample in zip(group.sample_lines, group.samples):
+            for number, sample in zip(group.sample_lines, group.samples, strict=True):
                 assert lines[number] == sample
 
 
@@ -341,10 +335,10 @@ class TestPatternReplacements:
     one that only says something was there."""
 
     TEXT = "\n".join(
-        "2026-09-19T04:00:%02d host sshd[%d]: login from 10.0.0.%d" % (i, i, i)
+        f"2026-09-19T04:00:{i:02d} host sshd[{i}]: login from 10.0.0.{i}"
         for i in range(30)
     )
-    RULES = [
+    RULES: ClassVar[list[tuple[str, str]]] = [
         (r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}", "<TS>"),
         (r"\b(?:\d{1,3}\.){3}\d{1,3}\b", "<IP>"),
         (r"\d+", "<N>"),

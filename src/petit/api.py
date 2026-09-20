@@ -75,7 +75,7 @@ class Analysis:
     lines_grouped: int
 
 
-def _render(entry) -> str:
+def _render(entry: _drivers.LogEntry) -> str:
     """The entry's original line.
 
     Falls back to the parsed payload only for entries built by something
@@ -83,12 +83,12 @@ def _render(entry) -> str:
     """
     raw = getattr(entry, "raw", "")
     if raw:
-        return raw
+        return str(raw)
     payload = getattr(entry, "log_entry", None)
     return str(payload) if payload else repr(entry)
 
 
-def _resolve_driver(name):
+def _resolve_driver(name: str | None) -> type[_drivers.LogEntry] | None:
     """Map a driver name to its entry class, for callers that pin one."""
     if name is None:
         return None
@@ -107,7 +107,7 @@ def analyze_text(
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
-    stopwords: list | None = None,
+    stopwords: list[str | tuple[str, str]] | None = None,
 ) -> Analysis:
     """Group `text` by line fingerprint and report how it was done.
 
@@ -184,7 +184,7 @@ def hash_text(
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
-    stopwords: list | None = None,
+    stopwords: list[str | tuple[str, str]] | None = None,
 ) -> list[Group]:
     """Group `text` by line fingerprint, most frequent first.
 
