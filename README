@@ -4,13 +4,15 @@ http://crunchtools.com/software/petit/
 
 Installation
 ===============================================================================
-    pip install petit-log
-    # or: uv tool install petit-log
-    # or: pipx install petit-log
+    pip install petit-log-crunchtools
+    # or: uv tool install petit-log-crunchtools
+    # or: pipx install petit-log-crunchtools
 
 Installs the petit command and the petit library. The PyPI distribution is
-named petit-log, not petit, because "petit" on PyPI belongs to an unrelated
-project — see CHANGELOG.md's 3.0.0 entry.
+named petit-log-crunchtools, not petit, because "petit" on PyPI belongs to
+an unrelated project. It follows the same naming convention as the rest of
+the crunchtools fleet (gatehouse-crunchtools, mcp-gemini-crunchtools) — see
+CHANGELOG.md's 3.0.0 and 3.1.1 entries.
 
 A container image is also published, for CI or isolated execution:
 
