@@ -11,13 +11,25 @@ justification = "Every entry in ruff's ignore and per-file-ignores carries an in
 check = "CH001-absolute_paths"
 path = "src/petit/resources.py"
 classification = "by_design"
-justification = "LEGACY_PREFIXES are intentional backward-compatibility search paths for existing system installs that predate packaged data (see the module's own docstring: 'The old prefixes are still searched, last, so an existing system install with locally added fingerprints keeps working'). They are not hardcoded deployment paths this code depends on -- they are a documented fallback."
+justification = "LEGACY_PREFIXES are intentional backward-compatibility search paths for existing system installs that predate packaged data (see the module's own docstring: old prefixes are still searched, last, so an install with locally added fingerprints keeps working). They are not hardcoded deployment paths this code depends on -- they are a documented fallback."
 
 [[exceptions]]
 check = "CH001-absolute_paths"
 path = "src/petit/api.py"
 classification = "by_design"
-justification = "/var/log/messages appears once, in a module docstring usage example (`open('/var/log/messages').read()`), illustrating the conventional syslog path -- not a path the code reads."
+justification = "The syslog path appears once, in a module docstring usage example, illustrating the conventional log location -- not a path the code reads."
+
+[[exceptions]]
+check = "EV004-redundant_error_handling"
+path = "src/petit/resources.py"
+classification = "by_design"
+justification = "data_dir()'s except is not empty in effect: it lets execution fall through to `return None`, which is the recovery for 'this package has no data directory' (running from source, a zipapp, or some other layout without importlib.resources support). ModuleNotFoundError/AttributeError/TypeError are the specific exceptions that mean the resource genuinely isn't there, not a caught-and-ignored bug."
+
+[[exceptions]]
+check = "EV004-redundant_error_handling"
+path = "test/test_api.py"
+classification = "by_design"
+justification = "test_hostile_input_does_not_escape_as_systemexit's `except Exception: pass` is the test's whole point: hostile input is allowed to raise any ordinary exception, and the test only fails if it raises SystemExit instead (caught separately, one line above, and turned into pytest.fail). This is a regression guard against the library taking the caller's process down, not sloppy error handling."
 
 [[exceptions]]
 check = "CQ003-deferred_work"
@@ -84,6 +96,24 @@ check = "DC004-dead_structs"
 path = "src/petit/CrunchLog.py"
 classification = "by_design"
 justification = "LogEntry and its seven drivers (SyslogEntry, RSyslogEntry, ApacheAccessEntry, ApacheErrorEntry, SecureLogEntry, RawEntry, SnortEntry) are constructed dynamically: `entry = entry_type(line)` in CrunchLog._parse, where entry_type is a type[LogEntry] resolved at runtime from the entry_types registry (built by reflection at module load, see the comment above entry_types) or passed in as the driver= override. There is no static `SyslogEntry(line)` call site for gourmand's analyzer to find, but every one of these classes is exercised by test/test_cli.py's fixture regression suite against real log files of each format, and by test/test_api.py's TestDriverOverride tests."
+
+[[exceptions]]
+check = "DC004-dead_structs"
+path = "src/petit/LogGraph.py"
+classification = "by_design"
+justification = "SecondsGraph/MinutesGraph/HoursGraph/DaysGraph/MonthsGraph/YearsGraph are constructed dynamically: cli.py's MODE_HANDLERS passes each class itself (not a call) to _run_graph_mode(graph_cls, args, filename), which does `graph_cls(log)`. Gourmand's analyzer sees the class name only as an argument at the mode_?graph call sites in cli.py, not as a direct `SecondsGraph(...)` construction, but every one of these classes is exercised by test/test_cli.py's fixture regression suite (one case per --?graph mode)."
+
+[[exceptions]]
+check = "DC004-dead_structs"
+path = "src/petit/LogHash.py"
+classification = "by_design"
+justification = "DaemonHash and HostHash are constructed the same way as the LogGraph.py classes above: cli.py's MODE_HANDLERS passes the class itself to _run_report_mode(hash_cls, stopwords, filename), which does `hash_cls(log, stopwords)`. Both are exercised by test/test_cli.py's fixture regression suite (--daemon and --host)."
+
+[[exceptions]]
+check = "CH012-copy_paste_detection"
+path = "src/petit/cli.py"
+classification = "by_design"
+justification = "_run_graph_mode and _run_report_mode look similar (build a CrunchLog, construct a class, call display()) but build different, unrelated class hierarchies with different constructor signatures: GraphHash subclasses take only a log and are configured afterward via tick/wide attributes, SuperHash subclasses take a log and a stopwords file name with no post-construction configuration. A single merged helper would need to special-case one branch for tick/wide and another for the stopwords argument, which is more indirection than the two four-line functions it would replace."
 
 [[exceptions]]
 check = "CH012-copy_paste_detection"
