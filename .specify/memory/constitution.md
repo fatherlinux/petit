@@ -24,12 +24,16 @@ refactors with no observable behavior change.
 
 ## PyPI Naming Exception
 
-The tool and command are `petit`; the PyPI distribution is `petit-log`, not
-`petit`, because `petit` was already taken on PyPI by an unrelated protein
-engineering toolkit at the time petit was first packaged for PyPI (see
-`CHANGELOG.md` 3.0.0 and 2.0.0 entries — `petitlog` was also taken by a fork
-of this same project). This is a documented exception to profile Section
-VIII's PyPI-name-matches-tool-name convention, not an oversight.
+The tool and command are `petit`; the PyPI distribution is
+`petit-log-crunchtools`, not `petit`, because `petit` was already taken on
+PyPI by an unrelated protein engineering toolkit at the time petit was
+first packaged for PyPI (see `CHANGELOG.md` 3.0.0 and 2.0.0 entries —
+`petitlog` was also taken by a fork of this same project). The
+distribution briefly used `petit-log` before settling on
+`petit-log-crunchtools` (3.1.1), matching the naming convention already in
+use across the crunchtools fleet (`gatehouse-crunchtools`,
+`mcp-gemini-crunchtools`). This is a documented exception to profile
+Section VIII's PyPI-name-matches-tool-name convention, not an oversight.
 
 ## CLI Interface
 

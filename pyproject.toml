@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "petit-log"
-version = "3.1.0"
+name = "petit-log-crunchtools"
+version = "3.1.1"
 description = "Log analysis for systems administrators — detects the log format, then collapses the repetitive into counts so the unusual is what you read"
 readme = { file = "README", content-type = "text/plain" }
 requires-python = ">=3.11"

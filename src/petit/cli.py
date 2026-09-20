@@ -204,7 +204,7 @@ def build_parser() -> argparse.ArgumentParser:
 def mode_version(_args: argparse.Namespace, _filename: str) -> None:
     """Version information"""
     try:
-        current_version = pkg_version("petit-log")
+        current_version = pkg_version("petit-log-crunchtools")
     except PackageNotFoundError:
         current_version = "unknown"
     print("Version: " + current_version)

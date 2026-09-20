@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.1] - 2026-09-20
+
+### Fixed
+- The 3.1.0 PyPI upload was rejected (trusted publisher was registered as a
+  new-project pending publisher instead of on the existing project's
+  Publishing settings). While fixing this on PyPI, the distribution name
+  changed to `petit-log-crunchtools`, matching the naming convention
+  already used elsewhere in the crunchtools fleet (`gatehouse-crunchtools`,
+  `mcp-gemini-crunchtools`). `petit --version` now looks up the installed
+  package under the new name; it would otherwise report "unknown" once
+  installed from PyPI.
+
 ## [3.1.0] - 2026-09-20
 
 ### Changed
@@ -286,6 +298,7 @@ preserved here rather than assigned invented version numbers.
 ### 2009-07-31
 - First working version.
 
-[Unreleased]: https://github.com/crunchtools/petit/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/crunchtools/petit/compare/v3.1.1...HEAD
+[3.1.1]: https://github.com/crunchtools/petit/releases/tag/v3.1.1
 [3.1.0]: https://github.com/crunchtools/petit/releases/tag/v3.1.0
 [3.0.0]: https://github.com/crunchtools/petit/releases/tag/v3.0.0
