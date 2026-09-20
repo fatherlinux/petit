@@ -54,6 +54,8 @@ from petit.LogGraph import (
 )
 from petit.LogHash import DaemonHash, HostHash, SuperHash, WordHash
 
+AnyGraph = SecondsGraph | MinutesGraph | HoursGraph | DaysGraph | MonthsGraph | YearsGraph
+
 # Process Signals
 
 
@@ -231,153 +233,48 @@ def mode_hash(args: argparse.Namespace, filename: str) -> None:
     x.display()
 
 
+def _run_report_mode(
+    hash_cls: type[WordHash | DaemonHash | HostHash], stopwords: str, filename: str,
+) -> None:
+    """Build one of the fixed-stopword-file reports and display it.
+
+    --wordcount, --daemon and --host differ only in which SuperHash subclass
+    and packaged stopword file they use.
+    """
+    log = CrunchLog(filename)
+    x = hash_cls(log, stopwords)
+    x.display()
+
+
 def mode_wordcount(_args: argparse.Namespace, filename: str) -> None:
     """Runs wordcount mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new word hash based on log file and filter created
-    x = WordHash(log, "words.stopwords")
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
+    _run_report_mode(WordHash, "words.stopwords", filename)
 
 
 def mode_daemon(_args: argparse.Namespace, filename: str) -> None:
     """Runs daemon report mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = DaemonHash(log, "daemon.stopwords")
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
+    _run_report_mode(DaemonHash, "daemon.stopwords", filename)
 
 
 def mode_host(_args: argparse.Namespace, filename: str) -> None:
     """Runs host report mode"""
+    _run_report_mode(HostHash, "host.stopwords", filename)
 
-    # Get input
+
+def _run_graph_mode(
+    graph_cls: type[AnyGraph],
+    args: argparse.Namespace,
+    filename: str,
+) -> None:
+    """Build, configure and display one of the time-window graphs.
+
+    Every --?graph mode differs only in which GraphHash subclass it builds;
+    tick/wide/display are identical, so they share this one implementation.
+    """
     log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = HostHash(log, "host.stopwords")
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-
-
-def mode_sgraph(args: argparse.Namespace, filename: str) -> None:
-    """Runs seconds graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = SecondsGraph(log)
-
-    # Set tick & width options
+    x = graph_cls(log)
     x.tick = args.tick
     x.wide = args.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-
-
-def mode_mgraph(args: argparse.Namespace, filename: str) -> None:
-    """Runs minutes graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = MinutesGraph(log)
-
-    # Set tick & width options
-    x.tick = args.tick
-    x.wide = args.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-
-
-def mode_hgraph(args: argparse.Namespace, filename: str) -> None:
-    """Runs hours graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = HoursGraph(log)
-
-    # Set tick & width options
-    x.tick = args.tick
-    x.wide = args.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-
-
-def mode_dgraph(args: argparse.Namespace, filename: str) -> None:
-    """Runs days graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = DaysGraph(log)
-
-    # Set tick & width options
-    x.tick = args.tick
-    x.wide = args.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-
-
-def mode_mograph(args: argparse.Namespace, filename: str) -> None:
-    """Runs months graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = MonthsGraph(log)
-
-    # Set tick & width options
-    x.tick = args.tick
-    x.wide = args.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
-
-
-def mode_ygraph(args: argparse.Namespace, filename: str) -> None:
-    """Runs years graph mode"""
-
-    # Get input
-    log = CrunchLog(filename)
-
-    # Create new syslog hash based on log file and filter created
-    x = YearsGraph(log)
-
-    # Set tick & width options
-    x.tick = args.tick
-    x.wide = args.wide
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
     x.display()
 
 
@@ -387,12 +284,12 @@ MODE_HANDLERS: dict[str, Callable[[argparse.Namespace, str], None]] = {
     "mode_wordcount": mode_wordcount,
     "mode_daemon": mode_daemon,
     "mode_host": mode_host,
-    "mode_sgraph": mode_sgraph,
-    "mode_mgraph": mode_mgraph,
-    "mode_hgraph": mode_hgraph,
-    "mode_dgraph": mode_dgraph,
-    "mode_mograph": mode_mograph,
-    "mode_ygraph": mode_ygraph,
+    "mode_sgraph": lambda args, filename: _run_graph_mode(SecondsGraph, args, filename),
+    "mode_mgraph": lambda args, filename: _run_graph_mode(MinutesGraph, args, filename),
+    "mode_hgraph": lambda args, filename: _run_graph_mode(HoursGraph, args, filename),
+    "mode_dgraph": lambda args, filename: _run_graph_mode(DaysGraph, args, filename),
+    "mode_mograph": lambda args, filename: _run_graph_mode(MonthsGraph, args, filename),
+    "mode_ygraph": lambda args, filename: _run_graph_mode(YearsGraph, args, filename),
 }
 
 

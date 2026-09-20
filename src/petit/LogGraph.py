@@ -12,6 +12,15 @@ from .errors import EmptyLogError
 if TYPE_CHECKING:
     from .CrunchLog import CrunchLog
 
+# Calendar constants used to size and label graphs.
+HOURS_PER_DAY = 24
+MONTHS_PER_YEAR = 12
+DAYS_PER_YEAR = 365
+# Not a true calendar constant — how many days DaysGraph shows (roughly a month).
+DAYS_GRAPH_WINDOW = 31
+# GraphHash.display() prints the year's last two digits on the x-axis.
+YEAR_LABEL_MODULUS = 2000
+
 
 class GraphHash(UserDict[str, int]):
     """Interface class used to control structure & use of all GraphHash subtypes"""
@@ -43,7 +52,6 @@ class GraphHash(UserDict[str, int]):
             self[key] = 0
 
         # Increment the hashed count
-        # Create an array of un-hashed values for sampling later
         self[key] += 1
 
     def zero(self, key: str) -> None:
@@ -94,7 +102,6 @@ class GraphHash(UserDict[str, int]):
         for key in list(self.keys()):
             graph_min_value = min(graph_min_value, self[key])
 
-        # Check if it should be normalized
         if graph_min_value == 0:
 
             # Recalculate
@@ -138,7 +145,6 @@ class GraphHash(UserDict[str, int]):
             sys.stdout.write(char_fill)
         print()
 
-        # Determine numbers for normal and wide graphs
         if self.wide:
 
             graph_width = graph_width * 2
@@ -165,18 +171,17 @@ class GraphHash(UserDict[str, int]):
 
             # Beginning
             if i == graph_position["begin"]:
-                sys.stdout.write(f"{graph_value['begin'] % 2000:02d}")
+                sys.stdout.write(f"{graph_value['begin'] % YEAR_LABEL_MODULUS:02d}")
             # Half
             elif i == graph_position["middle"]:
-                sys.stdout.write(f"{graph_value['middle'] % 2000:02d}")
+                sys.stdout.write(f"{graph_value['middle'] % YEAR_LABEL_MODULUS:02d}")
             # Last
             elif i == graph_position["end"]:
-                sys.stdout.write(f"{graph_value['end'] % 2000:02d}")
+                sys.stdout.write(f"{graph_value['end'] % YEAR_LABEL_MODULUS:02d}")
             else:
                 sys.stdout.write(" ")
         print()
 
-        # Create a little space at the top of the screen
         print()
         print("Start Time:\t", str(self.start_date), "\t\tMinimum Value:", self.min_value)
         print("End Time:\t", str(self.end_date), "\t\tMaximum Value:", self.max_value)
@@ -235,9 +240,6 @@ class SecondsGraph(GraphHash):
         self.middle_date = middle_date
         self.end_date = end_date
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Create key rooted in time
@@ -301,9 +303,6 @@ class MinutesGraph(GraphHash):
         self.middle_date = middle_date
         self.end_date = end_date
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Create key rooted in time
@@ -338,7 +337,7 @@ class HoursGraph(GraphHash):
         self.month = str(first_entry.month)
         self.year = first_entry.year
         self.unit = "hour"
-        self.duration = 24
+        self.duration = HOURS_PER_DAY
 
         start_date = datetime.datetime(
             int(self.year), int(self.month), int(self.day),
@@ -364,9 +363,6 @@ class HoursGraph(GraphHash):
         self.middle_date = middle_date
         self.end_date = end_date
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Create key rooted in time
@@ -401,7 +397,7 @@ class DaysGraph(GraphHash):
         self.month = str(first_entry.month)
         self.year = first_entry.year
         self.unit = "day"
-        self.duration = 31
+        self.duration = DAYS_GRAPH_WINDOW
 
         start_date = datetime.datetime(
             int(self.year), int(self.month), int(self.day),
@@ -427,9 +423,6 @@ class DaysGraph(GraphHash):
         self.middle_date = middle_date
         self.end_date = end_date
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Create key rooted in time
@@ -464,7 +457,7 @@ class MonthsGraph(GraphHash):
         self.month = str(first_entry.month)
         self.year = first_entry.year
         self.unit = "month"
-        self.duration = 12
+        self.duration = MONTHS_PER_YEAR
 
         start_date = datetime.datetime(
             int(self.year), int(self.month), int(self.day),
@@ -477,7 +470,7 @@ class MonthsGraph(GraphHash):
         for i in range(self.duration):
 
             # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(days=i * 365 / 12 + 1)
+            end_date = start_date + datetime.timedelta(days=i * DAYS_PER_YEAR / MONTHS_PER_YEAR + 1)
             end_key = f"{end_date.year}{end_date.month:02d}"
             self.zero(end_key)
             logging.debug("End Date: " + str(end_date))
@@ -492,9 +485,6 @@ class MonthsGraph(GraphHash):
         self.middle_date = middle_date
         self.end_date = end_date
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Create key rooted in time
@@ -542,7 +532,7 @@ class YearsGraph(GraphHash):
         for i in range(self.duration):
 
             # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(days=i * 365)
+            end_date = start_date + datetime.timedelta(days=i * DAYS_PER_YEAR)
             end_key = str(end_date.year)
             self.zero(end_key)
 
@@ -555,9 +545,6 @@ class YearsGraph(GraphHash):
         self.middle_date = middle_date
         self.end_date = end_date
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Create key rooted in time

@@ -36,10 +36,6 @@ class SuperHash(UserDict[str, list[Any]]):
         # Call parent init
         UserDict.__init__(self)
 
-        if log[0] == "__none__":  # type: ignore[comparison-overlap]
-            # Create empty filter
-            return
-
         # A caller that supplies its own normalisation policy passes a built
         # Filter instead of the name of one to go and find.
         if isinstance(filter_filename, Filter):
@@ -60,8 +56,6 @@ class SuperHash(UserDict[str, list[Any]]):
         if key not in self:
             self[key] = [0, []]
 
-        # Increment the hashed count
-        # Create an array of un-hashed values for sampling later
         self[key][0] += 1
         self[key][1].append(entry)
 
@@ -163,20 +157,15 @@ class SuperHash(UserDict[str, list[Any]]):
                 # Saves time on searching every entry
                 if count > threshold:
                     logging.info("Found Fingerprint:" + fingerprint.file_name)
-                    # `key` deliberately left shadowed by the inner loop below:
-                    # the outer loop's `key` is never read again after this
-                    # point, only whatever this loop leaves `key` set to
-                    # (existing behavior, not touched here).
-                    for key in list(fingerprint.keys()):  # noqa: PLW2901
-
-                        # Key found, plenty to remove
-                        if key in self:
-                            del self[key]
+                    matched_key = key
+                    for fingerprint_key in fingerprint:
+                        if fingerprint_key in self:
+                            del self[fingerprint_key]
 
                     # Force the sample entry to be the same as the key
                     # and based off of the filename of the fingerprint
-                    fingerprint[key][1][0].log_entry = fingerprint.file_name
-                    self.increment(fingerprint.file_name, fingerprint[key][1][0])
+                    fingerprint[matched_key][1][0].log_entry = fingerprint.file_name
+                    self.increment(fingerprint.file_name, fingerprint[matched_key][1][0])
                     break
 
             logging.info("Count: " + str(count))
@@ -202,7 +191,6 @@ class SuperHash(UserDict[str, list[Any]]):
                 "could not determine what type of objects the log contains"
             )
 
-        # Build and return the correct subclass instance based on log file type
         return log_hash_class(log, filter)
 
 
@@ -210,9 +198,6 @@ class SyslogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Syslog files"""
 
     def fill(self, log: CrunchLog) -> None:
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Scrub sections of SyslogEntry which will be used to key the hash
@@ -230,9 +215,6 @@ class ApacheLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Apache logs"""
 
     def fill(self, log: CrunchLog) -> None:
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Scrub sections of SyslogEntry which will be used to key the hash
@@ -250,9 +232,6 @@ class SnortLogHash(SuperHash):
     """Overrides the fill method specifically for LogHashes built from Snort logs"""
 
     def fill(self, log: CrunchLog) -> None:
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Scrub sections of SyslogEntry which will be used to key the hash
@@ -305,9 +284,6 @@ class SecureLogHash(SuperHash):
         return payload
 
     def fill(self, log: CrunchLog) -> None:
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Generalise sshd's vocabulary to build the key. This used to
@@ -334,9 +310,6 @@ class RawLogHash(SuperHash):
     """Overrides the fill method for LogHashes built from text files without date/time"""
 
     def fill(self, log: CrunchLog) -> None:
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Scrub sections of SyslogEntry which will be used to key the hash
@@ -355,9 +328,6 @@ class DaemonHash(SyslogHash):
 
     def fill(self, log: CrunchLog) -> None:
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Scrub sections of SyslogEntry which will be used to key the hash
@@ -376,9 +346,6 @@ class HostHash(SyslogHash):
 
     def fill(self, log: CrunchLog) -> None:
 
-        # Create a dictionary with an entry for each line. Increment
-        # the value for each time the word is found. Merge lines by
-        # Removing numbers and replacing them with a single '#'
         for entry in log:
 
             # Scrub sections of SyslogEntry which will be used to key the hash
@@ -400,8 +367,6 @@ class WordHash(SuperHash):
 
     def fill(self, log: CrunchLog) -> None:
 
-        # Create a dictionary with an entry for each word. Increment
-        # the value for each time the word is found
         for entry in log:
 
             # Base the wordcount on the log_entry payload

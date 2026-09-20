@@ -173,7 +173,9 @@ class CrunchLog(UserList["LogEntry"]):
         entries, failure = self._parse(buf, self.Entry)
 
         if entries is None:
-            assert failure is not None
+            # _parse's contract: None entries implies a failure tuple.
+            if failure is None:  # pragma: no cover
+                raise RuntimeError("unreachable: _parse reported no entries and no failure")
             # The driver was chosen from a sample and then applied to every
             # line, so one line in a different shape used to abort the whole
             # run. That is not an exotic input: application logs interleave
@@ -192,7 +194,8 @@ class CrunchLog(UserList["LogEntry"]):
             self.degraded = True
             entries, failure = self._parse(buf, self.Entry)
             if entries is None:  # pragma: no cover - RawEntry accepts anything
-                assert failure is not None
+                if failure is None:
+                    raise RuntimeError("unreachable: _parse reported no entries and no failure")
                 raise ParseError(*failure)
 
         self.data = entries
@@ -449,16 +452,19 @@ class RSyslogEntry(LogEntry):
 class ApacheAccessEntry(LogEntry):
     """Driver for Apache Access formatted log files"""
 
+    # Whitespace-separated fields in the Apache combined log format.
+    FIELD_COUNT = 12
+
     def __init__(self, line: str) -> None:
 
         # Split the line up
         value = line.split()
 
         # Should be normal log entry
-        if len(value) >= 12:
+        if len(value) >= self.FIELD_COUNT:
             # Grab major chunks from the line
             (_rhost, _ident, _ruser, apachedate, _junk, _junk2, uri, _protocol,
-             _status, _size, _referer, _agent) = value[:12]
+             _status, _size, _referer, _agent) = value[:self.FIELD_COUNT]
             self.log_entry = uri
 
             # Split up something that looks like this: [03/Aug/2009:11:53:08
