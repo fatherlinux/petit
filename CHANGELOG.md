@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-09-20
+
 ### Changed
 - Relicensed from GPL-3.0-or-later to AGPL-3.0-or-later, per the
   [crunchtools constitution](https://github.com/crunchtools/constitution).
@@ -284,5 +286,6 @@ preserved here rather than assigned invented version numbers.
 ### 2009-07-31
 - First working version.
 
-[Unreleased]: https://github.com/crunchtools/petit/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/crunchtools/petit/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/crunchtools/petit/releases/tag/v3.1.0
 [3.0.0]: https://github.com/crunchtools/petit/releases/tag/v3.0.0
