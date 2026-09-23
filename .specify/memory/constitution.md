@@ -1,8 +1,8 @@
 # petit Constitution
 
-> **Version:** 1.1.0
+> **Version:** 1.1.1
 > **Ratified:** 2026-09-20
-> **Amended:** 2026-09-22
+> **Amended:** 2026-09-23
 > **Status:** Active
 > **Inherits:** [crunchtools/constitution](https://github.com/crunchtools/constitution) v1.15.0
 > **Profile:** CLI Tool
@@ -116,5 +116,5 @@ Zero violations required. Config in `gourmand.toml`, exceptions in
 1. Lint — `uv run ruff check src test`
 2. Type Check — `uv run mypy src`
 3. Tests — `uv run pytest -v`
-4. Gourmand — `gourmand --full .`
+4. Gourmand — `gourmand check --full .`, run from `quay.io/crunchtools/gourmand:latest` (see `.pre-commit-config.yaml`)
 5. Container Build — `podman build -f Containerfile .`
