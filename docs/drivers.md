@@ -1,10 +1,41 @@
 # Writing and tuning petit drivers
 
-petit parses text with an **entry driver** (`petit/CrunchLog.py`), which picks
-out timestamp, host, daemon and payload, then turns each entry into a
-fingerprint with a **hash driver** (`petit/LogHash.py`). Entries that share a
-fingerprint are one group. How aggressive a hash driver is decides what a
-reader ever gets to see, so this page is about getting that right.
+petit works in three stages:
+
+1. A **framer** (`petit/records.py`) cuts the text into records: one per
+   line, one per JSON object, or one per email message.
+2. An **entry driver** (`petit/CrunchLog.py`) parses each record, picking
+   out timestamp, host, daemon and payload.
+3. A **hash driver** (`petit/LogHash.py`) turns each entry into a
+   fingerprint. Entries that share a fingerprint are one group.
+
+How aggressive a hash driver is decides what a reader ever gets to see, so
+most of this page is about getting that right.
+
+## Framers
+
+Framers are tried in order and the first to claim the whole buffer wins.
+`--framer` or `analyze_text(framer=...)` names one instead.
+
+| Framer    | Claims                                                       | Entry driver      |
+|-----------|--------------------------------------------------------------|-------------------|
+| `json`    | a JSON array of objects, or every non-blank line an object   | `StructuredEntry` |
+| `message` | 2+ RFC 822 header blocks, or 2+ mbox `From ` separators       | `RawEntry`        |
+| `line`    | anything; always last                                        | voted, as always  |
+
+A header block counts only if it has two or more fields and at least one is
+a mail header (`From`, `To`, `Subject`, `Date`, `Message-ID`, …), and it
+must start the buffer or follow a blank line. That keeps `key: value` prose
+from reading as mail.
+
+A framer that knows what its records are names their entry driver; line
+records are still voted on by every registered driver. Detection looks at
+only the first 2000 characters of a record (`DETECT_MAX_CHARS`).
+
+`JsonFramer` declines, rather than raises, above 4,000,000 characters
+(`MAX_JSON_CHARS`) or 64 levels of nesting (`MAX_JSON_DEPTH`). Array elements
+keep the exact source text as their sample, and `Group.sample_spans` gives the
+source lines each covered.
 
 ## What a hash driver declares
 
@@ -30,8 +61,31 @@ those still win.
 | `ApacheLogHash` | `log_entry`              | `hash.stopwords`   |
 | `SnortLogHash`  | `log_entry`              | `hash.stopwords`   |
 | `RawLogHash`    | `log_entry`              | `strict.stopwords` |
+| `StructuredHash`| the parsed JSON object   | none (`__none__`)  |
 | `DaemonHash`    | `daemon`                 | `daemon.stopwords` |
 | `HostHash`      | `host`                   | `host.stopwords`   |
+
+Which hash driver handles which entry driver is the `HASH_FOR` table in
+`LogHash.py`, looked up along the entry class's MRO. A subclass of an entry
+driver inherits its parent's hash driver. Anything unregistered gets
+`RawLogHash`.
+
+Every key is built from at most `max_record_chars` (default 4096) characters
+of text, because each stopword rule runs over the whole key. Samples are
+never truncated.
+
+### StructuredHash
+
+A JSON record's key is its canonical form: keys verbatim and sorted, values
+by type: numbers `<N>`, booleans `<B>`, null `<NULL>`, ISO-8601-shaped
+strings `<TS>`, UUID-shaped strings `<UUID>`, strings over 200 characters
+`<STR:n>` (n is the length rounded up to a power of two). Arrays become runs
+of identical element fingerprints with counts, `[<N>*3]`.
+
+**Strings of 200 characters or fewer stay verbatim.** That is where prose
+lives, and so where an injected instruction lives. A driver that normalized
+short strings away would let two records that say different things merge,
+and one of them would disappear into the other's count.
 
 ## The rule for generalizations
 

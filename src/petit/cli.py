@@ -53,6 +53,7 @@ from petit.LogGraph import (
     SecondsGraph,
     YearsGraph,
 )
+from petit.records import FRAMER_NAMES
 
 AnyGraph = SecondsGraph | MinutesGraph | HoursGraph | DaysGraph | MonthsGraph | YearsGraph
 
@@ -118,6 +119,13 @@ def build_parser() -> argparse.ArgumentParser:
                          dest="tick",
                          default="#",
                          help="Change tick character from default")
+
+    parser.add_argument("--framer",
+                         dest="framer",
+                         choices=FRAMER_NAMES,
+                         default="auto",
+                         help="How to cut input into records: one per line, per JSON "
+                              "object, or per email message (default: auto)")
 
     parser.add_argument("--fingerprint",
                          dest="fingerprint",
@@ -237,31 +245,33 @@ def mode_hash(args: argparse.Namespace, filename: str) -> None:
         filter_name="__none__" if args.filter is False else None,
         max_samples=1,
         collapse_fingerprints=args.fingerprint,
+        framer=args.framer,
     )
     print_groups(analysis, args.sample)
 
 
-def _run_report_mode(hash_mode: HashMode, filename: str) -> None:
+def _run_report_mode(hash_mode: HashMode, args: argparse.Namespace, filename: str) -> None:
     """--wordcount, --daemon and --host: counts per word, daemon or host."""
     analysis = analyze_text(
         read_source(filename), source_name=filename, max_samples=1, hash_mode=hash_mode,
+        framer=args.framer,
     )
     print_groups(analysis, "none")
 
 
-def mode_wordcount(_args: argparse.Namespace, filename: str) -> None:
+def mode_wordcount(args: argparse.Namespace, filename: str) -> None:
     """Runs wordcount mode"""
-    _run_report_mode("wordcount", filename)
+    _run_report_mode("wordcount", args, filename)
 
 
-def mode_daemon(_args: argparse.Namespace, filename: str) -> None:
+def mode_daemon(args: argparse.Namespace, filename: str) -> None:
     """Runs daemon report mode"""
-    _run_report_mode("daemon", filename)
+    _run_report_mode("daemon", args, filename)
 
 
-def mode_host(_args: argparse.Namespace, filename: str) -> None:
+def mode_host(args: argparse.Namespace, filename: str) -> None:
     """Runs host report mode"""
-    _run_report_mode("host", filename)
+    _run_report_mode("host", args, filename)
 
 
 def _run_graph_mode(
@@ -274,7 +284,7 @@ def _run_graph_mode(
     Every --?graph mode differs only in which GraphHash subclass it builds;
     tick/wide/display are identical, so they share this one implementation.
     """
-    log = CrunchLog.from_text(read_source(filename), source_name=filename)
+    log = CrunchLog.from_text(read_source(filename), source_name=filename, framer=args.framer)
     x = graph_cls(log)
     x.tick = args.tick
     x.wide = args.wide

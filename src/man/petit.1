@@ -46,10 +46,17 @@ Make graphing wider for bigger screens
 \fB\-\-tick\fR="%"
 Change tick character from default of "#". This can be any single character.
 .TP
-\fB\-\-finterprint\fR
+\fB\-\-fingerprint\fR
 Use fingerprinting to remove certain patterns from analysis. By default this is
 off for most or all functions. This is a safety feature to prevent an analyst
 from removing data without using an explicit switch.
+.TP
+\fB\-\-framer\fR={auto,line,json,message}
+How to cut the input into records before analysis: one per line, one per
+JSON object (a JSON array of objects, or JSON Lines), or one per email message
+(a mail thread or mbox). The default, auto, uses the first that recognises the
+input, in that order, so a JSON array or a mail thread is analysed per record
+rather than per line.
 .TP
 \fB\-V\fR, \fB\-\-version\fR
 Display the version of petit and exit
