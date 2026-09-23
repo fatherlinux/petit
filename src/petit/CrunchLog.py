@@ -31,6 +31,27 @@ SAMPLE_LINES_PER_ROUND = 10
 # buy cheaply; the first 2000 characters are plenty to recognise a format.
 DETECT_MAX_CHARS = 2000
 
+# A wall-clock time, HH:MM:SS, with an optional fraction of 1-9 digits:
+# `-o short-precise` and RFC 3339 write microseconds, some loggers write
+# milliseconds or nanoseconds. The fraction is dropped; petit counts whole
+# seconds.
+CLOCK = r"([0-9]{2}):([0-9]{2}):([0-9]{2})(?:\.[0-9]{1,9})?"
+
+# RFC 3339 as rsyslog and journalctl -o short-iso(-precise) write it:
+# 2010-06-24T17:56:32.197716-04:00, ...+05:30, ...Z, or -0400. The offset is
+# not applied; times stay the wall clock the host logged.
+RFC3339 = re.compile(r"([0-9]{4})-([0-9]{2})-([0-9]{2})T" + CLOCK
+                     + r"(?:Z|[+-][0-9]{2}:?[0-9]{2})?")
+
+
+def _clock_fields(clocktime: str) -> tuple[str, str, str]:
+    """Hour, minute and second of a CLOCK column, fraction dropped."""
+    match = re.fullmatch(CLOCK, clocktime)
+    if match is None:
+        raise ValueError(f"not a clock time: {clocktime!r}")
+    hour, minute, second = match.groups()
+    return hour, minute, second
+
 
 def select_framer(buf: list[str], name: str = "auto") -> type[Framer]:
     """The framer for `buf`: the first that claims it, or the one named.
@@ -419,7 +440,7 @@ class SyslogEntry(LogEntry):
             self.year = str(datetime.date.today().year)
             self.month, self.day, clocktime, self.host, self.daemon = value[:5]
             self.log_entry = ' '.join(value[5:])
-            self.hour, self.minute, self.second = clocktime.split(":")
+            self.hour, self.minute, self.second = _clock_fields(clocktime)
 
             # Convert month to integer
             self.month = str(time.strptime(self.month, "%b")[1])
@@ -452,7 +473,7 @@ class SyslogEntry(LogEntry):
         return bool(
             re.search("[A-Z][a-z]{2}", line[0])
             and re.search("[0-9][0-9]?", line[1])
-            and re.fullmatch("[0-9]{2}:[0-9]{2}:[0-9]{2}", line[2])
+            and re.fullmatch(CLOCK, line[2])
             and not (re.search("^pam_", line[5]) or re.search(r"^sshd\[", line[4]))
         )
 
@@ -468,23 +489,14 @@ class RSyslogEntry(LogEntry):
         # Should be normal log entry
         if len(value) >= 5:
 
-            # Complete major splits: 2010-06-24T17:56:32.197716-04:00
-            date, rtime = value[0].split("T")  # Raw time
-
-            # High precision time with timezone info: 17:56:32.197716-04:00
-            hptime, _offset = rtime.split("-")
-
-            # Patch for mixed enviornments, milliseconds do not get logged
-            # if older Ubuntu 8.04 boxes log to a newer 10.04 server with
-            # Rsyslog precision time on.
-            if re.search(r"[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}", hptime):
-                clocktime, _mseconds = hptime.split(".")  # Miliseconds
-            else:
-                clocktime = hptime
-
-            # Complete secondary splits
-            self.year, self.month, self.day = date.split("-")
-            self.hour, self.minute, self.second = clocktime.split(":")
+            # 2010-06-24T17:56:32.197716-04:00. This used to split on "-" to
+            # find the offset, which only works west of UTC: "+05:30" and "Z"
+            # raised, and so did any fraction but six digits (#11).
+            stamp = RFC3339.fullmatch(value[0])
+            if stamp is None:
+                raise ValueError(f"not an RFC 3339 timestamp: {value[0]!r}")
+            self.year, self.month, self.day, self.hour, self.minute, self.second = \
+                stamp.groups()
             self.host = value[1]
             self.daemon = value[2]
             self.log_entry = ' '.join(value[3:])
@@ -512,8 +524,8 @@ class RSyslogEntry(LogEntry):
         if len(line) < 1:
             return False
 
-        # Look for something similar to: "2011-04-04T"
-        return bool(re.search("[0-9]{4}-[0-9]{2}-[0-9]{2}T", line[0]))
+        # A whole RFC 3339 timestamp: "2011-04-04T10:00:00.123+02:00"
+        return RFC3339.fullmatch(line[0]) is not None
 
 
 class ApacheAccessEntry(LogEntry):
@@ -645,7 +657,7 @@ class SecureLogEntry(LogEntry):
             self.year = str(datetime.date.today().year)
             self.month, self.day, clocktime, self.host, self.daemon = value[:5]
             self.log_entry = ' '.join(value[5:])
-            self.hour, self.minute, self.second = clocktime.split(":")
+            self.hour, self.minute, self.second = _clock_fields(clocktime)
 
             # Convert month to integer
             self.month = str(time.strptime(self.month, "%b")[1])
@@ -676,7 +688,7 @@ class SecureLogEntry(LogEntry):
         # Look for something similar to: "29 11:53:08" in third column
         return bool(
             re.search("[0-9][0-9]?", line[1])
-            and re.fullmatch("[0-9]{2}:[0-9]{2}:[0-9]{2}", line[2])
+            and re.fullmatch(CLOCK, line[2])
             and (re.search("^pam_", line[5]) or re.search(r"^sshd\[", line[4]))
         )
 

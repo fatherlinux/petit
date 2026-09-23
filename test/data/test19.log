@@ -1,0 +1,33 @@
+-- Boot 3f2a9c1d8e7b4a5f9c0d1e2f3a4b5c6d --
+Sep 19 15:41:20.137911 host01.example.com systemd[1]: Started session-4.scope - Session 4 of User alice.
+Sep 19 15:41:21.275822 host01.example.com NetworkManager[1150]: <info>  [1789845681.1001] device (wlan0): state change: config -> ip-config
+Sep 19 15:41:21.413733 host01.example.com NetworkManager[1150]: <info>  [1789845681.2002] device (wlan0): state change: ip-config -> activated
+Sep 19 15:41:27.551644 host01.example.com ModemManager[1151]: <msg> [base-manager] couldn't check support for device '/sys/devices/pci0000:00/0000:00:14.3'
+Sep 19 15:41:27.689555 host01.example.com gnome-shell[2856]: Object .GProxyVolume (0x55669dd5ac50), has been already disposed — impossible to access it.
+                                                  == Stack trace for context 0x55669424a1f0 ==
+                                                  #0   556694310aa8 i   resource:///org/gnome/shell/ui/components/autorunManager.js:246 (3fa1d2c0 @ 12)
+                                                  #1   5566943109f8 i   resource:///org/gnome/shell/ui/components/autorunManager.js:212 (3fa1d2a0 @ 40)
+                                                  #2   556694310968 i   resource:///org/gnome/shell/ui/init.js:21 (3fa1a020 @ 48)
+Sep 19 15:41:28.827466 host01.example.com gnome-shell[2856]: Object .GProxyVolume (0x55669dd5b1e0), has been already disposed — impossible to access it.
+                                                  == Stack trace for context 0x55669424a1f0 ==
+                                                  #0   556694310aa8 i   resource:///org/gnome/shell/ui/components/autorunManager.js:246 (3fa1d2c0 @ 12)
+                                                  #1   5566943109f8 i   resource:///org/gnome/shell/ui/components/autorunManager.js:212 (3fa1d2a0 @ 40)
+                                                  #2   556694310968 i   resource:///org/gnome/shell/ui/init.js:21 (3fa1a020 @ 48)
+Sep 19 15:42:03.965377 host01.example.com sudo[3310]:    alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; COMMAND=/usr/bin/dnf upgrade
+Sep 19 15:42:03.103288 host01.example.com sudo[3310]: pam_unix(sudo:session): session opened for user root(uid=0) by alice(uid=1000)
+Sep 19 15:43:10.241199 host01.example.com kernel: usb 3-2: new full-speed USB device number 7 using xhci_hcd
+Sep 19 15:43:10.379110 host01.example.com kernel: usb 3-2: New USB device found, idVendor=046d, idProduct=c52b, bcdDevice=12.11
+Sep 19 15:44:59.517021 host01.example.com gnome-shell[2856]: Object .GProxyVolume (0x55669dd5c010), has been already disposed — impossible to access it.
+                                                  == Stack trace for context 0x55669424a1f0 ==
+                                                  #0   556694310aa8 i   resource:///org/gnome/shell/ui/components/autorunManager.js:246 (3fa1d2c0 @ 12)
+-- Boot 7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a29 --
+Sep 20 08:01:02.654932 host01.example.com systemd[1]: Started session-1.scope - Session 1 of User alice.
+Sep 20 08:01:04.792843 host01.example.com NetworkManager[1102]: <info>  [1789905664.3003] device (wlan0): state change: config -> ip-config
+Sep 20 08:02:15.930754 host01.example.com abrt-dump-journal-python[1880]: Traceback (most recent call last):
+                                                    File "/usr/libexec/tuned/tuned.py", line 88, in <module>
+                                                      daemon.run()
+                                                    File "/usr/lib/python3.12/site-packages/tuned/daemon/daemon.py", line 211, in run
+                                                      self._thread.start()
+                                                  RuntimeError: can't start new thread
+Sep 20 08:02:16.068665 host01.example.com systemd[1]: tuned.service: Main process exited, code=exited, status=1/FAILURE
+Sep 20 08:05:44.206576 host01.example.com systemd[1]: Started session-2.scope - Session 2 of User alice.

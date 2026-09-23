@@ -16,12 +16,14 @@ from typing import ClassVar
 
 import pytest
 
+from petit import analyze_text
 from petit.CrunchLog import (
     ApacheAccessEntry,
     CrunchLog,
     EmailEntry,
     LogEntry,
     RawEntry,
+    RSyslogEntry,
     SecureLogEntry,
     SnortEntry,
     StructuredEntry,
@@ -289,8 +291,64 @@ def test_every_hash_driver_has_a_table(hash_cls: type[SuperHash]) -> None:
     ("x10:00:01", False),
     ("10:00:01x", False),
     ("{2}:00:01", False),
+    # journalctl -o short-precise and friends (#45)
+    ("10:00:01.1", True),
+    ("10:00:01.125733", True),
+    ("10:00:01.123456789", True),
+    ("10:00:01.", False),
+    ("10:00:01.1234567890", False),
+    ("10:00:01,125", False),
 ])
-def test_clock_column_must_be_hh_mm_ss(entry_cls: type[LogEntry], tail: str,
+def test_clock_column_must_be_hh_mm_ss_with_optional_fraction(entry_cls: type[LogEntry], tail: str,
                                        clock: str, expected: bool) -> None:
     line = f"Jul 20 {clock} host {tail}".split()
     assert entry_cls.is_type(line) is expected
+
+
+
+@pytest.mark.parametrize("entry_cls", [SyslogEntry, SecureLogEntry])
+def test_fractional_seconds_are_dropped_not_rejected(entry_cls: type[LogEntry]) -> None:
+    entry = entry_cls("Sep 23 16:55:34.125733 host01 sshd[1]: pam_unix(sshd:session): opened")
+    assert (entry.month, entry.day, entry.hour, entry.minute, entry.second) == \
+        ("09", "23", "16", "55", "34")
+
+
+# RFC 3339 with every offset and fraction rsyslog and journalctl write. The
+# driver used to split on "-" to find the offset, so anything east of UTC,
+# "Z", and fractions other than six digits raised and sank the log (#11).
+@pytest.mark.parametrize("stamp", [
+    "2020-09-27T00:00:03+00:00",
+    "2020-09-27T00:00:03.766699+00:00",
+    "2020-09-27T00:00:03.766699+05:30",
+    "2020-09-27T00:00:03Z",
+    "2020-09-27T00:00:03.5Z",
+    "2020-09-27T00:00:03.123-04:00",
+    "2020-09-27T00:00:03.123456789-04:00",
+    "2020-09-27T00:00:03-0400",
+    "2020-09-27T00:00:03",
+])
+def test_rfc3339_offsets_and_fractions(stamp: str) -> None:
+    line = f"{stamp} host01 kernel: something happened"
+    assert RSyslogEntry.is_type(line.split())
+    entry = RSyslogEntry(line)
+    assert (entry.year, entry.month, entry.day, entry.hour, entry.minute, entry.second) == \
+        ("2020", "09", "27", "00", "00", "03")
+
+
+@pytest.mark.parametrize("token", [
+    "2020-09-27",
+    "2020-09-27T00:00",
+    "2020-09-27T00:00:03+5",
+    "2020-09-27T00:00:03.766699+00:00junk",
+    "x2020-09-27T00:00:03Z",
+])
+def test_rfc3339_must_be_the_whole_first_column(token: str) -> None:
+    assert not RSyslogEntry.is_type(f"{token} host01 kernel: x".split())
+
+
+def test_issue_11_line_is_read_as_rsyslog() -> None:
+    line = ("2020-09-27T00:00:03.766699+00:00 hostxxxxx su: "
+            "pam_unix(su:session): session closed for user yyyy\n")
+    result = analyze_text(line * 5)
+    assert result.driver == "RSyslogEntry"
+    assert result.records_grouped == 5

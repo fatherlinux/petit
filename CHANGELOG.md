@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.1] - 2026-09-23
+
+### Fixed
+- `SyslogEntry` and `SecureLogEntry` accept fractional seconds, so
+  `journalctl -o short-precise` (`Sep 23 16:55:34.125733`) is read as
+  syslog instead of falling back to `RawEntry` (#45). The clock column still
+  has to be a whole `HH:MM:SS`, optionally followed by `.` and 1-9 digits;
+  `10:00` and `x10:00:01` are still rejected (#2).
+- `RSyslogEntry` found the clock by splitting on `-`, which only works west
+  of UTC: any `+hh:mm` offset or `Z` raised `ValueError`, and so did a
+  fraction of anything but six digits, and one such line sank the whole log
+  to `RawEntry` (#11). It now matches the whole RFC 3339 timestamp, and its
+  vote requires the whole first column to be one.
+- Fixtures test19 (`short-precise` journal, same content as test16: its hash
+  and graph output are identical) and test20 (RFC 3339 with `+02:00`,
+  `+05:30`, `Z`, `-0400` and 1-9 digit fractions).
+
 ## [4.4.0] - 2026-09-23
 
 ### Added

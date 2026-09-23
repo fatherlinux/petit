@@ -16,7 +16,7 @@ import pytest
 
 from petit import PetitError, analyze_text
 from petit import records as framing
-from petit.CrunchLog import CrunchLog, StructuredEntry
+from petit.CrunchLog import CrunchLog, RSyslogEntry, StructuredEntry, SyslogEntry
 
 BUDGET_SECONDS = 5.0
 
@@ -173,4 +173,22 @@ class TestMultilineFraming:
         start = time.perf_counter()
         for pattern in framing.HEAD_PATTERNS.values():
             pattern.match(line)
+        assert time.perf_counter() - start < BUDGET_SECONDS
+
+
+class TestTimestampDrivers:
+    @pytest.mark.parametrize("token", [
+        "2020-09-27T00:00:03." + "1" * 1_000_000,
+        "2020-09-27T00:00:03" + "+" * 1_000_000,
+        "0" * 1_000_000,
+    ], ids=["long-fraction", "plus-flood", "digits"])
+    def test_rfc3339_on_huge_tokens(self, token):
+        start = time.perf_counter()
+        assert not RSyslogEntry.is_type([token, "host", "kernel:", "x"])
+        assert time.perf_counter() - start < BUDGET_SECONDS
+
+    def test_clock_on_a_huge_fraction(self):
+        start = time.perf_counter()
+        assert not SyslogEntry.is_type(["Sep", "23", "10:00:00." + "1" * 1_000_000,
+                                        "host", "cron[1]:", "x"])
         assert time.perf_counter() - start < BUDGET_SECONDS

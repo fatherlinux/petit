@@ -86,11 +86,21 @@ hostile input), and add its two example heads to
 every pattern has them.
 
 The framer only decides where records begin and end. Whether their text can
-be read is still the entry drivers' vote: journalctl `short-precise` heads
-(`10:00:00.123456`) frame correctly but aren't read by `SyslogEntry` yet
-(#45), and Python or Java
+be read is still the entry drivers' vote: Python or Java
 application logs have no driver of their own, so they are grouped as
 `RawEntry` records, one per message.
+
+## Timestamps the entry drivers read
+
+| Driver | First columns | Accepts |
+|---|---|---|
+| `SyslogEntry`, `SecureLogEntry` | `Sep 23 16:55:34 host daemon:` | seconds with an optional 1-9 digit fraction (`16:55:34.125733`, journalctl `-o short-precise`); the year is the current one |
+| `RSyslogEntry` | `2026-09-23T16:55:34.125733+02:00 host daemon:` | RFC 3339: any 1-9 digit fraction or none, and an offset of `+hh:mm`, `-hh:mm`, `+hhmm`, `Z` or none (rsyslog, journalctl `-o short-iso` / `short-iso-precise`) |
+
+The whole column has to match (`CLOCK` and `RFC3339` in `CrunchLog.py`), so a
+driver is never voted in for a line it can't unpack. Fractions are dropped:
+petit counts whole seconds. RFC 3339 offsets are not applied; times are the
+wall clock the host logged.
 
 `JsonFramer` declines, rather than raises, above 4,000,000 characters
 (`MAX_JSON_CHARS`) or 64 levels of nesting (`MAX_JSON_DEPTH`). Array elements
