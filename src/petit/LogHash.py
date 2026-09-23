@@ -34,6 +34,7 @@ from .CrunchLog import (
     ApacheAccessEntry,
     ApacheErrorEntry,
     CrunchLog,
+    EmailEntry,
     LogEntry,
     RawEntry,
     RSyslogEntry,
@@ -439,6 +440,69 @@ class StructuredHash(SuperHash):
         return self.filter.scrub(self.generalize(canonical(document)[:self.max_key_chars]))
 
 
+# Leading quote markers on a line, however they are spaced: "> > >", ">>>".
+_QUOTE_RUN = re.compile(r"(?:>[ \t]?)+")
+
+# A signature delimiter line (RFC 3676 "-- ", or a bare "--").
+_SIGNATURE = re.compile(r"--[ \t]?")
+
+
+class EmailHash(SuperHash):
+    """Email messages: the message's skeleton plus what its author wrote.
+
+    The key is:
+    - the header field names present, sorted — never their values, which
+      are addresses, dates and IDs;
+    - the quote-depth profile: each run of lines at one quote depth, in
+      order, so "wrote, then quoted, then quoted deeper" is a shape;
+    - whether a signature is present, but not what it says;
+    - the unquoted body lines above the signature, token-normalized by
+      strict.stopwords and otherwise verbatim.
+
+    A quoted block is format: it repeats what an earlier message already
+    said, so only its depth counts. An unquoted body line is human: it is
+    never generalized, only its timestamps and numbers normalized, so two
+    messages that say different things never share a key.
+    """
+
+    DEFAULT_FILTER: ClassVar[str] = "strict.stopwords"
+
+    # No GENERALIZATIONS table: both email rules are structural here. Header
+    # values (Message-ID, Date, Received and the rest) never enter the key
+    # at all, and a run of ">" markers collapses to its depth, so neither
+    # needs a regex that could reach into what the author wrote.
+
+    def key_for(self, entry: LogEntry) -> str:
+        names = getattr(entry, "header_names", None)
+        if names is None:
+            return super().key_for(entry)
+        body: list[str] = getattr(entry, "body_lines", [])
+
+        depths: list[int] = []
+        written: list[str] = []
+        signed = False
+        for line in body:
+            if _SIGNATURE.fullmatch(line):
+                signed = True
+                break
+            if not line.strip():
+                continue
+            run = _QUOTE_RUN.match(line)
+            depth = run.group(0).count(">") if run else 0
+            if not depths or depths[-1] != depth:
+                depths.append(depth)
+            if depth == 0:
+                written.append(" ".join(line.split()))
+
+        skeleton = (
+            "headers=" + ",".join(sorted(set(names)))
+            + " quotes=" + "-".join(str(d) for d in depths)
+            + " signature=" + ("yes" if signed else "no")
+        )
+        text = " / ".join(written)[:self.max_key_chars]
+        return skeleton + " body=" + self.filter.scrub(text)
+
+
 # Which hash driver fingerprints which entry driver. Looked up along the
 # entry class's MRO, so a subclass of a registered entry inherits its hash
 # driver instead of silently falling through to the wrong one. Declared here
@@ -452,6 +516,7 @@ HASH_FOR: dict[type[LogEntry], type[SuperHash]] = {
     SecureLogEntry: SecureLogHash,
     RawEntry: RawLogHash,
     StructuredEntry: StructuredHash,
+    EmailEntry: EmailHash,
 }
 
 

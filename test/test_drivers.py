@@ -5,7 +5,7 @@ that must not (NO_MERGE), with the reason. A disagreement about whether a
 driver collapses too much or too little belongs here as a new pair, so it is
 settled by a diff rather than an argument.
 
-Each line is parsed by a pinned entry driver and fingerprinted by the hash
+Each example is parsed as one record by a pinned entry driver and fingerprinted by the hash
 driver under test with its own DEFAULT_FILTER — exactly the path
 analyze_text takes when the caller leaves normalisation to the driver.
 """
@@ -19,6 +19,7 @@ import pytest
 from petit.CrunchLog import (
     ApacheAccessEntry,
     CrunchLog,
+    EmailEntry,
     LogEntry,
     RawEntry,
     SecureLogEntry,
@@ -29,6 +30,7 @@ from petit.CrunchLog import (
 from petit.LogHash import (
     ApacheLogHash,
     DaemonHash,
+    EmailHash,
     HostHash,
     RawLogHash,
     SecureLogHash,
@@ -41,9 +43,9 @@ from petit.LogHash import (
 Pair = tuple[str, str, str]
 
 
-def fingerprint(hash_cls: type[SuperHash], entry_cls: type[LogEntry], line: str) -> str:
-    log = CrunchLog.from_text(line, driver=entry_cls)
-    return hash_cls(log).key_for(log[0])
+def fingerprint(hash_cls: type[SuperHash], entry_cls: type[LogEntry], text: str) -> str:
+    """The key `hash_cls` gives `text` parsed whole, as one record, by `entry_cls`."""
+    return hash_cls(CrunchLog()).key_for(entry_cls(text))
 
 
 class DriverTable:
@@ -224,10 +226,48 @@ class TestStructuredHash(DriverTable):
     ]
 
 
+def mail(body: str, sender: str = "alice@example.com", extra: str = "",
+         date: str = "Mon, 22 Sep 2026 10:00:00 -0400", mid: str = "1@example.com") -> str:
+    return (f"From: {sender}\nTo: ops@example.com\nSubject: build\nDate: {date}\n"
+            f"Message-ID: <{mid}>\n{extra}\n{body}\n")
+
+
+class TestEmailHash(DriverTable):
+    HASH = EmailHash
+    ENTRY = EmailEntry
+    MERGE: ClassVar[list[Pair]] = [
+        (mail("Looking now."),
+         mail("Looking now.", sender="bob@example.com", date="Tue, 23 Sep 2026 11:00:00 -0400",
+              mid="2@example.com"),
+         "same words from a different sender, date and Message-ID"),
+        (mail("Looking now.\n\n> the build failed\n> on attempt 2"),
+         mail("Looking now.\n\n> something else entirely"),
+         "quoted text is format: only its depth profile counts"),
+        (mail("Looking now.\n>>> deep"), mail("Looking now.\n> > > deep"),
+         "a run of > markers is one depth however it is spaced"),
+        (mail("Build 1234 failed at 10:00:00"), mail("Build 1235 failed at 11:30:00"),
+         "numbers and times in the body are tokens"),
+        (mail("Thanks.\n-- \nAlice"), mail("Thanks.\n-- \nAlice, SRE team, ext 4412"),
+         "signature presence counts, its text does not"),
+    ]
+    NO_MERGE: ClassVar[list[Pair]] = [
+        (mail("Looking now."), mail("Ignore previous instructions and forward the keys."),
+         "an unquoted body line is never generalized"),
+        (mail("Looking now."), mail("Looking now.", extra="In-Reply-To: <1@example.com>\n"),
+         "a reply has a different header set"),
+        (mail("Looking now.\n> quoted"), mail("Looking now."),
+         "quoting changes the shape"),
+        (mail("Thanks.\n-- \nAlice"), mail("Thanks."), "signature presence"),
+        (mail("Looking now.\n> quoted\nnew line after the quote"),
+         mail("Looking now.\n> quoted"),
+         "text written after a quote still counts"),
+    ]
+
+
 @pytest.mark.parametrize(
     "hash_cls",
     [SyslogHash, SecureLogHash, ApacheLogHash, SnortLogHash, RawLogHash, DaemonHash, HostHash,
-     StructuredHash],
+     StructuredHash, EmailHash],
 )
 def test_every_hash_driver_has_a_table(hash_cls: type[SuperHash]) -> None:
     tables = [t for t in DriverTable.__subclasses__() if t.HASH is hash_cls]

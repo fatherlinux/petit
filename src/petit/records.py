@@ -169,7 +169,7 @@ class JsonFramer(Framer):
 
 # A header field: a name of printable characters other than colon, then a
 # colon. RFC 5322 section 2.2.
-_HEADER_FIELD = re.compile(r"([!-9;-~]{1,76}):")
+HEADER_FIELD = re.compile(r"([!-9;-~]{1,76}):")
 
 # A header block must name at least one of these to count as a message.
 _MESSAGE_HEADERS = frozenset({
@@ -184,7 +184,7 @@ def _header_block_at(buf: list[str], i: int) -> bool:
     known = False
     for j in range(i, len(buf)):
         line = buf[j]
-        match = _HEADER_FIELD.match(line)
+        match = HEADER_FIELD.match(line)
         if match:
             fields += 1
             known = known or match.group(1).lower() in _MESSAGE_HEADERS
@@ -213,7 +213,7 @@ class MessageFramer(Framer):
     """RFC 822 messages: a mail thread or an mbox."""
 
     name = "message"
-    entry_name = "RawEntry"
+    entry_name = "EmailEntry"
 
     @staticmethod
     def claims(buf: list[str]) -> bool:

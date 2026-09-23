@@ -89,6 +89,16 @@ class TestLongRecords:
         )
         assert bounded(thread).framer == "message"
 
+    def test_email_quote_and_signature_probes(self):
+        body = "> " * 100_000 + "\n" + "--" + " " * 100_000 + "\n"
+        thread = "".join(f"From: a{i}@x\nSubject: s\n\n{body}\n" for i in range(2))
+        assert bounded(thread).driver == "EmailEntry"
+
+    def test_email_header_flood(self):
+        headers = "".join(f"X-H{i}: v\n" for i in range(50_000))
+        thread = "".join(f"From: a{i}@x\n{headers}\nbody\n\n" for i in range(2))
+        assert bounded(thread).records_in == 2
+
     def test_one_enormous_line_of_digits(self):
         assert bounded("1" * 2_000_000 + "\n", driver="RawEntry") is not None
 

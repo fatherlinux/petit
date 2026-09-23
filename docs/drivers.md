@@ -20,7 +20,7 @@ Framers are tried in order and the first to claim the whole buffer wins.
 | Framer    | Claims                                                       | Entry driver      |
 |-----------|--------------------------------------------------------------|-------------------|
 | `json`    | a JSON array of objects, or every non-blank line an object   | `StructuredEntry` |
-| `message` | 2+ RFC 822 header blocks, or 2+ mbox `From ` separators       | `RawEntry`        |
+| `message` | 2+ RFC 822 header blocks, or 2+ mbox `From ` separators       | `EmailEntry`      |
 | `line`    | anything; always last                                        | voted, as always  |
 
 A header block counts only if it has two or more fields and at least one is
@@ -62,6 +62,7 @@ those still win.
 | `SnortLogHash`  | `log_entry`              | `hash.stopwords`   |
 | `RawLogHash`    | `log_entry`              | `strict.stopwords` |
 | `StructuredHash`| the parsed JSON object   | none (`__none__`)  |
+| `EmailHash`     | the message skeleton     | `strict.stopwords` |
 | `DaemonHash`    | `daemon`                 | `daemon.stopwords` |
 | `HostHash`      | `host`                   | `host.stopwords`   |
 
@@ -86,6 +87,23 @@ of identical element fingerprints with counts, `[<N>*3]`.
 lives, and so where an injected instruction lives. A driver that normalized
 short strings away would let two records that say different things merge,
 and one of them would disappear into the other's count.
+
+### EmailHash
+
+An email's key is its skeleton plus what its author wrote:
+
+- the header field names present, sorted, but never their values (addresses,
+  dates, `Message-ID`, `Received`);
+- the quote-depth profile: each run of lines at one depth, in order, with
+  `> > >` and `>>>` both depth 3;
+- whether there is a signature (`-- `), but not what it says;
+- the unquoted body lines above the signature, normalized by
+  `strict.stopwords` and otherwise verbatim.
+
+A quoted block is format: it repeats something already said, so only its
+depth counts. An unquoted body line is human, so it is never generalized. Two
+replies that both say "Looking now." merge whoever sent them; a reply that
+says something else never does.
 
 ## The rule for generalizations
 

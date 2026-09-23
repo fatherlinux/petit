@@ -89,6 +89,12 @@ class TestMessageFramer:
         assert all(r.text.startswith("From: ") for r in records)
         assert records[-1].end == len(buf)
 
+    def test_thread_is_grouped_per_message(self):
+        result = analyze_text("".join(fixture_lines("test15.log")))
+        assert result.driver == "EmailEntry"
+        assert result.records_in == 4
+        assert [g.count for g in result.groups] == [2, 1, 1]
+
     def test_mbox_separators(self):
         buf = ["From a@x Mon Sep 22\n", "Subject: one\n", "\n", "body\n", "\n",
                "From b@x Mon Sep 22\n", "Subject: two\n", "\n", "body\n"]
@@ -173,7 +179,7 @@ class TestHashDispatch:
 
     @pytest.mark.parametrize(
         "entry_cls",
-        [e for e in entry_types if e.__name__ != "StructuredEntry"],
+        [e for e in entry_types if e.__name__ not in ("StructuredEntry", "EmailEntry")],
         ids=lambda e: e.__name__,
     )
     def test_table_matches_the_old_chain(self, entry_cls):
