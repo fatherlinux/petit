@@ -86,9 +86,9 @@ hostile input), and add its two example heads to
 every pattern has them.
 
 The framer only decides where records begin and end. Whether their text can
-be read is still the entry drivers' vote: journalctl `short-precise`
-(`10:00:00.123456`) and fractional RFC 3339 heads (#11) frame correctly but
-aren't read by `SyslogEntry`/`RSyslogEntry` yet, and Python or Java
+be read is still the entry drivers' vote: journalctl `short-precise` heads
+(`10:00:00.123456`) frame correctly but aren't read by `SyslogEntry` yet
+(#45), and Python or Java
 application logs have no driver of their own, so they are grouped as
 `RawEntry` records, one per message.
 
