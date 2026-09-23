@@ -137,6 +137,16 @@ Track a special work you are interested in by minute
 
 	cat /var/log/messages | grep error | petit --mgraph
 
+Graph the whole log, letting petit pick seconds, minutes, hours, days, months
+or years to fit the span between the first and latest entry
+
+	petit --graph /var/log/messages
+
+Graph exactly 90 minutes (or 36h, 45d, 18mo...) from the first entry, one
+column per unit, as wide as the terminal allows
+
+	petit --span 90m /var/log/messages
+
 Show samples for each entry
 
 	petit --hash --allsample /var/log/messages

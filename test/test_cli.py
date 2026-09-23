@@ -62,8 +62,9 @@ HASH_OPTIONS = ["fingerprint", "nosample", "nofilter"]
 EMPTY_LOG_TEST_ID = "test13"
 
 
-def run_petit(*args: str) -> subprocess.CompletedProcess[str]:
-    env = dict(os.environ, PYTHONPATH=str(ROOT / "src"))
+def run_petit(*args: str, columns: int = 80) -> subprocess.CompletedProcess[str]:
+    # COLUMNS pins shutil.get_terminal_size(), which --span checks against.
+    env = dict(os.environ, PYTHONPATH=str(ROOT / "src"), COLUMNS=str(columns))
     return subprocess.run(
         [sys.executable, "-m", "petit.cli", *args],
         capture_output=True,
@@ -147,3 +148,57 @@ def test_undecodable_file_exits_1(tmp_path: Path) -> None:
     result = run_petit("--hash", str(target))
     assert result.returncode == 1
     assert "not valid text" in result.stderr
+
+
+# The fixed graph --graph should choose for each fixture, from the span
+# between its first and latest entry.
+AUTO_GRAPH = {
+    "test01": "sgraph", "test02": "sgraph", "test03": "sgraph", "test04": "sgraph",
+    "test05": "dgraph", "test06": "dgraph", "test07": "hgraph", "test08": "hgraph",
+    "test09": "dgraph", "test10": "hgraph", "test11": "dgraph", "test12": "dgraph",
+}
+
+
+@pytest.mark.parametrize(("test_id", "mode"), sorted(AUTO_GRAPH.items()))
+def test_graph_picks_the_fitting_fixed_graph(test_id: str, mode: str) -> None:
+    data_file = str(DATA_DIR / f"{test_id}.log")
+    result = run_petit("--graph", data_file)
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == run_petit(f"--{mode}", data_file).stdout
+
+
+@pytest.mark.parametrize("test_id", sorted(AUTO_GRAPH))
+@pytest.mark.parametrize(("span", "mode"), [("60s", "sgraph"), ("60m", "mgraph"),
+                                            ("24h", "hgraph"), ("31d", "dgraph"),
+                                            ("12mo", "mograph"), ("10y", "ygraph")])
+def test_span_matching_a_fixed_graph_is_that_graph(test_id: str, span: str, mode: str) -> None:
+    data_file = str(DATA_DIR / f"{test_id}.log")
+    result = run_petit("--span", span, data_file)
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == run_petit(f"--{mode}", data_file).stdout
+
+
+def test_span_draws_one_column_per_unit() -> None:
+    result = run_petit("--span", "90m", str(DATA_DIR / "test01.log"), columns=120)
+    assert result.returncode == 0, result.stderr
+    assert "#" * 90 + "\n" in result.stdout
+    assert "Duration:\t 90 minutes" in result.stdout
+
+
+@pytest.mark.parametrize("args", [
+    ("--span", "5m"),                 # too few units to label
+    ("--span", "3x"),                 # unknown unit
+    ("--span", "60m", "--wide"),      # 120 columns on an 80-column terminal
+    ("--hash", "--span", "1h"),       # --span is a graph option
+    ("--sgraph", "--span", "1h"),     # and replaces the fixed graphs
+])
+def test_bad_span_exits_2(args: tuple[str, ...]) -> None:
+    result = run_petit(*args, str(DATA_DIR / "test01.log"))
+    assert result.returncode == 2
+    assert result.stdout == ""
+
+
+def test_graph_on_empty_log_exits_1() -> None:
+    result = run_petit("--graph", str(DATA_DIR / f"{EMPTY_LOG_TEST_ID}.log"))
+    assert result.returncode == 1
+    assert "petit:" in result.stderr

@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0] - 2026-09-23
+
+### Added
+- `--graph` picks the finest of the six fixed graphs whose window, starting
+  at the first entry, reaches the latest entry (#6). Lines stamped with the
+  1900 placeholder year do not stretch the span.
+- `--span N{s,m,h,d,mo,y}` graphs exactly N units from the first entry,
+  e.g. `--span 90m`. It implies `--graph`, needs at least 6 units, and must
+  fit the terminal width (`--wide` doubles each column); otherwise exit 2.
+
+### Changed
+- The six graph classes share one constructor in `GraphHash`; each now only
+  names its unit and window. Entries are counted with a dict lookup instead
+  of a scan of the window per line.
+
+### Fixed
+- A leftover debug `print` wrote a stray number above the graph whenever the
+  window had empty buckets (20 fixtures).
+- `--mograph` and `--ygraph` stepped by 365/12 and 365 days, so two buckets
+  could land in the same month or year: "12 months" drew 11 columns, "10
+  years" drew 9, and End Time drifted (`2010-07-02 14:00:00`). They now
+  step on the calendar, draw every bucket, and end on the first of the
+  month or year.
+- The middle axis label never printed on odd-width graphs, including
+  `--dgraph`, because its position was compared as a float.
+
+Every `*graph.output` fixture that changed was regenerated and its diff
+reviewed: only the stray number, the column counts, the axis labels and
+End Time moved.
+
 ## [4.1.2] - 2026-09-23
 
 ### Fixed
