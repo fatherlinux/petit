@@ -160,13 +160,15 @@ class TestMultilineFraming:
         assert result.framer == "multiline"
         assert result.records_in == 50_000
 
+    # Explicit ids: pytest otherwise names each case after its million-character
+    # value, and `pytest -v` prints that name as one line of the CI log.
     @pytest.mark.parametrize("line", [
         "a" * 1_000_000,
         "a " * 500_000,
         "[" + "0" * 1_000_000,
         "<1>" + "9" * 1_000_000,
         "ERROR" + " " * 1_000_000,
-    ])
+    ], ids=["letters", "words", "bracket-digits", "pri-digits", "level-spaces"])
     def test_head_patterns_on_huge_lines(self, line):
         start = time.perf_counter()
         for pattern in framing.HEAD_PATTERNS.values():
