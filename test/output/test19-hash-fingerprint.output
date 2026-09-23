@@ -1,0 +1,12 @@
+3:	Started session-4.scope - Session 4 of User alice.
+2:	<info> [1789845681.1001] device (wlan0): state change: config -> ip-config
+2:	Object .GProxyVolume (0x55669dd5ac50), has been already disposed — impossible to access it. == Stack trace for context 0x55669424a1f0 == #0 556694310aa8 i resource:///org/gnome/shell/ui/components/autorunManager.js:246 (3fa1d2c0 @ 12) #1 5566943109f8 i resource:///org/gnome/shell/ui/components/autorunManager.js:212 (3fa1d2a0 @ 40) #2 556694310968 i resource:///org/gnome/shell/ui/init.js:21 (3fa1a020 @ 48)
+1:	<msg> [base-manager] couldn't check support for device '/sys/devices/pci0000:00/0000:00:14.3'
+1:	<info> [1789845681.2002] device (wlan0): state change: ip-config -> activated
+1:	Traceback (most recent call last): File "/usr/libexec/tuned/tuned.py", line 88, in <module> daemon.run() File "/usr/lib/python3.12/site-packages/tuned/daemon/daemon.py", line 211, in run self._thread.start() RuntimeError: can't start new thread
+1:	Object .GProxyVolume (0x55669dd5c010), has been already disposed — impossible to access it. == Stack trace for context 0x55669424a1f0 == #0 556694310aa8 i resource:///org/gnome/shell/ui/components/autorunManager.js:246 (3fa1d2c0 @ 12)
+1:	usb 3-2: New USB device found, idVendor=046d, idProduct=c52b, bcdDevice=12.11
+1:	usb 3-2: new full-speed USB device number 7 using xhci_hcd
+1:	alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; COMMAND=/usr/bin/dnf upgrade
+1:	pam_unix(sudo:session): session opened for user root(uid=0) by alice(uid=1000)
+1:	tuned.service: Main process exited, code=exited, status=1/FAILURE

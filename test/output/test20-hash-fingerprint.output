@@ -1,0 +1,10 @@
+2:	GC pause (G1 Evacuation Pause) 21ms
+2:	10.0.0.5 GET /index.html 200
+1:	10.0.0.5 GET /missing 404
+1:	connect from unknown[192.0.2.4]
+1:	disconnect from unknown[192.0.2.4]
+1:	checkpoint complete: wrote 118 buffers (0.7%)
+1:	checkpoint starting: time
+1:	Accepted publickey for deploy from 10.0.0.7 port 51122 ssh2
+1:	pam_unix(su:session): session closed for user operator
+1:	Started backup.service - Nightly backup.

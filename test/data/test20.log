@@ -1,0 +1,12 @@
+2026-09-21T09:00:00.101+02:00 web01.example.eu nginx[811]: 10.0.0.5 GET /index.html 200
+2026-09-21T09:00:00.311+02:00 web01.example.eu nginx[811]: 10.0.0.9 GET /index.html 200
+2026-09-21T09:00:01.004+02:00 web01.example.eu sshd[2211]: Accepted publickey for deploy from 10.0.0.7 port 51122 ssh2
+2026-09-21T09:00:02+02:00 web01.example.eu systemd[1]: Started backup.service - Nightly backup.
+2026-09-21T07:00:03Z db01.example.eu postgres[992]: checkpoint starting: time
+2026-09-21T07:00:05.5Z db01.example.eu postgres[992]: checkpoint complete: wrote 118 buffers (0.7%)
+2026-09-21T12:30:07.123456789+05:30 app01.example.in java[4410]: GC pause (G1 Evacuation Pause) 21ms
+2026-09-21T12:30:09.000000+05:30 app01.example.in java[4410]: GC pause (G1 Evacuation Pause) 19ms
+2026-09-21T09:01:10.777+02:00 web01.example.eu nginx[811]: 10.0.0.5 GET /missing 404
+2026-09-21T03:01:11-0400 mail01.example.com postfix/smtpd[3321]: connect from unknown[192.0.2.4]
+2026-09-21T03:01:12.250-04:00 mail01.example.com postfix/smtpd[3321]: disconnect from unknown[192.0.2.4]
+2020-09-27T00:00:03.766699+00:00 host02.example.com su: pam_unix(su:session): session closed for user operator
