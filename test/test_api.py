@@ -451,13 +451,14 @@ class TestFingerprintCollapse:
         assert first.groups == second.groups
 
     def test_corpora_are_parsed_once(self, monkeypatch):
-        analyze_text(fixture_text("test05.log"), collapse_fingerprints=True)
+        first = analyze_text(fixture_text("test05.log"), collapse_fingerprints=True)
 
         def boom(*_args, **_kwargs):
             raise AssertionError("corpus re-read from disk")
 
         monkeypatch.setattr("petit.LogHash.CrunchLog", boom)
-        analyze_text(fixture_text("test05.log"), collapse_fingerprints=True)
+        second = analyze_text(fixture_text("test05.log"), collapse_fingerprints=True)
+        assert second.fingerprints_matched == first.fingerprints_matched == ["rhel4-reboot.fp"]
 
 
 class TestOneParser:

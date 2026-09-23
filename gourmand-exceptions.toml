@@ -144,3 +144,9 @@ check = "CQ005-verbose_comments"
 path = "src/petit/cli.py"
 classification = "by_design"
 justification = "The header block is the mandatory AGPL-3.0-or-later license notice, not narrative comment -- there is no shorter form that satisfies the license."
+
+[[exceptions]]
+check = "CH006-primitive_obsession"
+path = "src/petit/api.py"
+classification = "by_design"
+justification = "analyze_text/hash_text take two independent opt-ins, strict (raise instead of degrading to RawEntry) and collapse_fingerprints (delete routine event sequences). They don't combine into modes, and collapse_fingerprints: bool is the signature agreed with the library's consumer in crunchtools/petit#31, so it stays a keyword-only flag rather than an options object."
