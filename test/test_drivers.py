@@ -274,3 +274,23 @@ def test_every_hash_driver_has_a_table(hash_cls: type[SuperHash]) -> None:
     assert tables, f"{hash_cls.__name__} has no MERGE/NO_MERGE table"
     assert tables[0].MERGE
     assert tables[0].NO_MERGE
+
+
+# The clock column must be a whole HH:MM:SS. A malformed character class
+# once let "10:00" or "x10:00:01" through, so the driver was chosen for a
+# line it then could not unpack (#2).
+@pytest.mark.parametrize(("entry_cls", "tail"), [
+    (SyslogEntry, "cron[1]: job started"),
+    (SecureLogEntry, "sshd[1]: pam_unix(sshd:session): session opened"),
+])
+@pytest.mark.parametrize(("clock", "expected"), [
+    ("10:00:01", True),
+    ("10:00", False),
+    ("x10:00:01", False),
+    ("10:00:01x", False),
+    ("{2}:00:01", False),
+])
+def test_clock_column_must_be_hh_mm_ss(entry_cls: type[LogEntry], tail: str,
+                                       clock: str, expected: bool) -> None:
+    line = f"Jul 20 {clock} host {tail}".split()
+    assert entry_cls.is_type(line) is expected

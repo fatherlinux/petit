@@ -452,7 +452,7 @@ class SyslogEntry(LogEntry):
         return bool(
             re.search("[A-Z][a-z]{2}", line[0])
             and re.search("[0-9][0-9]?", line[1])
-            and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}", line[2])
+            and re.fullmatch("[0-9]{2}:[0-9]{2}:[0-9]{2}", line[2])
             and not (re.search("^pam_", line[5]) or re.search(r"^sshd\[", line[4]))
         )
 
@@ -676,7 +676,7 @@ class SecureLogEntry(LogEntry):
         # Look for something similar to: "29 11:53:08" in third column
         return bool(
             re.search("[0-9][0-9]?", line[1])
-            and re.search("[0-9{2}:[0-9]{2}:[0-9]{2}", line[2])
+            and re.fullmatch("[0-9]{2}:[0-9]{2}:[0-9]{2}", line[2])
             and (re.search("^pam_", line[5]) or re.search(r"^sshd\[", line[4]))
         )
 
