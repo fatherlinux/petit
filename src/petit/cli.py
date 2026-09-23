@@ -35,6 +35,8 @@ from __future__ import annotations
 
 import argparse
 import logging
+import re
+import shutil
 import signal
 import sys
 from collections.abc import Callable
@@ -46,16 +48,39 @@ from petit.api import Analysis, HashMode, analyze_text
 from petit.CrunchLog import CrunchLog, read_source
 from petit.errors import PetitError
 from petit.LogGraph import (
+    GRAPH_FOR_UNIT,
     DaysGraph,
+    GraphHash,
     HoursGraph,
     MinutesGraph,
     MonthsGraph,
     SecondsGraph,
     YearsGraph,
+    auto_graph,
 )
 from petit.records import FRAMER_NAMES
 
-AnyGraph = SecondsGraph | MinutesGraph | HoursGraph | DaysGraph | MonthsGraph | YearsGraph
+GRAPH_MODES = frozenset({
+    "mode_graph", "mode_sgraph", "mode_mgraph", "mode_hgraph",
+    "mode_dgraph", "mode_mograph", "mode_ygraph",
+})
+
+# --span suffixes. "mo" is listed before "m" so the regex tries it first.
+SPAN_UNITS = {"mo": "month", "s": "second", "m": "minute", "h": "hour", "d": "day", "y": "year"}
+SPAN_RE = re.compile(r"^(\d+)(" + "|".join(SPAN_UNITS) + r")$")
+# Fewest buckets that still leave room for the begin/middle/end axis labels.
+MIN_SPAN = 6
+
+
+def parse_span(value: str) -> tuple[str, int]:
+    """argparse type for --span: `90m` -> ("minute", 90)."""
+    match = SPAN_RE.match(value)
+    if match is None:
+        raise argparse.ArgumentTypeError(
+            f"invalid span {value!r}: expected a count and one of "
+            + ", ".join(SPAN_UNITS) + " (e.g. 90m, 36h, 18mo)"
+        )
+    return SPAN_UNITS[match.group(2)], int(match.group(1))
 
 # Process Signals
 
@@ -200,6 +225,20 @@ def build_parser() -> argparse.ArgumentParser:
                          const="mode_ygraph",
                          help="show graph of first 10 years")
 
+    parser.add_argument("--graph",
+                         dest="mode",
+                         action="store_const",
+                         const="mode_graph",
+                         help="show a graph, choosing seconds through years to fit the log")
+
+    parser.add_argument("--span",
+                         dest="span",
+                         type=parse_span,
+                         default=None,
+                         metavar="N{s,m,h,d,mo,y}",
+                         help="graph exactly N units from the first entry, e.g. 90m or 36h "
+                              "(implies --graph; limited by terminal width)")
+
     # -V/--version is the default when no mode flag is given at all, exactly
     # as running plain `petit` always has.
     parser.set_defaults(mode="mode_version")
@@ -207,6 +246,28 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("file", nargs="?", default=None)
 
     return parser
+
+
+def check_span(parser: argparse.ArgumentParser, args: argparse.Namespace) -> None:
+    """--span stands alone or goes with --graph, and has to fit on screen.
+
+    Exits 2 through parser.error() like any other usage mistake.
+    """
+    if args.span is None:
+        return
+    if args.mode == "mode_version":
+        # No mode flag given: --span on its own means --graph.
+        args.mode = "mode_graph"
+    elif args.mode != "mode_graph":
+        parser.error("--span only applies to --graph")
+
+    _unit, count = args.span
+    if count < MIN_SPAN:
+        parser.error(f"--span needs at least {MIN_SPAN} units to label the axis")
+    columns = count * (2 if args.wide else 1)
+    available = shutil.get_terminal_size().columns
+    if columns > available:
+        parser.error(f"--span needs {columns} columns; the terminal has {available}")
 
 
 def mode_version(_args: argparse.Namespace, _filename: str) -> None:
@@ -275,7 +336,7 @@ def mode_host(args: argparse.Namespace, filename: str) -> None:
 
 
 def _run_graph_mode(
-    graph_cls: type[AnyGraph],
+    graph_cls: type[GraphHash] | None,
     args: argparse.Namespace,
     filename: str,
 ) -> None:
@@ -283,9 +344,15 @@ def _run_graph_mode(
 
     Every --?graph mode differs only in which GraphHash subclass it builds;
     tick/wide/display are identical, so they share this one implementation.
+    `graph_cls` None is --graph: --span's unit and count if given, otherwise
+    whichever fixed graph fits the log.
     """
     log = CrunchLog.from_text(read_source(filename), source_name=filename, framer=args.framer)
-    x = graph_cls(log)
+    if args.span is not None:
+        unit, count = args.span
+        x = GRAPH_FOR_UNIT[unit](log, count)
+    else:
+        x = (graph_cls or auto_graph(log))(log)
     x.tick = args.tick
     x.wide = args.wide
     x.display()
@@ -303,6 +370,7 @@ MODE_HANDLERS: dict[str, Callable[[argparse.Namespace, str], None]] = {
     "mode_dgraph": lambda args, filename: _run_graph_mode(DaysGraph, args, filename),
     "mode_mograph": lambda args, filename: _run_graph_mode(MonthsGraph, args, filename),
     "mode_ygraph": lambda args, filename: _run_graph_mode(YearsGraph, args, filename),
+    "mode_graph": lambda args, filename: _run_graph_mode(None, args, filename),
 }
 
 
@@ -314,6 +382,7 @@ def main() -> int:
     """
     parser = build_parser()
     args = parser.parse_args()
+    check_span(parser, args)
 
     filename = args.file if args.file is not None else "__none__"
 

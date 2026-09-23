@@ -10,32 +10,62 @@ from typing import TYPE_CHECKING
 from .errors import EmptyLogError
 
 if TYPE_CHECKING:
-    from .CrunchLog import CrunchLog
+    from .CrunchLog import CrunchLog, LogEntry
 
 # Calendar constants used to size and label graphs.
 HOURS_PER_DAY = 24
 MONTHS_PER_YEAR = 12
-DAYS_PER_YEAR = 365
 # Not a true calendar constant — how many days DaysGraph shows (roughly a month).
 DAYS_GRAPH_WINDOW = 31
 # GraphHash.display() prints the year's last two digits on the x-axis.
 YEAR_LABEL_MODULUS = 2000
+# set_abnormal()/set_blank() stamp unparseable lines with this year.
+SENTINEL_YEAR = 1900
+
+# Timestamp fields, coarsest first. A graph in unit U buckets on the fields up
+# to and including U; everything finer is floored away.
+_FIELDS = ("year", "month", "day", "hour", "minute", "second")
+
+
+def _entry_time(entry: LogEntry, unit: str) -> datetime.datetime:
+    """The entry's timestamp floored to `unit`."""
+    depth = _FIELDS.index(unit) + 1
+    parts = [int(getattr(entry, f)) for f in _FIELDS[:depth]]
+    # month and day floor to 1, the clock fields to 0
+    parts += [1, 1, 0, 0, 0][depth - 1:]
+    year, month, day, hour, minute, second = parts
+    return datetime.datetime(year, month, day, hour, minute, second)
+
+
+def _entry_key(entry: LogEntry, unit: str) -> str:
+    return "".join(getattr(entry, f) for f in _FIELDS[:_FIELDS.index(unit) + 1])
+
+
+def _time_key(when: datetime.datetime, unit: str) -> str:
+    # Same shape _entry_key builds from the drivers' zero-padded fields.
+    return when.strftime("%Y%m%d%H%M%S")[:4 + 2 * _FIELDS.index(unit)]
+
+
+def _step(start: datetime.datetime, unit: str, i: int) -> datetime.datetime:
+    """`start` moved forward `i` units, on the calendar for months and years."""
+    if unit == "year":
+        return start.replace(year=start.year + i)
+    if unit == "month":
+        months = start.month - 1 + i
+        return start.replace(year=start.year + months // MONTHS_PER_YEAR,
+                             month=months % MONTHS_PER_YEAR + 1)
+    return start + datetime.timedelta(**{unit + "s": i})
 
 
 class GraphHash(UserDict[str, int]):
-    """Interface class used to control structure & use of all GraphHash subtypes"""
+    """A count of entries per unit of time, over a fixed window that starts
+    at the first entry. Subclasses pick the unit and the default window."""
 
-    start_date: datetime.date = datetime.date.today()
-    end_date: datetime.date = datetime.date.today()
-    middle_date: datetime.date
+    start_date: datetime.datetime
+    end_date: datetime.datetime
+    middle_date: datetime.datetime
     max_value = 0
     min_value = 0
-    second: int | str = 0
-    minute: int | str = 0
-    hour: int | str = 0
-    day: int | str = 0
-    month: int | str = 0
-    year: int | str = 0
     scale = 0.0
     tick = "#"
     # Set by the CLI after construction (`x.wide = options.wide`); never
@@ -43,6 +73,31 @@ class GraphHash(UserDict[str, int]):
     wide = False
     duration: int = 0
     unit = ""
+
+    def __init__(self, log: CrunchLog, duration: int | None = None) -> None:
+        UserDict.__init__(self)
+
+        if len(log) == 0:
+            raise EmptyLogError("no entries to graph")
+
+        if duration is not None:
+            self.duration = duration
+
+        # Zero out each entry, this will fill in blanks which
+        # may be in the log, especially sparse logs.
+        self.start_date = _entry_time(log[0], self.unit)
+        for i in range(self.duration):
+            self.end_date = _step(self.start_date, self.unit, i)
+            self.zero(_time_key(self.end_date, self.unit))
+            if i == self.duration // 2:
+                self.middle_date = self.end_date
+
+        for entry in log:
+            key = _entry_key(entry, self.unit)
+            if key in self:
+                self.increment(key)
+
+        self.build_calculations()
 
     def increment(self, key: str) -> None:
         """Adds new entry. Similar to append method on list"""
@@ -80,7 +135,7 @@ class GraphHash(UserDict[str, int]):
         graph_height = 6
         graph_width = len(self)
         scale = float(float(self.max_value - self.min_value) / float(graph_height))
-        graph_position: dict[str, float] = {}
+        graph_position: dict[str, int] = {}
         graph_value: dict[str, int] = {}
 
         # Debug output
@@ -109,7 +164,6 @@ class GraphHash(UserDict[str, int]):
             for key in list(self.keys()):
                 if self[key] < graph_min_value and self[key] != 0:
                     graph_min_value = self[key] / 2
-                    print(graph_min_value)
 
         # Normalize data
         for key in list(self.keys()):
@@ -151,14 +205,14 @@ class GraphHash(UserDict[str, int]):
 
             # Calculate Positions
             graph_position["begin"] = 1
-            graph_position["middle"] = graph_width / 2 - ((graph_width / 2) % 2)
+            graph_position["middle"] = graph_width // 2 - ((graph_width // 2) % 2)
             graph_position["end"] = graph_width - 3
 
         else:
 
             # Calculate Positions
             graph_position["begin"] = 1
-            graph_position["middle"] = graph_width / 2
+            graph_position["middle"] = graph_width // 2
             graph_position["end"] = graph_width - 2
 
         # Calculate Values
@@ -189,369 +243,74 @@ class GraphHash(UserDict[str, int]):
         print()
 
 
+
+
 class SecondsGraph(GraphHash):
     """60 second graph subtype"""
-
-    def __init__(self, log: CrunchLog) -> None:
-
-        # Call parent init
-        UserDict.__init__(self)
-
-        # Turn first line into syslog
-        if len(log) > 0:
-            first_entry = log[0]
-        else:
-            raise EmptyLogError("no entries to graph")
-
-        # Local Variables
-        self.second = first_entry.second
-        self.minute = first_entry.minute
-        self.hour = first_entry.hour
-        self.day = first_entry.day
-        self.month = str(first_entry.month)
-        self.year = first_entry.year
-        self.unit = "second"
-        self.duration = 60
-
-        start_date = datetime.datetime(
-            int(self.year), int(self.month), int(self.day),
-            int(self.hour), int(self.minute), int(self.second),
-        )
-        middle_date = start_date
-
-        # Zero out each entry, this will fill in blanks which
-        # may be in the log, especially sparse logs.
-        for i in range(self.duration):
-
-            # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(seconds=i)
-            end_key = (
-                f"{end_date.year}{end_date.month:02d}{end_date.day:02d}"
-                f"{end_date.hour:02d}{end_date.minute:02d}{end_date.second:02d}"
-            )
-            self.zero(end_key)
-
-            # Check for middle date and save
-            if i == (self.duration / 2):
-                middle_date = end_date
-
-        # Save final values
-        self.start_date = start_date
-        self.middle_date = middle_date
-        self.end_date = end_date
-
-        for entry in log:
-
-            # Create key rooted in time
-            key = entry.year + entry.month + entry.day + entry.hour + entry.minute + entry.second
-
-            # Check to make sure key is found in the list built above
-            if key in list(self.keys()):
-                self.increment(key)
-
-        self.build_calculations()
+    unit = "second"
+    duration = 60
 
 
 class MinutesGraph(GraphHash):
     """60 minute graph subtype"""
-
-    def __init__(self, log: CrunchLog) -> None:
-
-        # Call parent init
-        UserDict.__init__(self)
-
-        # Turn first line into syslog
-        if len(log) > 0:
-            first_entry = log[0]
-        else:
-            raise EmptyLogError("no entries to graph")
-
-        # Local Variables
-        self.second = 0
-        self.minute = first_entry.minute
-        self.hour = first_entry.hour
-        self.day = first_entry.day
-        self.month = str(first_entry.month)
-        self.year = first_entry.year
-        self.unit = "minute"
-        self.duration = 60
-
-        start_date = datetime.datetime(
-            int(self.year), int(self.month), int(self.day),
-            int(self.hour), int(self.minute), int(self.second),
-        )
-        middle_date = start_date
-
-        # Zero out each entry, this will fill in blanks which
-        # may be in the log, especially sparse logs.
-        for i in range(self.duration):
-
-            # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(minutes=i)
-            end_key = (
-                f"{end_date.year}{end_date.month:02d}{end_date.day:02d}"
-                f"{end_date.hour:02d}{end_date.minute:02d}"
-            )
-            self.zero(end_key)
-
-            # Check for middle date and save
-            if i == (self.duration / 2):
-                middle_date = end_date
-
-        # Save final values
-        self.start_date = start_date
-        self.middle_date = middle_date
-        self.end_date = end_date
-
-        for entry in log:
-
-            # Create key rooted in time
-            key = entry.year + entry.month + entry.day + entry.hour + entry.minute
-
-            # Check to make sure key is found in the list built above
-            if key in list(self.keys()):
-                self.increment(key)
-
-        self.build_calculations()
+    unit = "minute"
+    duration = 60
 
 
 class HoursGraph(GraphHash):
     """24 hour graph subtype"""
-
-    def __init__(self, log: CrunchLog) -> None:
-
-        # Call parent init
-        UserDict.__init__(self)
-
-        # Turn first line into syslog
-        if len(log) > 0:
-            first_entry = log[0]
-        else:
-            raise EmptyLogError("no entries to graph")
-
-        # Local Variables
-        self.second = 0
-        self.minute = 0
-        self.hour = first_entry.hour
-        self.day = first_entry.day
-        self.month = str(first_entry.month)
-        self.year = first_entry.year
-        self.unit = "hour"
-        self.duration = HOURS_PER_DAY
-
-        start_date = datetime.datetime(
-            int(self.year), int(self.month), int(self.day),
-            int(self.hour), int(self.minute), int(self.second),
-        )
-        middle_date = start_date
-
-        # Zero out each entry, this will fill in blanks which
-        # may be in the log, especially sparse logs.
-        for i in range(self.duration):
-
-            # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(hours=i)
-            end_key = f"{end_date.year}{end_date.month:02d}{end_date.day:02d}{end_date.hour:02d}"
-            self.zero(end_key)
-
-            # Check for middle date and save
-            if i == (self.duration / 2):
-                middle_date = end_date
-
-        # Save final values
-        self.start_date = start_date
-        self.middle_date = middle_date
-        self.end_date = end_date
-
-        for entry in log:
-
-            # Create key rooted in time
-            key = entry.year + entry.month + entry.day + entry.hour
-
-            # Check to make sure key is found in the list built above
-            if key in list(self.keys()):
-                self.increment(key)
-
-        self.build_calculations()
+    unit = "hour"
+    duration = HOURS_PER_DAY
 
 
 class DaysGraph(GraphHash):
-    """30 day graph subtype"""
-
-    def __init__(self, log: CrunchLog) -> None:
-
-        # Call parent init
-        UserDict.__init__(self)
-
-        # Turn first line into syslog
-        if len(log) > 0:
-            first_entry = log[0]
-        else:
-            raise EmptyLogError("no entries to graph")
-
-        # Local Variables
-        self.second = 0
-        self.minute = 0
-        self.hour = 0
-        self.day = first_entry.day
-        self.month = str(first_entry.month)
-        self.year = first_entry.year
-        self.unit = "day"
-        self.duration = DAYS_GRAPH_WINDOW
-
-        start_date = datetime.datetime(
-            int(self.year), int(self.month), int(self.day),
-            int(self.hour), int(self.minute), int(self.second),
-        )
-        middle_date = start_date
-
-        # Zero out each entry, this will fill in blanks which
-        # may be in the log, especially sparse logs.
-        for i in range(self.duration):
-
-            # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(days=i)
-            end_key = f"{end_date.year}{end_date.month:02d}{end_date.day:02d}"
-            self.zero(end_key)
-
-            # Check for middle date and save
-            if i == (int(self.duration / 2)):
-                middle_date = end_date
-
-        # Save final values
-        self.start_date = start_date
-        self.middle_date = middle_date
-        self.end_date = end_date
-
-        for entry in log:
-
-            # Create key rooted in time
-            key = entry.year + entry.month + entry.day
-
-            # Check to make sure key is found in the list built above
-            if key in list(self.keys()):
-                self.increment(key)
-
-        self.build_calculations()
+    """31 day graph subtype"""
+    unit = "day"
+    duration = DAYS_GRAPH_WINDOW
 
 
 class MonthsGraph(GraphHash):
     """12 month graph subtype"""
-
-    def __init__(self, log: CrunchLog) -> None:
-
-        # Call parent init
-        UserDict.__init__(self)
-
-        # Turn first line into syslog
-        if len(log) > 0:
-            first_entry = log[0]
-        else:
-            raise EmptyLogError("no entries to graph")
-
-        # Local Variables
-        self.second = 0
-        self.minute = 0
-        self.hour = 0
-        self.day = 1
-        self.month = str(first_entry.month)
-        self.year = first_entry.year
-        self.unit = "month"
-        self.duration = MONTHS_PER_YEAR
-
-        start_date = datetime.datetime(
-            int(self.year), int(self.month), int(self.day),
-            int(self.hour), int(self.minute), int(self.second),
-        )
-        middle_date = start_date
-
-        # Zero out each entry, this will fill in blanks which
-        # may be in the log, especially sparse logs.
-        for i in range(self.duration):
-
-            # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(days=i * DAYS_PER_YEAR / MONTHS_PER_YEAR + 1)
-            end_key = f"{end_date.year}{end_date.month:02d}"
-            self.zero(end_key)
-            logging.debug("End Date: " + str(end_date))
-            logging.debug("End Key: " + end_key)
-
-            # Check for middle date and save
-            if i == (self.duration / 2):
-                middle_date = end_date
-
-        # Save final values
-        self.start_date = start_date
-        self.middle_date = middle_date
-        self.end_date = end_date
-
-        for entry in log:
-
-            # Create key rooted in time
-            key = entry.year + entry.month
-
-            # Check to make sure key is found in the list built above
-            if key in list(self.keys()):
-                self.increment(key)
-
-        self.build_calculations()
+    unit = "month"
+    duration = MONTHS_PER_YEAR
 
 
 class YearsGraph(GraphHash):
     """10 year graph subtype"""
+    unit = "year"
+    duration = 10
 
-    def __init__(self, log: CrunchLog) -> None:
 
-        # Call parent init
-        UserDict.__init__(self)
+# Finest first: auto_graph() takes the first one whose window fits the log.
+GRAPHS: tuple[type[GraphHash], ...] = (
+    SecondsGraph, MinutesGraph, HoursGraph, DaysGraph, MonthsGraph, YearsGraph,
+)
+GRAPH_FOR_UNIT: dict[str, type[GraphHash]] = {g.unit: g for g in GRAPHS}
 
-        # Turn first line into syslog
-        if len(log) > 0:
-            first_entry = log[0]
-        else:
-            raise EmptyLogError("no entries to graph")
 
-        # Local Variables
-        self.second = 0
-        self.minute = 0
-        self.hour = 0
-        self.day = 1
-        self.month = 1
-        self.year = first_entry.year
-        self.unit = "year"
-        self.duration = 10
+def auto_graph(log: CrunchLog) -> type[GraphHash]:
+    """The finest fixed graph whose window, starting at the first entry,
+    reaches the latest entry. Falls back to YearsGraph.
 
-        start_date = datetime.datetime(
-            int(self.year), int(self.month), int(self.day),
-            int(self.hour), int(self.minute), int(self.second),
-        )
-        middle_date = start_date
+    Lines stamped with the sentinel year by set_abnormal() carry no real time,
+    so they don't stretch the span unless the log itself starts there.
+    """
+    if len(log) == 0:
+        raise EmptyLogError("no entries to graph")
 
-        # Zero out each entry, this will fill in blanks which
-        # may be in the log, especially sparse logs.
-        for i in range(self.duration):
+    first = _entry_time(log[0], "second")
+    latest = first
+    for entry in log:
+        try:
+            when = _entry_time(entry, "second")
+        except ValueError:
+            continue
+        if when.year == SENTINEL_YEAR and first.year != SENTINEL_YEAR:
+            continue
+        latest = max(latest, when)
 
-            # Calculate the current date, the last one will be the end date
-            end_date = start_date + datetime.timedelta(days=i * DAYS_PER_YEAR)
-            end_key = str(end_date.year)
-            self.zero(end_key)
-
-            # Check for middle date and save
-            if i == (self.duration / 2):
-                middle_date = end_date
-
-        # Save final values
-        self.start_date = start_date
-        self.middle_date = middle_date
-        self.end_date = end_date
-
-        for entry in log:
-
-            # Create key rooted in time
-            key = entry.year
-
-            # Check to make sure key is found in the list built above
-            if key in list(self.keys()):
-                self.increment(key)
-
-        self.build_calculations()
+    for graph in GRAPHS:
+        start = _entry_time(log[0], graph.unit)
+        if latest < _step(start, graph.unit, graph.duration):
+            return graph
+    return YearsGraph
