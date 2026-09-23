@@ -150,24 +150,39 @@ def test_undecodable_file_exits_1(tmp_path: Path) -> None:
     assert "not valid text" in result.stderr
 
 
-# The fixed graph --graph should choose for each fixture, from the span
-# between its first and latest entry.
-AUTO_GRAPH = {
-    "test01": "sgraph", "test02": "sgraph", "test03": "sgraph", "test04": "sgraph",
-    "test05": "dgraph", "test06": "dgraph", "test07": "hgraph", "test08": "hgraph",
-    "test09": "dgraph", "test10": "hgraph", "test11": "dgraph", "test12": "dgraph",
-}
+GRAPH_TEST_IDS = [f"test{i:02d}" for i in range(1, 13)]
 
 
-@pytest.mark.parametrize(("test_id", "mode"), sorted(AUTO_GRAPH.items()))
-def test_graph_picks_the_fitting_fixed_graph(test_id: str, mode: str) -> None:
-    data_file = str(DATA_DIR / f"{test_id}.log")
-    result = run_petit("--graph", data_file)
+def _drawing(stdout: str) -> list[str]:
+    """The bar rows, the baseline and the axis labels: everything above the
+    blank line that starts the summary."""
+    return stdout.strip("\n").split("\n\n")[0].splitlines()
+
+
+@pytest.mark.parametrize("test_id", GRAPH_TEST_IDS)
+@pytest.mark.parametrize("columns", [40, 80, 200])
+@pytest.mark.parametrize("wide", [False, True])
+def test_graph_fits_the_terminal(test_id: str, columns: int, wide: bool) -> None:
+    flags = ["--graph", "--wide"] if wide else ["--graph"]
+    result = run_petit(*flags, str(DATA_DIR / f"{test_id}.log"), columns=columns)
     assert result.returncode == 0, result.stderr
-    assert result.stdout == run_petit(f"--{mode}", data_file).stdout
+    assert all(len(line) <= columns for line in _drawing(result.stdout))
 
 
-@pytest.mark.parametrize("test_id", sorted(AUTO_GRAPH))
+def test_graph_wide_uses_half_the_columns() -> None:
+    result = run_petit("--graph", "--wide", str(DATA_DIR / "test09.log"), columns=80)
+    assert result.returncode == 0, result.stderr
+    # test09 covers 6.5 days: 2- and 3-hour columns need 79 and 53, over 40.
+    assert "Duration:\t 162 hours (6-hour columns)" in result.stdout
+
+
+def test_graph_names_multi_unit_columns() -> None:
+    result = run_petit("--graph", str(DATA_DIR / "test05.log"), columns=80)
+    assert result.returncode == 0, result.stderr
+    assert "(6-hour columns)" in result.stdout
+
+
+@pytest.mark.parametrize("test_id", GRAPH_TEST_IDS)
 @pytest.mark.parametrize(("span", "mode"), [("60s", "sgraph"), ("60m", "mgraph"),
                                             ("24h", "hgraph"), ("31d", "dgraph"),
                                             ("12mo", "mograph"), ("10y", "ygraph")])
@@ -181,6 +196,7 @@ def test_span_matching_a_fixed_graph_is_that_graph(test_id: str, span: str, mode
 def test_span_draws_one_column_per_unit() -> None:
     result = run_petit("--span", "90m", str(DATA_DIR / "test01.log"), columns=120)
     assert result.returncode == 0, result.stderr
+    assert all(len(line) <= 120 for line in _drawing(result.stdout))
     assert "#" * 90 + "\n" in result.stdout
     assert "Duration:\t 90 minutes" in result.stdout
 
@@ -188,7 +204,8 @@ def test_span_draws_one_column_per_unit() -> None:
 @pytest.mark.parametrize("args", [
     ("--span", "5m"),                 # too few units to label
     ("--span", "3x"),                 # unknown unit
-    ("--span", "60m", "--wide"),      # 120 columns on an 80-column terminal
+    ("--span", "60m", "--wide"),      # 122 columns on an 80-column terminal
+    ("--span", "79m"),                # the axis labels need 81
     ("--hash", "--span", "1h"),       # --span is a graph option
     ("--sgraph", "--span", "1h"),     # and replaces the fixed graphs
 ])
