@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-09-22
+
+### Changed
+- **Breaking: input is framed into records before driver selection.**
+  `--framer {auto,line,json,message}` and `analyze_text(framer=...)` default
+  to `auto` for both the CLI and the library, so `petit --hash big.json` and
+  `petit --hash thread.eml` now group per JSON object and per message rather
+  than per line. `--framer line` restores the old behaviour. test01–test13
+  are byte-identical: no framer but the line framer claims them.
+- **Breaking: `Analysis.lines_in` and `lines_grouped` count source lines.**
+  `lines_in` is the number of lines in the input, and `lines_grouped` is the
+  number of source lines covered by grouped records, each line counted once.
+  With one record per line both are unchanged. `records_in`,
+  `records_grouped` and `framer` are new.
+- `SuperHash.manufacture()` looks the hash driver up in a `HASH_FOR` table
+  along the entry class's MRO, replacing an if/elif over the class of the
+  last entry. A subclass of an entry driver now gets its parent's hash
+  driver instead of whichever branch matched first. A characterization test
+  pins every existing entry driver to the hash driver the old chain chose.
+- Driver detection looks at the first 2000 characters of a record
+  (`DETECT_MAX_CHARS`).
+
+### Added
+- `petit.records`: `Record`, `JsonFramer` (JSON arrays of objects and JSON
+  Lines), `MessageFramer` (mail threads and mbox), `LineFramer`.
+- `StructuredEntry` and `StructuredHash`: JSON records are fingerprinted by
+  shape, with keys verbatim, values normalized by type, and strings of 200
+  characters or fewer kept verbatim so that prose can't merge away.
+- `analyze_text(max_record_chars=4096)`: bounds the text a fingerprint key is
+  built from. Samples and raw text are never truncated.
+- `Group.sample_spans`: the source lines each sample's record covered.
+- `test/data/test14.log` (JSON array) and `test15.log` (mail thread) with
+  fixtures, `test/test_records.py`, and `test/test_hostile.py`: deep nesting,
+  oversized records, pathological regex probes, and odd bytes, each with a
+  time budget.
+- Constitution 1.1.0: a hostile-input clause in Testing, and the rule that the
+  CLI is a shell over the library.
+
+### Fixed
+- The man page documented `--fingerprint` as `--finterprint`.
+
 ## [3.2.0] - 2026-09-22
 
 ### Changed

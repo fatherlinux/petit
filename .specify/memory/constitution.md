@@ -1,7 +1,8 @@
 # petit Constitution
 
-> **Version:** 1.0.0
+> **Version:** 1.1.0
 > **Ratified:** 2026-09-20
+> **Amended:** 2026-09-22
 > **Status:** Active
 > **Inherits:** [crunchtools/constitution](https://github.com/crunchtools/constitution) v1.15.0
 > **Profile:** CLI Tool
@@ -39,6 +40,7 @@ Section VIII's PyPI-name-matches-tool-name convention, not an oversight.
 
 Built with `argparse`. Flags: `-v/--verbose`, `--sample`/`--nosample`/
 `--allsample`, `--filter`/`--nofilter`, `--wide`, `--tick`, `--fingerprint`,
+`--framer {auto,line,json,message}`,
 `-V/--version`, and one mode flag per report: `--hash`, `--wordcount`,
 `--daemon`, `--host`, `--sgraph`, `--mgraph`, `--hgraph`, `--dgraph`,
 `--mograph`, `--ygraph`. One optional positional `file`; reads stdin when
@@ -60,6 +62,12 @@ makes no network calls and needs no credentials, so the
 `Analysis`, and the `PetitError` hierarchy) is a supported embedding surface
 independent of the CLI — see `petit/api.py`'s module docstring.
 
+The CLI is a thin shell over `petit.api`. Every capability the CLI has is
+reachable from the library with the same defaults, and the byte-for-byte
+fixture suite is therefore a regression net for the library too. A new
+driver, framer, or option is added to the library first and exposed by the
+CLI second; never the reverse.
+
 ## Container
 
 Built on `quay.io/hummingbird/python:latest-fips`/`-fips-builder`,
@@ -72,7 +80,31 @@ to `quay.io/crunchtools/petit` and `ghcr.io/crunchtools/petit`.
 unit tests (no external API, nothing to mock). `test/test_cli.py` covers the
 CLI: the exit code contract, `--help`, and a byte-for-byte regression suite
 against `test/data/` + `test/output/` fixtures that have been part of this
-repo since 2009. Run via `uv run pytest -v`.
+repo since 2009. `test/test_drivers.py` holds MERGE/NO_MERGE example pairs
+for every hash driver; a change to how aggressively a driver groups lands as
+a change to that table. Run via `uv run pytest -v`.
+
+### Hostile input
+
+petit parses attacker-controlled text: its main library consumer sits on a
+prompt-injection perimeter. Every parser, framer, and driver MUST have
+adversarial tests in `test/test_hostile.py` alongside its functional ones,
+and a change that adds one without them is incomplete. Those tests MUST
+show that:
+
+1. hostile input produces a result or a `PetitError` — never
+   `RecursionError`, `SystemExit`, or any other exception escaping the
+   library;
+2. work is bounded: deep nesting, oversized records, and pathological
+   strings complete within a fixed time budget, and size and depth limits
+   refuse by declining (a framer's `claims()` returns False), never by
+   raising;
+3. every regex added to a filter file, generalization table, or framer is
+   linear-time: character classes and bounded repetition, no nested
+   quantifiers, each probed with input shaped to make it backtrack;
+4. normalization never removes what a human wrote: short strings and
+   client-supplied values stay in the fingerprint, so two records that
+   say different things cannot merge and hide one of them.
 
 ## Gourmand
 

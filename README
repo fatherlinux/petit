@@ -29,8 +29,10 @@ Using petit as a library
 hash_text() groups lines by fingerprint, most frequent first. detect_format()
 reports which driver claims the text; "RawEntry" means no driver recognised it.
 analyze_text() returns the same groups plus how they were produced, and takes
-the options the CLI has: hash_mode ("daemon", "host", "wordcount") and
-collapse_fingerprints. Normalization is chosen by the driver for the format
+the options the CLI has: hash_mode ("daemon", "host", "wordcount"),
+collapse_fingerprints, and framer. A JSON array, JSON Lines, or a mail thread
+is grouped per object or per message rather than per line, and the Analysis
+accounts for both records and source lines. Normalization is chosen by the driver for the format
 unless you pass filter_name or stopwords. docs/drivers.md explains how
 drivers decide what to collapse.
 

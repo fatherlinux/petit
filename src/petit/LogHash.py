@@ -23,6 +23,7 @@ permits free text there, the rule is too wide. docs/drivers.md has more.
 
 from __future__ import annotations
 
+import json
 import logging
 import os
 import re
@@ -38,11 +39,17 @@ from .CrunchLog import (
     RSyslogEntry,
     SecureLogEntry,
     SnortEntry,
+    StructuredEntry,
     SyslogEntry,
 )
 from .errors import DataFileError, PetitError
 from .Filter import Filter
 from .resources import search_prefixes
+
+# Longest text a fingerprint key is built from. Every stopword regex runs
+# over the whole key, so an unbounded key is unbounded work; samples and raw
+# text are never truncated.
+MAX_KEY_CHARS = 4096
 
 # Share of a fingerprint corpus's patterns that must appear before the
 # corpus is considered present.
@@ -108,10 +115,16 @@ class SuperHash(UserDict[str, list[Any]]):
     # See the module docstring for what a rule here is allowed to swallow.
     GENERALIZATIONS: ClassVar[list[tuple[re.Pattern[str], str]]] = []
 
-    def __init__(self, log: CrunchLog, filter_filename: str | Filter | None = None) -> None:
+    def __init__(
+        self,
+        log: CrunchLog,
+        filter_filename: str | Filter | None = None,
+        max_key_chars: int = MAX_KEY_CHARS,
+    ) -> None:
 
         # Call parent init
         UserDict.__init__(self)
+        self.max_key_chars = max_key_chars
 
         # None asks the driver. A caller that supplies its own normalisation
         # policy passes a built Filter instead of the name of one to find.
@@ -138,7 +151,7 @@ class SuperHash(UserDict[str, list[Any]]):
         name and source address for every later reader of the log.
         """
         text = " ".join(getattr(entry, name) for name in self.KEY_FIELDS)
-        return self.filter.scrub(self.generalize(text))
+        return self.filter.scrub(self.generalize(text[:self.max_key_chars]))
 
     def fill(self, log: CrunchLog) -> None:
         """Group every entry under its fingerprint."""
@@ -227,27 +240,16 @@ class SuperHash(UserDict[str, list[Any]]):
         return matched
 
     @staticmethod
-    def manufacture(log: CrunchLog, filter: str | Filter | None = None) -> SuperHash:
-        """Factory method which creates new SuperHash of correct subtype"""
-
-        # Select the correct build method
-        log_hash_class: type[SuperHash]
-        if log.contains(SyslogEntry) or log.contains(RSyslogEntry):
-            log_hash_class = SyslogHash
-        elif log.contains(ApacheAccessEntry) or log.contains(ApacheErrorEntry):
-            log_hash_class = ApacheLogHash
-        elif log.contains(SnortEntry):
-            log_hash_class = SnortLogHash
-        elif log.contains(RawEntry):
-            log_hash_class = RawLogHash
-        elif log.contains(SecureLogEntry):
-            log_hash_class = SecureLogHash
-        else:
-            raise PetitError(
-                "could not determine what type of objects the log contains"
-            )
-
-        return log_hash_class(log, filter)
+    def manufacture(
+        log: CrunchLog, filter: str | Filter | None = None, max_key_chars: int = MAX_KEY_CHARS,
+    ) -> SuperHash:
+        """The hash driver for whatever entry driver parsed `log`."""
+        entry_type = getattr(log, "Entry", None)
+        if entry_type is None:
+            if len(log) < 1:
+                raise PetitError("could not determine what type of objects the log contains")
+            entry_type = type(log[-1])
+        return hash_for(entry_type)(log, filter, max_key_chars)
 
 
 class SyslogHash(SuperHash):
@@ -339,7 +341,7 @@ class WordHash(SuperHash):
 
                 # Keep the entry, not the word, so a group's members are
                 # the lines the word appeared in
-                self.increment(word, entry)
+                self.increment(word[:self.max_key_chars], entry)
 
         # Perform bleach at the end because it is more efficient
         for key in list(self.keys()):
@@ -357,3 +359,105 @@ class WordHash(SuperHash):
         # Finally, remove valueless lines
         if "#" in self:
             del self["#"]
+
+
+# Structured values that are shaped like a parameter whatever their content.
+_ISO_TIMESTAMP = re.compile(
+    r"\d{4}-\d{2}-\d{2}(?:[T ]\d{2}:\d{2}(?::\d{2}(?:[.,]\d{1,9})?)?"
+    r"(?:Z|[+-]\d{2}:?\d{2})?)?"
+)
+_UUID = re.compile(r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
+
+# Strings up to this length are kept verbatim in a structured fingerprint.
+MAX_VERBATIM_STRING = 200
+
+
+def canonical(value: Any) -> str:
+    """A structured value's fingerprint: keys verbatim, values by type.
+
+    Numbers, booleans and nulls become <N>, <B> and <NULL>; timestamp- and
+    UUID-shaped strings become <TS> and <UUID>; a string over 200 characters
+    becomes <STR:n>, n its length rounded up to a power of two. Every other
+    string is kept exactly. That is where prose lives, and so where an
+    injected instruction lives: normalising short strings away would let two
+    records that say different things merge, and one of them vanish.
+
+    Object keys are sorted. Arrays become runs of identical element
+    fingerprints with their counts, `[<N>*3]`.
+    """
+    if isinstance(value, dict):
+        return "{" + ",".join(
+            json.dumps(key) + ":" + canonical(value[key]) for key in sorted(value)
+        ) + "}"
+    if isinstance(value, list):
+        runs: list[list[Any]] = []
+        for item in value:
+            fingerprint = canonical(item)
+            if runs and runs[-1][0] == fingerprint:
+                runs[-1][1] += 1
+            else:
+                runs.append([fingerprint, 1])
+        return "[" + ",".join(f"{fp}*{count}" for fp, count in runs) + "]"
+    return _canonical_scalar(value)
+
+
+# Scalars fingerprinted by type alone. Looked up by exact type, so a bool
+# is never taken for the int it subclasses.
+_SCALAR_TOKENS: dict[type, str] = {bool: "<B>", type(None): "<NULL>", int: "<N>", float: "<N>"}
+
+# Strings shaped like a parameter, whatever they say.
+_STRING_SHAPES = [(_ISO_TIMESTAMP, "<TS>"), (_UUID, "<UUID>")]
+
+
+def _canonical_scalar(value: Any) -> str:
+    token = _SCALAR_TOKENS.get(type(value))
+    return token if token is not None else _canonical_string(str(value))
+
+
+def _canonical_string(text: str) -> str:
+    for shape, token in _STRING_SHAPES:
+        if shape.fullmatch(text):
+            return token
+    if len(text) > MAX_VERBATIM_STRING:
+        return f"<STR:{1 << (len(text) - 1).bit_length()}>"
+    return json.dumps(text)
+
+
+class StructuredHash(SuperHash):
+    """JSON records: the object's shape, with short strings kept verbatim.
+
+    The type-based rules are complete on their own. hash.stopwords on top
+    would mangle key names, so the default filter is none at all.
+    """
+
+    DEFAULT_FILTER: ClassVar[str] = "__none__"
+
+    def key_for(self, entry: LogEntry) -> str:
+        document = getattr(entry, "document", None)
+        if document is None:
+            return super().key_for(entry)
+        return self.filter.scrub(self.generalize(canonical(document)[:self.max_key_chars]))
+
+
+# Which hash driver fingerprints which entry driver. Looked up along the
+# entry class's MRO, so a subclass of a registered entry inherits its hash
+# driver instead of silently falling through to the wrong one. Declared here
+# rather than on the entry classes to keep CrunchLog free of LogHash imports.
+HASH_FOR: dict[type[LogEntry], type[SuperHash]] = {
+    SyslogEntry: SyslogHash,
+    RSyslogEntry: SyslogHash,
+    ApacheAccessEntry: ApacheLogHash,
+    ApacheErrorEntry: ApacheLogHash,
+    SnortEntry: SnortLogHash,
+    SecureLogEntry: SecureLogHash,
+    RawEntry: RawLogHash,
+    StructuredEntry: StructuredHash,
+}
+
+
+def hash_for(entry_type: type[LogEntry]) -> type[SuperHash]:
+    """The hash driver for `entry_type`, falling back to RawLogHash."""
+    for klass in entry_type.__mro__:
+        if klass in HASH_FOR:
+            return HASH_FOR[klass]
+    return RawLogHash

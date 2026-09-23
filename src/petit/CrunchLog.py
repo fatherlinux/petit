@@ -14,8 +14,10 @@ import re
 import sys
 import time
 from collections import UserList
+from typing import Any
 
-from .errors import DataFileError, EmptyLogError, ParseError
+from .errors import DataFileError, EmptyLogError, ParseError, PetitError
+from .records import FRAMER_NAMES, Framer, Record, framers, parse_json_object
 
 # Bound on how many times select() will resample before giving up and
 # using RawEntry. Without a bound, input that no driver claims spins forever.
@@ -23,6 +25,29 @@ MAX_SELECT_ROUNDS = 5
 
 # Lines drawn per selection round. Each further round widens the sample.
 SAMPLE_LINES_PER_ROUND = 10
+
+# Characters of a record that driver detection looks at. Splitting a 300 KB
+# email body into words just to vote on its format is work an attacker can
+# buy cheaply; the first 2000 characters are plenty to recognise a format.
+DETECT_MAX_CHARS = 2000
+
+
+def select_framer(buf: list[str], name: str = "auto") -> type[Framer]:
+    """The framer for `buf`: the first that claims it, or the one named.
+
+    A named framer that does not claim the buffer is an error rather than a
+    silent fallback, because the caller said what the input is.
+    """
+    if name not in FRAMER_NAMES:
+        raise PetitError("unknown framer: " + str(name))
+    for framer in framers:
+        if name not in ("auto", framer.name):
+            continue
+        if framer.claims(buf):
+            return framer
+        if name != "auto":
+            raise PetitError(f"the {name} framer does not recognise this input")
+    raise RuntimeError("unreachable: LineFramer claims every buffer")  # pragma: no cover
 
 
 def sample_indices(total: int, count: int) -> list[int]:
@@ -114,6 +139,10 @@ class CrunchLog(UserList["LogEntry"]):
     payload_type: str
     file_name: str
     build_date: datetime.datetime
+    # Name of the framer that cut the buffer into records.
+    framer = "line"
+    # Source lines in the buffer, however many records they made.
+    lines_in = 0
 
     def __init__(self, filename: str = "") -> None:
         UserList.__init__(self)
@@ -135,6 +164,7 @@ class CrunchLog(UserList["LogEntry"]):
         source_name: str = "<text>",
         driver: type[LogEntry] | None = None,
         strict: bool = False,
+        framer: str = "auto",
     ) -> CrunchLog:
         """Build a log from a string already in memory.
 
@@ -144,33 +174,37 @@ class CrunchLog(UserList["LogEntry"]):
 
         `driver` pins the entry class instead of detecting one. `strict`
         restores the old behaviour of raising when the driver meets a line
-        it cannot parse, rather than falling back to RawEntry.
+        it cannot parse, rather than falling back to RawEntry. `framer`
+        names how to cut the text into records; "auto" lets each framer
+        claim it in turn.
         """
         log = cls()
-        log._build(split_lines(text), source_name, driver=driver, strict=strict)
+        log._build(split_lines(text), source_name, driver=driver, strict=strict, framer=framer)
         return log
 
     def _parse(
-        self, buf: list[str], entry_type: type[LogEntry]
+        self, records: list[Record], entry_type: type[LogEntry]
     ) -> tuple[list[LogEntry] | None, tuple[int, str] | None]:
-        """Parse every line with `entry_type`.
+        """Parse every record with `entry_type`.
 
-        Returns (entries, None) on success, or (None, (line_number, line))
-        for the first line the driver could not handle.
+        Returns (entries, None) on success, or (None, (line_number, text))
+        for the first record the driver could not handle.
         """
         entries = []
-        for counter, line in enumerate(buf):
+        for record in records:
+            text = record.text
             try:
-                entry = entry_type(line)
+                entry = entry_type(text)
             except (ValueError, TypeError, IndexError):
-                return None, (counter, line)
-            # Keep the line exactly as it arrived. Every driver normalises
+                return None, (record.start, text)
+            # Keep the record exactly as it arrived. Every driver normalises
             # while parsing — collapsing runs of whitespace, substituting
             # placeholder dates for formats that carry none — so the parsed
             # fields cannot reconstruct the original. A caller that wants to
             # show a human what was actually in the log needs the bytes.
-            entry.raw = line.rstrip("\n")
-            entry.line_number = counter
+            entry.raw = text.rstrip("\n")
+            entry.line_number = record.start
+            entry.span = (record.start, record.end)
             entries.append(entry)
         return entries, None
 
@@ -180,23 +214,35 @@ class CrunchLog(UserList["LogEntry"]):
         source_name: str,
         driver: type[LogEntry] | None = None,
         strict: bool = False,
+        framer: str = "auto",
     ) -> None:
-        """Select a driver for the buffer and parse every line with it."""
+        """Frame the buffer, select a driver for the records, parse them."""
         if len(buf) < 1:
             raise EmptyLogError("no data found in " + (source_name or "input"))
 
-        # Automatically select entry type
-        self.Entry = driver if driver is not None else self.select(buf)
+        framer_cls = select_framer(buf, framer)
+        records = framer_cls.frame(buf)
+        self.framer = framer_cls.name
+        self.lines_in = len(buf)
+
+        # A framer that knows what its records are names their driver; the
+        # line framer leaves it to the drivers' vote, as always.
+        if driver is not None:
+            self.Entry = driver
+        elif framer_cls.entry_name is not None:
+            self.Entry = globals()[framer_cls.entry_name]
+        else:
+            self.Entry = self.select(records)
         self.degraded = False
 
-        entries, failure = self._parse(buf, self.Entry)
+        entries, failure = self._parse(records, self.Entry)
 
         if entries is None:
             # _parse's contract: None entries implies a failure tuple.
             if failure is None:  # pragma: no cover
                 raise RuntimeError("unreachable: _parse reported no entries and no failure")
             # The driver was chosen from a sample and then applied to every
-            # line, so one line in a different shape used to abort the whole
+            # record, so one in a different shape used to abort the whole
             # run. That is not an exotic input: application logs interleave
             # stack traces, and tool output mixes JSON with prose. Dying on
             # line 400 of 401 serves nobody.
@@ -211,7 +257,7 @@ class CrunchLog(UserList["LogEntry"]):
                          self.Entry.__name__, failure[0])
             self.Entry = RawEntry
             self.degraded = True
-            entries, failure = self._parse(buf, self.Entry)
+            entries, failure = self._parse(records, self.Entry)
             if entries is None:  # pragma: no cover - RawEntry accepts anything
                 if failure is None:
                     raise RuntimeError("unreachable: _parse reported no entries and no failure")
@@ -224,14 +270,14 @@ class CrunchLog(UserList["LogEntry"]):
         self.file_name = source_name
         self.build_date = datetime.datetime.now()
 
-    def select(self, buf: list[str]) -> type[LogEntry]:
+    def select(self, records: list[Record]) -> type[LogEntry]:
         """
         Determines which type of entry to use when building CrunchLog by
-        by sampling the buffer and using a quarum based on votes for each
+        by sampling the records and using a quarum based on votes for each
         log type
         """
 
-        if len(buf) < 1:
+        if len(records) < 1:
             return RawEntry
 
         # This loop used to be `while (1)`, which never terminated when no
@@ -251,8 +297,8 @@ class CrunchLog(UserList["LogEntry"]):
             # re-counted every line it had ever sampled, so round three
             # weighed the first ten lines three times over.
             wanted = SAMPLE_LINES_PER_ROUND * round_number
-            indices = sample_indices(len(buf), wanted)
-            sample_lines = [buf[i].split() for i in indices]
+            indices = sample_indices(len(records), wanted)
+            sample_lines = [records[i].text[:DETECT_MAX_CHARS].split() for i in indices]
 
             # Quorum is judged against the lines actually drawn, not the
             # number requested, so a log shorter than the sample size can
@@ -273,8 +319,8 @@ class CrunchLog(UserList["LogEntry"]):
 
                     return entry_type
 
-            # Already looked at every line; another round sees the same data.
-            if len(indices) >= len(buf):
+            # Already looked at every record; another round sees the same data.
+            if len(indices) >= len(records):
                 break
 
         logging.info("No driver reached quorum after %d rounds; using RawEntry",
@@ -322,6 +368,8 @@ class LogEntry:
     # Grouping reorders by definition; this is how a caller gets back to
     # where a line actually was.
     line_number = -1
+    # Source lines the entry's record covered: [start, end).
+    span = (-1, -1)
 
     def __init__(self, line: str) -> None:
         """Every concrete driver parses `line` in its own __init__."""
@@ -671,6 +719,24 @@ class RawEntry(LogEntry):
 
         # Look for any length of text in the line
         return bool(re.search(".+", str(line)))
+
+
+class StructuredEntry(LogEntry):
+    """One JSON object, as cut out by JsonFramer.
+
+    Never claims a record by vote: JsonFramer names it for the records it
+    produces, and a caller can pin it. `document` is the parsed object.
+    """
+
+    document: dict[str, Any]
+
+    def __init__(self, line: str) -> None:
+        self.document = parse_json_object(line)
+        self.set_abnormal(line.split())
+
+    @staticmethod
+    def is_type(_line: list[str]) -> bool:
+        return False
 
 
 class SnortEntry(LogEntry):
