@@ -150,8 +150,10 @@ def build_parser() -> argparse.ArgumentParser:
                          dest="framer",
                          choices=FRAMER_NAMES,
                          default="auto",
-                         help="How to cut input into records: one per line, per JSON "
-                              "object, or per email message (default: auto)")
+                         help="How to cut input into records: per JSON object, per email "
+                              "message, per multi-line log message (a stack trace joined "
+                              "to the line it belongs to), or one per line. auto, the "
+                              "default, tries them in that order")
 
     parser.add_argument("--fingerprint",
                          dest="fingerprint",

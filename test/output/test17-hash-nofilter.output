@@ -1,0 +1,10 @@
+1:	2026-09-20 08:00:00,101 INFO app.server: listening on 0.0.0.0:8080
+1:	2026-09-20 08:00:05,214 INFO app.request: GET /health 200 3ms
+1:	2026-09-20 08:00:09,310 INFO app.request: GET /api/orders/1042 200 41ms
+1:	2026-09-20 08:00:09,877 ERROR app.request: GET /api/orders/1043 500 12ms Traceback (most recent call last): File "/srv/app/handlers/orders.py", line 57, in get_order order = repo.fetch(order_id) File "/srv/app/repo.py", line 112, in fetch return self._rows[order_id] KeyError: 1043
+1:	2026-09-20 08:00:12,004 INFO app.request: GET /health 200 2ms
+1:	2026-09-20 08:00:13,550 ERROR app.request: GET /api/orders/1077 500 9ms Traceback (most recent call last): File "/srv/app/handlers/orders.py", line 57, in get_order order = repo.fetch(order_id) File "/srv/app/repo.py", line 112, in fetch return self._rows[order_id] KeyError: 1077
+1:	2026-09-20 08:00:15,120 WARNING app.pool: connection pool 80% used (16/20)
+1:	2026-09-20 08:00:20,006 INFO app.request: GET /health 200 2ms
+1:	2026-09-20 08:01:02,441 ERROR app.worker: job 88 failed Traceback (most recent call last): File "/srv/app/worker.py", line 30, in run self.handle(job) File "/srv/app/worker.py", line 44, in handle raise ValueError(f"bad payload for job {job.id}") ValueError: bad payload for job 88 During handling of the above exception, another exception occurred: Traceback (most recent call last): File "/srv/app/worker.py", line 33, in run self.report(job) ConnectionError: report endpoint unreachable
+1:	2026-09-20 08:01:30,000 INFO app.request: GET /health 200 2ms

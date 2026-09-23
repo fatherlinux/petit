@@ -1,0 +1,8 @@
+3:	<TS> INFO app.request: GET /health <N> 2ms
+1:	<TS> ERROR app.request: GET /api/orders/<N> <N> 12ms Traceback (most recent call last): File "/srv/app/handlers/orders.py", line <N>, in get_order order = repo.fetch(order_id) File "/srv/app/repo.py", line <N>, in fetch return self._rows[order_id] KeyError: <N>
+1:	<TS> ERROR app.request: GET /api/orders/<N> <N> 9ms Traceback (most recent call last): File "/srv/app/handlers/orders.py", line <N>, in get_order order = repo.fetch(order_id) File "/srv/app/repo.py", line <N>, in fetch return self._rows[order_id] KeyError: <N>
+1:	<TS> ERROR app.worker: job <N> failed Traceback (most recent call last): File "/srv/app/worker.py", line <N>, in run self.handle(job) File "/srv/app/worker.py", line <N>, in handle raise ValueError(f"bad payload for job {job.id}") ValueError: bad payload for job <N> During handling of the above exception, another exception occurred: Traceback (most recent call last): File "/srv/app/worker.py", line <N>, in run self.report(job) ConnectionError: report endpoint unreachable
+1:	<TS> INFO app.request: GET /api/orders/<N> <N> 41ms
+1:	<TS> INFO app.request: GET /health <N> 3ms
+1:	<TS> INFO app.server: listening on <IP>:<N>
+1:	<TS> WARNING app.pool: connection pool <N>% used (<N>/<N>)
