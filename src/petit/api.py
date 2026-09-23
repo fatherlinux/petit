@@ -18,12 +18,22 @@ driver votes, and the winner parses every line. Adding a driver to
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Literal
 
 from . import CrunchLog as _drivers
 from .CrunchLog import CrunchLog
 from .errors import PetitError
 from .Filter import Filter
-from .LogHash import SuperHash
+from .LogHash import DaemonHash, HostHash, SuperHash, WordHash
+
+HashMode = Literal["auto", "daemon", "host", "wordcount"]
+
+# What each non-default hash mode groups by. "auto" lets the format pick.
+_HASH_MODES: dict[str, type[SuperHash]] = {
+    "daemon": DaemonHash,
+    "host": HostHash,
+    "wordcount": WordHash,
+}
 
 
 @dataclass(frozen=True)
@@ -51,6 +61,10 @@ class Group:
     # show samples in the order they were written — rather than in the
     # order their groups happened to sort — needs these to put them back.
     sample_lines: list[int] = field(default_factory=list)
+    # The part of each sample the driver treats as the message — the line
+    # without the envelope its format wraps around it (timestamp, host,
+    # daemon). Parallel to `samples`. The CLI prints this.
+    sample_payloads: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -66,6 +80,9 @@ class Analysis:
     up in a group. They differ when entries scrub away to nothing (blank
     lines, `-- MARK --`), which petit drops. The two numbers are here so a
     caller can account for every line rather than wonder where they went.
+
+    `fingerprints_matched` names the event corpora collapsed into a single
+    group each, empty when none matched or `collapse_fingerprints` was off.
     """
 
     groups: list[Group]
@@ -73,6 +90,7 @@ class Analysis:
     degraded: bool
     lines_in: int
     lines_grouped: int
+    fingerprints_matched: list[str] = field(default_factory=list)
 
 
 def _render(entry: _drivers.LogEntry) -> str:
@@ -86,6 +104,11 @@ def _render(entry: _drivers.LogEntry) -> str:
         return str(raw)
     payload = getattr(entry, "log_entry", None)
     return str(payload) if payload else repr(entry)
+
+
+def _payload(entry: _drivers.LogEntry) -> str:
+    """The message part of an entry: its parsed payload, which may be empty."""
+    return str(entry.log_entry)
 
 
 def _resolve_driver(name: str | None) -> type[_drivers.LogEntry] | None:
@@ -102,12 +125,14 @@ def _resolve_driver(name: str | None) -> type[_drivers.LogEntry] | None:
 def analyze_text(
     text: str,
     *,
-    filter_name: str = "hash.stopwords",
+    filter_name: str | None = None,
     max_samples: int = 3,
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
     stopwords: list[str | tuple[str, str]] | None = None,
+    hash_mode: HashMode = "auto",
+    collapse_fingerprints: bool = False,
 ) -> Analysis:
     """Group `text` by line fingerprint and report how it was done.
 
@@ -116,8 +141,10 @@ def analyze_text(
     Args:
         text: The log or payload to analyse.
         filter_name: Stopword file to apply, resolved from packaged data.
-            Pass "__none__" for no filtering at all. Ignored when
-            `stopwords` is given.
+            None, the default, asks the hash driver: each one declares the
+            normalisation that suits its format (`DEFAULT_FILTER`). Pass
+            "__none__" for no filtering at all. Ignored when `stopwords` is
+            given.
         stopwords: Regexes to normalise with, supplied by the caller and
             used instead of any packaged file. The packaged hash.stopwords
             is tuned for system logs and is deliberately aggressive —
@@ -135,36 +162,48 @@ def analyze_text(
             pins RawEntry and gets exactly that.
         strict: Raise ParseError when the driver meets a line it cannot
             parse, instead of falling back to RawEntry.
+        hash_mode: What to group by. "auto" fingerprints each line with the
+            hash driver for its format; "daemon" and "host" group by those
+            fields; "wordcount" counts words.
+        collapse_fingerprints: Replace every known routine event sequence
+            (a reboot) found in the text with one group named after it.
+            Off by default because it deletes lines. What matched is
+            reported in `Analysis.fingerprints_matched`.
 
     Raises:
         EmptyLogError: `text` contained no data.
         ParseError: only when `strict`, or when `driver` was pinned and
             could not parse the text.
         DataFileError: `filter_name` was given but could not be read.
-        PetitError: `driver` is not a known entry class.
+        PetitError: `driver` is not a known entry class, or `hash_mode`
+            is not a known mode.
     """
+    if hash_mode != "auto" and hash_mode not in _HASH_MODES:
+        raise PetitError("unknown hash mode: " + str(hash_mode))
+
     log = CrunchLog.from_text(
         text,
         source_name=source_name,
         driver=_resolve_driver(driver),
         strict=strict,
     )
-    hashed = SuperHash.manufacture(
-        log,
-        Filter.from_patterns(stopwords) if stopwords is not None else filter_name,
+    policy = Filter.from_patterns(stopwords) if stopwords is not None else filter_name
+    hashed = (
+        SuperHash.manufacture(log, policy) if hash_mode == "auto"
+        else _HASH_MODES[hash_mode](log, policy)
     )
+    matched = hashed.fingerprint() if collapse_fingerprints else []
 
-    groups = [
-        Group(
+    groups = []
+    for key, value in hashed.items():
+        members = value[1][:max_samples]
+        groups.append(Group(
             pattern=str(key),
             count=value[0],
-            samples=[_render(entry) for entry in value[1][:max_samples]],
-            sample_lines=[
-                getattr(entry, "line_number", -1) for entry in value[1][:max_samples]
-            ],
-        )
-        for key, value in hashed.items()
-    ]
+            samples=[_render(entry) for entry in members],
+            sample_lines=[getattr(entry, "line_number", -1) for entry in members],
+            sample_payloads=[_payload(entry) for entry in members],
+        ))
     groups.sort(key=lambda g: (-g.count, g.pattern))
 
     return Analysis(
@@ -173,18 +212,21 @@ def analyze_text(
         degraded=log.degraded,
         lines_in=len(log),
         lines_grouped=sum(g.count for g in groups),
+        fingerprints_matched=matched,
     )
 
 
 def hash_text(
     text: str,
     *,
-    filter_name: str = "hash.stopwords",
+    filter_name: str | None = None,
     max_samples: int = 3,
     source_name: str = "<text>",
     driver: str | None = None,
     strict: bool = False,
     stopwords: list[str | tuple[str, str]] | None = None,
+    hash_mode: HashMode = "auto",
+    collapse_fingerprints: bool = False,
 ) -> list[Group]:
     """Group `text` by line fingerprint, most frequent first.
 
@@ -203,6 +245,8 @@ def hash_text(
         driver=driver,
         strict=strict,
         stopwords=stopwords,
+        hash_mode=hash_mode,
+        collapse_fingerprints=collapse_fingerprints,
     ).groups
 
 

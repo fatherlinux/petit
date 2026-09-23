@@ -17,6 +17,8 @@ from pathlib import Path
 
 import pytest
 
+from petit.api import analyze_text
+
 # Syslog/secure-log/snort entries carry no year, so CrunchLog stamps them
 # with the current year (see CrunchLog.py's SyslogEntry/SecureLogEntry/
 # SnortEntry). The graph fixtures built from those formats bake in whatever
@@ -127,3 +129,21 @@ def test_empty_log_exits_1_with_no_stdout() -> None:
     assert result.returncode == 1
     assert result.stdout == ""
     assert "no data found" in result.stderr
+
+
+def test_cli_hash_is_the_library_hash() -> None:
+    """The CLI is a shell over petit.api: same text in, same groups out."""
+    data_file = DATA_DIR / "test08.log"
+    result = run_petit("--hash", "--nosample", str(data_file))
+    expected = "".join(
+        f"{g.count}:\t{g.pattern}\n" for g in analyze_text(data_file.read_text()).groups
+    )
+    assert result.stdout == expected
+
+
+def test_undecodable_file_exits_1(tmp_path: Path) -> None:
+    target = tmp_path / "binary.log"
+    target.write_bytes(b"\xff\xfe\x00garbage\n")
+    result = run_petit("--hash", str(target))
+    assert result.returncode == 1
+    assert "not valid text" in result.stderr

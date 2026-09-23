@@ -1,4 +1,25 @@
-"""Contains SuperHash and all closely related children"""
+"""Hash drivers: SuperHash and the per-format classes that fingerprint entries.
+
+A hash driver turns each parsed entry into a fingerprint key. It declares
+three things and inherits the rest:
+
+- KEY_FIELDS: which LogEntry fields make up the key.
+- GENERALIZATIONS: (pattern, replacement) rules for the format's phrases.
+- DEFAULT_FILTER: the stopword file used unless the caller supplies one.
+
+The rule for GENERALIZATIONS:
+
+    A generalization is a claim that everything after this phrase is a
+    parameter, not a message. Normalize what the FORMAT generated; keep
+    what a HUMAN wrote.
+
+Ask two questions of a rule. Does it collapse a token or a phrase?
+Token-level rules — timestamps, addresses, hex, PIDs — are always safe; a
+token cannot carry a sentence. Phrase-level rules are allowed only when the
+tail they swallow is drawn from a bounded, machine-generated vocabulary.
+Then: what is the widest thing this rule's `.*` can swallow? If the format
+permits free text there, the rule is too wide. docs/drivers.md has more.
+"""
 
 from __future__ import annotations
 
@@ -6,13 +27,13 @@ import logging
 import os
 import re
 from collections import UserDict
-from random import choice
 from typing import Any, ClassVar
 
 from .CrunchLog import (
     ApacheAccessEntry,
     ApacheErrorEntry,
     CrunchLog,
+    LogEntry,
     RawEntry,
     RSyslogEntry,
     SecureLogEntry,
@@ -23,6 +44,50 @@ from .errors import DataFileError, PetitError
 from .Filter import Filter
 from .resources import search_prefixes
 
+# Share of a fingerprint corpus's patterns that must appear before the
+# corpus is considered present.
+FINGERPRINT_THRESHOLD = 0.31
+
+# (path, mtime) -> the corpus's fingerprint keys. Parsing the corpora is
+# thousands of lines of work; an embedding service asks on every request.
+_FINGERPRINT_CACHE: dict[tuple[str, float], frozenset[str]] = {}
+
+
+def load_fingerprints() -> list[tuple[str, frozenset[str]]]:
+    """Every fingerprint corpus as (name, keys), largest file first.
+
+    Largest first prevents double labelling when a smaller corpus is a
+    subset of a bigger one. Every search prefix contributes: the packaged
+    corpora plus any site-local .fp files. Only the first directory holding
+    files used to count, and the packaged one always does, so a site-local
+    corpus was never read. Where two share a name, the earlier prefix wins.
+    Each corpus is hashed by whatever driver claims it, with that driver's
+    own default filter.
+    """
+    prefixes = search_prefixes("fingerprints")
+    by_name: dict[str, str] = {}
+    for prefix in prefixes:
+        if not os.path.isdir(prefix):
+            continue
+        for name in sorted(os.listdir(prefix)):
+            if name.endswith(".fp"):
+                by_name.setdefault(name, os.path.join(prefix, name))
+    if not by_name:
+        raise DataFileError(
+            "could not locate fingerprint files in any of: " + ", ".join(prefixes)
+        )
+    paths = sorted(by_name.values(), key=os.path.getsize, reverse=True)
+
+    corpora = []
+    for path in paths:
+        cache_key = (path, os.path.getmtime(path))
+        keys = _FINGERPRINT_CACHE.get(cache_key)
+        if keys is None:
+            keys = frozenset(SuperHash.manufacture(CrunchLog(path)).keys())
+            _FINGERPRINT_CACHE[cache_key] = keys
+        corpora.append((os.path.basename(path), keys))
+    return corpora
+
 
 class SuperHash(UserDict[str, list[Any]]):
     """Interface and parent class for all hash/dict based objects. """
@@ -31,13 +96,27 @@ class SuperHash(UserDict[str, list[Any]]):
     sample = "none"
     file_name = ""
 
-    def __init__(self, log: CrunchLog, filter_filename: str | Filter = "__none__") -> None:
+    # The stopword file this driver normalises with unless the caller says
+    # otherwise. The driver knows what noise looks like in its format; the
+    # caller does not, so the default belongs here and not in analyze_text.
+    DEFAULT_FILTER: ClassVar[str] = "hash.stopwords"
+
+    # Which LogEntry fields, joined by a space, make up the fingerprint.
+    KEY_FIELDS: ClassVar[tuple[str, ...]] = ("log_entry",)
+
+    # (pattern, replacement) rules applied to the key before the filter.
+    # See the module docstring for what a rule here is allowed to swallow.
+    GENERALIZATIONS: ClassVar[list[tuple[re.Pattern[str], str]]] = []
+
+    def __init__(self, log: CrunchLog, filter_filename: str | Filter | None = None) -> None:
 
         # Call parent init
         UserDict.__init__(self)
 
-        # A caller that supplies its own normalisation policy passes a built
-        # Filter instead of the name of one to go and find.
+        # None asks the driver. A caller that supplies its own normalisation
+        # policy passes a built Filter instead of the name of one to find.
+        if filter_filename is None:
+            filter_filename = self.DEFAULT_FILTER
         if isinstance(filter_filename, Filter):
             self.filter = filter_filename
         elif filter_filename != "__none__":
@@ -45,8 +124,29 @@ class SuperHash(UserDict[str, list[Any]]):
 
         self.fill(log)
 
+    def generalize(self, text: str) -> str:
+        """Return `text` with this format's variable phrases collapsed."""
+        for pattern, replacement in self.GENERALIZATIONS:
+            text = pattern.sub(replacement, text)
+        return text
+
+    def key_for(self, entry: LogEntry) -> str:
+        """The fingerprint of one entry: its key fields, generalised, then scrubbed.
+
+        Built into a local, never written back. SecureLogHash used to assign
+        its generalised payload onto the entry, which destroyed the user
+        name and source address for every later reader of the log.
+        """
+        text = " ".join(getattr(entry, name) for name in self.KEY_FIELDS)
+        return self.filter.scrub(self.generalize(text))
+
     def fill(self, log: CrunchLog) -> None:
-        """Interface method which is flled in by subclasses"""
+        """Group every entry under its fingerprint."""
+        for entry in log:
+            self.increment(self.key_for(entry), entry)
+
+        # An entry that scrubs away to nothing carries no information
+        self.pop("#", None)
 
     def increment(self, key: str, entry: object) -> None:
         """Adds a new entry to superhash data structures.
@@ -76,8 +176,7 @@ class SuperHash(UserDict[str, list[Any]]):
 
             # Print all lines as sample
             if self.sample == "all":
-                print(str(self[key][0]) + ":\t" +
-                choice(self[key][1]).log_entry)
+                print(str(self[key][0]) + ":\t" + self[key][1][0].log_entry)
 
             elif self.sample == "none":
                 print(str(self[key][0]) + ":\t" + str(key))
@@ -94,84 +193,41 @@ class SuperHash(UserDict[str, list[Any]]):
                     "unsupported sampling mode: " + str(self.sample)
                 )
 
-    def fingerprint(self) -> None:
+    def fingerprint(self) -> list[str]:
+        """Collapse every known event sequence found in this hash.
+
+        A fingerprint is a corpus of the lines one routine event produces — a
+        reboot, say. When more than FINGERPRINT_THRESHOLD of a corpus's
+        patterns are present, every one of them is removed and replaced by a
+        single group named after the corpus, so 600 lines of boot noise read
+        as one line and whatever was unusual stands out.
+
+        Returns the names of the corpora that matched, in the order they did,
+        so a caller can tell "nothing matched" from "not asked".
         """
-        Remove all fingerprints from a given LogHash and replace with a
-        single string"
-        """
+        matched: list[str] = []
+        for name, keys in load_fingerprints():
+            count = sum(1 for key in keys if key in self)
+            logging.info("Fingerprint %s: %d of %d patterns", name, count, len(keys))
+            if count <= len(keys) * FINGERPRINT_THRESHOLD:
+                continue
 
-        # Declarations & Variables
-        threshold_coefficient = 0.31
-        fingerprints = []
-        fingerprint_files = ["__none__"]
+            for key in keys:
+                self.pop(key, None)
 
-        # Load & assign fingerprint files
-        prefixes = search_prefixes("fingerprints")
-
-        for prefix in prefixes:
-            if os.path.exists(prefix) and len(os.listdir(prefix)) >= 1:
-
-                # Process in order from largest to smallest which prevents
-                # double labeling with similar fingerprints
-                fingerprint_files = os.listdir(prefix)
-                fingerprint_files = [os.path.join(prefix, f) for f in fingerprint_files]
-                fingerprint_files.sort(key=os.path.getsize)
-                fingerprint_files.reverse()
-                break
-
-        if fingerprint_files[0] == "__none__":
-            raise DataFileError(
-                "could not locate fingerprint files in any of: "
-                + ", ".join(prefixes)
-            )
-
-        for fingerprint_file in fingerprint_files:
-            if re.search("fp", fingerprint_file):
-
-                # Build a Log for the fingerprint
-                log = CrunchLog(fingerprint_file)
-
-                # Build a SuperHash
-                x = SuperHash.manufacture(log, "hash.stopwords")
-
-                # Remove the prefix & set name
-                x.file_name = re.sub(prefix, "", fingerprint_file)
-                fingerprints.append(x)
-
-        # Iterate each fingerprint
-        for fingerprint in fingerprints:
-
-            logging.info("Testing Fingerprint:" + fingerprint.file_name)
-
-            # Reset counter for each fingerprint
-            count = 0
-            threshold = (len(fingerprint) * threshold_coefficient)
-            logging.info("Threshold:" + str(threshold))
-
-            # Look for fingerpring
-            for key in list(fingerprint.keys()):
-                if key in self:
-                    count = count + 1
-
-                # If Threshold is reached, remove everyline of fingerprint
-                # Saves time on searching every entry
-                if count > threshold:
-                    logging.info("Found Fingerprint:" + fingerprint.file_name)
-                    matched_key = key
-                    for fingerprint_key in fingerprint:
-                        if fingerprint_key in self:
-                            del self[fingerprint_key]
-
-                    # Force the sample entry to be the same as the key
-                    # and based off of the filename of the fingerprint
-                    fingerprint[matched_key][1][0].log_entry = fingerprint.file_name
-                    self.increment(fingerprint.file_name, fingerprint[matched_key][1][0])
-                    break
-
-            logging.info("Count: " + str(count))
+            # The collapsed group stands for lines that are gone, so its one
+            # member is made up here and named after the corpus. It used to
+            # be the corpus's own parsed entry with its payload overwritten,
+            # which mutated the loaded fingerprint — harmless only while
+            # nothing kept the corpus around between calls.
+            stand_in = RawEntry(name)
+            stand_in.raw = name
+            self.increment(name, stand_in)
+            matched.append(name)
+        return matched
 
     @staticmethod
-    def manufacture(log: CrunchLog, filter: str | Filter) -> SuperHash:
+    def manufacture(log: CrunchLog, filter: str | Filter | None = None) -> SuperHash:
         """Factory method which creates new SuperHash of correct subtype"""
 
         # Select the correct build method
@@ -195,63 +251,29 @@ class SuperHash(UserDict[str, list[Any]]):
 
 
 class SyslogHash(SuperHash):
-    """Overrides the fill method specifically for LogHashes built from Syslog files"""
+    """Syslog and rsyslog: the daemon and its message."""
 
-    def fill(self, log: CrunchLog) -> None:
-        for entry in log:
-
-            # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.daemon + " " + entry.log_entry)
-
-            # increment the LogHash with the new key
-            self.increment(key, entry)
-
-        # Finally, remove valueless lines
-        if "#" in self:
-            del self["#"]
+    KEY_FIELDS: ClassVar[tuple[str, ...]] = ("daemon", "log_entry")
 
 
 class ApacheLogHash(SuperHash):
-    """Overrides the fill method specifically for LogHashes built from Apache logs"""
-
-    def fill(self, log: CrunchLog) -> None:
-        for entry in log:
-
-            # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.log_entry)
-
-            # increment the LogHash with the new key
-            self.increment(key, entry)
-
-        # Finally, remove valueless lines
-        if "#" in self:
-            del self["#"]
+    """Apache access and error logs: the request or message."""
 
 
 class SnortLogHash(SuperHash):
-    """Overrides the fill method specifically for LogHashes built from Snort logs"""
-
-    def fill(self, log: CrunchLog) -> None:
-        for entry in log:
-
-            # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.log_entry)
-
-            # increment the LogHash with the new key
-            self.increment(key, entry)
-
-        # Finally, remove valueless lines
-        if "#" in self:
-            del self["#"]
+    """Snort alerts: the alert text."""
 
 
 class SecureLogHash(SuperHash):
-    """Overrides the fill method specifically for LogHashes built from Syslog files"""
+    """sshd and PAM entries from a secure/auth log."""
 
-    # Each rule collapses everything after a phrase sshd is known to emit,
-    # which is what makes a secure log group at all: the variable half is
-    # the user, host or port, and that is precisely what differs line to
-    # line. Applied to the key only — see fill().
+    KEY_FIELDS: ClassVar[tuple[str, ...]] = ("daemon", "log_entry")
+
+    # Each rule collapses the machine-generated tail after a phrase sshd or
+    # PAM emits: the host, port or session detail that differs line to line.
+    # A user name is chosen by whoever is knocking, so it is kept verbatim:
+    # the rule captures exactly one token for it and matches nothing at all
+    # if the name has a space in it, rather than swallowing the rest.
     GENERALIZATIONS: ClassVar[list[tuple[re.Pattern[str], str]]] = [
         # Session entries
         (re.compile("session closed for.*"), "session closed for #"),
@@ -260,103 +282,44 @@ class SecureLogHash(SuperHash):
         (re.compile("Accepted publickey for.*"), "Accepted publickey for #"),
         (re.compile("Accepted password for.*"), "Accepted password for #"),
         (re.compile("Postponed publickey for.*"), "Postponed publickey for #"),
-        (re.compile("input_userauth_request: invalid user.*"),
-         "input_userauth_request: invalid user #"),
-        (re.compile("Invalid user.*"), "Invalid user #"),
+        (re.compile(r"Invalid user (\S+) from \S+"), r"Invalid user \1 from #"),
         (re.compile("reverse mapping checking getaddrinfo for.*"),
          "reverse mapping checking getaddrinfo for #"),
         (re.compile("Connection closed by.*"), "Connection closed by #"),
-        (re.compile("Failed password for invalid user.*"),
-         "Failed password for invalid user #"),
-        (re.compile("Failed password for.*from.*"), "Failed password for # from #"),
-        (re.compile("error retrieving information about user.*"),
-         "error retrieving information about user #"),
+        (re.compile(r"Failed password for invalid user (\S+) from \S+"),
+         r"Failed password for invalid user \1 from #"),
+        (re.compile(r"Failed password for (\S+) from \S+"), r"Failed password for \1 from #"),
         (re.compile("authentication failure.*"), "authentication failure #"),
         # Misc
         (re.compile("Received disconnect from.*"), "Received disconnect from #"),
         (re.compile("Could not reverse map address.*"), "Could not reverse map address #"),
     ]
 
-    def generalize(self, payload: str) -> str:
-        """Return `payload` with sshd's variable tails collapsed."""
-        for pattern, replacement in self.GENERALIZATIONS:
-            payload = pattern.sub(replacement, payload)
-        return payload
-
-    def fill(self, log: CrunchLog) -> None:
-        for entry in log:
-
-            # Generalise sshd's vocabulary to build the key. This used to
-            # assign back to entry.log_entry, which mutated the log itself:
-            # after hashing, every sample the caller could reach had been
-            # overwritten with the generalised form, and the actual user
-            # name, source address or failure reason was gone for good.
-            # Fingerprinting is supposed to describe the entry, not consume
-            # it — so generalise into a local and leave the entry alone.
-            payload = self.generalize(entry.log_entry)
-
-            # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.daemon + " " + payload)
-
-            # increment the LogHash with the new key
-            self.increment(key, entry)
-
-        # Finally, remove valueless lines
-        if "#" in self:
-            del self["#"]
-
 
 class RawLogHash(SuperHash):
-    """Overrides the fill method for LogHashes built from text files without date/time"""
+    """Text no driver recognised: the whole line, structurally normalised.
 
-    def fill(self, log: CrunchLog) -> None:
-        for entry in log:
+    Nothing is known about the format, so nothing format-specific is
+    collapsed. strict.stopwords normalises shapes that are unambiguous —
+    timestamps, UUIDs, addresses, standalone numbers — and leaves
+    identifiers like web01 or PROJ-1234 distinct.
+    """
 
-            # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.log_entry)
-
-            # increment the LogHash with the new key
-            self.increment(key, entry)
-
-        # Finally, remove valueless lines
-        if "#" in self:
-            del self["#"]
+    DEFAULT_FILTER: ClassVar[str] = "strict.stopwords"
 
 
 class DaemonHash(SyslogHash):
-    """Overrides the fill method for DaemonHashes built from text files with date/time"""
+    """Counts entries per daemon."""
 
-    def fill(self, log: CrunchLog) -> None:
-
-        for entry in log:
-
-            # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.daemon)
-
-            # increment the LogHash with the new key
-            self.increment(key, entry)
-
-        # Finally, remove valueless lines
-        if "#" in self:
-            del self["#"]
+    DEFAULT_FILTER: ClassVar[str] = "daemon.stopwords"
+    KEY_FIELDS: ClassVar[tuple[str, ...]] = ("daemon",)
 
 
 class HostHash(SyslogHash):
-    """Overrides the fill method for HostHashes built from text files with date/time"""
+    """Counts entries per host."""
 
-    def fill(self, log: CrunchLog) -> None:
-
-        for entry in log:
-
-            # Scrub sections of SyslogEntry which will be used to key the hash
-            key = self.filter.scrub(entry.host)
-
-            # increment the LogHash with the new key
-            self.increment(key, entry)
-
-        # Finally, remove valueless lines
-        if "#" in self:
-            del self["#"]
+    DEFAULT_FILTER: ClassVar[str] = "host.stopwords"
+    KEY_FIELDS: ClassVar[tuple[str, ...]] = ("host",)
 
 
 class WordHash(SuperHash):
@@ -365,6 +328,8 @@ class WordHash(SuperHash):
     Date, time, and other common words are excluded from the count.
     """
 
+    DEFAULT_FILTER: ClassVar[str] = "words.stopwords"
+
     def fill(self, log: CrunchLog) -> None:
 
         for entry in log:
@@ -372,8 +337,9 @@ class WordHash(SuperHash):
             # Base the wordcount on the log_entry payload
             for word in entry.log_entry.split():
 
-                # increment the WordHash with the new key
-                self.increment(word, word)
+                # Keep the entry, not the word, so a group's members are
+                # the lines the word appeared in
+                self.increment(word, entry)
 
         # Perform bleach at the end because it is more efficient
         for key in list(self.keys()):

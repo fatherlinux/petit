@@ -8,6 +8,7 @@ or GraphHash.
 from __future__ import annotations
 
 import datetime
+import io
 import logging
 import re
 import sys
@@ -44,6 +45,35 @@ def sample_indices(total: int, count: int) -> list[int]:
         return list(range(total))
     step = total / count
     return [int(i * step) for i in range(count)]
+
+
+def split_lines(text: str) -> list[str]:
+    """Break `text` into lines the way reading a file in text mode does.
+
+    Universal newlines: `\\r\\n` and `\\r` become `\\n`, and nothing else
+    ends a line. The one splitter every input goes through.
+    """
+    return io.StringIO(text, newline=None).readlines()
+
+
+def read_source(filename: str) -> str:
+    """Text of `filename`, or of stdin when it is "__none__".
+
+    A missing or unreadable file is an ordinary operator mistake, not a bug,
+    and it should read like one. Left bare it escapes as a PermissionError
+    traceback (reported as issue #16), and bytes that are not text escape
+    as a UnicodeDecodeError.
+    """
+    if filename == "__none__":
+        return sys.stdin.read()
+    logging.debug("Opening File: %s", filename)
+    try:
+        with open(filename) as handle:
+            return handle.read()
+    except OSError as exc:
+        raise DataFileError(f"cannot read {filename}: {exc.strerror or exc}") from exc
+    except UnicodeDecodeError as exc:
+        raise DataFileError(f"cannot read {filename}: not valid text ({exc.reason})") from exc
 
 
 class Tally:
@@ -91,22 +121,12 @@ class CrunchLog(UserList["LogEntry"]):
         if filename == "":
             return
 
-        if filename == "__none__":
-            buf = sys.stdin.readlines()
-        else:
-            logging.debug("Opening File: %s", filename)
-            # A missing or unreadable file is an ordinary operator mistake, not
-            # a bug, and it should read like one. Left bare it escapes as a
-            # PermissionError traceback (reported as issue #16).
-            try:
-                with open(filename) as handle:
-                    buf = handle.readlines()
-            except OSError as exc:
-                raise DataFileError(
-                    f"cannot read {filename}: {exc.strerror or exc}"
-                ) from exc
-
-        self._build(buf, filename)
+        # A file is read to text and then parsed exactly as from_text() parses
+        # a string. There used to be two entry points into the parser — this
+        # one split with readlines(), from_text with str.splitlines(), which
+        # also breaks on form feeds and U+2028 — so the CLI and the library
+        # could disagree about where a line ended in the same bytes.
+        self._build(split_lines(read_source(filename)), filename)
 
     @classmethod
     def from_text(
@@ -127,8 +147,7 @@ class CrunchLog(UserList["LogEntry"]):
         it cannot parse, rather than falling back to RawEntry.
         """
         log = cls()
-        log._build(text.splitlines(keepends=True), source_name,
-                   driver=driver, strict=strict)
+        log._build(split_lines(text), source_name, driver=driver, strict=strict)
         return log
 
     def _parse(

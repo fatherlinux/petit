@@ -42,7 +42,8 @@ from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as pkg_version
 from types import FrameType
 
-from petit.CrunchLog import CrunchLog
+from petit.api import Analysis, HashMode, analyze_text
+from petit.CrunchLog import CrunchLog, read_source
 from petit.errors import PetitError
 from petit.LogGraph import (
     DaysGraph,
@@ -52,7 +53,6 @@ from petit.LogGraph import (
     SecondsGraph,
     YearsGraph,
 )
-from petit.LogHash import DaemonHash, HostHash, SuperHash, WordHash
 
 AnyGraph = SecondsGraph | MinutesGraph | HoursGraph | DaysGraph | MonthsGraph | YearsGraph
 
@@ -210,55 +210,58 @@ def mode_version(_args: argparse.Namespace, _filename: str) -> None:
     print("Version: " + current_version)
 
 
+# Groups at or below this count print a real sample instead of the pattern.
+SAMPLE_THRESHOLD = 3
+
+
+def print_groups(analysis: Analysis, sample: str) -> None:
+    """Print each group as `count:<TAB>text`, most frequent first.
+
+    `sample` picks the text: "none" always prints the pattern, "all" always
+    prints a member's payload, "threshold" prints the payload only for
+    groups small enough that the pattern hides something worth seeing.
+    """
+    for group in analysis.groups:
+        show_sample = sample == "all" or (
+            sample == "threshold" and group.count <= SAMPLE_THRESHOLD
+        )
+        text = group.sample_payloads[0] if show_sample else group.pattern
+        print(str(group.count) + ":\t" + text)
+
+
 def mode_hash(args: argparse.Namespace, filename: str) -> None:
     """Runs in hashing mode"""
-
-    # Get entire log file into ram for speed
-    log = CrunchLog(filename)
-
-    # Build the Hash
-    if args.filter is None or args.filter is True:
-        x = SuperHash.manufacture(log, "hash.stopwords")
-    else:
-        x = SuperHash.manufacture(log, "__none__")
-
-    if args.fingerprint:
-        x.fingerprint()
-
-    # Set sampling type
-    x.sample = args.sample
-
-    # Print out the dictionary first sorted by the word with
-    # the most entries with an alphabetical subsort
-    x.display()
+    analysis = analyze_text(
+        read_source(filename),
+        source_name=filename,
+        filter_name="__none__" if args.filter is False else None,
+        max_samples=1,
+        collapse_fingerprints=args.fingerprint,
+    )
+    print_groups(analysis, args.sample)
 
 
-def _run_report_mode(
-    hash_cls: type[WordHash | DaemonHash | HostHash], stopwords: str, filename: str,
-) -> None:
-    """Build one of the fixed-stopword-file reports and display it.
-
-    --wordcount, --daemon and --host differ only in which SuperHash subclass
-    and packaged stopword file they use.
-    """
-    log = CrunchLog(filename)
-    x = hash_cls(log, stopwords)
-    x.display()
+def _run_report_mode(hash_mode: HashMode, filename: str) -> None:
+    """--wordcount, --daemon and --host: counts per word, daemon or host."""
+    analysis = analyze_text(
+        read_source(filename), source_name=filename, max_samples=1, hash_mode=hash_mode,
+    )
+    print_groups(analysis, "none")
 
 
 def mode_wordcount(_args: argparse.Namespace, filename: str) -> None:
     """Runs wordcount mode"""
-    _run_report_mode(WordHash, "words.stopwords", filename)
+    _run_report_mode("wordcount", filename)
 
 
 def mode_daemon(_args: argparse.Namespace, filename: str) -> None:
     """Runs daemon report mode"""
-    _run_report_mode(DaemonHash, "daemon.stopwords", filename)
+    _run_report_mode("daemon", filename)
 
 
 def mode_host(_args: argparse.Namespace, filename: str) -> None:
     """Runs host report mode"""
-    _run_report_mode(HostHash, "host.stopwords", filename)
+    _run_report_mode("host", filename)
 
 
 def _run_graph_mode(
@@ -271,7 +274,7 @@ def _run_graph_mode(
     Every --?graph mode differs only in which GraphHash subclass it builds;
     tick/wide/display are identical, so they share this one implementation.
     """
-    log = CrunchLog(filename)
+    log = CrunchLog.from_text(read_source(filename), source_name=filename)
     x = graph_cls(log)
     x.tick = args.tick
     x.wide = args.wide
