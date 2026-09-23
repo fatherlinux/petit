@@ -185,9 +185,11 @@ def analyze_text(
             (a reboot) found in the text with one group named after it.
             Off by default because it deletes lines. What matched is
             reported in `Analysis.fingerprints_matched`.
-        framer: How to cut the text into records: "line", "json" (a JSON
-            array of objects or JSON Lines) or "message" (RFC 822 mail).
-            "auto", the default, lets each claim the text in that order.
+        framer: How to cut the text into records: "json" (a JSON array of
+            objects or JSON Lines), "message" (RFC 822 mail), "multiline"
+            (log messages whose continuation lines, such as a stack trace,
+            join the timestamped line above them) or "line". "auto", the
+            default, lets each claim the text in that order.
         max_record_chars: Longest text a record's fingerprint key is built
             from. Bounds the work stopword rules do on hostile input.
             Samples and raw text are never truncated.

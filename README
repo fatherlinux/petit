@@ -30,9 +30,10 @@ hash_text() groups lines by fingerprint, most frequent first. detect_format()
 reports which driver claims the text; "RawEntry" means no driver recognised it.
 analyze_text() returns the same groups plus how they were produced, and takes
 the options the CLI has: hash_mode ("daemon", "host", "wordcount"),
-collapse_fingerprints, and framer. A JSON array, JSON Lines, or a mail thread
-is grouped per object or per message rather than per line, and the Analysis
-accounts for both records and source lines. Normalization is chosen by the driver for the format
+collapse_fingerprints, and framer. A JSON array, JSON Lines, a mail thread, or
+a log whose messages run over several lines is grouped per object or per
+message rather than per line, and the Analysis accounts for both records and
+source lines (see "How petit reads a log"). Normalization is chosen by the driver for the format
 unless you pass filter_name or stopwords. docs/drivers.md explains how
 drivers decide what to collapse.
 
@@ -102,6 +103,69 @@ from a systems administrator
  5. After the algorithm has been applied, the output must be read by a systems 
 administrator to determine if it is a normal or abnormal. Then abnormal entries 
 can be acted on, hopefully before there is noticeable impact to your system. 
+
+
+How petit reads a log
+===============================================================================
+Every input goes through the same stages:
+
+	text -> lines -> framer -> records -> entry driver -> hash driver
+	                                                   -> graphs
+
+ 1. The text is split into lines.
+
+ 2. A framer cuts the lines into records. A record is one log message:
+    usually one line, but not always. petit tries each framer in turn and
+    the first that recognises the whole input wins:
+
+	json       a JSON array of objects, or JSON Lines: one record per object
+	message    a mail thread or mbox: one record per message
+	multiline  log messages that run over several lines: one record per
+	           message, continuation lines included (see below)
+	line       anything else: one record per line
+
+    --framer json|message|multiline|line forces one.
+
+ 3. An entry driver reads each record and picks out the time, host, daemon
+    and message. petit votes on which driver fits (syslog, rsyslog, Apache
+    access and error, secure, Snort, ...). If one record in the input can't
+    be read by the chosen driver, the whole input falls back to RawEntry,
+    which reads anything but finds no times, hosts or daemons in it.
+
+ 4. A hash driver turns each entry into a pattern, and entries with the same
+    pattern are one group in --hash. The graphs count entries per slice of
+    time instead.
+
+Counts are kept for both: an Analysis reports lines_in (source lines) and
+records_in (records), which are the same unless a framer joined lines.
+
+Multi-line messages. Stack traces, Python tracebacks and journalctl's
+indented continuation lines put one message over several lines, and only the
+first carries a timestamp:
+
+	Sep 19 15:41:27 host01 ModemManager[1151]: <msg> couldn't check support...
+	Sep 19 15:41:27 host01 gnome-shell[2856]: Object .GProxyVolume ... disposed
+	                                          == Stack trace for context 0x5566 ==
+	                                          #0   556694310aa8 i   resource:///...
+	                                          #1   5566943109f8 i   resource:///...
+	Sep 19 15:41:28 host01 gnome-shell[2856]: Object .GProxyVolume ... disposed
+	                                          == Stack trace for context 0x5566 ==
+
+Read line by line, that is seven records, four of which have no time, so the
+syslog driver can't read them and the whole log falls back to RawEntry. The
+multiline framer makes it three: a record starts at every line that begins
+with a timestamp, and every other line belongs to the record above it. Each
+crash is then one entry at 15:41:27, grouped with the other crashes like it,
+and counted once in a graph.
+
+It recognises the timestamps of syslog and journalctl, RFC 3339/5424, Python
+logging, log4j/logback, Go, nginx, Apache, Snort, Kubernetes, the kernel,
+Tomcat, java.util.logging, Redis and Unix time (docs/drivers.md has the
+list). It only switches on when some continuation line is indented, which is
+what a real multi-line log looks like; a log without one is framed line by
+line, exactly as before. journalctl's "-- Boot ... --" lines are skipped.
+
+docs/drivers.md covers each stage in detail and how to add to them.
 
 
 Routine Operations

@@ -3,7 +3,8 @@
 petit works in three stages:
 
 1. A **framer** (`petit/records.py`) cuts the text into records: one per
-   line, one per JSON object, or one per email message.
+   JSON object, one per email message, one per multi-line log message, or
+   one per line.
 2. An **entry driver** (`petit/CrunchLog.py`) parses each record, picking
    out timestamp, host, daemon and payload.
 3. A **hash driver** (`petit/LogHash.py`) turns each entry into a
@@ -21,6 +22,7 @@ Framers are tried in order and the first to claim the whole buffer wins.
 |-----------|--------------------------------------------------------------|-------------------|
 | `json`    | a JSON array of objects, or every non-blank line an object   | `StructuredEntry` |
 | `message` | 2+ RFC 822 header blocks, or 2+ mbox `From ` separators       | `EmailEntry`      |
+| `multiline` | timestamped lines with indented continuation lines         | voted, as always  |
 | `line`    | anything; always last                                        | voted, as always  |
 
 A header block counts only if it has two or more fields and at least one is
@@ -31,6 +33,64 @@ from reading as mail.
 A framer that knows what its records are names their entry driver; line
 records are still voted on by every registered driver. Detection looks at
 only the first 2000 characters of a record (`DETECT_MAX_CHARS`).
+
+### `multiline`
+
+A record starts at a line that begins, in column 0, with a timestamp, and
+every line after it that doesn't is part of that record, indented or not.
+That covers journalctl's indented continuations, Java's `\tat ...` frames and
+unindented `Caused by:` lines, and Python's `Traceback (most recent call
+last):` block down to the final `ValueError: ...`.
+
+It claims a buffer only when all of these hold:
+
+1. The first line with content (blank lines and journald markers aside)
+   starts with a timestamp from `HEAD_PATTERNS`.
+2. At least one continuation line is indented. That is the evidence the
+   input really has multi-line messages. Without it the framer declines and
+   the buffer is framed line by line, so a log with a stray unparseable line
+   (the `#` lines in test01) is never folded into its neighbour. The 2009
+   corpus, test01-test13, has no indented lines and frames exactly as before.
+3. No record runs past `MAX_RECORD_LINES` (1000). A longer one declines the
+   buffer rather than build a record that size.
+
+The timestamp format is fixed by the first record: a continuation line that
+happens to start with a different kind of time (a `10:00:00.500` inside an
+ISO-dated log) doesn't start a new record. journald's own notes, `-- Boot
+... --` and `-- No entries --`, are dropped: they count in `lines_in` but are
+in no record.
+
+| Pattern         | Example head                                   | Written by |
+|-----------------|------------------------------------------------|------------|
+| `bsd`           | `Sep 23 10:00:00`, `<34>Sep 23 10:00:00`        | syslog, secure, journalctl `short`/`short-precise` |
+| `iso`           | `2026-09-23T10:00:00`, `2026-09-23 10:00:00,123` | RFC 3339/5424, rsyslog, journalctl `short-iso`, Python logging, log4j/logback, Go, Postgres |
+| `iso_bracket`   | `[2026-09-23 10:00:00`                          | Elasticsearch, many application logs |
+| `level_iso`     | `ERROR 2026-09-23 10:00`, `[INFO] 2026-09-23 10:00` | level-first application logs |
+| `slash`         | `2026/09/23 10:00:00`                           | nginx error log, Go's `log` |
+| `ctime_bracket` | `[Sun Apr 10 04:04:00`                          | Apache error log |
+| `clf`           | `1.2.3.4 - - [10/Apr/2011:04:04:00`             | Apache/nginx access log |
+| `snort`         | `09/29-08:25:54`                                | Snort alerts |
+| `klog`          | `I0923 10:00:00.123456`                         | Kubernetes, glog |
+| `kernel`        | `[ 1234.567890]`                                | dmesg, journalctl `short-monotonic` |
+| `epoch`         | `1789845105.816 `                               | squid, Unix-time logs |
+| `jul`           | `Sep 23, 2026 10:00:00 AM`                      | java.util.logging, older Tomcat |
+| `tomcat`        | `23-Sep-2026 10:00:00`                          | Tomcat 8+ |
+| `us_date`       | `09/23/2026 10:00:00`                           | US-style dates |
+| `redis`         | `12345:M 23 Sep 2026 10:00:00`                  | Redis |
+| `time_ms`       | `10:00:00.123`, `10:00:00,123`                  | logback's default layout |
+
+To add a format, add a pattern to `HEAD_PATTERNS` anchored at column 0,
+using only character classes and bounded repeats (the module's rule for
+hostile input), and add its two example heads to
+`TestMultilineFramer.HEADS` in `test/test_records.py`; a test fails until
+every pattern has them.
+
+The framer only decides where records begin and end. Whether their text can
+be read is still the entry drivers' vote: journalctl `short-precise`
+(`10:00:00.123456`) and fractional RFC 3339 heads (#11) frame correctly but
+aren't read by `SyslogEntry`/`RSyslogEntry` yet, and Python or Java
+application logs have no driver of their own, so they are grouped as
+`RawEntry` records, one per message.
 
 `JsonFramer` declines, rather than raises, above 4,000,000 characters
 (`MAX_JSON_CHARS`) or 64 levels of nesting (`MAX_JSON_DEPTH`). Array elements

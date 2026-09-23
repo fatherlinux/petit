@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.0] - 2026-09-23
+
+### Added
+- `multiline` framer (`--framer multiline`, tried automatically after
+  `json` and `message`). A record starts at a line that begins with a
+  timestamp, and every other line belongs to the record above it, so a
+  journalctl stack trace, a Python traceback or a Java exception with
+  `Caused by:` is one record. It recognises 16 timestamp formats: syslog
+  and journalctl, RFC 3339/5424, Python logging, log4j/logback, Go, nginx,
+  Apache error and access, Snort, Kubernetes/glog, the kernel, Unix time,
+  java.util.logging, Tomcat, US dates, Redis and logback's time-only layout.
+  journald's `-- Boot ... --` lines are skipped.
+- README section "How petit reads a log": the framer, entry driver and
+  hash driver stages, what a record is, and a worked multi-line example.
+  docs/drivers.md documents the framer's rules and every timestamp format.
+- Fixtures test16 (journalctl), test17 (Python traceback) and test18 (Java
+  exception).
+
+### Changed
+- `journalctl -o short` output with multi-line messages used to fall back
+  to `RawEntry` as a whole, because its continuation lines have no time:
+  four days of a Fedora journal, 367,070 lines, graphed as nothing. It now
+  frames as 365,928 records read by `SyslogEntry`. Any input the new
+  framer claims groups per message instead of per line. It claims only
+  input with an indented continuation line; everything else, including all
+  of test01-test15, frames exactly as before.
+
 ## [4.3.0] - 2026-09-23
 
 ### Changed

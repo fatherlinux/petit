@@ -144,3 +144,33 @@ def test_odd_bytes_never_escape_as_anything_but_petit_errors(payload):
     result = bounded(payload)
     assert result is not None
     assert result.lines_grouped <= result.lines_in
+
+
+class TestMultilineFraming:
+    HEAD = "Sep 19 15:41:27 host app[1]: x\n"
+
+    def test_one_endless_record_is_declined(self):
+        result = bounded(self.HEAD + "    more\n" * 200_000)
+        assert result is not None
+        assert result.framer == "line"
+
+    def test_many_small_records_are_linear(self):
+        result = bounded((self.HEAD + "    trace\n") * 50_000)
+        assert result is not None
+        assert result.framer == "multiline"
+        assert result.records_in == 50_000
+
+    # Explicit ids: pytest otherwise names each case after its million-character
+    # value, and `pytest -v` prints that name as one line of the CI log.
+    @pytest.mark.parametrize("line", [
+        "a" * 1_000_000,
+        "a " * 500_000,
+        "[" + "0" * 1_000_000,
+        "<1>" + "9" * 1_000_000,
+        "ERROR" + " " * 1_000_000,
+    ], ids=["letters", "words", "bracket-digits", "pri-digits", "level-spaces"])
+    def test_head_patterns_on_huge_lines(self, line):
+        start = time.perf_counter()
+        for pattern in framing.HEAD_PATTERNS.values():
+            pattern.match(line)
+        assert time.perf_counter() - start < BUDGET_SECONDS
