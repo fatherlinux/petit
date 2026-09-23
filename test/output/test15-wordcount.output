@@ -1,6 +1,7 @@
 8:	build
 8:	failed
 8:	nightly
+7:	<#@example.com>
 5:	>
 4:	-#
 4:	Date:
@@ -17,7 +18,6 @@
 4:	on
 4:	ops@example.com
 3:	#one
-3:	<#@example.com>
 3:	Can
 3:	In-Reply-To:
 3:	Looking

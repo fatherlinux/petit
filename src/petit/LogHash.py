@@ -349,13 +349,19 @@ class WordHash(SuperHash):
 
             # First scrub any unwanted words
             newkey = self.filter.scrub(key)
-            if newkey in self:
-                self[newkey] = self[newkey] + self[key]
-            else:
-                self[newkey] = self[key]
+            if newkey == key:
+                continue
 
-            if newkey != key:
-                del self[key]
+            # Words that scrub to the same key are one word: add their
+            # counts and pool their lines. This used to be `a + b` on the
+            # two [count, members] lists, which concatenates them into
+            # [c1, m1, c2, m2] — the count stayed c1 and c2 was lost.
+            count, members = self.pop(key)
+            if newkey in self:
+                self[newkey][0] += count
+                self[newkey][1].extend(members)
+            else:
+                self[newkey] = [count, members]
 
         # Finally, remove valueless lines
         if "#" in self:

@@ -1,6 +1,7 @@
 1000:	[**]
 500:	#]
 500:	->
+500:	[#]
 500:	[Classification:
 500:	[Priority:
 496:	attempt
@@ -28,7 +29,6 @@
 32:	header
 14:	ClamAV
 14:	SMTP
-14:	[#]
 14:	comm#
 14:	injection
 14:	recipient

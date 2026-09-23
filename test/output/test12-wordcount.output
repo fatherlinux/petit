@@ -1,4 +1,5 @@
 68:	[error]
+67:	#]
 67:	[client
 54:	File
 54:	exist:
@@ -56,7 +57,6 @@
 2:	stat
 2:	to
 2:	unable
-1:	#]
 1:	(wrap#:
 1:	/usr/sbin/suexec)
 1:	/var/www/html/carmenletgo.fat#linux.com/MyAdmin

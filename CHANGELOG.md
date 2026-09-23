@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.1] - 2026-09-23
+
+### Fixed
+- `--wordcount` (and `hash_mode="wordcount"`) undercounted words that
+  normalize to the same key, such as `web01`/`web02` or `eth0`/`eth1`. The
+  merge concatenated the two `[count, members]` lists instead of adding
+  them, so the group kept the first word's count and lost the rest. Counts
+  now add up and sample lines are pooled (#33). Every `*-wordcount.output`
+  fixture was regenerated and checked against an independent per-word
+  tally.
+
 ## [4.1.0] - 2026-09-22
 
 ### Added

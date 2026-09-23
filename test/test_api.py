@@ -503,3 +503,25 @@ class TestSiteLocalFingerprints:
         result = analyze_text(corpus + "\nSep 22 10:01:00 lotor other[2]: unrelated",
                               collapse_fingerprints=True)
         assert result.fingerprints_matched == ["custom-event.fp"]
+
+
+class TestWordcountMerge:
+    """#33: words that scrub to the same key used to have their
+    [count, members] lists concatenated, so the count stayed the first
+    word's and the rest were lost."""
+
+    TEXT = "\n".join(
+        ["Sep 22 10:00:00 h d[1]: foo1 x"] * 3 + ["Sep 22 10:00:00 h d[1]: foo2 x"] * 5
+    )
+
+    def test_counts_add_up(self):
+        groups = {g.pattern: g for g in analyze_text(self.TEXT, hash_mode="wordcount").groups}
+        assert groups["foo#"].count == 8
+
+    def test_members_are_pooled(self):
+        group = next(
+            g for g in analyze_text(self.TEXT, hash_mode="wordcount", max_samples=8).groups
+            if g.pattern == "foo#"
+        )
+        assert len(group.samples) == 8
+        assert {s.split()[-2] for s in group.samples} == {"foo1", "foo2"}
