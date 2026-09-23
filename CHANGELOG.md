@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0] - 2026-09-23
+
+### Changed
+- `--graph` sizes the graph to the log and the terminal instead of picking
+  one of the six fixed windows. It runs from the earliest entry to the
+  latest and uses the finest column size that fits: 1/5/15/30 seconds,
+  1/5/15/30 minutes, 1/2/3/6/12 hours, 1/2/7 days, 1/3/6 months or 1/5/10
+  years. Three and a half days of syslog is 84 one-hour columns on a
+  120-column terminal and 42 two-hour columns on 80, where 4.2.0 drew 31
+  day columns, 27 of them empty. Multi-unit columns start on round values
+  (:00/:15, even hours, quarters) and the Duration line names the column
+  size, e.g. `98 hours (2-hour columns)`. Released in 4.2.0 earlier today,
+  and still promises what it did: the whole log, fitted to the terminal.
+- Graphs keep two characters of the terminal for the axis labels, which
+  print past the last column. A `--span` that filled the terminal exactly
+  wrapped its labels; it now exits 2 like any other span that doesn't fit.
+- `--help` and the README describe every graph in the same terms: the unit,
+  the number of columns, what the axis labels mean. New README section,
+  "Graphs".
+
+### Fixed
+- `--graph` started at the first line, so a log out of time order lost
+  every entry before it (test01: 100 of 115 lines). It now starts at the
+  earliest entry.
+
 ## [4.2.0] - 2026-09-23
 
 ### Added

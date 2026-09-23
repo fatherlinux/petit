@@ -1,3 +1,23 @@
+"""Text bar graphs of how many log entries fall in each slice of time.
+
+A graph is a row of columns. Each column counts the entries in `step` units
+of time, where the unit is one of second, minute, hour, day, month or year.
+The window starts at the first entry's timestamp, floored to the unit, and
+runs for `duration` columns. When a column spans several units (15 minutes,
+2 hours, a quarter) the start is also floored to a multiple of that size, so
+columns begin at :00/:15/:30/:45, on even hours, on Jan/Apr/Jul/Oct, and so
+on. Days are the exception: a month doesn't divide evenly into 2 or 7 days,
+so multi-day columns start on the first entry's day.
+
+The axis under the graph labels the first, middle and last column with the
+starting value of that column's unit: second of the minute, minute of the
+hour, hour of the day (00-23), day of the month, month (01-12), or the year's
+last two digits.
+
+Months and years are stepped on the calendar, never as a fixed number of
+days, so every column is exactly one (or `step`) calendar month or year.
+"""
+
 from __future__ import annotations
 
 import datetime
@@ -21,29 +41,58 @@ DAYS_GRAPH_WINDOW = 31
 YEAR_LABEL_MODULUS = 2000
 # set_abnormal()/set_blank() stamp unparseable lines with this year.
 SENTINEL_YEAR = 1900
+# Fewest columns a graph draws: enough room for the begin/middle/end labels.
+MIN_SPAN = 6
 
 # Timestamp fields, coarsest first. A graph in unit U buckets on the fields up
 # to and including U; everything finer is floored away.
 _FIELDS = ("year", "month", "day", "hour", "minute", "second")
+# What each field floors to; the year is never floored.
+_FLOOR_VALUES = (0, 1, 1, 0, 0, 0)
+_SECONDS_IN = {"second": 1, "minute": 60, "hour": 3600, "day": 86400}
+
+# Column sizes fit_graph() tries, finest first. Each unit's multiples are the
+# ones that divide its parent evenly (5/15/30 of 60; 2/3/6/12 of 24; 3/6 of
+# 12), so aligned columns never straddle a boundary. 7 days is a week; 5 and
+# 10 years are what's left once decades are wider than the terminal.
+LADDER: tuple[tuple[str, int], ...] = (
+    ("second", 1), ("second", 5), ("second", 15), ("second", 30),
+    ("minute", 1), ("minute", 5), ("minute", 15), ("minute", 30),
+    ("hour", 1), ("hour", 2), ("hour", 3), ("hour", 6), ("hour", 12),
+    ("day", 1), ("day", 2), ("day", 7),
+    ("month", 1), ("month", 3), ("month", 6),
+    ("year", 1), ("year", 5), ("year", 10),
+)
 
 
-def _entry_time(entry: LogEntry, unit: str) -> datetime.datetime:
-    """The entry's timestamp floored to `unit`."""
+def _floor(when: datetime.datetime, unit: str) -> datetime.datetime:
+    """`when` with every field finer than `unit` reset: month and day to 1,
+    the clock fields to 0."""
     depth = _FIELDS.index(unit) + 1
-    parts = [int(getattr(entry, f)) for f in _FIELDS[:depth]]
-    # month and day floor to 1, the clock fields to 0
-    parts += [1, 1, 0, 0, 0][depth - 1:]
-    year, month, day, hour, minute, second = parts
+    year, month, day, hour, minute, second = (
+        getattr(when, field) if i < depth else _FLOOR_VALUES[i]
+        for i, field in enumerate(_FIELDS)
+    )
     return datetime.datetime(year, month, day, hour, minute, second)
 
 
-def _entry_key(entry: LogEntry, unit: str) -> str:
-    return "".join(getattr(entry, f) for f in _FIELDS[:_FIELDS.index(unit) + 1])
+def _entry_time(entry: LogEntry, unit: str) -> datetime.datetime:
+    """The entry's timestamp floored to `unit`. Raises ValueError when the
+    driver left a field that isn't a number or a real date."""
+    year, month, day, hour, minute, second = (int(getattr(entry, f)) for f in _FIELDS)
+    return _floor(datetime.datetime(year, month, day, hour, minute, second), unit)
 
 
-def _time_key(when: datetime.datetime, unit: str) -> str:
-    # Same shape _entry_key builds from the drivers' zero-padded fields.
-    return when.strftime("%Y%m%d%H%M%S")[:4 + 2 * _FIELDS.index(unit)]
+def _align(start: datetime.datetime, unit: str, step: int) -> datetime.datetime:
+    """Floor `start` to a multiple of `step` units within the parent unit, so
+    multi-unit columns begin on round values. Days aren't aligned."""
+    if step == 1 or unit == "day":
+        return start
+    if unit == "year":
+        return start.replace(year=start.year - start.year % step)
+    if unit == "month":
+        return start.replace(month=start.month - (start.month - 1) % step)
+    return start - datetime.timedelta(**{unit + "s": getattr(start, unit) % step})
 
 
 def _step(start: datetime.datetime, unit: str, i: int) -> datetime.datetime:
@@ -57,11 +106,33 @@ def _step(start: datetime.datetime, unit: str, i: int) -> datetime.datetime:
     return start + datetime.timedelta(**{unit + "s": i})
 
 
+def _offset(start: datetime.datetime, when: datetime.datetime, unit: str) -> int:
+    """Whole units from `start` to `when`, both already floored to `unit`.
+    Negative when `when` is earlier. The inverse of _step()."""
+    if unit == "year":
+        return when.year - start.year
+    if unit == "month":
+        return (when.year - start.year) * MONTHS_PER_YEAR + when.month - start.month
+    return int((when - start).total_seconds()) // _SECONDS_IN[unit]
+
+
+def _time_key(when: datetime.datetime, unit: str) -> str:
+    # Same shape as the drivers' zero-padded fields joined together, so keys
+    # sort in time order.
+    return when.strftime("%Y%m%d%H%M%S")[:4 + 2 * _FIELDS.index(unit)]
+
+
 class GraphHash(UserDict[str, int]):
-    """A count of entries per unit of time, over a fixed window that starts
-    at the first entry. Subclasses pick the unit and the default window."""
+    """Entry counts per column, keyed by each column's start time.
+
+    Subclasses set the unit and the default number of columns. `duration`
+    overrides the number of columns, `step` makes each column span that many
+    units, and `start` moves the window off the first entry's timestamp; see
+    the module docstring for how the start is floored.
+    """
 
     start_date: datetime.datetime
+    # Start of the last column, not the end of the window.
     end_date: datetime.datetime
     middle_date: datetime.datetime
     max_value = 0
@@ -72,9 +143,16 @@ class GraphHash(UserDict[str, int]):
     # mutated by GraphHash itself.
     wide = False
     duration: int = 0
+    step = 1
     unit = ""
 
-    def __init__(self, log: CrunchLog, duration: int | None = None) -> None:
+    def __init__(
+        self,
+        log: CrunchLog,
+        duration: int | None = None,
+        step: int = 1,
+        start: datetime.datetime | None = None,
+    ) -> None:
         UserDict.__init__(self)
 
         if len(log) == 0:
@@ -82,20 +160,31 @@ class GraphHash(UserDict[str, int]):
 
         if duration is not None:
             self.duration = duration
+        self.step = step
 
-        # Zero out each entry, this will fill in blanks which
-        # may be in the log, especially sparse logs.
-        self.start_date = _entry_time(log[0], self.unit)
+        # Zero out every column first, so quiet stretches in sparse logs
+        # still get drawn.
+        if start is None:
+            start = _entry_time(log[0], "second")
+        self.start_date = _align(_floor(start, self.unit), self.unit, step)
+        keys = []
         for i in range(self.duration):
-            self.end_date = _step(self.start_date, self.unit, i)
-            self.zero(_time_key(self.end_date, self.unit))
+            self.end_date = _step(self.start_date, self.unit, i * step)
+            keys.append(_time_key(self.end_date, self.unit))
+            self.zero(keys[-1])
             if i == self.duration // 2:
                 self.middle_date = self.end_date
 
+        # Entries before the window, after it, or with fields that aren't a
+        # real time are left out.
         for entry in log:
-            key = _entry_key(entry, self.unit)
-            if key in self:
-                self.increment(key)
+            try:
+                when = _entry_time(entry, self.unit)
+            except ValueError:
+                continue
+            column = _offset(self.start_date, when, self.unit) // step
+            if 0 <= column < self.duration:
+                self.increment(keys[column])
 
         self.build_calculations()
 
@@ -127,6 +216,13 @@ class GraphHash(UserDict[str, int]):
         self.min_value = self.max_value
         for key in list(self.keys()):
             self.min_value = min(self.min_value, self[key])
+
+    def duration_text(self) -> str:
+        """`86 hours (2-hour columns)`, or just `24 hours` for one-unit columns."""
+        text = f"{self.duration * self.step} {self.unit}s"
+        if self.step > 1:
+            text += f" ({self.step}-{self.unit} columns)"
+        return text
 
     def display(self) -> None:
         """Common display function used by all graph subtypes"""
@@ -239,78 +335,88 @@ class GraphHash(UserDict[str, int]):
         print()
         print("Start Time:\t", str(self.start_date), "\t\tMinimum Value:", self.min_value)
         print("End Time:\t", str(self.end_date), "\t\tMaximum Value:", self.max_value)
-        print("Duration:\t", str(self.duration), self.unit + "s", "\t\t\tScale:", str(scale))
+        print("Duration:\t", self.duration_text(), "\t\t\tScale:", str(scale))
         print()
 
 
-
-
 class SecondsGraph(GraphHash):
-    """60 second graph subtype"""
+    """--sgraph: 60 one-second columns from the first entry."""
     unit = "second"
     duration = 60
 
 
 class MinutesGraph(GraphHash):
-    """60 minute graph subtype"""
+    """--mgraph: 60 one-minute columns from the first entry."""
     unit = "minute"
     duration = 60
 
 
 class HoursGraph(GraphHash):
-    """24 hour graph subtype"""
+    """--hgraph: 24 one-hour columns from the first entry."""
     unit = "hour"
     duration = HOURS_PER_DAY
 
 
 class DaysGraph(GraphHash):
-    """31 day graph subtype"""
+    """--dgraph: 31 one-day columns from the first entry."""
     unit = "day"
     duration = DAYS_GRAPH_WINDOW
 
 
 class MonthsGraph(GraphHash):
-    """12 month graph subtype"""
+    """--mograph: 12 one-month columns from the first entry's month."""
     unit = "month"
     duration = MONTHS_PER_YEAR
 
 
 class YearsGraph(GraphHash):
-    """10 year graph subtype"""
+    """--ygraph: 10 one-year columns from the first entry's year."""
     unit = "year"
     duration = 10
 
 
-# Finest first: auto_graph() takes the first one whose window fits the log.
 GRAPHS: tuple[type[GraphHash], ...] = (
     SecondsGraph, MinutesGraph, HoursGraph, DaysGraph, MonthsGraph, YearsGraph,
 )
 GRAPH_FOR_UNIT: dict[str, type[GraphHash]] = {g.unit: g for g in GRAPHS}
 
 
-def auto_graph(log: CrunchLog) -> type[GraphHash]:
-    """The finest fixed graph whose window, starting at the first entry,
-    reaches the latest entry. Falls back to YearsGraph.
+def time_range(log: CrunchLog) -> tuple[datetime.datetime, datetime.datetime]:
+    """The earliest and latest entry timestamps, to the second.
 
-    Lines stamped with the sentinel year by set_abnormal() carry no real time,
-    so they don't stretch the span unless the log itself starts there.
+    Logs aren't always in order (rotated files concatenated, or year-less
+    syslog stamped with the current year), so this is a scan, not the first
+    and last line. Lines stamped with the sentinel year by set_abnormal()
+    carry no real time and only count when nothing else does.
     """
-    if len(log) == 0:
-        raise EmptyLogError("no entries to graph")
-
-    first = _entry_time(log[0], "second")
-    latest = first
+    real: list[datetime.datetime] = []
+    sentinel: list[datetime.datetime] = []
     for entry in log:
         try:
             when = _entry_time(entry, "second")
         except ValueError:
             continue
-        if when.year == SENTINEL_YEAR and first.year != SENTINEL_YEAR:
-            continue
-        latest = max(latest, when)
+        (sentinel if when.year == SENTINEL_YEAR else real).append(when)
+    times = real or sentinel
+    if not times:
+        raise EmptyLogError("no timestamps to graph")
+    return min(times), max(times)
 
-    for graph in GRAPHS:
-        start = _entry_time(log[0], graph.unit)
-        if latest < _step(start, graph.unit, graph.duration):
-            return graph
-    return YearsGraph
+
+def fit_graph(log: CrunchLog, columns: int) -> GraphHash:
+    """--graph: the finest column size in LADDER that fits the whole log,
+    earliest entry to latest, into `columns`.
+
+    The graph draws only the columns the log covers, with MIN_SPAN as the
+    floor. A log too long even for 10-year columns gets `columns` of them.
+    """
+    if len(log) == 0:
+        raise EmptyLogError("no entries to graph")
+    earliest, latest = time_range(log)
+    for unit, step in LADDER:
+        start = _align(_floor(earliest, unit), unit, step)
+        needed = _offset(start, _floor(latest, unit), unit) // step + 1
+        if needed <= columns:
+            return GRAPH_FOR_UNIT[unit](log, max(needed, MIN_SPAN), step, earliest)
+    unit, step = LADDER[-1]
+    return GRAPH_FOR_UNIT[unit](log, max(columns, MIN_SPAN), step, earliest)

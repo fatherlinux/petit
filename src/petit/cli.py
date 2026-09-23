@@ -49,6 +49,7 @@ from petit.CrunchLog import CrunchLog, read_source
 from petit.errors import PetitError
 from petit.LogGraph import (
     GRAPH_FOR_UNIT,
+    MIN_SPAN,
     DaysGraph,
     GraphHash,
     HoursGraph,
@@ -56,7 +57,7 @@ from petit.LogGraph import (
     MonthsGraph,
     SecondsGraph,
     YearsGraph,
-    auto_graph,
+    fit_graph,
 )
 from petit.records import FRAMER_NAMES
 
@@ -67,9 +68,9 @@ GRAPH_MODES = frozenset({
 
 # --span suffixes. "mo" is listed before "m" so the regex tries it first.
 SPAN_UNITS = {"mo": "month", "s": "second", "m": "minute", "h": "hour", "d": "day", "y": "year"}
+# GraphHash.display() prints the axis labels two characters wider than the graph.
+AXIS_OVERHANG = 2
 SPAN_RE = re.compile(r"^(\d+)(" + "|".join(SPAN_UNITS) + r")$")
-# Fewest buckets that still leave room for the begin/middle/end axis labels.
-MIN_SPAN = 6
 
 
 def parse_span(value: str) -> tuple[str, int]:
@@ -193,51 +194,53 @@ def build_parser() -> argparse.ArgumentParser:
                          dest="mode",
                          action="store_const",
                          const="mode_sgraph",
-                         help="show graph of first 60 seconds")
+                         help="graph 60 one-second columns from the first entry")
 
     parser.add_argument("--mgraph",
                          dest="mode",
                          action="store_const",
                          const="mode_mgraph",
-                         help="show graph of first 60 minutes")
+                         help="graph 60 one-minute columns from the first entry")
 
     parser.add_argument("--hgraph",
                          dest="mode",
                          action="store_const",
                          const="mode_hgraph",
-                         help="show graph of first 24 hours")
+                         help="graph 24 one-hour columns from the first entry")
 
     parser.add_argument("--dgraph",
                          dest="mode",
                          action="store_const",
                          const="mode_dgraph",
-                         help="show graph of first 31 days")
+                         help="graph 31 one-day columns from the first entry")
 
     parser.add_argument("--mograph",
                          dest="mode",
                          action="store_const",
                          const="mode_mograph",
-                         help="show graph of first 12 months")
+                         help="graph 12 one-month columns from the first entry")
 
     parser.add_argument("--ygraph",
                          dest="mode",
                          action="store_const",
                          const="mode_ygraph",
-                         help="show graph of first 10 years")
+                         help="graph 10 one-year columns from the first entry")
 
     parser.add_argument("--graph",
                          dest="mode",
                          action="store_const",
                          const="mode_graph",
-                         help="show a graph, choosing seconds through years to fit the log")
+                         help="graph the whole log, choosing the finest column size (1s up to 10y) "
+                              "that fits the terminal width")
 
     parser.add_argument("--span",
                          dest="span",
                          type=parse_span,
                          default=None,
                          metavar="N{s,m,h,d,mo,y}",
-                         help="graph exactly N units from the first entry, e.g. 90m or 36h "
-                              "(implies --graph; limited by terminal width)")
+                         help="graph N one-unit columns from the first entry: s(econds), "
+                              "m(inutes), h(ours), d(ays), mo(nths), y(ears), e.g. 90m or 36h. "
+                              "Implies --graph; at least 6, and must fit the terminal width")
 
     # -V/--version is the default when no mode flag is given at all, exactly
     # as running plain `petit` always has.
@@ -264,10 +267,19 @@ def check_span(parser: argparse.ArgumentParser, args: argparse.Namespace) -> Non
     _unit, count = args.span
     if count < MIN_SPAN:
         parser.error(f"--span needs at least {MIN_SPAN} units to label the axis")
-    columns = count * (2 if args.wide else 1)
-    available = shutil.get_terminal_size().columns
-    if columns > available:
+    if count > graph_columns(args):
+        columns = count * (2 if args.wide else 1) + AXIS_OVERHANG
+        available = shutil.get_terminal_size().columns
         parser.error(f"--span needs {columns} columns; the terminal has {available}")
+
+
+def graph_columns(args: argparse.Namespace) -> int:
+    """How many graph columns fit the terminal; --wide draws each one twice as wide.
+
+    The axis labels run two characters past the last column, so they get
+    that room too.
+    """
+    return (shutil.get_terminal_size().columns - AXIS_OVERHANG) // (2 if args.wide else 1)
 
 
 def mode_version(_args: argparse.Namespace, _filename: str) -> None:
@@ -351,8 +363,10 @@ def _run_graph_mode(
     if args.span is not None:
         unit, count = args.span
         x = GRAPH_FOR_UNIT[unit](log, count)
+    elif graph_cls is None:
+        x = fit_graph(log, graph_columns(args))
     else:
-        x = (graph_cls or auto_graph(log))(log)
+        x = graph_cls(log)
     x.tick = args.tick
     x.wide = args.wide
     x.display()
