@@ -28,6 +28,11 @@ Using petit as a library
 
 hash_text() groups lines by fingerprint, most frequent first. detect_format()
 reports which driver claims the text; "RawEntry" means no driver recognised it.
+analyze_text() returns the same groups plus how they were produced, and takes
+the options the CLI has: hash_mode ("daemon", "host", "wordcount") and
+collapse_fingerprints. Normalization is chosen by the driver for the format
+unless you pass filter_name or stopwords. docs/drivers.md explains how
+drivers decide what to collapse.
 
 Text goes in, data comes out. Nothing here reads a file, writes to stdout, or
 exits the process — failures raise PetitError subclasses (EmptyLogError,
@@ -39,8 +44,8 @@ Public API and versioning
 Petit follows Semantic Versioning. Two things are public and covered by it:
 
   * the petit command line, its options and its output
-  * the names exported from the petit package: hash_text,
-    detect_format, Group, and the PetitError hierarchy
+  * the names exported from the petit package: analyze_text, hash_text,
+    detect_format, Analysis, Group, and the PetitError hierarchy
 
 Everything else is internal. The driver classes in petit.CrunchLog and
 the hash classes in petit.LogHash may change in any release; they are

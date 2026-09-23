@@ -10,6 +10,17 @@ from .errors import DataFileError
 from .resources import search_prefixes
 
 
+def parse_rule(line: str) -> tuple[re.Pattern[str], str]:
+    """One filter-file line: `regex<TAB>replacement`, or a bare regex.
+
+    A bare regex is replaced with "#", the scrub character petit has always
+    used. The tab form lets a file say what it normalised away — "<TS>",
+    "<IP>" — the way a caller's (regex, replacement) pairs can.
+    """
+    pattern, tab, replacement = line.partition("\t")
+    return re.compile(pattern), replacement if tab else "#"
+
+
 class Filter:
     """Filter object used to load filters into memory once, to save on file operations"""
 
@@ -52,35 +63,29 @@ class Filter:
         return instance
 
     def __init__(self, file: str = "__none__") -> None:
+        self.stopwords = []
+        if file == "__none__":
+            self.file = file
+            return
+
         for prefix in self.prefixes:
-
-            # Set class variable to file & path
             self.file = prefix + file
-            self.stopwords = []
+            if not os.path.exists(self.file):
+                continue
+            try:
+                with open(self.file) as f:
+                    self.stopwords = [parse_rule(line) for line in f.read().splitlines()]
+            except OSError as exc:
+                raise DataFileError(
+                    "could not open filter file " + str(self.file)
+                ) from exc
+            logging.info("Filter File: " + str(self.file))
+            return
 
-            if file == "__none__":
-                return
-
-            # Open the file and get each stopword or regex
-            if os.path.exists(self.file):
-                try:
-                    with open(self.file) as f:
-                        for line in f.readlines():
-
-                            # Read entire contents into array for speed
-                            # Save them as compiled regexes for speed
-                            # Patterns from a file have no replacement of
-                            # their own; "#" is the scrub character petit has
-                            # always used.
-                            self.stopwords.append((re.compile(line.rstrip()), "#"))
-                    break
-
-                except OSError as exc:
-                    raise DataFileError(
-                        "could not open filter file " + str(self.file)
-                    ) from exc
-
-        logging.info("Filter File: " + str(self.file))
+        # A misspelt filter name used to filter nothing, silently.
+        raise DataFileError(
+            "could not locate filter file " + file + " in any of: " + ", ".join(self.prefixes)
+        )
 
     def scrub(self, string: str) -> str:
         """Used to remove entries and replace them with the scrub character"""

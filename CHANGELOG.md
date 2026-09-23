@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-09-22
+
+### Changed
+- The CLI is now a thin shell over `petit.api`: every `--hash`, `--daemon`,
+  `--host` and `--wordcount` run is `analyze_text()` on the file's text.
+  `test/output/*` is byte-identical across this refactor.
+- Hash drivers own their normalization. Each declares `KEY_FIELDS`,
+  `GENERALIZATIONS` and `DEFAULT_FILTER`, and `analyze_text`/`hash_text`'s
+  `filter_name` now defaults to `None`, meaning "ask the driver". Explicit
+  `filter_name=` or `stopwords=` still win. The rule for what a
+  generalization may swallow is in `LogHash.py`'s docstring and the new
+  `docs/drivers.md`.
+- Raw text (`RawLogHash`) now normalizes with the new `strict.stopwords`
+  instead of `hash.stopwords`, so identifiers like `web01`/`web02` and
+  `PROJ-1234`/`PROJ-1235` stay distinct. Reviewed fixture diff:
+  `test04-hash-nosample.output` (`#` → `<N>`).
+- `SecureLogHash` keeps the user name the client supplied. `Invalid user.*`
+  and `Failed password for.*from.*` (and `Failed password for invalid
+  user.*`) swallowed the name and everything after it; they now collapse only
+  the source address, and a name containing a space doesn't match at all.
+  The `input_userauth_request: invalid user` and `error retrieving
+  information about user` rules were removed for the same reason. No
+  fixture moves: test08 contains none of these lines.
+- `--allsample` shows each group's first member instead of a random one.
+
+### Added
+- `analyze_text(hash_mode="auto"|"daemon"|"host"|"wordcount")`: every
+  grouping the CLI offers is reachable from the library.
+- `analyze_text(collapse_fingerprints=True)` and
+  `Analysis.fingerprints_matched`: reboot-sequence collapsing, previously
+  CLI-only (`--fingerprint`).
+- `Group.sample_payloads`: each sample's message without its envelope.
+- `strict.stopwords`, and filter files may give a replacement per rule as
+  `regex<TAB>replacement` (a bare regex still means `#`).
+- `test/test_drivers.py`: MERGE/NO_MERGE example pairs for every hash driver.
+
+### Fixed
+- Fingerprint corpora were re-read and re-parsed from disk on every call;
+  they are now cached by path and modification time. Matching no longer
+  overwrites the corpus's own entry in place.
+- Site-local fingerprint corpora (`/var/lib/petit/fingerprints/` etc.) were
+  never read, because only the first directory with files was searched and
+  the packaged one always has files. All directories are now read.
+- A misspelt or missing filter name silently filtered nothing; it now raises
+  `DataFileError`.
+- Files and strings split into lines the same way. `from_text` used
+  `str.splitlines()`, which also breaks on form feeds and U+2028, and
+  `\r\n` input kept a trailing `\r` in its samples.
+- A file that isn't valid UTF-8 exits 1 with a message instead of a
+  traceback.
+- `--wordcount` groups now hold the lines each word came from, so library
+  samples are real lines rather than the word repeated.
+
 ## [3.1.1] - 2026-09-20
 
 ### Fixed

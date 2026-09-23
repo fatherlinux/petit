@@ -8,6 +8,7 @@ import pytest
 from petit import (
     DataFileError,
     EmptyLogError,
+    LogHash,
     ParseError,
     PetitError,
     analyze_text,
@@ -210,8 +211,19 @@ class TestDriverOverride:
         assert analyze_text(secure_log(), driver="RawEntry").driver == "RawEntry"
 
     def test_pinned_raw_does_not_generalise_the_payload(self):
-        """SecureLogHash collapses everything after "Invalid user", which is
-        exactly the part a caller may need to keep distinct."""
+        """A pinned RawEntry applies no sshd vocabulary at all."""
+        text = "\n".join(
+            f"Sep 19 04:00:{i:02d} lotor sshd[{i}]: Accepted publickey for u{i} from 10.0.0.{i}"
+            for i in range(50)
+        )
+        assert len(analyze_text(text).groups) == 1
+        pinned = analyze_text(text, driver="RawEntry", filter_name="__none__")
+        assert len(pinned.groups) == 50
+
+    def test_detected_secure_log_keeps_the_user_name(self):
+        """"Invalid user.*" used to swallow the name a client chose, so an
+        odd one merged into the crowd. The rule now collapses only the
+        source address after it."""
         boilerplate = "\n".join(
             f"Sep 19 04:00:{i:02d} lotor sshd[{i}]: Invalid user bob{i} from 10.0.0.{i}"
             for i in range(50)
@@ -220,10 +232,8 @@ class TestDriverOverride:
             "\nSep 19 04:59:59 lotor sshd[99]: Invalid user DISTINCTIVE from 10.0.0.99"
         )
         detected = analyze_text(text)
-        assert len(detected.groups) == 1
-
-        pinned = analyze_text(text, driver="RawEntry", filter_name="__none__")
-        assert any("DISTINCTIVE" in g.pattern for g in pinned.groups)
+        assert detected.driver == "SecureLogEntry"
+        assert any("DISTINCTIVE" in g.pattern for g in detected.groups)
 
     def test_unknown_driver_is_rejected(self):
         with pytest.raises(PetitError):
@@ -296,9 +306,21 @@ class TestCallerSuppliedStopwords:
         """Documents the behaviour that motivates the option: `[a-f]+#`
         eats the letter next to a scrubbed number, so two different names
         share a fingerprint."""
-        groups = hash_text(self.NAMES, driver="RawEntry")
+        groups = hash_text(self.NAMES, driver="RawEntry", filter_name="hash.stopwords")
         assert len(groups) == 1
         assert groups[0].pattern == "user bo# logged in"
+
+    def test_raw_text_defaults_to_the_strict_filter(self):
+        """RawLogHash declares strict.stopwords: a number glued to a word is
+        part of an identifier and stays; only standalone numbers go."""
+        assert len(hash_text(self.NAMES, driver="RawEntry")) == 30
+        spaced = self.NAMES.replace("bob", "bob ").replace("boa", "boa ")
+        patterns = {g.pattern for g in hash_text(spaced, driver="RawEntry")}
+        assert patterns == {"user bob <N> logged in", "user boa <N> logged in"}
+
+    def test_a_missing_filter_file_is_an_error(self):
+        with pytest.raises(DataFileError):
+            hash_text(self.NAMES, filter_name="no-such.stopwords")
 
     def test_caller_patterns_keep_distinct_words_distinct(self):
         groups = hash_text(self.NAMES, driver="RawEntry", stopwords=[r"[0-9]+"])
@@ -461,3 +483,22 @@ class TestOneParser:
         target.write_bytes(b"\xff\xfe\x00garbage\n")
         with pytest.raises(DataFileError):
             CrunchLog(str(target))
+
+
+class TestSiteLocalFingerprints:
+    def test_site_local_corpus_is_read_alongside_packaged(self, tmp_path, monkeypatch):
+        """The packaged directory always has files, and only the first
+        directory with files used to be read, so site-local corpora never
+        were."""
+        corpus = "\n".join(
+            f"Sep 22 10:00:{i:02d} lotor custom[1]: step {w} done"
+            for i, w in enumerate(["alpha", "bravo", "charlie", "delta"])
+        )
+        (tmp_path / "custom-event.fp").write_text(corpus + "\n")
+        packaged = resources.search_prefixes("fingerprints")[0]
+        monkeypatch.setattr(
+            LogHash, "search_prefixes", lambda _kind: [packaged, str(tmp_path) + "/"]
+        )
+        result = analyze_text(corpus + "\nSep 22 10:01:00 lotor other[2]: unrelated",
+                              collapse_fingerprints=True)
+        assert result.fingerprints_matched == ["custom-event.fp"]
