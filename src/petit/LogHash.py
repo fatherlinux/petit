@@ -6,7 +6,6 @@ import logging
 import os
 import re
 from collections import UserDict
-from random import choice
 from typing import Any, ClassVar
 
 from .CrunchLog import (
@@ -23,6 +22,48 @@ from .errors import DataFileError, PetitError
 from .Filter import Filter
 from .resources import search_prefixes
 
+# Share of a fingerprint corpus's patterns that must appear before the
+# corpus is considered present.
+FINGERPRINT_THRESHOLD = 0.31
+
+# (path, mtime) -> the corpus's fingerprint keys. Parsing the corpora is
+# thousands of lines of work; an embedding service asks on every request.
+_FINGERPRINT_CACHE: dict[tuple[str, float], frozenset[str]] = {}
+
+
+def load_fingerprints() -> list[tuple[str, frozenset[str]]]:
+    """Every fingerprint corpus as (name, keys), largest file first.
+
+    Largest first prevents double labelling when a smaller corpus is a
+    subset of a bigger one. Only the first search prefix holding any files
+    is used, so a site-local directory replaces the packaged corpora rather
+    than mixing with them. Each corpus is hashed by whatever driver claims
+    it, with that driver's own default filter.
+    """
+    prefixes = search_prefixes("fingerprints")
+    paths: list[str] = []
+    for prefix in prefixes:
+        if os.path.isdir(prefix) and os.listdir(prefix):
+            paths = [os.path.join(prefix, f) for f in os.listdir(prefix)]
+            break
+    if not paths:
+        raise DataFileError(
+            "could not locate fingerprint files in any of: " + ", ".join(prefixes)
+        )
+    paths.sort(key=os.path.getsize, reverse=True)
+
+    corpora = []
+    for path in paths:
+        if not path.endswith(".fp"):
+            continue
+        cache_key = (path, os.path.getmtime(path))
+        keys = _FINGERPRINT_CACHE.get(cache_key)
+        if keys is None:
+            keys = frozenset(SuperHash.manufacture(CrunchLog(path)).keys())
+            _FINGERPRINT_CACHE[cache_key] = keys
+        corpora.append((os.path.basename(path), keys))
+    return corpora
+
 
 class SuperHash(UserDict[str, list[Any]]):
     """Interface and parent class for all hash/dict based objects. """
@@ -31,13 +72,20 @@ class SuperHash(UserDict[str, list[Any]]):
     sample = "none"
     file_name = ""
 
-    def __init__(self, log: CrunchLog, filter_filename: str | Filter = "__none__") -> None:
+    # The stopword file this driver normalises with unless the caller says
+    # otherwise. The driver knows what noise looks like in its format; the
+    # caller does not, so the default belongs here and not in analyze_text.
+    DEFAULT_FILTER: ClassVar[str] = "hash.stopwords"
+
+    def __init__(self, log: CrunchLog, filter_filename: str | Filter | None = None) -> None:
 
         # Call parent init
         UserDict.__init__(self)
 
-        # A caller that supplies its own normalisation policy passes a built
-        # Filter instead of the name of one to go and find.
+        # None asks the driver. A caller that supplies its own normalisation
+        # policy passes a built Filter instead of the name of one to find.
+        if filter_filename is None:
+            filter_filename = self.DEFAULT_FILTER
         if isinstance(filter_filename, Filter):
             self.filter = filter_filename
         elif filter_filename != "__none__":
@@ -76,8 +124,7 @@ class SuperHash(UserDict[str, list[Any]]):
 
             # Print all lines as sample
             if self.sample == "all":
-                print(str(self[key][0]) + ":\t" +
-                choice(self[key][1]).log_entry)
+                print(str(self[key][0]) + ":\t" + self[key][1][0].log_entry)
 
             elif self.sample == "none":
                 print(str(self[key][0]) + ":\t" + str(key))
@@ -94,84 +141,41 @@ class SuperHash(UserDict[str, list[Any]]):
                     "unsupported sampling mode: " + str(self.sample)
                 )
 
-    def fingerprint(self) -> None:
+    def fingerprint(self) -> list[str]:
+        """Collapse every known event sequence found in this hash.
+
+        A fingerprint is a corpus of the lines one routine event produces — a
+        reboot, say. When more than FINGERPRINT_THRESHOLD of a corpus's
+        patterns are present, every one of them is removed and replaced by a
+        single group named after the corpus, so 600 lines of boot noise read
+        as one line and whatever was unusual stands out.
+
+        Returns the names of the corpora that matched, in the order they did,
+        so a caller can tell "nothing matched" from "not asked".
         """
-        Remove all fingerprints from a given LogHash and replace with a
-        single string"
-        """
+        matched: list[str] = []
+        for name, keys in load_fingerprints():
+            count = sum(1 for key in keys if key in self)
+            logging.info("Fingerprint %s: %d of %d patterns", name, count, len(keys))
+            if count <= len(keys) * FINGERPRINT_THRESHOLD:
+                continue
 
-        # Declarations & Variables
-        threshold_coefficient = 0.31
-        fingerprints = []
-        fingerprint_files = ["__none__"]
+            for key in keys:
+                self.pop(key, None)
 
-        # Load & assign fingerprint files
-        prefixes = search_prefixes("fingerprints")
-
-        for prefix in prefixes:
-            if os.path.exists(prefix) and len(os.listdir(prefix)) >= 1:
-
-                # Process in order from largest to smallest which prevents
-                # double labeling with similar fingerprints
-                fingerprint_files = os.listdir(prefix)
-                fingerprint_files = [os.path.join(prefix, f) for f in fingerprint_files]
-                fingerprint_files.sort(key=os.path.getsize)
-                fingerprint_files.reverse()
-                break
-
-        if fingerprint_files[0] == "__none__":
-            raise DataFileError(
-                "could not locate fingerprint files in any of: "
-                + ", ".join(prefixes)
-            )
-
-        for fingerprint_file in fingerprint_files:
-            if re.search("fp", fingerprint_file):
-
-                # Build a Log for the fingerprint
-                log = CrunchLog(fingerprint_file)
-
-                # Build a SuperHash
-                x = SuperHash.manufacture(log, "hash.stopwords")
-
-                # Remove the prefix & set name
-                x.file_name = re.sub(prefix, "", fingerprint_file)
-                fingerprints.append(x)
-
-        # Iterate each fingerprint
-        for fingerprint in fingerprints:
-
-            logging.info("Testing Fingerprint:" + fingerprint.file_name)
-
-            # Reset counter for each fingerprint
-            count = 0
-            threshold = (len(fingerprint) * threshold_coefficient)
-            logging.info("Threshold:" + str(threshold))
-
-            # Look for fingerpring
-            for key in list(fingerprint.keys()):
-                if key in self:
-                    count = count + 1
-
-                # If Threshold is reached, remove everyline of fingerprint
-                # Saves time on searching every entry
-                if count > threshold:
-                    logging.info("Found Fingerprint:" + fingerprint.file_name)
-                    matched_key = key
-                    for fingerprint_key in fingerprint:
-                        if fingerprint_key in self:
-                            del self[fingerprint_key]
-
-                    # Force the sample entry to be the same as the key
-                    # and based off of the filename of the fingerprint
-                    fingerprint[matched_key][1][0].log_entry = fingerprint.file_name
-                    self.increment(fingerprint.file_name, fingerprint[matched_key][1][0])
-                    break
-
-            logging.info("Count: " + str(count))
+            # The collapsed group stands for lines that are gone, so its one
+            # member is made up here and named after the corpus. It used to
+            # be the corpus's own parsed entry with its payload overwritten,
+            # which mutated the loaded fingerprint — harmless only while
+            # nothing kept the corpus around between calls.
+            stand_in = RawEntry(name)
+            stand_in.raw = name
+            self.increment(name, stand_in)
+            matched.append(name)
+        return matched
 
     @staticmethod
-    def manufacture(log: CrunchLog, filter: str | Filter) -> SuperHash:
+    def manufacture(log: CrunchLog, filter: str | Filter | None = None) -> SuperHash:
         """Factory method which creates new SuperHash of correct subtype"""
 
         # Select the correct build method
@@ -326,6 +330,8 @@ class RawLogHash(SuperHash):
 class DaemonHash(SyslogHash):
     """Overrides the fill method for DaemonHashes built from text files with date/time"""
 
+    DEFAULT_FILTER: ClassVar[str] = "daemon.stopwords"
+
     def fill(self, log: CrunchLog) -> None:
 
         for entry in log:
@@ -343,6 +349,8 @@ class DaemonHash(SyslogHash):
 
 class HostHash(SyslogHash):
     """Overrides the fill method for HostHashes built from text files with date/time"""
+
+    DEFAULT_FILTER: ClassVar[str] = "host.stopwords"
 
     def fill(self, log: CrunchLog) -> None:
 
@@ -365,6 +373,8 @@ class WordHash(SuperHash):
     Date, time, and other common words are excluded from the count.
     """
 
+    DEFAULT_FILTER: ClassVar[str] = "words.stopwords"
+
     def fill(self, log: CrunchLog) -> None:
 
         for entry in log:
@@ -372,8 +382,9 @@ class WordHash(SuperHash):
             # Base the wordcount on the log_entry payload
             for word in entry.log_entry.split():
 
-                # increment the WordHash with the new key
-                self.increment(word, word)
+                # Keep the entry, not the word, so a group's members are
+                # the lines the word appeared in
+                self.increment(word, entry)
 
         # Perform bleach at the end because it is more efficient
         for key in list(self.keys()):

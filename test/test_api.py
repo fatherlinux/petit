@@ -365,3 +365,99 @@ class TestPatternReplacements:
         reversed_rules = list(reversed(self.RULES))
         groups = hash_text(self.TEXT, driver="RawEntry", stopwords=reversed_rules)
         assert "<TS>" not in groups[0].pattern
+
+
+DATA = os.path.join(os.path.dirname(__file__), "data")
+
+
+def fixture_text(name):
+    with open(os.path.join(DATA, name)) as handle:
+        return handle.read()
+
+
+class TestHashModes:
+    """Every grouping the CLI offers is reachable from the library."""
+
+    def test_daemon_mode_groups_by_daemon(self):
+        result = analyze_text(fixture_text("test01.log"), hash_mode="daemon")
+        assert result.groups
+        assert all(" " not in g.pattern for g in result.groups)
+
+    def test_host_mode_groups_by_host(self):
+        result = analyze_text(fixture_text("test01.log"), hash_mode="host")
+        assert result.groups
+
+    def test_wordcount_samples_are_the_lines_the_word_came_from(self):
+        text = fixture_text("test01.log")
+        lines = text.splitlines()
+        for group in analyze_text(text, hash_mode="wordcount").groups:
+            for number, sample in zip(group.sample_lines, group.samples, strict=True):
+                assert lines[number] == sample
+
+    def test_unknown_mode_is_rejected(self):
+        with pytest.raises(PetitError):
+            analyze_text(secure_log(), hash_mode="nonsense")
+
+
+class TestFingerprintCollapse:
+    """Reboot-sequence collapsing used to be reachable only from --fingerprint."""
+
+    def test_off_by_default(self):
+        result = analyze_text(fixture_text("test05.log"))
+        assert result.fingerprints_matched == []
+
+    def test_matches_are_reported_and_collapsed(self):
+        text = fixture_text("test05.log")
+        plain = analyze_text(text)
+        collapsed = analyze_text(text, collapse_fingerprints=True)
+        assert collapsed.fingerprints_matched == ["rhel4-reboot.fp"]
+        assert len(collapsed.groups) < len(plain.groups)
+        assert any(g.pattern == "rhel4-reboot.fp" for g in collapsed.groups)
+
+    def test_nothing_matched_is_distinguishable_from_off(self):
+        result = analyze_text(fixture_text("test01.log"), collapse_fingerprints=True)
+        assert result.fingerprints_matched == []
+
+    def test_repeat_calls_agree(self):
+        """Corpora are cached between calls; the first match used to
+        overwrite a corpus entry in place, which a cache would carry into
+        every later call."""
+        text = fixture_text("test06.log")
+        first = analyze_text(text, collapse_fingerprints=True)
+        second = analyze_text(text, collapse_fingerprints=True)
+        assert first.fingerprints_matched == second.fingerprints_matched
+        assert first.groups == second.groups
+
+    def test_corpora_are_parsed_once(self, monkeypatch):
+        analyze_text(fixture_text("test05.log"), collapse_fingerprints=True)
+
+        def boom(*_args, **_kwargs):
+            raise AssertionError("corpus re-read from disk")
+
+        monkeypatch.setattr("petit.LogHash.CrunchLog", boom)
+        analyze_text(fixture_text("test05.log"), collapse_fingerprints=True)
+
+
+class TestOneParser:
+    """The CLI reads a file and hands its text to the same splitter the
+    library uses; the two used to disagree about what ends a line."""
+
+    def test_form_feed_does_not_split_a_line(self):
+        result = analyze_text("one\x0ctwo\n", driver="RawEntry")
+        assert result.lines_in == 1
+
+    def test_crlf_is_not_kept_in_samples(self):
+        groups = hash_text("alpha beta\r\nalpha beta\r\n", driver="RawEntry")
+        assert groups[0].samples == ["alpha beta", "alpha beta"]
+
+    def test_file_and_text_parse_identically(self):
+        path = os.path.join(DATA, "test08.log")
+        from_file = CrunchLog(path)
+        from_text = CrunchLog.from_text(fixture_text("test08.log"))
+        assert [e.raw for e in from_file] == [e.raw for e in from_text]
+
+    def test_undecodable_file_raises_cleanly(self, tmp_path):
+        target = tmp_path / "binary.log"
+        target.write_bytes(b"\xff\xfe\x00garbage\n")
+        with pytest.raises(DataFileError):
+            CrunchLog(str(target))
