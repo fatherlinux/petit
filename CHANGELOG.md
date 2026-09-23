@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.2] - 2026-09-23
+
+### Fixed
+- `SyslogEntry` and `SecureLogEntry` detection checked the clock column with
+  a malformed character class (`[0-9{2}:...`), so fields like `10:00` or
+  `x10:00:01` passed as a time. The column must now be exactly `HH:MM:SS`.
+  A driver no longer gets picked for lines it cannot unpack (#2).
+
 ## [4.1.1] - 2026-09-23
 
 ### Fixed
