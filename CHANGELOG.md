@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2026-09-22
+
+### Added
+- `EmailEntry` and `EmailHash`: messages cut out by `MessageFramer` are
+  fingerprinted by skeleton: header names (never values), quote-depth
+  profile, signature present or not, and the unquoted body lines, which are
+  token-normalized by `strict.stopwords` and never generalized. Two replies
+  that say the same thing merge whoever sent them, and one that says
+  something else never does. MERGE/NO_MERGE table in `test/test_drivers.py`.
+
+### Changed
+- Mail threads and mbox input are parsed by `EmailEntry` instead of
+  `RawEntry`. Reviewed fixture diff: `test15-hash*.output`, where the two
+  identical "Looking now." replies now group together.
+
 ## [4.0.0] - 2026-09-22
 
 ### Changed

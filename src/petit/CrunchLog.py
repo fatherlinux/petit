@@ -17,7 +17,7 @@ from collections import UserList
 from typing import Any
 
 from .errors import DataFileError, EmptyLogError, ParseError, PetitError
-from .records import FRAMER_NAMES, Framer, Record, framers, parse_json_object
+from .records import FRAMER_NAMES, HEADER_FIELD, Framer, Record, framers, parse_json_object
 
 # Bound on how many times select() will resample before giving up and
 # using RawEntry. Without a bound, input that no driver claims spins forever.
@@ -733,6 +733,42 @@ class StructuredEntry(LogEntry):
     def __init__(self, line: str) -> None:
         self.document = parse_json_object(line)
         self.set_abnormal(line.split())
+
+    @staticmethod
+    def is_type(_line: list[str]) -> bool:
+        return False
+
+
+class EmailEntry(LogEntry):
+    """One RFC 822 message, as cut out by MessageFramer.
+
+    Never claims a record by vote: MessageFramer names it for the records it
+    produces. `header_names` are the field names in the header block, lower
+    case, in order; `body_lines` are everything after it.
+    """
+
+    header_names: list[str]
+    body_lines: list[str]
+
+    def __init__(self, line: str) -> None:
+        lines = line.splitlines()
+        # An mbox separator line precedes the headers
+        i = 1 if lines and lines[0].startswith("From ") else 0
+        names = []
+        while i < len(lines) and lines[i].strip():
+            match = HEADER_FIELD.match(lines[i])
+            if match:
+                names.append(match.group(1).lower())
+            elif lines[i][:1] not in (" ", "\t"):
+                break
+            i += 1
+        self.header_names = names
+        self.body_lines = lines[i:]
+        value = line.split()
+        if value:
+            self.set_abnormal(value)
+        else:
+            self.set_blank()
 
     @staticmethod
     def is_type(_line: list[str]) -> bool:
