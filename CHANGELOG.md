@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.6.0] - 2026-09-24
+
+### Added
+- Native packages (#48): a noarch `.rpm` for RHEL 8, 9 and 10 and their
+  rebuilds, Fedora, Amazon Linux 2023 and SUSE, and an `all` `.deb` for
+  Debian 12 and 13 and Ubuntu 24.04 and 26.04. Each release attaches them,
+  and the signed dnf and apt repository at crunchtools.github.io/packages
+  serves them, so `dnf upgrade` and `apt upgrade` pick up new versions.
+  petit installs to `/usr/lib/petit` and runs on whichever Python 3.11 or
+  newer the system has, so RHEL 8 and 9 use their `python3.12` package.
+- CI tests Python 3.11 through 3.14 (#51).
+
 ## [4.5.0] - 2026-09-23
 
 ### Added
