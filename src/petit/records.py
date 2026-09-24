@@ -22,8 +22,9 @@ import json
 import re
 from bisect import bisect_right
 from collections import deque
-from collections.abc import Iterable, Iterator
+from collections.abc import Callable, Iterable, Iterator
 from dataclasses import dataclass
+from functools import partial
 from typing import Any, ClassVar
 
 # JsonFramer declines a buffer larger than this rather than parse it.
@@ -101,10 +102,10 @@ def _loads_or_none(text: str) -> Any:
 
 @dataclass(frozen=True)
 class Claim:
-    """A framer's verdict on a whole input: the params it frames with, and
+    """A framer's verdict on a whole input: how to cut it into records, and
     how many records that makes."""
 
-    params: Any
+    frame: Callable[[Iterable[str]], Iterator[Record]]
     records: int
 
 
@@ -126,9 +127,10 @@ class Survey:
 class Framer:
     """Interface: survey an input, then cut it into records.
 
-    `survey()` returns a fresh Survey. `records(lines, params)` cuts lines
-    into Records with the params from the survey's Claim. Both take the
-    input as a stream. `claims()` and `frame()` do the same over a list.
+    `survey()` makes a fresh Survey, whose Claim cuts the lines it surveyed
+    into Records. `records(lines)` cuts lines the way the framer does when
+    nothing was surveyed. Both take the input as a stream. `claims()` and
+    `frame()` do the same over a list.
     """
 
     name: ClassVar[str] = ""
@@ -136,12 +138,10 @@ class Framer:
     # instead of voting. None lets the drivers vote as they always have.
     entry_name: ClassVar[str | None] = None
 
-    @classmethod
-    def survey(cls) -> Survey:
-        raise NotImplementedError
+    survey: ClassVar[type[Survey]] = Survey
 
     @classmethod
-    def records(cls, lines: Iterable[str], params: Any) -> Iterator[Record]:
+    def records(cls, lines: Iterable[str]) -> Iterator[Record]:
         raise NotImplementedError
 
     @classmethod
@@ -158,7 +158,7 @@ class Framer:
     @classmethod
     def frame(cls, buf: list[str]) -> list[Record]:
         claim = cls.claim(buf)
-        return list(cls.records(buf, None if claim is None else claim.params))
+        return list(cls.records(buf) if claim is None else claim.frame(buf))
 
 
 def _json_claims(buf: list[str]) -> bool:
@@ -193,7 +193,7 @@ class _JsonSurvey(Survey):
     def result(self) -> Claim | None:
         if self.overflow or not _json_claims(self.buf):
             return None
-        return Claim(None, sum(1 for _ in JsonFramer.records(self.buf, None)))
+        return Claim(JsonFramer.records, sum(1 for _ in JsonFramer.records(self.buf)))
 
 
 class JsonFramer(Framer):
@@ -206,12 +206,10 @@ class JsonFramer(Framer):
     name = "json"
     entry_name = "StructuredEntry"
 
-    @classmethod
-    def survey(cls) -> Survey:
-        return _JsonSurvey()
+    survey = _JsonSurvey
 
     @classmethod
-    def records(cls, lines: Iterable[str], _params: Any) -> Iterator[Record]:
+    def records(cls, lines: Iterable[str]) -> Iterator[Record]:
         buf = list(lines)
         text = "".join(buf)
         if text.lstrip()[:1] == "[":
@@ -383,7 +381,7 @@ class _MessageSurvey(Survey):
         # mbox separators win when there are two; header blocks otherwise.
         for mode, count in (("mbox", self.mbox), ("header", self.headers)):
             if count.count >= 2:
-                return Claim(mode, count.records())
+                return Claim(partial(MessageFramer.records, mode=mode), count.records())
         return None
 
 
@@ -393,18 +391,16 @@ class MessageFramer(Framer):
     name = "message"
     entry_name = "EmailEntry"
 
-    @classmethod
-    def survey(cls) -> Survey:
-        return _MessageSurvey()
+    survey = _MessageSurvey
 
     @classmethod
-    def records(cls, lines: Iterable[str], params: Any) -> Iterator[Record]:
+    def records(cls, lines: Iterable[str], mode: str = "header") -> Iterator[Record]:
         """One record per message; text before the first is a record too.
 
         A start is confirmed after its header block ends, so the lines since
         the last confirmed start are held until the next one is.
         """
-        scanner = _MboxStarts() if params == "mbox" else _HeaderStarts()
+        scanner = _MboxStarts() if mode == "mbox" else _HeaderStarts()
         buf: list[str] = []
         begin = 0
         line_count = 0
@@ -557,7 +553,7 @@ class _MultilineSurvey(Survey):
         cutter = self.cutter
         if cutter.declined or cutter.head is None or not cutter.indented:
             return None
-        return Claim(None, self.count + (last is not None))
+        return Claim(MultilineFramer.records, self.count + (last is not None))
 
 
 class MultilineFramer(Framer):
@@ -578,12 +574,10 @@ class MultilineFramer(Framer):
 
     name = "multiline"
 
-    @classmethod
-    def survey(cls) -> Survey:
-        return _MultilineSurvey()
+    survey = _MultilineSurvey
 
     @classmethod
-    def records(cls, lines: Iterable[str], _params: Any) -> Iterator[Record]:
+    def records(cls, lines: Iterable[str]) -> Iterator[Record]:
         # Input claimed on its whole length never has an over-long record;
         # the cap only bites when the claim was made on a prefix.
         cutter = _MultilineCutter(cut=True)
@@ -608,7 +602,7 @@ class _LineSurvey(Survey):
         self.count += 1
 
     def result(self) -> Claim | None:
-        return Claim(None, self.count) if self.count else None
+        return Claim(LineFramer.records, self.count) if self.count else None
 
 
 class LineFramer(Framer):
@@ -616,12 +610,10 @@ class LineFramer(Framer):
 
     name = "line"
 
-    @classmethod
-    def survey(cls) -> Survey:
-        return _LineSurvey()
+    survey = _LineSurvey
 
     @classmethod
-    def records(cls, lines: Iterable[str], _params: Any) -> Iterator[Record]:
+    def records(cls, lines: Iterable[str]) -> Iterator[Record]:
         for i, line in enumerate(lines):
             yield Record([line], i, i + 1)
 

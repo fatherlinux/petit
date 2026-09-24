@@ -442,29 +442,23 @@ class _Buckets:
     """
 
     def __init__(self, columns: int) -> None:
-        self.columns = columns
         self.unit = "second"
         self.counts: Counter[datetime.datetime] = Counter()
+        # N distinct buckets span at least N - 1 units, and a column size of
+        # `step` units needs span // step + 1 columns. Years never coarsen.
+        widest: dict[str, int] = {}
+        for unit, step in LADDER:
+            widest[unit] = max(widest.get(unit, 0), step)
+        self.limits = {unit: step * columns + 1 for unit, step in widest.items()}
+        self.limits["year"] = sys.maxsize
 
     def add(self, when: datetime.datetime) -> None:
         self.counts[_floor(when, self.unit)] += 1
-        if len(self.counts) > self._limit():
-            self._coarsen()
-
-    def _limit(self) -> int:
-        # N distinct buckets span at least N - 1 units, and a column size of
-        # `step` units needs span // step + 1 columns.
-        if self.unit == "year":
-            return sys.maxsize
-        widest = max(step for unit, step in LADDER if unit == self.unit)
-        return widest * self.columns + 1
-
-    def _coarsen(self) -> None:
-        while len(self.counts) > self._limit():
+        while len(self.counts) > self.limits[self.unit]:
             self.unit = _FIELDS[_FIELDS.index(self.unit) - 1]
             merged: Counter[datetime.datetime] = Counter()
-            for when, count in self.counts.items():
-                merged[_floor(when, self.unit)] += count
+            for bucket, count in self.counts.items():
+                merged[_floor(bucket, self.unit)] += count
             self.counts = merged
 
 

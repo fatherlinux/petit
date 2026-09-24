@@ -285,14 +285,6 @@ def test_overlapping_header_candidates_stay_linear() -> None:
     assert not MessageFramer.claims(buf)
 
 
-def _entry(when: datetime.datetime) -> LogEntry:
-    entry = LogEntry("")
-    entry.year, entry.month, entry.day = f"{when.year:04d}", f"{when.month:02d}", f"{when.day:02d}"
-    entry.hour, entry.minute, entry.second = (
-        f"{when.hour:02d}", f"{when.minute:02d}", f"{when.second:02d}")
-    return entry
-
-
 def _old_fit_graph(entries: list[LogEntry], columns: int) -> dict[str, int]:
     """--graph before streaming: the range first, then a second pass."""
     earliest, latest = time_range(entries)
@@ -310,9 +302,16 @@ def _old_fit_graph(entries: list[LogEntry], columns: int) -> dict[str, int]:
 def test_one_pass_graph_matches_the_two_pass_graph(span_seconds: int, columns: int) -> None:
     rng = random.Random(span_seconds + columns)
     base = datetime.datetime(1970, 3, 7, 11, 22, 33)
-    entries = [_entry(base + datetime.timedelta(seconds=rng.randrange(span_seconds)))
-               for _ in range(3000)]
-    entries.append(_entry(datetime.datetime(1900, 1, 1, 1, 1, 1)))
+    times = [base + datetime.timedelta(seconds=rng.randrange(span_seconds)) for _ in range(3000)]
+    times.append(datetime.datetime(1900, 1, 1, 1, 1, 1))
+    entries = []
+    for when in times:
+        entry = LogEntry("")
+        entry.year, entry.month, entry.day = (
+            f"{when.year:04d}", f"{when.month:02d}", f"{when.day:02d}")
+        entry.hour, entry.minute, entry.second = (
+            f"{when.hour:02d}", f"{when.minute:02d}", f"{when.second:02d}")
+        entries.append(entry)
     assert dict(fit_graph(entries, columns)) == _old_fit_graph(entries, columns)
 
 

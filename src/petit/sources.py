@@ -16,7 +16,6 @@ import io
 import logging
 import sys
 from collections.abc import Iterable, Iterator, Sequence
-from typing import TextIO
 
 from .errors import DataFileError, PetitError
 
@@ -30,12 +29,11 @@ def _guarded(lines: Iterable[str], name: str) -> Iterator[str]:
     not text escape as a UnicodeDecodeError — which, now that input is
     decoded as it streams, can happen on any line, not just at open.
     """
-    # A plain loop, not `yield from`: closing this generator early — voting
-    # stops reading once it has its sample — must not close the caller's
-    # file, and `yield from` passes close() on to it.
+    # Through a generator of its own: closing this one early — voting stops
+    # reading once it has its sample — must not close the caller's file, and
+    # `yield from` passes close() on to whatever it iterates.
     try:
-        for line in lines:  # noqa: UP028
-            yield line
+        yield from (line for line in lines)
     except OSError as exc:
         raise DataFileError(f"cannot read {name}: {exc.strerror or exc}") from exc
     except UnicodeDecodeError as exc:
@@ -96,22 +94,21 @@ class PathSource(Source):
 class HandleSource(Source):
     """An open text stream: rewindable when it can seek, one pass when not."""
 
-    def __init__(self, handle: TextIO | Iterable[str], name: str = "<stream>") -> None:
+    def __init__(self, handle: Iterable[str], name: str = "<stream>") -> None:
         self.handle = handle
         self.name = name
         self.start = -1
-        seekable = getattr(handle, "seekable", None)
         try:
-            if seekable is not None and seekable():
-                self.start = handle.tell()  # type: ignore[union-attr]
+            if isinstance(handle, io.IOBase) and handle.seekable():
+                self.start = handle.tell()
         except (OSError, ValueError):
             self.start = -1
         self.rewindable = self.start >= 0
         self.used = False
 
     def lines(self) -> Iterator[str]:
-        if self.rewindable:
-            self.handle.seek(self.start)  # type: ignore[union-attr]
+        if isinstance(self.handle, io.IOBase) and self.rewindable:
+            self.handle.seek(self.start)
         elif self.used:
             raise PetitError(f"{self.name} can only be read once")
         self.used = True

@@ -340,7 +340,7 @@ class LogStream:
     def _select(self) -> type[LogEntry]:
         """The drivers' vote on records sampled across the whole input."""
         if self._rest is not None:
-            records = list(self._framer.records(self._head, self._claim.params))
+            records = list(self._claim.frame(self._head))
             plan = sample_plan(len(records))
             return vote(len(records), {i: _words(records[i]) for i in plan})
 
@@ -348,7 +348,7 @@ class LogStream:
         plan = sample_plan(total)
         last = max(plan, default=-1)
         sample: dict[int, list[str]] = {}
-        for i, record in enumerate(self._framer.records(self.source.lines(), self._claim.params)):
+        for i, record in enumerate(self._claim.frame(self.source.lines())):
             if i in plan:
                 sample[i] = _words(record)
             if i >= last:
@@ -371,7 +371,7 @@ class LogStream:
         self.lines_in = 0
         self.records_in = 0
         entry_type = self.Entry
-        for record in self._framer.records(self._lines(), self._claim.params):
+        for record in self._claim.frame(self._lines()):
             self.records_in += 1
             text = record.text
             try:
