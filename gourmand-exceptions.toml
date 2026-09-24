@@ -172,5 +172,5 @@ justification = "_step is calendar arithmetic (move a date forward i units, on t
 [[exceptions]]
 check = "DC004-dead_structs"
 path = "src/petit/records.py"
-classification = "false_positive"
+classification = "gourmand_bug"
 justification = "Each framer names its survey class in a `survey` class attribute (JsonFramer.survey = _JsonSurvey, etc.), and LogStream._survey and Framer.claim instantiate it as `framer.survey()`. The check looks for a call by class name and misses instantiation through the attribute; every survey runs on every input petit reads, as test_streaming and test_records exercise."
