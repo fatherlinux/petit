@@ -174,3 +174,9 @@ check = "DC004-dead_structs"
 path = "src/petit/records.py"
 classification = "gourmand_bug"
 justification = "Each framer names its survey class in a `survey` class attribute (JsonFramer.survey = _JsonSurvey, etc.), and LogStream._survey and Framer.claim instantiate it as `framer.survey()`. The check looks for a call by class name and misses instantiation through the attribute; every survey runs on every input petit reads, as test_streaming and test_records exercise."
+
+[[exceptions]]
+check = "CH009-random_scripts"
+path = "packaging/petit.sh"
+classification = "by_design"
+justification = "Not a helper script: it is the file the .rpm and .deb install as /usr/bin/petit (see packaging/petit.spec and .github/workflows/packages.yml). It picks the newest Python 3.11+ on the system and runs petit from /usr/lib/petit, which is what lets one package serve every target distro."
