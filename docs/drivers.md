@@ -239,9 +239,30 @@ the table passes.
 ## Fingerprint corpora (`--fingerprint`, `collapse_fingerprints=True`)
 
 A fingerprint corpus is a log of one routine event, such as a reboot, stored as
-`<name>.fp`. When more than 31% of a corpus's fingerprints appear in the input,
-every matching group is removed and replaced by one group named after the
-corpus. `Analysis.fingerprints_matched` lists what matched.
+`<name>.fp`. When a corpus is present in the input, every matching group is
+removed and replaced by one group named after the corpus.
+`Analysis.fingerprints_matched` lists what matched.
+
+Related systems log much of the same reboot, so whether an event happened and
+which system logged it are decided separately:
+
+1. **Present.** More than 31% of the corpus's fingerprints appear, and at
+   least five of them (or all of them, for a corpus smaller than that).
+2. **Identity.** Each fingerprint is weighted 1 / the number of corpora that
+   hold it. A present corpus scores a weighted F1: how much of the corpus
+   was found, and how much of what was found the corpus accounts for. The
+   highest score wins, and ties go to the first name.
+3. **Ambiguity.** A runner-up shares the winner's label, as `a|b`, when it
+   scores within 10% of the winner, the winner has fewer than five
+   fingerprints the runner-up lacks, and the runner-up is no longer present
+   once the winner's fingerprints are set aside. That's the case where
+   nothing in the input tells them apart.
+4. **Repeat.** The winner's fingerprints are removed, and the remaining
+   corpora vote again on what is left. A log holding two different reboots
+   collapses both.
+
+`Analysis.fingerprint_scores` has each present corpus's detection share and
+identity score. `petit -v --fingerprint` logs them.
 
 Corpora are read from every one of these directories: the packaged
 `petit/data/fingerprints/`, then `/var/lib/petit/fingerprints/`,

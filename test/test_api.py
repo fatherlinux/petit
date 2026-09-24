@@ -1,5 +1,6 @@
 """Library API: text in, data out, exceptions on failure."""
 
+import itertools
 import os
 from typing import ClassVar
 
@@ -503,6 +504,157 @@ class TestSiteLocalFingerprints:
         result = analyze_text(corpus + "\nSep 22 10:01:00 lotor other[2]: unrelated",
                               collapse_fingerprints=True)
         assert result.fingerprints_matched == ["custom-event.fp"]
+
+
+def _word(i):
+    """A distinct lowercase word per integer. Digits would be normalised
+    away, so synthetic corpora spell their lines out."""
+    word = ""
+    i += 1
+    while i:
+        i, rest = divmod(i - 1, 26)
+        word = "abcdefghijklmnopqrstuvwxyz"[rest] + word
+    return word
+
+
+def _event(tag, words):
+    """A corpus text: one line per word, all from the same daemon."""
+    return "\n".join(f"Sep 22 10:00:00 lotor unit[1]: {tag} {_word(i)} reached" for i in words)
+
+
+class TestFingerprintVote:
+    """#49: corpora used to be tried largest first, and the first past the
+    threshold took the input and removed its lines. Overlapping corpora
+    claimed each other's reboots — rhel4 took a rhel5 reboot, ubuntu10.04 an
+    ubuntu9.04 one."""
+
+    PACKAGED = sorted(os.listdir(os.path.join(os.path.dirname(LogHash.__file__),
+                                              "data", "fingerprints")))
+
+    @staticmethod
+    def corpus_text(name):
+        path = os.path.join(os.path.dirname(LogHash.__file__), "data", "fingerprints", name)
+        with open(path) as handle:
+            return handle.read()
+
+    @staticmethod
+    def only(monkeypatch, directory, **corpora):
+        """Load exactly these corpora, written to `directory`."""
+        for name, text in corpora.items():
+            (directory / f"{name}.fp").write_text(text + "\n")
+        monkeypatch.setattr(LogHash, "search_prefixes", lambda _kind: [str(directory) + "/"])
+
+    @pytest.mark.parametrize("name", PACKAGED)
+    def test_every_packaged_corpus_names_only_itself(self, name):
+        result = analyze_text(self.corpus_text(name), collapse_fingerprints=True)
+        assert result.fingerprints_matched == [name]
+
+    # ubuntu10.04 is RSyslog's format and the rest classic syslog. A log
+    # that mixes the two is read as raw text, which none of them match.
+    @pytest.mark.parametrize(("a", "b"), list(itertools.combinations(
+        [name for name in PACKAGED if name != "ubuntu10.04-reboot.fp"], 2)))
+    def test_two_reboots_in_one_log_both_collapse(self, a, b):
+        text = self.corpus_text(a) + self.corpus_text(b)
+        result = analyze_text(text, collapse_fingerprints=True)
+        assert sorted(result.fingerprints_matched) == [a, b]
+
+    def test_small_corpus_inside_a_large_one_keeps_its_own_log(self, tmp_path, monkeypatch):
+        """First-fit gave this log to the large corpus: it clears 31% of it."""
+        self.only(monkeypatch, tmp_path,
+                  large=_event("common", range(400)),
+                  small=_event("common", range(150)) + "\n" + _event("own", range(20)))
+        log = _event("common", range(150)) + "\n" + _event("own", range(20))
+        assert analyze_text(log, collapse_fingerprints=True).fingerprints_matched == ["small.fp"]
+
+    def test_large_corpus_keeps_its_own_log(self, tmp_path, monkeypatch):
+        self.only(monkeypatch, tmp_path,
+                  large=_event("common", range(400)),
+                  small=_event("common", range(150)) + "\n" + _event("own", range(20)))
+        log = _event("common", range(400))
+        assert analyze_text(log, collapse_fingerprints=True).fingerprints_matched == ["large.fp"]
+
+    def test_superset_log_is_not_tied_with_its_subset(self, tmp_path, monkeypatch):
+        """A corpus wholly inside another is fully covered by the larger
+        one's log. Scoring coverage alone calls that a tie."""
+        self.only(monkeypatch, tmp_path,
+                  large=_event("common", range(400)),
+                  subset=_event("common", range(150)))
+        whole = analyze_text(_event("common", range(400)), collapse_fingerprints=True)
+        part = analyze_text(_event("common", range(150)), collapse_fingerprints=True)
+        assert whole.fingerprints_matched == ["large.fp"]
+        assert part.fingerprints_matched == ["subset.fp"]
+
+    def test_twins_are_told_apart_by_their_own_lines(self, tmp_path, monkeypatch):
+        self.only(monkeypatch, tmp_path,
+                  el9=_event("common", range(300)) + "\n" + _event("nine", range(15)),
+                  el10=_event("common", range(300)) + "\n" + _event("ten", range(15)))
+        log = _event("common", range(300)) + "\n" + _event("nine", range(15))
+        assert analyze_text(log, collapse_fingerprints=True).fingerprints_matched == ["el9.fp"]
+
+    def test_twins_with_nothing_to_tell_them_apart_are_both_named(self, tmp_path, monkeypatch):
+        """An honest "one of these two" beats a confident wrong answer."""
+        self.only(monkeypatch, tmp_path,
+                  el9=_event("common", range(300)) + "\n" + _event("nine", range(3)),
+                  el10=_event("common", range(300)) + "\n" + _event("ten", range(3)))
+        log = _event("common", range(300)) + "\n" + _event("nine", range(3))
+        result = analyze_text(log, collapse_fingerprints=True)
+        assert result.fingerprints_matched == ["el10.fp|el9.fp"]
+        assert any(g.pattern == "el10.fp|el9.fp" for g in result.groups)
+
+    def test_both_twins_rebooting_collapse_separately(self, tmp_path, monkeypatch):
+        self.only(monkeypatch, tmp_path,
+                  el9=_event("common", range(300)) + "\n" + _event("nine", range(15)),
+                  el10=_event("common", range(300)) + "\n" + _event("ten", range(15)))
+        log = "\n".join([_event("common", range(300)), _event("nine", range(15)),
+                         _event("ten", range(15))])
+        result = analyze_text(log, collapse_fingerprints=True)
+        assert sorted(result.fingerprints_matched) == ["el10.fp", "el9.fp"]
+
+    def test_adding_a_corpus_reweighs_the_vote(self, tmp_path, monkeypatch):
+        """Weights belong to the whole set of corpora, so a cached set must
+        not outlive a corpus added beside it."""
+        log = _event("common", range(300))
+        self.only(monkeypatch, tmp_path,
+                  el9=_event("common", range(300)) + "\n" + _event("nine", range(3)))
+        assert analyze_text(log, collapse_fingerprints=True).fingerprints_matched == ["el9.fp"]
+        self.only(monkeypatch, tmp_path,
+                  el10=_event("common", range(300)) + "\n" + _event("ten", range(3)))
+        assert analyze_text(log, collapse_fingerprints=True).fingerprints_matched == \
+            ["el10.fp|el9.fp"]
+
+    def test_scores_show_the_vote(self):
+        text = fixture_text("test06.log")
+        first = analyze_text(text, collapse_fingerprints=True)
+        second = analyze_text(text, collapse_fingerprints=True)
+        assert first.fingerprint_scores == second.fingerprint_scores
+        names = [score.name for score in first.fingerprint_scores]
+        assert names == sorted(names)
+        assert set(first.fingerprints_matched) <= set(names)
+        for score in first.fingerprint_scores:
+            assert 0 < score.detection <= 1
+            assert 0 < score.identity <= 1
+
+    def test_no_scores_when_not_asked(self):
+        assert analyze_text(fixture_text("test06.log")).fingerprint_scores == []
+
+
+# Reboot logs captured to verify the corpora (#37), one directory per corpus
+# they must match: test/data/verify/<corpus>.fp/<capture>.log.
+VERIFY = os.path.join(DATA, "verify")
+VERIFY_CASES = sorted(
+    (corpus, capture)
+    for corpus in (os.listdir(VERIFY) if os.path.isdir(VERIFY) else [])
+    for capture in os.listdir(os.path.join(VERIFY, corpus))
+)
+
+
+@pytest.mark.skipif(not VERIFY_CASES, reason="no verification captures yet (#37)")
+@pytest.mark.parametrize(("corpus", "capture"), VERIFY_CASES or [("", "")])
+def test_verification_capture_matches_its_corpus_first(corpus, capture):
+    with open(os.path.join(VERIFY, corpus, capture)) as handle:
+        result = analyze_text(handle.read(), collapse_fingerprints=True)
+    assert result.fingerprints_matched
+    assert corpus in result.fingerprints_matched[0].split("|")
 
 
 class TestWordcountMerge:

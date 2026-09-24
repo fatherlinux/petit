@@ -45,11 +45,13 @@ from .errors import (
     ParseError,
     PetitError,
 )
+from .LogHash import FingerprintScore
 
 __all__ = [
     "Analysis",
     "DataFileError",
     "EmptyLogError",
+    "FingerprintScore",
     "Group",
     "ParseError",
     "PetitError",

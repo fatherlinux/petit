@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.7.0] - 2026-09-24
+
+### Changed
+- Fingerprint corpora are voted on rather than tried largest first (#49).
+  A corpus is present when more than 31% of its lines are, as before, and
+  at least five of them. Among those present, the one that best accounts
+  for the input wins. The score is a weighted F1 in which a line many
+  corpora share counts for little, so the lines one distribution alone
+  logs decide. When nothing in the input tells two corpora apart, both
+  are named in one label, `a|b`, rather than one being guessed. The
+  winner's lines are then set aside and the rest vote again, so two
+  reboots in one log both collapse.
+
+### Fixed
+- A rhel5 reboot was also labelled `rhel4-reboot.fp`, and an ubuntu9.04
+  reboot `ubuntu10.04-reboot.fp`. The larger corpus claimed the reboot
+  first, then the right one matched what was left.
+
+### Added
+- `Analysis.fingerprint_scores` lists a `FingerprintScore` (name,
+  detection, identity) for every corpus that was present, so a caller can
+  see the vote behind `fingerprints_matched`. `-v` logs the same.
+
 ## [4.6.0] - 2026-09-24
 
 ### Added
