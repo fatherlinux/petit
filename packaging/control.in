@@ -1,0 +1,12 @@
+Package: petit
+Version: @VERSION@-1
+Architecture: all
+Maintainer: Scott McCarty <scott.mccarty@gmail.com>
+Depends: python3 (>= 3.11)
+Section: admin
+Priority: optional
+Homepage: https://github.com/crunchtools/petit
+Description: log analysis for systems administrators
+ petit detects a log's format, then collapses the repetitive into counts so
+ the unusual is what you read. It also graphs activity over time. It runs on
+ any Python 3.11 or newer the system has.

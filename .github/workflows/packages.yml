@@ -1,0 +1,202 @@
+name: Native Packages
+
+# Builds petit's .rpm and .deb, installs each in a container of every
+# distro it targets, and on a release attaches them to it. The signed dnf
+# and apt repositories are built from those release assets by
+# crunchtools/packages.
+
+on:
+  pull_request:
+    branches: [master]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: "latest"
+
+      - name: Read the version
+        id: version
+        run: |
+          version=$(python3 -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')
+          if [ "$GITHUB_EVENT_NAME" = release ] && [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::release tag $GITHUB_REF_NAME does not match pyproject.toml version $version"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Stage the tree
+        run: |
+          uv build --wheel
+          mkdir -p stage/usr/lib/petit stage/usr/bin
+          python3 -m zipfile -e dist/*.whl stage/usr/lib/petit
+          install -m 0755 packaging/petit.sh stage/usr/bin/petit
+          # Bytecode for every Python the launcher may pick; each version
+          # writes its own tagged .pyc, so they sit side by side.
+          for v in 3.11 3.12 3.13 3.14; do
+            uv python install "$v"
+            "$(uv python find "$v")" -m compileall -q --invalidation-mode unchecked-hash \
+              -s stage -p / stage/usr/lib/petit
+          done
+          # Artifacts drop file modes; a tarball keeps the launcher executable.
+          tar -C stage -czf stage.tar.gz .
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: stage
+          path: stage.tar.gz
+
+  rpm:
+    needs: stage
+    runs-on: ubuntu-latest
+    # Built on the oldest target, so every newer rpm can read it.
+    container: almalinux:8
+    env:
+      VERSION: ${{ needs.stage.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: stage
+
+      - name: Build the rpm
+        run: |
+          dnf install -y rpm-build
+          mkdir stage
+          tar -C stage -xzf stage.tar.gz
+          install -Dm0644 COPYING stage/usr/share/licenses/petit/COPYING
+          install -Dm0644 -t stage/usr/share/doc/petit README CHANGELOG.md
+          rpmbuild -bb --define "pkg_version $VERSION" --define "stage $PWD/stage" \
+            --define "_rpmdir $PWD/out" packaging/petit.spec
+          mv out/noarch/*.rpm .
+          rpm -qpi --requires ./petit-*.rpm
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: rpm
+          path: petit-*.rpm
+
+  deb:
+    needs: stage
+    runs-on: ubuntu-latest
+    container: debian:12
+    env:
+      VERSION: ${{ needs.stage.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: stage
+
+      - name: Build the deb
+        run: |
+          mkdir -p pkg/DEBIAN
+          tar -C pkg -xzf stage.tar.gz
+          install -Dm0644 COPYING pkg/usr/share/doc/petit/copyright
+          install -Dm0644 -t pkg/usr/share/doc/petit README CHANGELOG.md
+          sed "s/@VERSION@/$VERSION/" packaging/control.in > pkg/DEBIAN/control
+          echo "Installed-Size: $(du -sk pkg/usr | cut -f1)" >> pkg/DEBIAN/control
+          dpkg-deb -Zxz --root-owner-group --build pkg "petit_${VERSION}-1_all.deb"
+          dpkg-deb --info "petit_${VERSION}-1_all.deb"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: deb
+          path: petit_*.deb
+
+  smoke:
+    needs: [stage, rpm, deb]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { image: "registry.access.redhat.com/ubi8/ubi", kind: rpm }
+          - { image: "registry.access.redhat.com/ubi9/ubi", kind: rpm }
+          - { image: "registry.access.redhat.com/ubi10/ubi", kind: rpm }
+          - { image: "almalinux:9", kind: rpm }
+          - { image: "quay.io/centos/centos:stream10", kind: rpm }
+          - { image: "fedora:latest", kind: rpm }
+          - { image: "amazonlinux:2023", kind: rpm }
+          - { image: "registry.suse.com/bci/bci-base:15.7", kind: rpm }
+          - { image: "registry.suse.com/bci/bci-base:16.0", kind: rpm }
+          - { image: "debian:12", kind: deb }
+          - { image: "debian:13", kind: deb }
+          - { image: "ubuntu:24.04", kind: deb }
+          - { image: "ubuntu:26.04", kind: deb }
+    container: ${{ matrix.image }}
+    env:
+      VERSION: ${{ needs.stage.outputs.version }}
+    steps:
+      # Without git, checkout fetches a tarball; minimal images lack tar.
+      - name: Install tar
+        run: |
+          command -v tar >/dev/null && exit 0
+          if command -v zypper >/dev/null; then zypper --non-interactive install tar gzip
+          else dnf install -y tar gzip; fi
+
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: ${{ matrix.kind }}
+
+      - name: Install the package
+        run: |
+          if [ "${{ matrix.kind }}" = deb ]; then
+            apt-get update
+            apt-get install -y ./petit_*.deb
+          elif command -v zypper >/dev/null; then
+            zypper --non-interactive install --allow-unsigned-rpm ./petit-*.rpm
+          else
+            dnf install -y ./petit-*.rpm
+          fi
+
+      - name: Run petit
+        run: |
+          petit --version
+          test "$(petit --version)" = "Version: $VERSION"
+          # cksum, not diff: minimal images ship coreutils but not diffutils.
+          for mode in hash wordcount; do
+            petit "--$mode" test/data/test01.log > "$mode.out"
+            if [ "$(cksum < "$mode.out")" != "$(cksum < "test/output/test01-$mode.output")" ]; then
+              echo "::error::petit --$mode differs from test/output/test01-$mode.output"
+              cat "$mode.out"
+              exit 1
+            fi
+          done
+
+  attach:
+    if: github.event_name == 'release'
+    needs: smoke
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: "{rpm,deb}"
+          merge-multiple: true
+
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum petit-*.rpm petit_*.deb > SHA256SUMS
+          gh release upload "$GITHUB_REF_NAME" petit-*.rpm petit_*.deb SHA256SUMS \
+            --repo "$GITHUB_REPOSITORY" --clobber

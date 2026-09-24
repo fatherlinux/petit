@@ -26,7 +26,7 @@ COPY --from=builder /app/venv /app/venv
 ENV PATH="/app/venv/bin:$PATH"
 
 LABEL name="petit" \
-      version="4.5.0" \
+      version="4.6.0" \
       summary="Log analysis for systems administrators" \
       description="Detects the log format, then collapses the repetitive into counts so the unusual is what you read" \
       maintainer="crunchtools.com" \
