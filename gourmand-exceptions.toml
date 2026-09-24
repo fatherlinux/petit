@@ -168,3 +168,9 @@ check = "EV010-single_use_helpers"
 path = "src/petit/LogGraph.py"
 classification = "by_design"
 justification = "_step is calendar arithmetic (move a date forward i units, on the calendar for months and years), the documented inverse of _offset. It predates the streaming change; only its caller shrank when GraphHash was split into _open() and add()."
+
+[[exceptions]]
+check = "DC004-dead_structs"
+path = "src/petit/records.py"
+classification = "false_positive"
+justification = "Each framer names its survey class in a `survey` class attribute (JsonFramer.survey = _JsonSurvey, etc.), and LogStream._survey and Framer.claim instantiate it as `framer.survey()`. The check looks for a call by class name and misses instantiation through the attribute; every survey runs on every input petit reads, as test_streaming and test_records exercise."
