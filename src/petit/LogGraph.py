@@ -23,14 +23,16 @@ from __future__ import annotations
 import datetime
 import logging
 import sys
-from collections import UserDict
+from collections import Counter, UserDict
+from collections.abc import Iterable, Iterator
+from itertools import chain
 from math import ceil
 from typing import TYPE_CHECKING
 
 from .errors import EmptyLogError
 
 if TYPE_CHECKING:
-    from .CrunchLog import CrunchLog, LogEntry
+    from .CrunchLog import LogEntry
 
 # Calendar constants used to size and label graphs.
 HOURS_PER_DAY = 24
@@ -145,48 +147,73 @@ class GraphHash(UserDict[str, int]):
     duration: int = 0
     step = 1
     unit = ""
+    _keys: list[str]
 
     def __init__(
         self,
-        log: CrunchLog,
+        log: Iterable[LogEntry],
         duration: int | None = None,
         step: int = 1,
         start: datetime.datetime | None = None,
     ) -> None:
         UserDict.__init__(self)
 
-        if len(log) == 0:
+        entries = iter(log)
+        first = next(entries, None)
+        if first is None:
             raise EmptyLogError("no entries to graph")
 
-        if duration is not None:
-            self.duration = duration
-        self.step = step
-
-        # Zero out every column first, so quiet stretches in sparse logs
-        # still get drawn.
         if start is None:
-            start = _entry_time(log[0], "second")
-        self.start_date = _align(_floor(start, self.unit), self.unit, step)
-        keys = []
-        for i in range(self.duration):
-            self.end_date = _step(self.start_date, self.unit, i * step)
-            keys.append(_time_key(self.end_date, self.unit))
-            self.zero(keys[-1])
-            if i == self.duration // 2:
-                self.middle_date = self.end_date
+            start = _entry_time(first, "second")
+        self._open(start, duration, step)
 
         # Entries before the window, after it, or with fields that aren't a
         # real time are left out.
-        for entry in log:
+        for entry in chain((first,), entries):
             try:
                 when = _entry_time(entry, self.unit)
             except ValueError:
                 continue
-            column = _offset(self.start_date, when, self.unit) // step
-            if 0 <= column < self.duration:
-                self.increment(keys[column])
+            self.add(when)
 
         self.build_calculations()
+
+    @classmethod
+    def from_histogram(
+        cls, histogram: TimeHistogram, duration: int, step: int, start: datetime.datetime,
+    ) -> GraphHash:
+        """The graph of entries a TimeHistogram has already counted.
+
+        The histogram's buckets must be no wider than this graph's unit.
+        """
+        graph = cls.__new__(cls)
+        UserDict.__init__(graph)
+        graph._open(start, duration, step)
+        for when, count in histogram.buckets():
+            graph.add(_floor(when, cls.unit), count)
+        graph.build_calculations()
+        return graph
+
+    def _open(self, start: datetime.datetime, duration: int | None, step: int) -> None:
+        """Lay out the columns from `start`, every one zeroed so quiet
+        stretches in sparse logs still get drawn."""
+        if duration is not None:
+            self.duration = duration
+        self.step = step
+        self.start_date = _align(_floor(start, self.unit), self.unit, step)
+        self._keys = []
+        for i in range(self.duration):
+            self.end_date = _step(self.start_date, self.unit, i * step)
+            self._keys.append(_time_key(self.end_date, self.unit))
+            self.zero(self._keys[-1])
+            if i == self.duration // 2:
+                self.middle_date = self.end_date
+
+    def add(self, when: datetime.datetime, count: int = 1) -> None:
+        """Count `count` entries at `when`, already floored to the unit."""
+        column = _offset(self.start_date, when, self.unit) // self.step
+        if 0 <= column < self.duration:
+            self[self._keys[column]] += count
 
     def increment(self, key: str) -> None:
         """Adds new entry. Similar to append method on list"""
@@ -381,7 +408,7 @@ GRAPHS: tuple[type[GraphHash], ...] = (
 GRAPH_FOR_UNIT: dict[str, type[GraphHash]] = {g.unit: g for g in GRAPHS}
 
 
-def time_range(log: CrunchLog) -> tuple[datetime.datetime, datetime.datetime]:
+def time_range(log: Iterable[LogEntry]) -> tuple[datetime.datetime, datetime.datetime]:
     """The earliest and latest entry timestamps, to the second.
 
     Logs aren't always in order (rotated files concatenated, or year-less
@@ -403,20 +430,103 @@ def time_range(log: CrunchLog) -> tuple[datetime.datetime, datetime.datetime]:
     return min(times), max(times)
 
 
-def fit_graph(log: CrunchLog, columns: int) -> GraphHash:
+class _Buckets:
+    """Entry counts per time bucket, the buckets as fine as they can afford.
+
+    Counting starts per second. When there are more distinct buckets than
+    `limit(unit)`, the timestamps span more units than any LADDER column
+    size at that unit could fit into the graph, so no graph will be drawn
+    at that unit and the counts merge into the next unit up. Memory stays
+    bounded by the graph's width, not the log's length, and every graph
+    that can still be chosen is counted exactly.
+    """
+
+    def __init__(self, columns: int) -> None:
+        self.columns = columns
+        self.unit = "second"
+        self.counts: Counter[datetime.datetime] = Counter()
+
+    def add(self, when: datetime.datetime) -> None:
+        self.counts[_floor(when, self.unit)] += 1
+        if len(self.counts) > self._limit():
+            self._coarsen()
+
+    def _limit(self) -> int:
+        # N distinct buckets span at least N - 1 units, and a column size of
+        # `step` units needs span // step + 1 columns.
+        if self.unit == "year":
+            return sys.maxsize
+        widest = max(step for unit, step in LADDER if unit == self.unit)
+        return widest * self.columns + 1
+
+    def _coarsen(self) -> None:
+        while len(self.counts) > self._limit():
+            self.unit = _FIELDS[_FIELDS.index(self.unit) - 1]
+            merged: Counter[datetime.datetime] = Counter()
+            for when, count in self.counts.items():
+                merged[_floor(when, self.unit)] += count
+            self.counts = merged
+
+
+class TimeHistogram:
+    """One pass over a log: its time range and entry counts, for fit_graph().
+
+    Lines stamped with the sentinel year by set_abnormal() carry no real
+    time. They are counted apart, and only set the range when nothing else
+    does, as time_range() rules.
+    """
+
+    def __init__(self, columns: int) -> None:
+        self.entries = 0
+        self.real = _Buckets(columns)
+        self.sentinel = _Buckets(columns)
+        self.bounds: dict[bool, tuple[datetime.datetime, datetime.datetime]] = {}
+
+    def add(self, entry: LogEntry) -> None:
+        self.entries += 1
+        try:
+            when = _entry_time(entry, "second")
+        except ValueError:
+            return
+        real = when.year != SENTINEL_YEAR
+        (self.real if real else self.sentinel).add(when)
+        low, high = self.bounds.get(real, (when, when))
+        self.bounds[real] = (min(low, when), max(high, when))
+
+    def range(self) -> tuple[datetime.datetime, datetime.datetime]:
+        """What time_range() gives for the same log."""
+        bounds = self.bounds.get(True) or self.bounds.get(False)
+        if bounds is None:
+            raise EmptyLogError("no timestamps to graph")
+        return bounds
+
+    def buckets(self) -> Iterator[tuple[datetime.datetime, int]]:
+        # Sentinel buckets only land inside a graph of real times if the
+        # log's real times are near 1900 themselves.
+        yield from self.real.counts.items()
+        yield from self.sentinel.counts.items()
+
+
+def fit_graph(log: Iterable[LogEntry], columns: int) -> GraphHash:
     """--graph: the finest column size in LADDER that fits the whole log,
     earliest entry to latest, into `columns`.
 
     The graph draws only the columns the log covers, with MIN_SPAN as the
     floor. A log too long even for 10-year columns gets `columns` of them.
+    One pass: the counts are kept per time bucket while the range is
+    found, and the graph is drawn from the buckets.
     """
-    if len(log) == 0:
+    histogram = TimeHistogram(columns)
+    for entry in log:
+        histogram.add(entry)
+    if histogram.entries == 0:
         raise EmptyLogError("no entries to graph")
-    earliest, latest = time_range(log)
+    earliest, latest = histogram.range()
     for unit, step in LADDER:
         start = _align(_floor(earliest, unit), unit, step)
         needed = _offset(start, _floor(latest, unit), unit) // step + 1
         if needed <= columns:
-            return GRAPH_FOR_UNIT[unit](log, max(needed, MIN_SPAN), step, earliest)
+            return GRAPH_FOR_UNIT[unit].from_histogram(
+                histogram, max(needed, MIN_SPAN), step, earliest)
     unit, step = LADDER[-1]
-    return GRAPH_FOR_UNIT[unit](log, max(columns, MIN_SPAN), step, earliest)
+    return GRAPH_FOR_UNIT[unit].from_histogram(histogram, max(columns, MIN_SPAN), step, earliest)

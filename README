@@ -21,12 +21,16 @@ A container image is also published, for CI or isolated execution:
 
 Using petit as a library
 ===============================================================================
-    from petit import hash_text, detect_format
+    from petit import hash_lines, detect_format
 
-    for group in hash_text(open("/var/log/messages").read()):
-        print(group.count, group.pattern)
+    with open("/var/log/messages") as log:
+        for group in hash_lines(log):
+            print(group.count, group.pattern)
 
-hash_text() groups lines by fingerprint, most frequent first. detect_format()
+hash_lines() groups lines by fingerprint, most frequent first, reading them
+one at a time: memory follows the number of groups, not the size of the
+input. hash_text() and analyze_text() do the same for a string already in
+memory, and analyze_lines() is analyze_text() for lines. detect_format()
 reports which driver claims the text; "RawEntry" means no driver recognised it.
 analyze_text() returns the same groups plus how they were produced, and takes
 the options the CLI has: hash_mode ("daemon", "host", "wordcount"),
@@ -47,8 +51,9 @@ Public API and versioning
 Petit follows Semantic Versioning. Two things are public and covered by it:
 
   * the petit command line, its options and its output
-  * the names exported from the petit package: analyze_text, hash_text,
-    detect_format, Analysis, Group, and the PetitError hierarchy
+  * the names exported from the petit package: analyze_text, analyze_lines,
+    hash_text, hash_lines, detect_format, Analysis, Group, and the
+    PetitError hierarchy
 
 Everything else is internal. The driver classes in petit.CrunchLog and
 the hash classes in petit.LogHash may change in any release; they are
@@ -138,6 +143,16 @@ Every input goes through the same stages:
 
 Counts are kept for both: an Analysis reports lines_in (source lines) and
 records_in (records), which are the same unless a framer joined lines.
+
+Big inputs. petit streams: it never holds the whole input, only each
+group's count and a few sample lines, so a 96 MB log runs in about 30 MB of
+memory, and so does one four times its size. A file is read more than once —
+once to choose the framer, once to sample records for the drivers' vote,
+once to parse — so every choice is made on the whole file. A pipe can only
+be read once. petit holds its first 4 MB; a pipe that ends there is read
+exactly like a file, and one that runs longer is framed and parsed by
+whatever its first 4 MB chose, with any later record that driver can't
+read falling back to RawEntry on its own.
 
 Multi-line messages. Stack traces, Python tracebacks and journalctl's
 indented continuation lines put one message over several lines, and only the

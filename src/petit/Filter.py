@@ -90,15 +90,20 @@ class Filter:
     def scrub(self, string: str) -> str:
         """Used to remove entries and replace them with the scrub character"""
 
+        # Asked once per call, not once per stopword: scrub runs for every
+        # key, and the logging call alone used to cost as much as the regex.
+        debug = logging.getLogger().isEnabledFor(logging.DEBUG)
+
         # Check each stopword against each key
         for stopword, replacement in self.stopwords:
 
             # Replace matches with this pattern's replacement
             old_string = string
             string = stopword.sub(replacement, string)
-            logging.debug(
-                " SCRUBBING %s OF %s BECOMES %s", old_string, stopword.pattern, string
-            )
+            if debug:
+                logging.debug(
+                    " SCRUBBING %s OF %s BECOMES %s", old_string, stopword.pattern, string
+                )
 
         return string
 

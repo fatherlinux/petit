@@ -30,7 +30,15 @@ manipulating log data.
 # warning filters. It used to do both; a library that mutates global state on
 # import makes its host's behaviour depend on import order.
 
-from .api import Analysis, Group, analyze_text, detect_format, hash_text
+from .api import (
+    Analysis,
+    Group,
+    analyze_lines,
+    analyze_text,
+    detect_format,
+    hash_lines,
+    hash_text,
+)
 from .errors import (
     DataFileError,
     EmptyLogError,
@@ -45,8 +53,10 @@ __all__ = [
     "Group",
     "ParseError",
     "PetitError",
+    "analyze_lines",
     "analyze_text",
     "detect_format",
+    "hash_lines",
     "hash_text",
 ]
 

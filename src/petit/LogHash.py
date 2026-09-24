@@ -28,6 +28,7 @@ import logging
 import os
 import re
 from collections import UserDict
+from collections.abc import Iterable
 from typing import Any, ClassVar
 
 from .CrunchLog import (
@@ -36,6 +37,7 @@ from .CrunchLog import (
     CrunchLog,
     EmailEntry,
     LogEntry,
+    LogStream,
     RawEntry,
     RSyslogEntry,
     SecureLogEntry,
@@ -98,7 +100,17 @@ def load_fingerprints() -> list[tuple[str, frozenset[str]]]:
 
 
 class SuperHash(UserDict[str, list[Any]]):
-    """Interface and parent class for all hash/dict based objects. """
+    """Interface and parent class for all hash/dict based objects.
+
+    Each key maps to [count, members]. `max_samples` bounds how many member
+    entries a key keeps — the first ones seen, so output stays deterministic
+    — which is what keeps memory tied to the number of distinct keys rather
+    than the size of the input. None keeps them all.
+
+    Alongside, each key tallies the input records it grouped and the source
+    lines they covered, so `records_grouped` and `lines_grouped` stay exact
+    when the members are not all kept.
+    """
 
     filter = Filter()
     sample = "none"
@@ -118,14 +130,20 @@ class SuperHash(UserDict[str, list[Any]]):
 
     def __init__(
         self,
-        log: CrunchLog,
+        log: Iterable[LogEntry],
         filter_filename: str | Filter | None = None,
         max_key_chars: int = MAX_KEY_CHARS,
+        max_samples: int | None = None,
     ) -> None:
 
         # Call parent init
         UserDict.__init__(self)
         self.max_key_chars = max_key_chars
+        self.max_samples = max_samples
+        # key -> [records, lines] grouped under it; see account().
+        self.grouped: dict[str, list[int]] = {}
+        # The furthest source line any grouped record has reached.
+        self._reach = -1
 
         # None asks the driver. A caller that supplies its own normalisation
         # policy passes a built Filter instead of the name of one to find.
@@ -154,10 +172,12 @@ class SuperHash(UserDict[str, list[Any]]):
         text = " ".join(getattr(entry, name) for name in self.KEY_FIELDS)
         return self.filter.scrub(self.generalize(text[:self.max_key_chars]))
 
-    def fill(self, log: CrunchLog) -> None:
+    def fill(self, log: Iterable[LogEntry]) -> None:
         """Group every entry under its fingerprint."""
         for entry in log:
-            self.increment(self.key_for(entry), entry)
+            key = self.key_for(entry)
+            self.increment(key, entry)
+            self.account(key, entry)
 
         # An entry that scrubs away to nothing carries no information
         self.pop("#", None)
@@ -171,7 +191,38 @@ class SuperHash(UserDict[str, list[Any]]):
             self[key] = [0, []]
 
         self[key][0] += 1
-        self[key][1].append(entry)
+        if self.max_samples is None or len(self[key][1]) < self.max_samples:
+            self[key][1].append(entry)
+
+    def account(self, key: str, entry: LogEntry) -> None:
+        """Count `entry`'s record as grouped under `key`.
+
+        Records arrive in input order, so the lines a record adds are the
+        ones past the furthest line reached so far; JSON elements that
+        share a line count it once. A record under "#" is dropped, and a
+        stand-in for a collapsed fingerprint came from no input.
+        """
+        start, end = entry.span
+        if key == "#" or start < 0:
+            return
+        tally = self.grouped.setdefault(key, [0, 0])
+        tally[0] += 1
+        tally[1] += max(0, end - max(start, self._reach))
+        self._reach = max(self._reach, end)
+
+    def __delitem__(self, key: str) -> None:
+        super().__delitem__(key)
+        self.grouped.pop(key, None)
+
+    @property
+    def records_grouped(self) -> int:
+        """Input records that ended up in a group."""
+        return sum(tally[0] for tally in self.grouped.values())
+
+    @property
+    def lines_grouped(self) -> int:
+        """Source lines covered by records that ended up in a group."""
+        return sum(tally[1] for tally in self.grouped.values())
 
     def display(self) -> None:
         """Displays all entries held in the SuperHash structure"""
@@ -242,15 +293,18 @@ class SuperHash(UserDict[str, list[Any]]):
 
     @staticmethod
     def manufacture(
-        log: CrunchLog, filter: str | Filter | None = None, max_key_chars: int = MAX_KEY_CHARS,
+        log: CrunchLog | LogStream,
+        filter: str | Filter | None = None,
+        max_key_chars: int = MAX_KEY_CHARS,
+        max_samples: int | None = None,
     ) -> SuperHash:
         """The hash driver for whatever entry driver parsed `log`."""
         entry_type = getattr(log, "Entry", None)
         if entry_type is None:
-            if len(log) < 1:
+            if not isinstance(log, CrunchLog) or len(log) < 1:
                 raise PetitError("could not determine what type of objects the log contains")
             entry_type = type(log[-1])
-        return hash_for(entry_type)(log, filter, max_key_chars)
+        return hash_for(entry_type)(log, filter, max_key_chars, max_samples)
 
 
 class SyslogHash(SuperHash):
@@ -333,35 +387,33 @@ class WordHash(SuperHash):
 
     DEFAULT_FILTER: ClassVar[str] = "words.stopwords"
 
-    def fill(self, log: CrunchLog) -> None:
+    # Distinct words whose scrubbed form is remembered before starting over.
+    SCRUB_MEMO = 100_000
 
+    def fill(self, log: Iterable[LogEntry]) -> None:
+
+        # Words are scrubbed as they arrive, so words that scrub to the same
+        # key count as one word from the start. Scrubbing runs every
+        # stopword regex, so each distinct word is scrubbed once.
+        memo: dict[str, str] = {}
         for entry in log:
 
-            # Base the wordcount on the log_entry payload
-            for word in entry.log_entry.split():
-
-                # Keep the entry, not the word, so a group's members are
-                # the lines the word appeared in
-                self.increment(word[:self.max_key_chars], entry)
-
-        # Perform bleach at the end because it is more efficient
-        for key in list(self.keys()):
-
-            # First scrub any unwanted words
-            newkey = self.filter.scrub(key)
-            if newkey == key:
-                continue
-
-            # Words that scrub to the same key are one word: add their
-            # counts and pool their lines. This used to be `a + b` on the
-            # two [count, members] lists, which concatenates them into
-            # [c1, m1, c2, m2] — the count stayed c1 and c2 was lost.
-            count, members = self.pop(key)
-            if newkey in self:
-                self[newkey][0] += count
-                self[newkey][1].extend(members)
-            else:
-                self[newkey] = [count, members]
+            # Base the wordcount on the log_entry payload. Keep the entry,
+            # not the word, so a group's members are the lines the word
+            # appeared in; the record counts as grouped under its first
+            # word that survives scrubbing.
+            grouped = False
+            for whole in entry.log_entry.split():
+                word = whole[:self.max_key_chars]
+                key = memo.get(word)
+                if key is None:
+                    if len(memo) >= self.SCRUB_MEMO:
+                        memo.clear()
+                    key = memo[word] = self.filter.scrub(word)
+                self.increment(key, entry)
+                if not grouped and key != "#":
+                    self.account(key, entry)
+                    grouped = True
 
         # Finally, remove valueless lines
         if "#" in self:

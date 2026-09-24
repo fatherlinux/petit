@@ -1,9 +1,10 @@
-"""Framing: turning a buffer of lines into records before any driver sees it.
+"""Framing: turning lines into records before any driver sees them.
 
 petit used to assume one line is one entry. A JSON array element, an email
 in a thread, or a log message with a stack trace under it is not a line, so
-framing is its own stage, run before driver selection. A framer looks at
-the whole buffer, says whether it claims it, and cuts it into Records.
+framing is its own stage, run before driver selection. A framer surveys
+the whole input a line at a time, says whether it claims it, and then cuts
+it into Records as the lines stream past a second time.
 Every entry driver still receives a string — `record.text` — so a one-line
 record is byte-identical to the line every driver has always been given.
 
@@ -20,8 +21,9 @@ from __future__ import annotations
 import json
 import re
 from bisect import bisect_right
+from collections import deque
+from collections.abc import Iterable, Iterator
 from dataclasses import dataclass
-from itertools import pairwise
 from typing import Any, ClassVar
 
 # JsonFramer declines a buffer larger than this rather than parse it.
@@ -97,50 +99,127 @@ def _loads_or_none(text: str) -> Any:
     except ValueError:
         return None
 
+@dataclass(frozen=True)
+class Claim:
+    """A framer's verdict on a whole input: the params it frames with, and
+    how many records that makes."""
+
+    params: Any
+    records: int
+
+
+class Survey:
+    """Reads an input one line at a time and decides whether a framer claims it.
+
+    A survey never holds the input, only counters and at most one record's
+    lines. That is what lets petit decide how to frame a file of any size in
+    one pass and frame it in the next.
+    """
+
+    def feed(self, line: str) -> None:
+        raise NotImplementedError
+
+    def result(self) -> Claim | None:
+        raise NotImplementedError
+
 
 class Framer:
-    """Interface: decide whether a buffer is yours, then cut it into records."""
+    """Interface: survey an input, then cut it into records.
+
+    `survey()` returns a fresh Survey. `records(lines, params)` cuts lines
+    into Records with the params from the survey's Claim. Both take the
+    input as a stream. `claims()` and `frame()` do the same over a list.
+    """
 
     name: ClassVar[str] = ""
     # Entry driver every record from this framer is parsed with, by name,
     # instead of voting. None lets the drivers vote as they always have.
     entry_name: ClassVar[str | None] = None
 
-    @staticmethod
-    def claims(buf: list[str]) -> bool:
+    @classmethod
+    def survey(cls) -> Survey:
         raise NotImplementedError
 
-    @staticmethod
-    def frame(buf: list[str]) -> list[Record]:
+    @classmethod
+    def records(cls, lines: Iterable[str], params: Any) -> Iterator[Record]:
         raise NotImplementedError
+
+    @classmethod
+    def claim(cls, buf: Iterable[str]) -> Claim | None:
+        survey = cls.survey()
+        for line in buf:
+            survey.feed(line)
+        return survey.result()
+
+    @classmethod
+    def claims(cls, buf: list[str]) -> bool:
+        return cls.claim(buf) is not None
+
+    @classmethod
+    def frame(cls, buf: list[str]) -> list[Record]:
+        claim = cls.claim(buf)
+        return list(cls.records(buf, None if claim is None else claim.params))
+
+
+def _json_claims(buf: list[str]) -> bool:
+    stripped = "".join(buf).strip()
+    if not stripped or stripped[0] not in "[{" or not json_depth_ok(stripped):
+        return False
+    if stripped[0] == "[":
+        value = _loads_or_none(stripped)
+        return isinstance(value, list) and bool(value) \
+            and all(isinstance(item, dict) for item in value)
+    return all(isinstance(_loads_or_none(line), dict) for line in buf if line.strip())
+
+
+class _JsonSurvey(Survey):
+    """Keeps the input until it passes MAX_JSON_CHARS, then gives up on it."""
+
+    def __init__(self) -> None:
+        self.buf: list[str] = []
+        self.size = 0
+        self.overflow = False
+
+    def feed(self, line: str) -> None:
+        if self.overflow:
+            return
+        self.size += len(line)
+        if self.size > MAX_JSON_CHARS:
+            self.overflow = True
+            self.buf = []
+        else:
+            self.buf.append(line)
+
+    def result(self) -> Claim | None:
+        if self.overflow or not _json_claims(self.buf):
+            return None
+        return Claim(None, sum(1 for _ in JsonFramer.records(self.buf, None)))
 
 
 class JsonFramer(Framer):
-    """A JSON array of objects, or JSON Lines: one object per record."""
+    """A JSON array of objects, or JSON Lines: one object per record.
+
+    Never claims more than MAX_JSON_CHARS, so whatever it frames fits in
+    memory and may be joined back into one string.
+    """
 
     name = "json"
     entry_name = "StructuredEntry"
 
-    @staticmethod
-    def claims(buf: list[str]) -> bool:
-        text = "".join(buf)
-        if len(text) > MAX_JSON_CHARS:
-            return False
-        stripped = text.strip()
-        if not stripped or stripped[0] not in "[{" or not json_depth_ok(stripped):
-            return False
-        if stripped[0] == "[":
-            value = _loads_or_none(stripped)
-            return isinstance(value, list) and bool(value) \
-                and all(isinstance(item, dict) for item in value)
-        return all(isinstance(_loads_or_none(line), dict) for line in buf if line.strip())
+    @classmethod
+    def survey(cls) -> Survey:
+        return _JsonSurvey()
 
-    @staticmethod
-    def frame(buf: list[str]) -> list[Record]:
+    @classmethod
+    def records(cls, lines: Iterable[str], _params: Any) -> Iterator[Record]:
+        buf = list(lines)
         text = "".join(buf)
         if text.lstrip()[:1] == "[":
-            return JsonFramer._frame_array(text)
-        return [Record([line], i, i + 1) for i, line in enumerate(buf) if line.strip()]
+            yield from JsonFramer._frame_array(text)
+            return
+        for i, line in enumerate(buf):
+            if line.strip():
+                yield Record([line], i, i + 1)
 
     @staticmethod
     def _frame_array(text: str) -> list[Record]:
@@ -178,35 +257,134 @@ _MESSAGE_HEADERS = frozenset({
 })
 
 
-def _header_block_at(buf: list[str], i: int) -> bool:
-    """True when two or more header fields, one of them a mail header, start at line i."""
-    fields = 0
-    known = False
-    for j in range(i, len(buf)):
-        line = buf[j]
-        match = HEADER_FIELD.match(line)
-        if match:
-            fields += 1
-            known = known or match.group(1).lower() in _MESSAGE_HEADERS
-        elif not (fields and line[:1] in (" ", "\t")):
-            break
-    return fields >= 2 and known
+class _HeaderStarts:
+    """Lines that open a message's header block, found as the lines go by.
 
+    A candidate is the first line or any line after a blank one. It opens a
+    message when the header fields from it on — an indented line continues
+    a field — number two or more and one of them is a mail header. That is
+    only known when the block ends, so starts are confirmed late, but always
+    in order.
 
-def _message_starts(buf: list[str]) -> list[int]:
-    """Line numbers where a message begins.
-
-    An mbox `From ` separator at the start of the buffer or after a blank
-    line, if there are at least two; otherwise a header block in the same
-    positions.
+    Open candidates are grouped by state: fields so far, capped at 2, and
+    whether a mail header was seen. Two candidates in the same state see the
+    same lines from then on and end the same way, so the work per line stays
+    constant however many of them overlap.
     """
-    at_boundary = [
-        i for i in range(len(buf)) if i == 0 or not buf[i - 1].strip()
-    ]
-    mbox = [i for i in at_boundary if buf[i].startswith("From ")]
-    if len(mbox) >= 2:
-        return mbox
-    return [i for i in at_boundary if _header_block_at(buf, i)]
+
+    def __init__(self) -> None:
+        self.line = 0
+        self.after_blank = True
+        self.open: dict[tuple[int, bool], list[int]] = {}
+        self.pending: deque[int] = deque()
+        self.verdict: dict[int, bool] = {}
+
+    def feed(self, line: str) -> list[int]:
+        """Take the next line; return the starts it confirmed, in order."""
+        if self.after_blank:
+            self.open.setdefault((0, False), []).append(self.line)
+            self.pending.append(self.line)
+        self.line += 1
+        self.after_blank = not line.strip()
+
+        match = HEADER_FIELD.match(line)
+        continues = line[:1] in (" ", "\t")
+        still: dict[tuple[int, bool], list[int]] = {}
+        for (seen, named), starts in self.open.items():
+            fields, known = seen, named
+            if match:
+                fields = min(fields + 1, 2)
+                known = known or match.group(1).lower() in _MESSAGE_HEADERS
+            elif not (fields and continues):
+                self._decide(starts, fields >= 2 and known)
+                continue
+            if fields >= 2 and known:
+                # More fields cannot undo it.
+                self._decide(starts, True)
+                continue
+            # Hand the list over rather than copy it: in the worst case one
+            # state holds nearly every candidate, line after line.
+            merged = still.get((fields, known))
+            if merged is None:
+                still[(fields, known)] = starts
+            else:
+                merged.extend(starts)
+        self.open = still
+        return self._confirmed()
+
+    def finish(self) -> list[int]:
+        """End of input: every open block ends here."""
+        for (fields, known), starts in self.open.items():
+            self._decide(starts, fields >= 2 and known)
+        self.open = {}
+        return self._confirmed()
+
+    def _decide(self, starts: list[int], verdict: bool) -> None:
+        for start in starts:
+            self.verdict[start] = verdict
+
+    def _confirmed(self) -> list[int]:
+        out = []
+        while self.pending and self.pending[0] in self.verdict:
+            start = self.pending.popleft()
+            if self.verdict.pop(start):
+                out.append(start)
+        return out
+
+
+class _MboxStarts:
+    """Lines that open an mbox message: `From ` at the start or after a blank line."""
+
+    def __init__(self) -> None:
+        self.line = 0
+        self.after_blank = True
+
+    def feed(self, line: str) -> list[int]:
+        start = self.after_blank and line.startswith("From ")
+        self.after_blank = not line.strip()
+        self.line += 1
+        return [self.line - 1] if start else []
+
+    @staticmethod
+    def finish() -> list[int]:
+        return []
+
+
+class _StartCount:
+    """How many starts a scanner found, and whether the first was line 0."""
+
+    def __init__(self, scanner: _HeaderStarts | _MboxStarts) -> None:
+        self.scanner = scanner
+        self.count = 0
+        self.first = -1
+
+    def add(self, starts: list[int]) -> None:
+        if starts and self.count == 0:
+            self.first = starts[0]
+        self.count += len(starts)
+
+    def records(self) -> int:
+        """Records the starts cut the input into: text before the first
+        start is a record of its own."""
+        return self.count + (0 if self.first == 0 else 1)
+
+
+class _MessageSurvey(Survey):
+    def __init__(self) -> None:
+        self.mbox = _StartCount(_MboxStarts())
+        self.headers = _StartCount(_HeaderStarts())
+
+    def feed(self, line: str) -> None:
+        for count in (self.mbox, self.headers):
+            count.add(count.scanner.feed(line))
+
+    def result(self) -> Claim | None:
+        self.headers.add(self.headers.scanner.finish())
+        # mbox separators win when there are two; header blocks otherwise.
+        for mode, count in (("mbox", self.mbox), ("header", self.headers)):
+            if count.count >= 2:
+                return Claim(mode, count.records())
+        return None
 
 
 class MessageFramer(Framer):
@@ -215,17 +393,35 @@ class MessageFramer(Framer):
     name = "message"
     entry_name = "EmailEntry"
 
-    @staticmethod
-    def claims(buf: list[str]) -> bool:
-        return len(_message_starts(buf)) >= 2
+    @classmethod
+    def survey(cls) -> Survey:
+        return _MessageSurvey()
 
-    @staticmethod
-    def frame(buf: list[str]) -> list[Record]:
-        starts = _message_starts(buf)
-        if not starts or starts[0] != 0:
-            starts = [0, *starts]
-        bounds = [*starts, len(buf)]
-        return [Record(buf[a:b], a, b) for a, b in pairwise(bounds)]
+    @classmethod
+    def records(cls, lines: Iterable[str], params: Any) -> Iterator[Record]:
+        """One record per message; text before the first is a record too.
+
+        A start is confirmed after its header block ends, so the lines since
+        the last confirmed start are held until the next one is.
+        """
+        scanner = _MboxStarts() if params == "mbox" else _HeaderStarts()
+        buf: list[str] = []
+        begin = 0
+        line_count = 0
+        for line in lines:
+            buf.append(line)
+            line_count += 1
+            for start in scanner.feed(line):
+                if start > begin:
+                    yield Record(buf[:start - begin], begin, start)
+                    buf = buf[start - begin:]
+                    begin = start
+        for start in scanner.finish():
+            if start > begin:
+                yield Record(buf[:start - begin], begin, start)
+                buf = buf[start - begin:]
+                begin = start
+        yield Record(buf, begin, line_count)
 
 
 # A multi-line message may run to this many lines. MultilineFramer declines a
@@ -293,39 +489,75 @@ def _head_pattern(line: str) -> re.Pattern[str] | None:
     return None
 
 
-def _multiline_bounds(buf: list[str]) -> list[tuple[int, int]] | None:
-    """[start, end) line ranges of multi-line records, or None to decline.
+class _MultilineCutter:
+    """Cuts lines into multi-line records, one line at a time.
 
-    Decline unless the first line with content starts with a timestamp, at
-    least one continuation line is indented, and no record runs past
-    MAX_RECORD_LINES. Blank lines before the first record and journald
-    markers belong to no record.
+    A record starts at a line that begins, in column 0, with the timestamp
+    format of the first line with content; journald markers end a record
+    and belong to none. `cut` caps a record at MAX_RECORD_LINES by starting
+    a new one. Without it, a longer record marks the input declined.
     """
-    first = next((i for i, line in enumerate(buf)
-                  if line.strip() and not _is_journald_marker(line)), None)
-    if first is None:
-        return None
-    head = _head_pattern(buf[first])
-    if head is None:
-        return None
 
-    bounds: list[tuple[int, int]] = []
-    start = first
-    indented = False
-    for i in range(first + 1, len(buf)):
-        line = buf[i]
-        if _is_journald_marker(line) or head.match(line):
-            bounds.append((start, i))
-            start = i + 1 if _is_journald_marker(line) else i
-        elif line[:1] in (" ", "\t") and line.strip():
-            indented = True
-        if i - start >= MAX_RECORD_LINES:
+    def __init__(self, cut: bool) -> None:
+        self.cut = cut
+        self.head: re.Pattern[str] | None = None
+        self.declined = False
+        self.indented = False
+        self.line = 0
+        self.begin = 0
+        self.buf: list[str] = []
+
+    def feed(self, line: str) -> Record | None:
+        i = self.line
+        self.line += 1
+        if self.declined:
             return None
-    bounds.append((start, len(buf)))
-    if not indented:
-        return None
-    # A marker right before another boundary leaves an empty range.
-    return [(a, b) for a, b in bounds if b > a]
+        if self.head is None:
+            if line.strip() and not _is_journald_marker(line):
+                self.head = _head_pattern(line)
+                self.declined = self.head is None
+                self.begin, self.buf = i, [line]
+            return None
+
+        done = None
+        marker = _is_journald_marker(line)
+        if marker or self.head.match(line):
+            if self.buf:
+                done = Record(self.buf, self.begin, i)
+            self.begin, self.buf = (i + 1, []) if marker else (i, [line])
+        else:
+            if line[:1] in (" ", "\t") and line.strip():
+                self.indented = True
+            self.buf.append(line)
+        if i - self.begin >= MAX_RECORD_LINES:
+            if not self.cut:
+                self.declined = True
+                return None
+            done = Record(self.buf, self.begin, i + 1)
+            self.begin, self.buf = i + 1, []
+        return done
+
+    def finish(self) -> Record | None:
+        if self.declined or not self.buf:
+            return None
+        return Record(self.buf, self.begin, self.line)
+
+
+class _MultilineSurvey(Survey):
+    def __init__(self) -> None:
+        self.cutter = _MultilineCutter(cut=False)
+        self.count = 0
+
+    def feed(self, line: str) -> None:
+        if self.cutter.feed(line) is not None:
+            self.count += 1
+
+    def result(self) -> Claim | None:
+        last = self.cutter.finish()
+        cutter = self.cutter
+        if cutter.declined or cutter.head is None or not cutter.indented:
+            return None
+        return Claim(None, self.count + (last is not None))
 
 
 class MultilineFramer(Framer):
@@ -338,34 +570,60 @@ class MultilineFramer(Framer):
     continuation line that happens to start with a different kind of time
     stays a continuation.
 
-    Only claims a buffer with at least one indented continuation line. A
-    log without one frames line by line exactly as it always has.
+    Claims only input whose first line with content starts with a
+    timestamp, with at least one indented continuation line and no record
+    longer than MAX_RECORD_LINES. A log without an indented line frames
+    line by line exactly as it always has.
     """
 
     name = "multiline"
 
-    @staticmethod
-    def claims(buf: list[str]) -> bool:
-        return _multiline_bounds(buf) is not None
+    @classmethod
+    def survey(cls) -> Survey:
+        return _MultilineSurvey()
 
-    @staticmethod
-    def frame(buf: list[str]) -> list[Record]:
-        bounds = _multiline_bounds(buf) or []
-        return [Record(buf[a:b], a, b) for a, b in bounds]
+    @classmethod
+    def records(cls, lines: Iterable[str], _params: Any) -> Iterator[Record]:
+        # Input claimed on its whole length never has an over-long record;
+        # the cap only bites when the claim was made on a prefix.
+        cutter = _MultilineCutter(cut=True)
+        for line in lines:
+            record = cutter.feed(line)
+            if record is not None:
+                yield record
+        last = cutter.finish()
+        if last is not None:
+            yield last
+
+    @classmethod
+    def frame(cls, buf: list[str]) -> list[Record]:
+        return super().frame(buf) if cls.claims(buf) else []
+
+
+class _LineSurvey(Survey):
+    def __init__(self) -> None:
+        self.count = 0
+
+    def feed(self, _line: str) -> None:
+        self.count += 1
+
+    def result(self) -> Claim | None:
+        return Claim(None, self.count) if self.count else None
 
 
 class LineFramer(Framer):
-    """One record per line. Claims any buffer with a line in it; the last resort."""
+    """One record per line. Claims any input with a line in it; the last resort."""
 
     name = "line"
 
-    @staticmethod
-    def claims(buf: list[str]) -> bool:
-        return bool(buf)
+    @classmethod
+    def survey(cls) -> Survey:
+        return _LineSurvey()
 
-    @staticmethod
-    def frame(buf: list[str]) -> list[Record]:
-        return [Record([line], i, i + 1) for i, line in enumerate(buf)]
+    @classmethod
+    def records(cls, lines: Iterable[str], _params: Any) -> Iterator[Record]:
+        for i, line in enumerate(lines):
+            yield Record([line], i, i + 1)
 
 
 # Tried in order. LineFramer must stay last.

@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.5.0] - 2026-09-23
+
+### Added
+- `analyze_lines()` and `hash_lines()` take lines one at a time — an open
+  file, a pipe, a generator — so an embedder can analyse a log without
+  reading it into a string (#38).
+
+### Changed
+- petit streams its input in bounded memory (#38, replacing #5). It used to
+  read the whole input into one string, build an entry for every line and
+  keep every entry in its groups: 1.4 GB of memory for a 96 MB, 1M-line
+  secure log. It now keeps each group's count and a few samples, and the
+  same log takes 28 MB for `--hash` and every graph and 36 MB for
+  `--wordcount`, and still 28 MB for a 384 MB, 4M-line log. Output is byte-identical
+  for every mode and fixture.
+- A file is read in passes: every framer surveys it line by line, the
+  drivers vote on records sampled across the whole of it, then it is
+  parsed. Framing and driver choice are exactly what they were.
+- A pipe is read once. petit holds its first 4 MB (`HEAD_CHARS`, the same
+  as the JSON framer's limit); a pipe that ends there is read exactly like
+  a file. A longer one is framed and parsed by what its first 4 MB chose,
+  and a later record the driver can't read falls back to `RawEntry` on its
+  own rather than sending the whole input back to be re-read.
+- `--graph` finds its range and counts in one pass, keeping counts per
+  time bucket and merging buckets once they are too fine to be drawn.
+- `--hash` is about 25% faster and `--wordcount` more than twice as fast:
+  `Filter.scrub()` built a debug log message for every stopword on every
+  key even when debug logging was off, and `--wordcount` scrubs each
+  distinct word once.
+
+### Fixed
+- The container image's `version` label said 3.1.1.
+
 ## [4.4.1] - 2026-09-23
 
 ### Fixed
