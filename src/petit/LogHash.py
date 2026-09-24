@@ -29,6 +29,7 @@ import os
 import re
 from collections import UserDict
 from collections.abc import Iterable
+from dataclasses import dataclass
 from typing import Any, ClassVar
 
 from .CrunchLog import (
@@ -58,21 +59,55 @@ MAX_KEY_CHARS = 4096
 # corpus is considered present.
 FINGERPRINT_THRESHOLD = 0.31
 
+# Fewest matched patterns that count as evidence. A corpus must match at
+# least this many to be present at all, and a winner must hold at least this
+# many that a close runner-up cannot produce to be told apart from it. Below
+# that, the two are reported together as `a|b` rather than guessed between.
+# A corpus smaller than this needs every one of its patterns.
+FINGERPRINT_MIN_EVIDENCE = 5
+
+# How close, as a share of the winner's identity score, a runner-up must
+# come before it can share the winner's label.
+FINGERPRINT_MARGIN = 0.10
+
 # (path, mtime) -> the corpus's fingerprint keys. Parsing the corpora is
 # thousands of lines of work; an embedding service asks on every request.
 _FINGERPRINT_CACHE: dict[tuple[str, float], frozenset[str]] = {}
 
+# Every loaded corpus's (path, mtime) -> each key's weight. A key's weight
+# depends on how many corpora hold it, so it belongs to the whole set, and
+# adding or changing one corpus starts a new entry.
+_FINGERPRINT_WEIGHTS: dict[tuple[tuple[str, float], ...], dict[str, float]] = {}
 
-def load_fingerprints() -> list[tuple[str, frozenset[str]]]:
-    """Every fingerprint corpus as (name, keys), largest file first.
 
-    Largest first prevents double labelling when a smaller corpus is a
-    subset of a bigger one. Every search prefix contributes: the packaged
-    corpora plus any site-local .fp files. Only the first directory holding
-    files used to count, and the packaged one always does, so a site-local
-    corpus was never read. Where two share a name, the earlier prefix wins.
+@dataclass(frozen=True)
+class FingerprintScore:
+    """How one corpus fared in the fingerprint vote.
+
+    `detection` is the share of the corpus's patterns found in the input,
+    the test for whether its event happened at all. `identity` is how well
+    the corpus, and no other, accounts for what was found: a weighted F1 in
+    which a pattern shared by many corpora counts for little. Both are taken
+    from the last round the corpus stood in, after earlier winners' patterns
+    were set aside.
+    """
+
+    name: str
+    detection: float
+    identity: float
+
+
+def _load_corpora() -> tuple[list[tuple[str, frozenset[str]]], dict[str, float]]:
+    """Every fingerprint corpus as (name, keys) by name, and the key weights.
+
+    Every search prefix contributes: the packaged corpora plus any
+    site-local .fp files. Where two share a name, the earlier prefix wins.
     Each corpus is hashed by whatever driver claims it, with that driver's
     own default filter.
+
+    A key's weight is 1 / the number of corpora holding it, so a line every
+    distribution logs on reboot carries little of the vote and a line only
+    one produces carries all of its own.
     """
     prefixes = search_prefixes("fingerprints")
     by_name: dict[str, str] = {}
@@ -86,17 +121,38 @@ def load_fingerprints() -> list[tuple[str, frozenset[str]]]:
         raise DataFileError(
             "could not locate fingerprint files in any of: " + ", ".join(prefixes)
         )
-    paths = sorted(by_name.values(), key=os.path.getsize, reverse=True)
 
     corpora = []
-    for path in paths:
+    stamps = []
+    for name in sorted(by_name):
+        path = by_name[name]
         cache_key = (path, os.path.getmtime(path))
         keys = _FINGERPRINT_CACHE.get(cache_key)
         if keys is None:
             keys = frozenset(SuperHash.manufacture(CrunchLog(path)).keys())
             _FINGERPRINT_CACHE[cache_key] = keys
-        corpora.append((os.path.basename(path), keys))
-    return corpora
+        corpora.append((name, keys))
+        stamps.append(cache_key)
+
+    weights = _FINGERPRINT_WEIGHTS.get(tuple(stamps))
+    if weights is None:
+        held: dict[str, int] = {}
+        for _, keys in corpora:
+            for key in keys:
+                held[key] = held.get(key, 0) + 1
+        weights = {key: 1 / count for key, count in held.items()}
+        _FINGERPRINT_WEIGHTS[tuple(stamps)] = weights
+    return corpora, weights
+
+
+def load_fingerprints() -> list[tuple[str, frozenset[str]]]:
+    """Every fingerprint corpus as (name, keys), sorted by name.
+
+    Which corpus wins no longer depends on the order they are tried, so the
+    order is only for determinism. It used to be largest file first, and
+    the first to pass the threshold took the input.
+    """
+    return _load_corpora()[0]
 
 
 class SuperHash(UserDict[str, list[Any]]):
@@ -142,6 +198,8 @@ class SuperHash(UserDict[str, list[Any]]):
         self.max_samples = max_samples
         # key -> [records, lines] grouped under it; see account().
         self.grouped: dict[str, list[int]] = {}
+        # How each corpus fared the last time fingerprint() ran.
+        self.fingerprint_scores: list[FingerprintScore] = []
         # The furthest source line any grouped record has reached.
         self._reach = -1
 
@@ -262,23 +320,77 @@ class SuperHash(UserDict[str, list[Any]]):
         """Collapse every known event sequence found in this hash.
 
         A fingerprint is a corpus of the lines one routine event produces — a
-        reboot, say. When more than FINGERPRINT_THRESHOLD of a corpus's
-        patterns are present, every one of them is removed and replaced by a
-        single group named after the corpus, so 600 lines of boot noise read
-        as one line and whatever was unusual stands out.
+        reboot, say. When a corpus is present, every one of its patterns is
+        removed and replaced by a single group named after it, so 600 lines
+        of boot noise read as one line and whatever was unusual stands out.
 
-        Returns the names of the corpora that matched, in the order they did,
-        so a caller can tell "nothing matched" from "not asked".
+        Corpora of related systems share most of their lines, so presence
+        and identity are decided apart. A corpus is present when more than
+        FINGERPRINT_THRESHOLD of its patterns, and at least
+        FINGERPRINT_MIN_EVIDENCE, are found. Among those present, the one
+        that best accounts for the input on its distinctive lines wins (see
+        FingerprintScore). A runner-up the winner cannot be told from — it
+        scores within FINGERPRINT_MARGIN, the winner holds too few lines it
+        lacks, and it is gone once the winner's lines are — shares the
+        label, as `a|b`.
+        Then the winner's patterns are set aside and the rest vote again,
+        so two reboots in one log both collapse, each under its own name.
+
+        Largest corpus first, first past the threshold wins, used to decide
+        this: a big corpus claimed its neighbours' reboots and, by removing
+        the lines they share, left the right one below the threshold.
+
+        Returns the labels collapsed, in the order they were, so a caller
+        can tell "nothing matched" from "not asked". The scores behind them
+        are left in `fingerprint_scores`.
         """
+        corpora, weights = _load_corpora()
+        known = frozenset().union(*(keys for _, keys in corpora))
+        consumed: set[str] = set()
+        scores: dict[str, FingerprintScore] = {}
         matched: list[str] = []
-        for name, keys in load_fingerprints():
-            count = sum(1 for key in keys if key in self)
-            logging.info("Fingerprint %s: %d of %d patterns", name, count, len(keys))
-            if count <= len(keys) * FINGERPRINT_THRESHOLD:
-                continue
 
-            for key in keys:
+        def evidence(keys: frozenset[str]) -> int:
+            return min(FINGERPRINT_MIN_EVIDENCE, len(keys))
+
+        def present(keys: frozenset[str], gone: set[str]) -> bool:
+            live = keys - gone
+            hits = sum(1 for key in live if key in self)
+            return hits >= evidence(keys) and hits > len(live) * FINGERPRINT_THRESHOLD
+
+        while True:
+            found = sum(weights[key] for key in known - consumed if key in self)
+            candidates = []
+            for name, keys in corpora:
+                if not present(keys, consumed):
+                    continue
+                live = keys - consumed
+                hits = frozenset(key for key in live if key in self)
+                recall = sum(weights[key] for key in hits) / sum(weights[key] for key in live)
+                precision = sum(weights[key] for key in hits) / found
+                identity = 2 * precision * recall / (precision + recall)
+                scores[name] = FingerprintScore(name, len(hits) / len(live), identity)
+                candidates.append((identity, name, keys, hits))
+                logging.info("Fingerprint %s: %d of %d patterns, identity %.3f",
+                             name, len(hits), len(live), identity)
+            if not candidates:
+                break
+
+            candidates.sort(key=lambda c: (-c[0], c[1]))
+            best, name, keys, hits = candidates[0]
+            label = [name]
+            gone = set(keys)
+            for identity, other, other_keys, _ in candidates[1:]:
+                if (identity >= best * (1 - FINGERPRINT_MARGIN)
+                        and len(hits - other_keys) < evidence(keys)
+                        and not present(other_keys, consumed | keys)):
+                    label.append(other)
+                    gone |= other_keys
+            name = "|".join(sorted(label))
+
+            for key in gone:
                 self.pop(key, None)
+            consumed |= gone
 
             # The collapsed group stands for lines that are gone, so its one
             # member is made up here and named after the corpus. It used to
@@ -289,6 +401,8 @@ class SuperHash(UserDict[str, list[Any]]):
             stand_in.raw = name
             self.increment(name, stand_in)
             matched.append(name)
+
+        self.fingerprint_scores = [scores[name] for name in sorted(scores)]
         return matched
 
     @staticmethod

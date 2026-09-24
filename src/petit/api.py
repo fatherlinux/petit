@@ -29,7 +29,14 @@ from . import CrunchLog as _drivers
 from .CrunchLog import LogStream
 from .errors import PetitError
 from .Filter import Filter
-from .LogHash import MAX_KEY_CHARS, DaemonHash, HostHash, SuperHash, WordHash
+from .LogHash import (
+    MAX_KEY_CHARS,
+    DaemonHash,
+    FingerprintScore,
+    HostHash,
+    SuperHash,
+    WordHash,
+)
 from .sources import Source, TextSource, source_for
 
 HashMode = Literal["auto", "daemon", "host", "wordcount"]
@@ -97,6 +104,10 @@ class Analysis:
 
     `fingerprints_matched` names the event corpora collapsed into a single
     group each, empty when none matched or `collapse_fingerprints` was off.
+    When the input could have come from either of two corpora and nothing
+    in it tells them apart, both are named in one label, `a|b`.
+    `fingerprint_scores` has the vote behind it: one entry per corpus that
+    was present, by name.
     """
 
     groups: list[Group]
@@ -108,6 +119,7 @@ class Analysis:
     records_in: int = 0
     records_grouped: int = 0
     framer: str = "line"
+    fingerprint_scores: list[FingerprintScore] = field(default_factory=list)
 
 
 def _render(entry: _drivers.LogEntry) -> str:
@@ -313,6 +325,7 @@ def _analyze(
         records_in=stream.records_in,
         records_grouped=hashed.records_grouped,
         framer=stream.framer,
+        fingerprint_scores=hashed.fingerprint_scores,
     )
 
 
