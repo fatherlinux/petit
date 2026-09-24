@@ -150,3 +150,27 @@ check = "CH006-primitive_obsession"
 path = "src/petit/api.py"
 classification = "by_design"
 justification = "analyze_text/hash_text take two independent opt-ins, strict (raise instead of degrading to RawEntry) and collapse_fingerprints (delete routine event sequences). They don't combine into modes, and collapse_fingerprints: bool is the signature agreed with the library's consumer in crunchtools/petit#31, so it stays a keyword-only flag rather than an options object."
+
+[[exceptions]]
+check = "CQ002-dead_code_markers"
+path = "src/petit/records.py"
+classification = "by_design"
+justification = "_LineSurvey.feed(_line) implements the Survey.feed(line) interface that _JsonSurvey, _MessageSurvey and _MultilineSurvey all read. The line framer claims one record per line, so its survey only counts calls and has no use for the text. The parameter is part of the interface, not a leftover of a refactor."
+
+[[exceptions]]
+check = "EV010-single_use_helpers"
+path = "src/petit/sources.py"
+classification = "by_design"
+justification = "PathSource._read exists so the file is opened lazily, inside the generator that _guarded iterates: a missing or unreadable file then surfaces as DataFileError on the first read of a pass, and the file closes when that pass ends. Inlining the open into lines() would open eagerly, outside the guard."
+
+[[exceptions]]
+check = "EV010-single_use_helpers"
+path = "src/petit/LogGraph.py"
+classification = "by_design"
+justification = "_step is calendar arithmetic (move a date forward i units, on the calendar for months and years), the documented inverse of _offset. It predates the streaming change; only its caller shrank when GraphHash was split into _open() and add()."
+
+[[exceptions]]
+check = "DC004-dead_structs"
+path = "src/petit/records.py"
+classification = "gourmand_bug"
+justification = "Each framer names its survey class in a `survey` class attribute (JsonFramer.survey = _JsonSurvey, etc.), and LogStream._survey and Framer.claim instantiate it as `framer.survey()`. The check looks for a call by class name and misses instantiation through the attribute; every survey runs on every input petit reads, as test_streaming and test_records exercise."

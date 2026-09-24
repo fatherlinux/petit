@@ -15,7 +15,10 @@ most of this page is about getting that right.
 
 ## Framers
 
-Framers are tried in order and the first to claim the whole buffer wins.
+Framers are tried in order and the first to claim the whole input wins.
+Each framer surveys the input a line at a time and never holds it, so a
+file of any size is claimed on all of it; a pipe longer than 4 MB is
+claimed on its first 4 MB (see "Big inputs" in the README).
 `--framer` or `analyze_text(framer=...)` names one instead.
 
 | Framer    | Claims                                                       | Entry driver      |

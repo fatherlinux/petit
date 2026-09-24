@@ -44,8 +44,8 @@ from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as pkg_version
 from types import FrameType
 
-from petit.api import Analysis, HashMode, analyze_text
-from petit.CrunchLog import CrunchLog, read_source
+from petit.api import Analysis, HashMode, analyze_lines
+from petit.CrunchLog import LogStream
 from petit.errors import PetitError
 from petit.LogGraph import (
     GRAPH_FOR_UNIT,
@@ -60,6 +60,7 @@ from petit.LogGraph import (
     fit_graph,
 )
 from petit.records import FRAMER_NAMES
+from petit.sources import open_source
 
 GRAPH_MODES = frozenset({
     "mode_graph", "mode_sgraph", "mode_mgraph", "mode_hgraph",
@@ -314,8 +315,8 @@ def print_groups(analysis: Analysis, sample: str) -> None:
 
 def mode_hash(args: argparse.Namespace, filename: str) -> None:
     """Runs in hashing mode"""
-    analysis = analyze_text(
-        read_source(filename),
+    analysis = analyze_lines(
+        open_source(filename),
         source_name=filename,
         filter_name="__none__" if args.filter is False else None,
         max_samples=1,
@@ -327,8 +328,8 @@ def mode_hash(args: argparse.Namespace, filename: str) -> None:
 
 def _run_report_mode(hash_mode: HashMode, args: argparse.Namespace, filename: str) -> None:
     """--wordcount, --daemon and --host: counts per word, daemon or host."""
-    analysis = analyze_text(
-        read_source(filename), source_name=filename, max_samples=1, hash_mode=hash_mode,
+    analysis = analyze_lines(
+        open_source(filename), source_name=filename, max_samples=1, hash_mode=hash_mode,
         framer=args.framer,
     )
     print_groups(analysis, "none")
@@ -361,14 +362,15 @@ def _run_graph_mode(
     `graph_cls` None is --graph: --span's unit and count if given, otherwise
     whichever fixed graph fits the log.
     """
-    log = CrunchLog.from_text(read_source(filename), source_name=filename, framer=args.framer)
-    if args.span is not None:
-        unit, count = args.span
-        x = GRAPH_FOR_UNIT[unit](log, count)
-    elif graph_cls is None:
-        x = fit_graph(log, graph_columns(args))
-    else:
-        x = graph_cls(log)
+    def draw(log: LogStream) -> GraphHash:
+        if args.span is not None:
+            unit, count = args.span
+            return GRAPH_FOR_UNIT[unit](log, count)
+        if graph_cls is None:
+            return fit_graph(log, graph_columns(args))
+        return graph_cls(log)
+
+    x = LogStream(open_source(filename), framer=args.framer).build(draw)
     x.tick = args.tick
     x.wide = args.wide
     x.display()

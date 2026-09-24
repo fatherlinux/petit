@@ -1,14 +1,15 @@
 """Library entry points — petit's analysis without petit's command line.
 
-Everything here takes text already in memory, returns data, and raises on
-failure. No file paths, no stdout, no sys.exit. The CLI is one caller of this
+Everything here takes text — a string, or lines one at a time — returns
+data, and raises on failure. No file paths, no stdout, no sys.exit. The CLI is one caller of this
 module; a service embedding petit is another, and neither should have to
 route a payload through a temporary file or lose its process to a bad line.
 
-    from petit.api import hash_text
+    from petit.api import hash_lines
 
-    for group in hash_text(open("/var/log/messages").read()):
-        print(group.count, group.pattern)
+    with open("/var/log/messages") as log:
+        for group in hash_lines(log):
+            print(group.count, group.pattern)
 
 The text is first cut into records — lines, JSON objects, or email
 messages — by the first framer in `petit.records` that claims it. For line
@@ -19,15 +20,17 @@ available here automatically.
 
 from __future__ import annotations
 
+from collections import deque
 from collections.abc import Iterable
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Literal
 
 from . import CrunchLog as _drivers
-from .CrunchLog import CrunchLog
+from .CrunchLog import LogStream
 from .errors import PetitError
 from .Filter import Filter
 from .LogHash import MAX_KEY_CHARS, DaemonHash, HostHash, SuperHash, WordHash
+from .sources import Source, TextSource, source_for
 
 HashMode = Literal["auto", "daemon", "host", "wordcount"]
 
@@ -202,21 +205,89 @@ def analyze_text(
         PetitError: `driver`, `hash_mode` or `framer` is not a known name,
             or a named framer does not recognise the text.
     """
+    return _analyze(
+        TextSource(text, source_name),
+        filter_name=filter_name,
+        max_samples=max_samples,
+        driver=driver,
+        strict=strict,
+        stopwords=stopwords,
+        hash_mode=hash_mode,
+        collapse_fingerprints=collapse_fingerprints,
+        framer=framer,
+        max_record_chars=max_record_chars,
+    )
+
+
+def analyze_lines(
+    lines: Iterable[str] | Source,
+    *,
+    filter_name: str | None = None,
+    max_samples: int = 3,
+    source_name: str = "<lines>",
+    driver: str | None = None,
+    strict: bool = False,
+    stopwords: list[str | tuple[str, str]] | None = None,
+    hash_mode: HashMode = "auto",
+    collapse_fingerprints: bool = False,
+    framer: str = "auto",
+    max_record_chars: int = MAX_KEY_CHARS,
+) -> Analysis:
+    """`analyze_text` for input that arrives a line at a time.
+
+    Memory stays bounded by the number of distinct groups, not the size of
+    the input: nothing but the groups' counts and samples is kept.
+
+        with open("/var/log/messages") as log:
+            analysis = analyze_lines(log)
+
+    `lines` are lines as a file in text mode yields them, newline kept. A
+    file that can seek, a list or a tuple is read in several passes and
+    analysed exactly as `analyze_text` would. Anything else — a pipe, a
+    generator — is read once: petit holds its first HEAD_CHARS (4 MB) and,
+    if it runs longer, frames it and picks its driver from that head.
+    Arguments and errors are otherwise those of `analyze_text`; a file that
+    cannot be read or decoded raises DataFileError.
+    """
+    return _analyze(
+        source_for(lines, source_name),
+        filter_name=filter_name,
+        max_samples=max_samples,
+        driver=driver,
+        strict=strict,
+        stopwords=stopwords,
+        hash_mode=hash_mode,
+        collapse_fingerprints=collapse_fingerprints,
+        framer=framer,
+        max_record_chars=max_record_chars,
+    )
+
+
+def _analyze(
+    source: Source,
+    *,
+    filter_name: str | None,
+    max_samples: int,
+    driver: str | None,
+    strict: bool,
+    stopwords: list[str | tuple[str, str]] | None,
+    hash_mode: HashMode,
+    collapse_fingerprints: bool,
+    framer: str,
+    max_record_chars: int,
+) -> Analysis:
     if hash_mode != "auto" and hash_mode not in _HASH_MODES:
         raise PetitError("unknown hash mode: " + str(hash_mode))
 
-    log = CrunchLog.from_text(
-        text,
-        source_name=source_name,
-        driver=_resolve_driver(driver),
-        strict=strict,
-        framer=framer,
-    )
+    stream = LogStream(source, driver=_resolve_driver(driver), strict=strict, framer=framer)
     policy = Filter.from_patterns(stopwords) if stopwords is not None else filter_name
-    hashed = (
-        SuperHash.manufacture(log, policy, max_record_chars) if hash_mode == "auto"
-        else _HASH_MODES[hash_mode](log, policy, max_record_chars)
-    )
+
+    def group(log: LogStream) -> SuperHash:
+        if hash_mode == "auto":
+            return SuperHash.manufacture(log, policy, max_record_chars, max_samples)
+        return _HASH_MODES[hash_mode](log, policy, max_record_chars, max_samples)
+
+    hashed = stream.build(group)
     matched = hashed.fingerprint() if collapse_fingerprints else []
 
     groups = []
@@ -232,48 +303,17 @@ def analyze_text(
         ))
     groups.sort(key=lambda g: (-g.count, g.pattern))
 
-    grouped = _grouped_records(hashed.values())
     return Analysis(
         groups=groups,
-        driver=log.payload_type,
-        degraded=log.degraded,
-        lines_in=log.lines_in,
-        lines_grouped=_covered_lines(entry.span for entry in grouped),
+        driver=stream.payload_type,
+        degraded=stream.degraded,
+        lines_in=stream.lines_in,
+        lines_grouped=hashed.lines_grouped,
         fingerprints_matched=matched,
-        records_in=len(log),
-        records_grouped=len(grouped),
-        framer=log.framer,
+        records_in=stream.records_in,
+        records_grouped=hashed.records_grouped,
+        framer=stream.framer,
     )
-
-
-def _grouped_records(values: Iterable[list[Any]]) -> list[_drivers.LogEntry]:
-    """Every distinct input record in a group, in no particular order.
-
-    Distinct by identity: a --wordcount group lists a record once per word.
-    Stand-ins for collapsed fingerprints came from no input and don't count.
-    """
-    seen: dict[int, _drivers.LogEntry] = {}
-    for value in values:
-        for entry in value[1]:
-            if entry.span[0] >= 0:
-                seen.setdefault(id(entry), entry)
-    return list(seen.values())
-
-
-def _covered_lines(spans: Iterable[tuple[int, int]]) -> int:
-    """Source lines covered by `spans`, each counted once.
-
-    JSON elements written on one line share it; summing their spans would
-    count that line once per element.
-    """
-    covered = 0
-    reach = -1
-    for start, end in sorted(spans):
-        begin = max(start, reach)
-        if end > begin:
-            covered += end - begin
-        reach = max(reach, end)
-    return covered
 
 
 def hash_text(
@@ -314,6 +354,36 @@ def hash_text(
     ).groups
 
 
+def hash_lines(
+    lines: Iterable[str] | Source,
+    *,
+    filter_name: str | None = None,
+    max_samples: int = 3,
+    source_name: str = "<lines>",
+    driver: str | None = None,
+    strict: bool = False,
+    stopwords: list[str | tuple[str, str]] | None = None,
+    hash_mode: HashMode = "auto",
+    collapse_fingerprints: bool = False,
+    framer: str = "auto",
+    max_record_chars: int = MAX_KEY_CHARS,
+) -> list[Group]:
+    """The groups half of `analyze_lines`, most frequent first."""
+    return analyze_lines(
+        lines,
+        filter_name=filter_name,
+        max_samples=max_samples,
+        source_name=source_name,
+        driver=driver,
+        strict=strict,
+        stopwords=stopwords,
+        hash_mode=hash_mode,
+        collapse_fingerprints=collapse_fingerprints,
+        framer=framer,
+        max_record_chars=max_record_chars,
+    ).groups
+
+
 def detect_format(text: str, source_name: str = "<text>", framer: str = "auto") -> str:
     """Name of the driver that claims `text`, without parsing all of it.
 
@@ -321,5 +391,8 @@ def detect_format(text: str, source_name: str = "<text>", framer: str = "auto") 
     "RawEntry" answer means no driver recognised the format, so grouping will
     be structural at best.
     """
-    log = CrunchLog.from_text(text, source_name=source_name, framer=framer)
-    return log.payload_type
+    stream = LogStream(TextSource(text, source_name), framer=framer)
+    # A driver that fails part way through gives way to RawEntry, and the
+    # answer should say so; the entries themselves are not kept.
+    stream.build(lambda log: deque(log, maxlen=0))
+    return stream.payload_type
