@@ -32,11 +32,14 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+import time
 import tomllib
+import urllib.error
 import urllib.request
+from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeVar
 
 from petit import LogHash
 from petit.api import analyze_text
@@ -65,6 +68,9 @@ DISK_SIZE = "20G"
 OUTPUT_DISK_BYTES = 64 << 20
 CHUNK_BYTES = 1 << 20
 MARKER = "petit-capture"
+RETRY_DELAYS = (10, 30, 90)
+
+T = TypeVar("T")
 
 
 @dataclass(frozen=True)
@@ -98,10 +104,25 @@ class Platform:
 # --- what is supported -------------------------------------------------------
 
 
+def retrying(what: str, attempt: Callable[[], T]) -> T:
+    """Mirrors reset connections and time out handshakes; try again before
+    failing a capture over it."""
+    for delay in RETRY_DELAYS:
+        try:
+            return attempt()
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as error:
+            print(f"{what}: {error}; retrying in {delay}s", file=sys.stderr)
+            time.sleep(delay)
+    return attempt()
+
+
 def fetch(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=60) as response:
-        return bytes(response.read())
+    def once() -> bytes:
+        request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            return bytes(response.read())
+
+    return retrying(url, once)
 
 
 def version_key(version: str) -> tuple[int, ...]:
@@ -224,6 +245,11 @@ def download(url: str, digest: str, cache: Path) -> Path:
     if target.exists():
         return target
     cache.mkdir(parents=True, exist_ok=True)
+    retrying(url, lambda: download_once(url, algorithm, expected, target))
+    return target
+
+
+def download_once(url: str, algorithm: str, expected: str, target: Path) -> None:
     hasher = hashlib.new(algorithm)
     partial = target.with_suffix(".part")
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
@@ -236,7 +262,6 @@ def download(url: str, digest: str, cache: Path) -> Path:
         partial.unlink()
         raise SystemExit(f"{url}: {algorithm} mismatch")
     partial.rename(target)
-    return target
 
 
 def root_prefix() -> list[str]:
