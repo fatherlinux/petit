@@ -126,7 +126,7 @@ def test_stopword_rules_are_linear(filter_name, probe):
     "Failed password for invalid user " + "b" * 200_000 + " from",
 ], ids=lambda probe: repr(probe[:24]))
 def test_secure_generalizations_are_linear(probe):
-    line = f"Sep 22 10:00:00 lotor sshd[1]: {probe}\n"
+    line = f"Sep 22 10:00:00 host01 sshd[1]: {probe}\n"
     result = bounded(line * 3, driver="SecureLogEntry", max_record_chars=10**7)
     assert result is not None
     assert result.lines_in == 3
