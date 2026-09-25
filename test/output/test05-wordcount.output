@@ -49,6 +49,7 @@
 5:	registered
 5:	v#
 4:	#K
+4:	#[A]
 4:	(IRQs
 4:	(level,
 4:	(order:
@@ -106,6 +107,7 @@
 3:	socket
 3:	xinetd
 2:	#-#ELsmp
+2:	#A
 2:	#C#A
 2:	#MB
 2:	#f#
@@ -235,6 +237,8 @@
 1:	#Kbytes
 1:	#MHz
 1:	#X
+1:	#a
+1:	#a#
 1:	#a@#-r
 1:	#ac)
 1:	#alpha#

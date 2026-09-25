@@ -103,7 +103,8 @@ class TestLongRecords:
         assert bounded("1" * 2_000_000 + "\n", driver="RawEntry") is not None
 
 
-@pytest.mark.parametrize("filter_name", ["hash.stopwords", "strict.stopwords"])
+@pytest.mark.parametrize("filter_name", ["hash.stopwords", "strict.stopwords",
+                                         "words.stopwords", "daemon.stopwords"])
 @pytest.mark.parametrize("probe", [
     "0" * 200_000,
     "a-" * 100_000,
@@ -113,6 +114,17 @@ class TestLongRecords:
     "2026-09-22T" * 30_000,
     "deadbeef" * 50_000,
     "::ffff:" * 50_000,
+    "-" * 200_000 + "x",
+    "_" * 200_000 + "a",
+    "!" * 100_000 + "about" + "!" * 100_000 + "x",
+    "a0:" * 100_000,
+    "0000-" * 50_000,
+    "F96D\\x2d" * 30_000,
+    "0000\\x2d" * 30_000,
+    "tmp" * 100_000,
+    "rootfs_" * 50_000,
+    "#." * 100_000,
+    " -" * 100_000,
 ], ids=lambda probe: repr(probe[:12]))
 def test_stopword_rules_are_linear(filter_name, probe):
     result = bounded(probe + "\n", driver="RawEntry", filter_name=filter_name,

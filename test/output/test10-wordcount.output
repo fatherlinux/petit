@@ -92,6 +92,7 @@
 5:	protocol
 5:	type
 5:	zone:
+4:	#a#
 4:	#e#
 4:	#x#f#
 4:	(IRQs
@@ -180,6 +181,7 @@
 3:	x-info="http://www.rsyslog.com"]
 3:	x-pid="#"
 2:	#-#-generic
+2:	#A
 2:	#MB
 2:	#bit
 2:	#c#]
@@ -384,6 +386,7 @@
 1:	#E#
 1:	#K
 1:	#M
+1:	#a#)
 1:	#e
 1:	#fbed#
 1:	#fff#]

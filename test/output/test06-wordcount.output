@@ -151,6 +151,7 @@
 7:	type
 6:	#-#fc#i#
 6:	#M
+6:	#a#
 6:	(reason
 6:	A_M_I_
 6:	D#cold
@@ -213,6 +214,7 @@
 5:	sda:
 5:	use
 4:	#MB
+4:	#[A]
 4:	#c:
 4:	#e#
 4:	#f#
@@ -402,10 +404,13 @@
 3:	xinetd
 2:	#-#ELsmp
 2:	#-ioctl
+2:	#A
 2:	#C#A
 2:	#F#
 2:	#K,
+2:	#a#]
 2:	#a#be#]
+2:	#a:
 2:	#ac)
 2:	#cef#
 2:	#d#a]
@@ -451,6 +456,7 @@
 2:	/devices/platform/i#/serio#/input/input#
 2:	/devices/virtual/input/input#
 2:	/proc/kmsg
+2:	A#
 2:	AC
 2:	ACPI_CPU:#
 2:	ADDRCONF(NETDEV_UP):
@@ -501,7 +507,6 @@
 2:	Hat,
 2:	Hotkey
 2:	HugeTLB
-2:	I
 2:	II
 2:	IOAPIC#
 2:	IPv#
@@ -565,6 +570,7 @@
 2:	Video
 2:	Virtual
 2:	You
+2:	[#a#
 2:	[#a#c#
 2:	[#fc#
 2:	[LNKA]
@@ -797,6 +803,7 @@
 1:	#Kbytes
 1:	#MHz
 1:	#X
+1:	#a
 1:	#a@#-r
 1:	#alpha#
 1:	#b:

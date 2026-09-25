@@ -14,8 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   whole word, so `--wordcount` cut them out of other words. "target"
   became `tar#`, "command" became `comm#`, and 55 of the listed words
   didn't even stop themselves ("there" became `t#e`). Each word now
-  matches only as a whole word, in any case, with punctuation around it
-  allowed.
+  matches only as a whole word, in any case, with punctuation (not a
+  scrubbed number) around it allowed.
 - `hash.stopwords` let through noise that differs from one boot or machine
   to the next, measured against two reboots of every supported release and
   one real-hardware RHEL 10 reboot:
