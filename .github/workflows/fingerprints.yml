@@ -106,9 +106,12 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      actions: write
     steps:
+      # The org doesn't let github.token open PRs, so the bot pushes and opens
+      # them with the org's dispatch token. That also starts CI on the PR.
       - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.CRUNCHTOOLS_DISPATCH_TOKEN }}
 
       - uses: astral-sh/setup-uv@v7
 
@@ -131,7 +134,7 @@ jobs:
       - name: Open or update the PR
         if: steps.propose.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.CRUNCHTOOLS_DISPATCH_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -145,5 +148,3 @@ jobs:
             gh pr create --base master --head "$BRANCH" \
               --title "feat: refresh reboot fingerprint corpora" --body-file body.md
           fi
-          # A PR pushed with github.token doesn't start pull_request workflows.
-          gh workflow run ci.yml --ref "$BRANCH"

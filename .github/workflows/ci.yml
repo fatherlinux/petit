@@ -5,8 +5,6 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-  # fingerprints.yml dispatches this on the PRs it opens, which github.token
-  # can't trigger through pull_request.
   workflow_dispatch:
 
 jobs:
