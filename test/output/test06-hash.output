@@ -2,39 +2,40 @@
 11:	kernel: BIOS-#: # - # (reserved)
 11:	kernel: NET: Registered protocol family #
 10:	kernel: (# KHz - # KHz @ # KHz), (# mBi, # mBm)
-9:	kernel: system #:#: iomem range #x#-#x# has been reserved
+9:	kernel: system #:#: iomem range #-# has been reserved
 8:	crond(pam_unix)[#]: session closed for user root
 8:	crond(pam_unix)[#]: session opened for user root by (uid=#)
 8:	kernel: integrated sync not supported
-8:	kernel: pci #:#:#.#: PME# disabled
+8:	kernel: pci #:#:#: PME# disabled
 7:	clurgmgrd: [#]: <info> Executing /etc/init.d/httpd status
 7:	clurgmgrd: [#]: <info> Executing /etc/init.d/mysqld status
-6:	kernel: system #:#: ioport range #x#-#x# has been reserved
-6:	sshd[#]: Accepted publickey for root from #.#.#.# port # ssh#
+6:	kernel: system #:#: ioport range #-# has been reserved
+6:	sshd[#]: Accepted publickey for root from # port # ssh#
 6:	sshd[#]: pam_unix(sshd:session): session closed for user root
 6:	sshd[#]: pam_unix(sshd:session): session opened for user root by (uid=#)
 5:	init: tty# main process (#) killed by TERM signal
 5:	kernel: BIOS-#: # - # (usable)
-5:	kernel: hub #-#:#.#: # ports detected
-5:	kernel: hub #-#:#.#: USB hub found
-5:	kernel: pci #:#:#.#: PME# supported from D# D#hot D#old
+5:	kernel: hub #-#:#: # ports detected
+5:	kernel: hub #-#:#: USB hub found
+5:	kernel: pci #:#:#: PME# supported from D# D#hot D#old
+5:	kernel: system #:#: iomem range #-# could not be reserved
 5:	kernel: usb us#: New USB device found, idVendor=#, idProduct=#
 5:	kernel: usb us#: New USB device strings: Mfr=#, Product=#, SerialNumber=#
-5:	kernel: usb us#: SerialNumber: #:#:#.#
+5:	kernel: usb us#: SerialNumber: #:#:#
 5:	kernel: usb us#: configuration # chosen from # choice
 5:	sshd(pam_unix)[#]: session closed for user root
 5:	sshd(pam_unix)[#]: session opened for user root by (uid=#)
-5:	sshd[#]: Accepted publickey for root from ::ffff:#.#.#.# port # ssh#
+5:	sshd[#]: Accepted publickey for root from ::ffff:# port # ssh#
 4:	NetworkManager: <info> (wlan#): device state change: # -> # (reason #)
 4:	clurgmgrd: [#]: <info> Executing /etc/init.d/nfs status
-4:	kernel: ACPI: PCI interrupt #:#:#.#[A] -> GSI # (level, low) -> IRQ #
-4:	kernel: pci #:#:#.#: PCI bridge, secondary bus #:#
-4:	kernel: uhci_hcd #:#:#.#: UHCI Host Controller
-4:	kernel: uhci_hcd #:#:#.#: irq #, io base #x#
-4:	kernel: uhci_hcd #:#:#.#: new USB bus registered, assigned bus number #
-4:	kernel: usb us#: Manufacturer: Linux #.#.#.#-#.#.i# uhci_hcd
+4:	kernel: ACPI: PCI interrupt #:#:#[A] -> GSI # (level, low) -> IRQ #
+4:	kernel: pci #:#:#: PCI bridge, secondary bus #:#
+4:	kernel: uhci_hcd #:#:#: UHCI Host Controller
+4:	kernel: uhci_hcd #:#:#: irq #, io base #
+4:	kernel: uhci_hcd #:#:#: new USB bus registered, assigned bus number #
+4:	kernel: usb us#: Manufacturer: Linux #-#.i# uhci_hcd
 4:	kernel: usb us#: Product: UHCI Host Controller
-4:	sshd[#]: Postponed publickey for root from ::ffff:#.#.#.# port # ssh#
+4:	sshd[#]: Postponed publickey for root from ::ffff:# port # ssh#
 3:	ACPI: LAPIC (acpi_id[0x00] lapic_id[0x00] enabled)
 3:	CPU: L2 cache: 1024K
 3:	EXT3 FS on sda1, internal journal
@@ -47,7 +48,6 @@
 3:	pci 0000:00:1f.0: ICH7 LPC Generic IO decode 1 PIO at 0380 (mask 0003)
 3:	pci 0000:00:1c.0: IO window: disabled
 3:	pci 0000:00:1c.0: PREFETCH window: disabled
-3:	system 00:08: iomem range 0xfff00000-0xffffffff could not be reserved
 3:	usb 1-5: New USB device found, idVendor=058f, idProduct=6335
 3:	usb 1-5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
 3:	usb 1-5: configuration #1 chosen from 1 choice
@@ -459,9 +459,9 @@
 1:	apm: overridden by ACPI.
 1:	ata1.00: 312581808 sectors, multi 16: LBA48 NCQ (depth 0/32)
 1:	ata1.00: ATA-8: ST9160310AS, 0303, max UDMA/133
-1:	ata1.00: configured for UDMA/133
 1:	ata2: PATA max UDMA/100 cmd 0x170 ctl 0x376 bmdma 0xffa8 irq 15
 1:	ata1: SATA max UDMA/133 cmd 0x1f0 ctl 0x3f6 bmdma 0xffa0 irq 14
+1:	ata1.00: configured for UDMA/133
 1:	ata_piix 0000:00:1f.2: MAP [ P0 P2 IDE IDE ]
 1:	ata_piix 0000:00:1f.2: PCI INT B -> GSI 19 (level, low) -> IRQ 19
 1:	ath9k 0000:01:00.0: PCI INT A -> GSI 19 (level, low) -> IRQ 19
@@ -611,8 +611,6 @@
 1:	swap_cgroup can be disabled by noswapaccount boot option.
 1:	swap_cgroup: uses 2048 bytes of vmalloc for pointer array space and 2097152 bytes to hold mem_cgroup pointers on swap
 1:	sysctl net.netfilter.nf_conntrack_acct=1 to enable it.
-1:	system 00:0c: iomem range 0xc0000-0xcffff could not be reserved
-1:	system 00:0c: iomem range 0xe0000-0xfffff could not be reserved
 1:	task migration cache decay timeout: 3 msecs.
 1:	thermal LNXTHERM:01: registered as thermal_zone0
 1:	total RAM coverred: 2040M

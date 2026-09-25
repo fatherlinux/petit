@@ -1,13 +1,13 @@
-15:	kernel: [ #.#] ACPI: LAPIC (acpi_id[#x#] lapic_id[#x#] disabled)
-7:	kernel: [ #.#] # disabled
+15:	kernel: [ #] ACPI: LAPIC (acpi_id[#] lapic_id[#] disabled)
+7:	kernel: [ #] # disabled
 5:	NetworkManager: <info> (eth#): device state change: # -> # (reason #)
-5:	kernel: [ #.#] NET: Registered protocol family #
-5:	kernel: [ #.#] modified: # - # (reserved)
-5:	kernel: [ #.#] pci #:#:#.#: reg # io port: [#x#-#x#]
-4:	kernel: [ #.#] ACPI: INT_SRC_OVR (bus # bus_irq # global_irq # high level)
-4:	kernel: [ #.#] ACPI: IRQ# used by override.
-4:	kernel: [ #.#] BIOS-#: # - # (reserved)
-4:	kernel: [ #.#] PM: Registered nosave memory: # - #
+5:	kernel: [ #] NET: Registered protocol family #
+5:	kernel: [ #] modified: # - # (reserved)
+5:	kernel: [ #] pci #:#:#: reg # io port: [#-#]
+4:	kernel: [ #] ACPI: INT_SRC_OVR (bus # bus_irq # global_irq # high level)
+4:	kernel: [ #] ACPI: IRQ# used by override.
+4:	kernel: [ #] BIOS-#: # - # (reserved)
+4:	kernel: [ #] PM: Registered nosave memory: # - #
 3:	[ 0.000000] 0: 0x00000000 -> 0x00000002
 3:	[ 0.000000] modified: 0000000000000000 - 0000000000002000 (usable)
 2:	[ 0.000000] 0000000000 - 0000400000 page 4k

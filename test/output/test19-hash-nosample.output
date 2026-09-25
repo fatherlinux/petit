@@ -1,11 +1,11 @@
 3:	systemd[#]: Started session-#.scope - Session # of User alice.
-2:	NetworkManager[#]: <info> [#.#] device (wlan#): state change: config -> ip-config
-2:	gnome-shell[#]: Object .GProxyVolume (#x#), has been already disposed — impossible to access it. == Stack trace for context #x# == # i resource:///org/gnome/shell/ui/components/autorunManager.js:# (# @ #) # i resource:///org/gnome/shell/ui/components/autorunManager.js:# (# @ #) # i resource:///org/gnome/shell/ui/init.js:# (# @ #)
-1:	ModemManager[#]: <msg> [base-manager] couldn't check support for device '/sys/devices/pci#:#/#:#:#.#'
-1:	NetworkManager[#]: <info> [#.#] device (wlan#): state change: ip-config -> activated
-1:	abrt-dump-journal-python[#]: Traceback (most recent call last): File "/usr/libexec/tuned/tuned.py", line #, in <module> daemon.run() File "/usr/lib/python#.#/site-packages/tuned/daemon/daemon.py", line #, in run self._thread.start() RuntimeError: can't start new thread
-1:	gnome-shell[#]: Object .GProxyVolume (#x#), has been already disposed — impossible to access it. == Stack trace for context #x# == # i resource:///org/gnome/shell/ui/components/autorunManager.js:# (# @ #)
-1:	kernel: usb #-#: New USB device found, idVendor=#, idProduct=#, bcdDevice=#.#
+2:	NetworkManager[#]: <info> [#] device (wlan#): state change: config -> ip-config
+2:	gnome-shell[#]: Object .GProxyVolume (#), has been already disposed — impossible to access it. == Stack trace for context # == # i resource:///org/gnome/shell/ui/components/autorunManager.js:# (# @ #) # i resource:///org/gnome/shell/ui/components/autorunManager.js:# (# @ #) # i resource:///org/gnome/shell/ui/init.js:# (# @ #)
+1:	ModemManager[#]: <msg> [base-manager] couldn't check support for device '/sys/devices/pci#:#/#:#:#'
+1:	NetworkManager[#]: <info> [#] device (wlan#): state change: ip-config -> activated
+1:	abrt-dump-journal-python[#]: Traceback (most recent call last): File "/usr/libexec/tuned/tuned.py", line #, in <module> daemon.run() File "/usr/lib/python#/site-packages/tuned/daemon/daemon.py", line #, in run self._thread.start() RuntimeError: can't start new thread
+1:	gnome-shell[#]: Object .GProxyVolume (#), has been already disposed — impossible to access it. == Stack trace for context # == # i resource:///org/gnome/shell/ui/components/autorunManager.js:# (# @ #)
+1:	kernel: usb #-#: New USB device found, idVendor=#, idProduct=#, bcdDevice=#
 1:	kernel: usb #-#: new full-speed USB device number # using xhci_hcd
 1:	sudo[#]: alice : TTY=pts/# ; PWD=/home/alice ; USER=root ; COMMAND=/usr/bin/dnf upgrade
 1:	sudo[#]: pam_unix(sudo:session): session opened for user root(uid=#) by alice(uid=#)

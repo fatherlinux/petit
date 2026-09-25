@@ -1,10 +1,10 @@
 2:	java[#]: GC pause (G# Evacuation Pause) #ms
-2:	nginx[#]: #.#.#.# GET /index.html #
-1:	nginx[#]: #.#.#.# GET /missing #
-1:	postfix/smtpd[#]: connect from unknown[#.#.#.#]
-1:	postfix/smtpd[#]: disconnect from unknown[#.#.#.#]
-1:	postgres[#]: checkpoint complete: wrote # buffers (#.#%)
+2:	nginx[#]: # GET /index.html #
+1:	nginx[#]: # GET /missing #
+1:	postfix/smtpd[#]: connect from unknown[#]
+1:	postfix/smtpd[#]: disconnect from unknown[#]
+1:	postgres[#]: checkpoint complete: wrote # buffers (#%)
 1:	postgres[#]: checkpoint starting: time
-1:	sshd[#]: Accepted publickey for deploy from #.#.#.# port # ssh#
+1:	sshd[#]: Accepted publickey for deploy from # port # ssh#
 1:	su: pam_unix(su:session): session closed for user operator
 1:	systemd[#]: Started backup.service - Nightly backup.
