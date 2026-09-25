@@ -1,7 +1,7 @@
-21:	[error] [client #.#.#.#] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
-13:	[error] [client #.#.#.#] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
-8:	[crit]: Apach#::RequestIO::rflush: (#) Software caused connection abort at /usr/lib/perl#/vendor_perl/#.#.#/HTML/Mason/ApacheHandler.pm line # (/usr/sbin/webmux.pl:#)
-8:	[error] [client #.#.#.#] client sent HTTP/#.# request without hostname (see RFC# section #.#): /w#tw#t.at.ISC.SANS.DFind:)
+21:	[error] [client #] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/robots.txt
+13:	[error] [client #] File does not exist: /var/www/html/www.floureggsandwater.com/robots.txt
+8:	[crit]: Apach#::RequestIO::rflush: (#) Software caused connection abort at /usr/lib/perl#/vendor_perl/#/HTML/Mason/ApacheHandler.pm line # (/usr/sbin/webmux.pl:#)
+8:	[error] [client #] client sent HTTP/# request without hostname (see RFC# section #): /w#tw#t.at.ISC.SANS.DFind:)
 2:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpMyAdmin
 2:	[error] [client 94.136.38.118] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/phpmyadmin
 2:	[error] [client 72.29.84.183] File does not exist: /var/www/html/carmenletgo.fatherlinux.com/webdav

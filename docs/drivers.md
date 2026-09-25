@@ -218,12 +218,29 @@ becomes six numbers.
   aggressive: after `[0-9]+` → `#`, the rules `[a-f]+#` and `#[a-f]+` also
   collapse hex letters next to a number, so `bob0` and `boa0` share a
   fingerprint. That's right for spotting a flapping daemon, and wrong for
-  identifiers.
+  identifiers. Before the number rule, it collapses values a machine
+  generates and that differ per boot or per host: MACs and UUIDs in either
+  case, vfat serials (`F96D-44AD`), `0x` hex, and Python-tempfile and snap
+  mount names. After it, it collapses decimals and signs. The rules were
+  tuned so two reboots of the same image hash alike (see
+  `test/test_drivers.py`).
 - **`strict.stopwords`** normalizes only unambiguous shapes: ISO-8601, syslog,
   date and time stamps → `<TS>`, UUIDs → `<UUID>`, dotted quads → `<IP>`, `0x`
   hex and hex runs of 8+ containing a letter → `<HEX>`, standalone numbers →
   `<N>`. A number attached to a word or a dash (`web01`, `PROJ-1234`) is part
   of an identifier and stays.
+- **`words.stopwords`** is for `--wordcount`, which scrubs each
+  whitespace-separated word on its own and drops any word that scrubs to
+  `#`. Its English and systemd words are anchored: `(?i)^[^\w#]*the[^\w#]*$`
+  drops "The" and "(the)", but not "there" or "the1". An unanchored word
+  cuts itself out of longer words ("target" → `tar#`). Unknown words and
+  acronyms are never dropped.
+- **`daemon.stopwords`** and **`host.stopwords`** scrub a single field. The
+  daemon rules drop classic syslog pseudo-daemons (`last` in "last message
+  repeated", `--` in "-- MARK --") only as the whole field.
+
+Filter files have no comment syntax, because every line is compiled as a
+regex. Document a rule here and pin it with a test.
 
 Every regex in a filter or generalization table must be linear-time: use
 character classes and bounded repetition, and no nested quantifiers. petit

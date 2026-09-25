@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.9.0] - 2026-09-25
+
+### Fixed
+- `words.stopwords` matched its words anywhere inside a word, not as the
+  whole word, so `--wordcount` cut them out of other words. "target"
+  became `tar#`, "command" became `comm#`, and 55 of the listed words
+  didn't even stop themselves ("there" became `t#e`). Each word now
+  matches only as a whole word, in any case, with punctuation (not a
+  scrubbed number) around it allowed.
+- `hash.stopwords` let through noise that differs from one boot or machine
+  to the next, measured against two reboots of every supported release and
+  one real-hardware RHEL 10 reboot:
+  - UUIDs in upper case, or with a group made only of letters
+  - vfat volume serials (`F96D-44AD`) and `0x` hex values
+  - Python tempfile and snap mount names
+  - negative numbers and decimals
+  Keys from two boots of the same image now agree more closely (69
+  unstable keys down to 43). Of the fingerprint lines the real laptop
+  reboot missed, the ones missed only through normalisation went from 10
+  down to 1.
+
+### Changed
+- `--wordcount` also drops English one- and two-letter words, bare
+  punctuation, empty audit fields (`addr=?`), whole UUIDs, and systemd's
+  lifecycle words ("Started", "Stopped", "Reached", "target",
+  "Deactivated", "successfully" and so on). These filled the top of every
+  modern reboot's count.
+- `daemon.stopwords` rules for classic syslog pseudo-daemons ("last
+  message repeated", "-- MARK --") now match only the whole field.
+- Removed two `hash.stopwords` rules that could never match: `[a-f]{16}`
+  and a literal MAC address.
+
 ## [4.8.0] - 2026-09-25
 
 ### Added

@@ -1,7 +1,7 @@
-7:	kernel: [ #.#] # disabled
+7:	kernel: [ #] # disabled
 5:	NetworkManager: <info> (eth#): device state change: # -> # (reason #)
-5:	kernel: [ #.#] pci #:#:#.#: reg # io port: [#x#-#x#]
-4:	kernel: [ #.#] ACPI: IRQ# used by override.
+5:	kernel: [ #] pci #:#:#: reg # io port: [#-#]
+4:	kernel: [ #] ACPI: IRQ# used by override.
 2:	[ 0.000000] 0000000000 - 0000400000 page 4k
 2:	[ 0.000000] ACPI: Local APIC address 0xfee00000
 2:	Could no open output file '/dev/xconsole' [try http://www.rsyslog.com/e/2039 ]

@@ -2,6 +2,7 @@
 
 import itertools
 import os
+import re
 from typing import ClassVar
 
 import pytest
@@ -18,6 +19,7 @@ from petit import (
     resources,
 )
 from petit.CrunchLog import CrunchLog
+from petit.Filter import Filter
 from petit.LogHash import SuperHash
 
 
@@ -108,6 +110,49 @@ class TestPackagedData:
         concatenated into one and /opt was never actually searched."""
         prefixes = resources.search_prefixes("fingerprints")
         assert "/opt/petit/var/lib/fingerprints/" in prefixes
+
+
+class TestWordStopwords:
+    """words.stopwords drops whole words; it used to cut them out of others."""
+
+    FILTER = Filter("words.stopwords")
+
+    def test_every_listed_word_is_stopped(self):
+        path = resources.find("filters", "words.stopwords")
+        with open(path) as f:
+            words = re.findall(r"\^\[\^\\w#\]\*(\w+)\[\^\\w#\]\*\$", f.read())
+        assert len(words) > 150
+        assert [w for w in words if not self.FILTER.bleach(w)] == []
+
+    @pytest.mark.parametrize("word", ["I", "The", "there.", "___", "Stopped", "(of)", "--",
+                                      "addr=?",
+                                      "5e307723-75a3-4ee9-912d-a813e8cfe18f"])
+    def test_stopped(self, word):
+        assert self.FILTER.bleach(word)
+
+    @pytest.mark.parametrize("word", ["target.service", "command", "unreachable:", "ACPI",
+                                      "NVMe", "thermal", "shutdown", "i#", "a#"])
+    def test_kept_whole(self, word):
+        assert self.FILTER.scrub(word) == word
+
+
+class TestDaemonStopwords:
+    """Classic syslog pseudo-daemons are dropped only as the whole field."""
+
+    FILTER = Filter("daemon.stopwords")
+
+    @pytest.mark.parametrize("field", ["last", "--", "exiting", "ISO"])
+    def test_pseudo_daemon_is_dropped(self, field):
+        assert self.FILTER.bleach(field)
+
+    @pytest.mark.parametrize(("field", "key"), [
+        ("lastlog[12]:", "lastlog[#]:"),
+        ("exiting-helper:", "exiting-helper:"),
+        ("ISOmount[3]:", "ISOmount[#]:"),
+        ("dm--event[4]:", "dm--event[#]:"),
+    ])
+    def test_longer_field_is_kept(self, field, key):
+        assert self.FILTER.scrub(field) == key
 
 
 class TestFileErrors:

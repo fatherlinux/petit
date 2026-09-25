@@ -1,7 +1,3 @@
-1000:	[**]
-500:	#]
-500:	->
-500:	[#]
 500:	[Classification:
 500:	[Priority:
 496:	attempt
@@ -10,11 +6,11 @@
 493:	Gain]
 493:	Privilege
 362:	{TCP}
-309:	#mat
 309:	PASS
 309:	POP#
+309:	format
 309:	string
-170:	#flow
+170:	overflow
 138:	SQL
 138:	version
 138:	{UDP}
@@ -29,7 +25,7 @@
 32:	header
 14:	ClamAV
 14:	SMTP
-14:	comm#
+14:	command
 14:	injection
 14:	recipient
 7:	Application

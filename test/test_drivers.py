@@ -44,6 +44,11 @@ from petit.LogHash import (
 
 Pair = tuple[str, str, str]
 
+# Line prefixes for the reboot-log examples, which are long enough without them.
+SYSTEMD = "Sep 22 10:00:00 host01 systemd[1]: "
+KERNEL = "Sep 22 10:00:00 host01 kernel: "
+CHRONYD = "Sep 22 10:00:00 host01 chronyd[1]: "
+
 
 def fingerprint(hash_cls: type[SuperHash], entry_cls: type[LogEntry], text: str) -> str:
     """The key `hash_cls` gives `text` parsed whole, as one record, by `entry_cls`."""
@@ -84,6 +89,27 @@ class TestSyslogHash(DriverTable):
         ("Sep 22 10:00:00 host01 kernel: eth0: link up, 1000Mbps",
          "Sep 22 10:00:00 other kernel: eth0: link up, 1000Mbps",
          "host is not part of the key"),
+        (SYSTEMD + "Found device /dev/disk/by-uuid/3f2c9a1e-1b2c-4d5e-8f90-0123456789ab.",
+         SYSTEMD + "Found device /dev/disk/by-uuid/5E307723-AFEA-4EE9-912D-A813E8CFE18F.",
+         "UUIDs are parameters, in either case and with all-letter groups"),
+        (SYSTEMD + "Expecting device dev-disk-by\\x2duuid-F96D\\x2d44AD.device",
+         SYSTEMD + "Expecting device dev-disk-by\\x2duuid-EAB8\\x2d334F.device",
+         "a vfat serial is a parameter"),
+        (SYSTEMD + "run-cloud\\x2dinit-tmp-tmpisgzjim5.mount: Deactivated successfully.",
+         SYSTEMD + "run-cloud\\x2dinit-tmp-tmpoglsvtcn.mount: Deactivated successfully.",
+         "a tempfile name is random"),
+        (SYSTEMD + "tmp-snap.rootfs_FeURCA.mount: Deactivated successfully.",
+         SYSTEMD + "tmp-snap.rootfs_lwprmF.mount: Deactivated successfully.",
+         "a snap mount name is random"),
+        (KERNEL + "virtio_net virtio0 eth0: MAC 52:54:00:ab:cd:ef",
+         KERNEL + "virtio_net virtio0 eth0: MAC 52:54:00:AB:CD:EF",
+         "a MAC is a parameter in either case"),
+        (KERNEL + "pci 0000:00:1f.0: BAR 0 [io 0x0000-0x0fff]",
+         KERNEL + "pci 0000:00:1f.0: BAR 0 [io 0x1000-0xefbf]",
+         "a hex address is a parameter whatever its digits"),
+        (CHRONYD + "Frequency 1.234 +/- 0.5 ppm read from /var/lib/chrony/drift",
+         CHRONYD + "Frequency -12.5 +/- 0.25 ppm read from /var/lib/chrony/drift",
+         "a sign is part of the number"),
     ]
     NO_MERGE: ClassVar[list[Pair]] = [
         ("Sep 22 10:00:00 host01 crond[1]: job started",
