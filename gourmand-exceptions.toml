@@ -180,3 +180,9 @@ check = "CH009-random_scripts"
 path = "packaging/petit.sh"
 classification = "by_design"
 justification = "Not a helper script: it is the file the .rpm and .deb install as /usr/bin/petit (see packaging/petit.spec and .github/workflows/packages.yml). It picks the newest Python 3.11+ on the system and runs petit from /usr/lib/petit, which is what lets one package serve every target distro."
+
+[[exceptions]]
+check = "CH001-absolute_paths"
+path = "tools/fingerprints/refresh.py"
+classification = "by_design"
+justification = "The container store path in build_bootc() is the mount point inside the bootc-image-builder container, where that tool's documented interface expects the host's podman store. The host side of the mount is asked of `podman info`, not hardcoded."

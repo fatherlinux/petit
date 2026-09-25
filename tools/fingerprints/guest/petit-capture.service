@@ -1,0 +1,10 @@
+[Unit]
+Description=petit reboot fingerprint capture
+
+# Type=simple, so boot finishes without waiting on this; the script waits
+# for boot itself with `systemctl is-system-running --wait`.
+[Service]
+ExecStart=/usr/libexec/petit-capture
+
+[Install]
+WantedBy=multi-user.target

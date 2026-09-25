@@ -1,0 +1,20 @@
+#cloud-config
+# The seed for a systemd guest; refresh.py fills in the two files, base64.
+hostname: host01
+fqdn: host01.example.net
+manage_etc_hosts: true
+write_files:
+  - path: /usr/libexec/petit-capture
+    permissions: "0755"
+    encoding: b64
+    content: {script}
+  - path: /etc/systemd/system/petit-capture.service
+    encoding: b64
+    content: {unit}
+runcmd:
+  - mkdir -p /var/log/journal
+  - systemd-tmpfiles --create --prefix /var/log/journal
+  - journalctl --flush
+  - systemctl daemon-reload
+  - systemctl enable petit-capture.service
+  - systemctl start --no-block petit-capture.service

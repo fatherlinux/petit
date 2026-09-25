@@ -1,0 +1,109 @@
+# Platforms whose reboots petit fingerprints (#37).
+#
+# refresh.py reads this, asks endoflife.date which releases of each family
+# are supported today, and captures a clean reboot of each one under
+# QEMU/KVM. See docs/drivers.md, "Keeping the corpora current".
+#
+# role     corpus: the capture becomes src/petit/data/fingerprints/<corpus>-reboot.fp
+#          verify: the capture only checks that corpus (test/data/verify/)
+# releases all:    every supported release
+#          latest: the newest is `role`; the `previous` before it are verify-only
+# corpus   the corpus a release fingerprints, from {version} and {major}
+# image    qcow2 URL; {version}, {major} and {codename} are filled in. Omitted
+#          where refresh.py resolves it (Fedora, Alpine) or builds it (bootc).
+# checksum where the image's checksum is published
+# log      journal (systemd) or messages (busybox syslogd)
+
+[[family]]
+name = "almalinux"
+eol_product = "almalinux"
+role = "corpus"
+releases = "all"
+corpus = "el{major}"
+image = "https://repo.almalinux.org/almalinux/{major}/cloud/x86_64/images/AlmaLinux-{major}-GenericCloud-latest.x86_64.qcow2"
+checksum = "https://repo.almalinux.org/almalinux/{major}/cloud/x86_64/images/CHECKSUM"
+
+[[family]]
+name = "rocky"
+eol_product = "rocky-linux"
+role = "verify"
+releases = "all"
+corpus = "el{major}"
+image = "https://dl.rockylinux.org/pub/rocky/{major}/images/x86_64/Rocky-{major}-GenericCloud-Base.latest.x86_64.qcow2"
+checksum = "https://dl.rockylinux.org/pub/rocky/{major}/images/x86_64/Rocky-{major}-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM"
+
+[[family]]
+name = "centos-stream"
+eol_product = "centos-stream"
+role = "verify"
+releases = "all"
+corpus = "el{major}"
+image = "https://cloud.centos.org/centos/{major}-stream/x86_64/images/CentOS-Stream-GenericCloud-{major}-latest.x86_64.qcow2"
+checksum = "https://cloud.centos.org/centos/{major}-stream/x86_64/images/CentOS-Stream-GenericCloud-{major}-latest.x86_64.qcow2.SHA256SUM"
+
+# Image mode RHEL, from registry.redhat.io. There is no rhel8/rhel-bootc;
+# RHEL 7 and 8 are captured by hand with `refresh.py capture --image`.
+[[family]]
+name = "rhel"
+eol_product = "rhel"
+role = "verify"
+releases = "all"
+min_major = 9
+source = "bootc"
+corpus = "el{major}"
+image = "registry.redhat.io/rhel{major}/rhel-bootc:latest"
+
+[[family]]
+name = "fedora"
+eol_product = "fedora"
+role = "corpus"
+releases = "latest"
+previous = 1
+corpus = "fedora{version}"
+
+[[family]]
+name = "debian"
+eol_product = "debian"
+role = "corpus"
+releases = "all"
+corpus = "debian{version}"
+image = "https://cloud.debian.org/images/cloud/{codename}/latest/debian-{version}-genericcloud-amd64.qcow2"
+checksum = "https://cloud.debian.org/images/cloud/{codename}/latest/SHA512SUMS"
+
+[[family]]
+name = "ubuntu"
+eol_product = "ubuntu"
+role = "corpus"
+releases = "all"
+lts_only = true
+corpus = "ubuntu{version}"
+image = "https://cloud-images.ubuntu.com/{codename}/current/{codename}-server-cloudimg-amd64.img"
+checksum = "https://cloud-images.ubuntu.com/{codename}/current/SHA256SUMS"
+
+[[family]]
+name = "opensuse-leap"
+eol_product = "opensuse"
+role = "corpus"
+releases = "all"
+min_major = 16
+corpus = "opensuse-leap{major}"
+image = "https://download.opensuse.org/distribution/leap/{version}/appliances/Leap-{version}-Minimal-VM.x86_64-Cloud.qcow2"
+checksum = "https://download.opensuse.org/distribution/leap/{version}/appliances/Leap-{version}-Minimal-VM.x86_64-Cloud.qcow2.sha256"
+
+# Rolling: one release, always current.
+[[family]]
+name = "arch"
+role = "corpus"
+releases = "all"
+corpus = "arch"
+image = "https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg.qcow2"
+checksum = "https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg.qcow2.SHA256"
+
+[[family]]
+name = "alpine"
+eol_product = "alpine-linux"
+role = "corpus"
+releases = "latest"
+previous = 1
+corpus = "alpine"
+log = "messages"

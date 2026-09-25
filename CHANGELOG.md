@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `tools/fingerprints/refresh.py` and the weekly `fingerprints.yml`
+  workflow keep the reboot corpora current, the way Dependabot keeps
+  dependencies current (#37). Each supported release is booted from its
+  own cloud image under QEMU/KVM and its reboot captured and scrubbed. A PR
+  opens when a release is new, when its reboot no longer matches its
+  corpus, or when it reaches end of life.
+
 ## [4.7.0] - 2026-09-24
 
 ### Changed

@@ -645,6 +645,7 @@ VERIFY_CASES = sorted(
     (corpus, capture)
     for corpus in (os.listdir(VERIFY) if os.path.isdir(VERIFY) else [])
     for capture in os.listdir(os.path.join(VERIFY, corpus))
+    if capture.endswith(".log")
 )
 
 
