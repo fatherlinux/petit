@@ -151,24 +151,34 @@ def platforms(only: set[str] | None = None) -> list[Platform]:
         if family["releases"] == "latest":
             releases = releases[: 1 + family.get("previous", 0)]
         for index, release in enumerate(releases):
-            role = family["role"] if family["releases"] == "all" or index == 0 else "verify"
-            found.append(make_platform(family, release, role))
+            if family["releases"] == "all":
+                found.append(make_platform(family, release, family["role"]))
+            else:
+                # The releases before the newest verify the newest's corpus.
+                found.append(make_platform(family, release, family["role"] if index == 0
+                                           else "verify", corpus_from=releases[0]))
     return [p for p in found if only is None or p.id in only]
 
 
-def make_platform(family: dict[str, Any], release: dict[str, Any], role: str) -> Platform:
+def template_fields(release: dict[str, Any]) -> dict[str, str]:
     version = release["name"]
-    fields = {
+    return {
         "version": version,
         "major": version.split(".")[0],
         "codename": (release.get("codename") or "").split(" ")[0].lower(),
     }
+
+
+def make_platform(family: dict[str, Any], release: dict[str, Any], role: str,
+                  corpus_from: dict[str, Any] | None = None) -> Platform:
+    version = release["name"]
+    fields = template_fields(release)
     return Platform(
         id=f"{family['name']}{version}",
         family=family["name"],
         version=version,
         role=role,
-        corpus=family["corpus"].format(**fields),
+        corpus=family["corpus"].format(**template_fields(corpus_from or release)),
         log=family.get("log", "journal"),
         source=family.get("source", "cloud"),
         image=family.get("image", "").format(**fields),
