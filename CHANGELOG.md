@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.8.0] - 2026-09-25
+
 ### Added
+- Reboot fingerprint corpora for current Linux (#37): `el8`, `el9`, `el10`
+  (captured on AlmaLinux), `fedora44`, `debian12`, `debian13`,
+  `ubuntu22.04`, `ubuntu24.04`, `ubuntu26.04`, `opensuse-leap16`, `arch`
+  and `alpine`. The 2009–2011 corpora never matched a systemd journal, so
+  `--fingerprint` did nothing on a modern host. Each corpus has a second,
+  independent reboot in `test/data/verify/` that must name it first. Rocky
+  and CentOS Stream verify the `elN` corpora, and Fedora 43 and Alpine 3.23
+  verify the newest release's corpus.
 - `tools/fingerprints/refresh.py` and the weekly `fingerprints.yml`
   workflow keep the reboot corpora current, the way Dependabot keeps
   dependencies current (#37). Each supported release is booted from its
