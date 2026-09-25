@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- The Fingerprints workflow archives every capture to the public
+  [crunchtools/petit-captures](https://github.com/crunchtools/petit-captures)
+  repo, under `<date>/<run>/<release>/`. That includes the whole journal of both boots, scrubbed and
+  xz-compressed, not just the cut-out reboot, so stop words and corpora can
+  be retuned from real logs later. `refresh.py capture` writes these under
+  `raw/`.
+
 ## [4.9.0] - 2026-09-25
 
 ### Fixed

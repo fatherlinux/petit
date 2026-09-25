@@ -326,6 +326,12 @@ journal. Every corpus comes from the same procedure on a clean guest.
     scores below an identity of 0.5, which gets a new corpus;
   - a release past its end of life, which is retired.
 
+  Every run also pushes each capture to
+  [crunchtools/petit-captures](https://github.com/crunchtools/petit-captures),
+  under `<date>/<run>/<release>/`. That includes the whole journal of both boots
+  (`raw/<a|b>/*.log.xz`), scrubbed like the corpora. It lives in its own
+  repo, so it is never part of a petit clone or package.
+
 To capture by hand from a local qcow2 guest image:
 
     tools/fingerprints/refresh.py capture myhost --image guest.qcow2 \

@@ -142,3 +142,44 @@ jobs:
             gh pr create --base master --head "$BRANCH" \
               --title "feat: refresh reboot fingerprint corpora" --body-file body.md
           fi
+
+  # Every capture, whole and scrubbed, goes to a public archive for tuning
+  # stop words and fingerprints later. A repo of its own, not a branch here:
+  # a clone of petit would otherwise download all of it.
+  archive:
+    needs: [check, capture]
+    if: always() && needs.check.result == 'success'
+    runs-on: ubuntu-24.04
+    permissions: {}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: capture-*
+          path: captures
+          merge-multiple: true
+
+      - uses: actions/checkout@v7
+        with:
+          repository: crunchtools/petit-captures
+          token: ${{ secrets.CRUNCHTOOLS_DISPATCH_TOKEN }}
+          path: archive
+
+      - name: Push to crunchtools/petit-captures
+        run: |
+          if [ -z "$(ls -A captures 2>/dev/null)" ]; then
+            echo "No captures to archive."; exit 0
+          fi
+          # One directory per run, so a second run on the same day adds to
+          # the archive instead of overwriting it.
+          dest="$(date -u +%F)/$GITHUB_RUN_ID"
+          mkdir -p "archive/$dest"
+          cp -r captures/. "archive/$dest/"
+          cd archive
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dest"
+          git diff --cached --quiet && { echo "Already archived."; exit 0; }
+          git commit -m "captures: $dest ($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)"
+          # Runs are serialized by the workflow's concurrency group; this only
+          # covers a push to the archive from somewhere else.
+          git push || { git pull --rebase -q && git push; }
