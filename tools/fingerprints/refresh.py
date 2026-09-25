@@ -56,7 +56,6 @@ VERIFY = ROOT / "test" / "data" / "verify"
 EOL_API = "https://endoflife.date/api/v1/products/{}"
 FEDORA_RELEASES = "https://fedoraproject.org/releases.json"
 ALPINE_CLOUD = "https://dl-cdn.alpinelinux.org/alpine/v{version}/releases/cloud/"
-BOOTC_BUILDER = "quay.io/centos-bootc/bootc-image-builder:latest"
 USER_AGENT = "petit-fingerprint-refresh (+https://github.com/crunchtools/petit)"
 
 # A recaptured reboot that still names its corpus first, but scores below
@@ -274,32 +273,6 @@ def download_once(url: str, algorithm: str, expected: str, target: Path) -> None
     partial.rename(target)
 
 
-def root_prefix() -> list[str]:
-    return [] if os.geteuid() == 0 else ["sudo"]
-
-
-def build_bootc(platform: Platform, work: Path) -> Path:
-    """Image mode: the bootc base plus the capture unit, as a qcow2."""
-    tag = f"localhost/petit-capture:{platform.id}"
-    sudo = root_prefix()
-    subprocess.run([*sudo, "podman", "build", "--pull=newer", "-f",
-                    str(GUEST / "Containerfile.bootc"), "--build-arg", f"BASE={platform.image}",
-                    "-t", tag, str(GUEST)], check=True)
-    output = work / "bootc"
-    output.mkdir()
-    # bootc-image-builder reads the image from the same store podman built it in.
-    store = subprocess.run([*sudo, "podman", "info", "--format", "{{.Store.GraphRoot}}"],
-                           check=True, capture_output=True, text=True).stdout.strip()
-    subprocess.run([*sudo, "podman", "run", "--rm", "--privileged", "--pull=newer",
-                    "--security-opt", "label=type:unconfined_t",
-                    "-v", f"{output}:/output",
-                    "-v", f"{store}:/var/lib/containers/storage",
-                    BOOTC_BUILDER, "--type", "qcow2", "--rootfs", "xfs", tag], check=True)
-    subprocess.run([*sudo, "chown", "-R", f"{os.getuid()}:{os.getgid()}", str(output)],
-                   check=True)
-    return output / "qcow2" / "disk.qcow2"
-
-
 # --- booting it --------------------------------------------------------------
 
 
@@ -472,8 +445,6 @@ def cmd_capture(args: argparse.Namespace) -> int:
         work.mkdir(parents=True, exist_ok=True)
         if args.image:
             base = Path(args.image).resolve()
-        elif platform.source == "bootc":
-            image, digest, base = platform.image, "bootc", build_bootc(platform, work)
         else:
             image, digest = resolve(platform)
             base = download(image, digest, Path(args.cache))
@@ -497,7 +468,7 @@ def cmd_capture(args: argparse.Namespace) -> int:
 
 
 def manual_platform(args: argparse.Namespace) -> Platform:
-    """`--image rhel-8.qcow2 --as verify:el8`: a capture by hand, outside the manifest."""
+    """`--image guest.qcow2 --as verify:el9`: a capture by hand, outside the manifest."""
     role, _, corpus = args.as_.partition(":")
     if role not in {"corpus", "verify"} or not corpus:
         raise SystemExit("--image needs --as corpus:NAME or --as verify:NAME")

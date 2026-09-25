@@ -76,13 +76,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends qemu-system-x86 qemu-utils cloud-image-utils
 
-      - name: Log in to registry.redhat.io
-        if: startsWith(matrix.platform, 'rhel')
-        env:
-          RH_USER: ${{ secrets.REGISTRY_REDHAT_IO_USER }}
-          RH_PASSWORD: ${{ secrets.REGISTRY_REDHAT_IO_PASSWORD }}
-        run: echo "$RH_PASSWORD" | sudo podman login registry.redhat.io -u "$RH_USER" --password-stdin
-
       - name: Capture
         run: |
           uv run python tools/fingerprints/refresh.py capture "$PLATFORM" \

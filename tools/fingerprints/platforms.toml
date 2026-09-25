@@ -10,7 +10,7 @@
 #          latest: the newest is `role`; the `previous` before it verify its corpus
 # corpus   the corpus a release fingerprints, from {version} and {major}
 # image    qcow2 URL; {version}, {major} and {codename} are filled in. Omitted
-#          where refresh.py resolves it (Fedora, Alpine) or builds it (bootc).
+#          where refresh.py resolves it (Fedora, Alpine).
 # checksum where the image's checksum is published
 # log      journal (systemd) or messages (busybox syslogd)
 
@@ -40,18 +40,6 @@ releases = "all"
 corpus = "el{major}"
 image = "https://cloud.centos.org/centos/{major}-stream/x86_64/images/CentOS-Stream-GenericCloud-{major}-latest.x86_64.qcow2"
 checksum = "https://cloud.centos.org/centos/{major}-stream/x86_64/images/CentOS-Stream-GenericCloud-{major}-latest.x86_64.qcow2.SHA256SUM"
-
-# Image mode RHEL, from registry.redhat.io. There is no rhel8/rhel-bootc;
-# RHEL 7 and 8 are captured by hand with `refresh.py capture --image`.
-[[family]]
-name = "rhel"
-eol_product = "rhel"
-role = "verify"
-releases = "all"
-min_major = 9
-source = "bootc"
-corpus = "el{major}"
-image = "registry.redhat.io/rhel{major}/rhel-bootc:latest"
 
 [[family]]
 name = "fedora"
