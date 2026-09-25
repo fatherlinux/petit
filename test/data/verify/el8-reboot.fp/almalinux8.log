@@ -1,0 +1,1062 @@
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping Restore /run/initramfs on shutdown...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped target RPC Port Mapper.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped target Timers.
+Sep 25 02:28:47 host01.example.net systemd[1]: systemd-tmpfiles-clean.timer: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped Daily Cleanup of Temporary Directories.
+Sep 25 02:28:47 host01.example.net systemd[1]: dnf-makecache.timer: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped dnf makecache --timer.
+Sep 25 02:28:47 host01.example.net systemd[1]: unbound-anchor.timer: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped daily update of the root trust anchor for DNSSEC.
+Sep 25 02:28:47 host01.example.net systemd[1]: Removed slice system-sshd\x2dkeygen.slice.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping Hostname Service...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped target rpc_pipefs.target.
+Sep 25 02:28:47 host01.example.net systemd[1]: Unmounting RPC Pipe File System...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped target Cloud-init target.
+Sep 25 02:28:47 host01.example.net systemd[1]: cloud-final.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped Execute cloud user/final scripts.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped target Multi-User System.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping petit reboot fingerprint capture...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping Dynamic System Tuning Daemon...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped target Login Prompts.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping Serial Getty on ttyS0...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping Getty on tty1...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping Command Scheduler...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping NTP client/server...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping OpenSSH server daemon...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping irqbalance daemon...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping Login Service...
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopping System Logging Service...
+Sep 25 02:28:47 host01.example.net sshd[1061]: Received signal 15; terminating.
+Sep 25 02:28:47 host01.example.net chronyd[736]: chronyd exiting
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped petit reboot fingerprint capture.
+Sep 25 02:28:47 host01.example.net systemd[1]: systemd-hostnamed.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped Hostname Service.
+Sep 25 02:28:47 host01.example.net systemd[1]: sshd.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped OpenSSH server daemon.
+Sep 25 02:28:47 host01.example.net systemd[1]: dracut-shutdown.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped Restore /run/initramfs on shutdown.
+Sep 25 02:28:47 host01.example.net systemd[1]: var-lib-nfs-rpc_pipefs.mount: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Unmounted RPC Pipe File System.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped target sshd-keygen.target.
+Sep 25 02:28:47 host01.example.net crond[1075]: (CRON) INFO (Shutting down)
+Sep 25 02:28:47 host01.example.net systemd[1]: crond.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped Command Scheduler.
+Sep 25 02:28:47 host01.example.net systemd[1]: serial-getty@ttyS0.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped Serial Getty on ttyS0.
+Sep 25 02:28:47 host01.example.net systemd[1]: getty@tty1.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped Getty on tty1.
+Sep 25 02:28:47 host01.example.net systemd[1]: irqbalance.service: Succeeded.
+Sep 25 02:28:47 host01.example.net systemd[1]: Stopped irqbalance daemon.
+Sep 25 02:28:48 host01.example.net systemd[1]: Removed slice system-getty.slice.
+Sep 25 02:28:48 host01.example.net systemd[1]: Removed slice system-serial\x2dgetty.slice.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping Permit User Sessions...
+Sep 25 02:28:48 host01.example.net systemd[1]: tuned.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Dynamic System Tuning Daemon.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping Authorization Manager...
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-user-sessions.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Permit User Sessions.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Remote File Systems.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Remote File Systems (Pre).
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target NFS client services.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping GSSAPI Proxy Daemon...
+Sep 25 02:28:48 host01.example.net systemd[1]: cloud-config.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Apply the settings specified in cloud-config.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Cloud-config availability.
+Sep 25 02:28:48 host01.example.net systemd[1]: gssproxy.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped GSSAPI Proxy Daemon.
+Sep 25 02:28:48 host01.example.net systemd[1]: polkit.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Authorization Manager.
+Sep 25 02:28:48 host01.example.net rsyslogd[1059]: [origin software="rsyslogd" swVersion="8.2102.0-15.el8_10.1" x-pid="1059" x-info="https://www.rsyslog.com"] exiting on signal 15.
+Sep 25 02:28:48 host01.example.net systemd[1]: chronyd.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped NTP client/server.
+Sep 25 02:28:48 host01.example.net systemd[1]: rsyslog.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped System Logging Service.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-logind.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Login Service.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target User and Group Name Lookups.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Network is Online.
+Sep 25 02:28:48 host01.example.net systemd[1]: cloud-init.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Initial cloud-init job (metadata service crawler).
+Sep 25 02:28:48 host01.example.net systemd[1]: NetworkManager-wait-online.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Network Manager Wait Online.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Network.
+Sep 25 02:28:48 host01.example.net NetworkManager[770]: <info>  [1790303328.4944] caught SIGTERM, shutting down normally.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping Network Manager...
+Sep 25 02:28:48 host01.example.net NetworkManager[770]: <info>  [1790303328.4984] dhcp4 (eth0): canceled DHCP transaction
+Sep 25 02:28:48 host01.example.net NetworkManager[770]: <info>  [1790303328.4984] dhcp4 (eth0): activation: beginning transaction (timeout in 45 seconds)
+Sep 25 02:28:48 host01.example.net NetworkManager[770]: <info>  [1790303328.4984] dhcp4 (eth0): state changed no lease
+Sep 25 02:28:48 host01.example.net NetworkManager[770]: <info>  [1790303328.4986] manager: NetworkManager state is now CONNECTED_SITE
+Sep 25 02:28:48 host01.example.net dbus-daemon[724]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service' requested by ':1.2' (uid=0 pid=770 comm="/usr/sbin/NetworkManager --no-daemon " label="system_u:system_r:NetworkManager_t:s0")
+Sep 25 02:28:48 host01.example.net dbus-daemon[724]: [system] Activation via systemd failed for unit 'dbus-org.freedesktop.nm-dispatcher.service': Refusing activation, D-Bus is shutting down.
+Sep 25 02:28:48 host01.example.net NetworkManager[770]: <info>  [1790303328.5013] exiting (success)
+Sep 25 02:28:48 host01.example.net systemd[1]: NetworkManager.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Network Manager.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Network (Pre).
+Sep 25 02:28:48 host01.example.net systemd[1]: cloud-init-local.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Initial cloud-init job (pre-networking).
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping D-Bus System Message Bus...
+Sep 25 02:28:48 host01.example.net systemd[1]: dbus.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped D-Bus System Message Bus.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Basic System.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Paths.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Slices.
+Sep 25 02:28:48 host01.example.net systemd[1]: Removed slice User and Session Slice.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Sockets.
+Sep 25 02:28:48 host01.example.net systemd[1]: sssd-kcm.socket: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Closed SSSD Kerberos Cache Manager responder socket.
+Sep 25 02:28:48 host01.example.net systemd[1]: dbus.socket: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Closed D-Bus System Message Bus Socket.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target System Initialization.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Swap.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Local Encrypted Volumes.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-ask-password-console.path: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Dispatch Password Requests to Console Directory Watch.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-ask-password-wall.path: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Forward Password Requests to Wall Directory Watch.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping Update UTMP about System Boot/Shutdown...
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping Load/Save Random Seed...
+Sep 25 02:28:48 host01.example.net systemd[1]: nis-domainname.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Read and set NIS domainname from /etc/sysconfig/network.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-sysctl.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Apply Kernel Variables.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-modules-load.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Load Kernel Modules.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-random-seed.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Load/Save Random Seed.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-update-utmp.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Update UTMP about System Boot/Shutdown.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopping Security Auditing Service...
+Sep 25 02:28:48 host01.example.net auditd[692]: The audit daemon is exiting.
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1305 audit(1790303328.610:71): op=set audit_pid=0 old=692 auid=4294967295 ses=4294967295 subj=system_u:system_r:auditd_t:s0 res=1
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1131 audit(1790303328.620:72): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=auditd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1131 audit(1790303328.635:73): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-tmpfiles-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net systemd[1]: auditd.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Security Auditing Service.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-tmpfiles-setup.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Create Volatile Files and Directories.
+Sep 25 02:28:48 host01.example.net systemd[1]: import-state.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Import network configuration from initramfs.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Local File Systems.
+Sep 25 02:28:48 host01.example.net systemd[1]: Unmounting /boot/efi...
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1131 audit(1790303328.645:74): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=import-state comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net systemd[1]: boot-efi.mount: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Unmounted /boot/efi.
+Sep 25 02:28:48 host01.example.net systemd[1]: Unmounting /boot...
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-fsck@dev-disk-by\x2duuid-53CE\x2d2D92.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped File System Check on /dev/disk/by-uuid/53CE-2D92.
+Sep 25 02:28:48 host01.example.net systemd[1]: Removed slice system-systemd\x2dfsck.slice.
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1131 audit(1790303328.739:75): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-fsck@dev-disk-by\x2duuid-53CE\x2d2D92 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net kernel: XFS (vda3): Unmounting Filesystem
+Sep 25 02:28:48 host01.example.net systemd[1]: boot.mount: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Unmounted /boot.
+Sep 25 02:28:48 host01.example.net systemd[1]: Reached target Unmount All Filesystems.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped target Local File Systems (Pre).
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-remount-fs.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Remount Root and Kernel File Systems.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-tmpfiles-setup-dev.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Stopped Create Static Device Nodes in /dev.
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1131 audit(1790303328.794:76): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-remount-fs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net systemd[1]: Reached target Shutdown.
+Sep 25 02:28:48 host01.example.net systemd[1]: Reached target Final Step.
+Sep 25 02:28:48 host01.example.net systemd[1]: systemd-reboot.service: Succeeded.
+Sep 25 02:28:48 host01.example.net systemd[1]: Started Reboot.
+Sep 25 02:28:48 host01.example.net systemd[1]: Reached target Reboot.
+Sep 25 02:28:48 host01.example.net systemd[1]: Shutting down.
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1131 audit(1790303328.804:77): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-tmpfiles-setup-dev comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1130 audit(1790303328.809:78): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-reboot comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net kernel: audit: type=1131 audit(1790303328.809:79): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-reboot comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:28:48 host01.example.net systemd[1]: Hardware watchdog 'iTCO_wdt', version 0
+Sep 25 02:28:48 host01.example.net systemd[1]: Set hardware watchdog to 10min.
+Sep 25 02:28:48 host01.example.net kernel: watchdog: watchdog0: watchdog did not stop!
+Sep 25 02:28:48 host01.example.net kernel: printk: systemd-shutdow: 33 output lines suppressed due to ratelimiting
+Sep 25 02:28:48 host01.example.net systemd-shutdown[1]: Syncing filesystems and block devices.
+Sep 25 02:28:48 host01.example.net systemd-shutdown[1]: Sending SIGTERM to remaining processes...
+Sep 25 02:28:48 host01.example.net systemd-journald[586]: Journal stopped
+Sep 25 02:28:56 localhost kernel: Linux version 4.18.0-553.158.1.el8_10.x86_64 (mockbuild@x64-builder01.almalinux.org) (gcc version 8.5.0 20210514 (Red Hat 8.5.0-28) (GCC)) #1 SMP Wed Aug 26 03:18:33 EDT 2026
+Sep 25 02:28:56 localhost kernel: Command line: BOOT_IMAGE=(hd0,gpt3)/vmlinuz-4.18.0-553.158.1.el8_10.x86_64 root=UUID=00000000-0000-0000-0000-000000000000 ro console=tty0 console=ttyS0,115200n8 no_timer_check biosdevname=0 net.ifnames=0
+Sep 25 02:28:56 localhost kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+Sep 25 02:28:56 localhost kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+Sep 25 02:28:56 localhost kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+Sep 25 02:28:56 localhost kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+Sep 25 02:28:56 localhost kernel: x86/fpu: Enabled xstate features 0x7, context size is 832 bytes, using 'compacted' format.
+Sep 25 02:28:56 localhost kernel: signal: max sigframe size: 1776
+Sep 25 02:28:56 localhost kernel: BIOS-provided physical RAM map:
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007ffd5fff] usable
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x000000007ffd6000-0x000000007fffffff] reserved
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff] reserved
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+Sep 25 02:28:56 localhost kernel: BIOS-e820: [mem 0x000000fd00000000-0x000000ffffffffff] reserved
+Sep 25 02:28:56 localhost kernel: NX (Execute Disable) protection: active
+Sep 25 02:28:56 localhost kernel: SMBIOS 3.0.0 present.
+Sep 25 02:28:56 localhost kernel: DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+Sep 25 02:28:56 localhost kernel: Hypervisor detected: KVM
+Sep 25 02:28:56 localhost kernel: kvm-clock: Using msrs 4b564d01 and 4b564d00
+Sep 25 02:28:56 localhost kernel: kvm-clock: using sched offset of 81130788496 cycles
+Sep 25 02:28:56 localhost kernel: clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+Sep 25 02:28:56 localhost kernel: tsc: Detected 2596.152 MHz processor
+Sep 25 02:28:56 localhost kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
+Sep 25 02:28:56 localhost kernel: e820: remove [mem 0x000a0000-0x000fffff] usable
+Sep 25 02:28:56 localhost kernel: last_pfn = 0x7ffd6 max_arch_pfn = 0x400000000
+Sep 25 02:28:56 localhost kernel: MTRR default type: write-back
+Sep 25 02:28:56 localhost kernel: MTRR fixed ranges enabled:
+Sep 25 02:28:56 localhost kernel:   00000-9FFFF write-back
+Sep 25 02:28:56 localhost kernel:   A0000-BFFFF uncachable
+Sep 25 02:28:56 localhost kernel:   C0000-FFFFF write-protect
+Sep 25 02:28:56 localhost kernel: MTRR variable ranges enabled:
+Sep 25 02:28:56 localhost kernel:   0 base 0000C0000000 mask FFFFC0000000 uncachable
+Sep 25 02:28:56 localhost kernel:   1 disabled
+Sep 25 02:28:56 localhost kernel:   2 disabled
+Sep 25 02:28:56 localhost kernel:   3 disabled
+Sep 25 02:28:56 localhost kernel:   4 disabled
+Sep 25 02:28:56 localhost kernel:   5 disabled
+Sep 25 02:28:56 localhost kernel:   6 disabled
+Sep 25 02:28:56 localhost kernel:   7 disabled
+Sep 25 02:28:56 localhost kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+Sep 25 02:28:56 localhost kernel: found SMP MP-table at [mem 0x000f5460-0x000f546f]
+Sep 25 02:28:56 localhost kernel: Using GB pages for direct mapping
+Sep 25 02:28:56 localhost kernel: BRK [0x7f201000, 0x7f201fff] PGTABLE
+Sep 25 02:28:56 localhost kernel: BRK [0x7f202000, 0x7f202fff] PGTABLE
+Sep 25 02:28:56 localhost kernel: BRK [0x7f203000, 0x7f203fff] PGTABLE
+Sep 25 02:28:56 localhost kernel: BRK [0x7f204000, 0x7f204fff] PGTABLE
+Sep 25 02:28:56 localhost kernel: BRK [0x7f205000, 0x7f205fff] PGTABLE
+Sep 25 02:28:56 localhost kernel: BRK [0x7f206000, 0x7f206fff] PGTABLE
+Sep 25 02:28:56 localhost kernel: RAMDISK: [mem 0x2e308000-0x3317bfff]
+Sep 25 02:28:56 localhost kernel: ACPI: Early table checksum verification disabled
+Sep 25 02:28:56 localhost kernel: ACPI: RSDP 0x00000000000F52A0 000014 (v00 BOCHS )
+Sep 25 02:28:56 localhost kernel: ACPI: RSDT 0x000000007FFE239C 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:28:56 localhost kernel: ACPI: FACP 0x000000007FFE218C 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:28:56 localhost kernel: ACPI: DSDT 0x000000007FFE0040 00214C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:28:56 localhost kernel: ACPI: FACS 0x000000007FFE0000 000040
+Sep 25 02:28:56 localhost kernel: ACPI: APIC 0x000000007FFE2280 000080 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:28:56 localhost kernel: ACPI: HPET 0x000000007FFE2300 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:28:56 localhost kernel: ACPI: MCFG 0x000000007FFE2338 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:28:56 localhost kernel: ACPI: WAET 0x000000007FFE2374 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:28:56 localhost kernel: ACPI: Reserving FACP table memory at [mem 0x7ffe218c-0x7ffe227f]
+Sep 25 02:28:56 localhost kernel: ACPI: Reserving DSDT table memory at [mem 0x7ffe0040-0x7ffe218b]
+Sep 25 02:28:56 localhost kernel: ACPI: Reserving FACS table memory at [mem 0x7ffe0000-0x7ffe003f]
+Sep 25 02:28:56 localhost kernel: ACPI: Reserving APIC table memory at [mem 0x7ffe2280-0x7ffe22ff]
+Sep 25 02:28:56 localhost kernel: ACPI: Reserving HPET table memory at [mem 0x7ffe2300-0x7ffe2337]
+Sep 25 02:28:56 localhost kernel: ACPI: Reserving MCFG table memory at [mem 0x7ffe2338-0x7ffe2373]
+Sep 25 02:28:56 localhost kernel: ACPI: Reserving WAET table memory at [mem 0x7ffe2374-0x7ffe239b]
+Sep 25 02:28:56 localhost kernel: ACPI: Local APIC address 0xfee00000
+Sep 25 02:28:56 localhost kernel: No NUMA configuration found
+Sep 25 02:28:56 localhost kernel: Faking a node at [mem 0x0000000000000000-0x000000007ffd5fff]
+Sep 25 02:28:56 localhost kernel: NODE_DATA(0) allocated [mem 0x7ffab000-0x7ffd5fff]
+Sep 25 02:28:56 localhost kernel: Zone ranges:
+Sep 25 02:28:56 localhost kernel:   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+Sep 25 02:28:56 localhost kernel:   DMA32    [mem 0x0000000001000000-0x000000007ffd5fff]
+Sep 25 02:28:56 localhost kernel:   Normal   empty
+Sep 25 02:28:56 localhost kernel:   Device   empty
+Sep 25 02:28:56 localhost kernel: Movable zone start for each node
+Sep 25 02:28:56 localhost kernel: Early memory node ranges
+Sep 25 02:28:56 localhost kernel:   node   0: [mem 0x0000000000001000-0x000000000009efff]
+Sep 25 02:28:56 localhost kernel:   node   0: [mem 0x0000000000100000-0x000000007ffd5fff]
+Sep 25 02:28:56 localhost kernel: Zeroed struct page in unavailable ranges: 140 pages
+Sep 25 02:28:56 localhost kernel: Initmem setup node 0 [mem 0x0000000000001000-0x000000007ffd5fff]
+Sep 25 02:28:56 localhost kernel: On node 0 totalpages: 524148
+Sep 25 02:28:56 localhost kernel:   DMA zone: 64 pages used for memmap
+Sep 25 02:28:56 localhost kernel:   DMA zone: 158 pages reserved
+Sep 25 02:28:56 localhost kernel:   DMA zone: 3998 pages, LIFO batch:0
+Sep 25 02:28:56 localhost kernel:   DMA32 zone: 8128 pages used for memmap
+Sep 25 02:28:56 localhost kernel:   DMA32 zone: 520150 pages, LIFO batch:63
+Sep 25 02:28:56 localhost kernel: ACPI: PM-Timer IO Port: 0x608
+Sep 25 02:28:56 localhost kernel: ACPI: Local APIC address 0xfee00000
+Sep 25 02:28:56 localhost kernel: ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+Sep 25 02:28:56 localhost kernel: IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+Sep 25 02:28:56 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+Sep 25 02:28:56 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+Sep 25 02:28:56 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+Sep 25 02:28:56 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+Sep 25 02:28:56 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+Sep 25 02:28:56 localhost kernel: ACPI: IRQ0 used by override.
+Sep 25 02:28:56 localhost kernel: ACPI: IRQ5 used by override.
+Sep 25 02:28:56 localhost kernel: ACPI: IRQ9 used by override.
+Sep 25 02:28:56 localhost kernel: ACPI: IRQ10 used by override.
+Sep 25 02:28:56 localhost kernel: ACPI: IRQ11 used by override.
+Sep 25 02:28:56 localhost kernel: Using ACPI (MADT) for SMP configuration information
+Sep 25 02:28:56 localhost kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
+Sep 25 02:28:56 localhost kernel: TSC deadline timer available
+Sep 25 02:28:56 localhost kernel: smpboot: Allowing 2 CPUs, 0 hotplug CPUs
+Sep 25 02:28:56 localhost kernel: kvm-guest: KVM setup pv remote TLB flush
+Sep 25 02:28:56 localhost kernel: kvm-guest: setup PV sched yield
+Sep 25 02:28:56 localhost kernel: PM: Registered nosave memory: [mem 0x00000000-0x00000fff]
+Sep 25 02:28:56 localhost kernel: PM: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+Sep 25 02:28:56 localhost kernel: PM: Registered nosave memory: [mem 0x000a0000-0x000effff]
+Sep 25 02:28:56 localhost kernel: PM: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+Sep 25 02:28:56 localhost kernel: [mem 0xc0000000-0xfed1bfff] available for PCI devices
+Sep 25 02:28:56 localhost kernel: Booting paravirtualized kernel on KVM
+Sep 25 02:28:56 localhost kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+Sep 25 02:28:56 localhost kernel: setup_percpu: NR_CPUS:8192 nr_cpumask_bits:2 nr_cpu_ids:2 nr_node_ids:1
+Sep 25 02:28:56 localhost kernel: percpu: Embedded 63 pages/cpu s221184 r8192 d28672 u1048576
+Sep 25 02:28:56 localhost kernel: pcpu-alloc: s221184 r8192 d28672 u1048576 alloc=1*2097152
+Sep 25 02:28:56 localhost kernel: pcpu-alloc: [0] 0 1 
+Sep 25 02:28:56 localhost kernel: kvm-guest: PV spinlocks enabled
+Sep 25 02:28:56 localhost kernel: PV qspinlock hash table entries: 256 (order: 0, 4096 bytes, linear)
+Sep 25 02:28:56 localhost kernel: Built 1 zonelists, mobility grouping on.  Total pages: 515798
+Sep 25 02:28:56 localhost kernel: Policy zone: DMA32
+Sep 25 02:28:56 localhost kernel: Kernel command line: BOOT_IMAGE=(hd0,gpt3)/vmlinuz-4.18.0-553.158.1.el8_10.x86_64 root=UUID=00000000-0000-0000-0000-000000000000 ro console=tty0 console=ttyS0,115200n8 no_timer_check biosdevname=0 net.ifnames=0
+Sep 25 02:28:56 localhost kernel: Specific versions of hardware are certified with Red Hat Enterprise Linux 8. Please see the list of hardware certified with Red Hat Enterprise Linux 8 at https://catalog.redhat.com.
+Sep 25 02:28:56 localhost kernel: Memory: 261120K/2096592K available (14339K kernel code, 5958K rwdata, 8584K rodata, 2820K init, 13784K bss, 167792K reserved, 0K cma-reserved)
+Sep 25 02:28:56 localhost kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+Sep 25 02:28:56 localhost kernel: ftrace: allocating 41134 entries in 161 pages
+Sep 25 02:28:56 localhost kernel: ftrace: allocated 161 pages with 3 groups
+Sep 25 02:28:56 localhost kernel: rcu: Hierarchical RCU implementation.
+Sep 25 02:28:56 localhost kernel: rcu:         RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=2.
+Sep 25 02:28:56 localhost kernel:         Rude variant of Tasks RCU enabled.
+Sep 25 02:28:56 localhost kernel:         Tracing variant of Tasks RCU enabled.
+Sep 25 02:28:56 localhost kernel: rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+Sep 25 02:28:56 localhost kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+Sep 25 02:28:56 localhost kernel: NR_IRQS: 524544, nr_irqs: 440, preallocated irqs: 16
+Sep 25 02:28:56 localhost kernel: random: crng done (trusting CPU's manufacturer)
+Sep 25 02:28:56 localhost kernel: Console: colour VGA+ 80x25
+Sep 25 02:28:56 localhost kernel: printk: console [tty0] enabled
+Sep 25 02:28:56 localhost kernel: printk: console [ttyS0] enabled
+Sep 25 02:28:56 localhost kernel: ACPI: Core revision 20220331
+Sep 25 02:28:56 localhost kernel: clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+Sep 25 02:28:56 localhost kernel: hpet clockevent registered
+Sep 25 02:28:56 localhost kernel: APIC: Switch to symmetric I/O mode setup
+Sep 25 02:28:56 localhost kernel: x2apic enabled
+Sep 25 02:28:56 localhost kernel: Switched APIC routing to physical x2apic.
+Sep 25 02:28:56 localhost kernel: kvm-guest: setup PV IPIs
+Sep 25 02:28:56 localhost kernel: ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+Sep 25 02:28:56 localhost kernel: tsc: Marking TSC unstable due to TSCs unsynchronized
+Sep 25 02:28:56 localhost kernel: Calibrating delay loop (skipped) preset value.. 5192.30 BogoMIPS (lpj=2596152)
+Sep 25 02:28:56 localhost kernel: pid_max: default: 32768 minimum: 301
+Sep 25 02:28:56 localhost kernel: LSM: Security Framework initializing
+Sep 25 02:28:56 localhost kernel: Yama: becoming mindful.
+Sep 25 02:28:56 localhost kernel: SELinux:  Initializing.
+Sep 25 02:28:56 localhost kernel: LSM support for eBPF active
+Sep 25 02:28:56 localhost kernel: Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: Mount-cache hash table entries: 4096 (order: 3, 32768 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: x86/cpu: User Mode Instruction Prevention (UMIP) activated
+Sep 25 02:28:56 localhost kernel: Last level iTLB entries: 4KB 512, 2MB 255, 4MB 127
+Sep 25 02:28:56 localhost kernel: Last level dTLB entries: 4KB 512, 2MB 255, 4MB 127, 1GB 0
+Sep 25 02:28:56 localhost kernel: Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+Sep 25 02:28:56 localhost kernel: Spectre V2 : Mitigation: Retpolines
+Sep 25 02:28:56 localhost kernel: Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+Sep 25 02:28:56 localhost kernel: Spectre V2 : Spectre v2 / SpectreRSB : Filling RSB on VMEXIT
+Sep 25 02:28:56 localhost kernel: Speculative Store Bypass: Vulnerable
+Sep 25 02:28:56 localhost kernel: Speculative Return Stack Overflow: IBPB-extending microcode not applied!
+Sep 25 02:28:56 localhost kernel: Speculative Return Stack Overflow: WARNING: See https://kernel.org/doc/html/latest/admin-guide/hw-vuln/srso.html for mitigation options.
+Sep 25 02:28:56 localhost kernel: Speculative Return Stack Overflow: Vulnerable: Safe RET, no microcode
+Sep 25 02:28:56 localhost kernel: Freeing SMP alternatives memory: 36K
+Sep 25 02:28:56 localhost kernel: smpboot: CPU0: AMD EPYC 9V74 80-Core Processor (family: 0x19, model: 0x11, stepping: 0x1)
+Sep 25 02:28:56 localhost kernel: Performance Events: PMU not available due to virtualization, using software events only.
+Sep 25 02:28:56 localhost kernel: rcu: Hierarchical SRCU implementation.
+Sep 25 02:28:56 localhost kernel: NMI watchdog: Perf NMI watchdog permanently disabled
+Sep 25 02:28:56 localhost kernel: smp: Bringing up secondary CPUs ...
+Sep 25 02:28:56 localhost kernel: x86: Booting SMP configuration:
+Sep 25 02:28:56 localhost kernel: .... node  #0, CPUs:      #1
+Sep 25 02:28:56 localhost kernel: smp: Brought up 1 node, 2 CPUs
+Sep 25 02:28:56 localhost kernel: smpboot: Max logical packages: 1
+Sep 25 02:28:56 localhost kernel: smpboot: Total of 2 processors activated (10384.60 BogoMIPS)
+Sep 25 02:28:56 localhost kernel: node 0 deferred pages initialised in 6ms
+Sep 25 02:28:56 localhost kernel: devtmpfs: initialized
+Sep 25 02:28:56 localhost kernel: x86/mm: Memory block size: 128MB
+Sep 25 02:28:56 localhost kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+Sep 25 02:28:56 localhost kernel: futex hash table entries: 512 (order: 3, 32768 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: pinctrl core: initialized pinctrl subsystem
+Sep 25 02:28:56 localhost kernel: NET: Registered protocol family 16
+Sep 25 02:28:56 localhost kernel: DMA: preallocated 256 KiB GFP_KERNEL pool for atomic allocations
+Sep 25 02:28:56 localhost kernel: DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+Sep 25 02:28:56 localhost kernel: DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+Sep 25 02:28:56 localhost kernel: audit: initializing netlink subsys (disabled)
+Sep 25 02:28:56 localhost kernel: audit: type=2000 audit(1790303332.756:1): state=initialized audit_enabled=0 res=1
+Sep 25 02:28:56 localhost kernel: cpuidle: using governor menu
+Sep 25 02:28:56 localhost kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+Sep 25 02:28:56 localhost kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xb0000000-0xbfffffff] (base 0xb0000000)
+Sep 25 02:28:56 localhost kernel: PCI: MMCONFIG at [mem 0xb0000000-0xbfffffff] reserved in E820
+Sep 25 02:28:56 localhost kernel: PCI: Using configuration type 1 for base access
+Sep 25 02:28:56 localhost kernel: HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+Sep 25 02:28:56 localhost kernel: HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+Sep 25 02:28:56 localhost kernel: cryptd: max_cpu_qlen set to 1000
+Sep 25 02:28:56 localhost kernel: ACPI: Added _OSI(Module Device)
+Sep 25 02:28:56 localhost kernel: ACPI: Added _OSI(Processor Device)
+Sep 25 02:28:56 localhost kernel: ACPI: Added _OSI(3.0 _SCP Extensions)
+Sep 25 02:28:56 localhost kernel: ACPI: Added _OSI(Processor Aggregator Device)
+Sep 25 02:28:56 localhost kernel: ACPI: 1 ACPI AML tables successfully acquired and loaded
+Sep 25 02:28:56 localhost kernel: ACPI: Interpreter enabled
+Sep 25 02:28:56 localhost kernel: ACPI: PM: (supports S0 S3 S4 S5)
+Sep 25 02:28:56 localhost kernel: ACPI: Using IOAPIC for interrupt routing
+Sep 25 02:28:56 localhost kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+Sep 25 02:28:56 localhost kernel: ACPI: Enabled 2 GPEs in block 00 to 3F
+Sep 25 02:28:56 localhost kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+Sep 25 02:28:56 localhost kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+Sep 25 02:28:56 localhost kernel: acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug LTR DPC]
+Sep 25 02:28:56 localhost kernel: acpi PNP0A08:00: _OSC: OS now controls [SHPCHotplug PME AER PCIeCapability]
+Sep 25 02:28:56 localhost kernel: PCI host bridge to bus 0000:00
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: root bus resource [mem 0x80000000-0xafffffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: root bus resource [mem 0x100000000-0x8ffffffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: root bus resource [bus 00-ff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: [1234:1111] type 00 class 0x030000
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: reg 0x10: [mem 0xfd000000-0xfdffffff pref]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: reg 0x18: [mem 0xfeb90000-0xfeb90fff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: reg 0x30: [mem 0xfeb80000-0xfeb8ffff pref]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:02.0: [1af4:1001] type 00 class 0x010000
+Sep 25 02:28:56 localhost kernel: pci 0000:00:02.0: reg 0x10: [io  0xc000-0xc07f]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:02.0: reg 0x14: [mem 0xfeb91000-0xfeb91fff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:02.0: reg 0x20: [mem 0xfe000000-0xfe003fff 64bit pref]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:03.0: [1af4:1001] type 00 class 0x010000
+Sep 25 02:28:56 localhost kernel: pci 0000:00:03.0: reg 0x10: [io  0xc080-0xc0ff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:03.0: reg 0x14: [mem 0xfeb92000-0xfeb92fff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:03.0: reg 0x20: [mem 0xfe004000-0xfe007fff 64bit pref]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:04.0: [1af4:1000] type 00 class 0x020000
+Sep 25 02:28:56 localhost kernel: pci 0000:00:04.0: reg 0x10: [io  0xc1c0-0xc1df]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:04.0: reg 0x14: [mem 0xfeb93000-0xfeb93fff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:04.0: reg 0x20: [mem 0xfe008000-0xfe00bfff 64bit pref]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:04.0: reg 0x30: [mem 0xfeb00000-0xfeb7ffff pref]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:05.0: [1af4:1001] type 00 class 0x010000
+Sep 25 02:28:56 localhost kernel: pci 0000:00:05.0: reg 0x10: [io  0xc100-0xc17f]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:05.0: reg 0x14: [mem 0xfeb94000-0xfeb94fff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:05.0: reg 0x20: [mem 0xfe00c000-0xfe00ffff 64bit pref]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:1f.0: [8086:2918] type 00 class 0x060100
+Sep 25 02:28:56 localhost kernel: pci 0000:00:1f.0: quirk: [io  0x0600-0x067f] claimed by ICH6 ACPI/GPIO/TCO
+Sep 25 02:28:56 localhost kernel: pci 0000:00:1f.2: [8086:2922] type 00 class 0x010601
+Sep 25 02:28:56 localhost kernel: pci 0000:00:1f.2: reg 0x20: [io  0xc1e0-0xc1ff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:1f.2: reg 0x24: [mem 0xfeb95000-0xfeb95fff]
+Sep 25 02:28:56 localhost kernel: pci 0000:00:1f.3: [8086:2930] type 00 class 0x0c0500
+Sep 25 02:28:56 localhost kernel: pci 0000:00:1f.3: reg 0x20: [io  0x0700-0x073f]
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKE configured for IRQ 10
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKF configured for IRQ 10
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKG configured for IRQ 11
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link LNKH configured for IRQ 11
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSIA configured for IRQ 16
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSIB configured for IRQ 17
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSIC configured for IRQ 18
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSID configured for IRQ 19
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSIE configured for IRQ 20
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSIF configured for IRQ 21
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSIG configured for IRQ 22
+Sep 25 02:28:56 localhost kernel: ACPI: PCI: Interrupt link GSIH configured for IRQ 23
+Sep 25 02:28:56 localhost kernel: iommu: Default domain type: Passthrough 
+Sep 25 02:28:56 localhost kernel: SCSI subsystem initialized
+Sep 25 02:28:56 localhost kernel: ACPI: bus type USB registered
+Sep 25 02:28:56 localhost kernel: usbcore: registered new interface driver usbfs
+Sep 25 02:28:56 localhost kernel: usbcore: registered new interface driver hub
+Sep 25 02:28:56 localhost kernel: usbcore: registered new device driver usb
+Sep 25 02:28:56 localhost kernel: pps_core: LinuxPPS API ver. 1 registered
+Sep 25 02:28:56 localhost kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+Sep 25 02:28:56 localhost kernel: PTP clock support registered
+Sep 25 02:28:56 localhost kernel: EDAC MC: Ver: 3.0.0
+Sep 25 02:28:56 localhost kernel: PCI: Using ACPI for IRQ routing
+Sep 25 02:28:56 localhost kernel: PCI: pci_cache_line_size set to 64 bytes
+Sep 25 02:28:56 localhost kernel: e820: reserve RAM buffer [mem 0x0009fc00-0x0009ffff]
+Sep 25 02:28:56 localhost kernel: e820: reserve RAM buffer [mem 0x7ffd6000-0x7fffffff]
+Sep 25 02:28:56 localhost kernel: NetLabel: Initializing
+Sep 25 02:28:56 localhost kernel: NetLabel:  domain hash size = 128
+Sep 25 02:28:56 localhost kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+Sep 25 02:28:56 localhost kernel: NetLabel:  unlabeled traffic allowed by default
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: vgaarb: setting as boot VGA device
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: vgaarb: bridge control possible
+Sep 25 02:28:56 localhost kernel: vgaarb: loaded
+Sep 25 02:28:56 localhost kernel: hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+Sep 25 02:28:56 localhost kernel: hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+Sep 25 02:28:56 localhost kernel: clocksource: Switched to clocksource kvm-clock
+Sep 25 02:28:56 localhost kernel: VFS: Disk quotas dquot_6.6.0
+Sep 25 02:28:56 localhost kernel: VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+Sep 25 02:28:56 localhost kernel: pnp: PnP ACPI init
+Sep 25 02:28:56 localhost kernel: pnp 00:00: Plug and Play ACPI device, IDs PNP0303 (active)
+Sep 25 02:28:56 localhost kernel: pnp 00:01: Plug and Play ACPI device, IDs PNP0f13 (active)
+Sep 25 02:28:56 localhost kernel: pnp 00:02: Plug and Play ACPI device, IDs PNP0400 (active)
+Sep 25 02:28:56 localhost kernel: pnp 00:03: Plug and Play ACPI device, IDs PNP0501 (active)
+Sep 25 02:28:56 localhost kernel: pnp 00:04: Plug and Play ACPI device, IDs PNP0b00 (active)
+Sep 25 02:28:56 localhost kernel: system 00:05: [mem 0xb0000000-0xbfffffff window] has been reserved
+Sep 25 02:28:56 localhost kernel: system 00:05: Plug and Play ACPI device, IDs PNP0c01 (active)
+Sep 25 02:28:56 localhost kernel: pnp: PnP ACPI: found 6 devices
+Sep 25 02:28:56 localhost kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: resource 7 [mem 0x80000000-0xafffffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: resource 8 [mem 0xc0000000-0xfebfffff window]
+Sep 25 02:28:56 localhost kernel: pci_bus 0000:00: resource 9 [mem 0x100000000-0x8ffffffff window]
+Sep 25 02:28:56 localhost kernel: NET: Registered protocol family 2
+Sep 25 02:28:56 localhost kernel: IP idents hash table entries: 32768 (order: 6, 262144 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: tcp_listen_portaddr_hash hash table entries: 1024 (order: 2, 16384 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: TCP established hash table entries: 16384 (order: 5, 131072 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: TCP bind hash table entries: 16384 (order: 6, 262144 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: TCP: Hash tables configured (established 16384 bind 16384)
+Sep 25 02:28:56 localhost kernel: MPTCP token hash table entries: 2048 (order: 3, 49152 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: UDP hash table entries: 1024 (order: 3, 32768 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: UDP-Lite hash table entries: 1024 (order: 3, 32768 bytes, vmalloc)
+Sep 25 02:28:56 localhost kernel: NET: Registered protocol family 1
+Sep 25 02:28:56 localhost kernel: NET: Registered protocol family 44
+Sep 25 02:28:56 localhost kernel: pci 0000:00:01.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+Sep 25 02:28:56 localhost kernel: PCI: CLS 0 bytes, default 64
+Sep 25 02:28:56 localhost kernel: Unpacking initramfs...
+Sep 25 02:28:56 localhost kernel: Freeing initrd memory: 80336K
+Sep 25 02:28:56 localhost kernel: ACPI: bus type thunderbolt registered
+Sep 25 02:28:56 localhost kernel: Initialise system trusted keyrings
+Sep 25 02:28:56 localhost kernel: Key type blacklist registered
+Sep 25 02:28:56 localhost kernel: workingset: timestamp_bits=36 max_order=19 bucket_order=0
+Sep 25 02:28:56 localhost kernel: zbud: loaded
+Sep 25 02:28:56 localhost kernel: pstore: using deflate compression
+Sep 25 02:28:56 localhost kernel: Platform Keyring initialized
+Sep 25 02:28:56 localhost kernel: NET: Registered protocol family 38
+Sep 25 02:28:56 localhost kernel: Key type asymmetric registered
+Sep 25 02:28:56 localhost kernel: Asymmetric key parser 'x509' registered
+Sep 25 02:28:56 localhost kernel: Running certificate verification selftests
+Sep 25 02:28:56 localhost kernel: Loaded X.509 cert 'Certificate verification self-testing key: f58703bb33ce1b73ee02eccdee5b8817518fe3db'
+Sep 25 02:28:56 localhost kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 247)
+Sep 25 02:28:56 localhost kernel: io scheduler mq-deadline registered
+Sep 25 02:28:56 localhost kernel: io scheduler kyber registered
+Sep 25 02:28:56 localhost kernel: io scheduler bfq registered
+Sep 25 02:28:56 localhost kernel: atomic64_test: passed for x86-64 platform with CX8 and with SSE
+Sep 25 02:28:56 localhost kernel: shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+Sep 25 02:28:56 localhost kernel: input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+Sep 25 02:28:56 localhost kernel: ACPI: Power Button [PWRF]
+Sep 25 02:28:56 localhost kernel: ACPI: \_SB_.GSIG: Enabled at IRQ 22
+Sep 25 02:28:56 localhost kernel: ACPI: \_SB_.GSIH: Enabled at IRQ 23
+Sep 25 02:28:56 localhost kernel: ACPI: \_SB_.GSIE: Enabled at IRQ 20
+Sep 25 02:28:56 localhost kernel: ACPI: \_SB_.GSIF: Enabled at IRQ 21
+Sep 25 02:28:56 localhost kernel: Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+Sep 25 02:28:56 localhost kernel: 00:03: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+Sep 25 02:28:56 localhost kernel: Non-volatile memory driver v1.3
+Sep 25 02:28:56 localhost kernel: rdac: device handler registered
+Sep 25 02:28:56 localhost kernel: hp_sw: device handler registered
+Sep 25 02:28:56 localhost kernel: emc: device handler registered
+Sep 25 02:28:56 localhost kernel: alua: device handler registered
+Sep 25 02:28:56 localhost kernel: libphy: Fixed MDIO Bus: probed
+Sep 25 02:28:56 localhost kernel: usbcore: registered new interface driver usbserial_generic
+Sep 25 02:28:56 localhost kernel: usbserial: USB Serial support registered for generic
+Sep 25 02:28:56 localhost kernel: i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+Sep 25 02:28:56 localhost kernel: serio: i8042 KBD port at 0x60,0x64 irq 1
+Sep 25 02:28:56 localhost kernel: serio: i8042 AUX port at 0x60,0x64 irq 12
+Sep 25 02:28:56 localhost kernel: mousedev: PS/2 mouse device common for all mice
+Sep 25 02:28:56 localhost kernel: rtc_cmos 00:04: RTC can wake from S4
+Sep 25 02:28:56 localhost kernel: input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+Sep 25 02:28:56 localhost kernel: rtc_cmos 00:04: registered as rtc0
+Sep 25 02:28:56 localhost kernel: input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input4
+Sep 25 02:28:56 localhost kernel: rtc_cmos 00:04: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+Sep 25 02:28:56 localhost kernel: input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input3
+Sep 25 02:28:56 localhost kernel: amd_pstate: the _CPC object is not present in SBIOS or ACPI disabled
+Sep 25 02:28:56 localhost kernel: hid: raw HID events driver (C) Jiri Kosina
+Sep 25 02:28:56 localhost kernel: usbcore: registered new interface driver usbhid
+Sep 25 02:28:56 localhost kernel: usbhid: USB HID core driver
+Sep 25 02:28:56 localhost kernel: drop_monitor: Initializing network drop monitor service
+Sep 25 02:28:56 localhost kernel: Initializing XFRM netlink socket
+Sep 25 02:28:56 localhost kernel: NET: Registered protocol family 10
+Sep 25 02:28:56 localhost kernel: Segment Routing with IPv6
+Sep 25 02:28:56 localhost kernel: NET: Registered protocol family 17
+Sep 25 02:28:56 localhost kernel: mpls_gso: MPLS GSO support
+Sep 25 02:28:56 localhost kernel: AVX2 version of gcm_enc/dec engaged.
+Sep 25 02:28:56 localhost kernel: AES CTR mode by8 optimization enabled
+Sep 25 02:28:56 localhost kernel: sched_clock: Marking stable (1347201529, 0)->(2332390845, -985189316)
+Sep 25 02:28:56 localhost kernel: registered taskstats version 1
+Sep 25 02:28:56 localhost kernel: Loading compiled-in X.509 certificates
+Sep 25 02:28:56 localhost kernel: Loaded X.509 cert 'AlmaLinux kernel signing key: f328972e4af70b286135ae1ed23fd4e551281639'
+Sep 25 02:28:56 localhost kernel: Loaded X.509 cert 'AlmaLinux Driver update signing key: 7b863e0240ed208ab6b81b8a6f2860c0f4e8c7d6'
+Sep 25 02:28:56 localhost kernel: Loaded X.509 cert 'AlmaLinux kpatch signing key: 69a6d9eed3f620d5c2e13a1d211c46510a5ad9f5'
+Sep 25 02:28:56 localhost kernel: zswap: loaded using pool lzo/zbud
+Sep 25 02:28:56 localhost kernel: page_owner is disabled
+Sep 25 02:28:56 localhost kernel: Key type big_key registered
+Sep 25 02:28:56 localhost kernel: Key type encrypted registered
+Sep 25 02:28:56 localhost kernel: ima: No TPM chip found, activating TPM-bypass!
+Sep 25 02:28:56 localhost kernel: ima: Allocated hash algorithm: sha256
+Sep 25 02:28:56 localhost kernel: ima: No architecture policies found
+Sep 25 02:28:56 localhost kernel: evm: Initialising EVM extended attributes:
+Sep 25 02:28:56 localhost kernel: evm: security.selinux
+Sep 25 02:28:56 localhost kernel: evm: security.ima
+Sep 25 02:28:56 localhost kernel: evm: security.capability
+Sep 25 02:28:56 localhost kernel: evm: HMAC attrs: 0x1
+Sep 25 02:28:56 localhost kernel: rtc_cmos 00:04: setting system clock to 2026-09-25 02:28:56 UTC (1790303336)
+Sep 25 02:28:56 localhost kernel: Freeing unused decrypted memory: 2028K
+Sep 25 02:28:56 localhost kernel: Freeing unused kernel image (initmem) memory: 2820K
+Sep 25 02:28:56 localhost kernel: Write protecting the kernel read-only data: 26624k
+Sep 25 02:28:56 localhost kernel: Freeing unused kernel image (text/rodata gap) memory: 2016K
+Sep 25 02:28:56 localhost kernel: Freeing unused kernel image (rodata/data gap) memory: 1656K
+Sep 25 02:28:56 localhost systemd[1]: systemd 239 (239-82.el8_10.17) running in system mode. (+PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=legacy)
+Sep 25 02:28:56 localhost systemd[1]: Detected virtualization kvm.
+Sep 25 02:28:56 localhost systemd[1]: Detected architecture x86-64.
+Sep 25 02:28:56 localhost systemd[1]: Running in initial RAM disk.
+Sep 25 02:28:56 localhost systemd[1]: No hostname configured.
+Sep 25 02:28:56 localhost systemd[1]: Set hostname to <localhost>.
+Sep 25 02:28:56 localhost systemd[1]: Initializing machine ID from random generator.
+Sep 25 02:28:56 localhost systemd[1]: Reached target Timers.
+Sep 25 02:28:56 localhost systemd[1]: Reached target Local File Systems.
+Sep 25 02:28:56 localhost systemd[1]: Listening on udev Kernel Socket.
+Sep 25 02:28:56 localhost systemd-journald[219]: Journal started
+Sep 25 02:28:56 localhost systemd-journald[219]: Runtime journal (/run/log/journal/00000000000000000000000000000000) is 8.0M, max 98.5M, 90.5M free.
+Sep 25 02:28:56 localhost systemd-modules-load[238]: Inserted module 'i2c_dev'
+Sep 25 02:28:56 localhost kernel: i2c /dev entries driver
+Sep 25 02:28:56 localhost systemd-modules-load[238]: Module 'msr' is builtin
+Sep 25 02:28:56 localhost systemd[1]: Started Create list of required static device nodes for the current kernel.
+Sep 25 02:28:56 localhost systemd[1]: Started Create Volatile Files and Directories.
+Sep 25 02:28:56 localhost systemd[1]: memstrack.service: Succeeded.
+Sep 25 02:28:56 localhost systemd[1]: systemd-vconsole-setup.service: Succeeded.
+Sep 25 02:28:56 localhost systemd[1]: Started Setup Virtual Console.
+Sep 25 02:28:56 localhost systemd[1]: Started Load Kernel Modules.
+Sep 25 02:28:56 localhost systemd[1]: Starting Apply Kernel Variables...
+Sep 25 02:28:56 localhost systemd[1]: Starting dracut cmdline hook...
+Sep 25 02:28:56 localhost systemd[1]: Starting Create Static Device Nodes in /dev...
+Sep 25 02:28:56 localhost systemd[1]: Started Apply Kernel Variables.
+Sep 25 02:28:56 localhost systemd[1]: Started Create Static Device Nodes in /dev.
+Sep 25 02:28:56 localhost dracut-cmdline[242]: dracut-8.10 (Cerulean Leopard) dracut-049-246.git20260728.el8_10
+Sep 25 02:28:56 localhost dracut-cmdline[242]: Using kernel command line parameters: BOOT_IMAGE=(hd0,gpt3)/vmlinuz-4.18.0-553.158.1.el8_10.x86_64 root=UUID=00000000-0000-0000-0000-000000000000 ro console=tty0 console=ttyS0,115200n8 no_timer_check biosdevname=0 net.ifnames=0
+Sep 25 02:28:56 localhost systemd[1]: Started dracut cmdline hook.
+Sep 25 02:28:56 localhost systemd[1]: Starting dracut pre-udev hook...
+Sep 25 02:28:56 localhost kernel: device-mapper: uevent: version 1.0.3
+Sep 25 02:28:56 localhost kernel: device-mapper: ioctl: 4.46.0-ioctl (2022-02-22) initialised: dm-devel@redhat.com
+Sep 25 02:28:56 localhost systemd[1]: Started dracut pre-udev hook.
+Sep 25 02:28:56 localhost systemd[1]: Starting udev Kernel Device Manager...
+Sep 25 02:28:56 localhost systemd-udevd[340]: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Sep 25 02:28:56 localhost systemd[1]: Started udev Kernel Device Manager.
+Sep 25 02:28:56 localhost systemd[1]: Starting dracut pre-trigger hook...
+Sep 25 02:28:56 localhost dracut-pre-trigger[349]: rd.md=0: removing MD RAID activation
+Sep 25 02:28:57 localhost systemd[1]: Started dracut pre-trigger hook.
+Sep 25 02:28:57 localhost systemd[1]: Starting udev Coldplug all Devices...
+Sep 25 02:28:57 localhost systemd-udevd[340]: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Sep 25 02:28:57 localhost systemd[1]: Mounting Kernel Configuration File System...
+Sep 25 02:28:57 localhost systemd[1]: Mounted Kernel Configuration File System.
+Sep 25 02:28:57 localhost systemd[1]: Started udev Coldplug all Devices.
+Sep 25 02:28:57 localhost systemd[1]: Starting dracut initqueue hook...
+Sep 25 02:28:57 localhost systemd[1]: Reached target System Initialization.
+Sep 25 02:28:57 localhost systemd[1]: Reached target Basic System.
+Sep 25 02:28:57 localhost kernel: virtio_blk virtio0: [vda] 41943040 512-byte logical blocks (21.5 GB/20.0 GiB)
+Sep 25 02:28:57 localhost systemd-udevd[404]: link_config: autonegotiation is unset or enabled, the speed and duplex are not writable.
+Sep 25 02:28:57 localhost kernel: vda: detected capacity change from 0 to 21474836480
+Sep 25 02:28:57 localhost systemd-udevd[403]: Using default interface naming scheme 'rhel-8.0'.
+Sep 25 02:28:57 localhost systemd-udevd[403]: link_config: autonegotiation is unset or enabled, the speed and duplex are not writable.
+Sep 25 02:28:57 localhost kernel: libata version 3.00 loaded.
+Sep 25 02:28:57 localhost kernel:  vda: vda1 vda2 vda3 vda4
+Sep 25 02:28:57 localhost kernel: virtio_blk virtio1: [vdb] 131072 512-byte logical blocks (67.1 MB/64.0 MiB)
+Sep 25 02:28:57 localhost kernel: vdb: detected capacity change from 0 to 67108864
+Sep 25 02:28:57 localhost kernel: ahci 0000:00:1f.2: version 3.0
+Sep 25 02:28:57 localhost kernel: ACPI: \_SB_.GSIA: Enabled at IRQ 16
+Sep 25 02:28:57 localhost kernel: ahci 0000:00:1f.2: AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
+Sep 25 02:28:57 localhost kernel: ahci 0000:00:1f.2: flags: 64bit ncq only 
+Sep 25 02:28:57 localhost kernel: virtio_blk virtio3: [vdc] 736 512-byte logical blocks (377 kB/368 KiB)
+Sep 25 02:28:57 localhost kernel: vdc: detected capacity change from 0 to 376832
+Sep 25 02:28:57 localhost kernel: scsi host0: ahci
+Sep 25 02:28:57 localhost kernel: scsi host1: ahci
+Sep 25 02:28:57 localhost kernel: scsi host2: ahci
+Sep 25 02:28:57 localhost kernel: scsi host3: ahci
+Sep 25 02:28:57 localhost systemd[1]: Found device /dev/disk/by-uuid/00000000-0000-0000-0000-000000000000.
+Sep 25 02:28:57 localhost kernel: scsi host4: ahci
+Sep 25 02:28:57 localhost kernel: scsi host5: ahci
+Sep 25 02:28:57 localhost kernel: ata1: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95100 irq 36
+Sep 25 02:28:57 localhost kernel: ata2: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95180 irq 36
+Sep 25 02:28:57 localhost kernel: ata3: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95200 irq 36
+Sep 25 02:28:57 localhost kernel: ata4: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95280 irq 36
+Sep 25 02:28:57 localhost kernel: ata5: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95300 irq 36
+Sep 25 02:28:57 localhost kernel: ata6: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95380 irq 36
+Sep 25 02:28:57 localhost systemd[1]: Reached target Initrd Root Device.
+Sep 25 02:28:57 localhost kernel: ata1: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:28:57 localhost kernel: ata2: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:28:57 localhost kernel: ata4: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:28:57 localhost kernel: ata5: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:28:57 localhost kernel: ata6: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:28:57 localhost kernel: ata3: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+Sep 25 02:28:57 localhost kernel: ata3.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+Sep 25 02:28:57 localhost kernel: ata3.00: applying bridge limits
+Sep 25 02:28:57 localhost kernel: ata3.00: configured for UDMA/100
+Sep 25 02:28:57 localhost kernel: scsi 2001:db8::1 CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+Sep 25 02:28:57 localhost kernel: scsi 2001:db8::1 Attached scsi generic sg0 type 5
+Sep 25 02:28:57 localhost kernel: sr 2001:db8::1 [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+Sep 25 02:28:57 localhost kernel: cdrom: Uniform CD-ROM driver Revision: 3.20
+Sep 25 02:28:57 localhost kernel: sr 2001:db8::1 Attached scsi CD-ROM sr0
+Sep 25 02:28:57 localhost systemd[1]: Started dracut initqueue hook.
+Sep 25 02:28:57 localhost systemd[1]: Reached target Remote File Systems (Pre).
+Sep 25 02:28:57 localhost systemd[1]: Reached target Remote File Systems.
+Sep 25 02:28:57 localhost systemd[1]: Starting dracut pre-mount hook...
+Sep 25 02:28:57 localhost systemd[1]: Started dracut pre-mount hook.
+Sep 25 02:28:57 localhost systemd[1]: Starting File System Check on /dev/disk/by-uuid/00000000-0000-0000-0000-000000000000...
+Sep 25 02:28:57 localhost systemd-fsck[469]: /usr/sbin/fsck.xfs: XFS file system.
+Sep 25 02:28:57 localhost systemd[1]: Started File System Check on /dev/disk/by-uuid/00000000-0000-0000-0000-000000000000.
+Sep 25 02:28:57 localhost systemd[1]: Mounting /sysroot...
+Sep 25 02:28:58 localhost kernel: SGI XFS with ACLs, security attributes, quota, no debug enabled
+Sep 25 02:28:58 localhost kernel: XFS (vda4): Mounting V5 Filesystem
+Sep 25 02:28:58 localhost kernel: XFS (vda4): Ending clean mount
+Sep 25 02:28:58 localhost systemd[1]: Mounted /sysroot.
+Sep 25 02:28:58 localhost systemd[1]: Reached target Initrd Root File System.
+Sep 25 02:28:58 localhost systemd[1]: Starting Reload Configuration from the Real Root...
+Sep 25 02:28:58 localhost systemd[1]: Reloading.
+Sep 25 02:28:58 localhost systemd[1]: initrd-parse-etc.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Started Reload Configuration from the Real Root.
+Sep 25 02:28:58 localhost systemd[1]: Starting dracut mount hook...
+Sep 25 02:28:58 localhost systemd[1]: Reached target Initrd File Systems.
+Sep 25 02:28:58 localhost systemd[1]: Reached target Initrd Default Target.
+Sep 25 02:28:58 localhost systemd[1]: Started dracut mount hook.
+Sep 25 02:28:58 localhost systemd[1]: Starting dracut pre-pivot and cleanup hook...
+Sep 25 02:28:58 localhost systemd[1]: Started dracut pre-pivot and cleanup hook.
+Sep 25 02:28:58 localhost systemd[1]: Starting Cleaning Up and Shutting Down Daemons...
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Timers.
+Sep 25 02:28:58 localhost systemd[1]: dracut-pre-pivot.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped dracut pre-pivot and cleanup hook.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Initrd Default Target.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Initrd Root Device.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Remote File Systems.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Basic System.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Slices.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Paths.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Sockets.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Remote File Systems (Pre).
+Sep 25 02:28:58 localhost systemd[1]: Stopped target System Initialization.
+Sep 25 02:28:58 localhost systemd[1]: systemd-sysctl.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped Apply Kernel Variables.
+Sep 25 02:28:58 localhost systemd[1]: systemd-tmpfiles-setup.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped Create Volatile Files and Directories.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Local File Systems.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Swap.
+Sep 25 02:28:58 localhost systemd[1]: systemd-modules-load.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped Load Kernel Modules.
+Sep 25 02:28:58 localhost systemd[1]: dracut-mount.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped dracut mount hook.
+Sep 25 02:28:58 localhost systemd[1]: dracut-pre-mount.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped dracut pre-mount hook.
+Sep 25 02:28:58 localhost systemd[1]: Stopped target Local Encrypted Volumes.
+Sep 25 02:28:58 localhost systemd[1]: systemd-ask-password-console.path: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped Dispatch Password Requests to Console Directory Watch.
+Sep 25 02:28:58 localhost systemd[1]: dracut-initqueue.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped dracut initqueue hook.
+Sep 25 02:28:58 localhost systemd[1]: systemd-udev-trigger.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped udev Coldplug all Devices.
+Sep 25 02:28:58 localhost systemd[1]: dracut-pre-trigger.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped dracut pre-trigger hook.
+Sep 25 02:28:58 localhost systemd[1]: Stopping udev Kernel Device Manager...
+Sep 25 02:28:58 localhost systemd[1]: initrd-cleanup.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Started Cleaning Up and Shutting Down Daemons.
+Sep 25 02:28:58 localhost systemd[1]: systemd-udevd.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped udev Kernel Device Manager.
+Sep 25 02:28:58 localhost systemd[1]: dracut-pre-udev.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped dracut pre-udev hook.
+Sep 25 02:28:58 localhost systemd[1]: dracut-cmdline.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped dracut cmdline hook.
+Sep 25 02:28:58 localhost systemd[1]: systemd-tmpfiles-setup-dev.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped Create Static Device Nodes in /dev.
+Sep 25 02:28:58 localhost systemd[1]: kmod-static-nodes.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Stopped Create list of required static device nodes for the current kernel.
+Sep 25 02:28:58 localhost systemd[1]: systemd-udevd-control.socket: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Closed udev Control Socket.
+Sep 25 02:28:58 localhost systemd[1]: systemd-udevd-kernel.socket: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Closed udev Kernel Socket.
+Sep 25 02:28:58 localhost systemd[1]: Starting Cleanup udevd DB...
+Sep 25 02:28:58 localhost systemd[1]: initrd-udevadm-cleanup-db.service: Succeeded.
+Sep 25 02:28:58 localhost systemd[1]: Started Cleanup udevd DB.
+Sep 25 02:28:58 localhost systemd[1]: Reached target Switch Root.
+Sep 25 02:28:58 localhost systemd[1]: Starting Switch Root...
+Sep 25 02:28:58 localhost systemd[1]: Switching root.
+Sep 25 02:28:58 localhost systemd-journald[219]: Journal stopped
+Sep 25 02:28:59 host01.example.net kernel: printk: systemd: 16 output lines suppressed due to ratelimiting
+Sep 25 02:28:59 host01.example.net kernel: audit: type=1404 audit(1790303338.484:2): enforcing=1 old_enforcing=0 auid=4294967295 ses=4294967295 enabled=1 old-enabled=1 lsm=selinux res=1
+Sep 25 02:28:59 host01.example.net kernel: SELinux:  policy capability network_peer_controls=1
+Sep 25 02:28:59 host01.example.net kernel: SELinux:  policy capability open_perms=1
+Sep 25 02:28:59 host01.example.net kernel: SELinux:  policy capability extended_socket_class=1
+Sep 25 02:28:59 host01.example.net kernel: SELinux:  policy capability always_check_network=0
+Sep 25 02:28:59 host01.example.net kernel: SELinux:  policy capability cgroup_seclabel=1
+Sep 25 02:28:59 host01.example.net kernel: SELinux:  policy capability nnp_nosuid_transition=1
+Sep 25 02:28:59 host01.example.net kernel: audit: type=1403 audit(1790303338.678:3): auid=4294967295 ses=4294967295 lsm=selinux res=1
+Sep 25 02:28:59 host01.example.net systemd[1]: Successfully loaded SELinux policy in 196.548ms.
+Sep 25 02:28:59 host01.example.net systemd[1]: Relabelled /dev, /run and /sys/fs/cgroup in 17.270ms.
+Sep 25 02:28:59 host01.example.net systemd[1]: systemd 239 (239-82.el8_10.17) running in system mode. (+PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=legacy)
+Sep 25 02:28:59 host01.example.net systemd[1]: Detected virtualization kvm.
+Sep 25 02:28:59 host01.example.net systemd[1]: Detected architecture x86-64.
+Sep 25 02:28:59 host01.example.net systemd[1]: Set hostname to <host01.example.net>.
+Sep 25 02:28:59 host01.example.net systemd[1]: initrd-switch-root.service: Succeeded.
+Sep 25 02:28:59 host01.example.net systemd[1]: Stopped Switch Root.
+Sep 25 02:28:59 host01.example.net systemd[1]: systemd-journald.service: Service has no hold-off time (RestartSec=0), scheduling restart.
+Sep 25 02:28:59 host01.example.net systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
+Sep 25 02:28:59 host01.example.net systemd[1]: Stopped Journal Service.
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting Journal Service...
+Sep 25 02:28:59 host01.example.net systemd-journald[589]: Journal started
+Sep 25 02:28:59 host01.example.net systemd-journald[589]: Runtime journal (/run/log/journal/00000000000000000000000000000000) is 8.0M, max 98.5M, 90.5M free.
+Sep 25 02:28:59 host01.example.net systemd[1]: systemd-journald.service: Succeeded.
+Sep 25 02:28:59 host01.example.net systemd-modules-load[594]: Module 'msr' is builtin
+Sep 25 02:28:59 host01.example.net systemd[1]: Mounted Kernel Debug File System.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Remount Root and Kernel File Systems.
+Sep 25 02:28:59 host01.example.net systemd[1]: Mounted POSIX Message Queue File System.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Load Kernel Modules.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Create list of required static device nodes for the current kernel.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Read and set NIS domainname from /etc/sysconfig/network.
+Sep 25 02:28:59 host01.example.net systemd[1]: Mounted Huge Pages File System.
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting Apply Kernel Variables...
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting Create Static Device Nodes in /dev...
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting Load/Save Random Seed...
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting Flush Journal to Persistent Storage...
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Load/Save Random Seed.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Apply Kernel Variables.
+Sep 25 02:28:59 host01.example.net systemd-journald[589]: Time spent on flushing to /var is 26.252ms for 620 entries.
+Sep 25 02:28:59 host01.example.net systemd-journald[589]: System journal (/var/log/journal/00000000000000000000000000000000) is 8.0M, max 1.8G, 1.8G free.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Create Static Device Nodes in /dev.
+Sep 25 02:28:59 host01.example.net systemd[1]: Reached target Local File Systems (Pre).
+Sep 25 02:28:59 host01.example.net systemd[1]: Mounting /boot...
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting File System Check on /dev/disk/by-uuid/53CE-2D92...
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting udev Kernel Device Manager...
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Flush Journal to Persistent Storage.
+Sep 25 02:28:59 host01.example.net kernel: XFS (vda3): Mounting V5 Filesystem
+Sep 25 02:28:59 host01.example.net systemd-fsck[628]: fsck.fat 4.1 (2017-01-24)
+Sep 25 02:28:59 host01.example.net systemd-fsck[628]: /dev/vda2: 13 files, 1567/51145 clusters
+Sep 25 02:28:59 host01.example.net systemd[1]: Started File System Check on /dev/disk/by-uuid/53CE-2D92.
+Sep 25 02:28:59 host01.example.net systemd-udevd[622]: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started udev Coldplug all Devices.
+Sep 25 02:28:59 host01.example.net systemd[1]: Started udev Kernel Device Manager.
+Sep 25 02:28:59 host01.example.net kernel: XFS (vda3): Ending clean mount
+Sep 25 02:28:59 host01.example.net systemd[1]: Mounted /boot.
+Sep 25 02:28:59 host01.example.net kernel: lpc_ich 0000:00:1f.0: I/O space for GPIO uninitialized
+Sep 25 02:28:59 host01.example.net systemd[1]: Mounting /boot/efi...
+Sep 25 02:28:59 host01.example.net kernel: i801_smbus 0000:00:1f.3: SMBus using PCI interrupt
+Sep 25 02:28:59 host01.example.net kernel: parport_pc 00:02: reported by Plug and Play ACPI
+Sep 25 02:28:59 host01.example.net kernel: ACPI: bus type drm_connector registered
+Sep 25 02:28:59 host01.example.net kernel: input: PC Speaker as /devices/platform/pcspkr/input/input5
+Sep 25 02:28:59 host01.example.net kernel: parport0: PC-style at 0x378, irq 7 [PCSPP,TRISTATE]
+Sep 25 02:28:59 host01.example.net systemd[1]: Mounted /boot/efi.
+Sep 25 02:28:59 host01.example.net systemd[1]: Reached target Local File Systems.
+Sep 25 02:28:59 host01.example.net nfsrahead[651]: skipping non-NFS device 252:16
+Sep 25 02:28:59 host01.example.net systemd[1]: Starting Import network configuration from initramfs...
+Sep 25 02:28:59 host01.example.net nfsrahead[653]: skipping non-NFS device 252:0
+Sep 25 02:28:59 host01.example.net systemd-udevd[632]: Using default interface naming scheme 'rhel-8.0'.
+Sep 25 02:28:59 host01.example.net systemd-udevd[632]: link_config: autonegotiation is unset or enabled, the speed and duplex are not writable.
+Sep 25 02:28:59 host01.example.net systemd-udevd[642]: link_config: autonegotiation is unset or enabled, the speed and duplex are not writable.
+Sep 25 02:28:59 host01.example.net nfsrahead[650]: skipping non-NFS device 11:0
+Sep 25 02:28:59 host01.example.net nfsrahead[652]: skipping non-NFS device 252:32
+Sep 25 02:28:59 host01.example.net kernel: iTCO_vendor_support: vendor-support=0
+Sep 25 02:28:59 host01.example.net kernel: iTCO_wdt: Intel TCO WatchDog Timer Driver v1.11
+Sep 25 02:28:59 host01.example.net kernel: ppdev: user-space parallel port driver
+Sep 25 02:28:59 host01.example.net kernel: bochs-drm 0000:00:01.0: vgaarb: deactivate vga console
+Sep 25 02:28:59 host01.example.net kernel: iTCO_wdt: Found a ICH9 TCO device (Version=2, TCOBASE=0x0660)
+Sep 25 02:28:59 host01.example.net kernel: iTCO_wdt: initialized. heartbeat=30 sec (nowayout=0)
+Sep 25 02:28:59 host01.example.net kernel: Console: switching to colour dummy device 80x25
+Sep 25 02:28:59 host01.example.net kernel: [drm] Found bochs VGA, ID 0xb0c5.
+Sep 25 02:28:59 host01.example.net kernel: [drm] Framebuffer size 16384 kB @ 0xfd000000, mmio @ 0xfeb90000.
+Sep 25 02:28:59 host01.example.net kernel: [drm] Found EDID data blob.
+Sep 25 02:28:59 host01.example.net kernel: [drm] Initialized bochs-drm 1.0.0 20130925 for 0000:00:01.0 on minor 0
+Sep 25 02:28:59 host01.example.net kernel: fbcon: bochs-drmdrmfb (fb0) is primary device
+Sep 25 02:28:59 host01.example.net systemd[1]: Started Import network configuration from initramfs.
+Sep 25 02:28:59 host01.example.net kernel: SVM: TSC scaling supported
+Sep 25 02:28:59 host01.example.net kernel: kvm: Nested Virtualization enabled
+Sep 25 02:28:59 host01.example.net kernel: SVM: kvm: Nested Paging enabled
+Sep 25 02:28:59 host01.example.net kernel: SVM: Virtual VMLOAD VMSAVE supported
+Sep 25 02:28:59 host01.example.net kernel: Console: switching to colour frame buffer device 160x50
+Sep 25 02:28:59 host01.example.net kernel: bochs-drm 0000:00:01.0: [drm] fb0: bochs-drmdrmfb frame buffer device
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting Create Volatile Files and Directories...
+Sep 25 02:29:00 host01.example.net systemd[1]: Started Create Volatile Files and Directories.
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting Security Auditing Service...
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting RPC Bind...
+Sep 25 02:29:00 host01.example.net systemd[1]: Mounting RPC Pipe File System...
+Sep 25 02:29:00 host01.example.net auditd[689]: No plugins found, not dispatching events
+Sep 25 02:29:00 host01.example.net auditd[689]: Init complete, auditd 3.1.2 listening for events (startup state enable)
+Sep 25 02:29:00 host01.example.net systemd[1]: Started RPC Bind.
+Sep 25 02:29:00 host01.example.net augenrules[693]: /sbin/augenrules: No change
+Sep 25 02:29:00 host01.example.net augenrules[710]: No rules
+Sep 25 02:29:00 host01.example.net augenrules[710]: enabled 1
+Sep 25 02:29:00 host01.example.net augenrules[710]: failure 1
+Sep 25 02:29:00 host01.example.net augenrules[710]: pid 689
+Sep 25 02:29:00 host01.example.net augenrules[710]: rate_limit 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_limit 8192
+Sep 25 02:29:00 host01.example.net augenrules[710]: lost 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog 4
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_wait_time 60000
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_wait_time_actual 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: enabled 1
+Sep 25 02:29:00 host01.example.net augenrules[710]: failure 1
+Sep 25 02:29:00 host01.example.net augenrules[710]: pid 689
+Sep 25 02:29:00 host01.example.net augenrules[710]: rate_limit 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_limit 8192
+Sep 25 02:29:00 host01.example.net augenrules[710]: lost 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog 4
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_wait_time 60000
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_wait_time_actual 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: enabled 1
+Sep 25 02:29:00 host01.example.net augenrules[710]: failure 1
+Sep 25 02:29:00 host01.example.net augenrules[710]: pid 689
+Sep 25 02:29:00 host01.example.net augenrules[710]: rate_limit 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_limit 8192
+Sep 25 02:29:00 host01.example.net augenrules[710]: lost 0
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog 4
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_wait_time 60000
+Sep 25 02:29:00 host01.example.net augenrules[710]: backlog_wait_time_actual 0
+Sep 25 02:29:00 host01.example.net systemd[1]: Started Security Auditing Service.
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting Update UTMP about System Boot/Shutdown...
+Sep 25 02:29:00 host01.example.net systemd[1]: Started Update UTMP about System Boot/Shutdown.
+Sep 25 02:29:00 host01.example.net systemd[1]: Reached target System Initialization.
+Sep 25 02:29:00 host01.example.net systemd[1]: Started daily update of the root trust anchor for DNSSEC.
+Sep 25 02:29:00 host01.example.net systemd[1]: Started Daily Cleanup of Temporary Directories.
+Sep 25 02:29:00 host01.example.net systemd[1]: Listening on SSSD Kerberos Cache Manager responder socket.
+Sep 25 02:29:00 host01.example.net systemd[1]: Listening on D-Bus System Message Bus Socket.
+Sep 25 02:29:00 host01.example.net systemd[1]: Reached target Sockets.
+Sep 25 02:29:00 host01.example.net systemd[1]: Reached target Basic System.
+Sep 25 02:29:00 host01.example.net systemd[1]: Started irqbalance daemon.
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting Restore /run/initramfs on shutdown...
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting NTP client/server...
+Sep 25 02:29:00 host01.example.net systemd[1]: Started D-Bus System Message Bus.
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting Initial cloud-init job (pre-networking)...
+Sep 25 02:29:00 host01.example.net systemd[1]: Reached target sshd-keygen.target.
+Sep 25 02:29:00 host01.example.net kernel: RPC: Registered named UNIX socket transport module.
+Sep 25 02:29:00 host01.example.net kernel: RPC: Registered udp transport module.
+Sep 25 02:29:00 host01.example.net kernel: RPC: Registered tcp transport module.
+Sep 25 02:29:00 host01.example.net kernel: RPC: Registered tcp NFSv4.1 backchannel transport module.
+Sep 25 02:29:00 host01.example.net systemd[1]: Reached target User and Group Name Lookups.
+Sep 25 02:29:00 host01.example.net systemd[1]: Starting Login Service...
+Sep 25 02:29:00 host01.example.net systemd[1]: Started dnf makecache --timer.
+Sep 25 02:29:00 host01.example.net systemd[1]: Reached target Timers.
+Sep 25 02:29:00 host01.example.net systemd[1]: Started petit reboot fingerprint capture.
+Sep 25 02:29:00 host01.example.net systemd[1]: Started Restore /run/initramfs on shutdown.
+Sep 25 02:29:01 host01.example.net systemd-logind[731]: New seat seat0.
+Sep 25 02:29:01 host01.example.net systemd[1]: Mounted RPC Pipe File System.
+Sep 25 02:29:01 host01.example.net systemd-logind[731]: Watching system buttons on /dev/input/event0 (Power Button)
+Sep 25 02:29:01 host01.example.net systemd[1]: Reached target rpc_pipefs.target.
+Sep 25 02:29:01 host01.example.net systemd-logind[731]: Watching system buttons on /dev/input/event1 (AT Translated Set 2 keyboard)
+Sep 25 02:29:01 host01.example.net systemd[1]: Started Login Service.
+Sep 25 02:29:01 host01.example.net chronyd[738]: chronyd version 4.5 starting (+CMDMON +NTP +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +ASYNCDNS +NTS +SECHASH +IPV6 +DEBUG)
+Sep 25 02:29:01 host01.example.net chronyd[738]: Loaded 0 symmetric keys
+Sep 25 02:29:01 host01.example.net chronyd[738]: Frequency 26.858 +/- 345.407 ppm read from /var/lib/chrony/drift
+Sep 25 02:29:01 host01.example.net chronyd[738]: Using right/UTC timezone to obtain leap second data
+Sep 25 02:29:01 host01.example.net systemd[1]: Started NTP client/server.
+Sep 25 02:29:02 host01.example.net kernel: ISO 9660 Extensions: Microsoft Joliet Level 3
+Sep 25 02:29:02 host01.example.net kernel: ISO 9660 Extensions: RRIP_1991A
+Sep 25 02:29:02 host01.example.net systemd[1]: run-cloud\x2dinit-tmp-tmpu_2u4vsp.mount: Succeeded.
+Sep 25 02:29:02 host01.example.net cloud-init[756]: Cloud-init v. 23.4-7.el8_10.11.alma.2 running 'init-local' at Fri, 25 Sep 2026 02:29:01 +0000. Up 6.78 seconds.
+Sep 25 02:29:02 host01.example.net systemd[1]: Started Initial cloud-init job (pre-networking).
+Sep 25 02:29:02 host01.example.net systemd[1]: Reached target Network (Pre).
+Sep 25 02:29:02 host01.example.net systemd[1]: Starting Network Manager...
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.5593] NetworkManager (version 1.40.16-21.el8_10) is starting... (boot:00000000-0000-0000-0000-000000000000)
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.5609] Read config: /etc/NetworkManager/NetworkManager.conf (run: 15-carrier-timeout.conf)
+Sep 25 02:29:02 host01.example.net systemd[1]: Started Network Manager.
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.5652] bus-manager: acquired D-Bus service "org.freedesktop.NetworkManager"
+Sep 25 02:29:02 host01.example.net systemd[1]: Reached target Network.
+Sep 25 02:29:02 host01.example.net systemd[1]: Starting Dynamic System Tuning Daemon...
+Sep 25 02:29:02 host01.example.net systemd[1]: Starting GSSAPI Proxy Daemon...
+Sep 25 02:29:02 host01.example.net systemd[1]: Starting Network Manager Wait Online...
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.5802] manager[0x55faca2ab020]: monitoring kernel firmware directory '/lib/firmware'.
+Sep 25 02:29:02 host01.example.net dbus-daemon[728]: [system] Activating via systemd: service name='org.freedesktop.hostname1' unit='dbus-org.freedesktop.hostname1.service' requested by ':1.2' (uid=0 pid=771 comm="/usr/sbin/NetworkManager --no-daemon " label="system_u:system_r:NetworkManager_t:s0")
+Sep 25 02:29:02 host01.example.net systemd[1]: Starting Hostname Service...
+Sep 25 02:29:02 host01.example.net systemd[1]: Started GSSAPI Proxy Daemon.
+Sep 25 02:29:02 host01.example.net systemd[1]: Reached target NFS client services.
+Sep 25 02:29:02 host01.example.net systemd[1]: Reached target Remote File Systems (Pre).
+Sep 25 02:29:02 host01.example.net systemd[1]: Reached target Remote File Systems.
+Sep 25 02:29:02 host01.example.net dbus-daemon[728]: [system] Successfully activated service 'org.freedesktop.hostname1'
+Sep 25 02:29:02 host01.example.net systemd[1]: Started Hostname Service.
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.6904] hostname: hostname: using hostnamed
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.6905] hostname: static hostname changed from (none) to "host01.example.net"
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.6910] dns-mgr: init: dns=default,systemd-resolved rc-manager=symlink
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7022] Loaded device plugin: NMTeamFactory (/usr/lib64/NetworkManager/1.40.16-21.el8_10/libnm-device-plugin-team.so)
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7023] manager: rfkill: Wi-Fi enabled by radio killswitch; enabled by state file
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7025] manager: rfkill: WWAN enabled by radio killswitch; enabled by state file
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7028] manager: Networking is enabled by state file
+Sep 25 02:29:02 host01.example.net dbus-daemon[728]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service' requested by ':1.2' (uid=0 pid=771 comm="/usr/sbin/NetworkManager --no-daemon " label="system_u:system_r:NetworkManager_t:s0")
+Sep 25 02:29:02 host01.example.net systemd[1]: Starting Network Manager Script Dispatcher Service...
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7090] settings: Loaded settings plugin: ifcfg-rh ("/usr/lib64/NetworkManager/1.40.16-21.el8_10/libnm-settings-plugin-ifcfg-rh.so")
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7091] settings: Loaded settings plugin: keyfile (internal)
+Sep 25 02:29:02 host01.example.net kernel: IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7197] dhcp: init: Using DHCP client 'internal'
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7198] device (lo): carrier: link connected
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7200] manager: (lo): new Generic device (/org/freedesktop/NetworkManager/Devices/1)
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7210] manager: (eth0): new Ethernet device (/org/freedesktop/NetworkManager/Devices/2)
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7211] device (eth0): state change: unmanaged -> unavailable (reason 'managed', sys-iface-state: 'external')
+Sep 25 02:29:02 host01.example.net dbus-daemon[728]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Sep 25 02:29:02 host01.example.net systemd[1]: Started Network Manager Script Dispatcher Service.
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7408] device (eth0): carrier: link connected
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7418] device (eth0): state change: unavailable -> disconnected (reason 'carrier-changed', sys-iface-state: 'managed')
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7434] policy: auto-activating connection 'System eth0' (00000000-0000-0000-0000-000000000000)
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7443] device (eth0): Activation: starting connection 'System eth0' (00000000-0000-0000-0000-000000000000)
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7446] device (eth0): state change: disconnected -> prepare (reason 'none', sys-iface-state: 'managed')
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7458] manager: NetworkManager state is now CONNECTING
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7465] device (eth0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7476] device (eth0): state change: config -> ip-config (reason 'none', sys-iface-state: 'managed')
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7493] dhcp4 (eth0): activation: beginning transaction (timeout in 45 seconds)
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7511] dhcp4 (eth0): state changed new lease, address=192.0.2.2
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7520] policy: set 'System eth0' (eth0) as default for IPv4 routing and DNS
+Sep 25 02:29:02 host01.example.net dbus-daemon[728]: [system] Activating via systemd: service name='org.freedesktop.resolve1' unit='dbus-org.freedesktop.resolve1.service' requested by ':1.2' (uid=0 pid=771 comm="/usr/sbin/NetworkManager --no-daemon " label="system_u:system_r:NetworkManager_t:s0")
+Sep 25 02:29:02 host01.example.net dbus-daemon[728]: [system] Activation via systemd failed for unit 'dbus-org.freedesktop.resolve1.service': Unit dbus-org.freedesktop.resolve1.service not found.
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7594] device (eth0): state change: ip-config -> ip-check (reason 'none', sys-iface-state: 'managed')
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7609] device (eth0): state change: ip-check -> secondaries (reason 'none', sys-iface-state: 'managed')
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7610] device (eth0): state change: secondaries -> activated (reason 'none', sys-iface-state: 'managed')
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7612] manager: NetworkManager state is now CONNECTED_SITE
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7613] device (eth0): Activation: successful, device activated.
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7616] manager: NetworkManager state is now CONNECTED_GLOBAL
+Sep 25 02:29:02 host01.example.net NetworkManager[771]: <info>  [1790303342.7618] manager: startup complete
+Sep 25 02:29:02 host01.example.net systemd[1]: Started Network Manager Wait Online.
+Sep 25 02:29:02 host01.example.net systemd[1]: Starting Initial cloud-init job (metadata service crawler)...
+Sep 25 02:29:03 host01.example.net dbus-daemon[728]: [system] Activating via systemd: service name='org.freedesktop.PolicyKit1' unit='polkit.service' requested by ':1.7' (uid=0 pid=774 comm="/usr/libexec/platform-python -Es /usr/sbin/tuned -" label="system_u:system_r:tuned_t:s0")
+Sep 25 02:29:03 host01.example.net systemd[1]: Starting Authorization Manager...
+Sep 25 02:29:03 host01.example.net polkitd[1012]: Started polkitd version 0.115
+Sep 25 02:29:03 host01.example.net systemd[1]: Started Dynamic System Tuning Daemon.
+Sep 25 02:29:03 host01.example.net polkitd[1012]: Loading rules from directory /etc/polkit-1/rules.d
+Sep 25 02:29:03 host01.example.net polkitd[1012]: Loading rules from directory /usr/share/polkit-1/rules.d
+Sep 25 02:29:03 host01.example.net polkitd[1012]: Finished loading, compiling and executing 3 rules
+Sep 25 02:29:03 host01.example.net dbus-daemon[728]: [system] Successfully activated service 'org.freedesktop.PolicyKit1'
+Sep 25 02:29:03 host01.example.net systemd[1]: Started Authorization Manager.
+Sep 25 02:29:03 host01.example.net polkitd[1012]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: Cloud-init v. 23.4-7.el8_10.11.alma.2 running 'init' at Fri, 25 Sep 2026 02:29:03 +0000. Up 8.05 seconds.
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: ++++++++++++++++++++++++++++++++++++Net device info+++++++++++++++++++++++++++++++++++++
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +--------+------+-------------------------+---------------+--------+-------------------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: | Device |  Up  |         Address         |      Mask     | Scope  |     Hw-Address    |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +--------+------+-------------------------+---------------+--------+-------------------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |  eth0  | True |        192.0.2.2        | 255.255.255.0 | global | 00:00:5e:00:53:03 |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |  eth0  | True | 2001:db8::4/64 |       .       |  link  | 00:00:5e:00:53:03 |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |   lo   | True |        127.0.0.1        |   255.0.0.0   |  host  |         .         |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |   lo   | True |         ::1/128         |       .       |  host  |         .         |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +--------+------+-------------------------+---------------+--------+-------------------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +++++++++++++++++++++++++++Route IPv4 info++++++++++++++++++++++++++++
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +-------+-------------+----------+---------------+-----------+-------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: | Route | Destination | Gateway  |    Genmask    | Interface | Flags |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +-------+-------------+----------+---------------+-----------+-------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |   0   |   0.0.0.0   | 192.0.2.5 |    0.0.0.0    |    eth0   |   UG  |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |   1   |   192.0.2.6  | 0.0.0.0  | 255.255.255.0 |    eth0   |   U   |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +-------+-------------+----------+---------------+-----------+-------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +-------+-------------+---------+-----------+-------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: | Route | Destination | Gateway | Interface | Flags |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +-------+-------------+---------+-----------+-------+
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |   1   |  2001:db8::7/64  |    2001:db8::8   |    eth0   |   U   |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: |   3   |  multicast  |    2001:db8::8   |    eth0   |   U   |
+Sep 25 02:29:03 host01.example.net cloud-init[1024]: ci-info: +-------+-------------+---------+-----------+-------+
+Sep 25 02:29:03 host01.example.net systemd[1]: Started Initial cloud-init job (metadata service crawler).
+Sep 25 02:29:03 host01.example.net systemd[1]: Reached target Cloud-config availability.
+Sep 25 02:29:03 host01.example.net systemd[1]: Starting OpenSSH server daemon...
+Sep 25 02:29:03 host01.example.net systemd[1]: Reached target Network is Online.
+Sep 25 02:29:03 host01.example.net systemd[1]: Starting Apply the settings specified in cloud-config...
+Sep 25 02:29:03 host01.example.net systemd[1]: Starting System Logging Service...
+Sep 25 02:29:03 host01.example.net systemd[1]: Starting Notify NFS peers of a restart...
+Sep 25 02:29:03 host01.example.net sshd[1061]: Server listening on 0.0.0.0 port 22.
+Sep 25 02:29:03 host01.example.net sshd[1061]: Server listening on 2001:db8::8 port 22.
+Sep 25 02:29:03 host01.example.net systemd[1]: Started OpenSSH server daemon.
+Sep 25 02:29:03 host01.example.net sm-notify[1064]: Version 2.3.3 starting
+Sep 25 02:29:03 host01.example.net systemd[1]: Started Notify NFS peers of a restart.
+Sep 25 02:29:03 host01.example.net rsyslogd[1063]: [origin software="rsyslogd" swVersion="8.2102.0-15.el8_10.1" x-pid="1063" x-info="https://www.rsyslog.com"] start
+Sep 25 02:29:03 host01.example.net systemd[1]: Started System Logging Service.
+Sep 25 02:29:03 host01.example.net rsyslogd[1063]: imjournal: journal files changed, reloading...  [v8.2102.0-15.el8_10.1 try https://www.rsyslog.com/e/0 ]
+Sep 25 02:29:03 host01.example.net cloud-init[1073]: Cloud-init v. 23.4-7.el8_10.11.alma.2 running 'modules:config' at Fri, 25 Sep 2026 02:29:03 +0000. Up 8.77 seconds.
+Sep 25 02:29:03 host01.example.net systemd[1]: Started Apply the settings specified in cloud-config.
+Sep 25 02:29:03 host01.example.net systemd[1]: Starting Permit User Sessions...
+Sep 25 02:29:03 host01.example.net systemd[1]: Starting Execute cloud user/final scripts...
+Sep 25 02:29:04 host01.example.net systemd[1]: Started Permit User Sessions.
+Sep 25 02:29:04 host01.example.net systemd[1]: Started Serial Getty on ttyS0.
+Sep 25 02:29:04 host01.example.net systemd[1]: Started Command Scheduler.
+Sep 25 02:29:04 host01.example.net systemd[1]: Started Getty on tty1.
+Sep 25 02:29:04 host01.example.net systemd[1]: Reached target Login Prompts.
+Sep 25 02:29:04 host01.example.net systemd[1]: Reached target Multi-User System.
+Sep 25 02:29:04 host01.example.net crond[1079]: (CRON) STARTUP (1.5.2)
+Sep 25 02:29:04 host01.example.net crond[1079]: (CRON) INFO (Syslog will be used instead of sendmail.)
+Sep 25 02:29:04 host01.example.net crond[1079]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 54% if used.)
+Sep 25 02:29:04 host01.example.net systemd[1]: Starting Update UTMP about System Runlevel Changes...
+Sep 25 02:29:04 host01.example.net crond[1079]: (CRON) INFO (running with inotify support)
+Sep 25 02:29:04 host01.example.net systemd[1]: systemd-update-utmp-runlevel.service: Succeeded.
+Sep 25 02:29:04 host01.example.net systemd[1]: Started Update UTMP about System Runlevel Changes.
+Sep 25 02:29:04 host01.example.net NetworkManager[771]: <info>  [1790303344.2094] policy: set 'System eth0' (eth0) as default for IPv6 routing and DNS
+Sep 25 02:29:04 host01.example.net cloud-init[1087]: Cloud-init v. 23.4-7.el8_10.11.alma.2 running 'modules:final' at Fri, 25 Sep 2026 02:29:04 +0000. Up 9.26 seconds.
+Sep 25 02:29:04 host01.example.net cloud-init[1087]: Cloud-init v. 23.4-7.el8_10.11.alma.2 finished at Fri, 25 Sep 2026 02:29:04 +0000. Datasource DataSourceNoCloud [seed=/dev/vdc][dsmode=net].  Up 9.37 seconds
+Sep 25 02:29:04 host01.example.net systemd[1]: Reloading Network Manager.
+Sep 25 02:29:04 host01.example.net NetworkManager[771]: <info>  [1790303344.5510] audit: op="reload" arg="0" pid=1093 uid=0 result="success"
+Sep 25 02:29:04 host01.example.net NetworkManager[771]: <info>  [1790303344.5515] config: signal: SIGHUP (no changes from disk)
+Sep 25 02:29:04 host01.example.net systemd[1]: Reloaded Network Manager.
+Sep 25 02:29:04 host01.example.net systemd[1]: Started Execute cloud user/final scripts.
+Sep 25 02:29:04 host01.example.net systemd[1]: Reached target Cloud-init target.
+Sep 25 02:29:04 host01.example.net systemd[1]: Startup finished in 1.432s (kernel) + 1.953s (initrd) + 6.084s (userspace) = 9.470s.

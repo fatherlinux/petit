@@ -1,0 +1,37 @@
+Sep 25 02:34:16 host01 daemon.info init: starting pid 2247, tty '': '/sbin/openrc shutdown'
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2297]: Will stop /usr/sbin/sshd
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2297]: Will stop PID 2202
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2297]: Sending signal 15 to PID 2202
+Sep 25 02:34:16 host01 auth.info sshd[2202]: Received signal 15; terminating.
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2405]: Will stop /usr/sbin/cloud-init-hotplugd
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2405]: Will stop PID 2076
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2405]: Sending signal 15 to PID 2076
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2434]: Will stop /usr/sbin/chronyd
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2434]: Will stop PID 2049
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2434]: Sending signal 15 to PID 2049
+Sep 25 02:34:16 host01 daemon.info chronyd[2049]: chronyd exiting
+Sep 25 02:34:16 host01 daemon.debug start-stop-daemon[2511]: Will stop /sbin/syslogd
+Sep 25 02:34:16 host01 syslog.info syslogd exiting
+Sep 25 02:34:33 host01 syslog.info syslogd started: BusyBox v1.37.0
+Sep 25 02:34:33 host01 daemon.info init: starting pid 1889, tty '': '/sbin/openrc default'
+Sep 25 02:34:33 host01 daemon.info dhcpcd[1961]: dhcpcd-10.5.2 starting
+Sep 25 02:34:33 host01 daemon.info dhcpcd[1964]: DUID 00:01:00:01:32:48:99:c8:52:54:00:00:00:01
+Sep 25 02:34:33 host01 daemon.info dhcpcd[1964]: eth0: IAID 00:00:00:01
+Sep 25 02:34:34 host01 daemon.info dhcpcd[1964]: eth0: soliciting an IPv6 router
+Sep 25 02:34:34 host01 daemon.info dhcpcd[1964]: eth0: Router Advertisement from 2001:db8::1
+Sep 25 02:34:34 host01 daemon.info dhcpcd[1964]: eth0: adding address 2001:db8::2/64
+Sep 25 02:34:34 host01 daemon.info dhcpcd[1964]: eth0: adding route to 2001:db8::3/64
+Sep 25 02:34:34 host01 daemon.info dhcpcd[1964]: eth0: adding default route via 2001:db8::1
+Sep 25 02:34:34 host01 daemon.info dhcpcd[1964]: eth0: rebinding lease of 192.0.2.4
+Sep 25 02:34:34 host01 daemon.info dhcpcd[1964]: eth0: probing address 192.0.2.4/24
+Sep 25 02:34:39 host01 daemon.info dhcpcd[1964]: eth0: leased 192.0.2.4 for 86400 seconds
+Sep 25 02:34:39 host01 daemon.info dhcpcd[1964]: eth0: adding route to 192.0.2.5/24
+Sep 25 02:34:39 host01 daemon.info dhcpcd[1964]: eth0: adding default route via 192.0.2.6
+Sep 25 02:34:39 host01 daemon.info chronyd[2049]: chronyd version 4.8 starting (+CMDMON +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +NTS +SECHASH +IPV6 -DEBUG)
+Sep 25 02:34:39 host01 daemon.info chronyd[2049]: Frequency -66.715 +/- 983.371 ppm read from /var/lib/chrony/chrony.drift
+Sep 25 02:34:43 host01 daemon.info chronyd[2049]: System's initial offset : 0.444601 seconds slow of true (slew)
+Sep 25 02:34:47 host01 auth.info sshd[2202]: Server listening on 0.0.0.0 port 22.
+Sep 25 02:34:47 host01 auth.info sshd[2202]: Server listening on 2001:db8::7 port 22.
+Sep 25 02:34:47 host01 daemon.info init: starting pid 2241, tty '/dev/tty1': '/sbin/getty 38400 tty1'
+Sep 25 02:34:47 host01 daemon.info init: starting pid 2242, tty '': '/usr/libexec/alpine-cloud-images/cloud-serial-getty'
+Sep 25 02:34:50 host01 daemon.info chronyd[2049]: Selected source 192.0.2.8 (pool.ntp.org)

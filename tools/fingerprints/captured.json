@@ -1,0 +1,211 @@
+{
+  "almalinux10": {
+    "family": "almalinux",
+    "version": "10",
+    "role": "corpus",
+    "corpus": "el10",
+    "image": "https://repo.almalinux.org/almalinux/10/cloud/x86_64/images/AlmaLinux-10-GenericCloud-latest.x86_64.qcow2",
+    "digest": "sha256:bc59485c4828861a15887e30ff1bb913f0f16202fd7286208518f4814da1e10a",
+    "kernel": "6.12.0-211.47.1.el10_2.x86_64",
+    "os": "AlmaLinux 10.2 (Lavender Lion)",
+    "captured": "2026-09-25"
+  },
+  "almalinux8": {
+    "family": "almalinux",
+    "version": "8",
+    "role": "corpus",
+    "corpus": "el8",
+    "image": "https://repo.almalinux.org/almalinux/8/cloud/x86_64/images/AlmaLinux-8-GenericCloud-latest.x86_64.qcow2",
+    "digest": "sha256:66a440b458e0a0f774868f1b5d74433080c6718e40f38b59d05ff9ab269ae240",
+    "kernel": "4.18.0-553.158.1.el8_10.x86_64",
+    "os": "AlmaLinux 8.10 (Cerulean Leopard)",
+    "captured": "2026-09-25"
+  },
+  "almalinux9": {
+    "family": "almalinux",
+    "version": "9",
+    "role": "corpus",
+    "corpus": "el9",
+    "image": "https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2",
+    "digest": "sha256:6bdab6376d46d42e4203ace3733efafc7c5d37c7cb443a6cc74750097002d74b",
+    "kernel": "5.14.0-687.36.1.el9_8.x86_64",
+    "os": "AlmaLinux 9.8 (Olive Jaguar)",
+    "captured": "2026-09-25"
+  },
+  "alpine3.23": {
+    "family": "alpine",
+    "version": "3.23",
+    "role": "verify",
+    "corpus": "alpine",
+    "image": "https://dl-cdn.alpinelinux.org/alpine/v3.23/releases/cloud/alpine-3.23.6-x86_64-bios-cloudinit-r0.qcow2",
+    "digest": "sha512:f85d04d25be39260b6ef734d918d7e5f696975feeebae32e42d9012fa7669d6057f20119d1bab67e2856248b6d9c96824dc6843294f9228486ad9e08bc17d5a6",
+    "kernel": "6.18.52-0-virt",
+    "os": "Alpine Linux v3.23",
+    "captured": "2026-09-25"
+  },
+  "alpine3.24": {
+    "family": "alpine",
+    "version": "3.24",
+    "role": "corpus",
+    "corpus": "alpine",
+    "image": "https://dl-cdn.alpinelinux.org/alpine/v3.24/releases/cloud/alpine-3.24.2-x86_64-cloudinit-r0.qcow2",
+    "digest": "sha512:c9504d23613f304e0cfb6f5fec872e29e5a5a62e2bc64796daf19c14fdddaa87dc252912fd8bdd17f7b8ebf0cd03305e4075993d54de175e6028d6b50414c67f",
+    "kernel": "6.18.52-0-virt",
+    "os": "Alpine Linux v3.24",
+    "captured": "2026-09-25"
+  },
+  "arch": {
+    "family": "arch",
+    "version": "",
+    "role": "corpus",
+    "corpus": "arch",
+    "image": "https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg.qcow2",
+    "digest": "sha256:d7cc7c86a21b32d6678c001464714f71f4ef7e0d7bbbfca65e99123ac5afc25b",
+    "kernel": "7.2.6-arch2-1",
+    "os": "Arch Linux",
+    "captured": "2026-09-25"
+  },
+  "centos-stream10": {
+    "family": "centos-stream",
+    "version": "10",
+    "role": "verify",
+    "corpus": "el10",
+    "image": "https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-10-latest.x86_64.qcow2",
+    "digest": "sha256:cc788312a1f5d86f2557de38b4ca57ff9f9a6b7f812f7a7fc91a5009fb68f76b",
+    "kernel": "6.12.0-269.el10.x86_64",
+    "os": "CentOS Stream 10 (Coughlan)",
+    "captured": "2026-09-25"
+  },
+  "centos-stream9": {
+    "family": "centos-stream",
+    "version": "9",
+    "role": "verify",
+    "corpus": "el9",
+    "image": "https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2",
+    "digest": "sha256:8527cb5ae91991afa1b0403fa3e0eb5a8d2690648bdbe51e7de86131b52e2763",
+    "kernel": "5.14.0-749.el9.x86_64",
+    "os": "CentOS Stream 9",
+    "captured": "2026-09-25"
+  },
+  "debian12": {
+    "family": "debian",
+    "version": "12",
+    "role": "corpus",
+    "corpus": "debian12",
+    "image": "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2",
+    "digest": "sha512:3d94c9dd66d8a283fde060b8810373b7ae04038b956ee00d553d1ae564f6fbdeaa2fd6e7404e87e53348b5a9509170f3ea7c0731ba737590c5c4cb8d559a47f8",
+    "kernel": "6.1.0-53-cloud-amd64",
+    "os": "Debian GNU/Linux 12 (bookworm)",
+    "captured": "2026-09-25"
+  },
+  "debian13": {
+    "family": "debian",
+    "version": "13",
+    "role": "corpus",
+    "corpus": "debian13",
+    "image": "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2",
+    "digest": "sha512:95e110dfcdbd0ed8a82a75ed9579802f9950cabf51a810dcc6388e81bc778188713878b9f28d583a0ea602fbf48b35996ae9ad37f584166d8fbd6489df248f53",
+    "kernel": "6.12.107+deb13-cloud-amd64",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "captured": "2026-09-25"
+  },
+  "fedora43": {
+    "family": "fedora",
+    "version": "43",
+    "role": "verify",
+    "corpus": "fedora44",
+    "image": "https://download.fedoraproject.org/pub/fedora/linux/releases/43/Cloud/x86_64/images/Fedora-Cloud-Base-Generic-43-1.6.x86_64.qcow2",
+    "digest": "sha256:846574c8a97cd2d8dc1f231062d73107cc85cbbbda56335e264a46e3a6c8ab2f",
+    "kernel": "6.17.1-300.fc43.x86_64",
+    "os": "Fedora Linux 43 (Cloud Edition)",
+    "captured": "2026-09-25"
+  },
+  "fedora44": {
+    "family": "fedora",
+    "version": "44",
+    "role": "corpus",
+    "corpus": "fedora44",
+    "image": "https://download.fedoraproject.org/pub/fedora/linux/releases/44/Cloud/x86_64/images/Fedora-Cloud-Base-Generic-44-1.7.x86_64.qcow2",
+    "digest": "sha256:28680fe5b371a5a82ebf43a31926e086a168e59949d03969c5093e7071f90b7f",
+    "kernel": "6.19.10-300.fc44.x86_64",
+    "os": "Fedora Linux 44 (Cloud Edition)",
+    "captured": "2026-09-25"
+  },
+  "opensuse-leap16.0": {
+    "family": "opensuse-leap",
+    "version": "16.0",
+    "role": "corpus",
+    "corpus": "opensuse-leap16",
+    "image": "https://download.opensuse.org/distribution/leap/16.0/appliances/Leap-16.0-Minimal-VM.x86_64-Cloud.qcow2",
+    "digest": "sha256:9b3361cf6c2ea367e57043515f476be83b84bd05165d26bf9a22e073c493506a",
+    "kernel": "6.12.0-160000.38-default",
+    "os": "openSUSE Leap 16.0",
+    "captured": "2026-09-25"
+  },
+  "rocky10": {
+    "family": "rocky",
+    "version": "10",
+    "role": "verify",
+    "corpus": "el10",
+    "image": "https://download.rockylinux.org/pub/rocky/10/images/x86_64/Rocky-10-GenericCloud-Base.latest.x86_64.qcow2",
+    "digest": "sha256:9fc9e9ff16888bb68ac39b0392e25c9c92684d50c85f1cce6ab549363bbc4b48",
+    "kernel": "6.12.0-211.16.1.el10_2.0.1.x86_64",
+    "os": "Rocky Linux 10.2 (Red Quartz)",
+    "captured": "2026-09-25"
+  },
+  "rocky8": {
+    "family": "rocky",
+    "version": "8",
+    "role": "verify",
+    "corpus": "el8",
+    "image": "https://download.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base.latest.x86_64.qcow2",
+    "digest": "sha256:e56066c58606191e96184de9a9183a3af33c59bcbd8740d8b10ca054a7a89c14",
+    "kernel": "4.18.0-553.el8_10.x86_64",
+    "os": "Rocky Linux 8.10 (Green Obsidian)",
+    "captured": "2026-09-25"
+  },
+  "rocky9": {
+    "family": "rocky",
+    "version": "9",
+    "role": "verify",
+    "corpus": "el9",
+    "image": "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2",
+    "digest": "sha256:92c206cc6f790c61583247eefe87890f8828420662c17cacf247cec78ab4eec8",
+    "kernel": "5.14.0-687.10.1.el9_8.0.1.x86_64",
+    "os": "Rocky Linux 9.8 (Blue Onyx)",
+    "captured": "2026-09-25"
+  },
+  "ubuntu22.04": {
+    "family": "ubuntu",
+    "version": "22.04",
+    "role": "corpus",
+    "corpus": "ubuntu22.04",
+    "image": "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img",
+    "digest": "sha256:48c7e1ab2005bff1c5450bd6c74d0f38482f0d750e14f320367e3e1c795035f9",
+    "kernel": "5.15.0-191-generic",
+    "os": "Ubuntu 22.04.5 LTS",
+    "captured": "2026-09-25"
+  },
+  "ubuntu24.04": {
+    "family": "ubuntu",
+    "version": "24.04",
+    "role": "corpus",
+    "corpus": "ubuntu24.04",
+    "image": "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img",
+    "digest": "sha256:612b2c0cc1bc413a6cb8c38fd611794caf0f2b436c50013d8b3794db12ad7354",
+    "kernel": "6.8.0-139-generic",
+    "os": "Ubuntu 24.04.5 LTS",
+    "captured": "2026-09-25"
+  },
+  "ubuntu26.04": {
+    "family": "ubuntu",
+    "version": "26.04",
+    "role": "corpus",
+    "corpus": "ubuntu26.04",
+    "image": "https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img",
+    "digest": "sha256:2d3b9b1f76fc204f684a2313113b1d7c2b35eabba19cfcbcec5eae2aed3cc853",
+    "kernel": "7.0.0-31-generic",
+    "os": "Ubuntu 26.04.1 LTS",
+    "captured": "2026-09-25"
+  }
+}
