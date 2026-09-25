@@ -309,10 +309,15 @@ journal. Every corpus comes from the same procedure on a clean guest.
     scores below an identity of 0.5, which gets a new corpus;
   - a release past its end of life, which is retired.
 
-To capture by hand from a local guest image that runs cloud-init:
+To capture by hand from a local qcow2 guest image:
 
     tools/fingerprints/refresh.py capture myhost --image guest.qcow2 \
         --seed --as verify:el9 --out captures/myhost
+
+The image must run cloud-init with the NoCloud datasource, which `--seed`
+feeds the capture script through. It also needs `logger`, `tar` and
+either a systemd journal or, with `--log messages`, a syslog daemon writing
+`/var/log/messages`. Stock distribution cloud images have all of these.
 
 Every capture is scrubbed before it is written. Addresses become RFC 5737 or
 RFC 3849 ones, MACs RFC 7042 ones, and machine and filesystem IDs zeros.
