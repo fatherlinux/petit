@@ -1,0 +1,1376 @@
+Sep 25 02:38:21 host01 systemd-logind[333]: System is rebooting.
+Sep 25 02:38:21 host01 systemd-logind[333]: The system will reboot now!
+Sep 25 02:38:21 host01 systemd[1]: Stopped petit reboot fingerprint capture.
+Sep 25 02:38:21 host01 systemd[1]: Removed slice Slice /system/modprobe.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Cloud-init target.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Graphical Interface.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Host and Network Name Lookups.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Remote Encrypted Volumes.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Remote Integrity Protected Volumes.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Remote Verity Protected Volumes.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target SSH Access Available.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Timer Units.
+Sep 25 02:38:21 host01 systemd[1]: archlinux-keyring-wkd-sync.timer: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Refresh existing PGP keys of archlinux-keyring regularly.
+Sep 25 02:38:21 host01 systemd[1]: shadow.timer: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Daily verification of password and group files.
+Sep 25 02:38:21 host01 systemd[1]: systemd-tmpfiles-clean.timer: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Daily Cleanup of Temporary Directories.
+Sep 25 02:38:21 host01 systemd[1]: systemd-rfkill.socket: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Closed Load/Save RF Kill Switch Status /dev/rfkill Watch.
+Sep 25 02:38:21 host01 systemd[1]: cloud-final.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Cloud-init: Final Stage.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Multi-User System.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Login Prompts.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Virtual Machines and Containers.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target System Time Synchronized.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target System Time Set.
+Sep 25 02:38:21 host01 systemd[1]: cloud-config.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Cloud-init: Config Stage.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Cloud-config availability.
+Sep 25 02:38:21 host01 systemd[1]: Stopped target Network is Online.
+Sep 25 02:38:21 host01 systemd[1]: Stopping Getty on tty1...
+Sep 25 02:38:21 host01 systemd[1]: Starting Generate shutdown-ramfs...
+Sep 25 02:38:21 host01 systemd[1]: Stopping Serial Getty on ttyS0...
+Sep 25 02:38:21 host01 systemd[1]: Stopping OpenSSH Daemon...
+Sep 25 02:38:21 host01 systemd[1]: Stopping User Login Management...
+Sep 25 02:38:21 host01 systemd[1]: Stopping Enable Persistent Storage in systemd-networkd...
+Sep 25 02:38:21 host01 systemd[1]: systemd-networkd-wait-online.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Wait for Network to be Online.
+Sep 25 02:38:21 host01 systemd[1]: Stopping Load/Save OS Random Seed...
+Sep 25 02:38:21 host01 systemd[1]: systemd-time-wait-sync.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Wait Until Kernel Time Synchronized.
+Sep 25 02:38:21 host01 systemd[1]: systemd-udev-load-credentials.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Load udev Rules from Credentials.
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-final comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-config comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-networkd-wait-online comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-time-wait-sync comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-udev-load-credentials comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.594:101): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-final comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.596:102): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-config comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.605:103): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-networkd-wait-online comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.610:104): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-time-wait-sync comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.612:105): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-udev-load-credentials comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 sshd[430]: Received signal 15; terminating.
+Sep 25 02:38:21 host01 systemd[1]: serial-getty@ttyS0.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Serial Getty on ttyS0.
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=serial-getty@ttyS0 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.635:106): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=serial-getty@ttyS0 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 mkinitcpio[444]: ==> Starting build: 'none'
+Sep 25 02:38:21 host01 mkinitcpio[444]:   -> Running build hook: [sd-shutdown]
+Sep 25 02:38:21 host01 mkinitcpio[444]: ==> Build complete.
+Sep 25 02:38:21 host01 systemd[1]: systemd-logind.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped User Login Management.
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-logind comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.974:107): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-logind comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 systemd[1]: getty@tty1.service: Deactivated successfully.
+Sep 25 02:38:21 host01 systemd[1]: Stopped Getty on tty1.
+Sep 25 02:38:21 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty1 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:21 host01 kernel: audit: type=1131 audit(1790303901.977:108): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty1 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: sshd.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped OpenSSH Daemon.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=sshd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: mkinitcpio-generate-shutdown-ramfs.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Finished Generate shutdown-ramfs.
+Sep 25 02:38:22 host01 kernel: audit: type=1131 audit(1790303902.016:109): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=sshd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=mkinitcpio-generate-shutdown-ramfs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=mkinitcpio-generate-shutdown-ramfs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-networkd-persistent-storage.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Enable Persistent Storage in systemd-networkd.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-networkd-persistent-storage comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-random-seed.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Load/Save OS Random Seed.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-random-seed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit: BPF prog-id=55 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/getty.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/serial-getty.
+Sep 25 02:38:22 host01 systemd[1]: Stopping Permit User Sessions...
+Sep 25 02:38:22 host01 systemd[1]: systemd-user-sessions.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Permit User Sessions.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-user-sessions comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Network.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Remote File Systems.
+Sep 25 02:38:22 host01 systemd[1]: Stopping Home Area Activation...
+Sep 25 02:38:22 host01 systemd[1]: Stopping Network Management...
+Sep 25 02:38:22 host01 systemd-networkd[360]: eth0: DHCP lease lost
+Sep 25 02:38:22 host01 systemd[1]: systemd-userdb-load-credentials.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Load JSON user/group Records from Credentials.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-userdb-load-credentials comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit: BPF prog-id=64 op=UNLOAD
+Sep 25 02:38:22 host01 audit[360]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1b a1=0 a2=0 a3=0 items=0 ppid=1 pid=360 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:22 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:22 host01 systemd[1]: systemd-networkd.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Network Management.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-networkd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit: BPF prog-id=58 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: systemd-networkd-resolve-hook.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Network Management Resolve Hook Socket.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Preparation for Network.
+Sep 25 02:38:22 host01 systemd[1]: cloud-init-local.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Cloud-init: Local Stage (pre-network).
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-init-local comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-network-generator.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Generate Network Units from Kernel Command Line.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-network-generator comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-homed-activate.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Home Area Activation.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-homed-activate comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Stopping Home Area Manager...
+Sep 25 02:38:22 host01 systemd[1]: systemd-homed.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Home Area Manager.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-homed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Basic System.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Path Units.
+Sep 25 02:38:22 host01 audit: BPF prog-id=54 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Slice Units.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice User and Session Slice.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Socket Units.
+Sep 25 02:38:22 host01 systemd[1]: dirmngr@etc-pacman.d-gnupg.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed GnuPG network certificate management daemon for /etc/pacman.d/gnupg.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/dirmngr.
+Sep 25 02:38:22 host01 systemd[1]: gpg-agent-browser@etc-pacman.d-gnupg.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed GnuPG cryptographic agent and passphrase cache (access for web browsers) for /etc/pacman.d/gnupg.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/gpg-agent-browser.
+Sep 25 02:38:22 host01 systemd[1]: gpg-agent-extra@etc-pacman.d-gnupg.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed GnuPG cryptographic agent and passphrase cache (restricted) for /etc/pacman.d/gnupg.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/gpg-agent-extra.
+Sep 25 02:38:22 host01 systemd[1]: gpg-agent-ssh@etc-pacman.d-gnupg.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed GnuPG cryptographic agent (ssh-agent emulation) for /etc/pacman.d/gnupg.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/gpg-agent-ssh.
+Sep 25 02:38:22 host01 systemd[1]: gpg-agent@etc-pacman.d-gnupg.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed GnuPG cryptographic agent and passphrase cache for /etc/pacman.d/gnupg.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/gpg-agent.
+Sep 25 02:38:22 host01 systemd[1]: keyboxd@etc-pacman.d-gnupg.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed GnuPG public key management service for /etc/pacman.d/gnupg.
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/keyboxd.
+Sep 25 02:38:22 host01 systemd[1]: sshd-unix-local.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed OpenSSH Server Socket (systemd-ssh-generator, AF_UNIX Local).
+Sep 25 02:38:22 host01 systemd[1]: systemd-hostnamed.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Hostname Service Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-importd.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Disk Image Download Service Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-logind-varlink.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed User Login Management Varlink Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-machined.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Virtual Machine and Container Registration Service Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-mountfsd.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed DDI File System Mounter Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-mute-console.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Console Output Muting Service Socket.
+Sep 25 02:38:22 host01 kernel: clocksource: Watchdog remote CPU 1 read timed out
+Sep 25 02:38:22 host01 systemd[1]: systemd-networkd-varlink-metrics.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Network Management Metrics Varlink Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-networkd-varlink.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Network Management Varlink Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-networkd.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Network Management Netlink Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-repart.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Disk Repartitioning Service Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-report-cgroup.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed CGroup Report Varlink Socket.
+Sep 25 02:38:22 host01 dbus-broker[324]: Dispatched 1189 messages @ 1(±3)μs / message.
+Sep 25 02:38:22 host01 systemd[1]: Stopping D-Bus System Message Bus...
+Sep 25 02:38:22 host01 systemd[1]: dbus-broker.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped D-Bus System Message Bus.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=dbus-broker comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: dbus.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed D-Bus System Message Bus Socket.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target System Initialization.
+Sep 25 02:38:22 host01 systemd[1]: proc-sys-fs-binfmt_misc.automount: Deactivated successfully.
+Sep 25 02:38:22 host01 audit: BPF prog-id=53 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: Unset automount Arbitrary Executable File Formats File System Automount Point.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Local Encrypted Volumes.
+Sep 25 02:38:22 host01 systemd[1]: systemd-ask-password-console.path: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Dispatch Password Requests to Console Directory Watch.
+Sep 25 02:38:22 host01 systemd[1]: systemd-ask-password-wall.path: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Forward Password Requests to Wall Directory Watch.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Image Downloads.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Local Integrity Protected Volumes.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Local Verity Protected Volumes.
+Sep 25 02:38:22 host01 systemd[1]: Stopping Namespace Resource Manager...
+Sep 25 02:38:22 host01 systemd[1]: Stopping Network Name Resolution...
+Sep 25 02:38:22 host01 systemd[1]: Stopping Network Time Synchronization...
+Sep 25 02:38:22 host01 systemd[1]: systemd-update-done.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Update is Completed.
+Sep 25 02:38:22 host01 systemd[1]: ldconfig.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Rebuild Dynamic Linker Cache.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-update-done comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=ldconfig comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-boot-update.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Automatic Boot Loader Update.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-boot-update comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-journal-catalog-update.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Rebuild Journal Catalog.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-journal-catalog-update comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Stopping Record System Boot/Shutdown in UTMP...
+Sep 25 02:38:22 host01 systemd[1]: systemd-nsresourced.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Namespace Resource Manager.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-nsresourced comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-resolved.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Network Name Resolution.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-resolved comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-timesyncd.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Network Time Synchronization.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-timesyncd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit: BPF prog-id=49 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: systemd-nsresourced.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Namespace Resource Manager Socket.
+Sep 25 02:38:22 host01 audit: BPF prog-id=34 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: systemd-resolved-monitor.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 audit: BPF prog-id=50 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: Closed Resolve Monitor Varlink Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-resolved-varlink.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Resolve Service Varlink Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-sysctl.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Apply Kernel Variables.
+Sep 25 02:38:22 host01 audit[561]: AUDIT1128 pid=561 uid=0 auid=4294967295 ses=4294967295 msg=' comm="update-utmp" exe="/usr/lib/systemd/systemd-update-utmp" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-sysctl comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-coredump.socket: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Closed Process Core Dump Socket.
+Sep 25 02:38:22 host01 systemd[1]: systemd-update-utmp.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Record System Boot/Shutdown in UTMP.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-update-utmp comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-tmpfiles-setup.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Create System Files and Directories.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tmpfiles-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Local File Systems.
+Sep 25 02:38:22 host01 systemd[1]: Unmounting EFI System Partition Automount...
+Sep 25 02:38:22 host01 systemd[1]: Unmounting Temporary Directory /tmp...
+Sep 25 02:38:22 host01 systemd[1]: efi.mount: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Unmounted EFI System Partition Automount.
+Sep 25 02:38:22 host01 systemd[1]: tmp.mount: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Unmounted Temporary Directory /tmp.
+Sep 25 02:38:22 host01 systemd[1]: efi.automount: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Unset automount EFI System Partition Automount.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Swaps.
+Sep 25 02:38:22 host01 systemd[1]: Deactivating swap /swap/swapfile...
+Sep 25 02:38:22 host01 systemd[1]: systemd-fsck@dev-disk-by\x2ddiskseq-1\x2dpart2.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped File System Check on /dev/disk/by-diskseq/1-part2.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-fsck@dev-disk-by\x2ddiskseq-1\x2dpart2 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Removed slice Slice /system/systemd-fsck.
+Sep 25 02:38:22 host01 systemd[1]: Stopped target Preparation for Local File Systems.
+Sep 25 02:38:22 host01 systemd[1]: systemd-tmpfiles-setup-dev.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Create Static Device Nodes in /dev.
+Sep 25 02:38:22 host01 systemd[1]: systemd-sysusers.service: Deactivated successfully.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tmpfiles-setup-dev comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Stopped Create System Users.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-sysusers comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: systemd-tmpfiles-setup-dev-early.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Create Static Device Nodes in /dev gracefully.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tmpfiles-setup-dev-early comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: swap-swapfile.swap: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Deactivated swap /swap/swapfile.
+Sep 25 02:38:22 host01 systemd[1]: Reached target Unmount All Filesystems.
+Sep 25 02:38:22 host01 systemd[1]: systemd-remount-fs.service: Deactivated successfully.
+Sep 25 02:38:22 host01 systemd[1]: Stopped Remount Root and Kernel File Systems.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-remount-fs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Reached target System Shutdown.
+Sep 25 02:38:22 host01 systemd[1]: Reached target Late Shutdown Services.
+Sep 25 02:38:22 host01 systemd[1]: systemd-reboot.service: Deactivated successfully.
+Sep 25 02:38:22 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-reboot comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-reboot comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:22 host01 systemd[1]: Finished System Reboot.
+Sep 25 02:38:22 host01 systemd[1]: Reached target System Reboot.
+Sep 25 02:38:22 host01 systemd[1]: Shutting down.
+Sep 25 02:38:22 host01 audit: BPF prog-id=57 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=56 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=31 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=33 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=32 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=28 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=30 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=29 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=36 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=35 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=52 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=51 op=UNLOAD
+Sep 25 02:38:22 host01 audit: BPF prog-id=24 op=UNLOAD
+Sep 25 02:38:22 host01 systemd[1]: Using hardware watchdog /dev/watchdog0: 'iTCO_wdt', version 2.
+Sep 25 02:38:22 host01 systemd[1]: Watchdog running with a hardware timeout of 10min.
+Sep 25 02:38:22 host01 kernel: watchdog: watchdog0: watchdog did not stop!
+Sep 25 02:38:22 host01 systemd-shutdown[1]: Using hardware watchdog /dev/watchdog0: 'iTCO_wdt', version 2.
+Sep 25 02:38:22 host01 systemd-shutdown[1]: Watchdog running with a hardware timeout of 10min.
+Sep 25 02:38:22 host01 systemd-shutdown[1]: Syncing filesystems and block devices.
+Sep 25 02:38:22 host01 systemd-shutdown[1]: Sending SIGTERM to remaining processes...
+Sep 25 02:38:22 host01 systemd-journald[214]: Received SIGTERM from PID 1 (systemd-shutdow).
+Sep 25 02:38:22 host01 systemd-journald[214]: Journal stopped
+Sep 25 02:38:30 archlinux kernel: Linux version 7.2.6-arch2-1 (linux@archlinux) (gcc (GCC) 16.2.1 20260810, GNU ld (GNU Binutils) 2.47) #1 SMP PREEMPT_DYNAMIC Mon, 14 Sep 2026 22:41:30 +0000
+Sep 25 02:38:30 archlinux kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-linux root=UUID=00000000-0000-0000-0000-000000000000 rw net.ifnames=0 rootflags=compress=zstd:1 console=tty0 console=ttyS0,115200
+Sep 25 02:38:30 archlinux kernel: BIOS-provided physical RAM map:
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff]  System RAM
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [gap 0x00000000000a0000-0x00000000000effff]
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007ffd5fff]  System RAM
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x000000007ffd6000-0x000000007fffffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [gap 0x0000000080000000-0x00000000afffffff]
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [gap 0x00000000c0000000-0x00000000fed1bfff]
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [gap 0x00000000fed20000-0x00000000feffbfff]
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [gap 0x00000000ff000000-0x00000000fffbffff]
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [gap 0x0000000100000000-0x000000fcffffffff]
+Sep 25 02:38:30 archlinux kernel: BIOS-e820: [mem 0x000000fd00000000-0x000000ffffffffff]  device reserved
+Sep 25 02:38:30 archlinux kernel: NX (Execute Disable) protection: active
+Sep 25 02:38:30 archlinux kernel: APIC: Static calls initialized
+Sep 25 02:38:30 archlinux kernel: DMI: SMBIOS 3.0.0 present.
+Sep 25 02:38:30 archlinux kernel: DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+Sep 25 02:38:30 archlinux kernel: DMI: Memory slots populated: 1/1
+Sep 25 02:38:30 archlinux kernel: Hypervisor detected: KVM
+Sep 25 02:38:30 archlinux kernel: last_pfn = 0x7ffd6 max_arch_pfn = 0x400000000
+Sep 25 02:38:30 archlinux kernel: kvm-clock: Using msrs 4b564d01 and 4b564d00
+Sep 25 02:38:30 archlinux kernel: kvm-clock: using sched offset of 154238400330 cycles
+Sep 25 02:38:30 archlinux kernel: clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+Sep 25 02:38:30 archlinux kernel: tsc: Detected 2445.430 MHz processor
+Sep 25 02:38:30 archlinux kernel: e820: update [mem 0x00000000-0x00000fff] System RAM ==> device reserved
+Sep 25 02:38:30 archlinux kernel: e820: remove [mem 0x000a0000-0x000fffff] System RAM
+Sep 25 02:38:30 archlinux kernel: last_pfn = 0x7ffd6 max_arch_pfn = 0x400000000
+Sep 25 02:38:30 archlinux kernel: MTRR map: 4 entries (3 fixed + 1 variable; max 19), built from 8 variable MTRRs
+Sep 25 02:38:30 archlinux kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+Sep 25 02:38:30 archlinux kernel: found SMP MP-table at [mem 0x000f5460-0x000f546f]
+Sep 25 02:38:30 archlinux kernel: Using GB pages for direct mapping
+Sep 25 02:38:30 archlinux kernel: RAMDISK: [mem 0x31805000-0x34bf9fff]
+Sep 25 02:38:30 archlinux kernel: ACPI: Early table checksum verification disabled
+Sep 25 02:38:30 archlinux kernel: ACPI: RSDP 0x00000000000F52A0 000014 (v00 BOCHS )
+Sep 25 02:38:30 archlinux kernel: ACPI: RSDT 0x000000007FFE239C 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:38:30 archlinux kernel: ACPI: FACP 0x000000007FFE218C 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:38:30 archlinux kernel: ACPI: DSDT 0x000000007FFE0040 00214C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:38:30 archlinux kernel: ACPI: FACS 0x000000007FFE0000 000040
+Sep 25 02:38:30 archlinux kernel: ACPI: APIC 0x000000007FFE2280 000080 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:38:30 archlinux kernel: ACPI: HPET 0x000000007FFE2300 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:38:30 archlinux kernel: ACPI: MCFG 0x000000007FFE2338 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:38:30 archlinux kernel: ACPI: WAET 0x000000007FFE2374 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 25 02:38:30 archlinux kernel: ACPI: Reserving FACP table memory at [mem 0x7ffe218c-0x7ffe227f]
+Sep 25 02:38:30 archlinux kernel: ACPI: Reserving DSDT table memory at [mem 0x7ffe0040-0x7ffe218b]
+Sep 25 02:38:30 archlinux kernel: ACPI: Reserving FACS table memory at [mem 0x7ffe0000-0x7ffe003f]
+Sep 25 02:38:30 archlinux kernel: ACPI: Reserving APIC table memory at [mem 0x7ffe2280-0x7ffe22ff]
+Sep 25 02:38:30 archlinux kernel: ACPI: Reserving HPET table memory at [mem 0x7ffe2300-0x7ffe2337]
+Sep 25 02:38:30 archlinux kernel: ACPI: Reserving MCFG table memory at [mem 0x7ffe2338-0x7ffe2373]
+Sep 25 02:38:30 archlinux kernel: ACPI: Reserving WAET table memory at [mem 0x7ffe2374-0x7ffe239b]
+Sep 25 02:38:30 archlinux kernel: No NUMA configuration found
+Sep 25 02:38:30 archlinux kernel: Faking a node at [mem 0x0000000000000000-0x000000007ffd5fff]
+Sep 25 02:38:30 archlinux kernel: NODE_DATA(0) allocated [mem 0x7ffaaf80-0x7ffd5fff]
+Sep 25 02:38:30 archlinux kernel: ACPI: PM-Timer IO Port: 0x608
+Sep 25 02:38:30 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+Sep 25 02:38:30 archlinux kernel: IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+Sep 25 02:38:30 archlinux kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+Sep 25 02:38:30 archlinux kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+Sep 25 02:38:30 archlinux kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+Sep 25 02:38:30 archlinux kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+Sep 25 02:38:30 archlinux kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+Sep 25 02:38:30 archlinux kernel: ACPI: Using ACPI (MADT) for SMP configuration information
+Sep 25 02:38:30 archlinux kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
+Sep 25 02:38:30 archlinux kernel: TSC deadline timer available
+Sep 25 02:38:30 archlinux kernel: CPU topo: Max. logical packages:   1
+Sep 25 02:38:30 archlinux kernel: CPU topo: Max. logical nodes:      1
+Sep 25 02:38:30 archlinux kernel: CPU topo: Num. nodes per package:  1
+Sep 25 02:38:30 archlinux kernel: CPU topo: Max. logical dies:       1
+Sep 25 02:38:30 archlinux kernel: CPU topo: Max. dies per package:   1
+Sep 25 02:38:30 archlinux kernel: CPU topo: Max. threads per core:   1
+Sep 25 02:38:30 archlinux kernel: CPU topo: Num. cores per package:     2
+Sep 25 02:38:30 archlinux kernel: CPU topo: Num. threads per package:   2
+Sep 25 02:38:30 archlinux kernel: CPU topo: Allowing 2 present CPUs plus 0 hotplug CPUs
+Sep 25 02:38:30 archlinux kernel: kvm-guest: APIC: eoi() replaced with kvm_guest_apic_eoi_write()
+Sep 25 02:38:30 archlinux kernel: kvm-guest: KVM setup pv remote TLB flush
+Sep 25 02:38:30 archlinux kernel: kvm-guest: setup PV sched yield
+Sep 25 02:38:30 archlinux kernel: PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+Sep 25 02:38:30 archlinux kernel: PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x000fffff]
+Sep 25 02:38:30 archlinux kernel: [gap 0xc0000000-0xfed1bfff] available for PCI devices
+Sep 25 02:38:30 archlinux kernel: Booting paravirtualized kernel on KVM
+Sep 25 02:38:30 archlinux kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+Sep 25 02:38:30 archlinux kernel: Zone ranges:
+Sep 25 02:38:30 archlinux kernel:   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+Sep 25 02:38:30 archlinux kernel:   DMA32    [mem 0x0000000001000000-0x000000007ffd5fff]
+Sep 25 02:38:30 archlinux kernel:   Normal   empty
+Sep 25 02:38:30 archlinux kernel:   Device   empty
+Sep 25 02:38:30 archlinux kernel: Movable zone start for each node
+Sep 25 02:38:30 archlinux kernel: Early memory node ranges
+Sep 25 02:38:30 archlinux kernel:   node   0: [mem 0x0000000000001000-0x000000000009efff]
+Sep 25 02:38:30 archlinux kernel:   node   0: [mem 0x0000000000100000-0x000000007ffd5fff]
+Sep 25 02:38:30 archlinux kernel: Initmem setup node 0 [mem 0x0000000000001000-0x000000007ffd5fff]
+Sep 25 02:38:30 archlinux kernel: On node 0, zone DMA: 1 pages in unavailable ranges
+Sep 25 02:38:30 archlinux kernel: On node 0, zone DMA: 97 pages in unavailable ranges
+Sep 25 02:38:30 archlinux kernel: On node 0, zone DMA32: 42 pages in unavailable ranges
+Sep 25 02:38:30 archlinux kernel: setup_percpu: NR_CPUS:8192 nr_cpumask_bits:2 nr_cpu_ids:2 nr_node_ids:1
+Sep 25 02:38:30 archlinux kernel: percpu: Embedded 63 pages/cpu s221184 r8192 d28672 u1048576
+Sep 25 02:38:30 archlinux kernel: pcpu-alloc: s221184 r8192 d28672 u1048576 alloc=1*2097152
+Sep 25 02:38:30 archlinux kernel: pcpu-alloc: [0] 0 1 
+Sep 25 02:38:30 archlinux kernel: kvm-guest: PV spinlocks enabled
+Sep 25 02:38:30 archlinux kernel: PV qspinlock hash table entries: 256 (order: 0, 4096 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: Kernel command line: BOOT_IMAGE=/boot/vmlinuz-linux root=UUID=00000000-0000-0000-0000-000000000000 rw net.ifnames=0 rootflags=compress=zstd:1 console=tty0 console=ttyS0,115200
+Sep 25 02:38:30 archlinux kernel: random: crng init done
+Sep 25 02:38:30 archlinux kernel: printk: log buffer data + meta data: 131072 + 557056 = 688128 bytes
+Sep 25 02:38:30 archlinux kernel: Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: Fallback order for Node 0: 0 
+Sep 25 02:38:30 archlinux kernel: Built 1 zonelists, mobility grouping on.  Total pages: 524148
+Sep 25 02:38:30 archlinux kernel: Policy zone: DMA32
+Sep 25 02:38:30 archlinux kernel: mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+Sep 25 02:38:30 archlinux kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+Sep 25 02:38:30 archlinux kernel: ftrace: allocating 58725 entries in 232 pages
+Sep 25 02:38:30 archlinux kernel: ftrace: allocated 232 pages with 4 groups
+Sep 25 02:38:30 archlinux kernel: Dynamic Preempt: full
+Sep 25 02:38:30 archlinux kernel: rcu: Preemptible hierarchical RCU implementation.
+Sep 25 02:38:30 archlinux kernel: rcu:         RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=2.
+Sep 25 02:38:30 archlinux kernel: rcu:         RCU priority boosting: priority 1 delay 500 ms.
+Sep 25 02:38:30 archlinux kernel:         Trampoline variant of Tasks RCU enabled.
+Sep 25 02:38:30 archlinux kernel:         Rude variant of Tasks RCU enabled.
+Sep 25 02:38:30 archlinux kernel:         Tracing variant of Tasks RCU enabled.
+Sep 25 02:38:30 archlinux kernel: rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+Sep 25 02:38:30 archlinux kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+Sep 25 02:38:30 archlinux kernel: RCU Tasks: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=2.
+Sep 25 02:38:30 archlinux kernel: RCU Tasks Rude: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=2.
+Sep 25 02:38:30 archlinux kernel: NR_IRQS: 524544, nr_irqs: 440, preallocated irqs: 16
+Sep 25 02:38:30 archlinux kernel: rcu: srcu_init: Setting srcu_struct sizes based on contention.
+Sep 25 02:38:30 archlinux kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+Sep 25 02:38:30 archlinux kernel: kfence: initialized - using 2097152 bytes for 255 objects at 0x(____ptrval____)-0x(____ptrval____)
+Sep 25 02:38:30 archlinux kernel: Console: colour VGA+ 80x25
+Sep 25 02:38:30 archlinux kernel: printk: legacy console [tty0] enabled
+Sep 25 02:38:30 archlinux kernel: printk: legacy console [ttyS0] enabled
+Sep 25 02:38:30 archlinux kernel: ACPI: Core revision 20260408
+Sep 25 02:38:30 archlinux kernel: clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+Sep 25 02:38:30 archlinux kernel: APIC: Switch to symmetric I/O mode setup
+Sep 25 02:38:30 archlinux kernel: x2apic enabled
+Sep 25 02:38:30 archlinux kernel: APIC: Switched APIC routing to: physical x2apic
+Sep 25 02:38:30 archlinux kernel: kvm-guest: APIC: send_IPI_mask() replaced with kvm_send_ipi_mask()
+Sep 25 02:38:30 archlinux kernel: kvm-guest: APIC: send_IPI_mask_allbutself() replaced with kvm_send_ipi_mask_allbutself()
+Sep 25 02:38:30 archlinux kernel: kvm-guest: setup PV IPIs
+Sep 25 02:38:30 archlinux kernel: ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+Sep 25 02:38:30 archlinux kernel: clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x233fdbaba77, max_idle_ns: 440795254155 ns
+Sep 25 02:38:30 archlinux kernel: Calibrating delay loop (skipped) preset value.. 4890.86 BogoMIPS (lpj=2445430)
+Sep 25 02:38:30 archlinux kernel: x86/cpu: User Mode Instruction Prevention (UMIP) activated
+Sep 25 02:38:30 archlinux kernel: Last level iTLB entries: 4KB 512, 2MB 255, 4MB 127
+Sep 25 02:38:30 archlinux kernel: Last level dTLB entries: 4KB 512, 2MB 255, 4MB 127, 1GB 0
+Sep 25 02:38:30 archlinux kernel: mitigations: Enabled attack vectors: user_kernel, user_user, guest_host, guest_guest, SMT mitigations: auto
+Sep 25 02:38:30 archlinux kernel: Speculative Store Bypass: Vulnerable
+Sep 25 02:38:30 archlinux kernel: Speculative Return Stack Overflow: IBPB-extending microcode not applied!
+Sep 25 02:38:30 archlinux kernel: Speculative Return Stack Overflow: WARNING: See https://kernel.org/doc/html/latest/admin-guide/hw-vuln/srso.html for mitigation options.
+Sep 25 02:38:30 archlinux kernel: Transient Scheduler Attacks: Vulnerable: No microcode
+Sep 25 02:38:30 archlinux kernel: Spectre V2 : Mitigation: Retpolines
+Sep 25 02:38:30 archlinux kernel: Speculative Return Stack Overflow: Vulnerable: Safe RET, no microcode
+Sep 25 02:38:30 archlinux kernel: Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+Sep 25 02:38:30 archlinux kernel: Spectre V2 : Spectre v2 / SpectreRSB: Filling RSB on context switch and VMEXIT
+Sep 25 02:38:30 archlinux kernel: active return thunk: srso_alias_return_thunk
+Sep 25 02:38:30 archlinux kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+Sep 25 02:38:30 archlinux kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+Sep 25 02:38:30 archlinux kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+Sep 25 02:38:30 archlinux kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+Sep 25 02:38:30 archlinux kernel: x86/fpu: Enabled xstate features 0x7, context size is 832 bytes, using 'compacted' format.
+Sep 25 02:38:30 archlinux kernel: pid_max: default: 32768 minimum: 301
+Sep 25 02:38:30 archlinux kernel: landlock: Up and running.
+Sep 25 02:38:30 archlinux kernel: Yama: becoming mindful.
+Sep 25 02:38:30 archlinux kernel: LSM support for eBPF active
+Sep 25 02:38:30 archlinux kernel: Mount-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: VFS: Finished mounting rootfs on nullfs
+Sep 25 02:38:30 archlinux kernel: smpboot: CPU0: AMD EPYC 7763 64-Core Processor (family: 0x19, model: 0x1, stepping: 0x1)
+Sep 25 02:38:30 archlinux kernel: Performance Events: PMU not available due to virtualization, using software events only.
+Sep 25 02:38:30 archlinux kernel: signal: max sigframe size: 1776
+Sep 25 02:38:30 archlinux kernel: rcu: Hierarchical SRCU implementation.
+Sep 25 02:38:30 archlinux kernel: rcu:         Max phase no-delay instances is 400.
+Sep 25 02:38:30 archlinux kernel: Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+Sep 25 02:38:30 archlinux kernel: NMI watchdog: Perf NMI watchdog permanently disabled
+Sep 25 02:38:30 archlinux kernel: smp: Bringing up secondary CPUs ...
+Sep 25 02:38:30 archlinux kernel: smpboot: x86: Booting SMP configuration:
+Sep 25 02:38:30 archlinux kernel: .... node  #0, CPUs:      #1
+Sep 25 02:38:30 archlinux kernel: smp: Brought up 1 node, 2 CPUs
+Sep 25 02:38:30 archlinux kernel: smpboot: Total of 2 processors activated (9781.72 BogoMIPS)
+Sep 25 02:38:30 archlinux kernel: Memory: 1938012K/2096592K available (22205K kernel code, 3070K rwdata, 17660K rodata, 4936K init, 5016K bss, 152212K reserved, 0K cma-reserved)
+Sep 25 02:38:30 archlinux kernel: devtmpfs: initialized
+Sep 25 02:38:30 archlinux kernel: x86/mm: Memory block size: 128MB
+Sep 25 02:38:30 archlinux kernel: posixtimers hash table entries: 1024 (order: 2, 16384 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: futex hash table entries: 512 (32768 bytes on 1 NUMA nodes, total 32 KiB, linear).
+Sep 25 02:38:30 archlinux kernel: xor: automatically using best checksumming function   avx       
+Sep 25 02:38:30 archlinux kernel: PM: RTC time: 02:38:27, date: 2026-09-25
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+Sep 25 02:38:30 archlinux kernel: DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+Sep 25 02:38:30 archlinux kernel: DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+Sep 25 02:38:30 archlinux kernel: audit: initializing netlink subsys (disabled)
+Sep 25 02:38:30 archlinux kernel: audit: type=2000 audit(1790303907.296:1): state=initialized audit_enabled=0 res=1
+Sep 25 02:38:30 archlinux kernel: thermal_sys: Registered thermal governor 'fair_share'
+Sep 25 02:38:30 archlinux kernel: thermal_sys: Registered thermal governor 'bang_bang'
+Sep 25 02:38:30 archlinux kernel: thermal_sys: Registered thermal governor 'step_wise'
+Sep 25 02:38:30 archlinux kernel: thermal_sys: Registered thermal governor 'user_space'
+Sep 25 02:38:30 archlinux kernel: thermal_sys: Registered thermal governor 'power_allocator'
+Sep 25 02:38:30 archlinux kernel: cpuidle: using governor ladder
+Sep 25 02:38:30 archlinux kernel: cpuidle: using governor menu
+Sep 25 02:38:30 archlinux kernel: Freeing SMP alternatives memory: 60K
+Sep 25 02:38:30 archlinux kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+Sep 25 02:38:30 archlinux kernel: PCI: ECAM [mem 0xb0000000-0xbfffffff] (base 0xb0000000) for domain 0000 [bus 00-ff]
+Sep 25 02:38:30 archlinux kernel: PCI: ECAM [mem 0xb0000000-0xbfffffff] reserved as E820 entry
+Sep 25 02:38:30 archlinux kernel: PCI: Using configuration type 1 for base access
+Sep 25 02:38:30 archlinux kernel: virt/tdx: TDX not supported by the host platform
+Sep 25 02:38:30 archlinux kernel: kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+Sep 25 02:38:30 archlinux kernel: HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+Sep 25 02:38:30 archlinux kernel: HugeTLB: 16380 KiB vmemmap can be freed for a 1.00 GiB page
+Sep 25 02:38:30 archlinux kernel: HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+Sep 25 02:38:30 archlinux kernel: HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+Sep 25 02:38:30 archlinux kernel: raid6: using avx2x2 recovery algorithm
+Sep 25 02:38:30 archlinux kernel: raid6: skipped pq benchmark and selected avx2x4
+Sep 25 02:38:30 archlinux kernel: ACPI: Added _OSI(Module Device)
+Sep 25 02:38:30 archlinux kernel: ACPI: Added _OSI(Processor Device)
+Sep 25 02:38:30 archlinux kernel: ACPI: Added _OSI(Processor Aggregator Device)
+Sep 25 02:38:30 archlinux kernel: ACPI: 1 ACPI AML tables successfully acquired and loaded
+Sep 25 02:38:30 archlinux kernel: ACPI: \_SB_: platform _OSC: OS support mask [006e7eff]
+Sep 25 02:38:30 archlinux kernel: ACPI: Interpreter enabled
+Sep 25 02:38:30 archlinux kernel: ACPI: PM: (supports S0 S3 S4 S5)
+Sep 25 02:38:30 archlinux kernel: ACPI: Using IOAPIC for interrupt routing
+Sep 25 02:38:30 archlinux kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+Sep 25 02:38:30 archlinux kernel: PCI: Using E820 reservations for host bridge windows
+Sep 25 02:38:30 archlinux kernel: ACPI: Enabled 2 GPEs in block 00 to 3F
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+Sep 25 02:38:30 archlinux kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+Sep 25 02:38:30 archlinux kernel: acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug LTR DPC]
+Sep 25 02:38:30 archlinux kernel: acpi PNP0A08:00: _OSC: OS now controls [SHPCHotplug PME AER PCIeCapability]
+Sep 25 02:38:30 archlinux kernel: PCI host bridge to bus 0000:00
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: root bus resource [mem 0x80000000-0xafffffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: root bus resource [mem 0x100000000-0x8ffffffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: root bus resource [bus 00-ff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: [1234:1111] type 00 class 0x030000 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: BAR 0 [mem 0xfd000000-0xfdffffff pref]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: BAR 2 [mem 0xfeb90000-0xfeb90fff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: ROM [mem 0xfeb80000-0xfeb8ffff pref]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:02.0: [1af4:1001] type 00 class 0x010000 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:02.0: BAR 0 [io  0xc000-0xc07f]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:02.0: BAR 1 [mem 0xfeb91000-0xfeb91fff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:02.0: BAR 4 [mem 0xfe000000-0xfe003fff 64bit pref]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:03.0: [1af4:1001] type 00 class 0x010000 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:03.0: BAR 0 [io  0xc080-0xc0ff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:03.0: BAR 1 [mem 0xfeb92000-0xfeb92fff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:03.0: BAR 4 [mem 0xfe004000-0xfe007fff 64bit pref]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:04.0: [1af4:1000] type 00 class 0x020000 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:04.0: BAR 0 [io  0xc1c0-0xc1df]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:04.0: BAR 1 [mem 0xfeb93000-0xfeb93fff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:04.0: BAR 4 [mem 0xfe008000-0xfe00bfff 64bit pref]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:04.0: ROM [mem 0xfeb00000-0xfeb7ffff pref]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:05.0: [1af4:1001] type 00 class 0x010000 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:05.0: BAR 0 [io  0xc100-0xc17f]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:05.0: BAR 1 [mem 0xfeb94000-0xfeb94fff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:05.0: BAR 4 [mem 0xfe00c000-0xfe00ffff 64bit pref]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:1f.0: [8086:2918] type 00 class 0x060100 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:1f.0: quirk: [io  0x0600-0x067f] claimed by ICH6 ACPI/GPIO/TCO
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:1f.2: [8086:2922] type 00 class 0x010601 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:1f.2: BAR 4 [io  0xc1e0-0xc1ff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:1f.2: BAR 5 [mem 0xfeb95000-0xfeb95fff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:1f.3: [8086:2930] type 00 class 0x0c0500 conventional PCI endpoint
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:1f.3: BAR 4 [io  0x0700-0x073f]
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKE configured for IRQ 10
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKF configured for IRQ 10
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKG configured for IRQ 11
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link LNKH configured for IRQ 11
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSIA configured for IRQ 16
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSIB configured for IRQ 17
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSIC configured for IRQ 18
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSID configured for IRQ 19
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSIE configured for IRQ 20
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSIF configured for IRQ 21
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSIG configured for IRQ 22
+Sep 25 02:38:30 archlinux kernel: ACPI: PCI: Interrupt link GSIH configured for IRQ 23
+Sep 25 02:38:30 archlinux kernel: iommu: Default domain type: Translated
+Sep 25 02:38:30 archlinux kernel: iommu: DMA domain TLB invalidation policy: lazy mode
+Sep 25 02:38:30 archlinux kernel: SCSI subsystem initialized
+Sep 25 02:38:30 archlinux kernel: libata version 3.00 loaded.
+Sep 25 02:38:30 archlinux kernel: ACPI: bus type USB registered
+Sep 25 02:38:30 archlinux kernel: usbcore: registered new interface driver usbfs
+Sep 25 02:38:30 archlinux kernel: usbcore: registered new interface driver hub
+Sep 25 02:38:30 archlinux kernel: usbcore: registered new device driver usb
+Sep 25 02:38:30 archlinux kernel: EDAC MC: Ver: 3.0.0
+Sep 25 02:38:30 archlinux kernel: NetLabel: Initializing
+Sep 25 02:38:30 archlinux kernel: NetLabel:  domain hash size = 128
+Sep 25 02:38:30 archlinux kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+Sep 25 02:38:30 archlinux kernel: NetLabel:  unlabeled traffic allowed by default
+Sep 25 02:38:30 archlinux kernel: mctp: management component transport protocol core
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_MCTP protocol family
+Sep 25 02:38:30 archlinux kernel: PCI: Using ACPI for IRQ routing
+Sep 25 02:38:30 archlinux kernel: PCI: pci_cache_line_size set to 64 bytes
+Sep 25 02:38:30 archlinux kernel: e820: register RAM buffer resource [mem 0x0009fc00-0x0009ffff]
+Sep 25 02:38:30 archlinux kernel: e820: register RAM buffer resource [mem 0x7ffd6000-0x7fffffff]
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: vgaarb: setting as boot VGA device
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: vgaarb: bridge control possible
+Sep 25 02:38:30 archlinux kernel: pci 0000:00:01.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+Sep 25 02:38:30 archlinux kernel: vgaarb: loaded
+Sep 25 02:38:30 archlinux kernel: hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+Sep 25 02:38:30 archlinux kernel: hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+Sep 25 02:38:30 archlinux kernel: clocksource: Switched to clocksource kvm-clock
+Sep 25 02:38:30 archlinux kernel: VFS: Disk quotas dquot_6.6.0
+Sep 25 02:38:30 archlinux kernel: VFS: Dquot-cache hash table entries: 512 (4096 bytes)
+Sep 25 02:38:30 archlinux kernel: acpi PNP0C01:00: Reserved [mem 0xb0000000-0xbfffffff]
+Sep 25 02:38:30 archlinux kernel: pnp: PnP ACPI init
+Sep 25 02:38:30 archlinux kernel: pnp: PnP ACPI: found 4 devices
+Sep 25 02:38:30 archlinux kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_INET protocol family
+Sep 25 02:38:30 archlinux kernel: IP idents hash table entries: 32768 (order: 6, 262144 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: tcp_listen_portaddr_hash hash table entries: 1024 (order: 2, 16384 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: TCP established hash table entries: 16384 (order: 5, 131072 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: TCP bind hash table entries: 16384 (order: 7, 524288 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: TCP: Hash tables configured (established 16384 bind 16384)
+Sep 25 02:38:30 archlinux kernel: MPTCP token hash table entries: 2048 (order: 4, 49152 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: UDP hash table entries: 1024 (order: 4, 65536 bytes, linear)
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_UNIX/PF_LOCAL protocol family
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_XDP protocol family
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: resource 7 [mem 0x80000000-0xafffffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: resource 8 [mem 0xc0000000-0xfebfffff window]
+Sep 25 02:38:30 archlinux kernel: pci_bus 0000:00: resource 9 [mem 0x100000000-0x8ffffffff window]
+Sep 25 02:38:30 archlinux kernel: PCI: CLS 0 bytes, default 64
+Sep 25 02:38:30 archlinux kernel: Trying to unpack rootfs image as initramfs...
+Sep 25 02:38:30 archlinux kernel: clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x233fdbaba77, max_idle_ns: 440795254155 ns
+Sep 25 02:38:30 archlinux kernel: Initialise system trusted keyrings
+Sep 25 02:38:30 archlinux kernel: Key type blacklist registered
+Sep 25 02:38:30 archlinux kernel: workingset: timestamp_bits=36 (anon: 31) max_order=19 bucket_order=0 (anon: 0)
+Sep 25 02:38:30 archlinux kernel: fuse: init (API version 7.45)
+Sep 25 02:38:30 archlinux kernel: integrity: Platform Keyring initialized
+Sep 25 02:38:30 archlinux kernel: integrity: Machine keyring initialized
+Sep 25 02:38:30 archlinux kernel: Key type asymmetric registered
+Sep 25 02:38:30 archlinux kernel: Asymmetric key parser 'x509' registered
+Sep 25 02:38:30 archlinux kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 245)
+Sep 25 02:38:30 archlinux kernel: io scheduler mq-deadline registered
+Sep 25 02:38:30 archlinux kernel: io scheduler kyber registered
+Sep 25 02:38:30 archlinux kernel: io scheduler bfq registered
+Sep 25 02:38:30 archlinux kernel: ledtrig-cpu: registered to indicate activity on CPUs
+Sep 25 02:38:30 archlinux kernel: input: Power Button as /devices/platform/LNXPWRBN:00/input/input0
+Sep 25 02:38:30 archlinux kernel: ACPI: button: Power Button [PWRF]
+Sep 25 02:38:30 archlinux kernel: ACPI: \_SB_.GSIG: Enabled at IRQ 22
+Sep 25 02:38:30 archlinux kernel: ACPI: \_SB_.GSIH: Enabled at IRQ 23
+Sep 25 02:38:30 archlinux kernel: ACPI: \_SB_.GSIE: Enabled at IRQ 20
+Sep 25 02:38:30 archlinux kernel: ACPI: \_SB_.GSIF: Enabled at IRQ 21
+Sep 25 02:38:30 archlinux kernel: Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+Sep 25 02:38:30 archlinux kernel: 00:03: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+Sep 25 02:38:30 archlinux kernel: Non-volatile memory driver v1.3
+Sep 25 02:38:30 archlinux kernel: ACPI: bus type drm_connector registered
+Sep 25 02:38:30 archlinux kernel: virtio_blk virtio0: 2/0/0 default/read/poll queues
+Sep 25 02:38:30 archlinux kernel: virtio_blk virtio0: [vda] 41943040 512-byte logical blocks (21.5 GB/20.0 GiB)
+Sep 25 02:38:30 archlinux kernel:  vda: vda1 vda2 vda3
+Sep 25 02:38:30 archlinux kernel: virtio_blk virtio1: 2/0/0 default/read/poll queues
+Sep 25 02:38:30 archlinux kernel: virtio_blk virtio1: [vdb] 131072 512-byte logical blocks (67.1 MB/64.0 MiB)
+Sep 25 02:38:30 archlinux kernel: virtio_blk virtio3: 2/0/0 default/read/poll queues
+Sep 25 02:38:30 archlinux kernel: virtio_blk virtio3: [vdc] 736 512-byte logical blocks (377 kB/368 KiB)
+Sep 25 02:38:30 archlinux kernel: ACPI: \_SB_.GSIA: Enabled at IRQ 16
+Sep 25 02:38:30 archlinux kernel: ahci 0000:00:1f.2: AHCI vers 0001.0000, 32 command slots, 1.5 Gbps, SATA mode
+Sep 25 02:38:30 archlinux kernel: ahci 0000:00:1f.2: 6/6 ports implemented (port mask 0x3f)
+Sep 25 02:38:30 archlinux kernel: ahci 0000:00:1f.2: flags: 64bit ncq only 
+Sep 25 02:38:30 archlinux kernel: scsi host0: ahci
+Sep 25 02:38:30 archlinux kernel: scsi host1: ahci
+Sep 25 02:38:30 archlinux kernel: scsi host2: ahci
+Sep 25 02:38:30 archlinux kernel: scsi host3: ahci
+Sep 25 02:38:30 archlinux kernel: scsi host4: ahci
+Sep 25 02:38:30 archlinux kernel: scsi host5: ahci
+Sep 25 02:38:30 archlinux kernel: ata1: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95100 irq 33 lpm-pol 1
+Sep 25 02:38:30 archlinux kernel: ata2: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95180 irq 33 lpm-pol 1
+Sep 25 02:38:30 archlinux kernel: ata3: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95200 irq 33 lpm-pol 1
+Sep 25 02:38:30 archlinux kernel: ata4: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95280 irq 33 lpm-pol 1
+Sep 25 02:38:30 archlinux kernel: ata5: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95300 irq 33 lpm-pol 1
+Sep 25 02:38:30 archlinux kernel: ata6: SATA max UDMA/133 abar m4096@0xfeb95000 port 0xfeb95380 irq 33 lpm-pol 1
+Sep 25 02:38:30 archlinux kernel: usbcore: registered new interface driver usbserial_generic
+Sep 25 02:38:30 archlinux kernel: usbserial: USB Serial support registered for generic
+Sep 25 02:38:30 archlinux kernel: i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+Sep 25 02:38:30 archlinux kernel: serio: i8042 KBD port at 0x60,0x64 irq 1
+Sep 25 02:38:30 archlinux kernel: serio: i8042 AUX port at 0x60,0x64 irq 12
+Sep 25 02:38:30 archlinux kernel: rtc_cmos PNP0B00:00: RTC can wake from S4
+Sep 25 02:38:30 archlinux kernel: input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+Sep 25 02:38:30 archlinux kernel: rtc_cmos PNP0B00:00: registered as rtc0
+Sep 25 02:38:30 archlinux kernel: rtc_cmos PNP0B00:00: setting system clock to 2026-09-25T02:38:28 UTC (1790303908)
+Sep 25 02:38:30 archlinux kernel: rtc_cmos PNP0B00:00: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+Sep 25 02:38:30 archlinux kernel: hid: raw HID events driver (C) Jiri Kosina
+Sep 25 02:38:30 archlinux kernel: usbcore: registered new interface driver usbhid
+Sep 25 02:38:30 archlinux kernel: usbhid: USB HID core driver
+Sep 25 02:38:30 archlinux kernel: drop_monitor: Initializing network drop monitor service
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_INET6 protocol family
+Sep 25 02:38:30 archlinux kernel: Segment Routing with IPv6
+Sep 25 02:38:30 archlinux kernel: RPL Segment Routing with IPv6
+Sep 25 02:38:30 archlinux kernel: In-situ OAM (IOAM) with IPv6
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_PACKET protocol family
+Sep 25 02:38:30 archlinux kernel: IPI shorthand broadcast: enabled
+Sep 25 02:38:30 archlinux kernel: sched_clock: Marking stable (868034013, 33082820)->(927918523, -26801690)
+Sep 25 02:38:30 archlinux kernel: registered taskstats version 1
+Sep 25 02:38:30 archlinux kernel: Loading compiled-in X.509 certificates
+Sep 25 02:38:30 archlinux kernel: Freeing initrd memory: 53204K
+Sep 25 02:38:30 archlinux kernel: Loaded X.509 cert 'Build time autogenerated kernel key: d2bb598ffa8d687802e295a9d59e4ad9d032188c'
+Sep 25 02:38:30 archlinux kernel: zswap: loaded using pool zstd
+Sep 25 02:38:30 archlinux kernel: Demotion targets for Node 0: null
+Sep 25 02:38:30 archlinux kernel: Key type .fscrypt registered
+Sep 25 02:38:30 archlinux kernel: Key type fscrypt-provisioning registered
+Sep 25 02:38:30 archlinux kernel: Btrfs loaded, zoned=yes, fsverity=yes
+Sep 25 02:38:30 archlinux kernel: Key type big_key registered
+Sep 25 02:38:30 archlinux kernel: PM:   Magic number: 10:687:612
+Sep 25 02:38:30 archlinux kernel: tty tty: hash matches
+Sep 25 02:38:30 archlinux kernel: RAS: Correctable Errors collector initialized.
+Sep 25 02:38:30 archlinux kernel: clk: Disabling unused clocks
+Sep 25 02:38:30 archlinux kernel: PM: genpd: Disabling unused power domains
+Sep 25 02:38:30 archlinux kernel: ata2: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:38:30 archlinux kernel: ata4: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:38:30 archlinux kernel: ata5: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:38:30 archlinux kernel: ata3: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+Sep 25 02:38:30 archlinux kernel: ata3.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+Sep 25 02:38:30 archlinux kernel: ata3.00: applying bridge limits
+Sep 25 02:38:30 archlinux kernel: ata3.00: configured for UDMA/100
+Sep 25 02:38:30 archlinux kernel: ata1: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:38:30 archlinux kernel: ata6: SATA link down (SStatus 0 SControl 300)
+Sep 25 02:38:30 archlinux kernel: scsi 2001:db8::1 CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+Sep 25 02:38:30 archlinux kernel: Freeing unused decrypted memory: 2028K
+Sep 25 02:38:30 archlinux kernel: Freeing unused kernel image (initmem) memory: 4936K
+Sep 25 02:38:30 archlinux kernel: Write protecting the kernel read-only data: 40960k
+Sep 25 02:38:30 archlinux kernel: Freeing unused kernel image (text/rodata gap) memory: 320K
+Sep 25 02:38:30 archlinux kernel: Freeing unused kernel image (rodata/data gap) memory: 772K
+Sep 25 02:38:30 archlinux kernel: x86/mm: Checked W+X mappings: passed, no W+X pages found.
+Sep 25 02:38:30 archlinux kernel: rodata_test: all tests were successful
+Sep 25 02:38:30 archlinux kernel: Run /init as init process
+Sep 25 02:38:30 archlinux kernel:   with arguments:
+Sep 25 02:38:30 archlinux kernel:     /init
+Sep 25 02:38:30 archlinux kernel:   with environment:
+Sep 25 02:38:30 archlinux kernel:     HOME=/
+Sep 25 02:38:30 archlinux kernel:     TERM=linux
+Sep 25 02:38:30 archlinux kernel: NET: Registered PF_VSOCK protocol family
+Sep 25 02:38:30 archlinux systemd[1]: Successfully made /usr/ read-only.
+Sep 25 02:38:30 archlinux systemd[1]: systemd 261.3-1-arch running in system mode (+PAM +AUDIT -SELINUX +APPARMOR -IMA +IPE +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +LIBARCHIVE)
+Sep 25 02:38:30 archlinux systemd[1]: Detected virtualization kvm.
+Sep 25 02:38:30 archlinux systemd[1]: Detected architecture x86-64.
+Sep 25 02:38:30 archlinux systemd[1]: Running in initrd.
+Sep 25 02:38:30 archlinux systemd[1]: Initializing machine ID from random generator.
+Sep 25 02:38:30 archlinux systemd[1]: Queued start job for default target Initrd Default Target.
+Sep 25 02:38:30 archlinux systemd[1]: Expecting device /dev/disk/by-uuid/00000000-0000-0000-0000-000000000000...
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Path Units.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Slice Units.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Swaps.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Timer Units.
+Sep 25 02:38:30 archlinux systemd[1]: Listening on Journal Socket (/dev/log).
+Sep 25 02:38:30 archlinux systemd[1]: Listening on Journal Sockets.
+Sep 25 02:38:30 archlinux systemd[1]: Listening on udev Control Socket.
+Sep 25 02:38:30 archlinux systemd[1]: Listening on udev Kernel Socket.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Socket Units.
+Sep 25 02:38:30 archlinux systemd[1]: Starting Create List of Static Device Nodes...
+Sep 25 02:38:30 archlinux systemd[1]: Early Battery Level Check skipped, unmet condition check ConditionDirectoryNotEmpty=/sys/class/power_supply
+Sep 25 02:38:30 archlinux systemd[1]: Display Boot-Time Emergency Messages In Full Screen skipped, unmet condition check ConditionVirtualization=no
+Sep 25 02:38:30 archlinux systemd[1]: Starting Journal Service...
+Sep 25 02:38:30 archlinux systemd[1]: Starting Load Kernel Modules...
+Sep 25 02:38:30 archlinux systemd[1]: TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:30 archlinux systemd[1]: TPM PCR Barrier (initrd) skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:30 archlinux systemd[1]: Starting Create Static Device Nodes in /dev...
+Sep 25 02:38:30 archlinux systemd[1]: Starting Coldplug All udev Devices...
+Sep 25 02:38:30 archlinux systemd[1]: Finished Create List of Static Device Nodes.
+Sep 25 02:38:30 archlinux systemd-journald[96]: Collecting audit messages is disabled.
+Sep 25 02:38:30 archlinux systemd-journald[96]: Journal started
+Sep 25 02:38:30 archlinux systemd-journald[96]: Runtime Journal (/run/log/journal/00000000000000000000000000000000) is 4.8M, max 39.1M, 34.2M free.
+Sep 25 02:38:30 archlinux systemd[1]: Finished Create Static Device Nodes in /dev.
+Sep 25 02:38:30 archlinux systemd[1]: Started Journal Service.
+Sep 25 02:38:30 archlinux systemd[1]: Finished Load Kernel Modules.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Preparation for Local File Systems.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Local File Systems.
+Sep 25 02:38:30 archlinux systemd[1]: Starting Create System Files and Directories...
+Sep 25 02:38:30 archlinux systemd[1]: Starting Rule-based Manager for Device Events and Files...
+Sep 25 02:38:30 archlinux systemd[1]: Finished Create System Files and Directories.
+Sep 25 02:38:30 archlinux systemd-udevd[106]: Using default interface naming scheme 'v261'.
+Sep 25 02:38:30 archlinux systemd[1]: Started Rule-based Manager for Device Events and Files.
+Sep 25 02:38:30 archlinux systemd[1]: Finished Coldplug All udev Devices.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target System Initialization.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Basic System.
+Sep 25 02:38:30 archlinux systemd[1]: Found device /dev/disk/by-uuid/00000000-0000-0000-0000-000000000000.
+Sep 25 02:38:30 archlinux systemd[1]: Reached target Initrd Root Device.
+Sep 25 02:38:30 archlinux systemd[1]: Starting File System Check on /dev/disk/by-uuid/00000000-0000-0000-0000-000000000000...
+Sep 25 02:38:30 archlinux systemd[1]: Finished File System Check on /dev/disk/by-uuid/00000000-0000-0000-0000-000000000000.
+Sep 25 02:38:30 archlinux kernel: lpc_ich 0000:00:1f.0: I/O space for GPIO uninitialized
+Sep 25 02:38:30 archlinux kernel: bochs-drm 0000:00:01.0: vgaarb: deactivate vga console
+Sep 25 02:38:30 archlinux kernel: Console: switching to colour dummy device 80x25
+Sep 25 02:38:30 archlinux kernel: [drm] Found bochs VGA, ID 0xb0c5.
+Sep 25 02:38:30 archlinux kernel: [drm] Framebuffer size 16384 kB @ 0xfd000000, mmio @ 0xfeb90000.
+Sep 25 02:38:30 archlinux kernel: bochs-drm 0000:00:01.0: [drm] Registered 1 planes with drm panic
+Sep 25 02:38:30 archlinux kernel: [drm] Initialized bochs-drm 1.0.0 for 0000:00:01.0 on minor 0
+Sep 25 02:38:30 archlinux systemd[1]: Starting Virtual Console Setup...
+Sep 25 02:38:30 archlinux kernel: sr 2001:db8::1 [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+Sep 25 02:38:30 archlinux systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+Sep 25 02:38:30 archlinux systemd[1]: Stopped Virtual Console Setup.
+Sep 25 02:38:30 archlinux kernel: cdrom: Uniform CD-ROM driver Revision: 3.20
+Sep 25 02:38:30 archlinux kernel: sr 2001:db8::1 Attached scsi CD-ROM sr0
+Sep 25 02:38:30 archlinux kernel: Console: switching to colour frame buffer device 160x50
+Sep 25 02:38:30 archlinux kernel: bochs-drm 0000:00:01.0: [drm] fb0: bochs-drmdrmfb frame buffer device
+Sep 25 02:38:30 archlinux systemd[1]: Starting Virtual Console Setup...
+Sep 25 02:38:30 archlinux systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+Sep 25 02:38:30 archlinux systemd[1]: Stopped Virtual Console Setup.
+Sep 25 02:38:30 archlinux systemd[1]: Starting Virtual Console Setup...
+Sep 25 02:38:30 archlinux systemd-vconsole-setup[143]: Configuration of first virtual console was skipped, ignoring remaining ones.
+Sep 25 02:38:30 archlinux systemd[1]: Finished Virtual Console Setup.
+Sep 25 02:38:31 archlinux systemd[1]: Mounting /sysroot...
+Sep 25 02:38:31 archlinux kernel: BTRFS: device fsid 00000000-0000-0000-0000-000000000000 devid 1 transid 145 /dev/vda3 (254:3) scanned by mount (146)
+Sep 25 02:38:31 archlinux kernel: BTRFS info (device vda3): first mount of filesystem 00000000-0000-0000-0000-000000000000
+Sep 25 02:38:31 archlinux kernel: BTRFS info (device vda3): using crc32c checksum algorithm
+Sep 25 02:38:31 archlinux kernel: BTRFS info (device vda3): turning on async discard
+Sep 25 02:38:31 archlinux kernel: BTRFS info (device vda3): enabling free space tree
+Sep 25 02:38:31 archlinux kernel: BTRFS info (device vda3): use zstd compression, level 1
+Sep 25 02:38:31 archlinux systemd[1]: Mounted /sysroot.
+Sep 25 02:38:31 archlinux systemd[1]: Reached target Initrd Root File System.
+Sep 25 02:38:31 archlinux systemd[1]: Starting Mountpoints Configured in the Real Root...
+Sep 25 02:38:31 archlinux systemd[1]: initrd-parse-etc.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Finished Mountpoints Configured in the Real Root.
+Sep 25 02:38:31 archlinux systemd[1]: initrd-parse-etc.service: Triggering OnSuccess= dependencies.
+Sep 25 02:38:31 archlinux systemd[1]: Reached target Initrd File Systems.
+Sep 25 02:38:31 archlinux systemd[1]: Reached target Initrd Default Target.
+Sep 25 02:38:31 archlinux systemd[1]: Starting Cleaning Up and Shutting Down Daemons...
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Initrd Default Target.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Basic System.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Initrd Root Device.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Path Units.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Slice Units.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Socket Units.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target System Initialization.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Swaps.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Timer Units.
+Sep 25 02:38:31 archlinux systemd[1]: kmod-static-nodes.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped Create List of Static Device Nodes.
+Sep 25 02:38:31 archlinux systemd[1]: systemd-modules-load.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped Load Kernel Modules.
+Sep 25 02:38:31 archlinux systemd[1]: systemd-tmpfiles-setup.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped Create System Files and Directories.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Local File Systems.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped target Preparation for Local File Systems.
+Sep 25 02:38:31 archlinux systemd[1]: systemd-udev-trigger.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped Coldplug All udev Devices.
+Sep 25 02:38:31 archlinux systemd[1]: Stopping Rule-based Manager for Device Events and Files...
+Sep 25 02:38:31 archlinux systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped Virtual Console Setup.
+Sep 25 02:38:31 archlinux systemd[1]: initrd-cleanup.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Finished Cleaning Up and Shutting Down Daemons.
+Sep 25 02:38:31 archlinux systemd[1]: systemd-udevd.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped Rule-based Manager for Device Events and Files.
+Sep 25 02:38:31 archlinux systemd[1]: systemd-udevd-control.socket: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Closed udev Control Socket.
+Sep 25 02:38:31 archlinux systemd[1]: Starting Cleanup udev Database...
+Sep 25 02:38:31 archlinux systemd[1]: systemd-tmpfiles-setup-dev.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Stopped Create Static Device Nodes in /dev.
+Sep 25 02:38:31 archlinux systemd[1]: initrd-udevadm-cleanup-db.service: Deactivated successfully.
+Sep 25 02:38:31 archlinux systemd[1]: Finished Cleanup udev Database.
+Sep 25 02:38:31 archlinux systemd[1]: Reached target Switch Root.
+Sep 25 02:38:31 archlinux systemd[1]: Starting Switch Root...
+Sep 25 02:38:31 archlinux systemd[1]: Switching root.
+Sep 25 02:38:31 archlinux systemd-journald[96]: Journal stopped
+Sep 25 02:38:32 host01 systemd-journald[96]: Received SIGTERM from PID 1 (systemd).
+Sep 25 02:38:32 host01 systemd[1]: systemd 261.3-1-arch running in system mode (+PAM +AUDIT -SELINUX +APPARMOR -IMA +IPE +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +LIBARCHIVE)
+Sep 25 02:38:32 host01 systemd[1]: Detected virtualization kvm.
+Sep 25 02:38:32 host01 systemd[1]: Detected architecture x86-64.
+Sep 25 02:38:32 host01 systemd[1]: Hostname set to <host01>.
+Sep 25 02:38:32 host01 systemd[1]: bpf-restrict-fs: LSM BPF program attached
+Sep 25 02:38:32 host01 systemd[1]: initrd-switch-root.service: Deactivated successfully.
+Sep 25 02:38:32 host01 systemd[1]: Stopped Switch Root.
+Sep 25 02:38:32 host01 systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/dirmngr.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/getty.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/gpg-agent.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/gpg-agent-browser.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/gpg-agent-extra.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/gpg-agent-ssh.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/keyboxd.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/modprobe.
+Sep 25 02:38:32 host01 systemd[1]: Created slice Slice /system/serial-getty.
+Sep 25 02:38:32 host01 systemd[1]: Created slice User and Session Slice.
+Sep 25 02:38:32 host01 systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+Sep 25 02:38:32 host01 systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Sep 25 02:38:32 host01 systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+Sep 25 02:38:32 host01 systemd[1]: Expecting device /dev/ttyS0...
+Sep 25 02:38:32 host01 systemd[1]: Reached target Image Downloads.
+Sep 25 02:38:32 host01 systemd[1]: Stopped target Switch Root.
+Sep 25 02:38:32 host01 systemd[1]: Stopped target Initrd File Systems.
+Sep 25 02:38:32 host01 systemd[1]: Stopped target Initrd Root File System.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Local Integrity Protected Volumes.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Path Units.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Remote Encrypted Volumes.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Remote File Systems.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Remote Integrity Protected Volumes.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Remote Verity Protected Volumes.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Slice Units.
+Sep 25 02:38:32 host01 systemd[1]: Reached target Local Verity Protected Volumes.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Device-mapper event daemon FIFOs.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Query the User Interactively for a Password.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Process Core Dump Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Credential Encryption/Decryption.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Factory Reset Management.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Hostname Service Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Journal Audit Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on DDI File System Mounter Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Console Output Muting Service Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Network Management Metrics Varlink Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Network Management Varlink Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Network Management Netlink Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Namespace Resource Manager Socket.
+Sep 25 02:38:32 host01 systemd[1]: TPM PCR Measurements skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:32 host01 systemd[1]: Make TPM PCR Policy skipped, unmet condition check ConditionSecurity=measured-uki
+Sep 25 02:38:32 host01 systemd[1]: Listening on Disk Repartitioning Service Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Report System Basic Metrics Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on CGroup Report Varlink Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Resolve Monitor Varlink Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Resolve Service Varlink Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Simple Block Device Backed Storage Provider.
+Sep 25 02:38:32 host01 systemd[1]: Listening on Simple File System Backed Storage Provider.
+Sep 25 02:38:32 host01 systemd[1]: Listening on udev Control Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on udev Varlink Socket.
+Sep 25 02:38:32 host01 systemd[1]: Listening on User Database Manager Socket.
+Sep 25 02:38:32 host01 systemd[1]: Mounting Huge Pages File System...
+Sep 25 02:38:32 host01 systemd[1]: Mounting POSIX Message Queue File System...
+Sep 25 02:38:32 host01 systemd[1]: Mounting Kernel Debug File System...
+Sep 25 02:38:32 host01 systemd[1]: Mounting Kernel Trace File System...
+Sep 25 02:38:32 host01 systemd[1]: Starting Create List of Static Device Nodes...
+Sep 25 02:38:32 host01 systemd[1]: Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs
+Sep 25 02:38:32 host01 systemd[1]: Mounting Kernel Configuration File System...
+Sep 25 02:38:32 host01 systemd[1]: Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+Sep 25 02:38:32 host01 systemd[1]: Load Kernel Module efi_pstore skipped, unmet condition check ConditionKernelModuleLoaded=!efi_pstore
+Sep 25 02:38:32 host01 systemd[1]: Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+Sep 25 02:38:32 host01 systemd[1]: Mounting FUSE Control File System...
+Sep 25 02:38:32 host01 systemd[1]: Clear SysFail Entry If The Boot Is Successful skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/LoaderEntrySysFail-00000000-0000-0000-0000-000000000000
+Sep 25 02:38:32 host01 systemd[1]: systemd-fsck-root.service: Deactivated successfully.
+Sep 25 02:38:32 host01 systemd[1]: Stopped File System Check on Root Device.
+Sep 25 02:38:32 host01 systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-00000000-0000-0000-0000-000000000000
+Sep 25 02:38:32 host01 systemd[1]: Starting Journal Service...
+Sep 25 02:38:32 host01 systemd[1]: Load Kernel Modules skipped, no trigger condition checks were met.
+Sep 25 02:38:32 host01 systemd[1]: Starting Generate Network Units from Kernel Command Line...
+Sep 25 02:38:32 host01 systemd[1]: TPM PCR Machine ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:32 host01 systemd[1]: TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:32 host01 systemd[1]: Starting Remount Root and Kernel File Systems...
+Sep 25 02:38:32 host01 systemd[1]: Starting Apply Kernel Variables...
+Sep 25 02:38:32 host01 systemd[1]: Starting Wait Until Kernel Time Synchronized...
+Sep 25 02:38:32 host01 systemd[1]: Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:32 host01 systemd[1]: TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release
+Sep 25 02:38:32 host01 systemd[1]: Reached target Local Encrypted Volumes.
+Sep 25 02:38:32 host01 systemd[1]: TPM NvPCR Product ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:32 host01 systemd-journald[217]: Collecting audit messages is enabled.
+Sep 25 02:38:32 host01 systemd[1]: Starting Load udev Rules from Credentials...
+Sep 25 02:38:32 host01 systemd-journald[217]: Journal started
+Sep 25 02:38:32 host01 systemd-journald[217]: Runtime Journal (/run/log/journal/00000000000000000000000000000000) is 4.8M, max 39.1M, 34.2M free.
+Sep 25 02:38:32 host01 systemd[1]: Queued start job for default target Graphical Interface.
+Sep 25 02:38:32 host01 systemd[1]: systemd-journald.service: Deactivated successfully.
+Sep 25 02:38:32 host01 systemd[1]: Starting Coldplug All udev Devices...
+Sep 25 02:38:32 host01 systemd-time-wait-sync[222]: adjtime state 5 status 40 time Fri 2026-09-25 02:38:32.889572 UTC
+Sep 25 02:38:32 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-journald comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Started Journal Service.
+Sep 25 02:38:32 host01 kernel: audit: type=1130 audit(1790303912.895:2): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-journald comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Mounted Huge Pages File System.
+Sep 25 02:38:32 host01 systemd[1]: Mounted POSIX Message Queue File System.
+Sep 25 02:38:32 host01 systemd[1]: Mounted Kernel Debug File System.
+Sep 25 02:38:32 host01 systemd[1]: Mounted Kernel Trace File System.
+Sep 25 02:38:32 host01 systemd[1]: Finished Create List of Static Device Nodes.
+Sep 25 02:38:32 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=kmod-static-nodes comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Mounted Kernel Configuration File System.
+Sep 25 02:38:32 host01 systemd[1]: Mounted FUSE Control File System.
+Sep 25 02:38:32 host01 kernel: audit: type=1130 audit(1790303912.908:3): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=kmod-static-nodes comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Finished Generate Network Units from Kernel Command Line.
+Sep 25 02:38:32 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-network-generator comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 kernel: audit: type=1130 audit(1790303912.915:4): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-network-generator comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Finished Remount Root and Kernel File Systems.
+Sep 25 02:38:32 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-remount-fs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Finished Apply Kernel Variables.
+Sep 25 02:38:32 host01 kernel: audit: type=1130 audit(1790303912.918:5): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-remount-fs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-sysctl comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Finished Load udev Rules from Credentials.
+Sep 25 02:38:32 host01 kernel: audit: type=1130 audit(1790303912.920:6): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-sysctl comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-udev-load-credentials comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 kernel: audit: type=1130 audit(1790303912.923:7): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-udev-load-credentials comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Activating swap /swap/swapfile...
+Sep 25 02:38:32 host01 systemd[1]: Rebuild Hardware Database skipped, unmet condition check ConditionNeedsUpdate=/etc
+Sep 25 02:38:32 host01 systemd[1]: Starting Flush Journal to Persistent Storage...
+Sep 25 02:38:32 host01 systemd[1]: Platform Persistent Storage Archival skipped, unmet condition check ConditionDirectoryNotEmpty=/sys/fs/pstore
+Sep 25 02:38:32 host01 systemd[1]: Starting Load/Save OS Random Seed...
+Sep 25 02:38:32 host01 systemd[1]: Starting Create Static Device Nodes in /dev gracefully...
+Sep 25 02:38:32 host01 systemd[1]: TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:32 host01 systemd[1]: Activated swap /swap/swapfile.
+Sep 25 02:38:32 host01 kernel: Adding 524284k swap on /swap/swapfile.  Priority:-1 extents:4 across:1186892k 
+Sep 25 02:38:32 host01 systemd[1]: Reached target Swaps.
+Sep 25 02:38:32 host01 systemd-journald[217]: Time spent on flushing to /var/log/journal/00000000000000000000000000000000 is 19.923ms for 692 entries.
+Sep 25 02:38:32 host01 systemd-journald[217]: System Journal (/var/log/journal/00000000000000000000000000000000) is 8M, max 1.9G, 1.9G free.
+Sep 25 02:38:32 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-random-seed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd-journald[217]: Received client request to flush runtime journal.
+Sep 25 02:38:32 host01 systemd[1]: Finished Load/Save OS Random Seed.
+Sep 25 02:38:32 host01 audit: BPF prog-id=31 op=LOAD
+Sep 25 02:38:32 host01 kernel: audit: type=1130 audit(1790303912.976:8): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-random-seed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:32 host01 systemd[1]: Starting Load Kernel Module tun...
+Sep 25 02:38:32 host01 kernel: audit: type=1334 audit(1790303912.993:9): prog-id=31 op=LOAD
+Sep 25 02:38:32 host01 audit: BPF prog-id=32 op=LOAD
+Sep 25 02:38:32 host01 audit: BPF prog-id=33 op=LOAD
+Sep 25 02:38:32 host01 kernel: audit: type=1334 audit(1790303912.995:10): prog-id=32 op=LOAD
+Sep 25 02:38:32 host01 kernel: audit: type=1334 audit(1790303912.995:11): prog-id=33 op=LOAD
+Sep 25 02:38:33 host01 systemd[1]: Starting User Database Manager...
+Sep 25 02:38:33 host01 systemd[1]: Finished Flush Journal to Persistent Storage.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-journal-flush comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 kernel: tun: Universal TUN/TAP device driver, 1.6
+Sep 25 02:38:33 host01 systemd[1]: modprobe@tun.service: Deactivated successfully.
+Sep 25 02:38:33 host01 systemd[1]: Finished Load Kernel Module tun.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=modprobe@tun comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=modprobe@tun comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 audit: BPF prog-id=34 op=LOAD
+Sep 25 02:38:33 host01 audit: BPF prog-id=35 op=LOAD
+Sep 25 02:38:33 host01 audit: BPF prog-id=36 op=LOAD
+Sep 25 02:38:33 host01 systemd[1]: Starting Namespace Resource Manager...
+Sep 25 02:38:33 host01 systemd[1]: Started User Database Manager.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-userdbd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 audit: BPF prog-id=37 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=14 a0=5 a1=7ffd59dbafa0 a2=94 a3=1000 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=37 op=UNLOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=e a1=0 a2=0 a3=0 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=38 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=11 a0=5 a1=7ffd59dbade0 a2=a8 a3=2 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=38 op=UNLOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=b a1=0 a2=0 a3=0 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=39 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=15 a0=5 a1=7ffd59dbaa90 a2=94 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=39 op=UNLOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=f a1=0 a2=0 a3=0 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=40 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=15 a0=5 a1=7ffd59dbabc0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=40 op=UNLOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=f a1=0 a2=0 a3=0 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=41 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=15 a0=5 a1=7ffd59dbade0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=42 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=16 a0=5 a1=7ffd59dbade0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=43 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=17 a0=5 a1=7ffd59dbade0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=44 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=18 a0=5 a1=7ffd59dbade0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=45 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=19 a0=5 a1=7ffd59dbade0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=46 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=20 a0=5 a1=7ffd59dbade0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=47 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=21 a0=5 a1=7ffd59dbade0 a2=a8 a3=7fabfe3d2080 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 systemd[1]: Finished Coldplug All udev Devices.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-udev-trigger comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd-nsresourced[247]: userns-restrict BPF-LSM program userns_restrict_path_chown now attached.
+Sep 25 02:38:33 host01 systemd-nsresourced[247]: userns-restrict BPF-LSM program userns_restrict_path_mkdir now attached.
+Sep 25 02:38:33 host01 systemd-nsresourced[247]: userns-restrict BPF-LSM program userns_restrict_path_mknod now attached.
+Sep 25 02:38:33 host01 systemd-nsresourced[247]: userns-restrict BPF-LSM program userns_restrict_path_symlink now attached.
+Sep 25 02:38:33 host01 systemd-nsresourced[247]: userns-restrict BPF-LSM program userns_restrict_path_link now attached.
+Sep 25 02:38:33 host01 systemd-nsresourced[247]: userns-restrict BPF-LSM program userns_restrict_task_fix_setgroups now attached.
+Sep 25 02:38:33 host01 audit: BPF prog-id=48 op=LOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=321 success=yes exit=29 a0=5 a1=7ffd59dbaba0 a2=a8 a3=2 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 audit: BPF prog-id=48 op=UNLOAD
+Sep 25 02:38:33 host01 audit[247]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1d a1=0 a2=0 a3=0 items=0 ppid=1 pid=247 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="systemd-nsresou" exe="/usr/lib/systemd/systemd-nsresourced" key=(null)
+Sep 25 02:38:33 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-nsresourced"
+Sep 25 02:38:33 host01 systemd-nsresourced[247]: userns-restrict BPF-LSM program userns_restrict_retire_userns_sysctls now attached.
+Sep 25 02:38:33 host01 systemd[1]: Started Namespace Resource Manager.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-nsresourced comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Finished Create Static Device Nodes in /dev gracefully.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tmpfiles-setup-dev-early comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Create System Users skipped, no trigger condition checks were met.
+Sep 25 02:38:33 host01 systemd[1]: Starting Journal Log Access Socket...
+Sep 25 02:38:33 host01 audit: BPF prog-id=49 op=LOAD
+Sep 25 02:38:33 host01 systemd[1]: Starting Network Name Resolution...
+Sep 25 02:38:33 host01 audit: BPF prog-id=50 op=LOAD
+Sep 25 02:38:33 host01 systemd[1]: Starting Network Time Synchronization...
+Sep 25 02:38:33 host01 systemd[1]: Starting Create Static Device Nodes in /dev...
+Sep 25 02:38:33 host01 systemd[1]: Listening on Journal Log Access Socket.
+Sep 25 02:38:33 host01 systemd[1]: Finished Create Static Device Nodes in /dev.
+Sep 25 02:38:33 host01 systemd[1]: Reached target Preparation for Local File Systems.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tmpfiles-setup-dev comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Set up automount EFI System Partition Automount.
+Sep 25 02:38:33 host01 systemd[1]: Repartition Root Disk skipped, no trigger condition checks were met.
+Sep 25 02:38:33 host01 audit: BPF prog-id=6 op=UNLOAD
+Sep 25 02:38:33 host01 audit: BPF prog-id=5 op=UNLOAD
+Sep 25 02:38:33 host01 audit: BPF prog-id=51 op=LOAD
+Sep 25 02:38:33 host01 audit: BPF prog-id=52 op=LOAD
+Sep 25 02:38:33 host01 systemd[1]: Starting Rule-based Manager for Device Events and Files...
+Sep 25 02:38:33 host01 systemd-resolved[261]: Positive Trust Anchors:
+Sep 25 02:38:33 host01 systemd-resolved[261]: . IN DS 20326 8 2 e06d44b80b8f1d39a95c0b0d7c65d08458e880409bbc683457104237c7f8ec8d
+Sep 25 02:38:33 host01 systemd-resolved[261]: . IN DS 38696 8 2 683d2d0acb8c9b712a1948b27f741219298d0a450d612c483af444a4c0fb2b16
+Sep 25 02:38:33 host01 systemd-resolved[261]: Negative trust anchors: home.arpa 10.in-addr.arpa 16.172.in-addr.arpa 17.172.in-addr.arpa 18.172.in-addr.arpa 19.172.in-addr.arpa 20.172.in-addr.arpa 21.172.in-addr.arpa 22.172.in-addr.arpa 23.172.in-addr.arpa 24.172.in-addr.arpa 25.172.in-addr.arpa 26.172.in-addr.arpa 27.172.in-addr.arpa 28.172.in-addr.arpa 29.172.in-addr.arpa 30.172.in-addr.arpa 31.172.in-addr.arpa 170.0.0.192.in-addr.arpa 171.0.0.192.in-addr.arpa 168.192.in-addr.arpa d.f.ip6.arpa ipv4only.arpa resolver.arpa corp home internal intranet lan local private test
+Sep 25 02:38:33 host01 systemd[1]: Started Network Time Synchronization.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-timesyncd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Reached target System Time Set.
+Sep 25 02:38:33 host01 systemd-resolved[261]: Using system hostname 'host01'.
+Sep 25 02:38:33 host01 systemd[1]: Started Network Name Resolution.
+Sep 25 02:38:33 host01 systemd-resolved[261]: Switching to fallback DNS server 192.0.2.2#dns.quad9.net.
+Sep 25 02:38:33 host01 systemd[1]: Reached target Host and Network Name Lookups.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-resolved comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd-udevd[270]: Using default interface naming scheme 'v261'.
+Sep 25 02:38:33 host01 systemd[1]: Started Rule-based Manager for Device Events and Files.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-udevd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs
+Sep 25 02:38:33 host01 systemd[1]: Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+Sep 25 02:38:33 host01 (udev-worker)[280]: Network interface NamePolicy= disabled on kernel command line.
+Sep 25 02:38:33 host01 systemd[1]: Condition check resulted in /dev/ttyS0 being skipped.
+Sep 25 02:38:33 host01 kernel: input: PC Speaker as /devices/platform/pcspkr/input/input3
+Sep 25 02:38:33 host01 kernel: input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input5
+Sep 25 02:38:33 host01 kernel: input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input4
+Sep 25 02:38:33 host01 kernel: parport_pc 00:02: reported by Plug and Play ACPI
+Sep 25 02:38:33 host01 kernel: parport0: PC-style at 0x378, irq 7 [PCSPP,TRISTATE]
+Sep 25 02:38:33 host01 kernel: iTCO_wdt iTCO_wdt.1.auto: Found a ICH9 TCO device (Version=2, TCOBASE=0x0660)
+Sep 25 02:38:33 host01 kernel: iTCO_wdt iTCO_wdt.1.auto: initialized. heartbeat=30 sec (nowayout=0)
+Sep 25 02:38:33 host01 kernel: i801_smbus 0000:00:1f.3: SMBus using PCI interrupt
+Sep 25 02:38:33 host01 kernel: i2c i2c-0: Memory type 0x07 not supported yet, not instantiating SPD
+Sep 25 02:38:33 host01 systemd[1]: Starting Virtual Console Setup...
+Sep 25 02:38:33 host01 kernel: mousedev: PS/2 mouse device common for all mice
+Sep 25 02:38:33 host01 systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+Sep 25 02:38:33 host01 systemd[1]: Stopped Virtual Console Setup.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-vconsole-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 audit[1]: SERVICE_STOP pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-vconsole-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Starting Virtual Console Setup...
+Sep 25 02:38:33 host01 systemd-vconsole-setup[297]: Configuration of first virtual console was skipped, ignoring remaining ones.
+Sep 25 02:38:33 host01 systemd[1]: Finished Virtual Console Setup.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-vconsole-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Mounting Temporary Directory /tmp...
+Sep 25 02:38:33 host01 systemd[1]: Virtual Machine and Container Storage (Compatibility) skipped, unmet condition check ConditionPathExists=/var/lib/machines.raw
+Sep 25 02:38:33 host01 systemd[1]: Reached target Virtual Machines and Containers.
+Sep 25 02:38:33 host01 systemd[1]: Listening on Disk Image Download Service Socket.
+Sep 25 02:38:33 host01 systemd[1]: Mounted Temporary Directory /tmp.
+Sep 25 02:38:33 host01 systemd[1]: Reached target Local File Systems.
+Sep 25 02:38:33 host01 kernel: ppdev: user-space parallel port driver
+Sep 25 02:38:33 host01 systemd[1]: Listening on Boot Loader Control Service Socket.
+Sep 25 02:38:33 host01 systemd[1]: Listening on System Extension Image Management.
+Sep 25 02:38:33 host01 systemd[1]: Set Up Additional Binary Formats skipped, no trigger condition checks were met.
+Sep 25 02:38:33 host01 systemd[1]: Update Boot Loader Random Seed skipped, no trigger condition checks were met.
+Sep 25 02:38:33 host01 systemd[1]: Starting Automatic Boot Loader Update...
+Sep 25 02:38:33 host01 systemd[1]: Merge System Configuration Images into /etc/ skipped, no trigger condition checks were met.
+Sep 25 02:38:33 host01 systemd[1]: Merge System Extension Images into /usr/ and /opt/ skipped, no trigger condition checks were met.
+Sep 25 02:38:33 host01 systemd[1]: Starting Create System Files and Directories...
+Sep 25 02:38:33 host01 systemd[1]: Starting Load JSON user/group Records from Credentials...
+Sep 25 02:38:33 host01 systemd[1]: efi.automount: Got automount request for /efi, triggered by 302 (bootctl)
+Sep 25 02:38:33 host01 systemd[1]: Created slice Slice /system/systemd-fsck.
+Sep 25 02:38:33 host01 systemd[1]: Starting File System Check on /dev/disk/by-diskseq/1-part2...
+Sep 25 02:38:33 host01 kernel: kvm_amd: TSC scaling supported
+Sep 25 02:38:33 host01 kernel: kvm_amd: Nested Virtualization enabled
+Sep 25 02:38:33 host01 kernel: kvm_amd: Nested Paging enabled
+Sep 25 02:38:33 host01 kernel: kvm_amd: Virtual VMLOAD VMSAVE supported
+Sep 25 02:38:33 host01 kernel: kvm_amd: PMU virtualization is disabled
+Sep 25 02:38:33 host01 systemd[1]: Finished Load JSON user/group Records from Credentials.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-userdb-load-credentials comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd-fsck[308]: fsck.fat 4.2 (2021-01-31)
+Sep 25 02:38:33 host01 systemd-fsck[308]: /dev/vda2: 3 files, 84/76615 clusters
+Sep 25 02:38:33 host01 systemd[1]: Finished File System Check on /dev/disk/by-diskseq/1-part2.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-fsck@dev-disk-by\x2ddiskseq-1\x2dpart2 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd-timesyncd[262]: Network configuration changed, trying to establish connection.
+Sep 25 02:38:33 host01 systemd-timesyncd[262]: Network configuration changed, trying to establish connection.
+Sep 25 02:38:33 host01 systemd[1]: Finished Create System Files and Directories.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tmpfiles-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Rebuild Dynamic Linker Cache skipped, no trigger condition checks were met.
+Sep 25 02:38:33 host01 systemd[1]: Initial Setup skipped, unmet condition check ConditionFirstBoot=yes
+Sep 25 02:38:33 host01 systemd[1]: First Boot Complete skipped, unmet condition check ConditionFirstBoot=yes
+Sep 25 02:38:33 host01 systemd[1]: Rebuild Journal Catalog skipped, unmet condition check ConditionNeedsUpdate=/var
+Sep 25 02:38:33 host01 systemd[1]: Save Transient machine-id to Disk skipped, unmet condition check ConditionPathIsMountPoint=/etc/machine-id
+Sep 25 02:38:33 host01 systemd[1]: Starting Record System Boot/Shutdown in UTMP...
+Sep 25 02:38:33 host01 audit[313]: AUDIT1127 pid=313 uid=0 auid=4294967295 ses=4294967295 msg=' comm="update-utmp" exe="/usr/lib/systemd/systemd-update-utmp" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:33 host01 systemd[1]: Finished Record System Boot/Shutdown in UTMP.
+Sep 25 02:38:33 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-update-utmp comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:34 host01 systemd[1]: Mounting EFI System Partition Automount...
+Sep 25 02:38:34 host01 systemd[1]: Mounted EFI System Partition Automount.
+Sep 25 02:38:34 host01 systemd[1]: Finished Automatic Boot Loader Update.
+Sep 25 02:38:34 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-boot-update comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:34 host01 systemd[1]: Update is Completed skipped, no trigger condition checks were met.
+Sep 25 02:38:34 host01 systemd[1]: Reached target System Initialization.
+Sep 25 02:38:34 host01 systemd[1]: Started Daily Cleanup of Temporary Directories.
+Sep 25 02:38:34 host01 systemd[1]: Listening on D-Bus System Message Bus Socket.
+Sep 25 02:38:34 host01 systemd[1]: Listening on GnuPG network certificate management daemon for /etc/pacman.d/gnupg.
+Sep 25 02:38:34 host01 systemd[1]: Listening on GnuPG cryptographic agent and passphrase cache (access for web browsers) for /etc/pacman.d/gnupg.
+Sep 25 02:38:34 host01 systemd[1]: Listening on GnuPG cryptographic agent and passphrase cache (restricted) for /etc/pacman.d/gnupg.
+Sep 25 02:38:34 host01 systemd[1]: Listening on GnuPG cryptographic agent (ssh-agent emulation) for /etc/pacman.d/gnupg.
+Sep 25 02:38:34 host01 systemd[1]: Listening on GnuPG cryptographic agent and passphrase cache for /etc/pacman.d/gnupg.
+Sep 25 02:38:34 host01 systemd[1]: Listening on GnuPG public key management service for /etc/pacman.d/gnupg.
+Sep 25 02:38:34 host01 systemd[1]: Listening on OpenSSH Server Socket (systemd-ssh-generator, AF_UNIX Local).
+Sep 25 02:38:34 host01 systemd[1]: Listening on User Login Management Varlink Socket.
+Sep 25 02:38:34 host01 systemd[1]: Listening on Virtual Machine and Container Registration Service Socket.
+Sep 25 02:38:34 host01 systemd[1]: Reached target Socket Units.
+Sep 25 02:38:34 host01 audit: BPF prog-id=53 op=LOAD
+Sep 25 02:38:34 host01 systemd[1]: Starting D-Bus System Message Bus...
+Sep 25 02:38:34 host01 systemd[1]: TPM PCR Barrier (Initialization) skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:34 host01 systemd[1]: Started D-Bus System Message Bus.
+Sep 25 02:38:34 host01 systemd[1]: Reached target Basic System.
+Sep 25 02:38:34 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=dbus-broker comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:34 host01 systemd[1]: Starting Cloud-init: Single Process...
+Sep 25 02:38:34 host01 dbus-broker-launch[319]: Ready
+Sep 25 02:38:34 host01 systemd[1]: Started petit reboot fingerprint capture.
+Sep 25 02:38:34 host01 systemd[1]: SSH Key Generation skipped, no trigger condition checks were met.
+Sep 25 02:38:34 host01 audit: BPF prog-id=54 op=LOAD
+Sep 25 02:38:34 host01 systemd[1]: Starting Home Area Manager...
+Sep 25 02:38:34 host01 audit: BPF prog-id=55 op=LOAD
+Sep 25 02:38:34 host01 audit: BPF prog-id=56 op=LOAD
+Sep 25 02:38:34 host01 audit: BPF prog-id=57 op=LOAD
+Sep 25 02:38:34 host01 systemd[1]: Starting User Login Management...
+Sep 25 02:38:34 host01 systemd[1]: TPM PCR Barrier (User) skipped, unmet condition check ConditionSecurity=measured-os
+Sep 25 02:38:34 host01 systemd-homed[323]: Watching /home.
+Sep 25 02:38:34 host01 systemd[1]: Started Home Area Manager.
+Sep 25 02:38:34 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-homed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:34 host01 systemd[1]: Finished Home Area Activation.
+Sep 25 02:38:34 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-homed-activate comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:34 host01 systemd-logind[329]: New seat seat0.
+Sep 25 02:38:34 host01 systemd-logind[329]: Watching system buttons on /dev/input/event0 (Power Button)
+Sep 25 02:38:34 host01 systemd-logind[329]: Watching system buttons on /dev/input/event1 (AT Translated Set 2 keyboard)
+Sep 25 02:38:34 host01 systemd[1]: Started User Login Management.
+Sep 25 02:38:34 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-logind comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:35 host01 systemd[1]: Started Cloud-init: Single Process.
+Sep 25 02:38:35 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-init-main comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:35 host01 systemd[1]: Starting Cloud-init: Local Stage (pre-network)...
+Sep 25 02:38:35 host01 cloud-init[344]: Cloud-init v. 26.2 running 'init-local' at Fri, 25 Sep 2026 02:38:35 +0000. Up 7.90 seconds.
+Sep 25 02:38:35 host01 kernel: ISO 9660 Extensions: Microsoft Joliet Level 3
+Sep 25 02:38:35 host01 kernel: ISO 9660 Extensions: RRIP_1991A
+Sep 25 02:38:35 host01 systemd[1]: run-cloud\x2dinit-tmp-tmprv3yi32f.mount: Deactivated successfully.
+Sep 25 02:38:35 host01 systemd[1]: Finished Cloud-init: Local Stage (pre-network).
+Sep 25 02:38:35 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-init-local comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:35 host01 systemd[1]: Reached target Preparation for Network.
+Sep 25 02:38:35 host01 systemd[1]: Listening on Network Management Resolve Hook Socket.
+Sep 25 02:38:35 host01 audit: BPF prog-id=58 op=LOAD
+Sep 25 02:38:35 host01 systemd[1]: Starting Network Management...
+Sep 25 02:38:35 host01 systemd[1]: Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.
+Sep 25 02:38:35 host01 kernel: cfg80211: Loading compiled-in X.509 certificates for regulatory database
+Sep 25 02:38:35 host01 kernel: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+Sep 25 02:38:35 host01 kernel: Loaded X.509 cert 'wens: 61c038651aabdcf94bd0ac7ff06c7248db18c600'
+Sep 25 02:38:35 host01 kernel: faux_driver regulatory: Direct firmware load for regulatory.db failed with error -2
+Sep 25 02:38:35 host01 kernel: cfg80211: failed to load regulatory.db
+Sep 25 02:38:35 host01 systemd-networkd[356]: lo: Link UP
+Sep 25 02:38:35 host01 systemd-networkd[356]: lo: Gained carrier
+Sep 25 02:38:35 host01 audit: BPF prog-id=59 op=LOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=321 success=yes exit=26 a0=5 a1=7ffd9bbe1790 a2=94 a3=7febfa846632 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=59 op=UNLOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1a a1=0 a2=0 a3=0 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=60 op=LOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=321 success=yes exit=26 a0=5 a1=7ffd9bbe17a0 a2=a8 a3=2 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=60 op=UNLOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1a a1=0 a2=0 a3=0 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=61 op=LOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=321 success=yes exit=26 a0=5 a1=7ffd9bbe1600 a2=94 a3=7febfa860080 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=61 op=UNLOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1a a1=0 a2=0 a3=0 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=62 op=LOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=321 success=yes exit=27 a0=5 a1=7ffd9bbe1580 a2=a8 a3=7febfa860080 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=62 op=UNLOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1b a1=0 a2=0 a3=0 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=63 op=LOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=321 success=yes exit=28 a0=5 a1=7ffd9bbe1650 a2=a8 a3=5 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=63 op=UNLOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1c a1=0 a2=0 a3=0 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=64 op=LOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=321 success=yes exit=27 a0=5 a1=7ffd9bbe17a0 a2=a8 a3=7febfa860080 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=65 op=LOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=321 success=yes exit=29 a0=5 a1=7ffd9bbe1650 a2=a8 a3=2 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 audit: BPF prog-id=65 op=UNLOAD
+Sep 25 02:38:35 host01 audit[356]: SYSCALL arch=c000003e syscall=3 success=yes exit=0 a0=1d a1=0 a2=0 a3=0 items=0 ppid=1 pid=356 auid=4294967295 uid=977 gid=977 euid=977 suid=977 fsuid=977 egid=977 sgid=977 fsgid=977 tty=(none) ses=4294967295 comm="systemd-network" exe="/usr/lib/systemd/systemd-networkd" key=(null)
+Sep 25 02:38:35 host01 audit: PROCTITLE proctitle="/usr/lib/systemd/systemd-networkd"
+Sep 25 02:38:35 host01 systemd-networkd[356]: eth0: Found matching .network file, based on potentially unpredictable interface name: /etc/systemd/network/10-cloud-init-eth0.network
+Sep 25 02:38:35 host01 systemd-networkd[356]: eth0: Configuring with /etc/systemd/network/10-cloud-init-eth0.network.
+Sep 25 02:38:35 host01 systemd[1]: Started Network Management.
+Sep 25 02:38:35 host01 systemd-networkd[356]: eth0: Link UP
+Sep 25 02:38:35 host01 systemd-networkd[356]: eth0: Gained carrier
+Sep 25 02:38:35 host01 systemd-networkd[356]: eth0: Found matching .network file, based on potentially unpredictable interface name: /etc/systemd/network/10-cloud-init-eth0.network
+Sep 25 02:38:35 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-networkd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:35 host01 systemd[1]: Reached target Network.
+Sep 25 02:38:35 host01 systemd[1]: Starting Enable Persistent Storage in systemd-networkd...
+Sep 25 02:38:36 host01 systemd-networkd[356]: eth0: DHCPv4 address 192.0.2.3/24, gateway 192.0.2.4 acquired from 192.0.2.4
+Sep 25 02:38:36 host01 systemd[1]: Starting Wait for Network to be Online...
+Sep 25 02:38:36 host01 systemd-timesyncd[262]: Network configuration changed, trying to establish connection.
+Sep 25 02:38:36 host01 systemd[1]: Finished Enable Persistent Storage in systemd-networkd.
+Sep 25 02:38:36 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-networkd-persistent-storage comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:37 host01 systemd-networkd[356]: eth0: Gained IPv6LL
+Sep 25 02:38:37 host01 systemd-timesyncd[262]: Network configuration changed, trying to establish connection.
+Sep 25 02:38:37 host01 systemd[1]: Finished Wait for Network to be Online.
+Sep 25 02:38:37 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-networkd-wait-online comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:37 host01 systemd[1]: Starting Cloud-init: Network Stage...
+Sep 25 02:38:37 host01 cloud-init[344]: Cloud-init v. 26.2 running 'init' at Fri, 25 Sep 2026 02:38:37 +0000. Up 9.82 seconds.
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: ++++++++++++++++++++++++++++++++++++Net device info+++++++++++++++++++++++++++++++++++++
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +--------+------+-------------------------+---------------+--------+-------------------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: | Device |  Up  |         Address         |      Mask     | Scope  |     Hw-Address    |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +--------+------+-------------------------+---------------+--------+-------------------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |  eth0  | True |        192.0.2.3        | 255.255.255.0 | global | 00:00:5e:00:53:05 |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |  eth0  | True | 2001:db8::6/64 |       .       |  link  | 00:00:5e:00:53:05 |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   lo   | True |        127.0.0.1        |   255.0.0.0   |  host  |         .         |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   lo   | True |         ::1/128         |       .       |  host  |         .         |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +--------+------+-------------------------+---------------+--------+-------------------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: ++++++++++++++++++++++++++++Route IPv4 info+++++++++++++++++++++++++++++
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: | Route | Destination | Gateway  |     Genmask     | Interface | Flags |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   0   |   0.0.0.0   | 192.0.2.4 |     0.0.0.0     |    eth0   |   UG  |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   1   |   192.0.2.7  | 0.0.0.0  |  255.255.255.0  |    eth0   |   U   |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   2   |   192.0.2.4  | 0.0.0.0  | 255.255.255.255 |    eth0   |   UH  |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   3   |   192.0.2.8  | 0.0.0.0  | 255.255.255.255 |    eth0   |   UH  |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +-------+-------------+---------+-----------+-------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: | Route | Destination | Gateway | Interface | Flags |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +-------+-------------+---------+-----------+-------+
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   0   |  2001:db8::9/64  |    2001:db8::10   |    eth0   |   U   |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   2   |    local    |    2001:db8::10   |    eth0   |   U   |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: |   3   |  multicast  |    2001:db8::10   |    eth0   |   U   |
+Sep 25 02:38:37 host01 cloud-init[344]: ci-info: +-------+-------------+---------+-----------+-------+
+Sep 25 02:38:37 host01 systemd[1]: Finished Cloud-init: Network Stage.
+Sep 25 02:38:37 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-init-network comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:37 host01 systemd[1]: Reached target Cloud-config availability.
+Sep 25 02:38:37 host01 systemd[1]: Reached target Network is Online.
+Sep 25 02:38:37 host01 systemd[1]: Starting Cloud-init: Config Stage...
+Sep 25 02:38:37 host01 systemd[1]: Starting Permit User Sessions...
+Sep 25 02:38:37 host01 systemd[1]: Finished Permit User Sessions.
+Sep 25 02:38:37 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-user-sessions comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:37 host01 systemd[1]: Started Getty on tty1.
+Sep 25 02:38:37 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty1 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:37 host01 systemd[1]: Started Serial Getty on ttyS0.
+Sep 25 02:38:37 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=serial-getty@ttyS0 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:37 host01 systemd[1]: Reached target Login Prompts.
+Sep 25 02:38:37 host01 cloud-init[344]: Cloud-init v. 26.2 running 'modules:config' at Fri, 25 Sep 2026 02:38:37 +0000. Up 10.05 seconds.
+Sep 25 02:38:37 host01 systemd[1]: Finished Cloud-init: Config Stage.
+Sep 25 02:38:37 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-config comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:38:38 host01 systemd-timesyncd[262]: Network configuration changed, trying to establish connection.
+Sep 25 02:39:09 host01 systemd-timesyncd[262]: Contacted time server 192.0.2.11:123 (2.arch.pool.ntp.org).
+Sep 25 02:39:09 host01 systemd-time-wait-sync[222]: adjtime state 0 status 2001 time Fri 2026-09-25 02:39:09.224473 UTC
+Sep 25 02:39:09 host01 systemd-timesyncd[262]: Initial clock synchronization to Fri 2026-09-25 02:39:08.857839 UTC.
+Sep 25 02:39:09 host01 systemd[1]: Finished Wait Until Kernel Time Synchronized.
+Sep 25 02:39:09 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-time-wait-sync comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:39:09 host01 kernel: kauditd_printk_skb: 140 callbacks suppressed
+Sep 25 02:39:09 host01 kernel: audit: type=1130 audit(1790303949.228:92): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-time-wait-sync comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:39:09 host01 systemd[1]: Reached target System Time Synchronized.
+Sep 25 02:39:09 host01 systemd[1]: Started Refresh existing PGP keys of archlinux-keyring regularly.
+Sep 25 02:39:09 host01 systemd[1]: Started Daily verification of password and group files.
+Sep 25 02:39:09 host01 systemd[1]: Reached target Timer Units.
+Sep 25 02:39:09 host01 systemd[1]: Initializes Pacman keyring skipped, unmet condition check ConditionFirstBoot=yes
+Sep 25 02:39:09 host01 systemd[1]: Starting OpenSSH Daemon...
+Sep 25 02:39:09 host01 sshd[426]: Server listening on 0.0.0.0 port 22.
+Sep 25 02:39:09 host01 sshd[426]: Server listening on 2001:db8::10 port 22.
+Sep 25 02:39:09 host01 systemd[1]: Started OpenSSH Daemon.
+Sep 25 02:39:09 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=sshd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:39:09 host01 systemd[1]: Reached target Multi-User System.
+Sep 25 02:39:09 host01 kernel: audit: type=1130 audit(1790303949.252:93): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=sshd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:39:09 host01 systemd[1]: Reached target Graphical Interface.
+Sep 25 02:39:09 host01 systemd[1]: Reached target SSH Access Available.
+Sep 25 02:39:09 host01 systemd[1]: Starting Cloud-init: Final Stage...
+Sep 25 02:39:09 host01 cloud-init[344]: Cloud-init v. 26.2 running 'modules:final' at Fri, 25 Sep 2026 02:39:09 +0000. Up 41.63 seconds.
+Sep 25 02:39:09 host01 cloud-init[344]: Cloud-init v. 26.2 finished at Fri, 25 Sep 2026 02:39:09 +0000. Datasource DataSourceNoCloud [seed=/dev/vdc].  Up 41.68 seconds
+Sep 25 02:39:09 host01 systemd[1]: Finished Cloud-init: Final Stage.
+Sep 25 02:39:09 host01 audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-final comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:39:09 host01 systemd[1]: Reached target Cloud-init target.
+Sep 25 02:39:09 host01 kernel: audit: type=1130 audit(1790303949.329:94): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=cloud-final comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Sep 25 02:39:09 host01 systemd[1]: Startup finished in 1.251s (kernel) + 2.335s (initrd) + 38.102s (userspace) = 41.689s.
