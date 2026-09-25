@@ -317,7 +317,9 @@ def boot(base: Path, seed: Path | None, work: Path) -> dict[str, str]:
         "-netdev", "user,id=net0", "-device", "virtio-net-pci,netdev=net0,mac=52:54:00:00:00:01",
     ]
     if seed:
-        command += ["-drive", f"file={seed},media=cdrom,format=raw,readonly=on"]
+        # A virtio disk, not a CD-ROM: Debian 12's cloud kernel has no SATA
+        # CD driver, and NoCloud finds a `cidata` volume on any block device.
+        command += ["-drive", f"file={seed},if=virtio,format=raw,readonly=on"]
     subprocess.run(command, check=True, timeout=BOOT_TIMEOUT)
     files: dict[str, str] = {}
     with tarfile.open(out) as archive:
