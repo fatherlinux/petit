@@ -7,7 +7,7 @@
 # role     corpus: the capture becomes src/petit/data/fingerprints/<corpus>-reboot.fp
 #          verify: the capture only checks that corpus (test/data/verify/)
 # releases all:    every supported release
-#          latest: the newest is `role`; the `previous` before it are verify-only
+#          latest: the newest is `role`; the `previous` before it verify its corpus
 # corpus   the corpus a release fingerprints, from {version} and {major}
 # image    qcow2 URL; {version}, {major} and {codename} are filled in. Omitted
 #          where refresh.py resolves it (Fedora, Alpine) or builds it (bootc).
@@ -29,8 +29,8 @@ eol_product = "rocky-linux"
 role = "verify"
 releases = "all"
 corpus = "el{major}"
-image = "https://dl.rockylinux.org/pub/rocky/{major}/images/x86_64/Rocky-{major}-GenericCloud-Base.latest.x86_64.qcow2"
-checksum = "https://dl.rockylinux.org/pub/rocky/{major}/images/x86_64/Rocky-{major}-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM"
+image = "https://download.rockylinux.org/pub/rocky/{major}/images/x86_64/Rocky-{major}-GenericCloud-Base.latest.x86_64.qcow2"
+checksum = "https://download.rockylinux.org/pub/rocky/{major}/images/x86_64/Rocky-{major}-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM"
 
 [[family]]
 name = "centos-stream"
