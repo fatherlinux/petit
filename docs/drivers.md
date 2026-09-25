@@ -280,6 +280,41 @@ To add your own:
    startup, and concatenate the two.
 3. Replace host names and user names you don't want to publish. The
    fingerprint normalizes numbers already.
-4. Save it as `<name>.fp` in your fingerprint directory. The packaged
-   corpora date from 2009–2011 (RHEL 4/5, Fedora 11, Ubuntu 9.04/10.04) and
-   won't match a modern journal.
+4. Save it as `<name>.fp` in your fingerprint directory.
+
+On a host without a journal, such as Alpine with busybox syslogd, take
+`/var/log/messages` from the reboot request through the end of the next
+boot instead.
+
+### Keeping the corpora current
+
+The packaged corpora for current releases are not captured by hand.
+`tools/fingerprints/refresh.py` boots each distribution's own cloud image
+under QEMU/KVM, reboots it once cleanly, and cuts that reboot out of the
+journal. Every corpus comes from the same procedure on a clean guest.
+
+- `platforms.toml` lists the families to track: how to find a release's
+  image, which corpus it feeds, and whether it is a corpus or only verifies
+  one. Rocky, CentOS Stream and image mode RHEL only verify the `elN`
+  corpora captured on AlmaLinux. endoflife.date decides which releases are
+  supported.
+- `captured.json` is the lock file. It records the image, digest, kernel and
+  date behind each committed capture.
+- `.github/workflows/fingerprints.yml` runs weekly and on demand. It
+  captures every supported release and opens a PR only when something
+  changed:
+  - a new release, which gets a corpus plus a second, independent reboot
+    in `test/data/verify/<corpus>.fp/`;
+  - a release whose fresh reboot no longer names its own corpus first, or
+    scores below an identity of 0.5, which gets a new corpus;
+  - a release past its end of life, which is retired.
+
+To capture by hand, for example RHEL 8 from a local KVM guest image:
+
+    tools/fingerprints/refresh.py capture rhel8 --image rhel-8.qcow2 \
+        --seed --as verify:el8 --out captures/rhel8
+
+Every capture is scrubbed before it is written. Addresses become RFC 5737 or
+RFC 3849 ones, MACs RFC 7042 ones, and machine and filesystem IDs zeros.
+`refresh.py` refuses to write a capture that still names the host it ran on.
+The captured guest calls itself `host01`.

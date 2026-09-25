@@ -121,7 +121,9 @@ to construct new fingerprints.
 .TP
 \fB/var/lib/petit/fingerprints\fR
 Aggregate fingerprint files which can be used to filter out reboots
-and other events which the administrator does not care to see
+and other events which the administrator does not care to see. The
+packaged corpora are captured from each supported distribution's cloud
+image by tools/fingerprints/refresh.py in petit's source tree.
 .TP
 \fB/var/lib/petit/filters/\fR
 Each function has a separate list of words and patterns which are

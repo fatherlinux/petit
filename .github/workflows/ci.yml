@@ -5,6 +5,9 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  # fingerprints.yml dispatches this on the PRs it opens, which github.token
+  # can't trigger through pull_request.
+  workflow_dispatch:
 
 jobs:
   test:
@@ -30,7 +33,7 @@ jobs:
         run: uv sync --all-extras
 
       - name: Run linter
-        run: uv run ruff check src test
+        run: uv run ruff check src test tools
 
       - name: Run type checker
         run: uv run mypy src

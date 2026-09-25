@@ -1,0 +1,18 @@
+#cloud-config
+# The seed for an OpenRC guest that logs to /var/log/messages (Alpine).
+hostname: host01
+fqdn: host01.example.net
+manage_etc_hosts: true
+write_files:
+  - path: /usr/libexec/petit-capture
+    permissions: "0755"
+    encoding: b64
+    content: {script}
+  - path: /etc/local.d/petit-capture.start
+    permissions: "0755"
+    content: |
+      #!/bin/sh
+      setsid /usr/libexec/petit-capture </dev/null >/dev/null 2>&1 &
+runcmd:
+  - rc-update add local default
+  - /etc/local.d/petit-capture.start
