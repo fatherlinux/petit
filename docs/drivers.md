@@ -295,9 +295,9 @@ journal. Every corpus comes from the same procedure on a clean guest.
 
 - `platforms.toml` lists the families to track: how to find a release's
   image, which corpus it feeds, and whether it is a corpus or only verifies
-  one. Rocky, CentOS Stream and image mode RHEL only verify the `elN`
-  corpora captured on AlmaLinux. endoflife.date decides which releases are
-  supported.
+  one. Rocky and CentOS Stream only verify the `elN` corpora captured on
+  AlmaLinux, which also match RHEL itself. endoflife.date decides which
+  releases are supported.
 - `captured.json` is the lock file. It records the image, digest, kernel and
   date behind each committed capture.
 - `.github/workflows/fingerprints.yml` runs weekly and on demand. It
@@ -309,10 +309,15 @@ journal. Every corpus comes from the same procedure on a clean guest.
     scores below an identity of 0.5, which gets a new corpus;
   - a release past its end of life, which is retired.
 
-To capture by hand, for example RHEL 8 from a local KVM guest image:
+To capture by hand from a local qcow2 guest image:
 
-    tools/fingerprints/refresh.py capture rhel8 --image rhel-8.qcow2 \
-        --seed --as verify:el8 --out captures/rhel8
+    tools/fingerprints/refresh.py capture myhost --image guest.qcow2 \
+        --seed --as verify:el9 --out captures/myhost
+
+The image must run cloud-init with the NoCloud datasource, which `--seed`
+feeds the capture script through. It also needs `logger`, `tar` and
+either a systemd journal or, with `--log messages`, a syslog daemon writing
+`/var/log/messages`. Stock distribution cloud images have all of these.
 
 Every capture is scrubbed before it is written. Addresses become RFC 5737 or
 RFC 3849 ones, MACs RFC 7042 ones, and machine and filesystem IDs zeros.
