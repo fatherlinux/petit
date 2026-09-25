@@ -77,7 +77,7 @@ def sshd_log(lines: int, seed: int = 38) -> Iterator[str]:
             u=rng.choice(USERS), a=rng.randint(0, 255), b=rng.randint(0, 255),
             c=rng.randint(0, 255), p=rng.randint(1024, 65535),
         )
-        yield (f"Sep {1 + day % 28:2d} {hour:02d}:{minute:02d}:{second:02d} lotor "
+        yield (f"Sep {1 + day % 28:2d} {hour:02d}:{minute:02d}:{second:02d} host01 "
                f"sshd[{rng.randint(1000, 1400)}]: {text}\n")
 
 

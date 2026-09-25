@@ -29,7 +29,7 @@ def secure_log(lines=200, pids=(1234, 5678)):
     would make this suite pass for the wrong reason.
     """
     return "\n".join(
-        f"Aug 18 10:{i % 60:02d}:{i % 60:02d} lotor sshd[{pids[i % len(pids)]}]: "
+        f"Aug 18 10:{i % 60:02d}:{i % 60:02d} host01 sshd[{pids[i % len(pids)]}]: "
         f"Accepted publickey for scott from 10.0.0.{i % 250} port {3000 + i}"
         for i in range(lines)
     )
@@ -137,7 +137,7 @@ def mixed_log(syslog_fraction=0.7, lines=40):
     application logs and for tool output that interleaves JSON with prose."""
     k = int(lines * syslog_fraction)
     return "\n".join(
-        [f"Sep 19 04:00:{i:02d} lotor sshd[{i}]: Accepted publickey for scott "
+        [f"Sep 19 04:00:{i:02d} host01 sshd[{i}]: Accepted publickey for scott "
          f"from 10.0.0.{i} port 22" for i in range(k)]
         + ["an ordinary prose sentence slipped into the stream here"
            for _ in range(lines - k)]
@@ -214,7 +214,7 @@ class TestDriverOverride:
     def test_pinned_raw_does_not_generalise_the_payload(self):
         """A pinned RawEntry applies no sshd vocabulary at all."""
         text = "\n".join(
-            f"Sep 19 04:00:{i:02d} lotor sshd[{i}]: Accepted publickey for u{i} from 10.0.0.{i}"
+            f"Sep 19 04:00:{i:02d} host01 sshd[{i}]: Accepted publickey for u{i} from 10.0.0.{i}"
             for i in range(50)
         )
         assert len(analyze_text(text).groups) == 1
@@ -226,11 +226,11 @@ class TestDriverOverride:
         odd one merged into the crowd. The rule now collapses only the
         source address after it."""
         boilerplate = "\n".join(
-            f"Sep 19 04:00:{i:02d} lotor sshd[{i}]: Invalid user bob{i} from 10.0.0.{i}"
+            f"Sep 19 04:00:{i:02d} host01 sshd[{i}]: Invalid user bob{i} from 10.0.0.{i}"
             for i in range(50)
         )
         text = boilerplate + (
-            "\nSep 19 04:59:59 lotor sshd[99]: Invalid user DISTINCTIVE from 10.0.0.99"
+            "\nSep 19 04:59:59 host01 sshd[99]: Invalid user DISTINCTIVE from 10.0.0.99"
         )
         detected = analyze_text(text)
         assert detected.driver == "SecureLogEntry"
@@ -493,7 +493,7 @@ class TestSiteLocalFingerprints:
         directory with files used to be read, so site-local corpora never
         were."""
         corpus = "\n".join(
-            f"Sep 22 10:00:{i:02d} lotor custom[1]: step {w} done"
+            f"Sep 22 10:00:{i:02d} host01 custom[1]: step {w} done"
             for i, w in enumerate(["alpha", "bravo", "charlie", "delta"])
         )
         (tmp_path / "custom-event.fp").write_text(corpus + "\n")
@@ -501,7 +501,7 @@ class TestSiteLocalFingerprints:
         monkeypatch.setattr(
             LogHash, "search_prefixes", lambda _kind: [packaged, str(tmp_path) + "/"]
         )
-        result = analyze_text(corpus + "\nSep 22 10:01:00 lotor other[2]: unrelated",
+        result = analyze_text(corpus + "\nSep 22 10:01:00 host01 other[2]: unrelated",
                               collapse_fingerprints=True)
         assert result.fingerprints_matched == ["custom-event.fp"]
 
@@ -519,7 +519,7 @@ def _word(i):
 
 def _event(tag, words):
     """A corpus text: one line per word, all from the same daemon."""
-    return "\n".join(f"Sep 22 10:00:00 lotor unit[1]: {tag} {_word(i)} reached" for i in words)
+    return "\n".join(f"Sep 22 10:00:00 host01 unit[1]: {tag} {_word(i)} reached" for i in words)
 
 
 class TestFingerprintVote:

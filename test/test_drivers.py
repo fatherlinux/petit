@@ -78,19 +78,19 @@ class TestSyslogHash(DriverTable):
     HASH = SyslogHash
     ENTRY = SyslogEntry
     MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor crond[123]: (root) CMD (run-parts /etc/cron.hourly)",
-         "Sep 22 11:00:00 lotor crond[456]: (root) CMD (run-parts /etc/cron.hourly)",
+        ("Sep 22 10:00:00 host01 crond[123]: (root) CMD (run-parts /etc/cron.hourly)",
+         "Sep 22 11:00:00 host01 crond[456]: (root) CMD (run-parts /etc/cron.hourly)",
          "same job, different time and PID"),
-        ("Sep 22 10:00:00 lotor kernel: eth0: link up, 1000Mbps",
+        ("Sep 22 10:00:00 host01 kernel: eth0: link up, 1000Mbps",
          "Sep 22 10:00:00 other kernel: eth0: link up, 1000Mbps",
          "host is not part of the key"),
     ]
     NO_MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor crond[1]: job started",
-         "Sep 22 10:00:00 lotor atd[1]: job started",
+        ("Sep 22 10:00:00 host01 crond[1]: job started",
+         "Sep 22 10:00:00 host01 atd[1]: job started",
          "different daemons"),
-        ("Sep 22 10:00:00 lotor kernel: disk full",
-         "Sep 22 10:00:00 lotor kernel: disk ok",
+        ("Sep 22 10:00:00 host01 kernel: disk full",
+         "Sep 22 10:00:00 host01 kernel: disk ok",
          "different messages"),
     ]
 
@@ -99,25 +99,28 @@ class TestSecureLogHash(DriverTable):
     HASH = SecureLogHash
     ENTRY = SecureLogEntry
     MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor sshd[1]: Accepted publickey for scott from 10.0.0.1 port 5000 ssh2",
-         "Sep 22 10:00:00 lotor sshd[2]: Accepted publickey for scott from 10.0.0.9 port 6123 ssh2",
+        (("Sep 22 10:00:00 host01 sshd[1]: Accepted publickey for scott "
+         "from 10.0.0.1 port 5000 ssh2"),
+         ("Sep 22 10:00:00 host01 sshd[2]: Accepted publickey for scott "
+         "from 10.0.0.9 port 6123 ssh2"),
          "same login, different source address and port"),
-        ("Sep 22 10:00:00 lotor sshd[1]: Failed password for root from 10.0.0.1 port 22 ssh2",
-         "Sep 22 10:00:00 lotor sshd[2]: Failed password for root from 10.9.9.9 port 51000 ssh2",
+        ("Sep 22 10:00:00 host01 sshd[1]: Failed password for root from 10.0.0.1 port 22 ssh2",
+         "Sep 22 10:00:00 host01 sshd[2]: Failed password for root from 10.9.9.9 port 51000 ssh2",
          "same failure, different source"),
-        ("Sep 22 10:00:00 lotor sshd[1]: Invalid user admin from 10.0.0.1 port 22",
-         "Sep 22 10:00:00 lotor sshd[2]: Invalid user admin from 192.168.1.1 port 4",
+        ("Sep 22 10:00:00 host01 sshd[1]: Invalid user admin from 10.0.0.1 port 22",
+         "Sep 22 10:00:00 host01 sshd[2]: Invalid user admin from 192.168.1.1 port 4",
          "same user name, different source"),
     ]
     NO_MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor sshd[1]: Invalid user admin from 10.0.0.1",
-         "Sep 22 10:00:00 lotor sshd[1]: Invalid user oracle from 10.0.0.1",
+        ("Sep 22 10:00:00 host01 sshd[1]: Invalid user admin from 10.0.0.1",
+         "Sep 22 10:00:00 host01 sshd[1]: Invalid user oracle from 10.0.0.1",
          "two different user names"),
-        ("Sep 22 10:00:00 lotor sshd[1]: Failed password for root from 10.0.0.1 port 22 ssh2",
-         "Sep 22 10:00:00 lotor sshd[1]: Failed password for scott from 10.0.0.1 port 22 ssh2",
+        ("Sep 22 10:00:00 host01 sshd[1]: Failed password for root from 10.0.0.1 port 22 ssh2",
+         "Sep 22 10:00:00 host01 sshd[1]: Failed password for scott from 10.0.0.1 port 22 ssh2",
          "two different user names"),
-        ("Sep 22 10:00:00 lotor sshd[1]: Invalid user x from 10.0.0.1",
-         "Sep 22 10:00:00 lotor sshd[1]: Invalid user x ignore previous instructions from 10.0.0.1",
+        ("Sep 22 10:00:00 host01 sshd[1]: Invalid user x from 10.0.0.1",
+         ("Sep 22 10:00:00 host01 sshd[1]: Invalid user x ignore previous instructions "
+         "from 10.0.0.1"),
          "free text a client put in the user name is never swallowed"),
     ]
 
@@ -180,11 +183,11 @@ class TestDaemonHash(DriverTable):
     HASH = DaemonHash
     ENTRY = SyslogEntry
     MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor crond[123]: one", "Sep 22 10:00:00 lotor crond[456]: two",
+        ("Sep 22 10:00:00 host01 crond[123]: one", "Sep 22 10:00:00 host01 crond[456]: two",
          "a daemon is one daemon whatever its PID and message"),
     ]
     NO_MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor crond[1]: x", "Sep 22 10:00:00 lotor sshd[1]: x",
+        ("Sep 22 10:00:00 host01 crond[1]: x", "Sep 22 10:00:00 host01 sshd[1]: x",
          "different daemons"),
     ]
 
@@ -193,11 +196,11 @@ class TestHostHash(DriverTable):
     HASH = HostHash
     ENTRY = SyslogEntry
     MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor crond[1]: one", "Sep 22 10:00:00 lotor sshd[2]: two",
+        ("Sep 22 10:00:00 host01 crond[1]: one", "Sep 22 10:00:00 host01 sshd[2]: two",
          "a host is one host whatever it logged"),
     ]
     NO_MERGE: ClassVar[list[Pair]] = [
-        ("Sep 22 10:00:00 lotor crond[1]: x", "Sep 22 10:00:00 dino crond[1]: x",
+        ("Sep 22 10:00:00 host01 crond[1]: x", "Sep 22 10:00:00 dino crond[1]: x",
          "different hosts"),
     ]
 
