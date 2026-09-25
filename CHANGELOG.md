@@ -15,6 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   opens when a release is new, when its reboot no longer matches its
   corpus, or when it reaches end of life.
 
+### Removed
+- `petit/data/fingerprint_library/`, the 2009–2011 per-machine reboot logs
+  the old corpora were merged from by hand. Nothing read them. Corpora now
+  come from `tools/fingerprints/refresh.py`, and each one's independent
+  second capture is kept in `test/data/verify/`.
+
 ## [4.7.0] - 2026-09-24
 
 ### Changed
