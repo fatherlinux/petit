@@ -24,6 +24,7 @@ import datetime
 import hashlib
 import ipaddress
 import json
+import lzma
 import os
 import re
 import shutil
@@ -432,6 +433,30 @@ def assert_clean(lines: list[str]) -> None:
         raise SystemExit(f"capture still carries {sorted(set(leaks))}; not writing it")
 
 
+RAW_LOGS = ("previous.log", "current.log", "messages.log")
+
+
+def archive_raw(files: dict[str, str], dest: Path) -> None:
+    """Keep every log the guest wrote, whole, for crunchtools/petit-captures.
+
+    The logs are scrubbed together, so one address maps to one stand-in
+    across both boots, and xz-compressed; kernel and os-release are copied.
+    """
+    logs = {name: files[name].splitlines() for name in RAW_LOGS if name in files}
+    clean = scrub([line for lines in logs.values() for line in lines])
+    assert_clean(clean)
+    dest.mkdir(parents=True, exist_ok=True)
+    start = 0
+    for name, lines in logs.items():
+        end = start + len(lines)
+        text = "".join(line + "\n" for line in clean[start:end])
+        (dest / f"{name}.xz").write_bytes(lzma.compress(text.encode()))
+        start = end
+    for name in ("kernel", "os-release"):
+        if name in files:
+            (dest / name).write_text(files[name])
+
+
 def cmd_capture(args: argparse.Namespace) -> int:
     matches = platforms({args.platform}) if not args.image else []
     if not args.image and not matches:
@@ -457,6 +482,7 @@ def cmd_capture(args: argparse.Namespace) -> int:
             event = scrub(extract_event(files))
             assert_clean(event)
             (out / f"{'ab'[run]}.log").write_text("\n".join(event) + "\n")
+            archive_raw(files, out / "raw" / "ab"[run])
             os_name = re.search(r'^PRETTY_NAME="?([^"\n]*)', files.get("os-release", ""), re.M)
     meta = {**asdict(platform), "image": image, "digest": digest,
             "kernel": files.get("kernel", "").strip(),
